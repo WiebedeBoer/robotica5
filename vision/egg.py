@@ -8,31 +8,24 @@ def ShowCamFeed():
 	while(True):
 		_, frame = cap.read()
 
-		frame = cv2.GaussianBlur(frame,(5,5),0)
-		frame = cv2.bilateralFilter(frame,9,75,75)
-		
-		cv2.imshow('frame', frame)
+		cv2.imshow('default',frame)
+		frame = cv2.bilateralFilter(frame,9,100,100)
+		gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
 
 		# HSV
 		#lower_red = np.array([24,30,94])
 		#upper_red = np.array([26,64,81])
 
-		# RGB
-		# lower_red = np.array([227, 150,96])
-		# upper_red = np.array([240,196,169])
-
-		lower_red = np.array([0,0,0])
-		upper_red = np.array([30,150,150])
+		lower = np.array([0,50,0])
+		upper = np.array([90,180,255])
 		
-		maskRed = cv2.inRange(frame, lower_red, upper_red)
+		mask = cv2.inRange(frame, lower, upper)
+		cv2.imshow('mask',mask)
 
-		resRed = cv2.bitwise_and(frame,frame, mask=maskRed)
-		cv2.imshow('maskresult',resRed)
-
-		res = cv2.cvtColor(resRed, cv2.COLOR_BGR2GRAY)
-		cv2.imshow('mask1',res)
-		_, res = cv2.threshold(res,100,255,cv2.THRESH_BINARY_INV)
-		cv2.imshow('mask',res)
+		res = cv2.bitwise_and(frame,frame, mask=mask)
+		res = cv2.cvtColor(res, cv2.COLOR_RGB2GRAY)
+		res = cv2.adaptiveThreshold(res,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+		cv2.imshow('maskresult',res)
 
 		contours,hierarchy = cv2.findContours(res,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) 
 
@@ -41,11 +34,10 @@ def ShowCamFeed():
 			perimeter = cv2.arcLength(cnt,True)
 			if(perimeter > 0):
 				vormfactor = 4 * math.pi * area / perimeter ** 2
-				if area > 150:
-					if vormfactor > 0.6:
+				if area > 500:
+					if vormfactor > 0.7:
 						x,y,w,h = cv2.boundingRect(cnt)
-						frame = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
-						frame = cv2.drawContours(frame, [cnt], -1, (255,0,255), 3)
+						frame = cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,255),2)
 
 		cv2.imshow('result', frame)
 
