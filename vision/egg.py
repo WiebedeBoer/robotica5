@@ -62,7 +62,7 @@ def ShowCamFeed():
 			perimeter = cv2.arcLength(cnt,True)
 			if(perimeter > 0):
 				vormfactor = 4 * math.pi * area / perimeter ** 2
-				if area > 500:
+				if area > 800:
 					if vormfactor > 0.7:
 						x,y,w,h = cv2.boundingRect(cnt)
 						frame = cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,255),2)
