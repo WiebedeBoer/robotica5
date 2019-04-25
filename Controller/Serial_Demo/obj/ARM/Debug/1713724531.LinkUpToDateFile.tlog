@@ -1,0 +1,1 @@
+g++ -o "/home/pi/projects/Serial_Demo/bin/ARM/Debug/Serial_Demo.out" -Wl,--no-undefined -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack /home/pi/projects/Serial_Demo/obj/ARM/Debug/main.o -lwiringPi
