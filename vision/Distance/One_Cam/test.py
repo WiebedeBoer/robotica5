@@ -1,8 +1,15 @@
 import cv2
 import numpy as np
 import os, sys
+import math
 
 cam = cv2.VideoCapture(0)
+
+font                   = cv2.FONT_HERSHEY_SIMPLEX
+bottomLeftCornerOfText = (10,500)
+fontScale              = 1
+fontColor              = (255,255,255)
+lineType               = 2
 
 #Add color blue to mask
 boundaries = [
@@ -27,7 +34,24 @@ while (True):
         mask = mask + in_mask
 
     output = cv2.bitwise_and(frame, frame, mask = mask)
-    cv2.imshow('images', output)
+    contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    for cnt in contours:
+        area = cv2.contourArea(cnt)
+        perimeter = cv2.arcLength(cnt, True)
+        x, y, w, h = cv2.boundingRect(cnt)
+        if(area > 1600):
+            frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
+            
+            cv2.putText(frame,str(str(w) + " " + str(h)),
+                        bottomLeftCornerOfText,
+                        font,
+                        fontScale,
+                        fontColor,
+                        lineType)
+
+
+    cv2.imshow('images', frame)
 
     k = cv2.waitKey(1) & 0xFF
     if k == 27:
