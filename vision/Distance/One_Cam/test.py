@@ -6,12 +6,12 @@ cam = cv2.VideoCapture(0)
 
 #Add color blue to mask
 boundaries = [
-            ([110,50,50], [130,255,255])
+            ([100,150,0], [140,255,255])
          ]
 
 # loop over the boundaries
-lower_yellow = np.array([13, 123, 116])
-upper_yellow = np.array([36, 265, 236])
+lower_yellow = np.array([20, 100, 100])
+upper_yellow = np.array([30, 255, 255])
 
 while (True):
     _, frame = cam.read()
