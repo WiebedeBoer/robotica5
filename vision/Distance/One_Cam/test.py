@@ -7,7 +7,7 @@ cam = cv2.VideoCapture(0)
 
 font                   = cv2.FONT_HERSHEY_SIMPLEX
 bottomLeftCornerOfText = (10,500)
-fontScale              = 1
+fontScale              = 0.75
 fontColor              = (255,255,255)
 lineType               = 2
 
@@ -20,41 +20,48 @@ boundaries = [
 lower_yellow = np.array([20, 100, 100])
 upper_yellow = np.array([30, 255, 255])
 
-while (True):
-    _, frame = cam.read()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-    
-    for (lower, upper) in boundaries:
-        lower = np.array(lower, dtype = "uint8")
-        upper = np.array(upper, dtype = "uint8")
+def main():
+    while (True):
+        _, frame = cam.read()
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        
+        for (lower, upper) in boundaries:
+            lower = np.array(lower, dtype = "uint8")
+            upper = np.array(upper, dtype = "uint8")
 
-        #find the colors within the specified boundaries and apply the mask
-        in_mask = cv2.inRange(hsv, lower, upper)
-        mask = mask + in_mask
+            #find the colors within the specified boundaries and apply the mask
+            in_mask = cv2.inRange(hsv, lower, upper)
+            mask = mask + in_mask
 
-    output = cv2.bitwise_and(frame, frame, mask = mask)
-    contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        output = cv2.bitwise_and(frame, frame, mask = mask)
+        contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    for cnt in contours:
-        area = cv2.contourArea(cnt)
-        perimeter = cv2.arcLength(cnt, True)
-        x, y, w, h = cv2.boundingRect(cnt)
-        if(area > 1600):
-            frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
-            
-            cv2.putText(frame,str(str(w) + " " + str(h)),
-                        bottomLeftCornerOfText,
-                        font,
-                        fontScale,
-                        fontColor,
-                        lineType)
+        for cnt in contours:
+            area = cv2.contourArea(cnt)
+            perimeter = cv2.arcLength(cnt, True)
+            x, y, w, h = cv2.boundingRect(cnt)
+            if(area > 1600):
+                frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
+                
+                cv2.putText(frame,str(str(w) + " " + str(h)),
+                            (x + w, y + h),
+                            font,
+                            fontScale,
+                            fontColor,
+                            lineType)
 
 
-    cv2.imshow('images', frame)
+        cv2.imshow('images', frame)
 
-    k = cv2.waitKey(1) & 0xFF
-    if k == 27:
-        break
+        k = cv2.waitKey(1) & 0xFF
+        if k == 27:
+            break
 
-cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
+
+def distance_to_camera(knownWidth, focalLength, perWidth):
+    # compute and return the distance from the maker to the camera
+    return (knownWidth * focalLength) / perWidth
+
+main()
