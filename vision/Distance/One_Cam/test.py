@@ -57,20 +57,22 @@ def main():
                 
                 # Distance to object calculating
                 distance = calculateDistance(w)
-                
-                # (312 - 160) / 50 = 3.04
-                # 464 - (3.04 * distance)
-                # 0.048 / 50 = (3 / 3125)
-                relLength = Decimal(3.0 / 3125.0) * Decimal(distance) # Calculating relatieve length
-                KNOWN_WIDTH = (((w + (distance * Decimal(3.04))) - (Decimal(3.04) * distance)) * Decimal(relLength)) # First = calculation at 0 cm // Second = calc what width is at that distance
-                
+                # Calculating per cm how many pixels there are - 0.048 / 50 = (3 / 3125)
+                relLength = Decimal(3.0 / 3125.0) * Decimal(distance)
+                # Calculating object pixels width at 0 cm
+                #pxWidthObjAtZeroCM = w * Decimal(Decimal(1.2013) ** Decimal(distance / 10))
+                # Calculating object pixels width at calculated distance
+                #pxWidthObjAtDistanceCM = pxWidthObjAtZeroCM * Decimal(Decimal(0.833) ** Decimal(distance /10))
+
+                KNOWN_WIDTH =  (768 - w) * relLength
 
                 # Calibration
                 #focalLength = calibration(w)
-                
+
+
                 # Apply text in frame
-                cv2.putText(frame,str(str(w)+ " " + str(round(KNOWN_WIDTH, 2)) + " " + " " + str(h) + " " + str(distance)),
-                            (x + w, y + h),
+                cv2.putText(frame,str(str(w)+ " " + str(round(KNOWN_WIDTH, 2)) + " " + " " + str(h) + " " + str(round(distance, 2))),
+                            (x + (w / 2), y),
                             font,
                             fontScale,
                             fontColor,
