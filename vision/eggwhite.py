@@ -42,6 +42,7 @@ def ShowCamFeed():
 		_, res = cv2.threshold(res,100,255,cv2.THRESH_BINARY_INV)
 		cv2.imshow('mask',res)
 
+
 		contours,hierarchy = cv2.findContours(res,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) 
 
 		for cnt in contours:
@@ -49,7 +50,7 @@ def ShowCamFeed():
 			perimeter = cv2.arcLength(cnt,True)
 			if(perimeter > 0):
 				vormfactor = 4 * math.pi * area / perimeter ** 2
-				if area > 150:
+				if area > 1500:
 					if vormfactor > 0.6:
 						x,y,w,h = cv2.boundingRect(cnt)
 						frame = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
