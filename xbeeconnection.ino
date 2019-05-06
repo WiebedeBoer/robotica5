@@ -1,19 +1,17 @@
 void setup()  {
-  pinMode(13, OUTPUT);
   Serial.begin(9600);
-  Serial.println("Goodnight moon!");
+  Serial.println("start");
   }
  
  
  
 void loop()                     // run over and over again
 {
-  bool res = false;
+  // kijk of er input is op de serial poort
   while (Serial.available()) {
+      //print input zodat deze te zien is met de monitor
       Serial.print((char)Serial.read());
-      res = true;
   }
-  if (res)
-  Serial.print("\n");
+  //wacht 100 ms
   delay(100);
 }
