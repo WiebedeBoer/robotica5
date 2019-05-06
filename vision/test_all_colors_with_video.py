@@ -14,8 +14,10 @@ while(cam.isOpened()):
                 ([100,150,0], [140,255,255]),
                 #green
                 #([0,100,50],[100,255,255]),
-                ([20,100,50],[100,255,255]),
+                #([20,100,50],[100,255,255]),
                 #([99,227,117],[119,227,117]),
+                ([147,165,17],[191,128,148]),
+                #rgb 6,17,11 = 147,64.7,6.7 = 147,165,17 # 74,134,148 = 191,50,58 = 191,128,148
                 #red
                 #([0,206,145],[12,226,225]), 
                 #([0,157,54],[189,250,255]),
@@ -45,14 +47,19 @@ while(cam.isOpened()):
             mask = mask + in_mask
         output = cv2.bitwise_and(frame, frame, mask = mask)
         contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        for cnt in contours:
+        #for cnt in contours:
         #for cnt in range(len(contours)):
+        for cnr in range(len(contours)):
+            cnt = contours[cnr]
             area = cv2.contourArea(cnt)
             perimeter = cv2.arcLength(cnt, True)
-            #factor = 4 * math.pi * area / perimeter**2
+            if(perimeter >0):
+                factor = 4 * math.pi * area / perimeter**2
+            else:
+                factor = 0
             x, y, w, h = cv2.boundingRect(cnt)
-            if(area > 1600):
-            #if(area > 1600 and factor <0.88):
+            #if(area > 1600):
+            if(area > 1600 and factor >0 and factor <0.88):
                 frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
         cv2.imshow('images', frame)
 
