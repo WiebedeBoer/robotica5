@@ -1,241 +1,209 @@
+import sys
 import cv2
 import numpy as np
 import math
-from matplotlib import pyplot as plt
+import time
 
-def nothing(x):
-	pass
+class DetectEgg:
 
-def improveContrast(frame):
-	hist, bins = np.histogram(frame.flatten(), 256, [0,256])
+	def __init__(self, debug):
+		self.setDefaultValues()
+		self.debug = debug
 
-	cdf = hist.cumsum()
-	cdf_normalized = cdf * hist.max()/ cdf.max()
+		if debug:
+			self.createTrackbars()
+		self.DetectEgg()
 
-	cdf_m = np.ma.masked_equal(cdf,0)
-	cdf_m = (cdf_m - cdf_m.min())*255/(cdf_m.max()-cdf_m.min())
-	cdf = np.ma.filled(cdf_m,0).astype('uint8')
+	def nothing(self, x):
+		pass
 
-	return cdf[frame]
+	def CLAHE(self, frame):
+		clahe = cv2.createCLAHE(2.0, (8,8))
+		cl = clahe.apply(frame)
 
-def CLAHE(frame):
-	clahe = cv2.createCLAHE(2.0, (8,8))
-	cl = clahe.apply(frame)
+		return cl
 
-	return cl
-
-def bluefilter(frame, RG):
-	copy = frame.copy()
-	copy[:,:,1] = copy[:,:,1]*(RG*0.01)
-	copy[:,:,2] = copy[:,:,2]*(RG*0.01)
-	
-	return copy
-
-def createTrackbars():
-	cv2.createTrackbar('MIN_EDGE','settings',1,500,nothing)
-	cv2.createTrackbar('MAX_EDGE','settings',1,500,nothing)
-
-	cv2.createTrackbar('H_MIN','settings',0,255,nothing)
-	cv2.createTrackbar('S_MIN','settings',0,255,nothing)
-	cv2.createTrackbar('V_MIN','settings',0,255,nothing)
-
-	cv2.createTrackbar('H_MAX','settings',0,255,nothing)
-	cv2.createTrackbar('S_MAX','settings',0,255,nothing)
-	cv2.createTrackbar('V_MAX','settings',0,255,nothing)
-
-	cv2.createTrackbar('RG','settings',0,100,nothing)
-
-	cv2.createTrackbar('MIN_TH','settings',1,10,nothing)
-	cv2.createTrackbar('MAX_TH','settings',0,255,nothing)
-
-	cv2.createTrackbar('BLOCK_SIZE','settings',2,100,nothing)
-
-	cv2.createTrackbar('COLOR_SENSITIVITY','settings',0,255,nothing)
-	
-	# Set default values
-	cv2.setTrackbarPos('MIN_EDGE','settings',30)
-	cv2.setTrackbarPos('MAX_EDGE','settings',215)
-	
-	cv2.setTrackbarPos('H_MIN','settings',100)
-	cv2.setTrackbarPos('S_MIN','settings',0)
-	cv2.setTrackbarPos('V_MIN','settings',0)
-
-	cv2.setTrackbarPos('H_MAX','settings',255)
-	cv2.setTrackbarPos('S_MAX','settings',255)
-	cv2.setTrackbarPos('V_MAX','settings',255)
-
-	cv2.setTrackbarPos('RG','settings',40)
-
-	cv2.setTrackbarPos('MIN_TH','settings', 1)
-	cv2.setTrackbarPos('MAX_TH','settings', 255)
-
-	cv2.setTrackbarPos('BLOCK_SIZE','settings', 11)
-
-	cv2.setTrackbarPos('COLOR_SENSITIVITY','settings', 255)
-
-
-
-def DetectEgg():
-	cap = cv2.VideoCapture(0)
-	cv2.namedWindow('settings', 2)
-	cv2.namedWindow('result', 2)
-
-	# Create sliders 
-	createTrackbars()
-
-	params = cv2.SimpleBlobDetector_Params()
-
-	# Filter by Area.
-	params.filterByArea = True
-	params.minArea = 100
-
-	# Filter by Circularity
-	params.filterByCircularity = True
-	params.minCircularity = 0.8
-
-	# Filter by Convexity
-	params.filterByConvexity = True
-	params.minConvexity = 0.9
-
-	# Filter by color
-	params.filterByColor = True
-	
-
-	while(True):
-
-		# Read the values from the sliders
-		MIN_EDGE = cv2.getTrackbarPos('MIN_EDGE','settings')
-		MAX_EDGE = cv2.getTrackbarPos('MAX_EDGE','settings')
-
-		h_min = cv2.getTrackbarPos('H_MIN','settings')
-		s_min = cv2.getTrackbarPos('S_MIN','settings')
-		v_min = cv2.getTrackbarPos('V_MIN','settings')
-
-		h_max = cv2.getTrackbarPos('H_MAX','settings')
-		s_max = cv2.getTrackbarPos('S_MAX','settings')
-		v_max = cv2.getTrackbarPos('V_MAX','settings')
-
-		RG = cv2.getTrackbarPos('RG','settings')
-
-		MIN_TH = cv2.getTrackbarPos('MIN_TH','settings')
-		MAX_TH = cv2.getTrackbarPos('MAX_TH','settings')
-
-		if cv2.getTrackbarPos('BLOCK_SIZE','settings') % 2 != 0:
-			blockSize = cv2.getTrackbarPos('BLOCK_SIZE','settings')
-
-		COLOR_SENSITIVITY = cv2.getTrackbarPos('COLOR_SENSITIVITY','settings')
-
-		params.blobColor = COLOR_SENSITIVITY
-		params.minThreshold = MIN_TH
-		params.maxThreshold = MAX_TH
-
-		# Read the frame from the camera
-		_, frame = cap.read()
-
-		cv2.imshow("Regular Frame", frame)
-		gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-		gray_blur = cv2.GaussianBlur(gray, (9, 9), 0)
-
-		original_th = cv2.adaptiveThreshold(gray_blur,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+	def bluefilter(self, frame, RG):
+		copy = frame.copy()
+		copy[:,:,1] = copy[:,:,1]*(RG*0.01)
+		copy[:,:,2] = copy[:,:,2]*(RG*0.01)
 		
-		frame_contrast = improveContrast(frame)
-		frame_contrast = cv2.GaussianBlur(frame_contrast, (9, 9), 0)
-		cv2.imshow("Improved contrast", frame_contrast)
+		return copy
 
-		clahe_b = CLAHE(frame[:,:,0])
-		clahe_g = CLAHE(frame[:,:,1])
-		clahe_r = CLAHE(frame[:,:,2])
+	def createTrackbars(self):
+		cv2.namedWindow('settings', 2)
 
-		cv2.imshow("clahe_b", clahe_b)
-		cv2.imshow("clahe_g", clahe_g)
-		cv2.imshow("clahe_r", clahe_r)
+		callback = self.nothing
 
-		clahe = cv2.merge((clahe_b,clahe_g,clahe_r))
+		cv2.createTrackbar('H_MIN','settings',0,255,callback)
+		cv2.createTrackbar('S_MIN','settings',0,255,callback)
+		cv2.createTrackbar('V_MIN','settings',0,255,callback)
 
-		cv2.imshow("clahe", clahe)
+		cv2.createTrackbar('H_MAX','settings',0,255,callback)
+		cv2.createTrackbar('S_MAX','settings',0,255,callback)
+		cv2.createTrackbar('V_MAX','settings',0,255,callback)
 
-		bluefiltered = bluefilter(frame, RG)
-		bluefiltered_improved = bluefilter(clahe, RG)
+		cv2.createTrackbar('AREA','settings',0,5000,callback)
+		cv2.createTrackbar('CIRCULARITY','settings',0,100,callback)
+		cv2.createTrackbar('CONVEXITY','settings',0,100,callback)
 
-		lower = np.array([h_min,s_min,v_min])
-		upper = np.array([h_max,s_max,v_max])
+		cv2.createTrackbar('RG','settings',0,100,callback)
 
-		mask = cv2.inRange(bluefiltered, lower, upper)
-		# canny = cv2.Canny(bluefiltered_improved, MIN_EDGE, MAX_EDGE, True)
+		cv2.createTrackbar('MIN_TH','settings',0,255,callback)
+		cv2.createTrackbar('MAX_TH','settings',0,255,callback)
 
-		#,_ = cv2.findContours(canny,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-		# cv2.drawContours(canny, contours, -1, (255,0,0), 2)
+		cv2.createTrackbar('BLOCK_SIZE','settings',2,100,callback)
 
-		res = cv2.bitwise_and(clahe,clahe, mask=mask)		
+		cv2.setTrackbarPos('H_MIN','settings',self.h_min)
+		cv2.setTrackbarPos('S_MIN','settings',self.s_min)
+		cv2.setTrackbarPos('V_MIN','settings',self.v_min)
 
-		# = mask | canny
-		#kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-		#new_mask_open = cv2.morphologyEx(new_mask,cv2.MORPH_DILALATION,kernel)
-		#new_mask_open = cv2.dilate(new_mask,kernel,iterations = 2)
+		cv2.setTrackbarPos('H_MAX','settings',self.h_max)
+		cv2.setTrackbarPos('S_MAX','settings',self.s_max)
+		cv2.setTrackbarPos('V_MAX','settings',self.v_max)
 
-		#res = cv2.bitwise_and(frame,frame, mask=new_mask_open)
-		gray = cv2.cvtColor(res,cv2.COLOR_BGR2GRAY)
-		th = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,blockSize,MIN_TH)
+		cv2.setTrackbarPos('RG','settings',self.RG)
 
-		kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-		#new_mask_open = cv2.morphologyEx(th,cv2.MORPH_DILALATION,kernel)
-		new_mask_open = cv2.morphologyEx(th, cv2.MORPH_CLOSE, kernel)
+		cv2.setTrackbarPos('AREA','settings',self.area)
+		cv2.setTrackbarPos('CIRCULARITY','settings',self.circularity)
+		cv2.setTrackbarPos('CONVEXITY','settings',self.convexity)
 
-		# res = cv2.bitwise_and(frame_contrast,frame_contrast, mask=th)	
-		
-		
-		# for cnt in contours:
-		# 	area = cv2.contourArea(cnt)
-		# 	perimeter = cv2.arcLength(cnt,True)
-		# 	if(perimeter > 0):
-		# 		vormfactor = 4 * math.pi * area / perimeter ** 2
-		# 		if area > 600:
-		# 			if vormfactor > 0.85:
-		# 				x,y,w,h = cv2.boundingRect(cnt)
-		# 				res = cv2.rectangle(res,(x,y),(x+w,y+h),(255,0,255),2)
+		cv2.setTrackbarPos('MIN_TH','settings', self.min_th)
+		cv2.setTrackbarPos('MAX_TH','settings', self.max_th)
 
-		# cv2.imshow("canny", canny)
-		#cv2.imshow("new_mask", new_mask_open)
-		cv2.imshow("res", res)
-		cv2.imshow("I'm blue da ba dee da ba daa", bluefiltered)
-		cv2.imshow("I'm blue da ba dee da ba daa_improved", bluefiltered_improved)
-		cv2.imshow("th", th)
-		cv2.imshow("original_th", original_th)
-		cv2.imshow("new_mask_open",new_mask_open)
+	def setDefaultValues(self):
+
+		# Set default variables
+		self.h_min = 100
+		self.s_min = 0
+		self.v_min = 0
+
+		self.h_max = 255
+		self.s_max = 255
+		self.v_max = 255
+
+		self.area = 490
+		self.circularity = 72
+		self.convexity = 83
+
+		self.RG = 90
+
+		self.min_th = 1
+		self.max_th = 255
+
+		# Set params for blob detection
+		self.params = cv2.SimpleBlobDetector_Params()
+		self.params.filterByArea = True
+		self.params.filterByCircularity = True
+		self.params.filterByConvexity = True
+		#self.params.filterByColor = True
+
+		self.params.blobColor = 255
+		self.params.minThreshold = self.min_th
+		self.params.maxThreshold = self.max_th
+
+		self.params.minArea = self.area
+		self.params.minCircularity = self.circularity
+		self.params.minConvexity = self.convexity
+
+		#self.params = params
+
+	def toPercentage(self, var):
+		if var > 0:
+			var = float(var) / 100
+		return var
+
+	def updateValues(self):
+		self.h_min = cv2.getTrackbarPos('H_MIN','settings')
+		self.s_min = cv2.getTrackbarPos('S_MIN','settings')
+		self.v_min = cv2.getTrackbarPos('V_MIN','settings')
+
+		self.h_max = cv2.getTrackbarPos('H_MAX','settings')
+		self.s_max = cv2.getTrackbarPos('S_MAX','settings')
+		self.v_max = cv2.getTrackbarPos('V_MAX','settings')
+
+		self.area = cv2.getTrackbarPos('AREA','settings')
+		self.circularity = self.toPercentage(cv2.getTrackbarPos('CIRCULARITY','settings'))
+
+		self.convexity = self.toPercentage(cv2.getTrackbarPos('CONVEXITY','settings'))
+
+		self.RG = cv2.getTrackbarPos('RG','settings')
+
+		self.MIN_TH = cv2.getTrackbarPos('MIN_TH','settings')
+		self.MAX_TH = cv2.getTrackbarPos('MAX_TH','settings')
+
+		blockSize = cv2.getTrackbarPos('BLOCK_SIZE','settings')
+		if blockSize % 2 != 0 and blockSize > 1:
+			self.blockSize = blockSize
+
+		self.COLOR_SENSITIVITY = cv2.getTrackbarPos('COLOR_SENSITIVITY','settings')
+
+		self.params.blobColor = 255
+		self.params.minThreshold = self.MIN_TH
+		self.params.maxThreshold = self.MAX_TH
+
+		self.params.minArea = self.area
+		self.params.minCircularity = self.circularity
+		self.params.minConvexity = self.convexity
 
 
-		#gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-		#_,th = cv2.threshold(gray,200,255,cv2.THRESH_BINARY)
+	def DetectEgg(self):
+		cap = cv2.VideoCapture(0)
 
-		# Set up the detector with default parameters.
-		detector = cv2.SimpleBlobDetector_create(params)
-		 
-		# Detect blobs.
-		keypoints = detector.detect(res)
-		 
-		# Draw detected blobs as red circles.
-		# cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
-		im_with_keypoints = cv2.drawKeypoints(clahe, keypoints, np.array([]), (255,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+		cap.read()
+		time.sleep(1) # startup camera
+				
+		while True:
 
-		contours,hierarchy = cv2.findContours(th,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE) 
+			if debug:
+				self.updateValues()
 
-		for cnt in contours:
-			area = cv2.contourArea(cnt)
-			perimeter = cv2.arcLength(cnt,True)
-			if(perimeter > 0):
-				vormfactor = 4 * math.pi * area / perimeter ** 2
-				if area > 400:
-					if vormfactor > 0.9:
-						x,y,w,h = cv2.boundingRect(cnt)
-						im_with_keypoints = cv2.rectangle(im_with_keypoints,(x,y),(x+w,y+h),(255,0,255),2)
-					elif vormfactor > 0.8 and vormfactor <= 0.9:
-						x,y,w,h = cv2.boundingRect(cnt)
-						im_with_keypoints = cv2.rectangle(im_with_keypoints,(x,y),(x+w,y+h),(200,200,100),2)
-		 
-		# Show keypoints
-		cv2.imshow("Keypoints", im_with_keypoints)
+			# Read the frame from the camera
+			_, frame = cap.read()
 
-		if cv2.waitKey(1) & 0xFF == ord('q'):
-			break
+			#improve contrast
+			clahe_b = self.CLAHE(frame[:,:,0])
 
-DetectEgg()
+			denoise = cv2.fastNlMeansDenoising(clahe_b,None,10,5,10)
+			#frame_blur = cv2.bilateralFilter(clahe_b,9,75,75)
+
+			#cv2.imshow("blue channel blurred", frame_blur)
+			#cv2.imshow("denoise", denoise)
+			#cv2.imshow("blue channel", clahe_b)
+
+			clahe = cv2.merge((clahe_b,frame[:,:,1], frame[:,:,2]))
+
+			bluefiltered = self.bluefilter(clahe, self.RG)
+			
+
+			lower = np.array([self.h_min,self.s_min,self.v_min])
+			upper = np.array([self.h_max,self.s_max,self.v_max])
+
+			mask = cv2.inRange(bluefiltered, lower, upper)
+
+			res = cv2.bitwise_and(bluefiltered,bluefiltered, mask=mask)
+
+			# Set up the detector with default parameters.
+			detector = cv2.SimpleBlobDetector_create(self.params)
+			 
+			# Detect blobs.
+			keypoints = detector.detect(denoise)
+			 
+			# Draw detected blobs as red circles.
+			keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
+			# Show keypoints
+			cv2.imshow("output", keypoints_im)
+			cv2.imshow("result", res)
+
+			if not self.debug:
+				break
+			else:
+				if cv2.waitKey(1) & 0xFF == ord('q'):
+					break
+
+debug = False
+if str(sys.argv[1]) == "-d":
+	debug = True
+
+DetectEgg(debug)
