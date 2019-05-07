@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import os, sys
 import math
+from decimal import *
 
 cam = cv2.VideoCapture(0)
 
@@ -9,7 +10,7 @@ cam = cv2.VideoCapture(0)
     # Initialize the known distance from the camera to the object
 KNOWN_DISTANCE = 100.0
     # Initialize the known object width, which in this case
-KNOWN_WIDTH = 15.0
+KNOWN_WIDTH = Decimal(15.0)
   # Initialize the known object focal length, which in this case
 FOCAL_LENGTH = 1013
 
@@ -57,18 +58,24 @@ def main():
                 # Distance to object calculating
                 distance = calculateDistance(w)
                 
-                # (312 - 160) / 50 = 3.04
-                # 464 - (3.04 * distance)
-                # 0.048 / 50 = (3 / 3125)
-                relLength = (3 / 3125) * distance # Calculating relatieve length
-                KNOWN_WIDTH = (((w + distance * 3.04) - (3.04 * distance)) * relLength) # First = calculation at 0 cm // Second = calc what width is at that distance
+                # Calculating per cm how many pixels there are - 0.048 / 50 = (3 / 3125)
+                # RelLength = Decimal(3.0 / 3125.0) * Decimal(distance)
                 
+                # Calculating object pixels width at 0 cm
+                pxWidthObjAtZeroCM = w * Decimal(Decimal(1.2013) ** Decimal(distance / 10))
+                
+                # Calculating object pixels width at calculated distance
+                pxWidthObjAtDistanceCM = pxWidthObjAtZeroCM * Decimal(Decimal(0.833) ** Decimal(distance / 10))
+
+                # KNOWN_WIDTH =  (768 - w) * relLength
+
                 # Calibration
                 #focalLength = calibration(w)
-                
+
+
                 # Apply text in frame
-                cv2.putText(frame,str(str(w)+ " " + str(KNOWN_WIDTH) + " " + str(h) + " " + str(distance)),
-                            (x + w, y + h),
+                cv2.putText(frame,str(str(w)+ " " + str(round(pxWidthObjAtDistanceCM, 2)) + " " + " " + str(h) + " " + str(round(distance, 2))),
+                            (x + (w / 2), y),
                             font,
                             fontScale,
                             fontColor,
