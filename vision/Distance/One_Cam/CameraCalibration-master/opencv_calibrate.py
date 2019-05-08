@@ -128,13 +128,14 @@ if __name__ == '__main__':
         np.savetxt(matf, (camera_matrix[0], camera_matrix[1], camera_matrix[2]), fmt='%-12.8f')
 
     with open(os.path.join(out, "rotation.txt"), "w") as transvecf:
-        rvecs.reshape((3, 5))
-        np.savetxt(transvecf, (rvecs[0], rvecs[1], rvecs[2], rvecs[3], rvecs[4]), fmt='%-12.8f')
+        np.savetxt(transvecf, (rvecs[0][0], rvecs[0][1], rvecs[0][2]), fmt='%-12.8f')
+        np.savetxt(transvecf, (rvecs[1][0], rvecs[1][1], rvecs[1][2]), fmt='%-12.8f')
+        np.savetxt(transvecf, (rvecs[2][0], rvecs[2][1], rvecs[2][2]), fmt='%-12.8f')
 
     with open(os.path.join(out, "translation.txt"), "w") as tvecf:
-        tvecs.reshape((3, 5))
-        np.savetxt(tvecf, (tvecs[0], tvecs[1], tvecs[2], tvecs[3], tvecs[4]), fmt='%-12.8f')
-
+        np.savetxt(tvecf, (tvecs[0][0], tvecs[0][1], tvecs[0][2]), fmt='%-12.8f')
+        np.savetxt(tvecf, (tvecs[1][0], tvecs[1][1], tvecs[1][2]), fmt='%-12.8f')
+        np.savetxt(tvecf, (tvecs[2][0], tvecs[2][1], tvecs[2][2]), fmt='%-12.8f')
     with open(os.path.join(out, "distortion.txt"), "w") as distf:
         np.savetxt(distf, dist_coefs.ravel(), fmt='%.12f')
 
