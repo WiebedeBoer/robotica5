@@ -6,7 +6,7 @@ import time
 if len(sys.argv)>1:
     inputImage = cv2.imread(sys.argv[1])
 else:
-    inputImage = cv2.imread("qrcode-learnopencv.jpg")
+    inputImage = cv2.imread("shertogenbosch.png")
 
 # utility function to Display barcode and QR code location
 def display(im, bbox):
