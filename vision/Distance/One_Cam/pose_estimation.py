@@ -12,11 +12,15 @@ parser.add_argument('images', help='path to images')
 args = parser.parse_args()
 
 # This function draws lines joining the given image points to the first chess board corner
-def draw(img, corners, imgPoints):
-    corner = tuple(corners[0].ravel())
-    img = cv2.line(img, corner, tuple(imgPoints[0].ravel()), (255, 0, 0), 5)
-    img = cv2.line(img, corner, tuple(imgPoints[1].ravel()), (0, 255, 0), 5)
-    img = cv2.line(img, corner, tuple(imgPoints[2].ravel()), (0, 0, 255), 5)
+def draw(img, corners, imgpts):
+    imgpts = np.int32(imgpts).reshape(-1,2)
+    # draw ground floor in green
+    img = cv2.drawContours(img, [imgpts[:4]],-1,(0,255,0),-3)
+    # draw pillars in blue color
+    for i,j in zip(range(4),range(4,8)):
+        img = cv2.line(img, tuple(imgpts[i]), tuple(imgpts[j]),(255),3)
+    # draw top layer in red color
+    img = cv2.drawContours(img, [imgpts[4:]],-1,(0,0,255),3)
     return img
 
 # Load the camera calibration data
@@ -35,7 +39,8 @@ objectPoints = np.zeros((rows * cols, 1, 3), np.float32)
 objectPoints[:, :, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 1, 2)
 
 # Create the axis points
-axisPoints = np.float32([[3, 0, 0], [0, 3, 0], [0, 0, -3]]).reshape(-1, 3)
+axisPoints = np.float32([[0,0,0], [0,3,0], [3,3,0], [3,0,0],
+                   [0,0,-3],[0,3,-3],[3,3,-3],[3,0,-3] ])
 extensions = ['jpg', 'JPG', 'png']
 
 if os.path.isdir(args.images):
