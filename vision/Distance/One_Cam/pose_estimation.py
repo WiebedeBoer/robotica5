@@ -5,7 +5,8 @@ import os
 import argparse
 
 cam = cv2.VideoCapture(0)
-
+cam.set(3,640)
+cam.set(4,480)
 # This function draws lines joining the given image points to the first chess board corner
 def draw(frame, corners, imgpts):
     imgpts = np.int32(imgpts).reshape(-1,2)
@@ -60,10 +61,9 @@ while(1):
         frame = draw(frame, corners, axisImgPoints)
 
     # Display the image
-    cv2.imshow('chess board', frame)
 
-    k = cv2.waitKey(1) & 0xFF
-    if k == 27:
+    cv2.imshow('chess board', frame)
+    if (cv2.waitKey(1) & 0xFF) == 27:
         break
 
 cv2.destroyAllWindows()
