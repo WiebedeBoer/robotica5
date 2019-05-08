@@ -24,30 +24,31 @@ lineType               = 2
 
 # Add color blue to mask
 boundaries = [
-              ([100,150,0], [140,255,255]),
-              ([20, 100, 100], [30, 255, 255]),
+              [([20, 100, 100], [30, 255, 255])], #Yellow
+              [([100,150,0], [140,255,255])], #Blue
+              [([20, 100, 100], [30, 255, 255])] #Red
          ]
 
 totalContours = []
 
-# Loop over the boundaries
-lower_yellow = np.array([20, 100, 100])
-upper_yellow = np.array([30, 255, 255])
 
 def main():
     while (1):
         _, frame = cam.read()
         img = cv2.GaussianBlur(frame, (15, 15), 0)
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
-        
-        for (lower, upper) in boundaries:
-            # Find the colors within the specified boundaries and apply the mask
-            in_mask = cv2.inRange(hsv, np.array(lower, dtype = "uint8"), np.array(upper, dtype = "uint8"))
-            _, res = cv2.threshold(in_mask, 215, 255, cv2.THRESH_BINARY)
-            res = cv2.GaussianBlur(res, (15, 15), 0)
-            contours, hierarchy = cv2.findContours(res, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-            totalContours.append(contours)
+        for range in boundaries:
+            in_mask = None;
+            for (lower, upper) in range:
+                # Find the colors within the specified boundaries and apply the mask
+                if(in_mask is None):
+                    in_mask = cv2.inRange(hsv, np.array(lower, dtype = "uint8"), np.array(upper, dtype = "uint8"));
+                else:
+                    in_mask = in_mask + cv2.inRange(hsv, np.array(lower, dtype = "uint8"), np.array(upper, dtype = "uint8"))
+                _, res = cv2.threshold(in_mask, 215, 255, cv2.THRESH_BINARY)
+                res = cv2.GaussianBlur(res, (15, 15), 0)
+                contours, hierarchy = cv2.findContours(res, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+                totalContours.append(contours)
         
         for contours in totalContours:
             for cnt in contours:
