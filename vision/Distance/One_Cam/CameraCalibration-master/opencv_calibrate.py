@@ -123,21 +123,26 @@ if __name__ == '__main__':
     print("translation vector:\n", tvecs)
 
     # write to matrix to be used as input
-    with open(os.path.join(out, "matrix.txt"), "w") as matf:
+    with open(os.path.join(out, "matrix.txt"), "w") as path:
         camera_matrix.reshape((3, 3))
-        np.savetxt(matf, (camera_matrix[0], camera_matrix[1], camera_matrix[2]), fmt='%-12.8f')
+        np.savetxt(path, (camera_matrix[0], camera_matrix[1], camera_matrix[2]), fmt='%-12.8f')
 
-    with open(os.path.join(out, "rotation.txt"), "w") as transvecf:
-        np.savetxt(transvecf, (rvecs[0][0], rvecs[0][1], rvecs[0][2]), fmt='%-12.8f')
-        np.savetxt(transvecf, (rvecs[1][0], rvecs[1][1], rvecs[1][2]), fmt='%-12.8f')
-        np.savetxt(transvecf, (rvecs[2][0], rvecs[2][1], rvecs[2][2]), fmt='%-12.8f')
+    with open(os.path.join(out, "rotation.txt"), "w") as path:
+        np.savetxt(path, (rvecs[0][0], rvecs[0][1], rvecs[0][2]), fmt='%-12.8f')
+        np.savetxt(path, (rvecs[1][0], rvecs[1][1], rvecs[1][2]), fmt='%-12.8f')
+        np.savetxt(path, (rvecs[2][0], rvecs[2][1], rvecs[2][2]), fmt='%-12.8f')
+        np.savetxt(path, (rvecs[3][0], rvecs[3][1], rvecs[3][2]), fmt='%-12.8f')
+        np.savetxt(path, (rvecs[4][0], rvecs[4][1], rvecs[4][2]), fmt='%-12.8f')
 
-    with open(os.path.join(out, "translation.txt"), "w") as tvecf:
-        np.savetxt(tvecf, (tvecs[0][0], tvecs[0][1], tvecs[0][2]), fmt='%-12.8f')
-        np.savetxt(tvecf, (tvecs[1][0], tvecs[1][1], tvecs[1][2]), fmt='%-12.8f')
-        np.savetxt(tvecf, (tvecs[2][0], tvecs[2][1], tvecs[2][2]), fmt='%-12.8f')
-    with open(os.path.join(out, "distortion.txt"), "w") as distf:
-        np.savetxt(distf, dist_coefs.ravel(), fmt='%.12f')
+    with open(os.path.join(out, "translation.txt"), "w") as path:
+        np.savetxt(path, (tvecs[0][0], tvecs[0][1], tvecs[0][2]), fmt='%-12.8f')
+        np.savetxt(path, (tvecs[1][0], tvecs[1][1], tvecs[1][2]), fmt='%-12.8f')
+        np.savetxt(path, (tvecs[2][0], tvecs[2][1], tvecs[2][2]), fmt='%-12.8f')
+        np.savetxt(path, (tvecs[3][0], tvecs[3][1], tvecs[3][2]), fmt='%-12.8f')
+        np.savetxt(path, (tvecs[4][0], tvecs[4][1], tvecs[4][2]), fmt='%-12.8f')
+
+    with open(os.path.join(out, "distortion.txt"), "w") as path:
+        np.savetxt(path, dist_coefs.ravel(), fmt='%.12f')
 
     # undistort the image with the calibration
     for img_found in img_names_undistort:
