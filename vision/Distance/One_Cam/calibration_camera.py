@@ -12,8 +12,8 @@ parser.add_argument('images', help='path to images')
 args = parser.parse_args()
 
 # Define the chess board rows and columns
-rows = 9
-cols = 7
+rows = 8
+cols = 6
 
 # Set the termination criteria for the corner sub-pixel algorithm
 criteria = (cv2.TERM_CRITERIA_MAX_ITER + cv2.TERM_CRITERIA_EPS, 30, 0.001)
@@ -32,35 +32,31 @@ if os.path.isdir(args.images):
                  if any(fn.endswith(ext) for ext in extensions)]
     proj_root = args.images
 
+openGray = None
 # Loop over the image files
 for path in img_names:
     # Load the image and convert it to gray scale
     img = cv2.imread(os.path.join(proj_root, path))
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    print("testing")
-    
     # Find the chess board corners
     ret, corners = cv2.findChessboardCorners(gray, (rows, cols), None)
     
     # Make sure the chess board pattern was found in the image
     if ret:
+        openGray = gray
         # Refine the corner position
         corners = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
         
         # Add the object points and the image points to the arrays
         objectPointsArray.append(objectPoints)
         imgPointsArray.append(corners)
-        
+
         # Draw the corners on the image
         cv2.drawChessboardCorners(img, (rows, cols), corners, ret)
-    
-    # Display the image
-    cv2.imshow('chess board', img)
-    cv2.waitKey(500)
 
 # Calibrate the camera and save the results
-ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objectPointsArray, imgPointsArray, gray.shape[::-1], None, None)
-np.savez('/pictures/camera_calibration/calib.npz', mtx=mtx, dist=dist, rvecs=rvecs, tvecs=tvecs)
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objectPointsArray, imgPointsArray, openGray.shape[::-1], None, None)
+np.savez('pictures/camera_calibration/calib.npz', mtx=mtx, dist=dist, rvecs=rvecs, tvecs=tvecs)
 
 
 # Print the camera calibration error
