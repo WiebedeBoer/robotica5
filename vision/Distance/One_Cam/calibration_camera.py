@@ -3,8 +3,8 @@ import cv2
 import glob
 
 # Define the chess board rows and columns
-rows = 8
-cols = 6
+rows = 9
+cols = 7
 
 # Set the termination criteria for the corner sub-pixel algorithm
 criteria = (cv2.TERM_CRITERIA_MAX_ITER + cv2.TERM_CRITERIA_EPS, 30, 0.001)
@@ -37,15 +37,14 @@ for path in glob.glob('./pictures/camera_calibration/schaakbord8'):
         
         # Draw the corners on the image
         cv2.drawChessboardCorners(img, (rows, cols), corners, ret)
-
-    # Calibrate the camera and save the results
-    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objectPointsArray, imgPointsArray, gray.shape[::-1], None, None)
-    np.savez('/pictures/camera_calibration/calib.npz', mtx=mtx, dist=dist, rvecs=rvecs, tvecs=tvecs)
     
     # Display the image
     cv2.imshow('chess board', img)
     cv2.waitKey(500)
 
+# Calibrate the camera and save the results
+ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objectPointsArray, imgPointsArray, gray.shape[::-1], None, None)
+np.savez('/pictures/camera_calibration/calib.npz', mtx=mtx, dist=dist, rvecs=rvecs, tvecs=tvecs)
 
 
 # Print the camera calibration error

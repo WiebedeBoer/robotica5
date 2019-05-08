@@ -118,13 +118,22 @@ if __name__ == '__main__':
 
     print("\nRMS:", rms)
     print("camera matrix:\n", camera_matrix)
-    # print("matrix: \n", type(camera_matrix))
     print("distortion coefficients: ", dist_coefs.ravel())
+    print("rotation vector:\n", rvecs)
+    print("translation vector:\n", tvecs)
 
     # write to matrix to be used as input
     with open(os.path.join(out, "matrix.txt"), "w") as matf:
         camera_matrix.reshape((3, 3))
         np.savetxt(matf, (camera_matrix[0], camera_matrix[1], camera_matrix[2]), fmt='%-12.8f')
+
+    with open(os.path.join(out, "rotation.txt"), "w") as transvecf:
+        rvecs.reshape((3, 5))
+        np.savetxt(transvecf, (rvecs[0], rvecs[1], rvecs[2], rvecs[3], rvecs[4]), fmt='%-12.8f')
+
+    with open(os.path.join(out, "translation.txt"), "w") as tvecf:
+        tvecs.reshape((3, 5))
+        np.savetxt(tvecf, (tvecs[0], tvecs[1], tvecs[2], tvecs[3], tvecs[4]), fmt='%-12.8f')
 
     with open(os.path.join(out, "distortion.txt"), "w") as distf:
         np.savetxt(distf, dist_coefs.ravel(), fmt='%.12f')
