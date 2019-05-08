@@ -42,12 +42,12 @@ if __name__ == '__main__':
     parser.add_argument('images', help='path to images')
     parser.add_argument('pattern_x', metavar='X', default=9, type=int, 
                         help='pattern x')
-    parser.add_argument('pattern_y', metavar='Y', default=6, type=int, 
+    parser.add_argument('pattern_y', metavar='Y', default=7, type=int,
                         help='pattern y')
     parser.add_argument('--out', help='optional path for output')
     parser.add_argument('--square_size', default=1.0)
 
-    args=parser.parse_args()
+    args = parser.parse_args()
 
     logging.debug(args)
 

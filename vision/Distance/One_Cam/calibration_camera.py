@@ -1,6 +1,15 @@
 import numpy as np
 import cv2
 import glob
+import os
+import argparse
+
+parser = argparse.ArgumentParser(description='Generate camera matrix and '
+                                             'distortion parameters from checkerboard '
+                                             'images')
+parser.add_argument('images', help='path to images')
+
+args = parser.parse_args()
 
 # Define the chess board rows and columns
 rows = 9
@@ -16,12 +25,19 @@ objectPoints[:, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 2)
 # Create the arrays to store the object points and the image points
 objectPointsArray = []
 imgPointsArray = []
+extensions = ['jpg', 'JPG', 'png']
+
+if os.path.isdir(args.images):
+    img_names = [fn for fn in os.listdir(args.images)
+                 if any(fn.endswith(ext) for ext in extensions)]
+    proj_root = args.images
 
 # Loop over the image files
-for path in glob.glob('./pictures/camera_calibration/schaakbord8'):
+for path in img_names:
     # Load the image and convert it to gray scale
-    img = cv2.imread(path)
+    img = cv2.imread(os.path.join(proj_root, path))
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    print("testing")
     
     # Find the chess board corners
     ret, corners = cv2.findChessboardCorners(gray, (rows, cols), None)
@@ -44,6 +60,7 @@ for path in glob.glob('./pictures/camera_calibration/schaakbord8'):
 
 # Calibrate the camera and save the results
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objectPointsArray, imgPointsArray, gray.shape[::-1], None, None)
+print("testfase 2")
 np.savez('/pictures/camera_calibration/calib.npz', mtx=mtx, dist=dist, rvecs=rvecs, tvecs=tvecs)
 
 
@@ -57,7 +74,7 @@ for i in range(len(objectPointsArray)):
 print("Total error: ", error / len(objectPointsArray))
 
 # Load one of the test images
-img = cv2.imread('/pictures/camera_calibration/schaakbord5.jpg')
+img = cv2.imread('pictures/camera_calibration/schaakbord5.jpg')
 h, w = img.shape[:2]
 
 # Obtain the new camera matrix and undistort the image

@@ -11,7 +11,7 @@ def draw(img, corners, imgPoints):
     return img
 
 # Load the camera calibration data
-with np.load('../data/calib.npz') as calibData:
+with np.load('/pictures/calibration_camera/out/.npz') as calibData:
     mtx, dist, rvecs, tvecs = [calibData[i] for i in ('mtx', 'dist', 'rvecs', 'tvecs')]
 
 # Define the chess board rows and columns
