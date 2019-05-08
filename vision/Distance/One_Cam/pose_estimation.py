@@ -62,8 +62,7 @@ while(1):
     # Display the image
     cv2.imshow('chess board', frame)
 
-    k = cv2.waitKey(1) & 0xFF
-    if k == 27:
+    if cv2.waitKey(1) & 0xFF == 27:
         break
 
 cv2.destroyAllWindows()
