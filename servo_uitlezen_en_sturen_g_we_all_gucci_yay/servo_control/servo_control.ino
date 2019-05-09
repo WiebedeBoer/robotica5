@@ -25,6 +25,12 @@ void loop()
   unsigned long currentMillis = millis();
 
   //Serial.println("Initiating downwards");
+  
+  //Temp check
+  if (readTemp(1) > 70) { // Quit script, servo 1 overheated
+    
+  }
+  
   downwards();
   
   if (currentMillis - previousMillis >= interval) {
