@@ -1,17 +1,18 @@
 import socket
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((socket.gethostname(), 1234))
+s.connect(("127.0.0.1", 1234))
 
 
-s.send(bytes("Hey there!!!", "utf-8"))
-s.send(bytes("msg2", "utf-8"))
+s.send(bytes("Hey there!!!"))
+s.send(bytes("msg2k"))
 
 while True:
-    input1 = input()
-
+    input1 = raw_input()
+    u = unicode(input1, "utf-8")
     # output
-    print(input1)
-    s.send(bytes(input1, "utf-8"))
+    print(u)
+    s.send(bytes(u))
     if input1 == "exit":
         break
+s.close()
