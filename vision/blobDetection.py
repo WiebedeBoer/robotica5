@@ -149,6 +149,9 @@ class DetectEgg:
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
+	def calculateDistance(w):
+    	return (FOCAL_LENGTH * (KNOWN_WIDTH / 2)) / (w / 2)
+
 
 	def DetectEgg(self):
 		cap = cv2.VideoCapture(0)
@@ -191,6 +194,8 @@ class DetectEgg:
 				x = int(keypoints[0].pt[0])
 				y = int(keypoints[0].pt[1])
 
+				print keypoints[0].size
+
 				turn_x = x-(w/2)
 				height_y = y-(h/2)
 
@@ -198,7 +203,7 @@ class DetectEgg:
 
 			if not self.debug:
 				if eggDetectCount > 15:
-					print str(turn_x) + " " + str(height_y)
+					print str(turn_x) + " " + str(height_y) + " " calculateDistance()
 					break
 				elif count >= 30:
 					print "no egg was found."
