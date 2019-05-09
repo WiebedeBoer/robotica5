@@ -5,34 +5,40 @@ import time
 
 #EI OPPAKKEN EN BRENGEN NAAR BAKJE MET QR
 
-#ei detection
-from egg import ShowCamFeed
-ShowCamFeed()
+#ei detection #done
+from blobDetection import EggDetection
+EggDetection()
 
-#QR detection
+#QR detection #done
 from qrvid import ShowQR
 ShowQR()
 
-#bakjes detection
-from test_all_colors import Bakje
-Bakje()
+#black tape #doing
+from tape import BlackTape
+BlackTape()
 
-#kip detection
-from chicken_run import Kip
-Kip()
+#bakjes detection #doing
+from distance import main
+main()
+
+#kip detection #todo
+from chickenRun import ChickenDetection
+ChickenDetection()
 
 #POORT KWALIFICATIE
-from poort_run import Poort
+
+#poort detection #todo
+from poortRun import Poort
 Poort()
 
 #PATH FINDING
 
-#pathfinder algoritme
+#pathfinder algoritme #todo
 from pathfinding import FindPath
 FindPath()
 
 #HELLING RACE
 
-#trap detection
-from trap import TrapOp
-TrapOp()
+#trap detection #todo
+from stairs import UpStairs
+UpStairs()
