@@ -4,7 +4,7 @@ import os, sys
 import math
 
 #cam = cv2.VideoCapture(0)
-cam = cv2.VideoCapture('bakjegroen.avi')
+cam = cv2.VideoCapture('bakjegrijs.h264')
 
 while(cam.isOpened()):
 
@@ -18,7 +18,7 @@ while(cam.isOpened()):
                 #([99,227,117],[119,227,117]),
                 #([147,165,17],[191,128,148]),
                 #([93,165,17],[191,128,148]),
-                ([120,100,5],[191,110,158]),
+                #([120,100,5],[191,110,158]),
                 #([100,150,0], [140,255,255]),
                 #([93,65,7],[191,50,58]),
                 #rgb 6,17,11 = 147,64.7,6.7 = 147,165,17 # 74,134,148 = 191,50,58 = 191,128,148
@@ -36,8 +36,8 @@ while(cam.isOpened()):
              ]
 
     # loop over the boundaries, yellow
-    lower_yellow = np.array([20, 100, 100])
-    upper_yellow = np.array([30, 255, 255])
+    lower_yellow = np.array([90, 7, 50])
+    upper_yellow = np.array([125, 40, 192])
 
     while (True):
         _, frame = cam.read()
