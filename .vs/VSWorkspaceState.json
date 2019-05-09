@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Slaves",
-    "\\Slaves\\USBSerialDemo",
-    "\\sockets"
+    "\\Controller"
   ],
-  "SelectedNode": "\\socetserver.cpp",
   "PreviewInSolutionExplorer": false
 }
