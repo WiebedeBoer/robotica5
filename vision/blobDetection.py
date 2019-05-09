@@ -7,10 +7,10 @@ import time
 class DetectEgg:
 
 	def __init__(self, debug):
+		self.debug = debug
 		self.setDefaultValues()
 
 		if debug:
-			self.debug = debug
 			self.createTrackbars()
 			
 		self.DetectEgg()
@@ -60,6 +60,7 @@ class DetectEgg:
 
 		cv2.createTrackbar('BLOCK_SIZE','settings',2,100,callback)
 
+		# Set the trackbars to the default values
 		cv2.setTrackbarPos('H_MIN','settings',self.h_min)
 		cv2.setTrackbarPos('S_MIN','settings',self.s_min)
 		cv2.setTrackbarPos('V_MIN','settings',self.v_min)
@@ -71,9 +72,8 @@ class DetectEgg:
 		cv2.setTrackbarPos('RG','settings',self.RG)
 
 		cv2.setTrackbarPos('AREA','settings',self.area)
-		cv2.setTrackbarPos('MAX_AREA','settings',self.area)
-		cv2.setTrackbarPos('CIRCULARITY','settings',self.circularity)
-		cv2.setTrackbarPos('CONVEXITY','settings',self.convexity)
+		cv2.setTrackbarPos('CIRCULARITY','settings',int(100*self.circularity))
+		cv2.setTrackbarPos('CONVEXITY','settings',int(100*self.convexity))
 
 		cv2.setTrackbarPos('MIN_TH','settings', self.min_th)
 		cv2.setTrackbarPos('MAX_TH','settings', self.max_th)
@@ -90,8 +90,8 @@ class DetectEgg:
 		self.v_max = 255
 
 		self.area = 490
-		self.circularity = 80
-		self.convexity = 1
+		self.circularity = self.toPercentage(80)
+		self.convexity = self.toPercentage(1)
 
 		self.RG = 90
 
@@ -106,15 +106,13 @@ class DetectEgg:
 		self.params.filterByColor = True
 
 		self.params.blobColor = 255
-		self.params.minThreshold = self.min_th
-		self.params.maxThreshold = self.max_th
+		self.params.maxArea = 2000000 #2.000.000
 
 		self.params.minArea = self.area
-		self.params.maxArea = 2000000 #2.000.000
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
-
-		#self.params = params
+		self.params.minThreshold = self.min_th
+		self.params.maxThreshold = self.max_th
 
 	def toPercentage(self, var):
 		if var > 0:
@@ -132,13 +130,12 @@ class DetectEgg:
 
 		self.area = cv2.getTrackbarPos('AREA','settings')
 		self.circularity = self.toPercentage(cv2.getTrackbarPos('CIRCULARITY','settings'))
-
 		self.convexity = self.toPercentage(cv2.getTrackbarPos('CONVEXITY','settings'))
 
 		self.RG = cv2.getTrackbarPos('RG','settings')
 
-		self.MIN_TH = cv2.getTrackbarPos('MIN_TH','settings')
-		self.MAX_TH = cv2.getTrackbarPos('MAX_TH','settings')
+		self.min_th = cv2.getTrackbarPos('MIN_TH','settings')
+		self.max_th = cv2.getTrackbarPos('MAX_TH','settings')
 
 		blockSize = cv2.getTrackbarPos('BLOCK_SIZE','settings')
 		if blockSize % 2 != 0 and blockSize > 1:
@@ -146,12 +143,9 @@ class DetectEgg:
 
 		self.COLOR_SENSITIVITY = cv2.getTrackbarPos('COLOR_SENSITIVITY','settings')
 
-		self.params.blobColor = 255
-		self.params.minThreshold = self.MIN_TH
-		self.params.maxThreshold = self.MAX_TH
-
+		self.params.minThreshold = self.min_th
+		self.params.maxThreshold = self.max_th
 		self.params.minArea = self.area
-		self.params.maxArea = 2000000 #200.000
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
@@ -159,13 +153,14 @@ class DetectEgg:
 	def DetectEgg(self):
 		cap = cv2.VideoCapture(0)
 
-		cap.read()
-		time.sleep(1) # startup camera
+		w = cap.get(3)
+		h = cap.get(4)
+
+		x, y = 0, 0
+
 		count = 0
 		eggDetectCount = 0
 
-		x, y = 0, 0
-				
 		while True:
 
 			if self.debug:
@@ -195,30 +190,29 @@ class DetectEgg:
 			if len(keypoints) == 1:
 				x = int(keypoints[0].pt[0])
 				y = int(keypoints[0].pt[1])
-				cv2.circle(frame,(x, y), 1, (255,0,255))
+
+				turn_x = x-(w/2)
+				height_y = y-(h/2)
+
 				eggDetectCount += 1
-				print eggDetectCount
-
-
-			# Draw detected blobs as red circles.
-			keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-
-			# Show keypoints
-			cv2.imshow("output", keypoints_im)
-			cv2.imshow("th", th)
-			cv2.imshow("res", res)
 
 			if not self.debug:
-				if eggDetectCount > 0:
-					print x + " " + y
+				if eggDetectCount > 15:
+					print str(turn_x) + " " + str(height_y)
 					break
-				elif count >= 15:
+				elif count >= 30:
 					print "no egg was found."
 					break
 
 			else:
-				if cv2.waitKey(1) & 0xFF == ord('q'):
-					break
+				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
+				cv2.imshow("output", keypoints_im)
+				cv2.imshow("th", th)
+				cv2.imshow("res", res)
+
+			if cv2.waitKey(1) & 0xFF == ord('q'):
+				break
 
 debug = False
 if len(sys.argv) > 1:
