@@ -32,7 +32,7 @@ lineType = 2
 # Add color blue to mask
 boundaries = [
     [([20, 100, 100], [30, 255, 255])],  # Yellow
-    #[([100, 150, 0], [140, 255, 255])],  # Blue
+    [([100, 150, 0], [140, 255, 255])],  # Blue
     [([20, 100, 100], [30, 255, 255])]  # Red
 ]
 
@@ -49,6 +49,7 @@ objectPoints[:, :, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 1, 2)
 # Create the axis points
 axisPoints = np.float32([[0,0,0], [0,3,0], [3,3,0], [3,0,0],
                    [0,0,-3],[0,3,-3],[3,3,-3],[3,0,-3] ])
+
 
 
 def main():
@@ -79,8 +80,7 @@ def main():
                 if (w > 40 and h > 10 and len(approx) >= 4 and len(approx) <= 6):
                     # Set contour arround object
                     frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
-                    print("In latest if statement")
-                   #frame = pose_estimation(frame)
+                    frame = pose_estimation(frame)
 
                     # Distance to object calculating
                     distance = calculateDistance(w)
