@@ -10,8 +10,8 @@ from egg import ShowCamFeed
 ShowCamFeed()
 
 #QR detection
-from qrdetector import QRdetect
-QRdetect()
+from qrvid import ShowQR
+ShowQR()
 
 #bakjes detection
 from test_all_colors import Bakje
