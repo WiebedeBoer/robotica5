@@ -77,12 +77,15 @@ def main():
 
                     #objectPoints = np.zeros((rows * cols, 1, 3), np.float32)
                     #objectPoints[:, :, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 1, 2)
-
-                    frame = pose_estimation(frame, approx, area)
-
+                    objectPoints = cv2.boxPoints(cv2.minAreaRect(cnt))
+                    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                    gray = np.float32(gray)
+                    dst = cv2.cornerHarris(gray[y:y+h,x:x+w], 2, 3, 0.04)
+                    # result is dilated for marking the corners, not important
+                    dst = cv2.dilate(dst, None)
                     # Distance to object calculating
                     distance = calculateDistance(w)
-
+                    frame = pose_estimation(frame, dst, objectPoints)
                     # Apply text in frame
                     cv2.putText(frame, str(str(w) + " " + str(h) + " " + str(round(distance, 2))),
                                 (x + (w / 2), y), font, fontScale, fontColor, lineType)
@@ -124,7 +127,6 @@ def draw(frame, corners, imgpts):
 def pose_estimation(frame, corners, objectPoints):
     # Load the image and convert it to gray scale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     # Make sure the chess board pattern was found in the image
     # Refine the corner position
     corners = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
