@@ -214,9 +214,7 @@ class DetectEgg:
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 
-debug = False
-if len(sys.argv) > 1:
-	if str(sys.argv[1]) == "-d":
-		debug = True
+EggDetection():
+	DetectEgg(False)
 
-DetectEgg(debug)
+EggDetection()
