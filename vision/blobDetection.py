@@ -214,7 +214,7 @@ class DetectEgg:
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 
-EggDetection():
+def EggDetection():
 	DetectEgg(False)
 
 EggDetection()
