@@ -6,6 +6,14 @@ import time
 
 class DetectEgg:
 
+	# Distance calculating
+	# Initialize the known distance from the camera to the object
+	self.KNOWN_DISTANCE = 10.0
+		# Initialize the known object width, which in this case
+	self.KNOWN_WIDTH = Decimal(5.4)
+	  # Initialize the known object focal length, which in this case
+	self.FOCAL_LENGTH = 1013
+
 	def __init__(self, debug):
 		self.debug = debug
 		self.setDefaultValues()
@@ -149,8 +157,11 @@ class DetectEgg:
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
+	def calibration(w):
+		return (KNOWN_DISTANCE * (w / 2)) / (KNOWN_WIDTH / 2)
+
 	def calculateDistance(w):
-    	return (FOCAL_LENGTH * (KNOWN_WIDTH / 2)) / (w / 2)
+		return (FOCAL_LENGTH * (KNOWN_WIDTH / 2)) / (w / 2)
 
 
 	def DetectEgg(self):
@@ -203,7 +214,7 @@ class DetectEgg:
 
 			if not self.debug:
 				if eggDetectCount > 15:
-					print str(turn_x) + " " + str(height_y) + " " calculateDistance()
+					print str(turn_x) + " " + str(height_y)
 					break
 				elif count >= 30:
 					print "no egg was found."
