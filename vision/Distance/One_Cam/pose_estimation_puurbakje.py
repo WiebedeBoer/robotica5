@@ -1,11 +1,10 @@
-
 import cv2
 import numpy as np
 from decimal import *
 
 cam = cv2.VideoCapture(0)
-cam.set(3,640)
-cam.set(4,480)
+cam.set(3, 640)
+cam.set(4, 480)
 
 # Define the chess board rows and columns
 rows = 8
@@ -32,7 +31,7 @@ lineType = 2
 # Add color blue to mask
 boundaries = [
     [([20, 100, 100], [30, 255, 255])],  # Yellow
-    #[([100, 150, 0], [140, 255, 255])],  # Blue
+    # [([100, 150, 0], [140, 255, 255])],  # Blue
     [([20, 100, 100], [30, 255, 255])]  # Red
 ]
 
@@ -41,14 +40,9 @@ totalContours = []
 # Set the termination criteria for the corner sub-pixel algorithm
 criteria = (cv2.TERM_CRITERIA_MAX_ITER + cv2.TERM_CRITERIA_EPS, 30, 0.001)
 
-
-# Prepare the object points: (0,0,0), (1,0,0), (2,0,0), ..., (6,5,0). They are the same for all images
-objectPoints = np.zeros((rows * cols, 1, 3), np.float32)
-objectPoints[:, :, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 1, 2)
-
 # Create the axis points
-axisPoints = np.float32([[0,0,0], [0,3,0], [3,3,0], [3,0,0],
-                   [0,0,-3],[0,3,-3],[3,3,-3],[3,0,-3] ])
+axisPoints = np.float32([[0, 0, 0], [0, 3, 0], [3, 3, 0], [3, 0, 0],
+                         [0, 0, -3], [0, 3, -3], [3, 3, -3], [3, 0, -3]])
 
 
 def main():
@@ -57,11 +51,11 @@ def main():
         img = cv2.GaussianBlur(frame, (15, 15), 0)
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         for range in boundaries:
-            in_mask = None;
+            in_mask = None
             for (lower, upper) in range:
                 # Find the colors within the specified boundaries and apply the mask
                 if (in_mask is None):
-                    in_mask = cv2.inRange(hsv, np.array(lower, dtype="uint8"), np.array(upper, dtype="uint8"));
+                    in_mask = cv2.inRange(hsv, np.array(lower, dtype="uint8"), np.array(upper, dtype="uint8"))
                 else:
                     in_mask = in_mask + cv2.inRange(hsv, np.array(lower, dtype="uint8"), np.array(upper, dtype="uint8"))
                 _, res = cv2.threshold(in_mask, 215, 255, cv2.THRESH_BINARY)
@@ -71,7 +65,7 @@ def main():
 
         for contours in totalContours:
             for cnt in contours:
-                #area = cv2.contourArea(cnt)
+                area = cv2.contourArea(cnt)
                 perimeter = cv2.arcLength(cnt, True)
                 approx = cv2.approxPolyDP(cnt, 0.04 * perimeter, True)
                 x, y, w, h = cv2.boundingRect(cnt)
@@ -80,7 +74,11 @@ def main():
                     # Set contour arround object
                     frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
                     print("In latest if statement")
-                   #frame = pose_estimation(frame)
+
+                    #objectPoints = np.zeros((rows * cols, 1, 3), np.float32)
+                    #objectPoints[:, :, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 1, 2)
+
+                    frame = pose_estimation(frame, approx, area)
 
                     # Distance to object calculating
                     distance = calculateDistance(w)
@@ -112,37 +110,34 @@ def calculateDistance(w):
 
 # This function draws lines joining the given image points to the first chess board corner
 def draw(frame, corners, imgpts):
-    imgpts = np.int32(imgpts).reshape(-1,2)
+    imgpts = np.int32(imgpts).reshape(-1, 2)
     # draw ground floor in green
-    frame = cv2.drawContours(frame, [imgpts[:4]],-1,(0,255,0),-3)
+    frame = cv2.drawContours(frame, [imgpts[:4]], -1, (0, 255, 0), -3)
     # draw pillars in blue color
-    for i,j in zip(range(4),range(4,8)):
-        frame = cv2.line(frame, tuple(imgpts[i]), tuple(imgpts[j]),(255),3)
+    for i, j in zip(range(4), range(4, 8)):
+        frame = cv2.line(frame, tuple(imgpts[i]), tuple(imgpts[j]), (255), 3)
     # draw top layer in red color
-    frame = cv2.drawContours(frame, [imgpts[4:]],-1,(0,0,255),3)
+    frame = cv2.drawContours(frame, [imgpts[4:]], -1, (0, 0, 255), 3)
     return frame
 
 
-def pose_estimation(frame):
+def pose_estimation(frame, corners, objectPoints):
     # Load the image and convert it to gray scale
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Find the chess board corners
-    ret, corners = cv2.findChessboardCorners(gray, (rows, cols), None)
-
     # Make sure the chess board pattern was found in the image
-    if ret:
-        # Refine the corner position
-        corners = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
+    # Refine the corner position
+    corners = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
 
-        # Find the rotation and translation vectors
-        val, rvecs, tvecs, inliers = cv2.solvePnPRansac(objectPoints, corners, mtx, dist)
+    # Find the rotation and translation vectors
+    val, rvecs, tvecs, inliers = cv2.solvePnPRansac(objectPoints, corners, mtx, dist)
 
-        # Project the 3D axis points to the image plane
-        axisImgPoints, jac = cv2.projectPoints(axisPoints, rvecs, tvecs, mtx, dist)
+    # Project the 3D axis points to the image plane
+    axisImgPoints, jac = cv2.projectPoints(axisPoints, rvecs, tvecs, mtx, dist)
 
-        # Draw the axis lines
-        frame = draw(frame, corners, axisImgPoints)
-        return frame
+    # Draw the axis lines
+    frame = draw(frame, corners, axisImgPoints)
+    return frame
+
 
 main()
