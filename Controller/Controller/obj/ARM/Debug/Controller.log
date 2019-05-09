@@ -1,0 +1,14 @@
+﻿  Validating sources
+  Copying sources remotely to '192.168.2.100'
+  Validating architecture
+  Starting remote build
+  Compiling sources:
+  Arduino.cpp
+C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(15,20): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
+C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(15,20): warning :   for (int i = 0; i < str.length(); i++) {
+C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(15,20): warning :                   ~~^~~~~~~~~~~~~~
+C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(40,28): warning : conversion to ‘uint8_t {aka unsigned char}’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(40,28): warning :      rx_byte = serialGetchar(fd);
+C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(40,28): warning :                ~~~~~~~~~~~~~^~~~
+  Linking objects
+  Controller.vcxproj -> C:\Users\Thom\source\repos\Controller\Controller\bin\ARM\Debug\Controller.out
