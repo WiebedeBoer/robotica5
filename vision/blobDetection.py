@@ -8,14 +8,20 @@ class DetectEgg:
 
 	def __init__(self, debug):
 		self.setDefaultValues()
-		self.debug = debug
 
 		if debug:
+			self.debug = debug
 			self.createTrackbars()
+			
 		self.DetectEgg()
 
 	def nothing(self, x):
 		pass
+
+	def GHE(self, frame):
+		equ = cv2.equalizeHist(frame)
+
+		return equ
 
 	def CLAHE(self, frame):
 		clahe = cv2.createCLAHE(2.0, (8,8))
@@ -65,6 +71,7 @@ class DetectEgg:
 		cv2.setTrackbarPos('RG','settings',self.RG)
 
 		cv2.setTrackbarPos('AREA','settings',self.area)
+		cv2.setTrackbarPos('MAX_AREA','settings',self.area)
 		cv2.setTrackbarPos('CIRCULARITY','settings',self.circularity)
 		cv2.setTrackbarPos('CONVEXITY','settings',self.convexity)
 
@@ -83,8 +90,8 @@ class DetectEgg:
 		self.v_max = 255
 
 		self.area = 490
-		self.circularity = 72
-		self.convexity = 83
+		self.circularity = 80
+		self.convexity = 1
 
 		self.RG = 90
 
@@ -96,13 +103,14 @@ class DetectEgg:
 		self.params.filterByArea = True
 		self.params.filterByCircularity = True
 		self.params.filterByConvexity = True
-		#self.params.filterByColor = True
+		self.params.filterByColor = True
 
 		self.params.blobColor = 255
 		self.params.minThreshold = self.min_th
 		self.params.maxThreshold = self.max_th
 
 		self.params.minArea = self.area
+		self.params.maxArea = 2000000 #2.000.000
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
@@ -143,6 +151,7 @@ class DetectEgg:
 		self.params.maxThreshold = self.MAX_TH
 
 		self.params.minArea = self.area
+		self.params.maxArea = 2000000 #200.000
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
@@ -152,11 +161,17 @@ class DetectEgg:
 
 		cap.read()
 		time.sleep(1) # startup camera
+		count = 0
+		eggDetectCount = 0
+
+		x, y = 0, 0
 				
 		while True:
 
-			if debug:
+			if self.debug:
 				self.updateValues()
+			else:
+				count += 1
 
 			# Read the frame from the camera
 			_, frame = cap.read()
@@ -164,46 +179,50 @@ class DetectEgg:
 			#improve contrast
 			clahe_b = self.CLAHE(frame[:,:,0])
 
-			denoise = cv2.fastNlMeansDenoising(clahe_b,None,10,5,10)
-			#frame_blur = cv2.bilateralFilter(clahe_b,9,75,75)
+			denoise = cv2.medianBlur(clahe_b, 1)
+			denoise = cv2.bilateralFilter(denoise,9,75,75)
 
-			#cv2.imshow("blue channel blurred", frame_blur)
-			#cv2.imshow("denoise", denoise)
-			#cv2.imshow("blue channel", clahe_b)
+			_,th = cv2.threshold(denoise,75,255,cv2.THRESH_BINARY)
 
-			clahe = cv2.merge((clahe_b,frame[:,:,1], frame[:,:,2]))
-
-			bluefiltered = self.bluefilter(clahe, self.RG)
-			
-
-			lower = np.array([self.h_min,self.s_min,self.v_min])
-			upper = np.array([self.h_max,self.s_max,self.v_max])
-
-			mask = cv2.inRange(bluefiltered, lower, upper)
-
-			res = cv2.bitwise_and(bluefiltered,bluefiltered, mask=mask)
+			res = cv2.bitwise_and(denoise,denoise, mask=th)
 
 			# Set up the detector with default parameters.
 			detector = cv2.SimpleBlobDetector_create(self.params)
 			 
 			# Detect blobs.
-			keypoints = detector.detect(denoise)
-			 
+			keypoints = detector.detect(res)
+
+			if len(keypoints) == 1:
+				x = int(keypoints[0].pt[0])
+				y = int(keypoints[0].pt[1])
+				cv2.circle(frame,(x, y), 1, (255,0,255))
+				eggDetectCount += 1
+				print eggDetectCount
+
+
 			# Draw detected blobs as red circles.
 			keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 			# Show keypoints
 			cv2.imshow("output", keypoints_im)
-			cv2.imshow("result", res)
+			cv2.imshow("th", th)
+			cv2.imshow("res", res)
 
 			if not self.debug:
-				break
+				if eggDetectCount > 0:
+					print x + " " + y
+					break
+				elif count >= 15:
+					print "no egg was found."
+					break
+
 			else:
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
 
 debug = False
-if str(sys.argv[1]) == "-d":
-	debug = True
+if len(sys.argv) > 1:
+	if str(sys.argv[1]) == "-d":
+		debug = True
 
 DetectEgg(debug)
