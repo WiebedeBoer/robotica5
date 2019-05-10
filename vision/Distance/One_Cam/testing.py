@@ -15,6 +15,15 @@ boundaries = [
 
 totalContours = []
 
+# Prepare the object points: (0,0,0), (1,0,0), (2,0,0), ..., (6,5,0). They are the same for all images
+objectPoints = np.zeros((rows * cols, 1, 3), np.float32)
+objectPoints[:, :, :2] = np.mgrid[0:rows, 0:cols].T.reshape(-1, 1, 2)
+
+
+# Create the axis points
+axisPoints = np.float32([[0,0,0], [0,3,0], [3,3,0], [3,0,0],
+                   [0,0,-3],[0,3,-3],[3,3,-3],[3,0,-3] ])
+
 
 def main():
     while (1):
@@ -57,8 +66,7 @@ def main():
 
                     img1_bg = cv2.GaussianBlur(img1_bg, (15, 15), 0)
 
-                    img1_bg = cv2.adaptiveThreshold(img1_bg, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11,2)
-
+                    img1_bg = cv2.adaptiveThreshold(img1_bg, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
                     # Set contour around object
                     # frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)

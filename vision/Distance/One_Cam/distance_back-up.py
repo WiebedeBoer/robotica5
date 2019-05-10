@@ -8,11 +8,9 @@ cam = cv2.VideoCapture(0)
 
 # Distance calculating
     # Initialize the known distance from the camera to the object
-KNOWN_DISTANCE = 100.0
+KNOWN_DISTANCE = 80
     # Initialize the known object width, which in this case
-KNOWN_WIDTH = Decimal(15.0)
-  # Initialize the known object focal length, which in this case
-FOCAL_LENGTH = 1013
+KNOWN_WIDTH = Decimal(14.9)
 
 # Text settings
 font                   = cv2.FONT_HERSHEY_SIMPLEX
@@ -56,25 +54,26 @@ def main():
                 frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
                 
                 # Distance to object calculating
-                distance = calculateDistance(w)
+                #distance = calculateDistance(w)
                 
                 # Calculating per cm how many pixels there are - 0.048 / 50 = (3 / 3125)
                 # RelLength = Decimal(3.0 / 3125.0) * Decimal(distance)
                 
                 # Calculating object pixels width at 0 cm
-                pxWidthObjAtZeroCM = w * Decimal(Decimal(1.2013) ** Decimal(distance / 10))
+                #pxWidthObjAtZeroCM = w * Decimal(Decimal(1.2013) ** Decimal(distance / 10))
                 
                 # Calculating object pixels width at calculated distance
-                pxWidthObjAtDistanceCM = pxWidthObjAtZeroCM * Decimal(Decimal(0.833) ** Decimal(distance / 10))
+                #pxWidthObjAtDistanceCM = pxWidthObjAtZeroCM * Decimal(Decimal(0.833) ** Decimal(distance / 10))
 
                 # KNOWN_WIDTH =  (768 - w) * relLength
 
                 # Calibration
-                #focalLength = calibration(w)
+                focal = calibration(w)
+                print(focal)
 
 
                 # Apply text in frame
-                cv2.putText(frame,str(str(w)+ " " + str(round(pxWidthObjAtDistanceCM, 2)) + " " + " " + str(h) + " " + str(round(distance, 2))),
+                cv2.putText(frame, str(str(w) + " " + str(h)),
                             (x + (w / 2), y),
                             font,
                             fontScale,
