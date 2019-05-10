@@ -41,13 +41,10 @@ totalContours = []
 def main():
     while (1):
         _, frame = cam.read()
-        img1_bg = frame
         img = cv2.GaussianBlur(frame, (15, 15), 0)
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         grayFrame = CLAHE(gray)
-
-        mask = np.ones(img.shape[:2], dtype="uint8") * 255
 
         for range in boundaries:
             in_mask = None;
@@ -59,6 +56,7 @@ def main():
                     in_mask = in_mask + cv2.inRange(hsv, np.array(lower, dtype = "uint8"), np.array(upper, dtype = "uint8"))
                 _, res = cv2.threshold(in_mask, 215, 255, cv2.THRESH_BINARY)
                 res = cv2.GaussianBlur(res, (15, 15), 0)
+                res = cv2.bitwise_and(res, res, mask=grayFrame)
                 contours, hierarchy = cv2.findContours(res, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
                 totalContours.append(contours)
         
@@ -69,21 +67,7 @@ def main():
                 x, y, w, h = cv2.boundingRect(cnt)
                 
                 if(w > 40 and h > 10 and len(approx) >= 4 and len(approx) <= 6):
-                    #frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
-
-                    cv2.drawContours(mask, [cnt], -1, 0, -1)
-                    _, mask = cv2.threshold(mask, 10, 255, cv2.THRESH_BINARY_INV)
-
-                    img1_bg = cv2.bitwise_and(grayFrame, grayFrame, mask=mask)
-                    img1_bg = cv2.GaussianBlur(img1_bg, (15, 15), 0)
-                    img1_bg = cv2.adaptiveThreshold(img1_bg, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11,2)
-
-                    leftmost = tuple(cnt[cnt[:, :, 0].argmin()][0])
-                    rightmost = tuple(cnt[cnt[:, :, 0].argmax()][0])
-                    topmost = tuple(cnt[cnt[:, :, 1].argmin()][0])
-                    bottommost = tuple(cnt[cnt[:, :, 1].argmax()][0])
-
-                    print("left: " + str(leftmost) + " " + "right: " + str(rightmost) + " " + "top: " + str(topmost) + " " + "bottom: " + str(bottommost))
+                    frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 255), 2)
 
                     if w > (h*1.6):
                         KNOWN_WIDTH = 25.0
@@ -106,7 +90,6 @@ def main():
                 
         #Show frame
         cv2.imshow('images', frame)
-        cv2.imshow('img1_bg', img1_bg)
         
         #Check if "esc" is pressed
         k = cv2.waitKey(1) & 0xFF
