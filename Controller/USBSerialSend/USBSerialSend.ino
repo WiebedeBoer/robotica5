@@ -11,7 +11,7 @@ bool LedOnOff;
 
 void setup() {
   //ini serial interface
-  Serial.begin(9600);
+  Serial.begin(115200);
   //demo pin, change this.
   pinMode(LED_BUILTIN, OUTPUT);
 }

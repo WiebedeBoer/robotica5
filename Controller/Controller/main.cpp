@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <atomic>
 #include <queue>
 #include "Command.h"
 #include "Arduino.h" 
@@ -8,7 +7,6 @@
 #include <chrono>
 #include <thread>
 #include "CommandExecutor.h"
-#include <memory>
 
 bool running = true;
 GuardedQueue<Command> Commandqueue;
@@ -21,7 +19,7 @@ void loop() {
 
 		Commandqueue.push(Command(Sensor, "Led?"));
 		std::string SensorResponce = Sensor.GetLastResponce();
-		std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 
 		if (SensorResponce == "On")
 		{

@@ -7,11 +7,6 @@
     <ClCompile Include="CommandExecutor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Slaves">
-      <UniqueIdentifier>{b5f7526f-8385-4839-bb7c-23e003ca1325}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Arduino.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandExecutor.h" />
