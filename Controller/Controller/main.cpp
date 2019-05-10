@@ -8,25 +8,28 @@
 #include <thread>
 #include "CommandExecutor.h"
 
+
 bool running = true;
-GuardedQueue<Command> Commandqueue;
-Arduino Worker = Arduino("/dev/ttyACM0");
-Arduino Sensor = Arduino("/dev/ttyACM1");
+GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();
+Arduino* Worker = new Arduino("/dev/ttyACM0");
+Arduino* Sensor = new Arduino("/dev/ttyACM1");
 void loop() {
 	while (running == true) {
 
 		//running = false;
 
-		Commandqueue.push(Command(Sensor, "Led?"));
-		std::string SensorResponce = Sensor.GetLastResponce();
-		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-
+		Commandqueue->push(Command(Sensor, "Led?"));
+		std::string SensorResponce = Sensor->GetLastResponce();
+		if (Commandqueue->GetSize() > 10) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(200));
+			std::cout << "Queue to large!" << std::endl;
+		}
 		if (SensorResponce == "On")
 		{
-			Commandqueue.push(Command(Worker, "LedOn"));
+			Commandqueue->push(Command(Worker, "LedOn"));
 		}
 		if (SensorResponce == "Off") {
-			Commandqueue.push(Command(Worker, "LedOff"));
+			Commandqueue->push(Command(Worker, "LedOff"));
 		}
 	}
 }

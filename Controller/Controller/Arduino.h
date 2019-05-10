@@ -21,6 +21,7 @@ private:
 	int WaitForData(int fd, int timeout);
 	std::string WaitForMessage(int &fd);
 	bool ackresponse(std::string ack, std::string send);
+	int fd = 0;
 
 };
 

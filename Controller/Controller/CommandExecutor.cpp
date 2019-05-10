@@ -9,10 +9,10 @@ void CommandExecutor::Execute()
 	}
 }
 
-CommandExecutor::CommandExecutor(bool &r, GuardedQueue<Command> &gq)
+CommandExecutor::CommandExecutor(bool &r, GuardedQueue<Command>* gq)
 {
 	running = &r;
-	CommandQueue = &gq;
+	CommandQueue = gq;
 }
 
 

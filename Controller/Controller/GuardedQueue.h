@@ -23,12 +23,15 @@ public:
 	{
 		std::lock_guard<std::mutex> lock(m_mutex);
 		if (m_queque.size() == 0) {
-			Arduino a = Arduino();
+			Arduino* a = new Arduino("/dev/ttyACM0");
 			return Command(a, "Wait");
 		}
 		T result = m_queque.front();
 		m_queque.pop();
 		return result;
+	}
+	int GetSize() {
+	   return m_queque.size();
 	}
 	GuardedQueue();
 	~GuardedQueue();

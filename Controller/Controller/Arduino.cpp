@@ -28,13 +28,13 @@ int Arduino::WaitForData(int fd, int timeout)
 std::string Arduino::WaitForMessage(int &fd) {
 
 	uint8_t rx_byte = '9';
-
+	int dataavail = 0;
 	bool MessageCompleted = false;
 	std::string message;
 	int Datareceived = WaitForData(fd, 2000);
 	if (Datareceived == 1) {
 		while (MessageCompleted == false) {
-			int dataavail = serialDataAvail(fd);
+			dataavail = serialDataAvail(fd);
 			while (dataavail > 0) {
 
 				rx_byte = serialGetchar(fd);
@@ -48,6 +48,10 @@ std::string Arduino::WaitForMessage(int &fd) {
 					serialFlush(fd);
 					return message;
 				}
+			}
+			if (dataavail < 0) {
+				std::cout << "DataAvailableError" << std::endl;
+				return "No DataAvailable";
 			}
 		}
 	}
@@ -89,10 +93,11 @@ bool Arduino::ackresponse(std::string ack, std::string send) {
 }
 //sends string to serial interface with retries until message has been ack
 void Arduino::SerialSend(std::string input) {
-
-	int fd;
+	if (fd != 3) {
+		serialClose(fd);
+		fd = serialOpen(UsbPort, 115200);
+	}
 	std::string inputsum;
-	fd = serialOpen(UsbPort, 115200);
 	std::cout << fd << std::endl;
 	input = input + "|";
 	int NackCount = 0;
@@ -117,7 +122,6 @@ void Arduino::SerialSend(std::string input) {
 	else {
 		std::cout << "MessageSend" << std::endl;
 	}
-	serialClose(fd);
 }
 
 std::string Arduino::GetLastResponce(){
@@ -126,6 +130,8 @@ return Response;
 Arduino::Arduino(char* usb)
 {
 	UsbPort = usb;
+	fd = serialOpen(UsbPort, 115200);
+
 }
 
 
@@ -134,5 +140,7 @@ Arduino::Arduino()
 }
 Arduino::~Arduino()
 {
+	serialClose(fd);
+
 }
 

@@ -7,7 +7,7 @@
 class CommandExecutor
 {
 public:
-	CommandExecutor(bool &r, GuardedQueue<Command> &gq);
+	CommandExecutor(bool &r, GuardedQueue<Command>* gq);
 	~CommandExecutor();
 	void Execute();
 
