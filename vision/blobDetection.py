@@ -8,11 +8,17 @@ class DetectEgg:
 
 	# Distance calculating
 	# Initialize the known distance from the camera to the object
-	self.KNOWN_DISTANCE = 10.0
+	KNOWN_DISTANCE = 20.0
 		# Initialize the known object width, which in this case
-	self.KNOWN_WIDTH = Decimal(5.4)
+	KNOWN_WIDTH = 5.4
 	  # Initialize the known object focal length, which in this case
-	self.FOCAL_LENGTH = 1013
+	FOCAL_LENGTH = 395.684786196
+
+	font                   = cv2.FONT_HERSHEY_SIMPLEX
+	bottomLeftCornerOfText = (10,500)
+	fontScale              = 0.75
+	fontColor              = (255,255,255)
+	lineType               = 2
 
 	def __init__(self, debug):
 		self.debug = debug
@@ -89,7 +95,7 @@ class DetectEgg:
 	def setDefaultValues(self):
 
 		# Set default variables
-		self.h_min = 100
+		self.h_min = 800
 		self.s_min = 0
 		self.v_min = 0
 
@@ -157,11 +163,11 @@ class DetectEgg:
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
-	def calibration(w):
-		return (KNOWN_DISTANCE * (w / 2)) / (KNOWN_WIDTH / 2)
+	def calibration(self, w):
+		return (self.KNOWN_DISTANCE * (w / 2)) / (self.KNOWN_WIDTH / 2)
 
-	def calculateDistance(w):
-		return (FOCAL_LENGTH * (KNOWN_WIDTH / 2)) / (w / 2)
+	def calculateDistance(self, w):
+		return (self.FOCAL_LENGTH * (self.KNOWN_WIDTH / 2)) / (w / 2)
 
 
 	def DetectEgg(self):
@@ -205,16 +211,23 @@ class DetectEgg:
 				x = int(keypoints[0].pt[0])
 				y = int(keypoints[0].pt[1])
 
-				print keypoints[0].size
-
 				turn_x = x-(w/2)
 				height_y = y-(h/2)
 
+				width = (x+keypoints[0].size/2) - (x-keypoints[0].size/2)
+				distance = self.calculateDistance(width)
+
 				eggDetectCount += 1
+
+				if self.debug:
+					cv2.line(frame,(int(x-keypoints[0].size/2), y),(int(x+keypoints[0].size/2), y),(255,0,0),1)
+					cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),\
+						self.font,self.fontScale,self.fontColor,self.lineType)
+					print str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size)
 
 			if not self.debug:
 				if eggDetectCount > 15:
-					print str(turn_x) + " " + str(height_y)
+					print str(turn_x) + " " + str(height_y) + " " + str(distance)
 					break
 				elif count >= 30:
 					print "no egg was found."
@@ -222,15 +235,21 @@ class DetectEgg:
 
 			else:
 				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-
+				
 				cv2.imshow("output", keypoints_im)
 				cv2.imshow("th", th)
 				cv2.imshow("res", res)
+				
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 
-def EggDetection():
-	DetectEgg(False)
 
-EggDetection()
+debug = False
+if len(sys.argv) > 1:
+	if sys.argv[1] == '-d':
+		debug = True
+
+def EggDetection(debug = False):
+	DetectEgg(debug)
+EggDetection(debug)
