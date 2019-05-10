@@ -31,7 +31,7 @@ std::string Arduino::WaitForMessage(int &fd) {
 
 	bool MessageCompleted = false;
 	std::string message;
-	int Datareceived = WaitForData(fd, 1000);
+	int Datareceived = WaitForData(fd, 2000);
 	if (Datareceived == 1) {
 		while (MessageCompleted == false) {
 			int dataavail = serialDataAvail(fd);
@@ -92,7 +92,7 @@ void Arduino::SerialSend(std::string input) {
 
 	int fd;
 	std::string inputsum;
-	fd = serialOpen(UsbPort, 9600);
+	fd = serialOpen(UsbPort, 115200);
 	std::cout << fd << std::endl;
 	input = input + "|";
 	int NackCount = 0;

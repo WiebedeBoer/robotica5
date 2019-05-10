@@ -4,11 +4,18 @@
   Starting remote build
   Compiling sources:
   Arduino.cpp
-C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(15,20): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
-C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(15,20): warning :   for (int i = 0; i < str.length(); i++) {
-C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(15,20): warning :                   ~~^~~~~~~~~~~~~~
-C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(40,28): warning : conversion to ‘uint8_t {aka unsigned char}’ from ‘int’ may alter its value [-Wconversion]
-C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(40,28): warning :      rx_byte = serialGetchar(fd);
-C:\Users\Thom\source\repos\Controller\Controller\Arduino.cpp(40,28): warning :                ~~~~~~~~~~~~~^~~~
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Arduino.cpp(15,20): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Arduino.cpp(15,20): warning :   for (int i = 0; i < str.length(); i++) {
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Arduino.cpp(15,20): warning :                   ~~^~~~~~~~~~~~~~
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Arduino.cpp(40,28): warning : conversion to ‘uint8_t {aka unsigned char}’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Arduino.cpp(40,28): warning :      rx_byte = serialGetchar(fd);
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Arduino.cpp(40,28): warning :                ~~~~~~~~~~~~~^~~~
+  main.cpp
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(13,40): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(13,40): warning :  Arduino Worker = Arduino("/dev/ttyACM0");
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(13,40): warning :                                         ^
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(14,40): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(14,40): warning :  Arduino Sensor = Arduino("/dev/ttyACM1");
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(14,40): warning :                                         ^
   Linking objects
-  Controller.vcxproj -> C:\Users\Thom\source\repos\Controller\Controller\bin\ARM\Debug\Controller.out
+  Controller.vcxproj -> C:\Users\Thom\source\repos\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out
