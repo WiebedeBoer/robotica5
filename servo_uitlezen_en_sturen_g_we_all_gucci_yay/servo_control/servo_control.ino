@@ -16,13 +16,21 @@ bool initDown = true;
 void setup()
 {
   ax12a.begin(BaudRate, DirectionPin, &Serial1);
+  ax12a.move(1, 200);
+  ax12a.move(2, 200);
 }
 
 void loop()
 {
   unsigned long currentMillis = millis();
 
-  Serial.println("Initiating downwards");
+  //Serial.println("Initiating downwards");
+  
+  //Temp check
+  if (readTemp(1) > 70) { // Quit script, servo 1 overheated
+    
+  }
+  
   downwards();
   
   if (currentMillis - previousMillis >= interval) {
@@ -47,8 +55,8 @@ void loop()
 
 void downwards() {
   int aServo = 1, bServo = 2;
-  int aPos = 510, bPos = 1023;
-  int aSpeed = 500, bSpeed = 200;
+  int aPos = 300, bPos = 300;
+  int aSpeed = 50, bSpeed = 20;
   
   //Setup arm movement position
   ax12a.moveSpeedRW(aServo, aPos, aSpeed);
@@ -57,7 +65,13 @@ void downwards() {
   ax12a.action();
 
   Serial.println("Starting while");
+  Serial.println("Starting while");
+  Serial.println("Starting while");
+  Serial.println("Starting while");
+  Serial.println("Starting while");
   while (true) {
+    Serial.println(readPos(aServo));
+    Serial.println(readPos(bServo));
     if (readPos(aServo) >= aPos-10 && readPos(bServo) >= bPos-10) { break; }
   }
 
@@ -67,11 +81,11 @@ void downwards() {
     delay(1000);
   }
 
-  ax12a.move(aServo, 0);
-  ax12a.move(bServo, 0);
+  ax12a.move(aServo, 200);
+  ax12a.move(bServo, 200);
 
   while (true) {
-    if (readPos(aServo) < 10 && readPos(bServo) < 10) { break; }
+    if (readPos(aServo) < 510 && readPos(bServo) < 510) { break; }
   }
 
   Serial.println("Reset succes");

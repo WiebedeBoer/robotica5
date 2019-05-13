@@ -5,17 +5,19 @@ import math
 
 def BlackTape():
     cam = cv2.VideoCapture(0)
+    #cam = cv2.VideoCapture('tape.avi')    
 
     while(cam.isOpened()):
         #black tape
-        lower_yellow = np.array([30,227,18])
-        upper_yellow = np.array([105,94,84])
+        lower_black = np.array([30,227,18])
+        upper_black = np.array([105,94,84])
+        #[30,227,18],[105,94,84]
 
         while (True):
             _, frame = cam.read()
             #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
             hsv = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
-            mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
+            mask = cv2.inRange(hsv, lower_black, upper_black)
 
             output = cv2.bitwise_and(frame, frame, mask = mask)
             contours, hierarchy = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
