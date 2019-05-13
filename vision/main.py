@@ -35,7 +35,7 @@ def switchQualify(Qualify):
 #KWALIFICATIES AUTONOOM
 #2 POORT KWALIFICATIE
 def Poort:
-    #poort doorheen gaan #todo
+    #poort doorheen gaan #doing
     from gateRun import Gate
     Gate()
 
@@ -53,7 +53,7 @@ def Gripper:
 
 #5 VISION KWALIFICATIE
 def BlauwBalk:
-    #blauw houten balkje detection en volgen #todo
+    #blauw houten balkje detection en volgen #doing
     from blueBeam import ViewBeam
     ViewBeam()
     

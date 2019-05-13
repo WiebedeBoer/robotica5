@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 
-def ViewBeam():
+def Gate():
     cap = cv2.VideoCapture(0)
     while(1):
         _, frame = cap.read()
@@ -35,4 +35,4 @@ def ViewBeam():
     cap.release()
     cv2.destroyAllWindows()
 
-ViewBeam()
+Gate()
