@@ -3,7 +3,11 @@ import numpy as np
 import sys
 import time
 
-Qualify ="Egg"
+#get from socket
+from client import SocketReceive
+SocketReceive()
+Qualify = SocketReceive()
+#Qualify ="EggRace"
 
 #SWITCH CASE QUALIFY OR RACE
 def switchQualify(Qualify):
@@ -88,8 +92,10 @@ def Eggtelligence:
         EggDetection()
     elif DetectPhase =="eggDetected":
         #go near #todo
+        print("GoToEgg")
     elif DetectPhase =="eggNear":
         #egg grabbing #todo
+        print("GrabEgg")
     elif DetectPhase =="eggGrabbed":
         #kip detection #todo
         from chickenRun import ChickenDetection
