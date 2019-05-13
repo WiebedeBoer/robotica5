@@ -6,10 +6,11 @@ def ViewBeam():
     cap = cv2.VideoCapture(0)
     while(1):
         _, frame = cap.read()
+        #25,87,154 = 211,84,60 = 211,214,153 #27,94,164 = 211,84,64 = 211,214,163
         #([100,150,0], [140,255,255])
         # go over the boundaries, blue beam
-        lower_blue = np.array([100,150,0])
-        upper_blue = np.array([140,255,255])
+        lower_blue = np.array([211,214,153])
+        upper_blue = np.array([211,214,163])
         #mask
         hsv = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
