@@ -10,7 +10,7 @@ cam = cv2.VideoCapture(0)
 cam.set(3, 720)
 cam.set(4, 620)
 
-# Distance calculating
+# Extra_Functions calculating
 # Initialize the known distance from the camera to the object
 KNOWN_DISTANCE = 200.0
 # Initialize the known object width, which in this case

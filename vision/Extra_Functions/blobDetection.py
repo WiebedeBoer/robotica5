@@ -198,10 +198,10 @@ class DetectEgg:
 
 			if not self.debug:
 				if eggDetectCount > 15:
-					print str(turn_x) + " " + str(height_y)
+					print(str(turn_x) + " " + str(height_y))
 					break
 				elif count >= 30:
-					print "no egg was found."
+					print("no egg was found.")
 					break
 
 			else:

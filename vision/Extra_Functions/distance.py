@@ -10,7 +10,7 @@ cam = cv2.VideoCapture(0)
 cam.set(3, 720)
 cam.set(4, 620)
 
-# Distance calculating
+# Extra_Functions calculating
 # Initialize the known distance from the camera to the object
 KNOWN_DISTANCE = 100.0
 # Initialize the known object width, which in this case
@@ -30,9 +30,11 @@ text = None
 
 # Add color blue to mask
 boundaries = [
-              [([20, 100, 100], [30, 255, 255])], #Yellow
-              #[([100,150,0], [140,255,255])], #Blue
-              #[([20, 100, 100], [30, 255, 255])] #Red
+                [([20, 100, 100], [30, 255, 255])],  # Yellow
+                [([100, 150, 0], [140, 255, 255])],  # Blue
+                [([20, 100, 100], [30, 255, 255])],  # Red
+                [([120, 100, 5], [191, 110, 158])],  # Green
+                [([90, 7, 50], [125, 40, 192])]  # Grey
          ]
 
 totalContours = []
@@ -82,7 +84,7 @@ def main():
                         FOCAL_LENGTH = 1180
                         text = "Voorkant"
 
-                    # Distance to object calculating
+                    # Extra_Functions to object calculating
                     distance = calculateDistance(w, KNOWN_WIDTH, FOCAL_LENGTH)
 
                     if distance > 200:
