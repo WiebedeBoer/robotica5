@@ -95,7 +95,7 @@ class DetectEgg:
 	def setDefaultValues(self):
 
 		# Set default variables
-		self.h_min = 800
+		self.h_min = 80
 		self.s_min = 0
 		self.v_min = 0
 
@@ -104,8 +104,8 @@ class DetectEgg:
 		self.v_max = 255
 
 		self.area = 490
-		self.circularity = self.toPercentage(80)
-		self.convexity = self.toPercentage(1)
+		self.circularity = self.toPercentage(75)
+		self.convexity = self.toPercentage(0)
 
 		self.RG = 90
 
@@ -118,9 +118,10 @@ class DetectEgg:
 		self.params.filterByCircularity = True
 		self.params.filterByConvexity = True
 		self.params.filterByColor = True
+		self.params.filterByInertia = True
 
 		self.params.blobColor = 255
-		self.params.maxArea = 2000000 #2.000.000
+		self.params.maxArea = 20000000 #20.000.000
 
 		self.params.minArea = self.area
 		self.params.minCircularity = self.circularity
@@ -193,6 +194,10 @@ class DetectEgg:
 
 			#improve contrast
 			clahe_b = self.CLAHE(frame[:,:,0])
+			clahe_g = self.CLAHE(frame[:,:,1])
+			clahe_r = self.CLAHE(frame[:,:,2])
+
+			cv2.imshow("clahe_b", clahe_b)
 
 			denoise = cv2.medianBlur(clahe_b, 1)
 			denoise = cv2.bilateralFilter(denoise,9,75,75)
@@ -239,7 +244,7 @@ class DetectEgg:
 				cv2.imshow("output", keypoints_im)
 				cv2.imshow("th", th)
 				cv2.imshow("res", res)
-				
+
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
