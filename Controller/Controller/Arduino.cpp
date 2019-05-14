@@ -60,7 +60,7 @@ std::string Arduino::WaitForMessage(int &fd) {
 //returns true when ack belongs to the send
 bool Arduino::ackresponse(std::string ack, std::string send) {
 	int acksum, calcsum;
-	std::cout << ack << std::endl;
+	//std::cout << ack << std::endl;
 	if (!ack.empty() && ack[ack.length() - 1] == '\n') {
 		
 		std::regex rgx("(ack):(.*)<(.*)>\\|(\\d*)(.*)");
@@ -76,6 +76,8 @@ bool Arduino::ackresponse(std::string ack, std::string send) {
 		}
 		ack = (m[2].str() + "|" + m[4].str());
 		send = send.substr(0,send.find("|")) +"|"+ std::to_string(calcsum);
+		send.erase( send.find(","),(send.find("|") - send.find(",")));
+
 	}
 	if (ack == send) {
 		std::cout << "Ack!" << std::endl;
@@ -125,7 +127,10 @@ void Arduino::SerialSend(std::string input) {
 }
 
 std::string Arduino::GetLastResponce(){
-return Response;
+
+	std::string result = Response;
+	Response = "";
+return result;
 }
 Arduino::Arduino(char* usb)
 {

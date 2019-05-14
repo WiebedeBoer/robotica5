@@ -32,4 +32,7 @@ void Command::Execute() {
 	if (Command::type == "Led?") {
 		Command::slave->SerialSend("Led?");
 	}
+	if (Command::type == "refresh?") {
+		Command::slave->SerialSend("refresh?,100");
+	}
 }

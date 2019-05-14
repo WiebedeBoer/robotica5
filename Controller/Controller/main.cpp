@@ -18,19 +18,20 @@ void loop() {
 
 		//running = false;
 
-		Commandqueue->push(Command(Sensor, "Led?"));
+		Commandqueue->push(Command(Sensor, "refresh?"));
 		std::string SensorResponce = Sensor->GetLastResponce();
 		if (Commandqueue->GetSize() > 10) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(200));
-			std::cout << "Queue to large!" << std::endl;
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+			//std::cout << "Queue to large!" << std::endl;
 		}
-		if (SensorResponce == "On")
+		std::cout << Sensor->GetLastResponce();
+		/*if (SensorResponce == "On")
 		{
 			Commandqueue->push(Command(Worker, "LedOn"));
 		}
 		if (SensorResponce == "Off") {
 			Commandqueue->push(Command(Worker, "LedOff"));
-		}
+		}*/
 	}
 }
 
