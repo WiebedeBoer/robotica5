@@ -1,29 +1,28 @@
 import numpy as np
 import cv2
-from qrReader import ShowQR
+import pyzbar.pyzbar as pyzbar
+from qrReader import main as ShowQR
+from distanceToQR import main as GetDistance
 
-def main():
-    cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0)
+
+findQRCode = ["'s-Hertogenbosch"]
+
+
+def main(findQRCode):
     _, frame = cam.read()
-    allQRCodes = []
-    while True:
-        if ShowQR() != None:
-            allQRCodes.append(ShowQR())
-            print("Dikke boktor")
 
-        if len(allQRCodes) != 0:
-            for qr in allQRCodes:
-                text = None
+    qr = ShowQR(findQRCode)
+    print("Found QR: " + qr.data)
 
-        # Check if "esc" is pressed
-        if (cv2.waitKey(1) & 0xFF) == 27:
-            break
+    distance = GetDistance(qr)
+    print("Found Distance: " + str(distance))
 
+    return distance
     cam.release()
-    cv2.destroyAllWindows()
 
 
-main()
+main(findQRCode)
 
 
 
