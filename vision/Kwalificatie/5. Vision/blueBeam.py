@@ -14,6 +14,7 @@ def ViewBeam():
     lineType = 2
     #video capture
     cap = cv2.VideoCapture(0)
+    xc, yc = 0, 0
     while(1):
         _, frame = cap.read()
         #25,87,154 = 211,84,60 = 211,214,153 #27,94,164 = 211,84,64 = 211,214,163
@@ -39,13 +40,19 @@ def ViewBeam():
             else:
                 factor = 0
             x, y, w, h = cv2.boundingRect(cnt)
+            #screen coordinates
+            res = cv2.bitwise_and(frame,frame,mask=mask)
+            keypoints = (res)
+            if len(keypoints) == 1:
+                xc = int(keypoints[0].pt[0])
+                yc = int(keypoints[0].pt[1])
             if(area >100 and area <3600 and factor >0 and factor <0.99):
                 #set contour around object
                 frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 0), 2)
                 #calculate distance
                 distance = calculateDistance(w)
                 #print command
-                print("FollowBeam;"+str(w)+";"+str(h)+"\n")
+                print("FollowBeam;"+str(w)+";"+str(h)+";"+str(xc)+";"+str(yc)+"\n")
             elif(area >3600 and factor >0 and factor <0.99):
                 #set contour around object
                 frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
