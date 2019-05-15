@@ -1,4 +1,3 @@
-import numpy as np
 import cv2
 import pyzbar.pyzbar as pyzbar
 
@@ -6,14 +5,14 @@ import pyzbar.pyzbar as pyzbar
 class QRReader:
     qrObject = None
     cam = cv2.VideoCapture(0)
-    _, frame = cam.read()
-    decodedObjects = None
 
-    def __int__(self):
-        self.decodedObjects = pyzbar.decode(self.frame)
+    def getFrame(self):
+        _, frame = self.cam.read()
+        decodedObjects = pyzbar.decode(frame)
+        return decodedObjects
 
     def findQR(self, searchQR):
-        for obj in self.decodedObjects:
+        for obj in self.getFrame():
             qrdata = obj.data
             if qrdata == searchQR:
                 self.qrObject = obj

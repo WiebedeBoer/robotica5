@@ -1,6 +1,4 @@
-import cv2
-
-class Distance:
+class Distance():
     known_width = None
     focal_length = None
     known_distance = None
