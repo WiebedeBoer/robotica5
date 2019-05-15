@@ -9,6 +9,10 @@ def SocketReceive():
     # output
     sok.send(bytes(utf8_msg))
     rec = sok.recv(1024, 0)
-    print rec
+    return rec
 
 
+def SocketSend(msg):
+    utf8_msg = unicode(msg, "utf-8")
+
+    sok.send(bytes(utf8_msg))
