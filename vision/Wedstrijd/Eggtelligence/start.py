@@ -1,28 +1,29 @@
 import numpy as np
 import cv2
 import pyzbar.pyzbar as pyzbar
-from qrReader import main as ShowQR
-from distanceToQR import main as GetDistance
+import qrReader as QRReader
+import vision.Imp_Functions.distance as Distance
 
-cam = cv2.VideoCapture(0)
-
-findQRCode = ["'s-Hertogenbosch"]
+findQRCode = "http://'s-Hertogenbosch"
 
 
-def main(findQRCode):
-    _, frame = cam.read()
+def eggTelligence(findQRCode):
+    qrReader = QRReader()
+    getDistance = Distance(15, 1000, 100)
 
-    qr = ShowQR(findQRCode)
-    print("Found QR: " + qr.data)
+    while True:
+        qr = qrReader.findQR(findQRCode)
 
-    distance = GetDistance(qr)
-    print("Found Distance: " + str(distance))
+        if qr is not None:
+            print("Found QR: " + qr.data)
+            distance = getDistance.calculateDistance(qrReader.getWidthQR())
+            print("Found Distance: " + str(distance))
 
-    return distance
-    cam.release()
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
 
-main(findQRCode)
+eggTelligence(findQRCode)
 
 
 
