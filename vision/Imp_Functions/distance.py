@@ -1,9 +1,5 @@
-class Distance():
-    known_width = None
-    focal_length = None
-    known_distance = None
-
-    def __int__(self, width, focalLength, distance):
+class Distance:
+    def __init__(self, width, focalLength, distance):
         self.known_width = width
         self.focal_length = focalLength
         self.known_distance = distance
