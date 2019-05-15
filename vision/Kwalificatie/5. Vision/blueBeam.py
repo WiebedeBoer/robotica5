@@ -29,8 +29,17 @@ def ViewBeam():
             else:
                 factor = 0
             x, y, w, h = cv2.boundingRect(cnt)
-            if(area >100 and factor >0 and factor <0.99):
+            if(area >100 and area <3600 and factor >0 and factor <0.99):
                 frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 0), 2)
+                #print command
+                print("FollowBeam;")
+            elif(area >3600 and factor >0 and factor <0.99):
+                frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+                #print command
+                print("StopBeam;")
+            else:
+                #print command
+                print("SearchBeam;")
 
         #show vid
         cv2.imshow("Frame", frame)
