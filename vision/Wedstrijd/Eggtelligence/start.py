@@ -1,7 +1,6 @@
 import sys
 sys.path.append('../../Imp_Functions/')
 
-import cv2
 from qrReader import QRReader
 from distance import Distance
 
@@ -11,7 +10,7 @@ findQRCode = "http://'s-Hertogenbosch"
 
 def eggTelligence(findQRCode):
     qrReader = QRReader()
-    getDistance = Distance(15, 1000, 100)
+    getDistance = Distance(15, 1000)
 
     while True:
         qr = qrReader.findQR(findQRCode)
