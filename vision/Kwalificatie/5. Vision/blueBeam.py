@@ -16,6 +16,8 @@ def ViewBeam():
     cap = cv2.VideoCapture(0)
     xc, yc = 0, 0
     while(1):
+        #wait for socket
+        #sok.recv(1024,0)
         _, frame = cap.read()
         #25,87,154 = 211,84,60 = 211,214,153 #27,94,164 = 211,84,64 = 211,214,163
         #([100,150,0], [140,255,255])
