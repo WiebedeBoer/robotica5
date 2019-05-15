@@ -2,3 +2,6 @@
 	path = vision/Distance/One_Cam/AIRoboticaChicken
 	url = https://github.com/wnauta-stud/AIRoboticaChicken.git
 	branch = ChickenAI
+[submodule "vision/AIRoboticaChicken"]
+	path = vision/AIRoboticaChicken
+	url = https://github.com/wnauta-stud/AIRoboticaChicken
