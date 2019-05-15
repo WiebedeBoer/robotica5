@@ -32,11 +32,6 @@ class DetectEgg:
 	def nothing(self, x):
 		pass
 
-	def GHE(self, frame):
-		equ = cv2.equalizeHist(frame)
-
-		return equ
-
 	def CLAHE(self, frame):
 		clahe = cv2.createCLAHE(2.0, (8,8))
 		cl = clahe.apply(frame)
@@ -121,7 +116,7 @@ class DetectEgg:
 		self.params.filterByInertia = True
 
 		self.params.blobColor = 255
-		self.params.maxArea = 20000000 #20.000.000
+		self.params.maxArea = 200000000 #200.000.000
 
 		self.params.minArea = self.area
 		self.params.minCircularity = self.circularity
@@ -194,10 +189,6 @@ class DetectEgg:
 
 			#improve contrast
 			clahe_b = self.CLAHE(frame[:,:,0])
-			clahe_g = self.CLAHE(frame[:,:,1])
-			clahe_r = self.CLAHE(frame[:,:,2])
-
-			cv2.imshow("clahe_b", clahe_b)
 
 			denoise = cv2.medianBlur(clahe_b, 1)
 			denoise = cv2.bilateralFilter(denoise,9,75,75)
@@ -242,8 +233,6 @@ class DetectEgg:
 				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 				
 				cv2.imshow("output", keypoints_im)
-				cv2.imshow("th", th)
-				cv2.imshow("res", res)
 
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
