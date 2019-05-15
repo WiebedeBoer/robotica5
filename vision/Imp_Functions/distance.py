@@ -15,3 +15,4 @@ class Distance:
             return (self.known_distance * (w / 2)) / (self.known_width / 2)
         else:
             print("KnownDistance or KnownWidth isn't defined")
+
