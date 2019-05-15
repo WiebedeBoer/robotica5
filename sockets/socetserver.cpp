@@ -76,7 +76,8 @@ void main()
 		ZeroMemory(buf, 4096);
 
 		// Wait for client to send data
-		int bytesReceived = recv(clientSocket, buf, 4096, 0);
+		int bytesReceived = recv(clientSocket, buf, 1024, 0);
+		string msg = string(buf, 0, bytesReceived);
 		if (bytesReceived == SOCKET_ERROR)
 		{
 			cerr << "Error in recv(). Quitting" << endl;
@@ -88,7 +89,11 @@ void main()
 			cout << "Client disconnected " << endl;
 			break;
 		}
+		if (msg == "Ask") {
+			//send stuff from controler
+			send(clientSocket, "kip", 3, 0);
 
+		}
 		cout << string(buf, 0, bytesReceived) << endl;
 
 		// Echo message back to client
