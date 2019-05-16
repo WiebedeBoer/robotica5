@@ -1,11 +1,8 @@
-import sys
 import cv2
 import numpy as np
-import math
-import time
+
 
 class DetectEgg:
-
 	def __init__(self, debug):
 		self.debug = debug
 		self.setDefaultValues()
