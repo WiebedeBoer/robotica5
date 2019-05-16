@@ -17,7 +17,7 @@ def eggTelligence(findQRCode):
 
         if qr is not None:
             print("Found QR: " + qr.data)
-            distance = getDistance.calibration(qrReader.getWidthQR())
+            distance = getDistance.calculateDistance(qrReader.getWidthQR())
             print("Found Distance: " + str(distance))
 
 

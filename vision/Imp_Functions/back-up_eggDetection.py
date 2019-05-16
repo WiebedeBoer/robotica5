@@ -159,6 +159,13 @@ class DetectEgg:
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
+	def calibration(self, w):
+		return (self.KNOWN_DISTANCE * (w / 2)) / (self.KNOWN_WIDTH / 2)
+
+	def calculateDistance(self, w):
+		return (self.FOCAL_LENGTH * (self.KNOWN_WIDTH / 2)) / (w / 2)
+
+
 	def DetectEgg(self):
 		cap = cv2.VideoCapture(0)
 
@@ -204,6 +211,7 @@ class DetectEgg:
 				height_y = y-(h/2)
 
 				width = (x+keypoints[0].size/2) - (x-keypoints[0].size/2)
+				distance = self.calculateDistance(width)
 
 				eggDetectCount += 1
 
@@ -211,21 +219,25 @@ class DetectEgg:
 					cv2.line(frame,(int(x-keypoints[0].size/2), y),(int(x+keypoints[0].size/2), y),(255,0,0),1)
 					cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),\
 						self.font,self.fontScale,self.fontColor,self.lineType)
-					print(str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size))
+					print str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size)
 
 			if not self.debug:
 				if eggDetectCount > 15:
-					return True
+					print str(turn_x) + " " + str(height_y) + " " + str(distance)
 					break
 				elif count >= 30:
-					return False
+					print "no egg was found."
 					break
 
 			else:
 				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+				
 				cv2.imshow("output", keypoints_im)
-				if cv2.waitKey(1) & 0xFF == ord('q'):
-					break
+
+
+			if cv2.waitKey(1) & 0xFF == ord('q'):
+				break
+
 
 debug = False
 if len(sys.argv) > 1:

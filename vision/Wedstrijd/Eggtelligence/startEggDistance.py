@@ -6,7 +6,7 @@ from distance import Distance
 
 def eggTelligence():
     detectEgg = DetectEgg(False)
-    getDistance = Distance(15, 1000)
+    getDistance = Distance(5.4, 395.684786196, 20.0)
 
     while True:
          = 
