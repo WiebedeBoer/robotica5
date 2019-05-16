@@ -22,27 +22,107 @@ class DetectEgg:
 	fontColor              = (255,255,255)
 	lineType               = 2
 
-	# Camera init
-	camera = PiCamera()
-	camera.resolution = (640, 480)
-	camera.framerate = 30
-	rawCapture = PiRGBArray(camera, size=(640, 480))
-
-	time.sleep(0.1)
-
 	def __init__(self, debug):
 		self.debug = debug
 		self.setDefaultValues()
 
+                # Camera init
+                self.camera = PiCamera()
+                self.camera.resolution = (640, 480)
+                self.camera.framerate = 60
+                self.rawCapture = PiRGBArray(self.camera, size=(640, 480))
+
 		if debug:
 			self.createTrackbars()
-
-		self.DetectEgg()
 
 	def nothing(self, x):
 		pass
 
-	def GHE(self, frame):
+	def DetectEgg(self):
+		w = 640
+		h = 480
+
+		x, y = 0, 0
+
+		count = 0
+		eggDetectCount = 0
+
+		for frame in self.camera.capture_continuous(self.rawCapture, format="bgr",  use_video_port=1):
+			if self.debug:
+				self.updateValues()
+			else:
+				count += 1
+
+			# Read the frame from the camera
+			frame = frame.array
+
+			#improve contrast
+			clahe_b = self.CLAHE(frame[:,:,0])
+
+			#cv2.imshow("clahe_b", clahe_b)
+
+			denoise = cv2.medianBlur(clahe_b, 1)
+			denoise = cv2.bilateralFilter(denoise,9,75,75)
+
+			_,th = cv2.threshold(clahe_b,75,255,cv2.THRESH_BINARY)
+
+			res = cv2.bitwise_and(denoise,denoise, mask=th)
+                        
+                        #cv2.imshow("bitwise", res)
+
+			# Set up the detector with default parameters.
+			detector = cv2.SimpleBlobDetector(self.params)
+
+			# Detect blobs.
+			keypoints = detector.detect(res)
+
+			if len(keypoints) == 1:
+				x = int(keypoints[0].pt[0])
+				y = int(keypoints[0].pt[1])
+
+				turn_x = x-(w/2)
+				height_y = y-(h/2)
+
+				width = (x+keypoints[0].size/2) - (x-keypoints[0].size/2)
+				distance = self.calculateDistance(width)
+
+				eggDetectCount += 1
+
+				if self.debug:
+					cv2.line(frame,(int(x-keypoints[0].size/2), y),(int(x+keypoints[0].size/2), y),(255,0,0),1)
+					cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),\
+						self.font,self.fontScale,self.fontColor,self.lineType)
+					print str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size)
+
+			if not self.debug:
+                                #cv2.imshow("res",res)
+				if eggDetectCount > 3:
+					print  str(turn_x) + " " + str(height_y) + " " + str(distance)
+					self.rawCapture.truncate(0)
+					return True
+					break
+				elif count >= 10:
+					print "no egg was found."
+					self.rawCapture.truncate(0)
+					return False
+					break
+
+			else:
+				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+				
+				#cv2.imshow("output", keypoints_im)
+				#cv2.imshow("th", th)
+		        	#cv2.imshow("res", res)
+
+                        print "Frames with/without egg: " + str(eggDetectCount) + "/" + str(count)
+
+
+			if cv2.waitKey(1) & 0xFF == ord('q'):
+				break
+                        
+                        self.rawCapture.truncate(0)
+
+        def GHE(self, frame):
 		equ = cv2.equalizeHist(frame)
 
 		return equ
@@ -77,7 +157,7 @@ class DetectEgg:
 		cv2.createTrackbar('CIRCULARITY','settings',0,100,callback)
 		cv2.createTrackbar('CONVEXITY','settings',0,100,callback)
 
-		cv2.createTrackbar('RG','settings',0,100,callback)
+		cv2.createTrackbar('RG','settinga',0,100,callback)
 
 		cv2.createTrackbar('MIN_TH','settings',0,255,callback)
 		cv2.createTrackbar('MAX_TH','settings',0,255,callback)
@@ -180,94 +260,10 @@ class DetectEgg:
 	def calculateDistance(self, w):
 		return (self.FOCAL_LENGTH * (self.KNOWN_WIDTH / 2)) / (w / 2)
 
-
-	def DetectEgg(self):
-		w = 640
-		h = 480
-
-		x, y = 0, 0
-
-		count = 0
-		eggDetectCount = 0
-
-		for frame in camera.capture_continuous(rawCapture, format="bgr",  use_video_port=1):
-			if self.debug:
-				self.updateValues()
-			else:
-				count += 1
-
-			# Read the frame from the camera
-			frame = frame.array
-
-			#improve contrast
-			clahe_b = self.CLAHE(frame[:,:,0])
-			clahe_g = self.CLAHE(frame[:,:,1])
-			clahe_r = self.CLAHE(frame[:,:,2])
-
-			cv2.imshow("clahe_b", clahe_b)
-
-			denoise = cv2.medianBlur(clahe_b, 1)
-			denoise = cv2.bilateralFilter(denoise,9,75,75)
-
-			_,th = cv2.threshold(denoise,75,255,cv2.THRESH_BINARY)
-
-			res = cv2.bitwise_and(denoise,denoise, mask=th)
-
-			# Set up the detector with default parameters.
-			detector = cv2.SimpleBlobDetector_create(self.params)
-
-			# Detect blobs.
-			keypoints = detector.detect(res)
-
-			if len(keypoints) == 1:
-				x = int(keypoints[0].pt[0])
-				y = int(keypoints[0].pt[1])
-
-				turn_x = x-(w/2)
-				height_y = y-(h/2)
-
-				width = (x+keypoints[0].size/2) - (x-keypoints[0].size/2)
-				distance = self.calculateDistance(width)
-
-				eggDetectCount += 1
-
-				if self.debug:
-					cv2.line(frame,(int(x-keypoints[0].size/2), y),(int(x+keypoints[0].size/2), y),(255,0,0),1)
-					cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),\
-						self.font,self.fontScale,self.fontColor,self.lineType)
-					print str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size)
-
-			if not self.debug:
-				if eggDetectCount > 15:
-					camera.start_preview()
-					sleep(10)
-					camera.stop_preview()
-					print str(turn_x) + " " + str(height_y) + " " + str(distance)
-					break
-				elif count >= 30:
-					camera.start_preview()
-					sleep(10)
-					camera.stop_preview()
-					print "no egg was found."
-					break
-
-			else:
-				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-				
-				cv2.imshow("output", keypoints_im)
-				cv2.imshow("th", th)
-				cv2.imshow("res", res)
-
-
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
-
-
 debug = False
 if len(sys.argv) > 1:
 	if sys.argv[1] == '-d':
 		debug = True
 
-def EggDetection(debug = False):
-	DetectEgg(debug)
-EggDetection(debug)
+detected = DetectEgg(debug).DetectEgg()
+print(detected)
