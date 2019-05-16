@@ -1,3 +1,21 @@
 ﻿  Validating sources
   Copying sources remotely to '192.168.2.100'
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Application Type\Linux\1.0\Linux.targets(162,5): error : Could not connect to the remote system. Please verify your connection settings, and that your machine is on the network and reachable.
+  Validating architecture
+  Starting remote build
+  Compiling sources:
+  main.cpp
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(1,20): warning : extra tokens at end of #include directive
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(1,20): warning :  #include <iostream>;
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(1,20): warning :                     ^
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(2,26): warning : extra tokens at end of #include directive
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(2,26): warning :  #include <wiringSerial.h>;
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(2,26): warning :                           ^
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(15,26): warning : conversion to ‘char’ from ‘int’ may alter its value [-Wconversion]
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(15,26): warning :    result += serialGetchar(fd);
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(15,26): warning :              ~~~~~~~~~~~~~^~~~
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(21,20): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(21,20): warning :   for (int i = 0; i < str.length(); i++) {
+C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\main.cpp(21,20): warning :                   ~~^~~~~~~~~~~~~~
+  Linking objects
+  Serial_Demo.vcxproj -> C:\Users\Thom\source\repos\Serial_Demo\Serial_Demo\bin\ARM\Debug\Serial_Demo.out
+  Invoking 'gpio export 17 out', working directory: '/home/pi/projects/Serial_Demo'
