@@ -7,39 +7,26 @@
 #include <chrono>
 #include <thread>
 #include "CommandExecutor.h"
-
-
-bool running = true;
+#include "DataCollector.h"
+#include "Intelligence.h"
+bool* running = new bool(true);
 GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();
-Arduino* Worker = new Arduino("/dev/ttyACM0");
-Arduino* Sensor = new Arduino("/dev/ttyACM1");
-void loop() {
-	while (running == true) {
+DataCollector* Datacollector = new DataCollector();
 
-		//running = false;
-
-		Commandqueue->push(Command(Sensor, "Led?"));
-		std::string SensorResponce = Sensor->GetLastResponce();
-		if (Commandqueue->GetSize() > 10) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(200));
-			std::cout << "Queue to large!" << std::endl;
-		}
-		if (SensorResponce == "On")
-		{
-			Commandqueue->push(Command(Worker, "LedOn"));
-		}
-		if (SensorResponce == "Off") {
-			Commandqueue->push(Command(Worker, "LedOff"));
-		}
-	}
-}
+Arduino* Worker = new Arduino("/dev/ttyACM1");
+Arduino* Sensor = new Arduino("/dev/ttyACM0");
 
 int main()
 {	
 	std::cout << "Controller Online!" << std::endl;
 	CommandExecutor* CExe = new CommandExecutor(running, Commandqueue);
 	std::thread ExecutorThread = std::thread(&CommandExecutor::Execute, CExe);
-	loop();
+	Intelligence* AI = new Intelligence(Datacollector, Commandqueue, running, Worker, Sensor);
+	std::thread AIThread = std::thread(&Intelligence::Think, AI);
+
+	ExecutorThread.join();
+	AIThread.join();
+
 
     return 0;
 }

@@ -31,7 +31,7 @@ std::string Arduino::WaitForMessage(int &fd) {
 	int dataavail = 0;
 	bool MessageCompleted = false;
 	std::string message;
-	int Datareceived = WaitForData(fd, 2000);
+	int Datareceived = WaitForData(fd, 200);
 	if (Datareceived == 1) {
 		while (MessageCompleted == false) {
 			dataavail = serialDataAvail(fd);
@@ -60,25 +60,31 @@ std::string Arduino::WaitForMessage(int &fd) {
 //returns true when ack belongs to the send
 bool Arduino::ackresponse(std::string ack, std::string send) {
 	int acksum, calcsum;
-	std::cout << ack << std::endl;
 	if (!ack.empty() && ack[ack.length() - 1] == '\n') {
-		
-		std::regex rgx("(ack):(.*)<(.*)>\\|(\\d*)(.*)");
-		std::smatch m;
-		std::regex_search(ack, m, rgx);
-		std::string Sumable = std::string(m[1].str() + ":" + m[2].str() +"<"+ m[3].str() + ">" + "|");
-		acksum = CheckSum(Sumable);
-		calcsum =  std::stoi(m[4]);
-		Response = m[3].str();
-		if (acksum != calcsum) {
-			
-			std::cout << "ChecksumError" << std::endl;
+		try {
+			std::regex rgx("(ack):(.*)<(.*)>\\|(\\d*)(.*)");
+			std::smatch m;
+			std::regex_search(ack, m, rgx);
+			std::string Sumable = std::string(m[1].str() + ":" + m[2].str() + "<" + m[3].str() + ">" + "|");
+			acksum = CheckSum(Sumable);
+			calcsum = std::stoi(m[4]);
+			Response = m[3].str();
+			if (acksum != calcsum) {
+
+				std::cout << "ChecksumError" << std::endl;
+			}
+			ack = (m[2].str() + "|" + m[4].str());
+			//std::cout << ack << std::endl;
+
+			send = send.substr(0, send.find("|")) + "|" + std::to_string(calcsum);
+			send.erase(send.find(","), (send.find("|") - send.find(",")));
 		}
-		ack = (m[2].str() + "|" + m[4].str());
-		send = send.substr(0,send.find("|")) +"|"+ std::to_string(calcsum);
+		catch (const std::exception &) {
+			std::cout << "fatel error in ackresponce" << std::endl;
+		}
 	}
 	if (ack == send) {
-		std::cout << "Ack!" << std::endl;
+		//std::cout << "Ack!" << std::endl;
 
 		return true;
 	}
@@ -93,12 +99,12 @@ bool Arduino::ackresponse(std::string ack, std::string send) {
 }
 //sends string to serial interface with retries until message has been ack
 void Arduino::SerialSend(std::string input) {
-	if (fd != 3) {
+	if (fd < 3) {
 		serialClose(fd);
 		fd = serialOpen(UsbPort, 115200);
 	}
 	std::string inputsum;
-	std::cout << fd << std::endl;
+	//std::cout << fd << std::endl;
 	input = input + "|";
 	int NackCount = 0;
 	inputsum = std::to_string(CheckSum(input));
@@ -120,12 +126,15 @@ void Arduino::SerialSend(std::string input) {
 		std::cout << "CommandDropped After 5 tries" << std::endl;
 	}
 	else {
-		std::cout << "MessageSend" << std::endl;
+		//std::cout << "MessageSend" << std::endl;
 	}
 }
 
 std::string Arduino::GetLastResponce(){
-return Response;
+
+	std::string result = Response;
+	Response = "";
+return result;
 }
 Arduino::Arduino(char* usb)
 {

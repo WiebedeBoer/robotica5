@@ -260,5 +260,8 @@ paket-files/
 __pycache__/
 *.pyc
 
+*.db.idea/
+.vs/
+*.h264
 *.db
 *.h264
