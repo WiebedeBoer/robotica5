@@ -263,3 +263,5 @@ __pycache__/
 *.db.idea/
 .vs/
 *.h264
+*.db
+*.h264
