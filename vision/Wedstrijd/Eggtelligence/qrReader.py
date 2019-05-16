@@ -1,13 +1,14 @@
-import cv2
 import pyzbar.pyzbar as pyzbar
 
 
 class QRReader:
     qrObject = None
-    cam = cv2.VideoCapture(0)
+
+    def __int__(self, cap):
+        self.cap = cap
 
     def getFrame(self):
-        _, frame = self.cam.read()
+        _, frame = self.cap.read()
         decodedObjects = pyzbar.decode(frame)
         return decodedObjects
 
@@ -18,7 +19,7 @@ class QRReader:
                 self.qrObject = obj
                 return obj
             else:
-                return None
+                return False
 
     def getWidthQR(self):
         x, y, w, h = self.qrObject.rect
