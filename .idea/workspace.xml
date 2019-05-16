@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+    <list default="true" id="a2afd229-2933-4bbe-bcc8-3c568629e32b" name="Default Changelist" comment="" />
+>>>>>>> parent of 04b1f32... Merge branch 'Robin's-Testomgeving' into eiherkennen
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -27,74 +32,19 @@
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
+>>>>>>> parent of 04b1f32... Merge branch 'Robin's-Testomgeving' into eiherkennen
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>img_names</find>
-      <find>args.images</find>
-      <find>proj_root</find>
-      <find>pattern_points</find>
-      <find>objectPoints</find>
-      <find>img</find>
-      <find>mask</find>
-      <find>gray</find>
-      <find>qrBool</find>
-      <find>decimal</find>
-      <find>min_th</find>
-      <find>minThreshold</find>
-      <find>callback</find>
-      <find>nothing</find>
-    </findStrings>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/pictures/camera_calibration/out/translation.txt" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/calibration_camera.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/CameraCalibration-master/opencv_calibrate.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/pose_estimation.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/pose_estimation_bakje.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/pose_estimation_puurbakje.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/testing.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/distance_back-up.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/One_Cam/distance.py" />
-        <option value="$PROJECT_DIR$/vision/blobDetection.py" />
-        <option value="$PROJECT_DIR$/vision/Distance/distance.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/main.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/distanceToObject.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/distanceToQR.py" />
-        <option value="$PROJECT_DIR$/vision/Imp_Functions/__init__.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/qrReader.py" />
-        <option value="$PROJECT_DIR$/vision/main.py" />
-        <option value="$PROJECT_DIR$/vision/starting.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/__init__.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/__init__.py" />
-        <option value="$PROJECT_DIR$/vision/Imp_Functions/distance.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/start.py" />
-        <option value="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -116,6 +66,7 @@
               <item name="robotica5" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/HBO-ICT 2 - Mac/Periode 4/robotica5" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="vision" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="robotica5" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -140,32 +91,14 @@
               <item name="~/HBO-ICT 2 - Mac/Periode 4/robotica5" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="vision" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Kwalificatie" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+=======
+>>>>>>> parent of 04b1f32... Merge branch 'Robin's-Testomgeving' into eiherkennen
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
     </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/vision/Wedstrijd" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/vision/Imp_Functions" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd/Chicken_Survival_Run" />
-      <recent name="$PROJECT_DIR$/vision/Extra_Functions" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence" />
-      <recent name="$PROJECT_DIR$/vision" />
-      <recent name="$PROJECT_DIR$/vision/Imp_Functions" />
-      <recent name="$PROJECT_DIR$/vision/Distance/One_Cam" />
-    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -178,34 +111,6 @@
         </RuleState>
       </list>
     </option>
-  </component>
-  <component name="RunManager">
-    <configuration name="distance" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="robotica5" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vision/Distance/One_Cam" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vision/Imp_Functions/back-up_distance.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.distance" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -236,6 +141,7 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/CameraCalibration-master/.gitignore" />
     <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/translation.txt" />
     <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/rotation.txt" />
@@ -291,10 +197,17 @@
           <first_editor relative-caret-position="30">
             <caret line="2" selection-start-line="2" selection-end-line="2" />
           </first_editor>
+=======
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+>>>>>>> parent of 04b1f32... Merge branch 'Robin's-Testomgeving' into eiherkennen
           <second_editor />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/vision/eggDetection.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -315,5 +228,7 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> parent of 04b1f32... Merge branch 'Robin's-Testomgeving' into eiherkennen
   </component>
 </project>

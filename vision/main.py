@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import sys
 import time
-import Imp_Functions.distance
 
 #get from socket
 from client import SocketReceive
