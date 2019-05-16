@@ -1,8 +1,25 @@
+import sys
 import cv2
 import numpy as np
-
+import math
+import time
 
 class DetectEgg:
+
+	# Distance calculating
+	# Initialize the known distance from the camera to the object
+	KNOWN_DISTANCE = 20.0
+		# Initialize the known object width, which in this case
+	KNOWN_WIDTH = 5.4
+	  # Initialize the known object focal length, which in this case
+	FOCAL_LENGTH = 395.684786196
+
+	font                   = cv2.FONT_HERSHEY_SIMPLEX
+	bottomLeftCornerOfText = (10,500)
+	fontScale              = 0.75
+	fontColor              = (255,255,255)
+	lineType               = 2
+
 	def __init__(self, debug):
 		self.debug = debug
 		self.setDefaultValues()
@@ -14,11 +31,6 @@ class DetectEgg:
 
 	def nothing(self, x):
 		pass
-
-	def GHE(self, frame):
-		equ = cv2.equalizeHist(frame)
-
-		return equ
 
 	def CLAHE(self, frame):
 		clahe = cv2.createCLAHE(2.0, (8,8))
@@ -78,7 +90,7 @@ class DetectEgg:
 	def setDefaultValues(self):
 
 		# Set default variables
-		self.h_min = 100
+		self.h_min = 80
 		self.s_min = 0
 		self.v_min = 0
 
@@ -87,8 +99,8 @@ class DetectEgg:
 		self.v_max = 255
 
 		self.area = 490
-		self.circularity = self.toPercentage(80)
-		self.convexity = self.toPercentage(1)
+		self.circularity = self.toPercentage(75)
+		self.convexity = self.toPercentage(0)
 
 		self.RG = 90
 
@@ -101,9 +113,10 @@ class DetectEgg:
 		self.params.filterByCircularity = True
 		self.params.filterByConvexity = True
 		self.params.filterByColor = True
+		self.params.filterByInertia = True
 
 		self.params.blobColor = 255
-		self.params.maxArea = 2000000 #2.000.000
+		self.params.maxArea = 200000000 #200.000.000
 
 		self.params.minArea = self.area
 		self.params.minCircularity = self.circularity
@@ -145,6 +158,12 @@ class DetectEgg:
 		self.params.minArea = self.area
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
+
+	def calibration(self, w):
+		return (self.KNOWN_DISTANCE * (w / 2)) / (self.KNOWN_WIDTH / 2)
+
+	def calculateDistance(self, w):
+		return (self.FOCAL_LENGTH * (self.KNOWN_WIDTH / 2)) / (w / 2)
 
 
 	def DetectEgg(self):
@@ -191,27 +210,40 @@ class DetectEgg:
 				turn_x = x-(w/2)
 				height_y = y-(h/2)
 
+				width = (x+keypoints[0].size/2) - (x-keypoints[0].size/2)
+				distance = self.calculateDistance(width)
+
 				eggDetectCount += 1
+
+				if self.debug:
+					cv2.line(frame,(int(x-keypoints[0].size/2), y),(int(x+keypoints[0].size/2), y),(255,0,0),1)
+					cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),\
+						self.font,self.fontScale,self.fontColor,self.lineType)
+					print str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size)
 
 			if not self.debug:
 				if eggDetectCount > 15:
-					print(str(turn_x) + " " + str(height_y))
+					print str(turn_x) + " " + str(height_y) + " " + str(distance)
 					break
 				elif count >= 30:
-					print("no egg was found.")
+					print "no egg was found."
 					break
 
 			else:
 				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-
+				
 				cv2.imshow("output", keypoints_im)
-				cv2.imshow("th", th)
-				cv2.imshow("res", res)
+
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 
-def EggDetection():
-	DetectEgg(False)
 
-EggDetection()
+debug = False
+if len(sys.argv) > 1:
+	if sys.argv[1] == '-d':
+		debug = True
+
+def EggDetection(debug = False):
+	DetectEgg(debug)
+EggDetection(debug)
