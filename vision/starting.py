@@ -2,30 +2,30 @@ import cv2
 import numpy as np
 import sys
 import time
-import Imp_Functions.distance
+
 
 #get from socket
 from client import SocketReceive
 SocketReceive()
 Qualify = SocketReceive()
 
-#socket
-#import socket
-#sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#sok.connect((socket.gethostname(), 1234))
+socket
+import socket
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sok.connect((socket.gethostname(), 1234))
 
-#def SocketReceive():
-#    msg_send = "Ask"
-#    utf8_msg = unicode(msg_send, "utf-8")
-    # output
-#    sok.send(bytes(utf8_msg))
-#    rec = sok.recv(1024, 0)
-#    return rec
+def SocketReceive():
+    msg_send = "Ask"
+    utf8_msg = unicode(msg_send, "utf-8")
+     output
+    sok.send(bytes(utf8_msg))
+    rec = sok.recv(1024, 0)
+    return rec
 
-#def SocketSend(msg):
-#    utf8_msg = unicode(msg, "utf-8")
+def SocketSend(msg):
+    utf8_msg = unicode(msg, "utf-8")
 
-#sok.send(bytes(utf8_msg))
+sok.send(bytes(utf8_msg))
 
 #SWITCH CASE QUALIFY OR RACE
 def switchQualify(Qualify):
@@ -52,13 +52,13 @@ def switchQualify(Qualify):
 
 #KWALIFICATIES AUTONOOM
 #2 POORT QUALIFY
-def Poort:
+def Poort():
     #go through gate #doing
     from gateRun import Gate
     Gate()
 
 #3 GRINDPAD QUALIFY
-def Grindpad:
+def Grindpad():
     # go over grit path #todo
     from gritRun import Grit
     Grit()
