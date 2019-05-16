@@ -2,9 +2,89 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/detection/img1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/detection/img2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/detection/img3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/img1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/img2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/img3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/img4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/img5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Distance/One_Cam/img7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwAchter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwAchter2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwNaast.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwNaast2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwNaast3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwNaast4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwRechts1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwVoor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/BlauwVoor2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GR1.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GR2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GR3.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GR4.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GR5.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GR6.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelLinks1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelLinks2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelLinks3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelLinks4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelNaast.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelNaast2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelRechts1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelRechts2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelRechts3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelVoor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelVoor2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelVoor3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelVoor4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GeelVoorRechts.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsAchter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsAchter2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsNaast.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsNaast2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsNaast3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsNaast4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsVoor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsVoor2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GrijsVoor3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenAchter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenAchter2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenNaast.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenNaast2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenNaast3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenNaast4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenVoor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenVoor2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/GroenVoor3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodAchter1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodAchter2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodNaast.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodNaast3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodNaast4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodNaast5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodNaast6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodRechts1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodRechts2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodVoor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodVoor2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/RoodVoor3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/a.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/b.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/c.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/d.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/f.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/g.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/groenvoortwee.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/q.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/r.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/t.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Pictures/w.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/chickenrun.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/chickenrun2.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/e.PNG" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,57 +94,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="25" />
+            <state relative-caret-position="-334">
               <folding>
-                <element signature="e#584#690#0" />
-                <element signature="e#717#721#0" />
-                <element signature="e#750#824#0" />
-                <element signature="e#862#974#0" />
-                <element signature="e#1006#2520#0" />
-                <element signature="e#2554#3400#0" />
-                <element signature="e#3434#3484#0" />
-                <element signature="e#3513#4636#0" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py">
+        <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/qrReader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/distance.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="25" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="25" />
+            <state relative-caret-position="285">
+              <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -153,43 +201,7 @@
             <path>
               <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
               <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
               <item name="vision" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Extra_Functions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Imp_Functions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Kwalificatie" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Wedstrijd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Wedstrijd" type="462c0819:PsiDirectoryNode" />
-              <item name="Eggtelligence" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -211,11 +223,11 @@
       <recent name="$PROJECT_DIR$/vision/Distance/One_Cam" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun" />
       <recent name="$PROJECT_DIR$/vision/Imp_Functions" />
       <recent name="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence" />
       <recent name="$PROJECT_DIR$/vision/Wedstrijd/Chicken_Survival_Run" />
       <recent name="$PROJECT_DIR$/vision/Extra_Functions" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -282,7 +294,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16997617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -304,37 +315,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/CameraCalibration-master/.gitignore" />
-    <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/translation.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/rotation.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/matrix.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/pictures/camera_calibration/out/combination.txt" />
-    <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/distortion.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/pictures/camera_calibration/out/everything.txt" />
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/pictures/camera_calibration/out/everything.npz" />
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/CameraCalibration-master/opencv_calibrate.py" />
-    <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/schaakbord1_chess_undistorted.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/pictures/camera_calibration/out/schaakbord4_chess_undistorted.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/pose_estimation_puurbakje.py" />
     <entry file="file://$PROJECT_DIR$/vision/Extra_Functions/calibration_camera.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -388,7 +368,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/back-up_distance.py" />
-    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py" />
     <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/2. Poortje/gateRun.py" />
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/distanceToQR.py" />
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/distance.py" />
@@ -410,7 +389,7 @@
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
@@ -434,7 +413,7 @@
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="10" column="21" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="25" />
+          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="25" />
           <folding>
             <element signature="e#584#690#0" />
             <element signature="e#717#721#0" />
@@ -450,8 +429,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="375">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/detection/img1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/detection/img2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/detection/img3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img4.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img7.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Pictures/RoodVoor2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Pictures/RoodVoor.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Pictures/RoodNaast5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Pictures/GroenVoor.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Pictures/GR1.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Pictures/BlauwAchter.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Videos/record.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Videos/record.py.save">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/e.PNG">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="16" lean-forward="true" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/chickenrun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-334">
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
