@@ -1,7 +1,7 @@
 <annotation>
 	<folder>Wouter</folder>
-	<filename>20190516_093928(0).jpg</filename>
-	<path>/Users/wouter/Projects/robotica5/training/img/Wouter/20190516_093928(0).jpg</path>
+	<filename>20190516_094447.jpg</filename>
+	<path>/Users/wouter/Projects/robotica5/training/img/Wouter/20190516_094447.jpg</path>
 	<source>
 		<database>Unknown</database>
 	</source>
@@ -17,10 +17,10 @@
 		<truncated>0</truncated>
 		<difficult>0</difficult>
 		<bndbox>
-			<xmin>248</xmin>
-			<ymin>75</ymin>
-			<xmax>444</xmax>
-			<ymax>260</ymax>
+			<xmin>237</xmin>
+			<ymin>88</ymin>
+			<xmax>442</xmax>
+			<ymax>300</ymax>
 		</bndbox>
 	</object>
 </annotation>
