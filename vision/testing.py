@@ -20,29 +20,33 @@ def splitter(msg):
 
 
 # Main switcher
-def mainSwitcher(argument, argument1):
+def mainSwitcher(argument, arg1):
     switcher = {
-        0: kwalificatie(argument1),
-        1: wedstrijd(),
+        0: kwalificatie,
+        1: wedstrijd,
     }
-    return switcher.get(argument, "Nothing")
+    func = switcher.get(argument, "Nothing")
+    return func(arg1)
 
-def kwalificatie(argument):
-    def kwalificatieswitcher(argument):
+def kwalificatie(arg1):
+    def kwalificatieswitcher(arg1):
         switcher = {
-            0: pitch(),
-            1: egg(),
+            0: pitch,
+            1: egg,
         }
-        return switcher.get(argument, "Nothing")
+        func = switcher.get(arg1, "Nothing")
+        return func()
 
     def pitch():
+        print("Dikke boktor")
         return str("This is a pitch")
 
     def egg():
+        print("Dikke shit")
         return str("This is a egg")
 
 
-    return kwalificatieswitcher(argument)
+    return kwalificatieswitcher(arg1)
 
 
 
@@ -50,4 +54,4 @@ def wedstrijd():
     return str("hello from wedstrijd")
 
 
-print(mainSwitcher(0, 1))
+print(mainSwitcher(1))

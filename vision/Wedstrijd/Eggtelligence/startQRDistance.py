@@ -1,9 +1,10 @@
 import sys
 sys.path.append('Imp_Functions/')
+sys.path.append('Wedstrijd/Eggtelligence/')
 
 import cv2
-from qrReader import QRReader
 from helpFunctions import *
+from qrReader import QRReader
 
 def startQRDistance(findQRCode):
     cap = cv2.VideoCapture(0)
@@ -11,7 +12,7 @@ def startQRDistance(findQRCode):
 
     qr = qrReader.findQR(findQRCode)
 
-    if qr is not False:
+    if qr is not None:
         distance = calculateDistance(qrReader.getWidthQR(), 15, 1000)
         return distance
     else:

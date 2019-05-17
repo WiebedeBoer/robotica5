@@ -21,23 +21,29 @@ def splitter(msg):
 # Main switcher
 def mainSwitcher(argument, argument1, argument2):
     switcher = {
-        0: kwalificatie(argument1),
-        1: wedstrijd(argument1, argument2),
+        0: kwalificatie,
+        1: wedstrijd,
     }
-    return switcher.get(argument, "nothing")
+
+    func = switcher.get(argument, "Nothing")
+    if(func is kwalificatie):
+        return func(argument1)
+    else:
+        return func(argument1, argument2)
 
 
 # Kwalificatie switcher
 def kwalificatie(argument):
     def kwalificatieSwitcher(argument):
         switcher = {
-            0: pitch(),
-            1: poortje(),
-            2: grindpad(),
-            3: eiGripper(),
-            4: vision()
+            0: pitch,
+            1: poortje,
+            2: grindpad,
+            3: eiGripper,
+            4: vision
         }
-        return switcher.get(argument, "nothing")
+        func = switcher.get(argument, "Nothing")
+        return func()
 
     def pitch():
         sys.path.append('Kwalificatie/Pitch/')
@@ -65,10 +71,15 @@ def wedstrijd(argument, argument1):
     # Wedstrijd switcher
     def wedstrijdSwitcher(argument, argument1):
         switcher = {
-            0: chickenSurvivalRun(),
-            1: eggtelligence(argument1)
+            0: chickenSurvivalRun,
+            1: eggtelligence
         }
-        return switcher.get(argument, "nothing")
+        func = switcher.get(argument, "Nothing")
+        if (func is chickenSurvivalRun):
+            return func()
+        else:
+            return func(argument1)
+
 
     def chickenSurvivalRun():
         sys.path.append('Wedstrijd/ChickenSurvivalRun/')
@@ -77,10 +88,11 @@ def wedstrijd(argument, argument1):
     def eggtelligence(argument):
         def eggtelligenceSwitcher(argument):
             switcher = {
-                0: eggDistance(),
-                1: qrDistance()
+                0: eggDistance,
+                1: qrDistance
             }
-            return switcher.get(argument, "nothing")
+            func = switcher.get(argument, "Nothing")
+            return func()
 
         def eggDistance():
             sys.path.append('Wedstrijd/Eggtelligence/')
@@ -96,4 +108,4 @@ def wedstrijd(argument, argument1):
 
     return wedstrijdSwitcher(argument, argument1)
 
-print(mainSwitcher(1,1,0))
+print(mainSwitcher(1,1,1))

@@ -4,7 +4,7 @@ import pyzbar.pyzbar as pyzbar
 class QRReader:
     qrObject = None
 
-    def __int__(self, cap):
+    def __init__(self, cap):
         self.cap = cap
 
     def getFrame(self):
@@ -19,7 +19,7 @@ class QRReader:
                 self.qrObject = obj
                 return obj
             else:
-                return False
+                return None
 
     def getWidthQR(self):
         x, y, w, h = self.qrObject.rect
