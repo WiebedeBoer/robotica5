@@ -1,152 +1,111 @@
-import cv2
-import numpy as np
 import sys
-import time
-import Imp_Functions.distance
+import socket
 
-#get from socket
-from client import SocketReceive
-SocketReceive()
-Qualify = SocketReceive()
 
-#socket
-#import socket
-#sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#sok.connect((socket.gethostname(), 1234))
+# Here the function gets the string send by the pi
+def SocketReceive():
+    rec = sok.recv(1024, 0)
+    return rec
 
-#def SocketReceive():
-#    msg_send = "Ask"
-#    utf8_msg = unicode(msg_send, "utf-8")
-    # output
-#    sok.send(bytes(utf8_msg))
-#    rec = sok.recv(1024, 0)
-#    return rec
 
-#def SocketSend(msg):
-#    utf8_msg = unicode(msg, "utf-8")
+# Here the function sends a string back to the pi
+def SocketSend(msg):
+    utf8_msg = unicode(msg, "utf-8")
+    sok.send(bytes(utf8_msg))
 
-#sok.send(bytes(utf8_msg))
 
-#SWITCH CASE QUALIFY OR RACE
-def switchQualify(Qualify):
+def splitter(msg):
+    return msg.split(':')
+
+
+# Main switcher
+def mainSwitcher(argument, argument1, argument2):
     switcher = {
-        #QUALIFIERS
-        #gate
-        GateQualify:Poort(),
-        #grit path
-        GritQualify:Grindpad(),
-        #gripper
-        GripperQualify:Gripper(),
-        #vision
-        VisionQualify:BlauwBalk(),
-        #RACES
-        #chicken got talent
-        DanceRace:ChickenGotTalent(),
-        #eggtelligence
-        EggRace:Eggtelligence(),
-        #chicken stairs and slope
-        SlopeRace:ChickenTrap(),
-        #capture the flag     
-        FlagRace:Flag()
+        0: kwalificatie,
+        1: wedstrijd,
     }
 
-#KWALIFICATIES AUTONOOM
-#2 POORT QUALIFY
-def Poort:
-    #go through gate #doing
-    from gateRun import Gate
-    Gate()
-
-#3 GRINDPAD QUALIFY
-def Grindpad:
-    # go over grit path #todo
-    from gritRun import Grit
-    Grit()
-
-#4 GRIPPER QUALIFY
-def Gripper:
-    #grab and hold fresh egg #todo
-    from eggGrab import Grab
-    Grab()
-
-#5 VISION QUALIFY
-def BlauwBalk:
-    #detect and follow blue beam #doing
-    from blueBeam import ViewBeam
-    ViewBeam()
-    
-
-#RACES, AUTONOMOUS STAIRS AND EGGTELLIGENCE, REMAINDER REMOTE
-
-#1 CHICKEN RACE, speed in a straight line
-
-#2 CHICKEN GOT TALENT, dancing on music, touch line once
-
-#3 CHICKEN BOOGIE LINE DANCE, dancing on music in line
-
-#4 CHICKEN TRAP RACE
-def ChickenTrap:
-    #stairs detection #todo
-    from stairs import UpStairs
-    UpStairs()
-
-#5 EGGTELLIGENCE RACE
-def Eggtelligence:
-    DetectPhase ="default"
-    #BLACK TAPE    
-    #black tape #doing
-    from tape import BlackTape
-    BlackTape()
-
-    #PATH FINDING
-    #pathfinder algorithm #todo
-    #from pathfinding import FindPath
-    #FindPath()
-
-    #EI OPPAKKEN EN BRENGEN NAAR BAKJE MET QR
-    if DetectPhase =="default":
-        #egg detection #done
-        from blobDetection import EggDetection
-        EggDetection()
-    elif DetectPhase =="eggDetected":
-        #go near #todo
-        print("GoToEgg")
-    elif DetectPhase =="eggNear":
-        #egg grabbing #todo
-        print("GrabEgg")
-    elif DetectPhase =="eggGrabbed":
-        #chicken detection #todo
-        from chickenRun import ChickenDetection
-        ChickenDetection()
-    elif DetectPhase =="trayFind":
-        #trays detection #doing
-        from distance import main
-        main()
-    elif DetectPhase =="trayNear":
-        #QR detection #done
-        from qrvid import ShowQR
-        ShowQR()
+    func = switcher.get(argument, "Nothing")
+    if(func is kwalificatie):
+        return func(argument1)
     else:
-        #do nothing
+        return func(argument1, argument2)
 
 
+# Kwalificatie switcher
+def kwalificatie(argument):
+    def kwalificatieSwitcher(argument):
+        switcher = {
+            0: pitch,
+            1: poortje,
+            2: grindpad,
+            3: eiGripper,
+            4: vision
+        }
+        func = switcher.get(argument, "Nothing")
+        return func()
 
-#6 CAPTURE THE FLAG RACE, remote control
+    def pitch():
+        sys.path.append('Kwalificatie/Pitch/')
+
+    def poortje():
+        sys.path.append('Kwalificatie/Poortje/')
+        #from gateRun import gate
+        #return gate()
+
+    def grindpad():
+        sys.path.append('Kwalificatie/Grindpad/')
+
+    def eiGripper():
+        sys.path.append('Kwalificatie/EiGripper/')
+
+    def vision():
+        sys.path.append('Kwalificatie/Vision/')
+        #from blueBeam import viewBeam
+        #return viewBeam()
+
+    return kwalificatieSwitcher(argument)
 
 
+def wedstrijd(argument, argument1):
+    # Wedstrijd switcher
+    def wedstrijdSwitcher(argument, argument1):
+        switcher = {
+            0: chickenSurvivalRun,
+            1: eggtelligence
+        }
+        func = switcher.get(argument, "Nothing")
+        if (func is chickenSurvivalRun):
+            return func()
+        else:
+            return func(argument1)
 
 
+    def chickenSurvivalRun():
+        sys.path.append('Wedstrijd/ChickenSurvivalRun/')
+        test = False
 
+    def eggtelligence(argument):
+        def eggtelligenceSwitcher(argument):
+            switcher = {
+                0: eggDistance,
+                1: qrDistance
+            }
+            func = switcher.get(argument, "Nothing")
+            return func()
 
+        def eggDistance():
+            sys.path.append('Wedstrijd/Eggtelligence/')
+            from startEggDistance import startEggDistance
+            return startEggDistance()
 
+        def qrDistance():
+            sys.path.append('Wedstrijd/Eggtelligence/')
+            from startQRDistance import startQRDistance
+            return startQRDistance("http://'s-Hertogenbosch")
 
+        return eggtelligenceSwitcher(argument)
 
+    return wedstrijdSwitcher(argument, argument1)
 
-
-
-
-
-
-
-
-
+print(mainSwitcher(1,1,1))
