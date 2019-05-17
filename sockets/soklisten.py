@@ -39,3 +39,18 @@ while True:
         #SocketSend(cmd)
         break
 
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sok.connect((socket.gethostname(), 1234))
+
+while True:
+    #if cmd == "Ask":
+    print SocketReceive()
+    #else:
+    cmd = raw_input()
+
+    SocketSend(cmd)
+    if cmd == "Ask":
+        print SocketReceive()
+        cmd = raw_input()
+
+        SocketSend(cmd)
