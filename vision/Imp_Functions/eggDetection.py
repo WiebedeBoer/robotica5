@@ -1,33 +1,25 @@
 import sys
+sys.path.append('../../Imp_Functions/')
+
 import cv2
 import numpy as np
-import math
-import time
+from helpFunctions import *
+
 
 class DetectEgg:
-
-	# Distance calculating
-	# Initialize the known distance from the camera to the object
-	KNOWN_DISTANCE = 20.0
-		# Initialize the known object width, which in this case
-	KNOWN_WIDTH = 5.4
-	  # Initialize the known object focal length, which in this case
-	FOCAL_LENGTH = 395.684786196
-
 	font                   = cv2.FONT_HERSHEY_SIMPLEX
 	bottomLeftCornerOfText = (10,500)
 	fontScale              = 0.75
 	fontColor              = (255,255,255)
 	lineType               = 2
 
-	def __init__(self, debug):
+	def __init__(self, debug, cap):
 		self.debug = debug
+		self.cap = cap
 		self.setDefaultValues()
 
 		if debug:
 			self.createTrackbars()
-			
-		self.DetectEgg()
 
 	def nothing(self, x):
 		pass
@@ -159,11 +151,18 @@ class DetectEgg:
 		self.params.minCircularity = self.circularity
 		self.params.minConvexity = self.convexity
 
-	def DetectEgg(self):
-		cap = cv2.VideoCapture(0)
+	def widthKeypoints(self, keypoints):
+		allWidths = []
+		for kp in keypoints:
+			x = int(kp.pt[0])
+			width = (x + kp.size / 2) - (x - kp.size / 2)
+			allWidths.append(width)
 
-		w = cap.get(3)
-		h = cap.get(4)
+		return allWidths
+
+	def DetectEgg(self):
+		w = self.cap.get(3)
+		h = self.cap.get(4)
 
 		x, y = 0, 0
 
@@ -178,7 +177,7 @@ class DetectEgg:
 				count += 1
 
 			# Read the frame from the camera
-			_, frame = cap.read()
+			_, frame = self.cap.read()
 
 			#improve contrast
 			clahe_b = self.CLAHE(frame[:,:,0])
@@ -196,28 +195,28 @@ class DetectEgg:
 			# Detect blobs.
 			keypoints = detector.detect(res)
 
-			if len(keypoints) == 1:
-				x = int(keypoints[0].pt[0])
-				y = int(keypoints[0].pt[1])
+			if len(keypoints) <= 5:
+				for kp in keypoints:
+					eggDetectCount += 1
 
-				turn_x = x-(w/2)
-				height_y = y-(h/2)
+					if self.debug:
+						x = int(kp.pt[0])
+						y = int(kp.pt[1])
 
-				width = (x+keypoints[0].size/2) - (x-keypoints[0].size/2)
+						width = (x + kp.size / 2) - (x - kp.size / 2)
+						cv2.line(frame,(int(x-kp.size/2), y),(int(x+kp.size/2), y),(255,0,0),1)
+						cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),
+							self.font,self.fontScale,self.fontColor,self.lineType)
 
-				eggDetectCount += 1
-
-				if self.debug:
-					cv2.line(frame,(int(x-keypoints[0].size/2), y),(int(x+keypoints[0].size/2), y),(255,0,0),1)
-					cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),\
-						self.font,self.fontScale,self.fontColor,self.lineType)
-					print(str(turn_x) + " " + str(height_y) + " " + str(keypoints[0].size))
+						turn_x = x - (w / 2)
+						height_y = y - (h / 2)
+						print(str(turn_x) + " " + str(height_y) + " " + str(kp.size))
 
 			if not self.debug:
-				if eggDetectCount > 15:
-					return True
+				if eggDetectCount > 5:
+					return keypoints
 					break
-				elif count >= 30:
+				elif count >= 7:
 					return False
 					break
 
@@ -227,11 +226,6 @@ class DetectEgg:
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
 
-debug = False
 if len(sys.argv) > 1:
 	if sys.argv[1] == '-d':
 		debug = True
-
-def EggDetection(debug = False):
-	DetectEgg(debug)
-EggDetection(debug)

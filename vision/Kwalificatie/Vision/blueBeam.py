@@ -5,7 +5,7 @@ import math
 from decimal import *
 import glob
 
-def ViewBeam():
+def viewBeam():
     # Text settings
     font = cv2.FONT_HERSHEY_SIMPLEX
     bottomLeftCornerOfText = (10,500)

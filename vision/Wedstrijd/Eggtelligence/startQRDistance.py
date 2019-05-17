@@ -1,29 +1,19 @@
 import sys
-sys.path.append('../../Imp_Functions/')
+sys.path.append('Imp_Functions/')
+sys.path.append('Wedstrijd/Eggtelligence/')
 
+import cv2
+from helpFunctions import *
 from qrReader import QRReader
-from distance import Distance
 
+def startQRDistance(findQRCode):
+    cap = cv2.VideoCapture(0)
+    qrReader = QRReader(cap)
 
-findQRCode = "http://'s-Hertogenbosch"
+    qr = qrReader.findQR(findQRCode)
 
-
-def eggTelligence(findQRCode):
-    qrReader = QRReader()
-    getDistance = Distance(15, 1000)
-
-    while True:
-        qr = qrReader.findQR(findQRCode)
-
-        if qr is not None:
-            print("Found QR: " + qr.data)
-            distance = getDistance.calculateDistance(qrReader.getWidthQR())
-            print("Found Distance: " + str(distance))
-
-
-eggTelligence(findQRCode)
-
-
-
-
-
+    if qr is not None:
+        distance = calculateDistance(qrReader.getWidthQR(), 15, 1000)
+        return distance
+    else:
+        return False
