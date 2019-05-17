@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Wouter</folder>
+	<filename>20190516_094500.jpg</filename>
+	<path>/Users/wouter/Projects/robotica5/training/img/Wouter/20190516_094500.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>720</width>
+		<height>405</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>fakeChicken</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>260</xmin>
+			<ymin>90</ymin>
+			<xmax>389</xmax>
+			<ymax>264</ymax>
+		</bndbox>
+	</object>
+</annotation>
