@@ -25,11 +25,24 @@ bool drivingL, drivingR;
 
 bool NearTray;
 int AfstandsSensor = 0;
+int Distance = 0;
 
 void setup() {
   // put your setup code here, to run once:
     //ini serial interface
   Serial.begin(115200);
+}
+
+//test led
+String Led(){
+  if(LedOnOff == true){
+    LedOnOff = false;
+    return "ack:Led?<On>|";
+    }
+  if(LedOnOff == false){
+    LedOnOff = true;
+    return "ack:Led?<Off>|";
+  }
 }
 
 void loop() {
@@ -45,8 +58,8 @@ void loop() {
         String Checksum = String(checksum(result));
         Serial.println(result + Checksum );  
         }
-      else if (rx_Msg == "Motor?|"){
-        String result = wheelLeft(200,1);
+      else if (rx_Msg == "Sensor?|"){
+        String result = readSensors(Distance);
         String Checksum = String(checksum(result));
         Serial.println(result + Checksum );  
        }     
@@ -62,7 +75,8 @@ void loop() {
 
 }
 
-void readSensors(){ 
+//sensor function
+String readSensors(int Distance){ 
 
     //afstandsensor lezen
   AfstandsSensor = analogRead(A0);
@@ -77,8 +91,8 @@ else{
     NearTray = false;
 }
 
-  pot->set(sp);
-  return "ack:Motor?<Speed>|";
+  pot->set(Distance);
+  return "ack:Sensor?<Distance>|";
 
 }
 
