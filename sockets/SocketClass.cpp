@@ -9,8 +9,8 @@ void SocketServer::close() {
 	closesocket(clientSocket);
 	// Cleanup winsock
 	WSACleanup();
-	system("pause");
 }
+
 bool SocketServer::makeConnection() {
 	// Initialze winsock
 	WSADATA wsData;
@@ -81,6 +81,7 @@ void SocketServer::waitMsg(char buf[]) {
 	std::string msg2 = std::string(buf, 0, bytesReceived);
 	if (bytesReceived == SOCKET_ERROR)
 	{
+
 	}
 	if (msg2 == "Ask") {
 		//send stuff from controler
