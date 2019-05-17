@@ -113,17 +113,8 @@ sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sok.connect((socket.gethostname(), 1234))
 
 while True:
-    #if cmd == "Ask":
     msg = SocketReceive()
     msg = splitter(msg)
 
-    mainSwitcher(msg[0], msg[1], msg[2])
-    #else:
-    cmd = raw_input()
-
-    SocketSend(cmd)
-    if cmd == "Ask":
-        print(SocketReceive())
-        cmd = raw_input()
-
-        SocketSend(cmd)
+    msgBack =  mainSwitcher(msg[0], msg[1], msg[2])
+    SocketSend(msgBack)
