@@ -58,7 +58,7 @@ def read_segmentation_with_rgb_color_map(image_testdata_path,
       as a string.
     rgb_to_semantic_label: Mapping from RGB colors to integer labels as a
       dictionary.
-    output_dtype: Type of the output labels. If None, defaults to the type of
+    output_dtype: Type of the wouter labels. If None, defaults to the type of
       the provided color map.
 
   Returns:

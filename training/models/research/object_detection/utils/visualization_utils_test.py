@@ -145,7 +145,7 @@ class VisualizationUtilsTest(tf.test.TestCase):
       with self.test_session() as sess:
         sess.run(tf.global_variables_initializer())
 
-        # Write output images for visualization.
+        # Write wouter images for visualization.
         images_with_boxes_np = sess.run(images_with_boxes)
         self.assertEqual(images_np.shape[0], images_with_boxes_np.shape[0])
         self.assertEqual(images_np.shape[3], images_with_boxes_np.shape[3])
@@ -154,7 +154,7 @@ class VisualizationUtilsTest(tf.test.TestCase):
         for i in range(images_with_boxes_np.shape[0]):
           img_name = 'image_' + str(i) + '.png'
           output_file = os.path.join(self.get_temp_dir(), img_name)
-          logging.info('Writing output image %d to %s', i, output_file)
+          logging.info('Writing wouter image %d to %s', i, output_file)
           image_pil = Image.fromarray(images_with_boxes_np[i, ...])
           image_pil.save(output_file)
 

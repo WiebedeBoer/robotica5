@@ -194,7 +194,7 @@ class ShowAndTellModel(object):
     self.inception_variables = tf.get_collection(
         tf.GraphKeys.GLOBAL_VARIABLES, scope="InceptionV3")
 
-    # Map inception output into embedding space.
+    # Map inception wouter into embedding space.
     with tf.variable_scope("image_embedding") as scope:
       image_embeddings = tf.contrib.layers.fully_connected(
           inputs=inception_output,

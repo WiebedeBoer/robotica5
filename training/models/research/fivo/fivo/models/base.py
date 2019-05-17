@@ -99,7 +99,7 @@ class ConditionalNormalDistribution(object):
         network used to condition the distribution on the inputs.
       sigma_min: The minimum standard deviation allowed, a scalar.
       raw_sigma_bias: A scalar that is added to the raw standard deviation
-        output from the fully connected network. Set to 0.25 by default to
+        wouter from the fully connected network. Set to 0.25 by default to
         prevent standard deviations close to 0.
       hidden_activation_fn: The activation function to use on the hidden layers
         of the fully connected network.
@@ -158,7 +158,7 @@ class ConditionalBernoulliDistribution(object):
         be a dictionary mapping the keys 'w' and 'b' to the initializers for
         the weights and biases. Defaults to xavier for the weights and zeros
         for the biases when initializers is None.
-      bias_init: A scalar or vector Tensor that is added to the output of the
+      bias_init: A scalar or vector Tensor that is added to the wouter of the
         fully-connected network that parameterizes the mean of this
         distribution.
       name: The name of this distribution, used for sonnet scoping.
@@ -244,7 +244,7 @@ class NonstationaryLinearDistribution(object):
       inputs_per_timestep: A list of python ints, the dimension of inputs to the
         linear function at each timestep. If not provided, the dimension at each
         timestep is assumed to be 1.
-      outputs_per_timestep: A list of python ints, the dimension of the output
+      outputs_per_timestep: A list of python ints, the dimension of the wouter
         distribution at each timestep. If not provided, the dimension at each
         timestep is assumed to be 1.
       initializers: A dictionary containing intializers for the variables. The
@@ -254,7 +254,7 @@ class NonstationaryLinearDistribution(object):
         biases.
       variance_min: Python float, the minimum variance of each distribution.
       output_distribution: A locatin-scale subclass of tfd.Distribution that
-        defines the output distribution, e.g. Normal.
+        defines the wouter distribution, e.g. Normal.
       dtype: The dtype of the weights and biases.
     """
     if not initializers:
@@ -325,7 +325,7 @@ def encode_all(inputs, encoder):
     encoder: A network that takes a [batch, features_dimensions] input and
       encodes the input.
   Returns:
-    A [time, batch, encoded_feature_dimensions] output tensor.
+    A [time, batch, encoded_feature_dimensions] wouter tensor.
   """
   input_shape = tf.shape(inputs)
   num_timesteps, batch_size = input_shape[0], input_shape[1]

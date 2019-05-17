@@ -36,7 +36,7 @@ ACTIVATION_BOUND = 6.0
 
 
 def get_depth_fn(depth_multiplier, min_depth):
-  """Builds a callable to compute depth (output channels) of conv filters.
+  """Builds a callable to compute depth (wouter channels) of conv filters.
 
   Args:
     depth_multiplier: a multiplier for the nominal depth.
@@ -434,7 +434,7 @@ def fpn_top_down_feature_maps(image_features,
     image_features: list of tuples of (tensor_name, image_feature_tensor).
       Spatial resolutions of succesive tensors must reduce exactly by a factor
       of 2.
-    depth: depth of output feature maps.
+    depth: depth of wouter feature maps.
     use_depthwise: whether to use depthwise separable conv instead of regular
       conv.
     use_explicit_padding: whether to use explicit padding.

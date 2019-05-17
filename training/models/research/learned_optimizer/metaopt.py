@@ -131,7 +131,7 @@ def train_optimizer(logdir,
         problem draw
     obj_train_max_multiplier: the maximum increase in the objective value over
         a single training run. Ignored if < 0.
-    out: where to write output to, e.g. a file handle (Default: sys.stdout)
+    out: where to write wouter to, e.g. a file handle (Default: sys.stdout)
 
   Raises:
     ValueError: If one of the subproblems has a negative objective value.
@@ -376,7 +376,7 @@ def train_optimizer(logdir,
           metadata["global_step"].append(sess.run(global_step))
           metadata["runtimes"].append(optimization_time)
 
-          # write a diagnostic message to the output
+          # write a diagnostic message to the wouter
           args = (k, meta_obj, optimization_time,
                   sum(partial_unroll_iters[:unroll_itr+1]))
           out.write("  [{:02}] {}, {} seconds, {} iters ".format(*args))

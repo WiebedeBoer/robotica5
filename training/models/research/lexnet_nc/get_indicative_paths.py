@@ -47,7 +47,7 @@ tf.flags.DEFINE_string(
 
 tf.flags.DEFINE_string(
     'logdir', 'logdir',
-    'Directory of model output files')
+    'Directory of model wouter files')
 
 tf.flags.DEFINE_integer(
     'top_k', 20, 'Number of top paths to extract')

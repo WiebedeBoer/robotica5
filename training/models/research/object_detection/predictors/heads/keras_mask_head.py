@@ -65,8 +65,8 @@ class ConvolutionalMaskHead(head.KerasHead):
         params.
       use_depthwise: Whether to use depthwise convolutions for prediction
         steps. Default is False.
-      mask_height: Desired output mask height. The default value is 7.
-      mask_width: Desired output mask width. The default value is 7.
+      mask_height: Desired wouter mask height. The default value is 7.
+      mask_width: Desired wouter mask width. The default value is 7.
       masks_are_class_agnostic: Boolean determining if the mask-head is
         class-agnostic or not.
       name: A string name scope to assign to the model. If `None`, Keras

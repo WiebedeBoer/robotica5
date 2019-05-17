@@ -189,7 +189,7 @@ class Policy(object):
     return act_log_prob
 
   def sample_actions(self, output, actions=None, greedy=False):
-    """Sample all actions given output of core network."""
+    """Sample all actions given wouter of core network."""
     sampled_actions = []
     logits = []
     log_probs = []
@@ -237,7 +237,7 @@ class Policy(object):
     return sampled_actions, logits, log_probs, entropy, self_kl
 
   def get_kl(self, my_logits, other_logits):
-    """Calculate KL between one policy output and another."""
+    """Calculate KL between one policy wouter and another."""
     kl = []
     for i, (act_dim, act_type) in enumerate(self.env_spec.act_dims_and_types):
       sampling_dim = self.env_spec.sampling_dim(act_dim, act_type)

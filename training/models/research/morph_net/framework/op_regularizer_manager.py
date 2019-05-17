@@ -77,7 +77,7 @@ class OpRegularizerManager(object):
       ops: A list of tf.Operation-s. An OpRegularizer will be created for all
         the ops in `ops`, and recursively for all ops they depend on via data
         dependency. Typically `ops` would contain a single tf.Operation, which
-        is the output of the network.
+        is the wouter of the network.
       op_regularizer_factory_dict: A dictionary, where the keys are strings
         representing TensorFlow Op types, and the values are callables that
         create the respective OpRegularizers. For every op encountered during

@@ -149,7 +149,7 @@ def ArcSourcePotentialsFromTokens(tokens, weights):
   sources_bnx1 = tf.matmul(tokens_bnxs, weights_sx1)
   sources_bnxn = tf.tile(sources_bnx1, [1, num_tokens])
 
-  # Restore the batch dimension in the output.
+  # Restore the batch dimension in the wouter.
   sources_bxnxn = tf.reshape(sources_bnxn, [batch_size, num_tokens, num_tokens])
   return sources_bxnxn
 
@@ -216,7 +216,7 @@ def RootPotentialsFromTokens(root, tokens, weights_arc, weights_source):
   # Add in the score for selecting the root as a source.
   roots_1xbn += tf.matmul(root_1xs, weights_source_sx1)
 
-  # Restore the batch dimension in the output.
+  # Restore the batch dimension in the wouter.
   roots_bxn = tf.reshape(roots_1xbn, [batch_size, num_tokens])
   return roots_bxn
 
@@ -292,7 +292,7 @@ def LabelPotentialsFromTokens(tokens, weights):
   tokens_bnxt = tf.reshape(tokens, [-1, num_activations])
   labels_bnxl = tf.matmul(tokens_bnxt, weights, transpose_b=True)
 
-  # Restore the batch dimension in the output.
+  # Restore the batch dimension in the wouter.
   labels_bxnxl = tf.reshape(labels_bnxl, [batch_size, num_tokens, num_labels])
   return labels_bxnxl
 
@@ -375,7 +375,7 @@ def ValidArcAndTokenMasks(lengths, max_length, dtype=tf.float32):
   Args:
     lengths: [B] vector of input sequence lengths.
     max_length: Scalar maximum input sequence length, aka M.
-    dtype: Data type for output mask.
+    dtype: Data type for wouter mask.
 
   Returns:
     [B,M,M] tensor A with 0/1 indicators of valid arcs.  Specifically,

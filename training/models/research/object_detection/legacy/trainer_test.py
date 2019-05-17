@@ -101,7 +101,7 @@ class FakeDetectionModel(model.DetectionModel):
     }
 
   def postprocess(self, prediction_dict, true_image_shapes, **params):
-    """Convert predicted output tensors to final detections. Unused.
+    """Convert predicted wouter tensors to final detections. Unused.
 
     Args:
       prediction_dict: a dictionary holding prediction tensors.

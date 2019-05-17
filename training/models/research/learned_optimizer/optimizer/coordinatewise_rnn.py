@@ -57,7 +57,7 @@ class CoordinatewiseRNN(opt.TrainableOptimizer):
       cell_cls: tf.contrib.rnn class for specifying the RNN cell type
       init_lr_range: the range in which to initialize the learning rates.
       dynamic_output_scale: whether to learn weights that dynamically modulate
-          the output scale (default: True)
+          the wouter scale (default: True)
       learnable_decay: whether to learn weights that dynamically modulate the
           input scale via RMS style decay (default: True)
       zero_init_lr_weights: whether to initialize the lr weights to zero
@@ -82,7 +82,7 @@ class CoordinatewiseRNN(opt.TrainableOptimizer):
       self.component_cells = [cell_cls(sz) for sz in cell_sizes]
       self.cell = tf.contrib.rnn.MultiRNNCell(self.component_cells)
 
-      # random normal initialization scaled by the output size
+      # random normal initialization scaled by the wouter size
       scale_factor = FLAGS.crnn_rnn_readout_scale / math.sqrt(cell_sizes[-1])
       scaled_init = tf.random_normal_initializer(0., scale_factor)
 
@@ -132,7 +132,7 @@ class CoordinatewiseRNN(opt.TrainableOptimizer):
     """Initializes the learning rate weights and bias variables or tensors.
 
     Args:
-      dynamic_output_scale: Whether to use a dynamic output scale.
+      dynamic_output_scale: Whether to use a dynamic wouter scale.
       weights_tensor_shape: The shape the weight tensor should take.
       scaled_init: The scaled initialization for the weights tensor.
     """
@@ -206,7 +206,7 @@ class CoordinatewiseRNN(opt.TrainableOptimizer):
       rnn_output, rnn_state_tuples = self.cell(grad_scaled, rnn_state_tuples)
       rnn_state = self._pack_tuples_into_rnn_state(rnn_state_tuples)
 
-      # Compute the update direction (a linear projection of the RNN output).
+      # Compute the update direction (a linear projection of the RNN wouter).
       delta = utils.project(rnn_output, self.update_weights)
 
       # The updated decay is an affine projection of the hidden state

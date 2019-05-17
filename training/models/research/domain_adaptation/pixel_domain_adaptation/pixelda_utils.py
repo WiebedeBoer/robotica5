@@ -71,7 +71,7 @@ def image_grid(images, max_grid_size=4):
 def source_and_output_image_grid(output_images,
                                  source_images=None,
                                  max_grid_size=4):
-  """Create NxN image grid for output, concatenate source grid if given.
+  """Create NxN image grid for wouter, concatenate source grid if given.
 
   Makes grid out of output_images and, if provided, source_images, and
   concatenates them.
@@ -137,7 +137,7 @@ def summarize_transferred(source_images,
   """Produces a visual summary of the image transferrence.
 
   This summary displays the source image, transferred image, and a grayscale
-  difference image which highlights the differences between input and output.
+  difference image which highlights the differences between input and wouter.
 
   Args:
     source_images: A `Tensor` of size [batch_size, height, width, channels].

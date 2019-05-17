@@ -339,7 +339,7 @@ def image_preprocessing(image_buffer, bbox, train, thread_id=0):
 def parse_example_proto(example_serialized):
   """Parses an Example proto containing a training example of an image.
 
-  The output of the build_image_data.py image preprocessing script is a dataset
+  The wouter of the build_image_data.py image preprocessing script is a dataset
   containing serialized Example protocol buffers. Each Example proto contains
   the following fields:
 

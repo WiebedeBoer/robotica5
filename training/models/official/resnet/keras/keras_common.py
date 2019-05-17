@@ -47,7 +47,7 @@ class LearningRateBatchScheduler(tf.keras.callbacks.Callback):
   Args:
       schedule: a function that takes an epoch index and a batch index as input
           (both integer, indexed from 0) and returns a new learning rate as
-          output (float).
+          wouter (float).
   """
 
   def __init__(self, schedule, batch_size, num_images):
@@ -70,7 +70,7 @@ class LearningRateBatchScheduler(tf.keras.callbacks.Callback):
                        self.batches_per_epoch,
                        self.batch_size)
     if not isinstance(lr, (float, np.float32, np.float64)):
-      raise ValueError('The output of the "schedule" function should be float.')
+      raise ValueError('The wouter of the "schedule" function should be float.')
     if lr != self.prev_lr:
       self.model.optimizer.learning_rate = lr  # lr should be a float here
       self.prev_lr = lr
@@ -356,7 +356,7 @@ def define_keras_flags():
       'the first and last step to profile. For example, "--profile_steps=2,4" '
       'triggers the profiler to process 3 steps, starting from the 2nd step. '
       'Note that profiler has a non-trivial performance overhead, and the '
-      'output file can be gigantic if profiling many steps.')
+      'wouter file can be gigantic if profiling many steps.')
   flags.DEFINE_boolean(
       name='data_prefetch_with_slack', default=False,
       help='Add a small delay in tf.data prefetch to prioritize memory copy of '

@@ -84,7 +84,7 @@ def linear(x, n_units, scope=None, stddev=0.02,
     Returns
     -------
     x : Tensor
-        Fully-connected output.
+        Fully-connected wouter.
     """
     shape = x.get_shape().as_list()
 

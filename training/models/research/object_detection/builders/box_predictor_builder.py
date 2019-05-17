@@ -70,7 +70,7 @@ def build_convolutional_box_predictor(is_training,
       then the kernel size is automatically set to be
       min(feature_width, feature_height).
     box_code_size: Size of encoding for each box.
-    apply_sigmoid_to_scores: If True, apply the sigmoid on the output
+    apply_sigmoid_to_scores: If True, apply the sigmoid on the wouter
       class_predictions.
     add_background_class: Whether to add an implicit background class.
     class_prediction_bias_init: Constant value to initialize bias of the last
@@ -339,8 +339,8 @@ def build_mask_rcnn_box_predictor(is_training,
       to the returned class.
     conv_hyperparams_fn: A function to generate tf-slim arg_scope with
       hyperparameters for convolution ops.
-    mask_height: Desired output mask height. The default value is 14.
-    mask_width: Desired output mask width. The default value is 14.
+    mask_height: Desired wouter mask height. The default value is 14.
+    mask_width: Desired wouter mask width. The default value is 14.
     mask_prediction_num_conv_layers: Number of convolution layers applied to
       the image_features in mask prediction branch.
     mask_prediction_conv_depth: The depth for the first conv2d_transpose op

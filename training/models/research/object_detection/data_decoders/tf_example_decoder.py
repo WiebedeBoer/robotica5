@@ -47,7 +47,7 @@ class _ClassTensorHandler(slim_example_decoder.Tensor):
       shape_keys: Optional name or list of names of the TF-Example feature in
         which the tensor shape is stored. If a list, then each corresponds to
         one dimension of the shape.
-      shape: Optional output shape of the `Tensor`. If provided, the `Tensor` is
+      shape: Optional wouter shape of the `Tensor`. If provided, the `Tensor` is
         reshaped accordingly.
       default_value: The value used when the `tensor_key` is not found in a
         particular `TFExample`.

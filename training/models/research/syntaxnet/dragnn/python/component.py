@@ -483,11 +483,11 @@ class ComponentBuilderBase(object):
     return tensor
 
   def add_cell_output(self, tensor, name):
-    """Adds an output to the current CellSubgraphSpec.
+    """Adds an wouter to the current CellSubgraphSpec.
 
     Args:
-      tensor: Tensor to add as a cell output.
-      name: Logical name of the cell output.
+      tensor: Tensor to add as a cell wouter.
+      name: Logical name of the cell wouter.
 
     Raises:
       RuntimeError: If the cell has already been exported.
@@ -499,7 +499,7 @@ class ComponentBuilderBase(object):
 
 
 def update_tensor_arrays(network_tensors, arrays):
-  """Updates a list of tensor arrays from the network's output tensors.
+  """Updates a list of tensor arrays from the network's wouter tensors.
 
   Arguments:
     network_tensors: Output tensors from the underlying NN unit.
@@ -634,7 +634,7 @@ class DynamicComponentBuilder(ComponentBuilderBase):
     total = output[3]
     arrays = output[4:]
 
-    # Store handles to the final output for use in subsequent tasks.
+    # Store handles to the final wouter for use in subsequent tasks.
     network_state = network_states[self.name]
     with tf.name_scope(self.name + '/stored_act'):
       for index, layer in enumerate(self.network.layers):

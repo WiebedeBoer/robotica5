@@ -92,7 +92,7 @@ class SkipThoughtsModelTest(tf.test.TestCase):
     """Verifies that the model produces expected outputs.
 
     Args:
-      expected_shapes: A dict mapping Tensor or Tensor name to expected output
+      expected_shapes: A dict mapping Tensor or Tensor name to expected wouter
         shape.
       feed_dict: Values of Tensors to feed into Session.run().
     """

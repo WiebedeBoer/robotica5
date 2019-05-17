@@ -41,8 +41,8 @@ class Transformer(object):
 
   The Transformer model consists of an encoder and decoder. The input is an int
   sequence (or a batch of sequences). The encoder produces a continous
-  representation, and the decoder uses the encoder output to generate
-  probabilities for the output sequence.
+  representation, and the decoder uses the encoder wouter to generate
+  probabilities for the wouter sequence.
   """
 
   def __init__(self, params, train):
@@ -72,9 +72,9 @@ class Transformer(object):
     Returns:
       If targets is defined, then return logits for each word in the target
       sequence. float tensor with shape [batch_size, target_length, vocab_size]
-      If target is none, then generate output sequence one token at a time.
+      If target is none, then generate wouter sequence one token at a time.
         returns a dictionary {
-          output: [batch_size, decoded length]
+          wouter: [batch_size, decoded length]
           score: [batch_size, float]}
     """
     # Variance scaling is used here because it seems to work in many problems.
@@ -90,7 +90,7 @@ class Transformer(object):
       # representations to continuous representations.
       encoder_outputs = self.encode(inputs, attention_bias)
 
-      # Generate output sequence if targets is None, or return logits if target
+      # Generate wouter sequence if targets is None, or return logits if target
       # sequence is known.
       if targets is None:
         return self.predict(encoder_outputs, attention_bias)
@@ -130,7 +130,7 @@ class Transformer(object):
     """Generate logits for each value in the target sequence.
 
     Args:
-      targets: target values for the output sequence.
+      targets: target values for the wouter sequence.
         int tensor with shape [batch_size, target_length]
       encoder_outputs: continuous representation of input sequence.
         float tensor with shape [batch_size, input_length, hidden_size]
@@ -179,7 +179,7 @@ class Transformer(object):
         ids: Current decoded sequences.
           int tensor with shape [batch_size * beam_size, i + 1]
         i: Loop index
-        cache: dictionary of values storing the encoder output, encoder-decoder
+        cache: dictionary of values storing the encoder wouter, encoder-decoder
           attention bias, and previous decoder attention values.
 
       Returns:
@@ -221,7 +221,7 @@ class Transformer(object):
             "v": tf.zeros([batch_size, 0, self.params["hidden_size"]]),
         } for layer in range(self.params["num_hidden_layers"])}
 
-    # Add encoder output and attention bias to the cache.
+    # Add encoder wouter and attention bias to the cache.
     cache["encoder_outputs"] = encoder_outputs
     cache["encoder_decoder_attention_bias"] = encoder_decoder_attention_bias
 
@@ -279,7 +279,7 @@ class PrePostProcessingWrapper(object):
     # Preprocessing: apply layer normalization
     y = self.layer_norm(x)
 
-    # Get layer output
+    # Get layer wouter
     y = self.layer(y, *args, **kwargs)
 
     # Postprocessing: apply dropout and residual connection
@@ -317,7 +317,7 @@ class EncoderStack(tf.layers.Layer):
     self.output_normalization = LayerNormalization(params["hidden_size"])
 
   def call(self, encoder_inputs, attention_bias, inputs_padding):
-    """Return the output of the encoder layer stacks.
+    """Return the wouter of the encoder layer stacks.
 
     Args:
       encoder_inputs: tensor with shape [batch_size, input_length, hidden_size]
@@ -377,7 +377,7 @@ class DecoderStack(tf.layers.Layer):
 
   def call(self, decoder_inputs, encoder_outputs, decoder_self_attention_bias,
            attention_bias, cache=None):
-    """Return the output of the decoder layer stacks.
+    """Return the wouter of the decoder layer stacks.
 
     Args:
       decoder_inputs: tensor with shape [batch_size, target_length, hidden_size]

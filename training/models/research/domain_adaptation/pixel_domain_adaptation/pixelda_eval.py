@@ -133,7 +133,7 @@ def run_eval(run_dir, checkpoint_dir, hparams):
         del source_labels['classes']
         if num_source_classes != num_target_classes:
           raise ValueError(
-              'Input and output datasets must have same number of classes')
+              'Input and wouter datasets must have same number of classes')
       else:
         source_images = None
         source_labels = None

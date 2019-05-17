@@ -46,7 +46,7 @@ import tensorflow as tf
 
 
 tf.flags.DEFINE_string("file_out", "",
-                       "Filename of the output .tfrecords file.")
+                       "Filename of the wouter .tfrecords file.")
 tf.flags.DEFINE_string("fn_root", "", "Name of root file path.")
 
 FLAGS = tf.flags.FLAGS

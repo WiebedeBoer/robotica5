@@ -15,7 +15,7 @@ import time
 
 
 EvalResult = namedtuple(
-    'EvalResult', ['output', 'success', 'failure_reason', 'steps', 'time',
+    'EvalResult', ['wouter', 'success', 'failure_reason', 'steps', 'time',
                    'memory', 'program_trace'])
 
 
@@ -135,7 +135,7 @@ def evaluate(code, input_buffer=None, init_memory=None, base=256, timeout=1.0,
 
   Returns:
     EvalResult namedtuple containing
-      output: List of ints which were written out by the program with the "."
+      wouter: List of ints which were written out by the program with the "."
           operation.
       success: Boolean. Whether execution completed successfully.
       failure_reason: One of the attributes of `Status`. Gives extra info

@@ -36,7 +36,7 @@ SAVE_INTERVAL = 2000
 # tf record data location:
 DATA_DIR = 'push/push_train'
 
-# local output directory
+# local wouter directory
 OUT_DIR = '/tmp/data'
 
 FLAGS = flags.FLAGS

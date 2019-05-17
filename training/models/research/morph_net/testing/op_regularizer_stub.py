@@ -29,7 +29,7 @@ The model is:
 
              -> conv1 --+     -> conv3 -->  conv4 --
             /           |    /                      \
-      image          [concat]                      (add) --> output
+      image          [concat]                      (add) --> wouter
             \           |    \                      /
              -> conv2 --+     -> -------------------
 """

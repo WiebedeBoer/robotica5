@@ -31,7 +31,7 @@ from syntaxnet.util import check
 
 
 def calculate_component_accuracies(eval_res_values):
-  """Transforms the DRAGNN eval_res output to float accuracies of components."""
+  """Transforms the DRAGNN eval_res wouter to float accuracies of components."""
   # The structure of eval_res_values is
   # [comp1_total, comp1_correct, comp2_total, comp2_correct, ...]
   return [

@@ -14,7 +14,7 @@
 # ==============================================================================
 """Trainer for generic DRAGNN models.
 
-This trainer uses a "model directory" for both input and output.  When invoked,
+This trainer uses a "model directory" for both input and wouter.  When invoked,
 the model directory should contain the following inputs:
 
   <model_dir>/config.txt: A stringified dict that defines high-level

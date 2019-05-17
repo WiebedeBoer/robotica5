@@ -20,7 +20,7 @@ class.  We intend for the functions in this class to follow tensor-in/tensor-out
 design, thus all functions have tensors or lists/dictionaries holding tensors as
 inputs and outputs.
 
-Abstractly, detection models predict output tensors given input images
+Abstractly, detection models predict wouter tensors given input images
 which can be passed to a loss function at training time or passed to a
 postprocessing function at eval time.  The computation graphs at a high level
 consequently look as follows:
@@ -136,7 +136,7 @@ class DetectionModel(object):
     preprocess function prior to calling any batching operations (which should
     happen outside of the model) and thus assuming that batch sizes are equal
     to 1 in the preprocess function.
-    + There is also no explicit assumption that the output resolutions
+    + There is also no explicit assumption that the wouter resolutions
     must be fixed across inputs --- this is to support "fully convolutional"
     settings in which input images can have different shapes/resolutions.
 
@@ -176,7 +176,7 @@ class DetectionModel(object):
 
   @abc.abstractmethod
   def postprocess(self, prediction_dict, true_image_shapes, **params):
-    """Convert predicted output tensors to final detections.
+    """Convert predicted wouter tensors to final detections.
 
     This stage typically performs a few things such as
     * Non-Max Suppression to remove overlapping detection boxes.
@@ -185,14 +185,14 @@ class DetectionModel(object):
     Outputs adhere to the following conventions:
     * Classes are integers in [0, num_classes); background classes are removed
       and the first non-background class is mapped to 0. If the model produces
-      class-agnostic detections, then no output is produced for classes.
+      class-agnostic detections, then no wouter is produced for classes.
     * Boxes are to be interpreted as being in [y_min, x_min, y_max, x_max]
       format and normalized relative to the image window.
     * `num_detections` is provided for settings where detections are padded to a
       fixed number of boxes.
     * We do not specifically assume any kind of probabilistic interpretation
       of the scores --- the only important thing is their relative ordering.
-      Thus implementations of the postprocess function are free to output
+      Thus implementations of the postprocess function are free to wouter
       logits, probabilities, calibrated probabilities, or anything else.
 
     Args:

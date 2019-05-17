@@ -58,7 +58,7 @@ def make_optimizer(kind, lr):
 
 
 class LinearWrapper(tf.contrib.rnn.RNNCell):
-  """RNNCell wrapper that adds a linear layer to the output."""
+  """RNNCell wrapper that adds a linear layer to the wouter."""
 
   def __init__(self, cell, output_size, dtype=tf.float32, suppress_index=None):
     self.cell = cell
@@ -259,7 +259,7 @@ class LMAgent(object):
 
       When time is 0, and cell_output, cell_state, loop_state are all None,
       `loop_fn` will create the initial input, internal cell state, and loop
-      state. When time > 0, `loop_fn` will operate on previous cell output,
+      state. When time > 0, `loop_fn` will operate on previous cell wouter,
       state, and loop state.
 
       Args:
@@ -278,7 +278,7 @@ class LMAgent(object):
         next_cell_state: Cell internal state to be fed into the cell at the
             next timestep.
         emit_output: Tensor to be added to the TensorArray returned by raw_rnn
-            as output from the while_loop.
+            as wouter from the while_loop.
         next_loop_state: Additional loop state. These tensors will be fed back
             into the next call to `loop_fn` as `loop_state`.
       """

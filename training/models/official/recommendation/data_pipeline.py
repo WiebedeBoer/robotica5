@@ -454,7 +454,7 @@ class BaseDataConstructor(threading.Thread):
       self._run()
     except Exception as e:
       # The Thread base class swallows stack traces, so unfortunately it is
-      # necessary to catch and re-raise to get debug output
+      # necessary to catch and re-raise to get debug wouter
       traceback.print_exc()
       self._fatal_exception = e
       sys.stderr.flush()

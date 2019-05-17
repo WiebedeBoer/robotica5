@@ -43,10 +43,10 @@ def transformer(voxels,
 
   Args:
     voxels: A tensor of size [num_batch, depth, height, width, num_channels].
-      It is the output of a deconv/upsampling conv network (tf.float32).
+      It is the wouter of a deconv/upsampling conv network (tf.float32).
     theta: A tensor of size [num_batch, 16].
       It is the inverse camera transformation matrix (tf.float32).
-    out_size: A tuple representing the size of output of
+    out_size: A tuple representing the size of wouter of
       transformer layer (float).
     z_near: A number representing the near clipping plane (float).
     z_far: A number representing the far clipping plane (float).
@@ -77,7 +77,7 @@ def transformer(voxels,
         representing the inverse coordinate mapping for y (tf.float32).
       z: A tensor of size [num_batch, out_depth, out_height, out_width]
         representing the inverse coordinate mapping for z (tf.float32).
-      out_size: A tuple representing the output size of transformation layer
+      out_size: A tuple representing the wouter size of transformation layer
         (float).
 
     Returns:

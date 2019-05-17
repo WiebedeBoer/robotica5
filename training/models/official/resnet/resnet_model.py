@@ -122,7 +122,7 @@ def _building_block_v1(inputs, filters, training, projection_shortcut, strides,
     data_format: The input format ('channels_last' or 'channels_first').
 
   Returns:
-    The output tensor of the block; shape should match inputs.
+    The wouter tensor of the block; shape should match inputs.
   """
   shortcut = inputs
 
@@ -169,7 +169,7 @@ def _building_block_v2(inputs, filters, training, projection_shortcut, strides,
     data_format: The input format ('channels_last' or 'channels_first').
 
   Returns:
-    The output tensor of the block; shape should match inputs.
+    The wouter tensor of the block; shape should match inputs.
   """
   shortcut = inputs
   inputs = batch_norm(inputs, training, data_format)
@@ -217,7 +217,7 @@ def _bottleneck_block_v1(inputs, filters, training, projection_shortcut,
     data_format: The input format ('channels_last' or 'channels_first').
 
   Returns:
-    The output tensor of the block; shape should match inputs.
+    The wouter tensor of the block; shape should match inputs.
   """
   shortcut = inputs
 
@@ -278,7 +278,7 @@ def _bottleneck_block_v2(inputs, filters, training, projection_shortcut,
     data_format: The input format ('channels_last' or 'channels_first').
 
   Returns:
-    The output tensor of the block; shape should match inputs.
+    The wouter tensor of the block; shape should match inputs.
   """
   shortcut = inputs
   inputs = batch_norm(inputs, training, data_format)
@@ -324,11 +324,11 @@ def block_layer(inputs, filters, bottleneck, block_fn, blocks, strides,
       greater than 1, this layer will ultimately downsample the input.
     training: Either True or False, whether we are currently training the
       model. Needed for batch norm.
-    name: A string name for the tensor output of the block layer.
+    name: A string name for the tensor wouter of the block layer.
     data_format: The input format ('channels_last' or 'channels_first').
 
   Returns:
-    The output tensor of the block layer.
+    The wouter tensor of the block layer.
   """
 
   # Bottleneck blocks end with 4x the number of filters as they start with

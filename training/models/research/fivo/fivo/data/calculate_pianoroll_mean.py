@@ -35,7 +35,7 @@ from datasets import sparse_pianoroll_to_dense
 tf.app.flags.DEFINE_string('in_file', None,
                            'Filename of the pickled pianoroll dataset to load.')
 tf.app.flags.DEFINE_string('out_file', None,
-                           'Name of the output pickle file. Defaults to in_file, '
+                           'Name of the wouter pickle file. Defaults to in_file, '
                            'updating the input pickle file.')
 tf.app.flags.mark_flag_as_required('in_file')
 

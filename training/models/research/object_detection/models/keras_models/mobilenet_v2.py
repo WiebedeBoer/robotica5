@@ -70,7 +70,7 @@ class _LayersOverride(object):
         containing hyperparameters for convolution ops. Optionally set to `None`
         to use default mobilenet_v2 layer builders.
       use_explicit_padding: If True, use 'valid' padding for convolutions,
-        but explicitly pre-pads inputs so that the output dimensions are the
+        but explicitly pre-pads inputs so that the wouter dimensions are the
         same as if 'same' padding were used. Off by default.
       alpha: The width multiplier referenced in the MobileNetV2 paper. It
         modifies the number of filters in each convolutional layer.
@@ -289,7 +289,7 @@ def mobilenet_v2(batchnorm_training,
         containing hyperparameters for convolution ops. Optionally set to `None`
         to use default mobilenet_v2 layer builders.
       use_explicit_padding: If True, use 'valid' padding for convolutions,
-        but explicitly pre-pads inputs so that the output dimensions are the
+        but explicitly pre-pads inputs so that the wouter dimensions are the
         same as if 'same' padding were used. Off by default.
       alpha: The width multiplier referenced in the MobileNetV2 paper. It
         modifies the number of filters in each convolutional layer.

@@ -2376,7 +2376,7 @@ class PreprocessorTest(tf.test.TestCase):
                           resized_images_shape_)
 
   def testResizeImageWithMasks(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[15, 60, 40], [10, 15, 30]]
     height = 50
@@ -2403,7 +2403,7 @@ class PreprocessorTest(tf.test.TestCase):
         self.assertAllEqual(out_masks_shape, expected_mask_shape)
 
   def testResizeImageWithMasksTensorInputHeightAndWidth(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[15, 60, 40], [10, 15, 30]]
     height = tf.constant(50, dtype=tf.int32)
@@ -2430,7 +2430,7 @@ class PreprocessorTest(tf.test.TestCase):
         self.assertAllEqual(out_masks_shape, expected_mask_shape)
 
   def testResizeImageWithNoInstanceMask(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[0, 60, 40], [0, 15, 30]]
     height = 50
@@ -2457,7 +2457,7 @@ class PreprocessorTest(tf.test.TestCase):
         self.assertAllEqual(out_masks_shape, expected_mask_shape)
 
   def testResizeToRangePreservesStaticSpatialShape(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_shape_list = [[60, 40, 3], [15, 30, 3], [15, 50, 3]]
     min_dim = 50
     max_dim = 100
@@ -2470,7 +2470,7 @@ class PreprocessorTest(tf.test.TestCase):
       self.assertAllEqual(out_image.get_shape().as_list(), expected_shape)
 
   def testResizeToRangeWithDynamicSpatialShape(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_shape_list = [[60, 40, 3], [15, 30, 3], [15, 50, 3]]
     min_dim = 50
     max_dim = 100
@@ -2528,7 +2528,7 @@ class PreprocessorTest(tf.test.TestCase):
       self.assertAllClose(ex_image_np, out_image_np)
 
   def testResizeToRangeWithMasksPreservesStaticSpatialShape(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[15, 60, 40], [10, 15, 30]]
     min_dim = 50
@@ -2549,7 +2549,7 @@ class PreprocessorTest(tf.test.TestCase):
       self.assertAllEqual(out_image.get_shape().as_list(), expected_image_shape)
 
   def testResizeToRangeWithMasksAndPadToMaxDimension(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[15, 60, 40], [10, 15, 30]]
     min_dim = 50
@@ -2583,7 +2583,7 @@ class PreprocessorTest(tf.test.TestCase):
         self.assertAllEqual(out_masks_shape, expected_mask_shape)
 
   def testResizeToRangeWithMasksAndDynamicSpatialShape(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[15, 60, 40], [10, 15, 30]]
     min_dim = 50
@@ -2615,7 +2615,7 @@ class PreprocessorTest(tf.test.TestCase):
         self.assertAllEqual(out_masks_shape, expected_mask_shape)
 
   def testResizeToRangeWithInstanceMasksTensorOfSizeZero(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[0, 60, 40], [0, 15, 30]]
     min_dim = 50
@@ -2647,7 +2647,7 @@ class PreprocessorTest(tf.test.TestCase):
       preprocessor.resize_to_range(image, 500, 600)
 
   def testResizeToRangeSameMinMax(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_shape_list = [[312, 312, 3], [299, 299, 3]]
     min_dim = 320
     max_dim = 320
@@ -2694,7 +2694,7 @@ class PreprocessorTest(tf.test.TestCase):
         self.assertAllEqual(out_masks_shape, expected_mask_shape)
 
   def testResizeToMinDimensionWithInstanceMasksTensorOfSizeZero(self):
-    """Tests image resizing, checking output sizes."""
+    """Tests image resizing, checking wouter sizes."""
     in_image_shape_list = [[60, 40, 3], [15, 30, 3]]
     in_masks_shape_list = [[0, 60, 40], [0, 15, 30]]
     min_dim = 50

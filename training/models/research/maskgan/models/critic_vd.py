@@ -100,7 +100,7 @@ def critic_seq2seq_vd_derivative(hparams, sequence, is_training, reuse=None):
         if is_training:
           rnn_out *= output_mask
 
-        # Prediction is linear output for Discriminator.
+        # Prediction is linear wouter for Discriminator.
         value = tf.contrib.layers.linear(rnn_out, 1, scope=vs)
 
         values.append(value)

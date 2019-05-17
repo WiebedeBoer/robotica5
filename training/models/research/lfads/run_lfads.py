@@ -102,7 +102,7 @@ flags.DEFINE_string("kind", "train",
                     posterior_push_mean, \
                     prior_sample, write_model_params")
 flags.DEFINE_string("output_dist", OUTPUT_DISTRIBUTION,
-                    "Type of output distribution, 'poisson' or 'gaussian'")
+                    "Type of wouter distribution, 'poisson' or 'gaussian'")
 flags.DEFINE_boolean("allow_gpu_growth", False,
                      "If true, only allocate amount of memory needed for \
                      Session. Otherwise, use full GPU memory.")
@@ -118,7 +118,7 @@ flags.DEFINE_string("checkpoint_pb_load_name", CHECKPOINT_PB_LOAD_NAME,
 flags.DEFINE_string("checkpoint_name", CHECKPOINT_NAME,
                     "Name of checkpoint files (.ckpt appended)")
 flags.DEFINE_string("output_filename_stem", OUTPUT_FILENAME_STEM,
-                    "Name of output file (postfix will be added)")
+                    "Name of wouter file (postfix will be added)")
 flags.DEFINE_string("device", DEVICE,
                     "Which device to use (default: \"gpu:0\", can also be \
                     \"cpu:0\", \"gpu:1\", etc)")
@@ -314,7 +314,7 @@ flags.DEFINE_float("cell_clip_value", CELL_CLIP_VALUE,
 # If you don't care about that particular experiment, this flag should always be
 # false.
 flags.DEFINE_boolean("do_train_io_only", DO_TRAIN_IO_ONLY,
-                     "Train only the input (readin) and output (readout) \
+                     "Train only the input (readin) and wouter (readout) \
                      affine functions.")
 
 # This flag is used for an experiment where one wants to know if the dynamics
@@ -353,7 +353,7 @@ flags.DEFINE_integer("temporal_spike_jitter_width",
 
 # General note about helping ascribe controller inputs vs dynamics:
 #
-# If controller is heavily penalized, then it won't have any output.
+# If controller is heavily penalized, then it won't have any wouter.
 # If dynamics are heavily penalized, then generator won't make
 # dynamics.  Note this l2 penalty is only on the recurrent portion of
 # the RNNs, as dropout is also available, penalizing the feed-forward
@@ -364,7 +364,7 @@ flags.DEFINE_float("l2_con_scale", L2_CON_SCALE,
                    "L2 regularization cost for the controller only.")
 flags.DEFINE_float("co_mean_corr_scale", CO_MEAN_CORR_SCALE,
                    "Cost of correlation (thru time)in the means of \
-                   controller output.")
+                   controller wouter.")
 
 # UNDERFITTING
 # If the primary task of LFADS is "filtering" of data and not
@@ -381,7 +381,7 @@ flags.DEFINE_float("co_mean_corr_scale", CO_MEAN_CORR_SCALE,
 flags.DEFINE_float("kl_ic_weight", KL_IC_WEIGHT,
                    "Strength of KL weight on initial conditions KL penatly.")
 flags.DEFINE_float("kl_co_weight", KL_CO_WEIGHT,
-                   "Strength of KL weight on controller output KL penalty.")
+                   "Strength of KL weight on controller wouter KL penalty.")
 
 # Sometimes the task can be sufficiently hard to learn that the
 # optimizer takes the 'easy route', and simply minimizes the KL
@@ -626,7 +626,7 @@ def write_model_runs(hps, datasets, output_fname=None, push_mean=False):
     hps: The dictionary of hyperparameters.
     datasets: A dictionary of data dictionaries.  The dataset dict is simply a
       name(string)-> data dictionary mapping (See top of lfads.py).
-    output_fname (optional): output filename stem to write the model runs.
+    output_fname (optional): wouter filename stem to write the model runs.
     push_mean: if False (default), generates batch_size samples for each trial
       and averages the results. if True, runs each trial once without noise,
       pushing the posterior mean initial conditions and control inputs through
@@ -648,7 +648,7 @@ def write_model_samples(hps, datasets, dataset_name=None, output_fname=None):
     The initial conditions, g0, for all examples.
     The generator states for all time.
     The factors for all time.
-    The output distribution parameters (e.g. rates) for all time.
+    The wouter distribution parameters (e.g. rates) for all time.
 
   Args:
     hps: The dictionary of hyperparameters.

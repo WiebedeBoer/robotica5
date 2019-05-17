@@ -17,7 +17,7 @@
 
    The dataset is captured with a robot moving around and taking picture in
    multiple directions. The actions are moving in four directions, and rotate
-   clockwise or counter clockwise. The observations are the output of vision
+   clockwise or counter clockwise. The observations are the wouter of vision
    pipelines such as object detectors. The goal is to find objects of interest
    in each environment. For more details, refer:
    http://cs.unc.edu/~ammirato/active_vision_dataset_website/.
@@ -121,7 +121,7 @@ def generate_detection_image(detections,
     detections: 2D object detections from the image. It's a dictionary that
       contains detection_boxes, detection_classes, and detection_scores with
       dimensions of nx4, nx1, nx1 where n is the number of detections.
-    image_size: The resolution of the output image.
+    image_size: The resolution of the wouter image.
     category_map: dictionary that maps label names to index.
     num_classes: Number of classes.
     is_binary: If true, it sets the corresponding channels to 0 and 1.
@@ -237,7 +237,7 @@ def read_cached_data(should_load_images, dataset_root, segmentation_file_name,
       segmentation annotations.
     targets_file_name: The name of the file the contains targets annotated for
       each world.
-    output_size: Size of the output images. This is used for pre-processing the
+    output_size: Size of the wouter images. This is used for pre-processing the
       loaded images.
   Returns:
     Dictionary of all the cached data.
@@ -344,7 +344,7 @@ class ActiveVisionDatasetEnv(task_env.TaskEnv):
         used for computing metrics in tf agents.
       confidence_threshold: Consider detections more than confidence_threshold
         for potential targets.
-      output_size: Resolution of the output image.
+      output_size: Resolution of the wouter image.
       worlds: List of the name of the worlds.
       targets: List of the target names. Each entry is a string label of the
         target category (e.g. 'fridge', 'microwave', so on).

@@ -202,7 +202,7 @@ def MobileNetV2(input_shape=None,
         weights: one of `None` (random initialization),
               'imagenet' (pre-training on ImageNet),
               or the path to the weights file to be loaded.
-        input_tensor: optional Keras tensor (i.e. output of
+        input_tensor: optional Keras tensor (i.e. wouter of
             `layers.Input()`)
             to use as image input for the model.
         classes: optional number of classes to classify images
@@ -413,7 +413,7 @@ def MobileNetV2(input_shape=None,
 
     # no alpha applied to last conv as stated in the paper:
     # if the width multiplier is greater than 1 we
-    # increase the number of output channels
+    # increase the number of wouter channels
     if alpha > 1.0:
         last_block_filters = _make_divisible(1280 * alpha, 8)
     else:

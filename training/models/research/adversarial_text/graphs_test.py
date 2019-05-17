@@ -88,7 +88,7 @@ class GraphsTest(tf.test.TestCase):
     FLAGS.cl_hidden_size = 4
     FLAGS.vocab_size = 10
 
-    # Set input/output flags
+    # Set input/wouter flags
     FLAGS.data_dir = tempfile.mkdtemp()
 
     # Build and write sequence files.

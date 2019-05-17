@@ -151,7 +151,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
-      output_directory = os.path.join(tmp_dir, 'output')
+      output_directory = os.path.join(tmp_dir, 'wouter')
       pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
       pipeline_config.eval_config.use_moving_averages = False
       exporter.export_inference_graph(
@@ -170,7 +170,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
-      output_directory = os.path.join(tmp_dir, 'output')
+      output_directory = os.path.join(tmp_dir, 'wouter')
       pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
       pipeline_config.eval_config.use_moving_averages = False
       exporter.export_inference_graph(
@@ -192,7 +192,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
-      output_directory = os.path.join(tmp_dir, 'output')
+      output_directory = os.path.join(tmp_dir, 'wouter')
       pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
       pipeline_config.eval_config.use_moving_averages = False
       exporter.export_inference_graph(
@@ -223,7 +223,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
-      output_directory = os.path.join(tmp_dir, 'output')
+      output_directory = os.path.join(tmp_dir, 'wouter')
       pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
       pipeline_config.eval_config.use_moving_averages = False
       exporter.export_inference_graph(
@@ -242,7 +242,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
-      output_directory = os.path.join(tmp_dir, 'output')
+      output_directory = os.path.join(tmp_dir, 'wouter')
       pipeline_config = pipeline_pb2.TrainEvalPipelineConfig()
       pipeline_config.eval_config.use_moving_averages = False
       exporter.export_inference_graph(
@@ -294,7 +294,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
@@ -319,7 +319,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
         trained_checkpoint_prefix,
         use_moving_averages=False,
         enable_quantization=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'inference_graph.pbtxt')
     with mock.patch.object(
@@ -353,7 +353,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     with mock.patch.object(
@@ -381,7 +381,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     with mock.patch.object(
@@ -409,7 +409,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     with mock.patch.object(
@@ -466,7 +466,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     with mock.patch.object(
@@ -518,7 +518,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     with mock.patch.object(
@@ -560,7 +560,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     with mock.patch.object(
@@ -607,7 +607,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     inference_graph_path = os.path.join(output_directory,
                                         'frozen_inference_graph.pb')
     tf.gfile.MakeDirs(output_directory)
@@ -671,7 +671,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=True)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     with mock.patch.object(
         model_builder, 'build', autospec=True) as mock_builder:
       mock_builder.return_value = FakeModel()
@@ -696,7 +696,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=False)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     saved_model_path = os.path.join(output_directory, 'saved_model')
 
     with mock.patch.object(
@@ -756,7 +756,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=False)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     saved_model_path = os.path.join(output_directory, 'saved_model')
     tf.gfile.MakeDirs(output_directory)
     with mock.patch.object(
@@ -837,7 +837,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=False)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     model_path = os.path.join(output_directory, 'model.ckpt')
     meta_graph_path = model_path + '.meta'
 
@@ -888,7 +888,7 @@ class ExportInferenceGraphTest(tf.test.TestCase):
     trained_checkpoint_prefix = os.path.join(tmp_dir, 'model.ckpt')
     self._save_checkpoint_from_mock_model(trained_checkpoint_prefix,
                                           use_moving_averages=False)
-    output_directory = os.path.join(tmp_dir, 'output')
+    output_directory = os.path.join(tmp_dir, 'wouter')
     model_path = os.path.join(output_directory, 'model.ckpt')
     meta_graph_path = model_path + '.meta'
     tf.gfile.MakeDirs(output_directory)

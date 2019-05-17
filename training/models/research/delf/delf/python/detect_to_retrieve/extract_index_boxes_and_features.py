@@ -113,7 +113,7 @@ def main(argv):
   with tf.gfile.GFile(cmd_args.delf_config_path, 'r') as f:
     text_format.Merge(f.read(), config)
 
-  # Create output directories if necessary.
+  # Create wouter directories if necessary.
   if not os.path.exists(cmd_args.output_features_dir):
     os.makedirs(cmd_args.output_features_dir)
   if not os.path.exists(cmd_args.output_boxes_dir):
@@ -214,7 +214,7 @@ def main(argv):
                                  feature_scales_out, descriptors_out,
                                  attention_out)
 
-  # Save mapping from output DELF name to index image id and box id.
+  # Save mapping from wouter DELF name to index image id and box id.
   _WriteMappingBasenameToIds(index_names_ids_and_boxes,
                              cmd_args.output_index_mapping)
 

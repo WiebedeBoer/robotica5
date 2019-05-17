@@ -22,7 +22,7 @@ Usage:
 
 Optiona:
 
-  -o <filename>, --output <filename>
+  -o <filename>, --wouter <filename>
     The name of the file into which the binary vectors are written.
 
   -v <filename>, --vocab <filename>
@@ -48,7 +48,7 @@ import sys
 
 try:
   opts, args = getopt(
-      sys.argv[1:], 'o:v:', ['output=', 'vocab='])
+      sys.argv[1:], 'o:v:', ['wouter=', 'vocab='])
 except GetoptError as e:
   print >> sys.stderr, e
   sys.exit(2)
@@ -56,7 +56,7 @@ except GetoptError as e:
 opt_output = 'vecs.bin'
 opt_vocab = 'vocab.txt'
 for o, a in opts:
-  if o in ('-o', '--output'):
+  if o in ('-o', '--wouter'):
     opt_output = a
   if o in ('-v', '--vocab'):
     opt_vocab = a

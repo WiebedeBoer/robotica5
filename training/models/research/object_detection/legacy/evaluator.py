@@ -61,7 +61,7 @@ EVAL_DEFAULT_METRIC = 'pascal_voc_detection_metrics'
 def _extract_predictions_and_losses(model,
                                     create_input_dict_fn,
                                     ignore_groundtruth=False):
-  """Constructs tensorflow detection graph and returns output tensors.
+  """Constructs tensorflow detection graph and returns wouter tensors.
 
   Args:
     model: model to perform predictions with.

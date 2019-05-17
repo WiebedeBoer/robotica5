@@ -25,9 +25,9 @@ AGENT_COUNT = config["agent_config"]["count"]
 EVALUATOR_COUNT = config["evaluator_config"]["count"]
 MODEL_AUGMENTED = config["model_config"] is not False
 if config["resume"]:
-  ROOT_PATH = "output/" + config["env"]["name"] + "/" + config["name"]
+  ROOT_PATH = "wouter/" + config["env"]["name"] + "/" + config["name"]
 else:
-  ROOT_PATH = util.create_and_wipe_directory("output/" + config["env"]["name"] + "/" + config["name"])
+  ROOT_PATH = util.create_and_wipe_directory("wouter/" + config["env"]["name"] + "/" + config["name"])
 log_config()
 import learner, agent, valuerl_learner
 if MODEL_AUGMENTED: import worldmodel_learner

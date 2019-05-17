@@ -71,7 +71,7 @@ descending frequency) of word tokens in the training set. Only tokens appearing
 at least 4 times are considered; all other words get the "unknown" word id.
 
 NOTE: This script will consume around 100GB of disk space because each image
-in the MSCOCO dataset is replicated ~5 times (once per caption) in the output.
+in the MSCOCO dataset is replicated ~5 times (once per caption) in the wouter.
 This is done for two reasons:
   1. In order to better shuffle the training data.
   2. It makes it easier to perform asynchronous preprocessing of each image in
@@ -250,7 +250,7 @@ def _process_image_files(thread_index, ranges, name, images, decoder, vocab,
     images: List of ImageMetadata.
     decoder: An ImageDecoder object.
     vocab: A Vocabulary object.
-    num_shards: Integer number of shards for the output files.
+    num_shards: Integer number of shards for the wouter files.
   """
   # Each thread produces N shards where N = num_shards / num_threads. For
   # instance, if num_shards = 128, and num_threads = 2, then the first thread
@@ -304,7 +304,7 @@ def _process_dataset(name, images, vocab, num_shards):
     name: Unique identifier specifying the dataset.
     images: List of ImageMetadata.
     vocab: A Vocabulary object.
-    num_shards: Integer number of shards for the output files.
+    num_shards: Integer number of shards for the wouter files.
   """
   # Break up each image into a separate entity for each caption.
   images = [ImageMetadata(image.image_id, image.filename, [caption])

@@ -153,7 +153,7 @@ class DelfV1(object):
 
     Args:
       feature_map: A tensor of size [batch, height, width, channels]. Usually it
-        corresponds to the output feature map of a fully-convolutional network.
+        corresponds to the wouter feature map of a fully-convolutional network.
       end_points: Set of activations of the network constructed so far.
       attention_nonlinear: Type of non-linearity on top of the attention
         function.
@@ -300,7 +300,7 @@ class DelfV1(object):
 
     Args:
       images: A tensor of size [batch, height, width, channels]
-      num_classes: The number of output classes.
+      num_classes: The number of wouter classes.
       weight_decay: The parameters for weight_decay regularizer.
       attention_nonlinear: Type of non-linearity on top of the attention
         function.
@@ -359,7 +359,7 @@ class DelfV1(object):
 
     Args:
       images: A tensor of size [batch, height, width, channels]
-      num_classes: The number of output classes.
+      num_classes: The number of wouter classes.
       weight_decay: The parameters for weight_decay regularizer.
       attention_nonlinear: Type of non-linearity on top of the attention
         function.

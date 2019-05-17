@@ -166,7 +166,7 @@ def _compute_metric(metric_aggregator, gt_folder, pred_folder,
   """Iterates over matched annotation pairs and computes a metric over them."""
   for gt_ann, pred_ann in annotation_pairs:
     # We only expect "iscrowd" to appear in the ground-truth, and not in model
-    # output. In predicted JSON it is simply ignored, as done in official code.
+    # wouter. In predicted JSON it is simply ignored, as done in official code.
     gt_category, gt_instance = _category_and_instance_from_annotation(
         gt_ann, gt_folder, metric_aggregator.ignored_label, True)
     pred_category, pred_instance = _category_and_instance_from_annotation(

@@ -136,7 +136,7 @@ def main(_):
     names_to_values, names_to_updates = slim.metrics.aggregate_metric_map(
         metric_names_to_values)
 
-    # Create the summary ops such that they also print out to std output:
+    # Create the summary ops such that they also print out to std wouter:
     summary_ops = []
     for metric_name, metric_value in names_to_values.iteritems():
       op = tf.summary.scalar(metric_name, metric_value)

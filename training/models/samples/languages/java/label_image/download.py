@@ -23,7 +23,7 @@ LABELS_FILE = 'imagenet_comp_graph_label_strings.txt'
 GRAPH_FILE = 'tensorflow_inception_graph.pb'
 
 GRAPH_INPUT_TENSOR = 'input:0'
-GRAPH_PROBABILITIES_TENSOR = 'output:0'
+GRAPH_PROBABILITIES_TENSOR = 'wouter:0'
 
 IMAGE_HEIGHT = 224
 IMAGE_WIDTH = 224
@@ -73,7 +73,7 @@ def patch_graph():
         input_map={GRAPH_INPUT_TENSOR: image_normalized},
         return_elements=[GRAPH_PROBABILITIES_TENSOR])
     # We're constructing a graph that accepts a single image (as opposed to a
-    # batch of images), so might as well make the output be a vector of
+    # batch of images), so might as well make the wouter be a vector of
     # probabilities, instead of a batch of vectors with batch size 1.
     output_probabilities = tf.squeeze(softmax, name='probabilities')
     # Overwrite the graph.

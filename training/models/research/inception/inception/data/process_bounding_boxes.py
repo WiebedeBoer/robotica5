@@ -63,13 +63,13 @@ Each XML file contains a bounding box annotation. The script:
 (3) By default, the script outputs all valid bounding boxes. If a
     [synsets-file] is supplied, only the subset of bounding boxes associated
     with those synsets are outputted. Importantly, one can supply a list of
-    synsets in the ImageNet Challenge and output the list of bounding boxes
+    synsets in the ImageNet Challenge and wouter the list of bounding boxes
     associated with the training images of the ILSVRC.
 
     We use these bounding boxes to inform the random distortion of images
     supplied to the network.
 
-If you run this script successfully, you will see the following output
+If you run this script successfully, you will see the following wouter
 to stderr:
 > Finished processing 544546 XML files.
 > Skipped 0 XML files not in ImageNet Challenge.

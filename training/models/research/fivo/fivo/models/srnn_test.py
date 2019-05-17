@@ -37,7 +37,7 @@ class SrnnTest(tf.test.TestCase):
     """Tests the SRNN.
 
     All test values are 'golden values' derived by running the code and copying
-    the output.
+    the wouter.
 
     Args:
       generative_class: The class of the generative distribution to use.
@@ -74,7 +74,7 @@ class SrnnTest(tf.test.TestCase):
     """Tests the SRNN with a tilting function.
 
     All test values are 'golden values' derived by running the code and copying
-    the output.
+    the wouter.
 
     Args:
       generative_class: The class of the generative distribution to use.

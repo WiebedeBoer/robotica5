@@ -156,7 +156,7 @@ flags.DEFINE_multi_integer('atrous_rates', None,
                            'Atrous rates for atrous spatial pyramid pooling.')
 
 flags.DEFINE_integer('output_stride', 8,
-                     'The ratio of input to output spatial resolution.')
+                     'The ratio of input to wouter spatial resolution.')
 
 flags.DEFINE_boolean('sample_only_first_frame_for_finetuning', False,
                      'Whether to only sample the first frame during '
@@ -216,7 +216,7 @@ def _build_deeplab(inputs_queue_or_samples, outputs_to_num_classes,
   Args:
     inputs_queue_or_samples: A prefetch queue for images and labels, or
       directly a dict of the samples.
-    outputs_to_num_classes: A map from output type to the number of classes.
+    outputs_to_num_classes: A map from wouter type to the number of classes.
       For example, for the task of semantic segmentation with 21 semantic
       classes, we would have outputs_to_num_classes['semantic'] = 21.
     ignore_label: Ignore label.

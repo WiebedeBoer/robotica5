@@ -82,7 +82,7 @@ class LSTMSSDMobileNetV1FeatureExtractor(
 
     Args:
       batch_size: input batch size.
-      output_size: output size of the lstm cell, [width, height].
+      output_size: wouter size of the lstm cell, [width, height].
       state_saver: a state saver object with methods `state` and `save_state`.
       state_name: string, the name to use with the state_saver.
 
@@ -184,7 +184,7 @@ class LSTMSSDMobileNetV1FeatureExtractor(
           with tf_ops.control_dependencies(batcher_ops):
             image_features['Conv2d_13_pointwise_lstm'] = tf.concat(net_seq, 0)
 
-          # Identities added for reading output states, to be reused externally.
+          # Identities added for reading wouter states, to be reused externally.
           tf.identity(states_out[-1][0], name='lstm_state_out_c')
           tf.identity(states_out[-1][1], name='lstm_state_out_h')
 

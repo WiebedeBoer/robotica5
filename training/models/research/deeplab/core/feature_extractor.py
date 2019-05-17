@@ -46,7 +46,7 @@ def _mobilenet_v2(net,
       usage will be to set this value in (0, 1) to reduce the number of
       parameters or computation cost of the model.
     output_stride: An integer that specifies the requested ratio of input to
-      output spatial resolution. If not None, then we invoke atrous convolution
+      wouter spatial resolution. If not None, then we invoke atrous convolution
       if necessary to prevent the network from reducing the spatial resolution
       of the activation maps. Allowed values are 8 (accurate fully convolutional
       mode), 16 (fast fully convolutional mode), 32 (classification mode).
@@ -259,7 +259,7 @@ def extract_features(images,
 
   Args:
     images: A tensor of size [batch, height, width, channels].
-    output_stride: The ratio of input to output spatial resolution.
+    output_stride: The ratio of input to wouter spatial resolution.
     multi_grid: Employ a hierarchy of different atrous rates within network.
     depth_multiplier: Float multiplier for the depth (number of channels)
       for all convolution ops used in MobileNet.
@@ -282,7 +282,7 @@ def extract_features(images,
       to None for dense prediction tasks.
     global_pool: Global pooling for image classification task. Defaults to
       False, since dense prediction tasks do not use this.
-    nas_stem_output_num_conv_filters: Number of filters of the NAS stem output
+    nas_stem_output_num_conv_filters: Number of filters of the NAS stem wouter
       tensor.
     nas_training_hyper_parameters: A dictionary storing hyper-parameters for
       training nas models. It is either None or its keys are:

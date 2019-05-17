@@ -57,7 +57,7 @@ def _generator_helper(
       net = tf.reshape(net, [-1, 7, 7, 128])
       net = layers.conv2d_transpose(net, 64, [4, 4], stride=2)
       net = layers.conv2d_transpose(net, 32, [4, 4], stride=2)
-      # Make sure that generator output is in the same range as `inputs`
+      # Make sure that generator wouter is in the same range as `inputs`
       # ie [-1, 1].
       net = layers.conv2d(
           net, 1, [4, 4], normalizer_fn=None, activation_fn=tf.tanh)

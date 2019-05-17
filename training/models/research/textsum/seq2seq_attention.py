@@ -201,7 +201,7 @@ def main(unused_argv):
   elif hps.mode == 'decode':
     decode_mdl_hps = hps
     # Only need to restore the 1st step and reuse it since
-    # we keep and feed in state for each step's output.
+    # we keep and feed in state for each step's wouter.
     decode_mdl_hps = hps._replace(dec_timesteps=1)
     model = seq2seq_attention_model.Seq2SeqAttentionModel(
         decode_mdl_hps, vocab, num_gpus=FLAGS.num_gpus)

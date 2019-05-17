@@ -276,7 +276,7 @@ def build_model(stage_id, batch_size, real_images, **kwargs):
         'kernel_size': Convolution kernel size.
         'colors': Number of image channels.
         'to_rgb_use_tanh_activation': Whether to apply tanh activation when
-            output rgb.
+            wouter rgb.
         'fmap_base': Base number of filters.
         'fmap_decay': Decay of number of filters.
         'fmap_max': Max number of filters.

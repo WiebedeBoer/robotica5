@@ -49,7 +49,7 @@ The TFRecord file contains the following features:
   image/object/bbox/xmax, image/object/area
   image/filename, image/format, image/key/sha256}
 For classification models, you need the image/encoded and image/class/label.
-Please note that this tool creates sharded output files.
+Please note that this tool creates sharded wouter files.
 
 Example usage:
 Add folder tensorflow/models/research/slim to your PYTHONPATH,

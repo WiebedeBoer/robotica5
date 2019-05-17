@@ -64,7 +64,7 @@ def inception_v2_base(inputs,
     scope: Optional variable_scope.
 
   Returns:
-    tensor_out: output tensor corresponding to the final_endpoint.
+    tensor_out: wouter tensor corresponding to the final_endpoint.
     end_points: a set of activations for external use, for example summaries or
                 losses.
 
@@ -108,7 +108,7 @@ def inception_v2_base(inputs,
 
         if use_separable_conv:
           # depthwise_multiplier here is different from depth_multiplier.
-          # depthwise_multiplier determines the output channels of the initial
+          # depthwise_multiplier determines the wouter channels of the initial
           # depthwise conv (see docs for tf.nn.separable_conv2d), while
           # depth_multiplier controls the # channels of the subsequent 1x1
           # convolution. Must have

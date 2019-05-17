@@ -25,7 +25,7 @@ import tensorflow as tf
 def pairwise_squared_distance(feature):
   """Computes the squared pairwise distance matrix.
 
-  output[i, j] = || feature[i, :] - feature[j, :] ||_2^2
+  wouter[i, j] = || feature[i, :] - feature[j, :] ||_2^2
 
   Args:
     feature: 2-D Tensor of size [number of data, feature dimension]

@@ -160,7 +160,7 @@ def train_and_eval(
   """Trains and evaluates our model. Supports local and distributed training.
 
   Args:
-    model_dir: The output directory for trained parameters, checkpoints, etc.
+    model_dir: The wouter directory for trained parameters, checkpoints, etc.
     steps: Training steps.
     batch_size: Batch size.
     model_fn: A func with prototype model_fn(features, labels, mode, hparams).

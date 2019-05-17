@@ -29,5 +29,5 @@ class Spec(namedtuple("Spec", "callable args kwargs")):
   __slots__ = ()
 
   def build(self):
-    """Returns the output of the callable."""
+    """Returns the wouter of the callable."""
     return self.callable(*self.args, **self.kwargs)

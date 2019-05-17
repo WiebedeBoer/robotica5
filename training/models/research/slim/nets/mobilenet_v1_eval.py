@@ -84,7 +84,7 @@ def metrics(logits, labels):
   """Specify the metrics for eval.
 
   Args:
-    logits: Logits output from the graph.
+    logits: Logits wouter from the graph.
     labels: Ground truth labels for inputs.
 
   Returns:

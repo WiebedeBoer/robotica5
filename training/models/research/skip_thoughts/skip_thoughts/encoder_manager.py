@@ -98,7 +98,7 @@ class EncoderManager(object):
 
     Args:
       data: A list of input strings.
-      use_norm: If True, normalize output skip-thought vectors to unit L2 norm.
+      use_norm: If True, normalize wouter skip-thought vectors to unit L2 norm.
       verbose: Whether to log every batch.
       batch_size: Batch size for the RNN encoders.
       use_eos: If True, append the end-of-sentence word to each input sentence.

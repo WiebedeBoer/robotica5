@@ -60,7 +60,7 @@ flags.DEFINE_string('hyperparams',
                     'Hyperparameters of the model to train, either in ProtoBuf'
                     'text format or base64-encoded ProtoBuf text format.')
 flags.DEFINE_string('tensorboard_dir', '',
-                    'Directory for TensorBoard logs output.')
+                    'Directory for TensorBoard logs wouter.')
 flags.DEFINE_string('checkpoint_filename', '',
                     'Filename to save the best checkpoint to.')
 

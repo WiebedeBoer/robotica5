@@ -25,7 +25,7 @@ import reader
 
 FLAGS = tf.flags.FLAGS
 tf.flags.DEFINE_string('master', '', 'Session address.')
-tf.flags.DEFINE_string('log_root', '/tmp/moving_obj', 'The root dir of output.')
+tf.flags.DEFINE_string('log_root', '/tmp/moving_obj', 'The root dir of wouter.')
 tf.flags.DEFINE_string('data_filepattern', '',
                        'training data file pattern.')
 tf.flags.DEFINE_integer('image_size', 64, 'Image height and width.')

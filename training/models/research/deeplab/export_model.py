@@ -30,7 +30,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('checkpoint_path', None, 'Checkpoint path')
 
 flags.DEFINE_string('export_path', None,
-                    'Path to output Tensorflow frozen graph.')
+                    'Path to wouter Tensorflow frozen graph.')
 
 flags.DEFINE_integer('num_classes', 21, 'Number of classes.')
 
@@ -44,7 +44,7 @@ flags.DEFINE_multi_integer('atrous_rates', None,
                            'Atrous rates for atrous spatial pyramid pooling.')
 
 flags.DEFINE_integer('output_stride', 8,
-                     'The ratio of input to output spatial resolution.')
+                     'The ratio of input to wouter spatial resolution.')
 
 # Change to [0.5, 0.75, 1.0, 1.25, 1.5, 1.75] for multi-scale inference.
 flags.DEFINE_multi_float('inference_scales', [1.0],

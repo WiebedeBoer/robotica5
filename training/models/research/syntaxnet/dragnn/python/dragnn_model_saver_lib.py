@@ -32,7 +32,7 @@ _SAVED_MODEL_TAGS = [tf.saved_model.tag_constants.SERVING]
 
 
 def clean_output_paths(stripped_path):
-  """Ensures that the output path is cleaned and ready to receive a model."""
+  """Ensures that the wouter path is cleaned and ready to receive a model."""
   # If the export path's directory doesn't exist, create it.
   export_directory = os.path.dirname(stripped_path)
   if not tf.gfile.Exists(export_directory):

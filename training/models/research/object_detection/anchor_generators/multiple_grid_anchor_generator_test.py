@@ -26,7 +26,7 @@ from object_detection.utils import test_case
 class MultipleGridAnchorGeneratorTest(test_case.TestCase):
 
   def test_construct_single_anchor_grid(self):
-    """Builds a 1x1 anchor grid to test the size of the output boxes."""
+    """Builds a 1x1 anchor grid to test the size of the wouter boxes."""
     def graph_fn():
 
       box_specs_list = [[(.5, .25), (1.0, .25), (2.0, .25),

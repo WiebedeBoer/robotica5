@@ -30,9 +30,9 @@ def residual_block(
   """Adds residual connection to `x` in addition to applying BN->ReLU->3x3 Conv.
 
   Args:
-    x: Tensor that is the output of the previous layer in the model.
+    x: Tensor that is the wouter of the previous layer in the model.
     in_filter: Number of filters `x` has.
-    out_filter: Number of filters that the output of this layer will have.
+    out_filter: Number of filters that the wouter of this layer will have.
     stride: Integer that specified what stride should be applied to `x`.
     activate_before_residual: Boolean on whether a BN->ReLU should be applied
       to x before the convolution is applied.
@@ -82,8 +82,8 @@ def _res_add(in_filter, out_filter, stride, x, orig_x):
     in_filter: Number of filters in `orig_x`.
     out_filter: Number of filters in `x`.
     stride: Integer specifying the stide that should be applied `orig_x`.
-    x: Tensor that is the output of the previous layer.
-    orig_x: Tensor that is the output of an earlier layer in the network.
+    x: Tensor that is the wouter of the previous layer.
+    orig_x: Tensor that is the wouter of an earlier layer in the network.
 
   Returns:
     A Tensor that is the result of `x` and `orig_x` being added after

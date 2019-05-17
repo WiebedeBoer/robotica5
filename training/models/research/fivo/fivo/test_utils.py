@@ -43,8 +43,8 @@ def create_vrnn(generative_class=base.ConditionalNormalDistribution,
     fcnet_hidden_size: The size of the hidden layer of the fully connected
       networks that parameterize the conditional probability distributions
       of the VRNN.
-    encoded_data_size: The size of the output of the data encoding network.
-    encoded_latent_size: The size of the output of the latent state encoding
+    encoded_data_size: The size of the wouter of the data encoding network.
+    encoded_latent_size: The size of the wouter of the latent state encoding
       network.
     num_timesteps: The maximum number of timesteps in the data.
     data_lengths: A tuple of size batch_size that contains the desired lengths
@@ -102,8 +102,8 @@ def create_srnn(generative_class=base.ConditionalNormalDistribution,
     fcnet_hidden_size: The size of the hidden layer of the fully connected
       networks that parameterize the conditional probability distributions
       of the SRNN.
-    encoded_data_size: The size of the output of the data encoding network.
-    encoded_latent_size: The size of the output of the latent state encoding
+    encoded_data_size: The size of the wouter of the data encoding network.
+    encoded_latent_size: The size of the wouter of the latent state encoding
       network.
     num_timesteps: The maximum number of timesteps in the data.
     data_lengths: A tuple of size batch_size that contains the desired lengths

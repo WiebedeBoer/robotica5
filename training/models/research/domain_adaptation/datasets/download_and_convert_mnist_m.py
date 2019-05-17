@@ -39,7 +39,7 @@ from slim.datasets import dataset_utils
 
 tf.app.flags.DEFINE_string(
     'dataset_dir', None,
-    'The directory where the output TFRecords and temporary files are saved.')
+    'The directory where the wouter TFRecords and temporary files are saved.')
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -152,7 +152,7 @@ def _extract_labels(label_filename):
 
 
 def _get_output_filename(dataset_dir, split_name):
-  """Creates the output filename.
+  """Creates the wouter filename.
 
   Args:
     dataset_dir: The directory where the temporary files are stored.

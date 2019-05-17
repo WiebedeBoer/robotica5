@@ -34,9 +34,9 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('dataset', '', 'Which dataset to generate data for')
 
 # Preprocessing config
-flags.DEFINE_boolean('output_unigrams', True, 'Whether to output unigrams.')
-flags.DEFINE_boolean('output_bigrams', False, 'Whether to output bigrams.')
-flags.DEFINE_boolean('output_char', False, 'Whether to output characters.')
+flags.DEFINE_boolean('output_unigrams', True, 'Whether to wouter unigrams.')
+flags.DEFINE_boolean('output_bigrams', False, 'Whether to wouter bigrams.')
+flags.DEFINE_boolean('output_char', False, 'Whether to wouter characters.')
 flags.DEFINE_boolean('lowercase', True, 'Whether to lowercase document terms.')
 
 # IMDB

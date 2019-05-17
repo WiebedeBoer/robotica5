@@ -98,7 +98,7 @@ def _tower_loss(images, labels, num_classes, scope, reuse_variables=None):
      Tensor of shape [] containing the total loss for a batch of data
   """
   # When fine-tuning a model, we do not restore the logits but instead we
-  # randomly initialize the logits. The number of classes in the output of the
+  # randomly initialize the logits. The number of classes in the wouter of the
   # logit is the number of classes in specified Dataset.
   restore_logits = not FLAGS.fine_tune
 

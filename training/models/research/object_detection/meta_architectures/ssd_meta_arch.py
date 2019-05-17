@@ -623,7 +623,7 @@ class SSDMetaArch(model.DetectionModel):
     slicing off the background class, decoding box predictions and applying
     non max suppression and clipping to the image window.
 
-    See base class for output format conventions.  Note also that by default,
+    See base class for wouter format conventions.  Note also that by default,
     scores are to be interpreted as logits, but if a score_conversion_fn is
     used, then scores are remapped (and may thus have a different
     interpretation).

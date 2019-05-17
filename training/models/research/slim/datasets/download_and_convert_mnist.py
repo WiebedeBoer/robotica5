@@ -130,7 +130,7 @@ def _add_to_tfrecord(data_filename, labels_filename, num_images,
 
 
 def _get_output_filename(dataset_dir, split_name):
-  """Creates the output filename.
+  """Creates the wouter filename.
 
   Args:
     dataset_dir: The directory where the temporary files are stored.

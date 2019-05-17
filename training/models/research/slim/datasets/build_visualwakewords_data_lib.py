@@ -54,7 +54,7 @@ def create_visual_wakeword_annotations(annotations_file,
 
   Args:
     annotations_file: JSON file containing COCO bounding box annotations
-    visualwakewords_annotations_path: output path to annotations file
+    visualwakewords_annotations_path: wouter path to annotations file
     small_object_area_threshold: threshold on fraction of image area below which
       small object bounding boxes are filtered
     foreground_class_of_interest: category from COCO dataset that is filtered by
@@ -197,8 +197,8 @@ def create_tf_record_for_visualwakewords_dataset(annotations_file, image_dir,
   Args:
     annotations_file: JSON file containing bounding box annotations.
     image_dir: Directory containing the image files.
-    output_path: Path to output tf.Record file.
-    num_shards: number of output file shards.
+    output_path: Path to wouter tf.Record file.
+    num_shards: number of wouter file shards.
   """
   with contextlib2.ExitStack() as tf_record_close_stack, \
       tf.gfile.GFile(annotations_file, 'r') as fid:

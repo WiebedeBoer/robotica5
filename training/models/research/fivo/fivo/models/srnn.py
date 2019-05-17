@@ -51,7 +51,7 @@ class SRNN(object):
   In this implementation of the SRNN the latent state z_t is Gaussian. The
   model's prior over z_t (also called the transition distribution) is
   distributed as Normal(mu_t, diag(sigma_t^2)) where mu_t and sigma_t are the
-  mean and standard deviation output from a fully connected network that accepts
+  mean and standard deviation wouter from a fully connected network that accepts
   the rnn hidden state h_t and previous latent state z_{t-1} as input.
 
   The emission distribution p(x_t|z_t, h_t) is conditioned on the latent state
@@ -146,7 +146,7 @@ class SRNN(object):
         the model. Most often this is x_{t-1}, the previous token in the
         observation sequence.
     Returns:
-      rnn_out: The output of the RNN.
+      rnn_out: The wouter of the RNN.
       rnn_state: The new state of the RNN.
     """
     rnn_inputs = self.data_encoder(tf.to_float(inputs))
@@ -159,7 +159,7 @@ class SRNN(object):
     Note that p(z_t | h_t, z_{t-1}) = p(z_t| z_{t-1}, x_{1:t-1})
 
     Args:
-      rnn_out: The output of the rnn for the current timestep.
+      rnn_out: The wouter of the rnn for the current timestep.
       prev_latent_encoded: Float Tensor of shape
         [batch_size, encoded_latent_size], the previous latent state z_{t-1}
         run through latent_encoder.
@@ -176,7 +176,7 @@ class SRNN(object):
 
     Args:
       latent: The stochastic latent state z_t.
-      rnn_out: The output of the rnn for the current timestep.
+      rnn_out: The wouter of the rnn for the current timestep.
     Returns:
       p(x_t | z_t, h_t): A distribution with event shape
         [batch_size, data_size].
@@ -187,7 +187,7 @@ class SRNN(object):
     return self._emission(latent_encoded, rnn_out), latent_encoded
 
   def sample_step(self, prev_state, inputs, unused_t):
-    """Samples one output from the model.
+    """Samples one wouter from the model.
 
     Args:
       prev_state: The previous state of the model, a SRNNState containing the
@@ -198,7 +198,7 @@ class SRNN(object):
       unused_t: The current timestep. Not used currently.
     Returns:
       new_state: The next state of the model, a SRNNState.
-      xt: A float Tensor of shape [batch_size, data_size], an output sampled
+      xt: A float Tensor of shape [batch_size, data_size], an wouter sampled
         from the emission distribution.
     """
     rnn_out, rnn_state = self.run_rnn(prev_state.rnn_state,
@@ -227,7 +227,7 @@ class TrainableSRNN(SRNN, base.ELBOTrainableSequenceModel):
 
   As described in the SRNN paper, the learned filtering proposal is
   parameterized by a fully connected neural network that accepts as input the
-  current target x_t and the current rnn output h_t. The learned smoothing
+  current target x_t and the current rnn wouter h_t. The learned smoothing
   proposal is also given the hidden state of an RNN run in reverse over the
   inputs, so as to incorporate information about future observations.
 
@@ -291,10 +291,10 @@ class TrainableSRNN(SRNN, base.ELBOTrainableSequenceModel):
         proposal_type is "smoothing", rev_rnn_cell must also be provided.
       proposal: A callable that implements the proposal q(z_t| h_t, x_{1:T}).
         If proposal_type is "filtering" then proposal must accept as arguments
-        the current rnn output, the encoded target of the current timestep,
+        the current rnn wouter, the encoded target of the current timestep,
         and the mean of the prior. If proposal_type is "smoothing" then
-        in addition to the current rnn output and the mean of the prior
-        proposal must accept as arguments the output of the reverse rnn.
+        in addition to the current rnn wouter and the mean of the prior
+        proposal must accept as arguments the wouter of the reverse rnn.
         proposal should return a tf.distributions.Normal distribution
         conditioned on its inputs. If proposal_type is "prior" this argument is
         ignored.
@@ -333,7 +333,7 @@ class TrainableSRNN(SRNN, base.ELBOTrainableSequenceModel):
     """Stores the model's observations.
 
     Stores the observations (inputs and targets) in TensorArrays and precomputes
-    things for later like the reverse RNN output and encoded targets.
+    things for later like the reverse RNN wouter and encoded targets.
 
     Args:
       observations: The observations of the model, a tuple containing two
@@ -390,7 +390,7 @@ class TrainableSRNN(SRNN, base.ELBOTrainableSequenceModel):
     """Computes the proposal distribution specified by proposal_type.
 
     Args:
-      rnn_out: The output of the rnn for the current timestep.
+      rnn_out: The wouter of the rnn for the current timestep.
       prev_latent_encoded: Float Tensor of shape
         [batch_size, encoded_latent_size], the previous latent state z_{t-1}
         run through latent_encoder.
@@ -491,17 +491,17 @@ def create_srnn(
       layers of the fully connected networks that parameterize the conditional
       distributions of the SRNN. If None, then it defaults to one hidden
       layer of size latent_size.
-    encoded_data_size: The size of the output of the data encoding network. If
+    encoded_data_size: The size of the wouter of the data encoding network. If
       None, defaults to latent_size.
-    encoded_latent_size: The size of the output of the latent state encoding
+    encoded_latent_size: The size of the wouter of the latent state encoding
       network. If None, defaults to latent_size.
     sigma_min: The minimum value that the standard deviation of the
       distribution over the latent state can take.
     raw_sigma_bias: A scalar that is added to the raw standard deviation
-      output from the neural networks that parameterize the prior and
+      wouter from the neural networks that parameterize the prior and
       approximate posterior. Useful for preventing standard deviations close
       to zero.
-    emission_bias_init: A bias to added to the raw output of the fully
+    emission_bias_init: A bias to added to the raw wouter of the fully
       connected network that parameterizes the emission distribution. Useful
       for initalizing the mean of the distribution to a sensible starting point
       such as the mean of the training data. Only used with Bernoulli generative

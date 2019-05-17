@@ -15,7 +15,7 @@
 
 """Converts Tiny Imagenet dataset into TFRecord format.
 
-As an output this program generates following files in TFRecord format:
+As an wouter this program generates following files in TFRecord format:
 - train.tfrecord
 - validation.tfrecord
 - test.tfrecord

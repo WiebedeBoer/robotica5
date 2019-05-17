@@ -44,7 +44,7 @@ class FeedFowardNetwork(tf.layers.Layer):
       x: tensor with shape [batch_size, length, hidden_size]
       padding: (optional) If set, the padding values are temporarily removed
         from x (provided self.allow_pad is set). The padding values are placed
-        back in the output tensor in the same locations.
+        back in the wouter tensor in the same locations.
         shape [batch_size, length]
 
     Returns:

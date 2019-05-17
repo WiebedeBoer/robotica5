@@ -57,7 +57,7 @@ data_route = 'contextual_bandits/datasets'
 
 FLAGS = flags.FLAGS
 FLAGS.set_default('alsologtostderr', True)
-flags.DEFINE_string('logdir', '/tmp/bandits/', 'Base directory to save output')
+flags.DEFINE_string('logdir', '/tmp/bandits/', 'Base directory to save wouter')
 flags.DEFINE_string(
     'mushroom_data',
     os.path.join(base_route, data_route, 'mushroom.data'),

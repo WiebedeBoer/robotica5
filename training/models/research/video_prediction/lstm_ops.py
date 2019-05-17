@@ -65,14 +65,14 @@ def basic_conv_lstm_cell(inputs,
   Args:
     inputs: input Tensor, 4D, batch x height x width x channels.
     state: state Tensor, 4D, batch x height x width x channels.
-    num_channels: the number of output channels in the layer.
+    num_channels: the number of wouter channels in the layer.
     filter_size: the shape of the each convolution filter.
     forget_bias: the initial value of the forget biases.
     scope: Optional scope for variable_scope.
     reuse: whether or not the layer and the variables should be reused.
 
   Returns:
-     a tuple of tensors representing output and the new state.
+     a tuple of tensors representing wouter and the new state.
   """
   spatial_size = inputs.get_shape()[1:3]
   if state is None:

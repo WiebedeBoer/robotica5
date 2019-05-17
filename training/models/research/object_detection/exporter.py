@@ -116,7 +116,7 @@ def _tf_example_input_placeholder():
   """Returns input that accepts a batch of strings with tf examples.
 
   Returns:
-    a tuple of input placeholder and the output decoded images.
+    a tuple of input placeholder and the wouter decoded images.
   """
   batch_tf_example_placeholder = tf.placeholder(
       tf.string, shape=[None], name='tf_example')
@@ -138,7 +138,7 @@ def _encoded_image_string_tensor_input_placeholder():
   """Returns input that accepts a batch of PNG or JPEG strings.
 
   Returns:
-    a tuple of input placeholder and the output decoded images.
+    a tuple of input placeholder and the wouter decoded images.
   """
   batch_image_str_placeholder = tf.placeholder(
       dtype=tf.string,
@@ -168,9 +168,9 @@ input_placeholder_fn_map = {
 
 def add_output_tensor_nodes(postprocessed_tensors,
                             output_collection_name='inference_op'):
-  """Adds output nodes for detection boxes and scores.
+  """Adds wouter nodes for detection boxes and scores.
 
-  Adds the following nodes for output tensors -
+  Adds the following nodes for wouter tensors -
     * num_detections: float32 tensor of shape [batch_size].
     * detection_boxes: float32 tensor of shape [batch_size, num_boxes, 4]
       containing detected boxes.
@@ -195,10 +195,10 @@ def add_output_tensor_nodes(postprocessed_tensors,
       'detection_keypoints': [batch, max_detections, num_keypoints, 2]
         (optional).
       'num_detections': [batch]
-    output_collection_name: Name of collection to add output tensors to.
+    output_collection_name: Name of collection to add wouter tensors to.
 
   Returns:
-    A tensor dict containing the added output tensor nodes.
+    A tensor dict containing the added wouter tensor nodes.
   """
   detection_fields = fields.DetectionResultFields
   label_id_offset = 1
@@ -439,9 +439,9 @@ def export_inference_graph(input_type,
     output_directory: Path to write outputs.
     input_shape: Sets a fixed shape for an `image_tensor` input. If not
       specified, will default to [None, None, None, 3].
-    output_collection_name: Name of collection to add output tensors to.
-      If None, does not add output tensors to a collection.
-    additional_output_tensor_names: list of additional output
+    output_collection_name: Name of collection to add wouter tensors to.
+      If None, does not add wouter tensors to a collection.
+    additional_output_tensor_names: list of additional wouter
       tensors to include in the frozen graph.
     write_inference_graph: If true, writes inference graph to disk.
   """

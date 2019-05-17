@@ -20,7 +20,7 @@ Creates a sharded word co-occurrence matrix from a text file input corpus.
 
 Usage:
 
-  prep.py --output_dir <output-dir> --input <text-file>
+  prep.py --output_dir <wouter-dir> --input <text-file>
 
 Options:
 
@@ -28,7 +28,7 @@ Options:
       The input text.
 
   --output_dir <directory>
-      Specifies the output directory where the various Swivel data
+      Specifies the wouter directory where the various Swivel data
       files should be placed.
 
   --shard_size <int>
@@ -196,7 +196,7 @@ def compute_coocs(lines, vocab):
       sums[lid] += 1.0
       pair = (lid, lid)
       coocs.setdefault(pair, 0.0)
-      coocs[pair] += 0.5  # Only add 1/2 since we output (a, b) and (b, a)
+      coocs[pair] += 0.5  # Only add 1/2 since we wouter (a, b) and (b, a)
 
     if lineno % 10000 == 0:
       pos = lines.tell()
@@ -287,7 +287,7 @@ def write_shards(vocab, shardfiles):
 
 
 def main(_):
-  # Create the output directory, if necessary
+  # Create the wouter directory, if necessary
   if FLAGS.output_dir and not os.path.isdir(FLAGS.output_dir):
     os.makedirs(FLAGS.output_dir)
 

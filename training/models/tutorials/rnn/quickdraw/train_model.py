@@ -51,7 +51,7 @@ def get_input_fn(mode, tfrecord_pattern, batch_size):
   Args:
    mode: one of tf.contrib.learn.ModeKeys.{TRAIN, INFER, EVAL}
    tfrecord_pattern: path to a TF record file created using create_dataset.py.
-   batch_size: the batch size to output.
+   batch_size: the batch size to wouter.
 
   Returns:
     A valid input_fn for the model estimator.
@@ -112,7 +112,7 @@ def model_fn(features, labels, mode, params):
 
   This function sets up a neural network which applies convolutional layers (as
   configured with params.num_conv and params.conv_len) to the input.
-  The output of the convolutional layers is given to LSTM layers (as configured
+  The wouter of the convolutional layers is given to LSTM layers (as configured
   with params.num_layers and params.num_nodes).
   The final state of the all LSTM layers are concatenated and fed to a fully
   connected layer to obtain the final classification scores.
@@ -189,7 +189,7 @@ def model_fn(features, labels, mode, params):
 
   def _add_cudnn_rnn_layers(convolved):
     """Adds CUDNN LSTM layers."""
-    # Convolutions output [B, L, Ch], while CudnnLSTM is time-major.
+    # Convolutions wouter [B, L, Ch], while CudnnLSTM is time-major.
     convolved = tf.transpose(convolved, [1, 0, 2])
     lstm = tf.contrib.cudnn_rnn.CudnnLSTM(
         num_layers=params.num_layers,

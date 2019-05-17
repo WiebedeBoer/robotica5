@@ -34,7 +34,7 @@ def BatchedSparseToDense(sparse_indices, output_size):
 
   Args:
     sparse_indices: [batch_size] tensor containing one index per batch
-    output_size: needed in order to generate the correct dense output
+    output_size: needed in order to generate the correct dense wouter
 
   Returns:
     A [batch_size, output_size] dense tensor.
@@ -90,7 +90,7 @@ class GreedyParser(object):
     cost: a tensor containing the current training step cost
     gold_actions: a tensor containing actions from gold decoding
     feature_endpoints: a list of sparse feature vectors
-    logits: output of the final layer before computing softmax
+    logits: wouter of the final layer before computing softmax
   The training network also contains:
     train_op: an op that executes a single training step
 
@@ -310,7 +310,7 @@ class GreedyParser(object):
 
     The network topology is already defined in the constructor, so multiple
     calls to BuildForward build multiple networks whose parameters are all
-    shared. It is the source of the input features and the use of the output
+    shared. It is the source of the input features and the use of the wouter
     that distinguishes each network.
 
     Args:
@@ -318,7 +318,7 @@ class GreedyParser(object):
       return_average: whether to use moving averages as model parameters
 
     Returns:
-      logits: output of the final layer before computing softmax
+      logits: wouter of the final layer before computing softmax
     """
     assert len(feature_endpoints) == self._feature_size
 

@@ -214,12 +214,12 @@ class BulkComponentTest(test_util.TensorFlowTestCase):
       fixed_embedding_matrix = tf.get_variable(
           network_units.fixed_embeddings_name(0))
 
-    # Get output layer.
+    # Get wouter layer.
     comp.build_greedy_training(self.master_state, self.network_states)
     activations = self.network_states[comp.name].activations
     outputs = activations[comp.network.layers[0].name].bulk_tensor
 
-    # Compute the gradient of the output layer w.r.t. the embedding matrix.
+    # Compute the gradient of the wouter layer w.r.t. the embedding matrix.
     # This should be well-defined for in the normal case.
     gradients = tf.gradients(outputs, fixed_embedding_matrix)
     self.assertEqual(len(gradients), 1)
@@ -257,7 +257,7 @@ class BulkComponentTest(test_util.TensorFlowTestCase):
       trainable_embedding_matrix = tf.get_variable(
           network_units.fixed_embeddings_name(1))
 
-    # Get output layer.
+    # Get wouter layer.
     comp.build_greedy_training(self.master_state, self.network_states)
     activations = self.network_states[comp.name].activations
     outputs = activations[comp.network.layers[0].name].bulk_tensor

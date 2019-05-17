@@ -138,7 +138,7 @@ class LSTMPolicy(Policy):
         indicating whether the previous action was successful or not.
 
     Returns:
-      a tuple of (lstm output, lstm state).
+      a tuple of (lstm wouter, lstm state).
     """
 
     # Adding prev action and success in addition to the embeddings of the
@@ -327,9 +327,9 @@ class TaskPolicy(Policy):
   def _embed_task_ios(self, streams):
     """Embeds a list of heterogenous streams.
 
-    These streams correspond to task history, goal and output. The number of
+    These streams correspond to task history, goal and wouter. The number of
     streams is equal to the total number of history, plus one for the goal if
-    present, plus one for the output. If the number of history is k, then the
+    present, plus one for the wouter. If the number of history is k, then the
     first k streams are the history.
 
     The used embedders depend on the input (or goal) types. If an input is an
@@ -339,7 +339,7 @@ class TaskPolicy(Policy):
     Args:
       streams: a list of Tensors.
     Returns:
-      Three float Tensors history, goal, output. If there are no history, or no
+      Three float Tensors history, goal, wouter. If there are no history, or no
       goal, then the corresponding returned values are None. The shape of the
       embedded history is batch_size x sequence_length x sum of all embedding
       dimensions for all history. The shape of the goal is embedding dimension.
@@ -400,7 +400,7 @@ class ReactivePolicy(TaskPolicy):
   """A policy which ignores history.
 
   It processes only the current observation (last element in history) and the
-  goal to output a prediction.
+  goal to wouter a prediction.
   """
 
   def __init__(self, *args, **kwargs):
@@ -429,8 +429,8 @@ class RNNPolicy(TaskPolicy):
 
   The implementation might and will change.
   The history, together with the goal, is processed using a stacked LSTM. The
-  output of the last LSTM step is used to produce a prediction. Currently, only
-  a single step output is supported.
+  wouter of the last LSTM step is used to produce a prediction. Currently, only
+  a single step wouter is supported.
   """
 
   def __init__(self, lstm_hparams, *args, **kwargs):
@@ -468,7 +468,7 @@ class RNNPolicy(TaskPolicy):
       assert len(goal.get_shape().as_list()) == 2
       decoder = embedders.MLPEmbedder(
           layers=self._embedder_hparams.predictions.layer_sizes + oconfig)
-      # Prediction is done off the last step lstm output and the goal.
+      # Prediction is done off the last step lstm wouter and the goal.
       predictions = decoder.build(features)
 
     return predictions, state

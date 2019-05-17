@@ -109,7 +109,7 @@ def _add_to_tfrecord(filename, tfrecord_writer, offset=0):
 
 
 def _get_output_filename(dataset_dir, split_name):
-  """Creates the output filename.
+  """Creates the wouter filename.
 
   Args:
     dataset_dir: The dataset directory where the dataset is stored.

@@ -373,7 +373,7 @@ class Context(object):
       state_repr = kwargs['state_repr']
       next_state_repr = kwargs['next_state_repr']
       with tf.control_dependencies(ops):  # Step high level context before computing low level one.
-        # Get the context transition function output.
+        # Get the context transition function wouter.
         values = self._context_transition_fn(self.vars, self.t, None,
                                              state=state_repr,
                                              next_state=next_state_repr)

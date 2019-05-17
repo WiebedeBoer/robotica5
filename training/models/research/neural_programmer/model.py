@@ -305,7 +305,7 @@ class Graph():
 
   def perform_operations(self, softmax, full_column_softmax, select,
                          prev_select_1, curr_pass):
-    #performs all the 15 operations. computes scalar output, lookup answer and row selector
+    #performs all the 15 operations. computes scalar wouter, lookup answer and row selector
     column_softmax = tf.slice(full_column_softmax, [0, 0],
                               [self.batch_size, self.num_cols])
     word_column_softmax = tf.slice(full_column_softmax, [0, self.num_cols],
@@ -357,7 +357,7 @@ class Graph():
     values = tf.concat(axis=1, values=[count])
     softmax_content = tf.slice(softmax, [0, 0],
                                [self.batch_size, length_content])
-    #compute scalar output
+    #compute scalar wouter
     output = tf.reduce_sum(tf.multiply(softmax_content, values), 1)
     #compute lookup answer
     softmax_print = tf.slice(softmax, [0, length_content + length_select],
@@ -503,7 +503,7 @@ class Graph():
         tf.fill([self.batch_size, self.embedding_dims], 0.0),
         self.data_type)  #running sum of the hidden states of the model
     output = tf.cast(tf.fill([self.batch_size, 1], 0.0),
-                     self.data_type)  #output of the model
+                     self.data_type)  #wouter of the model
     correct = tf.cast(
         tf.fill([1], 0.0), self.data_type
     )  #to compute accuracy, returns number of correct examples for this batch

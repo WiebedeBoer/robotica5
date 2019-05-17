@@ -17,7 +17,7 @@ r"""Exports an SSD detection model to use with tf-lite.
 Outputs file:
 * A tflite compatible frozen graph - $output_directory/tflite_graph.pb
 
-The exported graph has the following input and output nodes.
+The exported graph has the following input and wouter nodes.
 
 Inputs:
 'normalized_input_image_tensor': a float32 tensor of shape
@@ -60,7 +60,7 @@ python object_detection/export_tflite_ssd_graph \
     --trained_checkpoint_prefix path/to/model.ckpt \
     --output_directory path/to/exported_model_directory
 
-The expected output would be in the directory
+The expected wouter would be in the directory
 path/to/exported_model_directory (which is created if it does not exist)
 with contents:
  - tflite_graph.pbtxt

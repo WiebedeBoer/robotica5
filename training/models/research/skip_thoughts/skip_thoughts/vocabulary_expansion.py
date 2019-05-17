@@ -186,7 +186,7 @@ def main(unused_argv):
   embedding_map = _expand_vocabulary(skip_thoughts_emb, skip_thoughts_vocab,
                                      word2vec)
 
-  # Save the output.
+  # Save the wouter.
   vocab = embedding_map.keys()
   vocab_file = os.path.join(FLAGS.output_dir, "vocab.txt")
   with tf.gfile.GFile(vocab_file, "w") as f:

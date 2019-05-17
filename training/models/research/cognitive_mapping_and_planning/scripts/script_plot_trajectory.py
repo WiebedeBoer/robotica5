@@ -21,7 +21,7 @@ to plot the view points.
   PYTHONPATH='.' PYOPENGL_PLATFORM=egl python scripts/script_plot_trajectory.py \
       --first_person --num_steps 40 \
       --config_name cmp.lmap_Msc.clip5.sbpd_d_r2r \
-      --imset test --alsologtostderr --base_dir output --out_dir vis
+      --imset test --alsologtostderr --base_dir wouter --out_dir vis
 
 """
 import os, sys, numpy as np, copy
@@ -46,13 +46,13 @@ from src import graph_utils
 from src import utils
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('out_dir', 'vis', 'Directory where to store the output')
+flags.DEFINE_string('out_dir', 'vis', 'Directory where to store the wouter')
 flags.DEFINE_string('type', '', 'Optional type.')
 flags.DEFINE_bool('first_person', False, 'Visualize the first person view.')
 flags.DEFINE_bool('top_view', False, 'Visualize the trajectory in the top view.')
 flags.DEFINE_integer('num_steps', 40, 'Number of steps to run the model for.')
 flags.DEFINE_string('imset', 'test', '')
-flags.DEFINE_string('base_dir', 'output', 'Cache directory.')
+flags.DEFINE_string('base_dir', 'wouter', 'Cache directory.')
 
 def _get_suffix_str():
   return ''

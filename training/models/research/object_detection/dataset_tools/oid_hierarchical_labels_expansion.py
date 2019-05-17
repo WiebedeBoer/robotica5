@@ -19,7 +19,7 @@ python models/research/object_detection/dataset_tools/\
 oid_hierarchical_labels_expansion.py \
 --json_hierarchy_file=<path to JSON hierarchy> \
 --input_annotations=<input csv file> \
---output_annotations=<output csv file> \
+--output_annotations=<wouter csv file> \
 --annotation_type=<1 (for boxes) or 2 (for image-level labels)>
 """
 
@@ -189,7 +189,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--output_annotations',
       required=True,
-      help="""Path to the output file.""")
+      help="""Path to the wouter file.""")
   parser.add_argument(
       '--annotation_type',
       type=int,

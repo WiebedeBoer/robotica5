@@ -35,7 +35,7 @@ def build(post_processing_config):
   of these tensors.
 
   Score converter callable should be called with `input` tensor. The callable
-  returns the output from one of 3 tf operations based on the configuration -
+  returns the wouter from one of 3 tf operations based on the configuration -
   tf.identity, tf.sigmoid or tf.nn.softmax. If a calibration config is provided,
   score_converter also applies calibration transformations, as defined in
   calibration_builder.py. See tensorflow documentation for argument and return

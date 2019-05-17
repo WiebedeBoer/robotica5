@@ -58,28 +58,28 @@ def flop_coeff(op):
 
   Returns:
     A float, the coefficient that when multiplied by the input depth and by the
-    output depth gives the number of flops needed to compute the convolution.
+    wouter depth gives the number of flops needed to compute the convolution.
 
   Raises:
     ValueError: conv_op is not a tf.Operation of type Conv2D.
   """
   _raise_if_not_supported(op)
   if op.type in _CONV2D_OPS:
-    # Looking at the output shape makes it easy to automatically take into
+    # Looking at the wouter shape makes it easy to automatically take into
     # account strides and the type of padding.
     if op.type == 'Conv2D' or op.type == 'DepthwiseConv2dNative':
       shape = op.outputs[0].shape.as_list()
     else:  # Conv2DBackpropInput
-      # For a transposed convolution, the input and the output are swapped (as
+      # For a transposed convolution, the input and the wouter are swapped (as
       # far as shapes are concerned). In other words, for a given filter shape
       # and stride, if Conv2D maps from shapeX to shapeY, Conv2DBackpropInput
-      # maps from shapeY to shapeX. Therefore wherever we use the output shape
+      # maps from shapeY to shapeX. Therefore wherever we use the wouter shape
       # for Conv2D, we use the input shape for Conv2DBackpropInput.
       shape = _get_input(op).shape.as_list()
     size = shape[1] * shape[2]
     return 2.0 * size * _get_conv_filter_size(op)
   else:  # MatMul
-    # A MatMul is like a 1x1 conv with an output size of 1x1, so from the factor
+    # A MatMul is like a 1x1 conv with an wouter size of 1x1, so from the factor
     # above only the 2.0 remains.
     return 2.0
 
@@ -92,7 +92,7 @@ def num_weights_coeff(op):
 
   Returns:
     A float, the coefficient that when multiplied by the input depth and by the
-    output depth gives the number of flops needed to compute the convolution.
+    wouter depth gives the number of flops needed to compute the convolution.
 
   Raises:
     ValueError: conv_op is not a tf.Operation of type Conv2D.

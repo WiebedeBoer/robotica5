@@ -39,7 +39,7 @@ class VrnnTest(tf.test.TestCase):
     """Tests the VRNN.
 
     All test values are 'golden values' derived by running the code and copying
-    the output.
+    the wouter.
 
     Args:
       generative_class: The class of the generative distribution to use.
@@ -93,7 +93,7 @@ class VrnnTest(tf.test.TestCase):
     """Tests the VRNN with a tilting function.
 
     All test values are 'golden values' derived by running the code and copying
-    the output.
+    the wouter.
 
     Args:
       generative_class: The class of the generative distribution to use.

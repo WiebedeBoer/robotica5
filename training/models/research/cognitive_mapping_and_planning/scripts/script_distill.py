@@ -22,7 +22,7 @@ blaze build --define=ION_GFX_OGLES20=1 -c opt --copt=-mavx --config=cuda_clang \
 
 
 ./blaze-bin/experimental/users/saurabhgupta/navigation/cmp/scripts/script_distill \
-  --logdir=/cns/iq-d/home/saurabhgupta/output/stanford-distill/local/v0/ \
+  --logdir=/cns/iq-d/home/saurabhgupta/wouter/stanford-distill/local/v0/ \
   --config_name 'v0+train' --gfs_user robot-intelligence-gpu
 
 """

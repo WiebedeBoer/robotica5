@@ -28,7 +28,7 @@ Subclasses must implement the following methods:
 
   inference_step():
     Takes a batch of inputs and states at a single time-step. Returns the
-    softmax output corresponding to the inputs, and the new states of the batch.
+    softmax wouter corresponding to the inputs, and the new states of the batch.
     Optionally also returns metadata about the current inference step, e.g. a
     serialized numpy array containing activations from a particular model layer.
 

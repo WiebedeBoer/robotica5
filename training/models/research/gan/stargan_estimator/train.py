@@ -170,7 +170,7 @@ def main(_, override_generator_fn=None, override_discriminator_fn=None):
   test_images_np, _ = data_provider.provide_celeba_test_set()
   filename_str = os.path.join(FLAGS.output_dir, 'summary_image_%i.png')
 
-  # Periodically train and write prediction output to disk.
+  # Periodically train and write prediction wouter to disk.
   cur_step = 0
   while cur_step < FLAGS.max_number_of_steps:
     stargan_estimator.train(train_input_fn, steps=FLAGS.steps_per_eval)

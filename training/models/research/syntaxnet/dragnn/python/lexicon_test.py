@@ -55,7 +55,7 @@ class LexiconTest(tf.test.TestCase):
 
   def testBuildLexicon(self):
     empty_input_path = os.path.join(test_flags.temp_dir(), 'empty-input')
-    lexicon_output_path = os.path.join(test_flags.temp_dir(), 'lexicon-output')
+    lexicon_output_path = os.path.join(test_flags.temp_dir(), 'lexicon-wouter')
 
     with open(empty_input_path, 'w'):
       pass

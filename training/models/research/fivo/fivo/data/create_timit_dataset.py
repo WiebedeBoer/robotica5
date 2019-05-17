@@ -53,7 +53,7 @@ SAMPLE_MAX_REGEX = re.compile(r"sample_max -i (-?\d+)")
 def get_filenames(split):
   """Get all wav filenames from the TIMIT archive."""
   path = os.path.join(FLAGS.raw_timit_dir, "TIMIT", split, "*", "*", "*.WAV")
-  # Sort the output by name so the order is deterministic.
+  # Sort the wouter by name so the order is deterministic.
   files = sorted(glob.glob(path))
   return files
 

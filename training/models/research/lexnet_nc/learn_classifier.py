@@ -46,7 +46,7 @@ tf.flags.DEFINE_string(
 
 tf.flags.DEFINE_string(
     'logdir', 'logdir',
-    'Directory of model output files')
+    'Directory of model wouter files')
 
 tf.flags.DEFINE_string('hparams', '', 'Hyper-parameters')
 

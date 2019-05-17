@@ -971,7 +971,7 @@ def create_initial_softmax_from_labels(last_frame_labels, reference_labels,
     reference_labels: reference frame labels of shape [1, height, width, 1].
     decoder_output_stride: Integer, the stride of the decoder. Can be None, in
       this case it's assumed that the last_frame_labels and reference_labels
-      are already scaled to the decoder output resolution.
+      are already scaled to the decoder wouter resolution.
     reduce_labels: Boolean, whether to reduce the depth of the softmax one_hot
       encoding to the actual number of labels present in the reference frame
       (otherwise the depth will be the highest label index + 1).

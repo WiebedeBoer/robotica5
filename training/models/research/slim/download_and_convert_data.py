@@ -50,7 +50,7 @@ tf.app.flags.DEFINE_string(
 tf.app.flags.DEFINE_string(
     'dataset_dir',
     None,
-    'The directory where the output TFRecords and temporary files are saved.')
+    'The directory where the wouter TFRecords and temporary files are saved.')
 
 
 def main(_):

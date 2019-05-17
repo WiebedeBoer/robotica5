@@ -184,7 +184,7 @@ class DdpgAgent(object):
     return utils.clip_to_spec(agent_action, self._action_spec)
 
   def actor_net(self, states, stop_gradients=False):
-    """Returns the output of the actor network.
+    """Returns the wouter of the actor network.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch
@@ -203,7 +203,7 @@ class DdpgAgent(object):
     return actions
 
   def critic_net(self, states, actions, for_critic_loss=False):
-    """Returns the output of the critic network.
+    """Returns the wouter of the critic network.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch
@@ -221,7 +221,7 @@ class DdpgAgent(object):
                             for_critic_loss=for_critic_loss)
 
   def target_actor_net(self, states):
-    """Returns the output of the target actor network.
+    """Returns the wouter of the target actor network.
 
     The target network is used to compute stable targets for training.
 
@@ -238,7 +238,7 @@ class DdpgAgent(object):
     return tf.stop_gradient(actions)
 
   def target_critic_net(self, states, actions, for_critic_loss=False):
-    """Returns the output of the target critic network.
+    """Returns the wouter of the target critic network.
 
     The target network is used to compute stable targets for training.
 
@@ -259,7 +259,7 @@ class DdpgAgent(object):
                                 for_critic_loss=for_critic_loss))
 
   def value_net(self, states, for_critic_loss=False):
-    """Returns the output of the critic evaluated with the actor.
+    """Returns the wouter of the critic evaluated with the actor.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch
@@ -272,7 +272,7 @@ class DdpgAgent(object):
                            for_critic_loss=for_critic_loss)
 
   def target_value_net(self, states, for_critic_loss=False):
-    """Returns the output of the target critic evaluated with the target actor.
+    """Returns the wouter of the target critic evaluated with the target actor.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch
@@ -297,9 +297,9 @@ class DdpgAgent(object):
       actions: A [batch_size, num_action_dims] tensor representing a batch
         of actions.
       rewards: A [batch_size, ...] tensor representing a batch of rewards,
-        broadcastable to the critic net output.
+        broadcastable to the critic net wouter.
       discounts: A [batch_size, ...] tensor representing a batch of discounts,
-        broadcastable to the critic net output.
+        broadcastable to the critic net wouter.
       next_states: A [batch_size, num_state_dims] tensor representing a batch
         of next states.
     Returns:
@@ -342,7 +342,7 @@ class DdpgAgent(object):
   def actor_loss(self, states):
     """Computes a loss for training the actor network.
 
-    Note that output does not represent an actual loss. It is called a loss only
+    Note that wouter does not represent an actual loss. It is called a loss only
     in the sense that its gradient w.r.t. the actor network weights is the
     correct gradient for training the actor network,
     i.e. dloss/dweights = (dq/da)*(da/dweights)
@@ -594,7 +594,7 @@ class TD3Agent(DdpgAgent):
             utils.join_scope(self._scope, self.CRITIC_NET_SCOPE)))
 
   def critic_net(self, states, actions, for_critic_loss=False):
-    """Returns the output of the critic network.
+    """Returns the wouter of the critic network.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch
@@ -615,7 +615,7 @@ class TD3Agent(DdpgAgent):
     return values1
 
   def target_critic_net(self, states, actions, for_critic_loss=False):
-    """Returns the output of the target critic network.
+    """Returns the wouter of the target critic network.
 
     The target network is used to compute stable targets for training.
 
@@ -642,7 +642,7 @@ class TD3Agent(DdpgAgent):
     return values1
 
   def value_net(self, states, for_critic_loss=False):
-    """Returns the output of the critic evaluated with the actor.
+    """Returns the wouter of the critic evaluated with the actor.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch
@@ -655,7 +655,7 @@ class TD3Agent(DdpgAgent):
                            for_critic_loss=for_critic_loss)
 
   def target_value_net(self, states, for_critic_loss=False):
-    """Returns the output of the target critic evaluated with the target actor.
+    """Returns the wouter of the target critic evaluated with the target actor.
 
     Args:
       states: A [batch_size, num_state_dims] tensor representing a batch

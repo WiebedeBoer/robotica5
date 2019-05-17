@@ -36,7 +36,7 @@ def rnn_nas(hparams, model):
     assert FLAGS.discriminator_model == 'rnn_nas'
     assert hparams.dis_num_layers == 2
 
-  # Output variables only for the Generator.  Discriminator output biases
+  # Output variables only for the Generator.  Discriminator wouter biases
   # will begin randomly initialized.
   if model == 'gen':
     softmax_b = [
@@ -146,7 +146,7 @@ def rnn_zaremba(hparams, model):
             FLAGS.discriminator_model == 'rnn_vd')
     assert hparams.dis_num_layers == 2
 
-  # Output variables only for the Generator.  Discriminator output weights
+  # Output variables only for the Generator.  Discriminator wouter weights
   # and biases will begin randomly initialized.
   if model == 'gen':
     softmax_w = [

@@ -89,7 +89,7 @@ class Model:
             {'_key_find': case_key_find,
              '_key_filter': case_key_filter})
         att_expr_decl.resolve_to(recursion_cases)
-        # _val_desc: output scores for choice (for valid expressions)
+        # _val_desc: wouter scores for choice (for valid expressions)
         predicted_scores = td.Record([('input_0', recursion_cases),
                                       ('time_idx', td.Scalar('int32')),
                                       ('batch_idx', td.Scalar('int32'))])
@@ -106,7 +106,7 @@ class Model:
             {'_val_desc': predicted_scores,
              INVALID: dummy_scores})
 
-        # compile and get the output scores
+        # compile and get the wouter scores
         self.compiler = td.Compiler.create(output_scores)
         self.scores = self.compiler.output_tensors[0]
 

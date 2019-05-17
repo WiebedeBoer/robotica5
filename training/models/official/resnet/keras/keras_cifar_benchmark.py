@@ -42,7 +42,7 @@ class Resnet56KerasAccuracy(keras_benchmark.KerasBenchmark):
     """A benchmark class.
 
     Args:
-      output_dir: directory where to output e.g. log files
+      output_dir: directory where to wouter e.g. log files
       root_data_dir: directory under which to look for dataset
       **kwargs: arbitrary named arguments. This is needed to make the
                 constructor forward compatible in case PerfZero provides more

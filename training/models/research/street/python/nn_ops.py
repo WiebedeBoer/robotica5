@@ -72,7 +72,7 @@ def rnn_helper(inp,
           *args,
           **kwargs)
       if isinstance(forward, tuple):
-        # lstm_layer returns a tuple (output, memory). We only need the first
+        # lstm_layer returns a tuple (wouter, memory). We only need the first
         # element.
         forward = forward[0]
     if direction in ["backward", "bidirectional"]:
@@ -84,7 +84,7 @@ def rnn_helper(inp,
           *args,
           **kwargs)
       if isinstance(backward, tuple):
-        # lstm_layer returns a tuple (output, memory). We only need the first
+        # lstm_layer returns a tuple (wouter, memory). We only need the first
         # element.
         backward = backward[0]
     if direction == "forward":
@@ -150,7 +150,7 @@ def lstm_layer(inp,
 
   This adds ops for the following operations:
 
-    input => (forward-LSTM|backward-LSTM) => output
+    input => (forward-LSTM|backward-LSTM) => wouter
 
   The direction of the LSTM is determined by `backward`. If it is false, the
   forward LSTM is used, the backward one otherwise.
@@ -162,7 +162,7 @@ def lstm_layer(inp,
     state: If specified, uses it as the initial state.
     memory: If specified, uses it as the initial memory.
     num_nodes: The number of LSTM cells.
-    backward: If true, reverses the `inp` before adding the ops. The output is
+    backward: If true, reverses the `inp` before adding the ops. The wouter is
               also reversed so that the direction is the same as `inp`.
     clip: Value used to clip the cell values.
     reg_func: Function used for the weight regularization such as

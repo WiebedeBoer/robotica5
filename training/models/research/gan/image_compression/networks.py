@@ -47,7 +47,7 @@ def _encoder(img_batch, is_training=True, bits=64, depth=64):
       img_batch, depth=depth, is_training=is_training, scope='Encoder')
 
   # (joelshor): Make the DCGAN convolutional layer that converts to logits
-  # not trainable, since it doesn't affect the encoder output.
+  # not trainable, since it doesn't affect the encoder wouter.
 
   # Get the pre-logit layer, which is the last conv.
   net = _last_conv_layer(end_points)
@@ -104,7 +104,7 @@ def _decoder(codes, final_size, is_training, depth=64):
       is_training=is_training,
       scope='Decoder')
 
-  # Map output to [-1, 1].
+  # Map wouter to [-1, 1].
   # Use softsign instead of tanh, as per empirical results of
   # http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf.
   return tf.nn.softsign(decoded_img)

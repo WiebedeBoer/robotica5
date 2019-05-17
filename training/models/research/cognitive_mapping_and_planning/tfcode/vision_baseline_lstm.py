@@ -323,7 +323,7 @@ def setup_to_run(m, args, is_training, batch_norm_is_training, summary_mode):
 
   # For lstm_ego, and lstm_image, embed the ego motion, accumulate it into an
   # LSTM, combine with image features and accumulate those in an LSTM. Finally
-  # combine what you get from the image LSTM with the goal to output an action.
+  # combine what you get from the image LSTM with the goal to wouter an action.
   if args.arch.lstm_ego:
     ego_reshaped = preprocess_egomotion(m.input_tensors['step']['incremental_locs'], 
                                         m.input_tensors['step']['incremental_thetas'])
@@ -344,7 +344,7 @@ def setup_to_run(m, args, is_training, batch_norm_is_training, summary_mode):
     init_state_ops += [state_init_op]
     updated_state_ops += [updated_state_op]
 
-    # Combine the output with the vision features.
+    # Combine the wouter with the vision features.
     m.img_ego_op = combine_setup('img_ego', args.arch.combine_type_ego,
                                  m.embed_img, out_op,
                                  args.arch.img_embed_neurons[-1],

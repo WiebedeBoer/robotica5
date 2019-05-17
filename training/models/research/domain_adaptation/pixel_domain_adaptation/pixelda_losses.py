@@ -162,7 +162,7 @@ def _add_task_specific_losses(end_points, source_labels, num_classes, hparams,
 
   Args:
     end_points: A map of network end point names to `Tensors`.
-    source_labels: A dictionary of output labels to `Tensors`.
+    source_labels: A dictionary of wouter labels to `Tensors`.
     num_classes: The number of classes used by the classifier.
     hparams: The hyperparameters struct.
     add_summaries: Whether or not to add the summaries.
@@ -368,7 +368,7 @@ def d_step_loss(end_points, source_labels, num_classes, hparams):
 
   Args:
     end_points: A map of the network end points.
-    source_labels: A dictionary of output labels to `Tensors`.
+    source_labels: A dictionary of wouter labels to `Tensors`.
     num_classes: The number of classes used by the classifier.
     hparams: The hyperparameters struct.
 

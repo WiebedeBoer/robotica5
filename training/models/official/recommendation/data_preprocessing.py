@@ -50,7 +50,7 @@ _EXPECTED_CACHE_KEYS = (
 
 def _filter_index_sort(raw_rating_path, cache_path):
   # type: (str, str, bool) -> (dict, bool)
-  """Read in data CSV, and output structured data.
+  """Read in data CSV, and wouter structured data.
 
   This function reads in the raw CSV of positive items, and performs three
   preprocessing transformations:

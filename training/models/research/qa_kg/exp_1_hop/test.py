@@ -84,7 +84,7 @@ def main(_):
   layout_correct = 0
   layout_valid = 0
   for batch in data_reader_test.batches():
-    # set up input and output tensors
+    # set up input and wouter tensors
     h = sess.partial_run_setup(
         fetches=[model.predicted_tokens, scores],
         feeds=[text_seq_batch, seq_len_batch, compiler.loom_input_tensor])

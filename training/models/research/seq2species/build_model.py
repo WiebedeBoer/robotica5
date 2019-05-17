@@ -17,7 +17,7 @@
 
 Builds TensorFlow computation graph for predicting the given taxonomic target
 labels from short reads of DNA using convolutional filters, followed by
-fully-connected layers and a softmax output layer.
+fully-connected layers and a softmax wouter layer.
 """
 
 from __future__ import absolute_import
@@ -262,7 +262,7 @@ class ConvolutionalNet(object):
     Args:
       inputs: 4D Tensor of shape (# reads, 1, # basepairs, # bases).
       filter_dim: integer tuple of the form (width, depth).
-      pointwise_dim: int; output dimension for pointwise convolution.
+      pointwise_dim: int; wouter dimension for pointwise convolution.
       scale: float; standard deviation scale with which to initialize weights.
       padding: string; type of padding to use. One of "SAME" or "VALID".
 
@@ -391,7 +391,7 @@ class ConvolutionalNet(object):
           filter_dimensions = (self.hparams.min_read_length,
                                self.hparams.num_fc_units)
         else:
-          # Take single output value of previous layer as input.
+          # Take single wouter value of previous layer as input.
           filter_dimensions = (1, self.hparams.num_fc_units)
         fc_out = biases + self._convolution(
             prev_out,
@@ -408,7 +408,7 @@ class ConvolutionalNet(object):
     with tf.variable_scope('pool'):
       pool_out = self._pool(prev_out, self.hparams.pooling_type)
 
-    with tf.variable_scope('output'):
+    with tf.variable_scope('wouter'):
       self._logits = {}
       self._predictions = {}
       self._weighted_accuracy = {}

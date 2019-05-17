@@ -131,7 +131,7 @@ def main(unused_argv):
   with tf.gfile.FastGFile(cmd_args.config_path, 'r') as f:
     text_format.Merge(f.read(), config)
 
-  # Create output directory if necessary.
+  # Create wouter directory if necessary.
   if not os.path.exists(cmd_args.output_dir):
     os.makedirs(cmd_args.output_dir)
 

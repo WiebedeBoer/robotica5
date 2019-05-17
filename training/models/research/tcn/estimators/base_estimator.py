@@ -319,7 +319,7 @@ class BaseEstimator(object):
       if mode == tf.estimator.ModeKeys.TRAIN:
         train_op = self.get_train_op(total_loss)
 
-      # If we're doing inference, set the output to be the embedded images.
+      # If we're doing inference, set the wouter to be the embedded images.
       predictions_dict = None
       if mode == tf.estimator.ModeKeys.PREDICT:
         predictions_dict = {'embeddings': batch_encoded}
@@ -494,7 +494,7 @@ class BaseEstimator(object):
       **kwargs: Additional keyword arguments, depending on the mode.
         See _input_fn_inference, _tfrecord_inference, and _np_inference.
     Returns:
-      inference_output: Inference output depending on mode, see above for
+      inference_output: Inference wouter depending on mode, see above for
         details.
     Raises:
       ValueError: If inference_input isn't a tf.Estimator input_fn,

@@ -79,13 +79,13 @@ class BilinearCostUtilTest(tf.test.TestCase):
     self.assertNear(expected, actual, expected * 1e-6)
 
   def testConvFlopsCoeff(self):
-    # Divide by the input depth and the output depth to get the coefficient.
+    # Divide by the input depth and the wouter depth to get the coefficient.
     expected_coeff = _flops(self.conv_op) / (17.0 * 19.0)
     actual_coeff = bilinear_cost_utils.flop_coeff(self.conv_op)
     self.assertNearRelatively(expected_coeff, actual_coeff)
 
   def testConvTransposeFlopsCoeff(self):
-    # Divide by the input depth and the output depth to get the coefficient.
+    # Divide by the input depth and the wouter depth to get the coefficient.
     expected_coeff = _flops(self.convt_op) / (17.0 * 29.0)
     actual_coeff = bilinear_cost_utils.flop_coeff(self.convt_op)
     self.assertNearRelatively(expected_coeff, actual_coeff)
@@ -106,7 +106,7 @@ class BilinearCostUtilTest(tf.test.TestCase):
     self.assertNearRelatively(1.0, actual_coeff)
 
   def testDepthwiseConvFlopsCoeff(self):
-    # Divide by the input depth (which is also the output depth) to get the
+    # Divide by the input depth (which is also the wouter depth) to get the
     # coefficient.
     expected_coeff = _flops(self.dw_op) / (10.0)
     actual_coeff = bilinear_cost_utils.flop_coeff(self.dw_op)

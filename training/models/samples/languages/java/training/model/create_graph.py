@@ -9,7 +9,7 @@ W = tf.Variable(5., name='W')
 b = tf.Variable(3., name='b')
 
 y = x * W + b
-y = tf.identity(y, name='output')
+y = tf.identity(y, name='wouter')
 
 loss = tf.reduce_mean(tf.square(y - y_))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)

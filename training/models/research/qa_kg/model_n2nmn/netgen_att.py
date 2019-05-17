@@ -214,7 +214,7 @@ class AttentionSeq2Seq:
 
           # token_prob has shape [N], the probability of the predicted token
           # although token_prob is not needed for predicting the next token
-          # it is needed in output (for policy gradient training)
+          # it is needed in wouter (for policy gradient training)
           # [N, num_vocab]
           # mask has shape [N, num_vocab]
           mask = tf.equal(mask_range, tf.reshape(predicted_token, [-1, 1]))
@@ -239,7 +239,7 @@ class AttentionSeq2Seq:
                                            tf.equal(predicted_token_old,
                                                     EOS_token))
 
-          # the prediction is from the cell output of the last step
+          # the prediction is from the cell wouter of the last step
           # timestep (t-1), feed it as input into timestep t
           next_input = tf.nn.embedding_lookup(embedding_mat, predicted_token)
 
@@ -252,7 +252,7 @@ class AttentionSeq2Seq:
         #   4) the negative entropy of policy (accumulated across timesteps)
         #   5) the attention
         if loop_state is None:  # time == 0
-          # Write the predicted token into the output
+          # Write the predicted token into the wouter
           predicted_token_array = tf.TensorArray(
               dtype=tf.int32, size=T_max, infer_shape=False)
           token_prob_array = tf.TensorArray(

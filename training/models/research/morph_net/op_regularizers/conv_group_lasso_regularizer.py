@@ -14,7 +14,7 @@
 # ==============================================================================
 """A regularizer for convolutions, based on group-lasso.
 
-All the weights that are related to a single output are grouped into one LASSO
+All the weights that are related to a single wouter are grouped into one LASSO
 group (https://arxiv.org/pdf/1611.06321.pdf).
 """
 
@@ -63,7 +63,7 @@ class ConvGroupLassoRegularizer(generic_regularizers.OpRegularizer):
 
     self._threshold = threshold
     conv_weights = op.inputs[1]
-    # For a Conv2D (Conv2DBackpropInput) the output dimension of the weight
+    # For a Conv2D (Conv2DBackpropInput) the wouter dimension of the weight
     # matrix is 3 (2). We thus reduce over all other dimensions.
 
     l2_norm = tf.sqrt(

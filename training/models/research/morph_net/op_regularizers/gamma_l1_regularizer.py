@@ -94,7 +94,7 @@ def _group_depthwise_conv_regularizer(op, regularizer, opreg_manager):
   # If its first input doesn't have regularizers, return None. While pruning
   # the depthwise_conv still effectively shut down input channels, fluid_net
   # currently has not implemented a way to interpret it. In particular, the
-  # union of active channels of dw's input and output will always return all
+  # union of active channels of dw's input and wouter will always return all
   # channels.
   # TODO: update the interpretation to discover channels that are
   # effectively pruned by dw.

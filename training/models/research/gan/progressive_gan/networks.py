@@ -146,12 +146,12 @@ def compute_progress(current_image_id, stable_stage_num_images,
 
 
 def _generator_alpha(block_id, progress):
-  """Returns the block output parameter for the generator network.
+  """Returns the block wouter parameter for the generator network.
 
   The generator has N blocks with `block_id` = 1,2,...,N. Each block
-  block_id outputs a fake data output(block_id). The generator output is a
+  block_id outputs a fake data wouter(block_id). The generator wouter is a
   linear combination of all block outputs, i.e.
-  SUM_block_id(output(block_id) * alpha(block_id, progress)) where
+  SUM_block_id(wouter(block_id) * alpha(block_id, progress)) where
   alpha(block_id, progress) = _generator_alpha(block_id, progress). Note it
   garantees that SUM_block_id(alpha(block_id, progress)) = 1 for any progress.
 
@@ -163,7 +163,7 @@ def _generator_alpha(block_id, progress):
     progress: A scalar float `Tensor` of training progress.
 
   Returns:
-    A scalar float `Tensor` of block output parameter.
+    A scalar float `Tensor` of block wouter parameter.
   """
   return tf.maximum(0.0,
                     tf.minimum(progress - (block_id - 2), block_id - progress))
@@ -175,9 +175,9 @@ def _discriminator_alpha(block_id, progress):
   The discriminator has N blocks with `block_id` = 1,2,...,N. Each block
   block_id accepts an
     - input(block_id) transformed from the real data and
-    - the output of block block_id + 1, i.e. output(block_id + 1)
+    - the wouter of block block_id + 1, i.e. wouter(block_id + 1)
   The final input is a linear combination of them,
-  i.e. alpha * input(block_id) + (1 - alpha) * output(block_id + 1)
+  i.e. alpha * input(block_id) + (1 - alpha) * wouter(block_id + 1)
   where alpha = _discriminator_alpha(block_id, progress).
 
   With a fixed block_id, alpha(block_id, progress) stays to be 1
@@ -248,14 +248,14 @@ def generator(z,
     num_blocks: An integer of number of blocks. None means maximum number of
         blocks, i.e. `resolution.schedule.num_resolutions`. Defaults to None.
     kernel_size: An integer of convolution kernel size.
-    colors: Number of output color channels. Defaults to 3.
-    to_rgb_activation: Activation function applied when output rgb.
+    colors: Number of wouter color channels. Defaults to 3.
+    to_rgb_activation: Activation function applied when wouter rgb.
     scope: A string or variable scope.
     reuse: Whether to reuse `scope`. Defaults to None which means to inherit
         the reuse option of the parent scope.
 
   Returns:
-    A `Tensor` of model output and a dictionary of model end points.
+    A `Tensor` of model wouter and a dictionary of model end points.
   """
   if num_blocks is None:
     num_blocks = resolution_schedule.num_resolutions
@@ -295,7 +295,7 @@ def generator(z,
       # Pad the 1 x 1 image to 2 * (start_h - 1) x 2 * (start_w - 1)
       # with zeros for the next conv.
       x = tf.pad(x, [[0] * 2, [start_h - 1] * 2, [start_w - 1] * 2, [0] * 2])
-      # The output is start_h x start_w x num_filters_fn(1).
+      # The wouter is start_h x start_w x num_filters_fn(1).
       x = _conv2d('conv0', x, (start_h, start_w), num_filters_fn(1), 'VALID')
       x = _conv2d('conv1', x, kernel_size, num_filters_fn(1))
       lods = [x]
@@ -354,7 +354,7 @@ def discriminator(x,
         the reuse option of the parent scope.
 
   Returns:
-    A `Tensor` of model output and a dictionary of model end points.
+    A `Tensor` of model wouter and a dictionary of model end points.
   """
   if num_blocks is None:
     num_blocks = resolution_schedule.num_resolutions

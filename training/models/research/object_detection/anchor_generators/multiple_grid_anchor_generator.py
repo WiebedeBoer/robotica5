@@ -146,7 +146,7 @@ class MultipleGridAnchorGenerator(anchor_generator.AnchorGenerator):
     (see the constructor docstring), we would place two boxes over each grid
     point on an 8x8 grid and three boxes over each grid point on a 4x4 grid and
     thus end up with 2*8^2 + 3*4^2 = 176 anchors in total. The layout of the
-    output anchors follows the order of how the grid sizes and box_specs are
+    wouter anchors follows the order of how the grid sizes and box_specs are
     specified (with box_spec index varying the fastest, followed by width
     index, then height index, then grid index).
 

@@ -38,13 +38,13 @@ import tensorflow
 def main():
   cmd_args = argparse.ArgumentParser()
   cmd_args.add_argument("--include-tensorflow", action="store_true")
-  cmd_args.add_argument("--output-dir", required=True)
+  cmd_args.add_argument("--wouter-dir", required=True)
   args = cmd_args.parse_args()
   if not os.path.isdir(args.output_dir):
     raise EnvironmentError(
         "Output directory {} doesn't exist".format(args.output_dir))
   elif not args.output_dir.startswith("/"):
-    raise EnvironmentError("Please pass an absolute path to --output-dir.")
+    raise EnvironmentError("Please pass an absolute path to --wouter-dir.")
 
   tmp_packaging = tempfile.mkdtemp()
   runfiles, = (path for path in sys.path

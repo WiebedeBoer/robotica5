@@ -66,7 +66,7 @@ class Assembler:
   def _assemble_layout_tokens(self, layout_tokens, batch_idx):
     # Every module takes a time_idx as the index from LSTM hidden states
     # (even if it doesn't need it, like _and), and different arity of
-    # attention inputs. The output type can be either attention or answer
+    # attention inputs. The wouter type can be either attention or answer
     #
     # The final assembled expression for each instance is as follows:
     # expr_type :=

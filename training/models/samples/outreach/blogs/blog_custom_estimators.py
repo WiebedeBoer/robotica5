@@ -119,7 +119,7 @@ def my_model_fn(
     logits = tf.layers.Dense(3)(h2)
 
     # class_ids will be the model prediction for the class (Iris flower type)
-    # The output node with the highest value is our prediction
+    # The wouter node with the highest value is our prediction
     predictions = { 'class_ids': tf.argmax(input=logits, axis=1) }
 
     # 1. Prediction mode

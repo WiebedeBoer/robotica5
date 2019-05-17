@@ -65,7 +65,7 @@ class DeeplabModelTest(tf.test.TestCase):
             outputs_to_scales_to_logits = model.multi_scale_logits(
                 inputs, model_options, image_pyramid=image_pyramid)
 
-            # Check computed results for each output type.
+            # Check computed results for each wouter type.
             for output in outputs_to_num_classes:
               scales_to_logits = outputs_to_scales_to_logits[output]
               self.assertListEqual(sorted(scales_to_logits.keys()),
@@ -103,10 +103,10 @@ class DeeplabModelTest(tf.test.TestCase):
         sess.run(tf.global_variables_initializer())
         outputs_to_scales_to_logits = sess.run(outputs_to_scales_to_logits)
 
-        # Check computed results for each output type.
+        # Check computed results for each wouter type.
         for output in outputs_to_num_classes:
           scales_to_logits = outputs_to_scales_to_logits[output]
-          # Expect only one output.
+          # Expect only one wouter.
           self.assertEqual(len(scales_to_logits), 1)
           for logits in scales_to_logits.values():
             self.assertTrue(logits.any())

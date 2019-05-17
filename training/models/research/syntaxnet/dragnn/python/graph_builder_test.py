@@ -719,7 +719,7 @@ class GraphBuilderTest(test_util.TensorFlowTestCase):
           'GetSession', 'SetTracing', 'AttachDataReader', 'ReleaseSession'
       ])
 
-      # Same for the 'traces' output, if that's what you were to call.
+      # Same for the 'traces' wouter, if that's what you were to call.
       self.checkOpOrder('traces', anno['traces'], [
           'GetSession', 'SetTracing', 'AttachDataReader', 'ReleaseSession'
       ])

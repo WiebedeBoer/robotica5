@@ -92,7 +92,7 @@ def make_sgf(board_size, move_history, result_string, ruleset='Chinese',
 
 
 def sgf_prop(value_list):
-  """Converts raw sgf library output to sensible value."""
+  """Converts raw sgf library wouter to sensible value."""
   if value_list is None:
     return None
   if len(value_list) == 1:

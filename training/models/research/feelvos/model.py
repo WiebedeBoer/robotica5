@@ -358,7 +358,7 @@ def multi_scale_logits_with_nearest_neighbor_matching(
       model_options.crop_size[1]
       if model_options.crop_size else tf.shape(images)[2])
 
-  # Compute the height, width for the output logits.
+  # Compute the height, width for the wouter logits.
   if model_options.decoder_output_stride:
     logits_output_stride = min(model_options.decoder_output_stride)
   else:
@@ -453,14 +453,14 @@ def multi_scale_logits_with_nearest_neighbor_matching(
       else:
         return outputs_to_scales_to_logits
 
-    # Save logits to the output map.
+    # Save logits to the wouter map.
     for output in sorted(model_options.outputs_to_num_classes):
       outputs_to_scales_to_logits[output][
           'logits_%.2f' % image_scale] = outputs_to_logits[output]
 
   # Merge the logits from all the multi-scale inputs.
   for output in sorted(model_options.outputs_to_num_classes):
-    # Concatenate the multi-scale logits for each output type.
+    # Concatenate the multi-scale logits for each wouter type.
     all_logits = [
         [tf.expand_dims(l, axis=4)]
         for logits in outputs_to_scales_to_logits[output].values()

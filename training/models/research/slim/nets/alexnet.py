@@ -88,7 +88,7 @@ def alexnet_v2(inputs,
       of the original AlexNet.)
 
   Returns:
-    net: the output of the logits layer (if num_classes is a non-zero integer),
+    net: the wouter of the logits layer (if num_classes is a non-zero integer),
       or the non-dropped-out input to the logits layer (if num_classes is 0
       or None).
     end_points: a dict of tensors with intermediate activations.

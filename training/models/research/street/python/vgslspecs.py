@@ -85,7 +85,7 @@ class VGSLSpecs(object):
           x runs the LSTM in the x-dimension (on data with or without the
              y-dimension).
           y runs the LSTM in the y-dimension (data must have a y dimension).
-          s (optional) summarizes the output in the requested dimension,
+          s (optional) summarizes the wouter in the requested dimension,
              outputting only the final step, collapsing the dimension to a
              single element.
           Examples:
@@ -94,11 +94,11 @@ class VGSLSpecs(object):
           Lfys64 runs a forward-only LSTM in the y-dimension with 64 outputs
                  and collapses the y-dimension to 1 element.
           NOTE that Lbxsn is implemented as (LfxsnLrxsn) since the summaries
-          need to be taken from opposite ends of the output
+          need to be taken from opposite ends of the wouter
         Do[{name}] Insert a dropout layer.
         ============ PLUMBING OPS ============
         [...] Execute ... networks in series (layers).
-        (...) Execute ... networks in parallel, with their output concatenated
+        (...) Execute ... networks in parallel, with their wouter concatenated
           in depth.
         S[{name}]<d>(<a>x<b>)<e>,<f> Splits one dimension, moves one part to
           another dimension.
@@ -111,8 +111,8 @@ class VGSLSpecs(object):
           Eg. S3(3x50)2,3 will split the 150-element depth into 3x50, with the 3
           going to the most significant part of the width, and the 50 part
           staying in depth.
-          This will rearrange a 3x50 output parallel operation to spread the 3
-          output sets over width.
+          This will rearrange a 3x50 wouter parallel operation to spread the 3
+          wouter sets over width.
         Mp[{name}]<y>,<x> Maxpool the input, reducing the (y,x) rectangle to a
           single vector value.
 
@@ -215,7 +215,7 @@ class VGSLSpecs(object):
     index += 1
     layers = []
     num_dims = 0
-    # Each parallel must output the same, including any reduction factor, in
+    # Each parallel must wouter the same, including any reduction factor, in
     # all dimensions except depth.
     # We have to save the starting factors, so they don't get reduced by all
     # the elements of the parallel, only once.

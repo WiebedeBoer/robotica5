@@ -66,7 +66,7 @@ class SsdFeatureExtractorTestBase(test_case.TestCase):
       pad_to_multiple: the nearest multiple to zero pad the input height and
         width dimensions to.
       use_explicit_padding: use 'VALID' padding for convolutions, but prepad
-        inputs so that the output dimensions are the same as if 'SAME' padding
+        inputs so that the wouter dimensions are the same as if 'SAME' padding
         were used.
       use_keras: if True builds a keras-based feature extractor, if False builds
         a slim-based one.

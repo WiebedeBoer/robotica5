@@ -110,7 +110,7 @@ def conv2d(inputs,
 
   Args:
     inputs: a 4D tensor in NHWC format.
-    num_filters_out: the number of output filters.
+    num_filters_out: the number of wouter filters.
     kernel_size: an int specifying the kernel height and width size.
     stride: an int specifying the height and width stride.
     scope: Optional scope for variable_scope.
@@ -149,7 +149,7 @@ def fc(inputs,
   Args:
     inputs: a tensor that the fully connected layer will be applied to. It
       will be reshaped if it is not 2D.
-    num_units_out: the number of output units in the layer.
+    num_units_out: the number of wouter units in the layer.
     scope: Optional scope for variable_scope.
     reuse: whether or not the layer and its variables should be reused.
 

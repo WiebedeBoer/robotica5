@@ -40,7 +40,7 @@ def _sample_patch(image, patch_size):
 
   Args:
     image: A 3D `Tensor` of HWC format.
-    patch_size: A Python scalar.  The output image size.
+    patch_size: A Python scalar.  The wouter image size.
 
   Returns:
     A 3D `Tensor` of HWC format which has the shape of

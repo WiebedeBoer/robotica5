@@ -96,7 +96,7 @@ def main(argv):
   num_images = len(image_list)
   print('done! Found %d images' % num_images)
 
-  # Parse AggregationConfig proto, and select output extension.
+  # Parse AggregationConfig proto, and select wouter extension.
   config = aggregation_config_pb2.AggregationConfig()
   with tf.gfile.GFile(cmd_args.aggregation_config_path, 'r') as f:
     text_format.Merge(f.read(), config)
@@ -117,7 +117,7 @@ def main(argv):
     images_to_box_feature_files = _ReadMappingBasenameToBoxNames(
         cmd_args.index_mapping_path, image_list)
 
-  # Create output directory if necessary.
+  # Create wouter directory if necessary.
   if not os.path.exists(cmd_args.output_aggregation_dir):
     os.makedirs(cmd_args.output_aggregation_dir)
 
@@ -138,7 +138,7 @@ def main(argv):
 
       image_name = image_list[i]
 
-      # Compose output file name, skip extraction for this image if it already
+      # Compose wouter file name, skip extraction for this image if it already
       # exists.
       output_aggregation_filename = os.path.join(
           cmd_args.output_aggregation_dir, image_name + output_extension)
@@ -228,7 +228,7 @@ if __name__ == '__main__':
       Optional CSV file which maps each .delf file name to the index image ID
       and detected box ID. If regional aggregation is performed, this should be
       set. Otherwise, this is ignored.
-      Usually this file is obtained as an output from the
+      Usually this file is obtained as an wouter from the
       `extract_index_boxes_and_features.py` script.
       """)
   parser.add_argument(
@@ -236,7 +236,7 @@ if __name__ == '__main__':
       type=str,
       default='/tmp/aggregation',
       help="""
-      Directory where aggregation output will be written to. Each image's
+      Directory where aggregation wouter will be written to. Each image's
       features will be written to a file with same name, and extension replaced
       by one of
       ['.vlad', '.asmk', '.asmk_star', '.rvlad', '.rasmk', '.rasmk_star'].

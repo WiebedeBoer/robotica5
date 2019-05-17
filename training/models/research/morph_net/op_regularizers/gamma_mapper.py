@@ -74,7 +74,7 @@ def _get_existing_variable(name):
     return None
 
   # Among all cases (partitioned variable, resource variable, or regular one),
-  # we assume that there's either a shape attribute to the op or to its output.
+  # we assume that there's either a shape attribute to the op or to its wouter.
   try:
     shape = tf.TensorShape(op.get_attr('shape'))
   except ValueError:

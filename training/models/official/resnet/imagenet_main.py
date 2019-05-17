@@ -62,7 +62,7 @@ def get_filenames(is_training, data_dir):
 def _parse_example_proto(example_serialized):
   """Parses an Example proto containing a training example of an image.
 
-  The output of the build_image_data.py image preprocessing script is a dataset
+  The wouter of the build_image_data.py image preprocessing script is a dataset
   containing serialized Example protocol buffers. Each Example proto contains
   the following fields (values are included as examples):
 
@@ -246,7 +246,7 @@ class ImagenetModel(resnet_model.Model):
       resnet_size: The number of convolutional layers needed in the model.
       data_format: Either 'channels_first' or 'channels_last', specifying which
         data format to use when setting up the model.
-      num_classes: The number of output classes needed from the model. This
+      num_classes: The number of wouter classes needed from the model. This
         enables users to extend the same model to their own datasets.
       resnet_version: Integer representing which version of the ResNet network
         to use. See README for details. Valid values: [1, 2]

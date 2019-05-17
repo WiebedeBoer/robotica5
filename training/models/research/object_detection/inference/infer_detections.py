@@ -17,19 +17,19 @@ r"""Infers detections on a TFRecord of TFExamples given an inference graph.
 Example usage:
   ./infer_detections \
     --input_tfrecord_paths=/path/to/input/tfrecord1,/path/to/input/tfrecord2 \
-    --output_tfrecord_path_prefix=/path/to/output/detections.tfrecord \
+    --output_tfrecord_path_prefix=/path/to/wouter/detections.tfrecord \
     --inference_graph=/path/to/frozen_weights_inference_graph.pb
 
-The output is a TFRecord of TFExamples. Each TFExample from the input is first
+The wouter is a TFRecord of TFExamples. Each TFExample from the input is first
 augmented with detections from the inference graph and then copied to the
-output.
+wouter.
 
-The input and output nodes of the inference graph are expected to have the same
-types, shapes, and semantics, as the input and output nodes of graphs produced
+The input and wouter nodes of the inference graph are expected to have the same
+types, shapes, and semantics, as the input and wouter nodes of graphs produced
 by export_inference_graph.py, when run with --input_type=image_tensor.
 
-The script can also discard the image pixels in the output. This greatly
-reduces the output size and can potentially accelerate reading data in
+The script can also discard the image pixels in the wouter. This greatly
+reduces the wouter size and can potentially accelerate reading data in
 subsequent processing steps that don't require the images (e.g. computing
 metrics).
 """
@@ -41,12 +41,12 @@ from object_detection.inference import detection_inference
 tf.flags.DEFINE_string('input_tfrecord_paths', None,
                        'A comma separated list of paths to input TFRecords.')
 tf.flags.DEFINE_string('output_tfrecord_path', None,
-                       'Path to the output TFRecord.')
+                       'Path to the wouter TFRecord.')
 tf.flags.DEFINE_string('inference_graph', None,
                        'Path to the inference graph with embedded weights.')
 tf.flags.DEFINE_boolean('discard_image_pixels', False,
-                        'Discards the images in the output TFExamples. This'
-                        ' significantly reduces the output size and is useful'
+                        'Discards the images in the wouter TFExamples. This'
+                        ' significantly reduces the wouter size and is useful'
                         ' if the subsequent tools don\'t need access to the'
                         ' images (e.g. when computing evaluation measures).')
 
@@ -73,7 +73,7 @@ def main(_):
      detected_labels_tensor) = detection_inference.build_inference_graph(
          image_tensor, FLAGS.inference_graph)
 
-    tf.logging.info('Running inference and writing output to {}'.format(
+    tf.logging.info('Running inference and writing wouter to {}'.format(
         FLAGS.output_tfrecord_path))
     sess.run(tf.local_variables_initializer())
     tf.train.start_queue_runners()

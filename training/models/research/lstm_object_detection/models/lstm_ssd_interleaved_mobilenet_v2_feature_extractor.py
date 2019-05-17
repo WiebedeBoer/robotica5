@@ -151,7 +151,7 @@ class LSTMSSDInterleavedMobilenetV2FeatureExtractor(
 
     Args:
       batch_size: input batch size.
-      output_size: output size of the lstm cell, [width, height].
+      output_size: wouter size of the lstm cell, [width, height].
       state_saver: a state saver object with methods `state` and `save_state`.
       state_name: string, the name to use with the state_saver.
     Returns:
@@ -210,7 +210,7 @@ class LSTMSSDInterleavedMobilenetV2FeatureExtractor(
         [batch, height_i, width_i, depth_i]
     Raises:
       ValueError: if interleave_method not recognized or large and small base
-        network output feature maps of different sizes.
+        network wouter feature maps of different sizes.
     """
     preprocessed_inputs = shape_utils.check_min_image_dim(
         33, preprocessed_inputs)

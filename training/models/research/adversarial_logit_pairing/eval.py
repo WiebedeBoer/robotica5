@@ -42,7 +42,7 @@ flags.DEFINE_string('checkpoint_path', None,
                     'this program evaluates only provided checkpoint one time.')
 
 flags.DEFINE_string('output_file', None,
-                    'Name of output file. Used only in single evaluation mode.')
+                    'Name of wouter file. Used only in single evaluation mode.')
 
 flags.DEFINE_string('eval_name', 'default', 'Name for eval subdirectory.')
 

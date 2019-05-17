@@ -50,7 +50,7 @@ flags.DEFINE_integer('batch_size', 4096, 'Batch size')
 
 FLAGS = flags.FLAGS
 
-# Input and output configuration.
+# Input and wouter configuration.
 TEXT_SIZE = 16
 KEY_SIZE = 16
 

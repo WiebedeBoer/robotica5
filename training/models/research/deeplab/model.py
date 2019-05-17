@@ -259,7 +259,7 @@ def multi_scale_logits(images,
     image_pooling_crop_height = model_options.image_pooling_crop_size[0]
     image_pooling_crop_width = model_options.image_pooling_crop_size[1]
 
-  # Compute the height, width for the output logits.
+  # Compute the height, width for the wouter logits.
   if model_options.decoder_output_stride:
     logits_output_stride = min(model_options.decoder_output_stride)
   else:
@@ -325,14 +325,14 @@ def multi_scale_logits(images,
             MERGED_LOGITS_SCOPE] = outputs_to_logits[output]
       return outputs_to_scales_to_logits
 
-    # Save logits to the output map.
+    # Save logits to the wouter map.
     for output in sorted(model_options.outputs_to_num_classes):
       outputs_to_scales_to_logits[output][
           'logits_%.2f' % image_scale] = outputs_to_logits[output]
 
   # Merge the logits from all the multi-scale inputs.
   for output in sorted(model_options.outputs_to_num_classes):
-    # Concatenate the multi-scale logits for each output type.
+    # Concatenate the multi-scale logits for each wouter type.
     all_logits = [
         tf.expand_dims(logits, axis=4)
         for logits in outputs_to_scales_to_logits[output].values()
@@ -601,7 +601,7 @@ def refine_by_decoder(features,
       activation.
     crop_size: A tuple [crop_height, crop_width] specifying whole patch crop
       size.
-    decoder_output_stride: A list of integers specifying the output stride of
+    decoder_output_stride: A list of integers specifying the wouter stride of
       low-level features used in the decoder module.
     decoder_use_separable_conv: Employ separable convolution for decoder or not.
     model_variant: Model variant for feature extraction.
@@ -613,7 +613,7 @@ def refine_by_decoder(features,
       activations better lend themselves to quantized inference.
 
   Returns:
-    Decoder output with size [batch, decoder_height, decoder_width,
+    Decoder wouter with size [batch, decoder_height, decoder_width,
       decoder_channels].
 
   Raises:
@@ -663,7 +663,7 @@ def refine_by_decoder(features,
                     48,
                     1,
                     scope='feature_projection' + str(i) + scope_suffix))
-            # Determine the output size.
+            # Determine the wouter size.
             decoder_height = scale_dimension(crop_size[0], 1.0 / output_stride)
             decoder_width = scale_dimension(crop_size[1], 1.0 / output_stride)
             # Resize to decoder_height/decoder_width.

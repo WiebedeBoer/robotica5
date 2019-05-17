@@ -94,7 +94,7 @@ class HierarchicalRNN(opt.TrainableOptimizer):
       learnable_decay: whether to learn weights that dynamically modulate the
           input scale via RMS style decay
       dynamic_output_scale: whether to learn weights that dynamically modulate
-          the output scale
+          the wouter scale
       use_attention: whether to use attention to train the optimizer
       use_log_objective: whether to train on the log of the objective
       num_gradient_scales: the number of scales to use for gradient history
@@ -178,7 +178,7 @@ class HierarchicalRNN(opt.TrainableOptimizer):
       # get the cell size for the per-parameter RNN (Level 0)
       cell_size = level_sizes[0]
 
-      # Random normal initialization scaled by the output size. This is the
+      # Random normal initialization scaled by the wouter size. This is the
       # scale for the RNN *readouts*. RNN internal weight scale is set in the
       # BiasGRUCell call.
       scale_factor = FLAGS.hrnn_rnn_readout_scale / math.sqrt(cell_size)
@@ -544,7 +544,7 @@ class HierarchicalRNN(opt.TrainableOptimizer):
     """
     # lowest level (per parameter)
     #   input -> gradient for this parameter
-    #   bias -> output from the layer RNN
+    #   bias -> wouter from the layer RNN
     with tf.variable_scope("Layer0_RNN"):
       total_bias = None
       if self.num_layers > 1:
@@ -567,7 +567,7 @@ class HierarchicalRNN(opt.TrainableOptimizer):
     if self.num_layers > 1:
       # middle level (per layer)
       #   input -> average hidden state from each parameter in this layer
-      #   bias -> output from the RNN at the global level
+      #   bias -> wouter from the RNN at the global level
       with tf.variable_scope("Layer1_RNN"):
         if not use_additional_features:
           # Restore old behavior and only add the mean of the new params.
@@ -593,7 +593,7 @@ class HierarchicalRNN(opt.TrainableOptimizer):
   def _compute_rnn_state_projections(self, state, new_param_state,
                                      grads_scaled):
     """Computes the RNN state-based updates to parameters and update steps."""
-    # Compute the update direction (a linear projection of the RNN output).
+    # Compute the update direction (a linear projection of the RNN wouter).
     update_weights = self.update_weights
 
     update_delta = utils.project(new_param_state, update_weights)
@@ -683,7 +683,7 @@ class HierarchicalRNN(opt.TrainableOptimizer):
       lr_param = tf.exp(step_log_lr + param_stepsize_offset)
       lr_attend = tf.exp(step_log_lr) if self.use_attention else lr_param
     else:
-      # Dynamic output scale is off, LR param is always 1.
+      # Dynamic wouter scale is off, LR param is always 1.
       lr_param = 2. * utils.project(new_param_state, self.lr_weights,
                                     bias=self.lr_bias,
                                     activation=tf.nn.sigmoid)

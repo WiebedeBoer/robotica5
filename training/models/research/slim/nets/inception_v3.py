@@ -80,7 +80,7 @@ def inception_v3_base(inputs,
     scope: Optional variable_scope.
 
   Returns:
-    tensor_out: output tensor corresponding to the final_endpoint.
+    tensor_out: wouter tensor corresponding to the final_endpoint.
     end_points: a set of activations for external use, for example summaries or
                 losses.
 

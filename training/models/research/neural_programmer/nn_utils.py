@@ -42,7 +42,7 @@ def LSTMCell(x, mprev, cprev, key, params):
     w: A dictionary of the weights and optional biases as returned
       by LSTMParametersSplit().
     x: Inputs to this cell.
-    mprev: m_{t-1}, the recurrent activations (same as the output)
+    mprev: m_{t-1}, the recurrent activations (same as the wouter)
       from the previous cell.
     cprev: c_{t-1}, the cell activations from the previous cell.
     keep_prob: Keep probability on the input and the outputs of a cell.

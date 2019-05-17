@@ -118,7 +118,7 @@ def process_arch_str(args, arch_str):
     args.arch.img_embed_neurons = [1024, 512, 256]
   
   elif exp_ver == 'v2':
-    # LSTM at the output on top of multiple interactions.
+    # LSTM at the wouter on top of multiple interactions.
     args.arch.combine_type = 'multiply'
     args.arch.goal_embed_neurons = [64, 8]
     args.arch.img_embed_neurons = [1024, 512, 256*8]

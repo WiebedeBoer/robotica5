@@ -87,7 +87,7 @@ def transform_input_data(tensor_dict,
     merge_multiple_boxes: (optional) whether to merge multiple groundtruth boxes
       and classes for a given image if the boxes are exactly the same.
     retain_original_image: (optional) whether to retain original image in the
-      output dictionary.
+      wouter dictionary.
     use_multiclass_scores: whether to use multiclass scores as
       class targets instead of one-hot encoding of `groundtruth_classes`.
     use_bfloat16: (optional) a bool, whether to use bfloat16 in training.
@@ -310,7 +310,7 @@ def augment_input_data(tensor_dict, data_augmentation_options):
     tensor_dict: A dictionary of input tensors keyed by fields.InputDataFields.
     data_augmentation_options: A list of tuples, where each tuple contains a
       function and a dictionary that contains arguments and their values.
-      Usually, this is the output of core/preprocessor.build.
+      Usually, this is the wouter of core/preprocessor.build.
 
   Returns:
     A dictionary of tensors obtained by applying data augmentation ops to the

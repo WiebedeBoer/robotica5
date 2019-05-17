@@ -69,7 +69,7 @@ def generator(inputs, targets):
 def discriminator(input_net, class_num):
   """Discriminator Module.
 
-  Piece everything together and reshape the output source tensor
+  Piece everything together and reshape the wouter source tensor
 
   PyTorch Version:
   https://github.com/yunjey/StarGAN/blob/fbdb6a6ce2a4a92e1dc034faec765e0dbe4b8164/model.py#L63

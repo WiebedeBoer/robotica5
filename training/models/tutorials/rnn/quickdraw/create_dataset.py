@@ -91,9 +91,9 @@ def convert_data(trainingdata_dir,
    trainingdata_dir: path to the directory containin the training data.
      The training data is stored in that directory as ndjson files.
    observations_per_class: the number of items to load per class.
-   output_file: path where to write the output.
+   output_file: path where to write the wouter.
    classnames: array with classnames - is auto created if not passed in.
-   output_shards: the number of shards to write the output in.
+   output_shards: the number of shards to write the wouter in.
    offset: the number of items to skip at the beginning of each file.
 
   Returns:
@@ -190,7 +190,7 @@ if __name__ == "__main__":
       "--output_path",
       type=str,
       default="",
-      help="Directory where to store the output TFRecord files.")
+      help="Directory where to store the wouter TFRecord files.")
   parser.add_argument(
       "--train_observations_per_class",
       type=int,
@@ -205,7 +205,7 @@ if __name__ == "__main__":
       "--output_shards",
       type=int,
       default=10,
-      help="Number of shards for the output.")
+      help="Number of shards for the wouter.")
 
   FLAGS, unparsed = parser.parse_known_args()
   tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)

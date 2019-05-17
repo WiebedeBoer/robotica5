@@ -79,7 +79,7 @@ def _trim_and_decode(ids, subtokenizer):
 def translate_file(
     estimator, subtokenizer, input_file, output_file=None,
     print_all_translations=True):
-  """Translate lines in file, and save to output file if specified.
+  """Translate lines in file, and save to wouter file if specified.
 
   Args:
     estimator: tf.Estimator used to generate the translations.
@@ -90,7 +90,7 @@ def translate_file(
     print_all_translations: If true, all translations are printed to stdout.
 
   Raises:
-    ValueError: if output file is invalid.
+    ValueError: if wouter file is invalid.
   """
   batch_size = _DECODE_BATCH_SIZE
 
@@ -128,7 +128,7 @@ def translate_file(
   # Write translations in the order they appeared in the original file.
   if output_file is not None:
     if tf.io.gfile.isdir(output_file):
-      raise ValueError("File output is a directory, will not save outputs to "
+      raise ValueError("File wouter is a directory, will not save outputs to "
                        "file.")
     tf.logging.info("Writing to file %s" % output_file)
     with tf.io.gfile.GFile(output_file, "w") as f:
@@ -186,7 +186,7 @@ def main(unused_argv):
     output_file = None
     if FLAGS.file_out is not None:
       output_file = os.path.abspath(FLAGS.file_out)
-      tf.logging.info("File output specified: %s" % output_file)
+      tf.logging.info("File wouter specified: %s" % output_file)
 
     translate_file(estimator, subtokenizer, input_file, output_file)
 
@@ -224,7 +224,7 @@ def define_translate_flags():
       name="file", default=None,
       help=flags_core.help_wrap(
           "File containing text to translate. Translation will be printed to "
-          "console and, if --file_out is provided, saved to an output file."))
+          "console and, if --file_out is provided, saved to an wouter file."))
   flags.DEFINE_string(
       name="file_out", default=None,
       help=flags_core.help_wrap(

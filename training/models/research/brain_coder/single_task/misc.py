@@ -60,7 +60,7 @@ def bf_tokens_to_string(bf_tokens, truncate=True):
 
   Args:
     bf_tokens: Python list of ints representing the code string.
-    truncate: If true, the output string will end at the first EOS token.
+    truncate: If true, the wouter string will end at the first EOS token.
         If false, the entire token list is converted to string.
 
   Returns:

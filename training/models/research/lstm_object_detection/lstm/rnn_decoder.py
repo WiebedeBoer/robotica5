@@ -30,7 +30,7 @@ def rnn_decoder(decoder_inputs,
     decoder_inputs: A list of 4D Tensors with shape [batch_size x input_size].
     initial_state: 2D Tensor with shape [batch_size x cell.state_size].
     cell: rnn_cell.RNNCell defining the cell function and size.
-    loop_function: If not None, this function will be applied to the i-th output
+    loop_function: If not None, this function will be applied to the i-th wouter
       in order to generate the i+1-st input, and decoder_inputs will be ignored,
       except for the first element ("GO" symbol). This can be used for decoding,
       but also for training to emulate http://arxiv.org/abs/1506.03099.
@@ -192,7 +192,7 @@ def generate_action(selection_strategy, local_step, sequence_step,
 def select_inputs(decoder_inputs, action, local_step, get_alt_inputs=False):
   """Selects sequence from decoder_inputs based on 1D actions.
 
-  Given multiple input batches, creates a single output batch by
+  Given multiple input batches, creates a single wouter batch by
   selecting from the action[i]-ith input for the i-th batch element.
 
   Args:
@@ -203,7 +203,7 @@ def select_inputs(decoder_inputs, action, local_step, get_alt_inputs=False):
     get_alt_inputs: Whether the non-chosen inputs should also be returned.
 
   Returns:
-    The constructed output. Also outputs the elements that were not chosen
+    The constructed wouter. Also outputs the elements that were not chosen
     if get_alt_inputs is True, otherwise None.
 
   Raises:

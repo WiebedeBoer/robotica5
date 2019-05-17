@@ -26,7 +26,7 @@ im = im / 255.
 im = im.reshape(1, 1200, 1600, 3)
 im = im.astype('float32')
 
-# %% Let the output size of the transformer be half the image size.
+# %% Let the wouter size of the transformer be half the image size.
 out_size = (600, 800)
 
 # %% Simulate batch
@@ -40,7 +40,7 @@ x = tf.cast(batch, 'float32')
 # %% Create localisation network and convolutional layer
 with tf.variable_scope('spatial_transformer_0'):
 
-    # %% Create a fully-connected layer with 6 output nodes
+    # %% Create a fully-connected layer with 6 wouter nodes
     n_fc = 6
     W_fc1 = tf.Variable(tf.zeros([1200 * 1600 * 3, n_fc]), name='W_fc1')
 

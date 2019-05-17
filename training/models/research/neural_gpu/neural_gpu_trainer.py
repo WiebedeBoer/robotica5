@@ -125,7 +125,7 @@ def read_data(source_path, target_path, buckets, max_size=None, print_out=True):
     source_path: path to the files with token-ids for the source language.
     target_path: path to the file with token-ids for the target language;
       it must be aligned with the source file: n-th line contains the desired
-      output for n-th line from the source_path.
+      wouter for n-th line from the source_path.
     buckets: the buckets to use.
     max_size: maximum number of lines to read, all other will be ignored;
       if 0 or None, data files will be read completely (no limit).

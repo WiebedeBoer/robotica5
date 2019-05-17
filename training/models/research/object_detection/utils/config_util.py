@@ -51,7 +51,7 @@ def get_image_resizer_config(model_config):
 
 
 def get_spatial_image_size(image_resizer_config):
-  """Returns expected spatial size of the output image from a given config.
+  """Returns expected spatial size of the wouter image from a given config.
 
   Args:
     image_resizer_config: An image_resizer_pb2.ImageResizer.
@@ -315,8 +315,8 @@ def _check_and_convert_legacy_input_config_key(key):
       is_valid_input_config_key is true. None if is_valid_input_config_key is
       false.
     input_name: always returns None since legacy input config key never
-      specifies the target input config. Keeping this output only to match the
-      output form defined for input config update.
+      specifies the target input config. Keeping this wouter only to match the
+      wouter form defined for input config update.
     field_name: the field name in input config. `key` itself if
       is_valid_input_config_key is false.
   """

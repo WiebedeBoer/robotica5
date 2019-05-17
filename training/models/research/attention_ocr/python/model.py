@@ -193,7 +193,7 @@ class Model(object):
 
     Returns:
       A tensor of shape [batch_size, OH, OW, N], where OWxOH is resolution of
-      output feature map and N is number of output features (depends on the
+      wouter feature map and N is number of wouter features (depends on the
       network architecture).
     """
     mparams = self._mparams['conv_tower_fn']
@@ -266,7 +266,7 @@ class Model(object):
     return net
 
   def pool_views_fn(self, nets):
-    """Combines output of multiple convolutional towers into a single tensor.
+    """Combines wouter of multiple convolutional towers into a single tensor.
 
     It stacks towers one on top another (in height dim) in a 4x1 grid.
     The order is arbitrary design choice and shouldn't matter much.

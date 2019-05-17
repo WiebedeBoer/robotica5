@@ -42,10 +42,10 @@ def my_dnn_regression_fn(features, labels, mode, params):
     # Add a hidden layer, densely connected on top of the previous layer.
     top = tf.layers.dense(inputs=top, units=units, activation=tf.nn.relu)
 
-  # Connect a linear output layer on top.
+  # Connect a linear wouter layer on top.
   output_layer = tf.layers.dense(inputs=top, units=1)
 
-  # Reshape the output layer to a 1-dim Tensor to return predictions
+  # Reshape the wouter layer to a 1-dim Tensor to return predictions
   predictions = tf.squeeze(output_layer, 1)
 
   if mode == tf.estimator.ModeKeys.PREDICT:

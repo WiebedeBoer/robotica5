@@ -163,7 +163,7 @@ flags.DEFINE_multi_integer('atrous_rates', None,
                            'Atrous rates for atrous spatial pyramid pooling.')
 
 flags.DEFINE_integer('output_stride', 16,
-                     'The ratio of input to output spatial resolution.')
+                     'The ratio of input to wouter spatial resolution.')
 
 # Hard example mining related flags.
 flags.DEFINE_integer(
@@ -200,7 +200,7 @@ def _build_deeplab(iterator, outputs_to_num_classes, ignore_label):
 
   Args:
     iterator: An iterator of type tf.data.Iterator for images and labels.
-    outputs_to_num_classes: A map from output type to the number of classes. For
+    outputs_to_num_classes: A map from wouter type to the number of classes. For
       example, for the task of semantic segmentation with 21 semantic classes,
       we would have outputs_to_num_classes['semantic'] = 21.
     ignore_label: Ignore label.

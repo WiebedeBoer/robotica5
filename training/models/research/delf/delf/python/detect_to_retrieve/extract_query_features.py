@@ -84,7 +84,7 @@ def main(argv):
   with tf.gfile.GFile(cmd_args.delf_config_path, 'r') as f:
     text_format.Merge(f.read(), config)
 
-  # Create output directory if necessary.
+  # Create wouter directory if necessary.
   if not os.path.exists(cmd_args.output_features_dir):
     os.makedirs(cmd_args.output_features_dir)
 

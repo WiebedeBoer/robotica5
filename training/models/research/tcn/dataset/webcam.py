@@ -206,7 +206,7 @@ def persist(write_queue, view_dirs):
   Args:
     write_queue: A multiprocessing.Queue holding lists of concurrent images;
       one image per view.
-    view_dirs: A list of strings, holding the output image directories for each
+    view_dirs: A list of strings, holding the wouter image directories for each
       view.
   """
   timestep = 0
@@ -329,7 +329,7 @@ def setup_paths():
   # Get one directory per concurrent view and a sequence name.
   view_dirs, seqname = get_view_dirs(vidbase, tmp_imagedir)
 
-  # Get an output path to each view's video.
+  # Get an wouter path to each view's video.
   vid_paths = []
   for idx, _ in enumerate(view_dirs):
     vid_path = os.path.join(vidbase, '%s_view%d.mp4' % (seqname, idx))
@@ -431,7 +431,7 @@ def launch_images_to_videos(view_dirs, vid_paths, debug_path):
 def main(_):
   # Initialize the camera capture objects.
   cameras = get_cameras()
-  # Get one output directory per view.
+  # Get one wouter directory per view.
   view_dirs, vid_paths, debug_path = setup_paths()
   try:
     # Wait for user input.

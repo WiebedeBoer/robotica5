@@ -95,18 +95,18 @@ def bottleneck(inputs,
 
   Args:
     inputs: A tensor of size [batch, height, width, channels].
-    depth: The depth of the ResNet unit output.
+    depth: The depth of the ResNet unit wouter.
     depth_bottleneck: The depth of the bottleneck layers.
     stride: The ResNet unit's stride. Determines the amount of downsampling of
-      the units output compared to its input.
+      the units wouter compared to its input.
     rate: An integer, rate for atrous convolution.
-    outputs_collections: Collection to add the ResNet unit output.
+    outputs_collections: Collection to add the ResNet unit wouter.
     scope: Optional variable_scope.
     use_bounded_activations: Whether or not to use bounded activations. Bounded
       activations better lend themselves to quantized inference.
 
   Returns:
-    The ResNet unit's output.
+    The ResNet unit's wouter.
   """
   with tf.variable_scope(scope, 'bottleneck_v1', [inputs]) as sc:
     depth_in = slim.utils.last_dimension(inputs.get_shape(), min_rank=4)
@@ -157,15 +157,15 @@ def resnet_v1(inputs,
   block instantiations that produce ResNets of various depths.
 
   Training for image classification on Imagenet is usually done with [224, 224]
-  inputs, resulting in [7, 7] feature maps at the output of the last ResNet
+  inputs, resulting in [7, 7] feature maps at the wouter of the last ResNet
   block for the ResNets defined in [1] that have nominal stride equal to 32.
   However, for dense prediction tasks we advise that one uses inputs with
   spatial dimensions that are multiples of 32 plus 1, e.g., [321, 321]. In
-  this case the feature maps at the ResNet output will have spatial shape
+  this case the feature maps at the ResNet wouter will have spatial shape
   [(height - 1) / output_stride + 1, (width - 1) / output_stride + 1]
   and corners exactly aligned with the input image corners, which greatly
   facilitates alignment of the features to the image. Using as input [225, 225]
-  images results in [8, 8] feature maps at the output of the last ResNet block.
+  images results in [8, 8] feature maps at the wouter of the last ResNet block.
 
   For dense prediction tasks, the ResNet needs to run in fully-convolutional
   (FCN) mode and global_pool needs to be set to False. The ResNets in [1, 2] all
@@ -184,15 +184,15 @@ def resnet_v1(inputs,
       from an outer slim.arg_scope.
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     include_root_block: If True, include the initial convolution followed by
       max-pooling, if False excludes it.
     spatial_squeeze: if True, logits is of shape [B, C], if false logits is
         of shape [B, 1, 1, C], where B is batch_size and C is number of classes.
         To use this parameter, the input images must be smaller than 300x300
-        pixels, in which case the output logit layer does not contain spatial
+        pixels, in which case the wouter logit layer does not contain spatial
         information and can be removed.
     store_non_strided_activations: If True, we compute non-strided (undecimated)
       activations at the last unit of each block and store them in the
@@ -209,7 +209,7 @@ def resnet_v1(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is 0 or None,
-      then net is the output of the last ResNet block, potentially after global
+      then net is the wouter of the last ResNet block, potentially after global
       average pooling. If num_classes a non-zero integer, net contains the
       pre-softmax activations.
     end_points: A dictionary from components of the network to the corresponding

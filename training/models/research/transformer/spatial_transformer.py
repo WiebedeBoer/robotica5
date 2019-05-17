@@ -26,13 +26,13 @@ def transformer(U, theta, out_size, name='SpatialTransformer', **kwargs):
     Parameters
     ----------
     U : float
-        The output of a convolutional net should have the
+        The wouter of a convolutional net should have the
         shape [num_batch, height, width, num_channels].
     theta: float
-        The output of the
+        The wouter of the
         localisation network should be [num_batch, 6].
     out_size: tuple of two ints
-        The size of the output of the network (height, width)
+        The size of the wouter of the network (height, width)
 
     References
     ----------
@@ -193,7 +193,7 @@ def batch_transformer(U, thetas, out_size, name='BatchSpatialTransformer'):
     thetas : float
         a set of transformations for each input [num_batch,num_transforms,6]
     out_size : int
-        the size of the output [out_height,out_width]
+        the size of the wouter [out_height,out_width]
 
     Returns: float
         Tensor of size [num_batch*num_transforms,out_height,out_width,num_channels]

@@ -235,7 +235,7 @@ class RFCNMetaArch(faster_rcnn_meta_arch.FasterRCNNMetaArch):
                             anchors,
                             image_shape,
                             true_image_shapes):
-    """Predicts the output tensors from 2nd stage of R-FCN.
+    """Predicts the wouter tensors from 2nd stage of R-FCN.
 
     Args:
       rpn_box_encodings: 3-D float tensor of shape

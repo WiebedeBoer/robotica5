@@ -59,7 +59,7 @@ flags.DEFINE_integer('kernel_size', 3, 'Convolution kernel size.')
 flags.DEFINE_integer('colors', 3, 'Number of image channels.')
 
 flags.DEFINE_bool('to_rgb_use_tanh_activation', False,
-                  'Whether to apply tanh activation when output rgb.')
+                  'Whether to apply tanh activation when wouter rgb.')
 
 flags.DEFINE_integer('stable_stage_num_images', 1000,
                      'Number of images in the stable stage.')

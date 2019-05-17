@@ -279,7 +279,7 @@ def define_ncf_flags():
   flags.DEFINE_bool(
       name="output_ml_perf_compliance_logging", default=False,
       help=flags_core.help_wrap(
-          "If set, output the MLPerf compliance logging. This is only useful "
+          "If set, wouter the MLPerf compliance logging. This is only useful "
           "if one is running the model for MLPerf. See "
           "https://github.com/mlperf/policies/blob/master/training_rules.adoc"
           "#submission-compliance-logs for details. This uses sudo and so may "

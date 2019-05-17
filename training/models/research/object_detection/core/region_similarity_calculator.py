@@ -120,7 +120,7 @@ class ThresholdedIouSimilarity(RegionSimilarityCalculator):
 
   This class computes pairwise similarity between two BoxLists based on IOU and
   a 'score' present in boxlist1. If IOU > threshold, then the entry in the
-  output pairwise tensor will contain `score`, otherwise 0.
+  wouter pairwise tensor will contain `score`, otherwise 0.
   """
 
   def __init__(self, iou_threshold=0):

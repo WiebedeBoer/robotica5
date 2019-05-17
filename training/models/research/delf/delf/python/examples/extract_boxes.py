@@ -135,13 +135,13 @@ def _FilterBoxesByScore(boxes, scores, class_indices, score_threshold):
 
 
 def _PlotBoxesAndSaveImage(image, boxes, output_path):
-  """Plot boxes on image and save to output path.
+  """Plot boxes on image and save to wouter path.
 
   Args:
     image: Numpy array containing image.
     boxes: [N, 4] float array denoting bounding box coordinates, in format [top,
       left, bottom, right].
-    output_path: String containing output path.
+    output_path: String containing wouter path.
   """
   height = image.shape[0]
   width = image.shape[1]
@@ -178,7 +178,7 @@ def main(argv):
   num_images = len(image_paths)
   tf.logging.info('done! Found %d images', num_images)
 
-  # Create output directories if necessary.
+  # Create wouter directories if necessary.
   if not os.path.exists(cmd_args.output_dir):
     os.makedirs(cmd_args.output_dir)
   if cmd_args.output_viz_dir and not os.path.exists(cmd_args.output_viz_dir):

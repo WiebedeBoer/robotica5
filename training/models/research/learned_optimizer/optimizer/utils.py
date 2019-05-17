@@ -49,7 +49,7 @@ def affine(inputs, output_size, scope="Affine", scale=0.1, vec_mean=0.,
 
   Args:
     inputs: List of tensors with shape (batch_size, input_size)
-    output_size: Size (dimension) of the output
+    output_size: Size (dimension) of the wouter
     scope: Variable scope for these parameters (default: "Affine")
     scale: Initial weight scale for the matrix parameters (default: 0.1),
       this constant is divided by the sqrt of the input size to get the
@@ -60,7 +60,7 @@ def affine(inputs, output_size, scope="Affine", scale=0.1, vec_mean=0.,
     random_seed: Random seed for random initializers. (Default: None)
 
   Returns:
-    output: Tensor with shape (batch_size, output_size)
+    wouter: Tensor with shape (batch_size, output_size)
   """
 
   # Concatenate the input arguments.

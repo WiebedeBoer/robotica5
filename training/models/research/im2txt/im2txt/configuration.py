@@ -70,7 +70,7 @@ class ModelConfig(object):
     # Scale used to initialize model variables.
     self.initializer_scale = 0.08
 
-    # LSTM input and output dimensionality, respectively.
+    # LSTM input and wouter dimensionality, respectively.
     self.embedding_size = 512
     self.num_lstm_units = 512
 

@@ -77,7 +77,7 @@ def multiclass_non_max_suppression(boxes,
     boundaries: (optional) a [k, q, boundary_height, boundary_width] float32
       tensor containing box boundaries. `q` can be either number of classes or 1
       depending on whether a separate boundary is predicted per class.
-    pad_to_max_output_size: If true, the output nmsed boxes are padded to be of
+    pad_to_max_output_size: If true, the wouter nmsed boxes are padded to be of
       length `max_size_per_class`. Defaults to false.
     additional_fields: (optional) If not None, a dictionary that maps keys to
       tensors whose first dimensions are all of size `k`. After non-maximum
@@ -283,7 +283,7 @@ def batch_multiclass_non_max_suppression(boxes,
     additional_fields: (optional) If not None, a dictionary that maps keys to
       tensors whose dimensions are [batch_size, num_anchors, ...].
     scope: tf scope name.
-    use_static_shapes: If true, the output nmsed boxes are padded to be of
+    use_static_shapes: If true, the wouter nmsed boxes are padded to be of
       length `max_size_per_class` and it doesn't clip boxes to max_total_size.
       Defaults to false.
     parallel_iterations: (optional) number of batch items to process in
@@ -358,7 +358,7 @@ def batch_multiclass_non_max_suppression(boxes,
       additional_fields = {}
 
     def _single_image_nms_fn(args):
-      """Runs NMS on a single image and returns padded output.
+      """Runs NMS on a single image and returns padded wouter.
 
       Args:
         args: A list of tensors consisting of the following:

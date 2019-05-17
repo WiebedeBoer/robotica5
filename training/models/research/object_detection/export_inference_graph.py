@@ -30,7 +30,7 @@ specified option.
     serialized TFExample protos. Image resolutions are expected to be the same
     if more than 1 image is provided.
 
-and the following output nodes returned by the model.postprocess(..):
+and the following wouter nodes returned by the model.postprocess(..):
   * `num_detections`: Outputs float32 tensors of the form [batch]
       that specifies the number of valid boxes per image in the batch.
   * `detection_boxes`: Outputs float32 tensors of the form
@@ -62,7 +62,7 @@ python export_inference_graph \
     --trained_checkpoint_prefix path/to/model.ckpt \
     --output_directory path/to/exported_model_directory
 
-The expected output would be in the directory
+The expected wouter would be in the directory
 path/to/exported_model_directory (which is created if it does not exist)
 with contents:
  - inference_graph.pbtxt

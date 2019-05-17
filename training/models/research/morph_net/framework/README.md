@@ -224,30 +224,9 @@ class OpRegularizerManager(object):
 
   def __init__(self, ops, op_regularizer_factory_dict,
                create_grouping_regularizer=None):
-    """Creates an instance.
+    wouter
 
-    Args:
-      ops: A list of tf.Operation. An OpRegularizer will be created for all the
-        ops in `ops`, and recursively for all ops they depend on via data
-        dependency. Typically `ops` would contain a single tf.Operation, which
-        is the output of the network.
-      op_regularizer_factory_dict: A dictionary, where the keys are strings
-        representing TensorFlow Op types, and the values are callables that
-        create the respective OpRegularizers. For every op encountered during
-        the recursion, if op.type is in op_regularizer_factory_dict, the
-        respective callable will be used to create an OpRegularizer. The
-        signature of the callables is the following args;
-          op; a tf.Operation for which to create a regularizer.
-          opreg_manager; A reference to an OpRegularizerManager object. Can be
-            None if the callable does not need access to OpRegularizerManager.
-      create_grouping_regularizer: A callable that has the signature of
-        grouping_regularizers.MaxGroupingRegularizer's constructor. Will be
-        called whenever a grouping op (see _GROUPING_OPS) is encountered.
-        Defaults to MaxGroupingRegularizer if None.
 
-    Raises:
-      ValueError: If ops is not a list.
-    """
     ...
 
   def get_regularizer(self, op):

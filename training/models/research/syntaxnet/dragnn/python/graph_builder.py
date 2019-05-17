@@ -300,13 +300,13 @@ class MasterBuilder(object):
 
     Args:
       handle: Handle to ComputeSession on which all computation until now has
-          depended. It will be released and assigned to the output 'run'.
+          depended. It will be released and assigned to the wouter 'run'.
       inputs: list of nodes we want to pass through without any dependencies.
       outputs: list of nodes whose access should ensure the ComputeSession is
           safely released.
 
     Returns:
-      A dictionary of both input and output nodes.
+      A dictionary of both input and wouter nodes.
     """
     with tf.control_dependencies(outputs.values()):
       with tf.name_scope('ComputeSession'):
@@ -686,7 +686,7 @@ class MasterBuilder(object):
       build_runtime_graph: Whether to build a graph for use by the runtime.
 
     Returns:
-      A dictionary of input and output nodes.
+      A dictionary of input and wouter nodes.
     """
     with tf.name_scope(name_scope):
       handle, input_batch = self._get_session_with_reader(enable_tracing)

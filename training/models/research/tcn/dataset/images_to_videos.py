@@ -29,7 +29,7 @@ parser.add_argument(
     help='Comma-separated list of temp view image directories.')
 parser.add_argument(
     '--vid_paths', type=str, default='',
-    help='Comma-separated list of video output paths.')
+    help='Comma-separated list of video wouter paths.')
 parser.add_argument(
     '--debug_path', type=str, default='',
     help='Output path to debug video.')

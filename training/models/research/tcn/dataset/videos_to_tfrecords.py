@@ -62,7 +62,7 @@ tf.app.flags.DEFINE_integer('resize_min_edge', 0,
 tf.app.flags.DEFINE_integer('rotate', 0, '''rotate the image in degrees.''')
 tf.app.flags.DEFINE_string('rotate_if_matching', None,
                            'rotate only if video path matches regexp.')
-tf.app.flags.DEFINE_string('output_dir', '', 'output directory for the dataset')
+tf.app.flags.DEFINE_string('output_dir', '', 'wouter directory for the dataset')
 tf.app.flags.DEFINE_integer(
     'max_per_shard', -1, 'max # of frames per data chunk')
 tf.app.flags.DEFINE_integer('expected_views', 2, 'expected number of views')
@@ -70,7 +70,7 @@ tf.app.flags.DEFINE_integer('log_frequency', 50, 'frequency of logging')
 tf.app.flags.DEFINE_integer(
     'max_views_discrepancy', 100,
     'Maximum length difference (in frames) allowed between views')
-tf.app.flags.DEFINE_boolean('overwrite', False, 'overwrite output files')
+tf.app.flags.DEFINE_boolean('overwrite', False, 'overwrite wouter files')
 FLAGS = tf.app.flags.FLAGS
 
 feature = tf.train.Feature
@@ -433,13 +433,13 @@ def AddSequences():
       ok, num_frames = CheckRecord(record_name, sequence)
       if ok:
         progress.Add(num_frames)
-        tf.logging.info('Skipping existing output file: %s' % record_name)
+        tf.logging.info('Skipping existing wouter file: %s' % record_name)
         continue
       else:
         tf.logging.info('File does not match sequence, reprocessing...')
     output_dir = os.path.dirname(record_name)
     if not tf.gfile.Exists(output_dir):
-      tf.logging.info('Creating output directory: %s' % output_dir)
+      tf.logging.info('Creating wouter directory: %s' % output_dir)
       tf.gfile.MakeDirs(output_dir)
     output_list.append(record_name)
     tf.logging.info('Writing to ' + record_name)

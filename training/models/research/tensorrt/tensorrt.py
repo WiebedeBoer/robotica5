@@ -111,7 +111,7 @@ def batch_from_random(batch_size, output_height=224, output_width=224,
     batch_size: int, the size of the desired batch of data
     output_height: int, final height of data
     output_width: int, final width of data
-    num_channels: int, depth of output data
+    num_channels: int, depth of wouter data
 
   Returns:
     Float array containing random numbers with shape
@@ -176,7 +176,7 @@ def convert_savedmodel_to_frozen_graph(savedmodel_dir, output_dir):
       and variables for a SavedModel. This is equivalent to the subdirectory
       that is created under the directory specified by --export_dir when
       running an Official Model.
-    output_dir: string representing path to the output directory for saving
+    output_dir: string representing path to the wouter directory for saving
       the frozen graph.
 
   Returns:
@@ -223,7 +223,7 @@ def get_trt_graph(graph_name, graph_def, precision_mode, output_dir,
     precision_mode: string, the precision that TensorRT should convert into.
       Options- FP32, FP16, INT8.
     output_dir: string, the path to where files should be written.
-    output_node: string, the names of the output node that will
+    output_node: string, the names of the wouter node that will
       be returned during inference.
     batch_size: int, the number of examples that will be predicted at a time.
     workspace_size: int, size in megabytes that can be used during conversion.
@@ -276,13 +276,13 @@ def time_graph(graph_def, data, input_node, output_node, num_loops=100):
       predicted.
     input_node: string, the label of the input node where data will enter the
       graph.
-    output_node: string, the names of the output node that will
+    output_node: string, the names of the wouter node that will
       be returned during inference.
     num_loops: int, number of batches that should run through for timing.
 
   Returns:
     A tuple consisting of a list of num_loops inference times, and the
-    predictions that were output for the batch.
+    predictions that were wouter for the batch.
   """
   tf.logging.info("Starting execution")
 
@@ -296,7 +296,7 @@ def time_graph(graph_def, data, input_node, output_node, num_loops=100):
         input_map={input_node: iterator.get_next()},
         return_elements=[output_node]
     )
-    # Unwrap the returned output node. For now, we assume we only
+    # Unwrap the returned wouter node. For now, we assume we only
     # want the tensor with index `:0`, which is the 0th element of the
     # `.outputs` list.
     output = return_tensors[0].outputs[0]
@@ -521,14 +521,14 @@ class TensorRTParser(argparse.ArgumentParser):
 
     self.add_argument(
         "--output_dir", "-od", default="/tmp",
-        help="[default: %(default)s] The location where output files will "
+        help="[default: %(default)s] The location where wouter files will "
         "be saved.",
         metavar="<OD>",
     )
 
     self.add_argument(
         "--output_node", "-on", default="softmax_tensor",
-        help="[default: %(default)s] The names of the graph output node "
+        help="[default: %(default)s] The names of the graph wouter node "
         "that should be used when retrieving results. Assumed to be a softmax.",
         metavar="<ON>",
     )
@@ -597,7 +597,7 @@ class TensorRTParser(argparse.ArgumentParser):
         "--ids_are_one_indexed", action="store_true",
         help="[default: %(default)s] Some ResNet models include a `background` "
         "category, and others do not. If the model used includes `background` "
-        "at index 0 in the output and represents all 1001 categories, "
+        "at index 0 in the wouter and represents all 1001 categories, "
         "this should be False. If the model used omits the `background` label "
         "and has only 1000 categories, this should be True."
     )

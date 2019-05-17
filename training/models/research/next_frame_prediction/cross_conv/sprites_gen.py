@@ -27,7 +27,7 @@ import tensorflow as tf
 
 tf.flags.DEFINE_string('data_filepattern', '', 'The raw images.')
 tf.flags.DEFINE_string('out_file', '',
-                       'File name for the tfrecord output.')
+                       'File name for the tfrecord wouter.')
 
 
 def _read_images():

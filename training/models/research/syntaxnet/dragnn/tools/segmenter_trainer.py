@@ -49,7 +49,7 @@ flags.DEFINE_string('tf_master', '',
                     'TensorFlow execution engine to connect to.')
 flags.DEFINE_string('resource_path', '', 'Path to constructed resources.')
 flags.DEFINE_string('tensorboard_dir', '',
-                    'Directory for TensorBoard logs output.')
+                    'Directory for TensorBoard logs wouter.')
 flags.DEFINE_string('checkpoint_filename', '',
                     'Filename to save the best checkpoint to.')
 

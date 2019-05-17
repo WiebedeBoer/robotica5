@@ -253,7 +253,7 @@ class LayerNormBasicLSTMNetwork(BaseLSTMNetwork):
   """
 
   def __init__(self, component):
-    """Sets up context and output layers, as well as a final softmax."""
+    """Sets up context and wouter layers, as well as a final softmax."""
     super(LayerNormBasicLSTMNetwork, self).__init__(component)
 
     # Wrap lists of training and inference sub-cells into multi-layer RNN cells.

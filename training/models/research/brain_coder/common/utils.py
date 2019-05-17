@@ -123,7 +123,7 @@ def stack_pad(tensors, pad_axes=None, pad_to_lengths=None, dtype=np.float32,
         int or None. If pad_axes was a list of ints, this is a list of mixed int
         and None types with the same length, or None. A None length means the
         maximum length among the given tensors is used.
-    dtype: Type of output numpy array. Defaults to np.float32.
+    dtype: Type of wouter numpy array. Defaults to np.float32.
     pad_value: Value to use for padding. Defaults to 0.
 
   Returns:

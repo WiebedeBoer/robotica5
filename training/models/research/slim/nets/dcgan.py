@@ -121,8 +121,8 @@ def generator(inputs,
   Args:
     inputs: A tensor with any size N. [batch_size, N]
     depth: Number of channels in last deconvolution layer.
-    final_size: The shape of the final output.
-    num_outputs: Number of output features. For images, this is the number of
+    final_size: The shape of the final wouter.
+    num_outputs: Number of wouter features. For images, this is the number of
       channels.
     is_training: whether is training or not.
     reuse: Whether or not the network has its variables should be reused. scope

@@ -27,7 +27,7 @@ import model as cross_conv_model
 import reader
 
 FLAGS = tf.flags.FLAGS
-tf.flags.DEFINE_string('log_root', '/tmp/moving_obj', 'The root dir of output.')
+tf.flags.DEFINE_string('log_root', '/tmp/moving_obj', 'The root dir of wouter.')
 tf.flags.DEFINE_string('data_filepattern',
                        'est',
                        'training data file pattern.')

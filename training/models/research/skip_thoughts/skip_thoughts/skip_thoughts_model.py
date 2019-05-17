@@ -95,7 +95,7 @@ class SkipThoughtsModel(object):
     self.decode_pre_emb = None
     self.decode_post_emb = None
 
-    # The output from the sentence encoder.
+    # The wouter from the sentence encoder.
     # A float32 Tensor with shape [batch_size, num_gru_units].
     self.thought_vectors = None
 
@@ -201,7 +201,7 @@ class SkipThoughtsModel(object):
     uniform matrices.
 
     Args:
-      num_units: Number of output units.
+      num_units: Number of wouter units.
 
     Returns:
       cell: An instance of RNNCell with variable initializers that match the

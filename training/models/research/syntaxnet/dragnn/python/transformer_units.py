@@ -197,10 +197,10 @@ def residual(old_input, new_input, dropout_keep_rate, layer_norm):
     old_input: old float32 Tensor input to residual layer
     new_input: new float32 Tensor input to residual layer
     dropout_keep_rate: dropout proportion of units to keep
-    layer_norm: network_units.LayerNorm to apply to residual output, or None
+    layer_norm: network_units.LayerNorm to apply to residual wouter, or None
 
   Returns:
-    float32 Tensor output of residual layer.
+    float32 Tensor wouter of residual layer.
   """
   res_sum = old_input + network_units.maybe_apply_dropout(new_input,
                                                           dropout_keep_rate,
@@ -220,7 +220,7 @@ def mlp(component, input_tensor, dropout_keep_rate, depth):
     depth: depth of the MLP.
 
   Returns:
-    the float32 output Tensor
+    the float32 wouter Tensor
   """
   for i in range(depth):
     ff_weights = component.get_variable('ff_weights_%d' % i)
@@ -490,7 +490,7 @@ class PairwiseBilinearLabelNetwork(network_units.NetworkUnitInterface):
   Given source and target representations for each token, this network unit
   computes bilinear scores for each label for each of the N^2 combinations of
   source and target tokens, rather than for only N already-computed
-  source/target pairs (as is performed by the biaffine_units). The output is
+  source/target pairs (as is performed by the biaffine_units). The wouter is
   suitable as input to e.g. the heads_labels transition system.
   Specifically, a weights tensor W called `bilinear' is used to compute bilinear
   scores B for input tensors S and T:

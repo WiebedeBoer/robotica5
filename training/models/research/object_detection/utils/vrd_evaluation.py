@@ -347,7 +347,7 @@ class VRDPhraseDetectionEvaluator(VRDDetectionEvaluator):
 
     Returns:
       result: A numpy array of structures with the shape [M, 1], each
-        structure containing exactly one named bounding box. i-th output
+        structure containing exactly one named bounding box. i-th wouter
         structure corresponds to the result of processing i-th input structure,
         where the named bounding box is computed as an enclosing bounding box
         of all bounding boxes of the i-th input structure.
@@ -383,7 +383,7 @@ class VRDPhraseDetectionEvaluator(VRDDetectionEvaluator):
 
     Returns:
       result: A numpy array of structures with the shape [M, 1], each
-        structure containing exactly one named bounding box. i-th output
+        structure containing exactly one named bounding box. i-th wouter
         structure corresponds to the result of processing i-th input structure,
         where the named bounding box is computed as an enclosing bounding box
         of all bounding boxes of the i-th input structure.

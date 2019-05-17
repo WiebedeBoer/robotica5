@@ -276,7 +276,7 @@ class ResNet(Embedder):
     Args:
       x: a float 4 rank Tensor representing the input to the layer.
       in_filter: a python integer representing depth of the input.
-      out_filter: a python integer representing depth of the output.
+      out_filter: a python integer representing depth of the wouter.
       stride: a python integer denoting the stride of the layer applied before
         the first convolution.
       activate_before_residual: a python boolean. If True, then a ReLU is
@@ -503,7 +503,7 @@ class ResNet50Embedder(Embedder):
           number of channels.
     Returns:
       The embedding of the input image with the shape of NxTxL where L is the
-        embedding size of the output.
+        embedding size of the wouter.
 
     Raises:
       ValueError: if the shape of the input does not agree with the expected
@@ -537,7 +537,7 @@ class ResNet50Embedder(Embedder):
 
 
 class IdentityEmbedder(Embedder):
-  """This embedder just returns the input as the output.
+  """This embedder just returns the input as the wouter.
 
   Used for modalitites that the embedding of the modality is the same as the
   modality itself. For example, it can be used for one_hot goal.

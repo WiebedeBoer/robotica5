@@ -81,7 +81,7 @@ def discriminator(hparams, sequence, is_training, reuse=None):
           h_drop, num_outputs=dis_num_filters_total / 2)
 
     # Final (unnormalized) scores and predictions
-    with tf.variable_scope("output"):
+    with tf.variable_scope("wouter"):
       W = tf.get_variable(
           "W",
           shape=[dis_num_filters_total / 2, 1],

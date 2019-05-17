@@ -135,7 +135,7 @@ def _insert_fixed_quant_op(context,
   if consumers:
     tensors_modified_count = common.RerouteTensor(
         quant, inputs, can_modify=consumers)
-    # Some operations can have multiple output tensors going to the same
+    # Some operations can have multiple wouter tensors going to the same
     # consumer. Since consumers is a set, we need to ensure that
     # tensors_modified_count is greater than or equal to the length of the set
     # of consumers.

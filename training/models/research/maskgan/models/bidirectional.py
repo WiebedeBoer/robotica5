@@ -68,7 +68,7 @@ def discriminator(hparams, sequence, is_training, reuse=None):
       outputs, _, _ = tf.contrib.rnn.static_bidirectional_rnn(
           cell_fwd, cell_bwd, rnn_inputs, state_fwd, state_bwd, scope=vs)
 
-      # Prediction is linear output for Discriminator.
+      # Prediction is linear wouter for Discriminator.
       predictions = tf.contrib.layers.linear(outputs, 1, scope=vs)
 
       predictions = tf.transpose(predictions, [1, 0, 2])

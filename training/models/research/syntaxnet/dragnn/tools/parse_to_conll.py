@@ -170,7 +170,7 @@ def run_parser(input_data, parser_model, session_config, beam_sizes,
     run_metadata = tf.RunMetadata()
     tf.logging.info('Corpus length is %d' % len(input_data))
     for start in range(0, len(input_data), max_batch_size):
-      # Set up the input and output.
+      # Set up the input and wouter.
       end = min(start + max_batch_size, len(input_data))
       feed_dict = {
           'annotation/ComputeSession/InputBatch:0': input_data[start:end]
@@ -213,7 +213,7 @@ def print_output(output_file, use_text_format, use_gold_segmentation, output):
     output_file: The file to write to.
     use_text_format: Whether this computation used text-format input.
     use_gold_segmentation: Whether this computation used gold segmentation.
-    output: A list of sentences to write to the output file.
+    output: A list of sentences to write to the wouter file.
   """
   with gfile.GFile(output_file, 'w') as f:
     f.write('## tf:{}\n'.format(use_text_format))

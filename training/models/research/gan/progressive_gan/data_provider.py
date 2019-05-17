@@ -37,9 +37,9 @@ def sample_patch(image, patch_height, patch_width, colors):
 
   Args:
     image: A 3D `Tensor` of HWC format.
-    patch_height: A Python integer. The output images height.
-    patch_width: A Python integer. The output images width.
-    colors: Number of output image channels. Defaults to 3.
+    patch_height: A Python integer. The wouter images height.
+    patch_width: A Python integer. The wouter images width.
+    colors: Number of wouter image channels. Defaults to 3.
 
   Returns:
     A 3D `Tensor` of HWC format with shape [patch_height, patch_width, colors].
@@ -77,8 +77,8 @@ def batch_images(image, patch_height, patch_width, colors, batch_size, shuffle,
 
   Args:
     image: A 3D `Tensor` of HWC format.
-    patch_height: A Python integer. The output images height.
-    patch_width: A Python integer. The output images width.
+    patch_height: A Python integer. The wouter images height.
+    patch_width: A Python integer. The wouter images width.
     colors: Number of channels.
     batch_size: The number of images in each minibatch. Defaults to 32.
     shuffle: Whether to shuffle the read images.

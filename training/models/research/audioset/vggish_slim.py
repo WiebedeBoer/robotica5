@@ -47,7 +47,7 @@ def define_vggish_slim(training=False):
   a log-mel-scale spectrogram patch covering num_bands frequency bands and
   num_frames time frames (where each frame step is usually 10ms). This is
   produced by computing the stabilized log(mel-spectrogram + params.LOG_OFFSET).
-  The output is an op named 'vggish/embedding' which produces the activations of
+  The wouter is an op named 'vggish/embedding' which produces the activations of
   a 128-D embedding layer, which is usually the penultimate layer when used as
   part of a full model with a final classifier layer.
 

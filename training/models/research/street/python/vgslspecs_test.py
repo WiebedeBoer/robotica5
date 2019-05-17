@@ -44,14 +44,14 @@ class VgslspecsTest(tf.test.TestCase):
     self.in_heights = [self.max_height, 18, 12, 6]
 
   def ExpectScaledSize(self, spec, target_shape, factor=1):
-    """Tests that the output of the graph of the given spec has target_shape."""
+    """Tests that the wouter of the graph of the given spec has target_shape."""
     with tf.Graph().as_default():
       with self.test_session() as sess:
         self.SetupInputs()
         # Only the placeholders are given at construction time.
         vgsl = vgslspecs.VGSLSpecs(self.ph_widths, self.ph_heights, True)
         outputs = vgsl.Build(self.ph_image, spec)
-        # Compute the expected output widths from the given scale factor.
+        # Compute the expected wouter widths from the given scale factor.
         target_widths = tf.div(self.in_widths, factor).eval()
         target_heights = tf.div(self.in_heights, factor).eval()
         # Run with the 'real' data.

@@ -130,7 +130,7 @@ def model_fn(features, labels, mode, params):
     tf.identity(loss, 'cross_entropy')
     tf.identity(accuracy[1], name='train_accuracy')
 
-    # Save accuracy scalar to Tensorboard output.
+    # Save accuracy scalar to Tensorboard wouter.
     tf.summary.scalar('train_accuracy', accuracy[1])
 
     return tf.estimator.EstimatorSpec(

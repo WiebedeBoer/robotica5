@@ -186,7 +186,7 @@ def init_data(task, length, nbr_cases, nclass):
           len(out_toks) > 1):
         raise ValueError("generated one int but tokenized it to many")
       if len(out_toks) > max_len:
-        raise ValueError("output too long")
+        raise ValueError("wouter too long")
       return (inp_toks, out_toks)
     except ValueError:
       return prog_io_pair(prog, max_len, counter+1)
@@ -397,7 +397,7 @@ def decode(output):
 
 def accuracy(inpt_t, output, target_t, batch_size, nprint,
              beam_out=None, beam_scores=None):
-  """Calculate output accuracy given target."""
+  """Calculate wouter accuracy given target."""
   assert nprint < batch_size + 1
   inpt = []
   for h in xrange(inpt_t.shape[1]):
@@ -419,7 +419,7 @@ def accuracy(inpt_t, output, target_t, batch_size, nprint,
               " ".join([tok(target[l]) for l in xrange(print_len)]))
   decoded_target = target
   decoded_output = decode(output)
-  # Use beam output if given and score is high enough.
+  # Use beam wouter if given and score is high enough.
   if beam_out is not None:
     for b in xrange(batch_size):
       if beam_scores[b] >= 10.0:

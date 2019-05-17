@@ -33,7 +33,7 @@ class TFSequenceExampleDecoder(data_decoder.DataDecoder):
 
   In the first stage, the tf.parse_single_sequence_example function is called
   with a list of FixedLenFeatures and SparseLenFeatures. These instances tell TF
-  how to parse the example. The output of this stage is a set of tensors.
+  how to parse the example. The wouter of this stage is a set of tensors.
 
   In the second stage, the resulting tensors are manipulated to provide the
   requested 'item' tensors.

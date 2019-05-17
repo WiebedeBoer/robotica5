@@ -26,7 +26,7 @@ class Postprocessor(object):
   The initial release of AudioSet included 128-D VGGish embeddings for each
   segment of AudioSet. These released embeddings were produced by applying
   a PCA transformation (technically, a whitening transform is included as well)
-  and 8-bit quantization to the raw embedding output from VGGish, in order to
+  and 8-bit quantization to the raw embedding wouter from VGGish, in order to
   stay compatible with the YouTube-8M project which provides visual embeddings
   in the same format for a large set of YouTube videos. This class implements
   the same PCA (with whitening) and quantization transformations.
@@ -54,7 +54,7 @@ class Postprocessor(object):
 
     Args:
       embeddings_batch: An nparray of shape [batch_size, embedding_size]
-        containing output from the embedding layer of VGGish.
+        containing wouter from the embedding layer of VGGish.
 
     Returns:
       An nparray of the same shape as the input but of type uint8,

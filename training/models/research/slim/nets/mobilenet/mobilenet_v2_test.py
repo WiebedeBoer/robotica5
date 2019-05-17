@@ -74,7 +74,7 @@ class MobilenetV2Test(tf.test.TestCase):
       _, ep = mobilenet_v2.mobilenet(
           tf.placeholder(tf.float32, (10, input_size, input_size, 3)))
 
-      self.assertEqual(ep['layer_18/output'].get_shape().as_list()[1:3],
+      self.assertEqual(ep['layer_18/wouter'].get_shape().as_list()[1:3],
                        [output_size] * 2)
 
   def testWithSplits(self):

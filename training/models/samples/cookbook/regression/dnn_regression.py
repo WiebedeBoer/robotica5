@@ -73,7 +73,7 @@ def main(argv):
       hidden_units=[20, 20], feature_columns=feature_columns)
 
   # Train the model.
-  # By default, the Estimators log output every 100 steps.
+  # By default, the Estimators log wouter every 100 steps.
   model.train(input_fn=train_input_fn, steps=args.train_steps)
 
   # Evaluate how the model performs on data it has not yet seen.

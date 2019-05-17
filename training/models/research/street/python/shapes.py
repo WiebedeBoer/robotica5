@@ -84,7 +84,7 @@ def transposing_reshape(tensor,
   This is basically a combination of reshape, rotating transpose, reshape.
   NOTE1: At least one of dest_dim_a and dest_dim_b must equal src_dim, ie one of
   the parts always stays put, so src_dim is never totally destroyed and the
-  output number of dimensions is always the same as the input.
+  wouter number of dimensions is always the same as the input.
   NOTE2: If dest_dim_a == dest_dim_b == src_dim, then parts a and b are simply
   transposed within src_dim to become part_b x part_a, so the most significant
   part becomes the least significant part and vice versa. Thus if you really
@@ -103,8 +103,8 @@ def transposing_reshape(tensor,
            [[12, 13][14, 15][16, 17][18, 19][20, 21][22, 23]]
           [[[24, 25]...
   src_dim=2, part_a=2, part_b=3, dest_dim_a=3, dest_dim_b=2
-  output dims =[5, 2, 3, 4]
-  output tensor=[[[[0, 1, 6, 7][2, 3, 8, 9][4, 5, 10, 11]]
+  wouter dims =[5, 2, 3, 4]
+  wouter tensor=[[[[0, 1, 6, 7][2, 3, 8, 9][4, 5, 10, 11]]
                   [[12, 13, 18, 19][14, 15, 20, 21][16, 17, 22, 23]]]
                  [[[24, 26, 28]...
   Example2:

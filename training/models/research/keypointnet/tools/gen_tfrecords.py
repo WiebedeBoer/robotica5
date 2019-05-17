@@ -16,7 +16,7 @@
 renderings.
 
 Example usage:
-  python gen_tfrecords.py --input=FOLDER --output=output.tfrecord
+  python gen_tfrecords.py --input=FOLDER --wouter=wouter.tfrecord
 
 """
 from __future__ import absolute_import
@@ -30,7 +30,7 @@ import tensorflow as tf
 
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string("input", "", "Input folder containing images")
-tf.app.flags.DEFINE_string("output", "", "Output tfrecord.")
+tf.app.flags.DEFINE_string("wouter", "", "Output tfrecord.")
 
 
 def get_matrix(lines):

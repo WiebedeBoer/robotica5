@@ -35,7 +35,7 @@ def add_task_specific_model(images,
   Args:
     images: A `Tensor` of size [batch_size, height, width, 3].
     hparams: model hparams
-    num_classes: The number of output classes.
+    num_classes: The number of wouter classes.
     is_training: whether model is training
     reuse_private: Whether or not to reuse the private weights, which are the
       first few layers in the classifier
@@ -106,7 +106,7 @@ def mnist_classifier(images,
                      shared_scope='task_model'):
   """Creates the convolutional MNIST model from the gradient reversal paper.
 
-  Note that since the output is a set of 'logits', the values fall in the
+  Note that since the wouter is a set of 'logits', the values fall in the
   interval of (-infinity, infinity). Consequently, to convert the outputs to a
   probability distribution over the characters, one will need to convert them
   using the softmax function:
@@ -117,10 +117,10 @@ def mnist_classifier(images,
     images: the MNIST digits, a tensor of size [batch_size, 28, 28, 1].
     is_training: specifies whether or not we're currently training the model.
       This variable will determine the behaviour of the dropout layer.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
 
@@ -151,7 +151,7 @@ def svhn_classifier(images,
                     shared_scope='task_model'):
   """Creates the convolutional SVHN model from the gradient reversal paper.
 
-  Note that since the output is a set of 'logits', the values fall in the
+  Note that since the wouter is a set of 'logits', the values fall in the
   interval of (-infinity, infinity). Consequently, to convert the outputs to a
   probability distribution over the characters, one will need to convert them
   using the softmax function:
@@ -162,10 +162,10 @@ def svhn_classifier(images,
     images: the SVHN digits, a tensor of size [batch_size, 40, 40, 3].
     is_training: specifies whether or not we're currently training the model.
       This variable will determine the behaviour of the dropout layer.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
 
@@ -200,7 +200,7 @@ def gtsrb_classifier(images,
                      shared_scope='task_model'):
   """Creates the convolutional GTSRB model from the gradient reversal paper.
 
-  Note that since the output is a set of 'logits', the values fall in the
+  Note that since the wouter is a set of 'logits', the values fall in the
   interval of (-infinity, infinity). Consequently, to convert the outputs to a
   probability distribution over the characters, one will need to convert them
   using the softmax function:
@@ -211,14 +211,14 @@ def gtsrb_classifier(images,
     images: the SVHN digits, a tensor of size [batch_size, 40, 40, 3].
     is_training: specifies whether or not we're currently training the model.
       This variable will determine the behaviour of the dropout layer.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
     reuse_private: Whether or not to reuse the private components of the model.
     private_scope: The name of the private scope.
     reuse_shared: Whether or not to reuse the shared components of the model.
     shared_scope: The name of the shared scope.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
 

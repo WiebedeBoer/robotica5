@@ -122,7 +122,7 @@ class Decoder(object):
                                 sequence_errors, num_steps * batch_size)
 
   def StringFromCTC(self, ctc_labels, merge_dups, null_label):
-    """Decodes CTC output to a string.
+    """Decodes CTC wouter to a string.
 
     Extracts only sequences of codes that are allowed by self.decoder.
     Labels that make illegal code sequences are dropped.
@@ -205,7 +205,7 @@ class Decoder(object):
           self.decoder[code].append(Part(utf8, index, num_codes))
 
   def _CodesFromCTC(self, ctc_labels, merge_dups, null_label):
-    """Collapses CTC output to regular output.
+    """Collapses CTC wouter to regular wouter.
 
     Args:
       ctc_labels: List of class labels including null characters to remove.
@@ -216,7 +216,7 @@ class Decoder(object):
     TODO(rays) This may become a problem with non-CTC models.
     If using charset, this should not be a problem as zero is always space.
     tf.pad can only append zero, so we have to be able to drop them, as a
-    non-ctc will have learned to output trailing zeros instead of trailing
+    non-ctc will have learned to wouter trailing zeros instead of trailing
     nulls. This is awkward, as the stock ctc loss function requires that the
     null character be num_classes-1.
     Returns:

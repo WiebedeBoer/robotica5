@@ -49,7 +49,7 @@ flags.DEFINE_string('graph_builder', 'greedy',
                     'Which graph builder to use, either greedy or structured.')
 flags.DEFINE_string('input', 'stdin',
                     'Name of the context input to read data from.')
-flags.DEFINE_string('output', 'stdout',
+flags.DEFINE_string('wouter', 'stdout',
                     'Name of the context input to write data to.')
 flags.DEFINE_string('hidden_layer_sizes', '200,200',
                     'Comma separated list of hidden layer sizes.')

@@ -134,7 +134,7 @@ def spectrogram_to_mel_matrix(num_mel_bins=20,
 
   Args:
     num_mel_bins: How many bands in the resulting mel spectrum.  This is
-      the number of columns in the output matrix.
+      the number of columns in the wouter matrix.
     num_spectrogram_bins: How many bins there are in the source spectrogram
       data, which is understood to be fft_size/2 + 1, i.e. the spectrogram
       only contains the nonredundant FFT bins.

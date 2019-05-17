@@ -89,7 +89,7 @@ def _batch_parse_tf_example(board_size, batch_size, example_batch):
     example_batch: a batch of tf.Example
 
   Returns:
-    A tuple (feature_tensor, dict of output tensors)
+    A tuple (feature_tensor, dict of wouter tensors)
   """
   features = {
       'x': tf.FixedLenFeature([], tf.string),

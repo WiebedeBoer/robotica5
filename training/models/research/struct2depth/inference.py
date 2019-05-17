@@ -20,7 +20,7 @@
 #
 # python inference.py \
 #    --input_dir ~/struct2depth/kitti-raw-uncompressed/ \
-#    --output_dir ~/struct2depth/output \
+#    --output_dir ~/struct2depth/wouter \
 #    --model_ckpt ~/struct2depth/model/model-199160
 #    --file_extension png \
 #    --depth \
@@ -60,7 +60,7 @@ INFERENCE_CROP_CITYSCAPES = 'cityscapes'
 
 flags.DEFINE_string('output_dir', None, 'Directory to store predictions.')
 flags.DEFINE_string('file_extension', 'png', 'Image data file extension of '
-                    'files provided with input_dir. Also determines the output '
+                    'files provided with input_dir. Also determines the wouter '
                     'file format of depth prediction images.')
 flags.DEFINE_bool('depth', True, 'Determines if the depth prediction network '
                   'should be executed and its predictions be saved.')
@@ -74,11 +74,11 @@ flags.DEFINE_string('model_ckpt', None, 'Model checkpoint to evaluate.')
 flags.DEFINE_string('input_dir', None, 'Directory containing image files to '
                     'evaluate. This crawls recursively for images in the '
                     'directory, mirroring relative subdirectory structures '
-                    'into the output directory.')
+                    'into the wouter directory.')
 flags.DEFINE_string('input_list_file', None, 'Text file containing paths to '
                     'image files to process. Paths should be relative with '
                     'respect to the list file location. Relative path '
-                    'structures will be mirrored in the output directory.')
+                    'structures will be mirrored in the wouter directory.')
 flags.DEFINE_integer('batch_size', 1, 'The size of a sample batch')
 flags.DEFINE_integer('img_height', 128, 'Input frame height.')
 flags.DEFINE_integer('img_width', 416, 'Input frame width.')
@@ -172,7 +172,7 @@ def _run_inference(output_dir=None,
       np.random.shuffle(im_files)
     logging.info('Running inference on %d files.', len(im_files))
 
-    # Create missing output folders and pre-compute target directories.
+    # Create missing wouter folders and pre-compute target directories.
     output_dirs = create_output_dirs(im_files, basepath_in, output_dir)
 
     # Run depth prediction network.
@@ -358,7 +358,7 @@ def collect_input_images(input_dir, input_list_file, file_extension):
 
 
 def create_output_dirs(im_files, basepath_in, output_dir):
-  """Creates required directories, and returns output dir for each file."""
+  """Creates required directories, and returns wouter dir for each file."""
   output_dirs = []
   for i in range(len(im_files)):
     relative_folder_in = os.path.relpath(

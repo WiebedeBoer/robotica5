@@ -92,13 +92,13 @@ def large_decoder(codes,
                   channels,
                   batch_norm_params=None,
                   weight_decay=0.0):
-  """Decodes the codes to a fixed output size.
+  """Decodes the codes to a fixed wouter size.
 
   Args:
     codes: a tensor of size [batch_size, code_size].
-    height: the height of the output images.
-    width: the width of the output images.
-    channels: the number of the output channels.
+    height: the height of the wouter images.
+    width: the width of the wouter images.
+    channels: the number of the wouter channels.
     batch_norm_params: a dictionary that maps batch norm parameter names to
       values.
     weight_decay: the value for the weight decay coefficient.
@@ -141,13 +141,13 @@ def gtsrb_decoder(codes,
                   channels,
                   batch_norm_params=None,
                   weight_decay=0.0):
-  """Decodes the codes to a fixed output size. This decoder is specific to GTSRB
+  """Decodes the codes to a fixed wouter size. This decoder is specific to GTSRB
 
   Args:
     codes: a tensor of size [batch_size, 100].
-    height: the height of the output images.
-    width: the width of the output images.
-    channels: the number of the output channels.
+    height: the height of the wouter images.
+    width: the width of the wouter images.
+    channels: the number of the wouter channels.
     batch_norm_params: a dictionary that maps batch norm parameter names to
       values.
     weight_decay: the value for the weight decay coefficient.
@@ -195,13 +195,13 @@ def small_decoder(codes,
                   channels,
                   batch_norm_params=None,
                   weight_decay=0.0):
-  """Decodes the codes to a fixed output size.
+  """Decodes the codes to a fixed wouter size.
 
   Args:
     codes: a tensor of size [batch_size, code_size].
-    height: the height of the output images.
-    width: the width of the output images.
-    channels: the number of the output channels.
+    height: the height of the wouter images.
+    width: the width of the wouter images.
+    channels: the number of the wouter channels.
     batch_norm_params: a dictionary that maps batch norm parameter names to
       values.
     weight_decay: the value for the weight decay coefficient.
@@ -250,11 +250,11 @@ def dann_mnist(images,
     images: the MNIST digits, a tensor of size [batch_size, 28, 28, 1].
     weight_decay: the value for the weight decay coefficient.
     prefix: name of the model to use when prefixing tags.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
     **kwargs: Placeholder for keyword arguments used by other shared encoders.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
   end_points = {}
@@ -297,11 +297,11 @@ def dann_svhn(images,
     images: the SVHN digits, a tensor of size [batch_size, 32, 32, 3].
     weight_decay: the value for the weight decay coefficient.
     prefix: name of the model to use when prefixing tags.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
     **kwargs: Placeholder for keyword arguments used by other shared encoders.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
 
@@ -349,11 +349,11 @@ def dann_gtsrb(images,
     images: the GTSRB images, a tensor of size [batch_size, 40, 40, 3].
     weight_decay: the value for the weight decay coefficient.
     prefix: name of the model to use when prefixing tags.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
     **kwargs: Placeholder for keyword arguments used by other shared encoders.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
 
@@ -399,14 +399,14 @@ def dsn_cropped_linemod(images,
       [batch_size, 64, 64, 4].
     weight_decay: the value for the weight decay coefficient.
     prefix: name of the model to use when prefixing tags.
-    num_classes: the number of output classes to use.
+    num_classes: the number of wouter classes to use.
     batch_norm_params: a dictionary that maps batch norm parameter names to
       values.
     is_training: specifies whether or not we're currently training the model.
       This variable will determine the behaviour of the dropout layer.
 
   Returns:
-    the output logits, a tensor of size [batch_size, num_classes].
+    the wouter logits, a tensor of size [batch_size, num_classes].
     a dictionary with key/values the layer names and tensors.
   """
 

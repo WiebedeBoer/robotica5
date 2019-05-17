@@ -37,7 +37,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):
   """Pads the input along the spatial dimensions independently of input size.
 
   Pads the input such that if it was used in a convolution with 'VALID' padding,
-  the output would have the same dimensions as if the unpadded input was used
+  the wouter would have the same dimensions as if the unpadded input was used
   in a convolution with 'SAME' padding.
 
   Args:
@@ -46,7 +46,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):
     rate: An integer, rate for atrous convolution.
 
   Returns:
-    output: A tensor of size [batch, height_out, width_out, channels] with the
+    wouter: A tensor of size [batch, height_out, width_out, channels] with the
       input, either intact (if kernel_size == 1) or padded (if kernel_size > 1).
   """
   kernel_size_effective = [kernel_size[0] + (kernel_size[0] - 1) * (rate - 1),
@@ -174,7 +174,7 @@ def mobilenet_base(  # pylint: disable=invalid-name
     final_endpoint: The name of last layer, for early termination for
     for V1-based networks: last layer is "layer_14", for V2: "layer_20"
     output_stride: An integer that specifies the requested ratio of input to
-      output spatial resolution. If not None, then we invoke atrous convolution
+      wouter spatial resolution. If not None, then we invoke atrous convolution
       if necessary to prevent the network from reducing the spatial resolution
       of the activation maps. Allowed values are 1 or any even number, excluding
       zero. Typical values are 8 (accurate fully convolutional mode), 16
@@ -185,7 +185,7 @@ def mobilenet_base(  # pylint: disable=invalid-name
       operators to operate properly.
 
     use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-      inputs so that the output dimensions are the same as if 'SAME' padding
+      inputs so that the wouter dimensions are the same as if 'SAME' padding
       were used.
     scope: optional variable scope.
     is_training: How to setup batch_norm and other ops. Note: most of the time
@@ -198,7 +198,7 @@ def mobilenet_base(  # pylint: disable=invalid-name
       no arg_scope is added for slim.batch_norm's is_training parameter.
 
   Returns:
-    tensor_out: output tensor.
+    tensor_out: wouter tensor.
     end_points: a set of activations for external use, for example summaries or
                 losses.
 
@@ -231,11 +231,11 @@ def mobilenet_base(  # pylint: disable=invalid-name
       safe_arg_scope([slim.batch_norm], is_training=is_training), \
       _set_arg_scope_defaults(conv_defs_defaults), \
       _set_arg_scope_defaults(conv_defs_overrides):
-    # The current_stride variable keeps track of the output stride of the
+    # The current_stride variable keeps track of the wouter stride of the
     # activations, i.e., the running product of convolution strides up to the
     # current network layer. This allows us to invoke atrous convolution
     # whenever applying the next convolution would result in the activations
-    # having output stride larger than the target output_stride.
+    # having wouter stride larger than the target output_stride.
     current_stride = 1
 
     # The atrous convolution rate parameter.
@@ -292,12 +292,12 @@ def mobilenet_base(  # pylint: disable=invalid-name
       if final_endpoint is not None and end_point == final_endpoint:
         break
 
-    # Add all tensors that end with 'output' to
+    # Add all tensors that end with 'wouter' to
     # endpoints
     for t in net.graph.get_operations():
       scope = os.path.dirname(t.name)
       bn = os.path.basename(t.name)
-      if scope in scopes and t.name.endswith('output'):
+      if scope in scopes and t.name.endswith('wouter'):
         end_points[scopes[scope] + '/' + bn] = t.outputs[0]
     return net, end_points
 
@@ -387,7 +387,7 @@ def mobilenet(inputs,
 
       logits = tf.squeeze(logits, [1, 2])
 
-      logits = tf.identity(logits, name='output')
+      logits = tf.identity(logits, name='wouter')
     end_points['Logits'] = logits
     if prediction_fn:
       end_points['Predictions'] = prediction_fn(logits, 'Predictions')
@@ -395,7 +395,7 @@ def mobilenet(inputs,
 
 
 def global_pool(input_tensor, pool_op=tf.nn.avg_pool):
-  """Applies avg pool to produce 1x1 output.
+  """Applies avg pool to produce 1x1 wouter.
 
   NOTE: This function is funcitonally equivalenet to reduce_mean, but it has
   baked in average pool which has better support across hardware.
@@ -415,7 +415,7 @@ def global_pool(input_tensor, pool_op=tf.nn.avg_pool):
     kernel_size = [1, shape[1], shape[2], 1]
   output = pool_op(
       input_tensor, ksize=kernel_size, strides=[1, 1, 1, 1], padding='VALID')
-  # Recover output shape, for unknown shape.
+  # Recover wouter shape, for unknown shape.
   output.set_shape([None, 1, 1, None])
   return output
 

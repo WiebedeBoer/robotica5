@@ -91,7 +91,7 @@ def discriminator(hparams, sequence, is_training, reuse=None):
         hidden = tf.nn.dropout(hidden, FLAGS.keep_prob)
 
       # Output.
-      output = tf.nn.xw_plus_b(hidden, W_out, b_out, name="output")
+      output = tf.nn.xw_plus_b(hidden, W_out, b_out, name="wouter")
 
       predictions.append(output)
     predictions = tf.stack(predictions, axis=1)

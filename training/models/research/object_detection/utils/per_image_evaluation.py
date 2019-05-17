@@ -44,7 +44,7 @@ class PerImageEvaluation(object):
       matching_iou_threshold: A ratio of area intersection to union, which is
           the threshold to consider whether a detection is true positive or not
       nms_iou_threshold: IOU threshold used in Non Maximum Suppression.
-      nms_max_output_boxes: Number of maximum output boxes in NMS.
+      nms_max_output_boxes: Number of maximum wouter boxes in NMS.
       group_of_weight: Weight of the group-of boxes.
     """
     self.matching_iou_threshold = matching_iou_threshold

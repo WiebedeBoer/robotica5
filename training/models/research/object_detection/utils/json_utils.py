@@ -48,7 +48,7 @@ def Dumps(obj, float_digits=-1, **params):
     **params: Additional parameters to pass to json.dumps.
 
   Returns:
-    output: JSON string representation of obj.
+    wouter: JSON string representation of obj.
   """
   original_encoder = encoder.FLOAT_REPR
   original_c_make_encoder = encoder.c_make_encoder
@@ -65,7 +65,7 @@ def Dumps(obj, float_digits=-1, **params):
 
 
 def PrettyParams(**params):
-  """Returns parameters for use with Dump and Dumps to output pretty json.
+  """Returns parameters for use with Dump and Dumps to wouter pretty json.
 
   Example usage:
     ```json_str = json_utils.Dumps(obj, **json_utils.PrettyParams())```

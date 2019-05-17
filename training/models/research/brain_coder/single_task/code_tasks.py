@@ -187,9 +187,9 @@ class MultiIOTaskManager(object):
     Returns:
       misc.RewardInfo namedtuple instance containing reward and code execution
           information, including inputs, expected outputs, code outputs, input
-          and output types, and reason for the reward obtained.
+          and wouter types, and reason for the reward obtained.
     """
-    # Get list of 2-tuples, each containing an input sequence and an output
+    # Get list of 2-tuples, each containing an input sequence and an wouter
     # sequence.
     io_seqs = self.task.make_io_set()
     terminal_reward = 0.0
@@ -280,7 +280,7 @@ class BaseTask(object):
 class PrintTask(BaseTask):
   """Print string coding task.
 
-  Code needs to output a fixed string (given as a hyperparameter to the
+  Code needs to wouter a fixed string (given as a hyperparameter to the
   task constructor). Program input is ignored.
   """
 
@@ -301,7 +301,7 @@ class PrintTask(BaseTask):
 class RemoveCharTaskV2(BaseTask):
   """Remove character coding task (version 2).
 
-  Code needs to pipe input to output, but with all the 'A' (value 1) chars
+  Code needs to pipe input to wouter, but with all the 'A' (value 1) chars
   removed. 'A' appears exactly once in each input.
 
   Test cases are hard-coded.
@@ -330,7 +330,7 @@ class RemoveCharTaskV2(BaseTask):
 class RemoveCharTask(BaseTask):
   """Remove character coding task.
 
-  Code needs to pipe input to output, but with all the 'A' (value 1) chars
+  Code needs to pipe input to wouter, but with all the 'A' (value 1) chars
   removed. 'A' appears at least once in each input.
 
   Test cases are dynamically generated, allowing for the number of test cases
@@ -367,7 +367,7 @@ class RemoveCharTask(BaseTask):
 class ReverseTaskV2(BaseTask):
   """Reverse string coding task (version 2).
 
-  Code needs to pipe input to output, but in reverse order.
+  Code needs to pipe input to wouter, but in reverse order.
 
   Stochastic test case = new test case randomly generated for every run of
   `make_io_set`, i.e. different test cases every time code is scored.
@@ -429,7 +429,7 @@ class ReverseTaskV2(BaseTask):
 class ReverseTask(BaseTask):
   """Reverse string coding task.
 
-  Code needs to pipe input to output, but in reverse order.
+  Code needs to pipe input to wouter, but in reverse order.
 
   Test cases are dynamically generated, allowing for the number of test cases
   to be a hyperparameter.
@@ -462,7 +462,7 @@ class ReverseTask(BaseTask):
 class CommonPrefixTask(BaseTask):
   """Common prefix coding task.
 
-  Code needs to output the common prefix between two input lists. Input lists
+  Code needs to wouter the common prefix between two input lists. Input lists
   are variable length, where each list ends with a 0. A common prefix is a
   sequence which both lists start with.
   """
@@ -518,7 +518,7 @@ class CountCharTask(BaseTask):
 class CountCharTaskV2(BaseTask):
   """Count char coding task (version 2).
 
-  Code must output the number of occurances of character 'A' (value 1) in an
+  Code must wouter the number of occurances of character 'A' (value 1) in an
   input string.
 
   Test cases are dynamically generated, allowing for the number of test cases
@@ -564,7 +564,7 @@ class CountCharTaskV2(BaseTask):
 class AddTask(BaseTask):
   """Addition coding task.
 
-  Code needs to read in two integers and output their sum mod the BF base,
+  Code needs to read in two integers and wouter their sum mod the BF base,
   followed by a terminating 0.
   """
 
@@ -749,7 +749,7 @@ class ShiftRightTask(KnownCodeBaseTask):
 class RiffleTask(KnownCodeBaseTask):
   """Shuffle like a deck of cards.
 
-  For input of length N, output values in the following index order:
+  For input of length N, wouter values in the following index order:
   N-1, 0, N-2, 1, N-3, 2, ...
   """
 
@@ -919,7 +919,7 @@ class DedupTask(KnownCodeBaseTask):
 class PrintIntTask(BaseTask):
   """Print integer coding task.
 
-  Code needs to output a fixed single value (given as a hyperparameter to the
+  Code needs to wouter a fixed single value (given as a hyperparameter to the
   task constructor). Program input is ignored.
   """
 
@@ -1157,7 +1157,7 @@ class FibonacciTask(BaseTask):
 class FindSubStrTask(BaseTask):
   """Find sub-string coding task.
 
-  Code needs to output a bool: True if the input string contains a hard-coded
+  Code needs to wouter a bool: True if the input string contains a hard-coded
   substring, 'AB' (values [1, 2]).
   """
 
@@ -1189,7 +1189,7 @@ class FindSubStrTask(BaseTask):
 class SortFixedTask(BaseTask):
   """Sort list coding task.
 
-  Code needs to output a sorted input list. The task consists of lists of the
+  Code needs to wouter a sorted input list. The task consists of lists of the
   same length L, where L is provided to this task's constructor as a
   hyperparameter.
   """
@@ -1216,7 +1216,7 @@ class SortFixedTask(BaseTask):
 class SortFixedTaskV2(BaseTask):
   """Sort list coding task (version 2).
 
-  Code needs to output a sorted input list. The task consists of lists of the
+  Code needs to wouter a sorted input list. The task consists of lists of the
   same length L, where L is provided to this task's constructor as a
   hyperparameter.
 
@@ -1312,7 +1312,7 @@ def stringlist2tokens_b27(strings):
 class BottlesOfBeerTask(BaseTask):
   """Bottles of beer coding task.
 
-  This is a counting task. Code needs to read in an int N and then output
+  This is a counting task. Code needs to read in an int N and then wouter
   every int from N to 0, each separated by a 0.
   """
   base = 256
@@ -1332,7 +1332,7 @@ class BottlesOfBeerTask(BaseTask):
 class SplitTask(BaseTask):
   """Split coding task.
 
-  Code needs to pipe input strings to output, but insert a 0 after every 3
+  Code needs to pipe input strings to wouter, but insert a 0 after every 3
   characters. This is in essence splitting the string into intervals of length
   3.
   """
@@ -1360,7 +1360,7 @@ class SplitTask(BaseTask):
 class TrimLeftTask(BaseTask):
   """Trim left coding task.
 
-  Code needs to pipe input strings to output, but remove everything before the
+  Code needs to pipe input strings to wouter, but remove everything before the
   first quotation char (").
   """
   base = 256

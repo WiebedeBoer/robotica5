@@ -83,7 +83,7 @@ class MeshgridTest(tf.test.TestCase):
     with self.test_session() as sess:
       xgrid_output, ygrid_output = sess.run([xgrid, ygrid])
 
-    # Check the shape of the output grids
+    # Check the shape of the wouter grids
     self.assertEqual(xgrid_output.shape, tuple(grid_shape))
     self.assertEqual(ygrid_output.shape, tuple(grid_shape))
 
@@ -914,14 +914,14 @@ class OpsTestPositionSensitiveCropRegions(tf.test.TestCase):
 
     expected_output = []
 
-    # Expected output, when crop_size = [3, 2].
+    # Expected wouter, when crop_size = [3, 2].
     expected_output.append(np.expand_dims(
         np.tile(np.array([[1, 2],
                           [3, 4],
                           [5, 6]]), (num_boxes, 1, 1)),
         axis=-1))
 
-    # Expected output, when crop_size = [6, 4].
+    # Expected wouter, when crop_size = [6, 4].
     expected_output.append(np.expand_dims(
         np.tile(np.array([[1, 1, 2, 2],
                           [1, 1, 2, 2],
@@ -952,7 +952,7 @@ class OpsTestPositionSensitiveCropRegions(tf.test.TestCase):
 
     expected_output = []
 
-    # Expected output, when crop_size = [3, 2].
+    # Expected wouter, when crop_size = [3, 2].
     expected_output.append(np.mean(
         np.expand_dims(
             np.tile(np.array([[1, 2],
@@ -961,7 +961,7 @@ class OpsTestPositionSensitiveCropRegions(tf.test.TestCase):
             axis=-1),
         axis=(1, 2), keepdims=True))
 
-    # Expected output, when crop_size = [6, 4].
+    # Expected wouter, when crop_size = [6, 4].
     expected_output.append(np.mean(
         np.expand_dims(
             np.tile(np.array([[1, 1, 2, 2],
@@ -1042,14 +1042,14 @@ class OpsTestBatchPositionSensitiveCropRegions(tf.test.TestCase):
 
     expected_output = []
 
-    # Expected output, when the box containing whole image.
+    # Expected wouter, when the box containing whole image.
     expected_output.append(
         np.reshape(np.array([[4, 7],
                              [10, 13]]),
                    (1, 2, 2, 1))
     )
 
-    # Expected output, when the box containing only first row.
+    # Expected wouter, when the box containing only first row.
     expected_output.append(
         np.reshape(np.array([[3, 6],
                              [7, 10]]),

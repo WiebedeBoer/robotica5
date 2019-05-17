@@ -154,7 +154,7 @@ class GammaFlopLossWithDepthwiseConvTestBase(object):
     #        \                   |
     #         -> conv2 --> dw2 --+
     #
-    # (the model has one "output", conv3).
+    # (the model has one "wouter", conv3).
     #
     image = tf.constant(0.0, shape=[1, 17, 19, NUM_CHANNELS])
     dw1 = layers.separable_conv2d(

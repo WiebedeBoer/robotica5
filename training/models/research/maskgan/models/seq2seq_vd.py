@@ -219,7 +219,7 @@ def gen_encoder_cnn(hparams, inputs, targets_present, is_training, reuse=None):
       h_conv_flat = tf.nn.dropout(h_conv_flat, hparams.gen_vd_keep_prob)
 
   # Final (unnormalized) scores and predictions
-  with tf.variable_scope('output'):
+  with tf.variable_scope('wouter'):
     W = tf.get_variable(
         'W',
         shape=[dis_num_filters_total, hparams.gen_rnn_size],
@@ -522,7 +522,7 @@ def dis_decoder(hparams,
         if is_training:
           rnn_out *= output_mask
 
-        # Prediction is linear output for Discriminator.
+        # Prediction is linear wouter for Discriminator.
         pred = tf.contrib.layers.linear(rnn_out, 1, scope=vs)
         predictions.append(pred)
 

@@ -117,7 +117,7 @@ class Problem(object):
     """Compute gradients of the objective with respect to the parameters.
 
     Args:
-      objective: The objective op (e.g. output of self.objective())
+      objective: The objective op (e.g. wouter of self.objective())
       parameters: A list of tensors (the parameters to optimize)
 
     Returns:

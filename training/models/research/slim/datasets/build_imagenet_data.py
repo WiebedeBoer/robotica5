@@ -137,7 +137,7 @@ tf.app.flags.DEFINE_string('imagenet_metadata_file',
                            'imagenet_metadata.txt',
                            'ImageNet metadata file')
 
-# This file is the output of process_bounding_box.py
+# This file is the wouter of process_bounding_box.py
 # Assumes each line of the file looks like:
 #
 #   n00007846_64193.JPEG,0.0060,0.2620,0.7545,0.9940
@@ -650,7 +650,7 @@ def _build_bounding_box_lookup(bounding_box_file):
         <JPEG file name>, <xmin>, <ymin>, <xmax>, <ymax>
 
       Note that there might exist mulitple bounding box annotations associated
-      with an image file. This file is the output of process_bounding_boxes.py.
+      with an image file. This file is the wouter of process_bounding_boxes.py.
 
   Returns:
     Dictionary mapping image file names to a list of bounding boxes. This list

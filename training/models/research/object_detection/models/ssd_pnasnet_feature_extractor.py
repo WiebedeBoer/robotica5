@@ -74,7 +74,7 @@ class SSDPNASNetFeatureExtractor(ssd_meta_arch.SSDFeatureExtractor):
         base feature extractor.
       reuse_weights: Whether to reuse variables. Default is None.
       use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-        inputs so that the output dimensions are the same as if 'SAME' padding
+        inputs so that the wouter dimensions are the same as if 'SAME' padding
         were used.
       use_depthwise: Whether to use depthwise convolutions.
       override_base_feature_extractor_hyperparams: Whether to override

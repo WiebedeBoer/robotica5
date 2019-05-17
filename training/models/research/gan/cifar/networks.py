@@ -48,7 +48,7 @@ def generator(noise, is_training=True):
   """
   images, _ = dcgan.generator(noise, is_training=is_training, fused_batch_norm=True)
 
-  # Make sure output lies between [-1, 1].
+  # Make sure wouter lies between [-1, 1].
   return tf.tanh(images)
 
 
@@ -70,7 +70,7 @@ def conditional_generator(inputs, is_training=True):
 
   images, _ = dcgan.generator(noise, is_training=is_training, fused_batch_norm=True)
 
-  # Make sure output lies between [-1, 1].
+  # Make sure wouter lies between [-1, 1].
   return tf.tanh(images)
 
 
@@ -91,7 +91,7 @@ def discriminator(img, unused_conditioning, is_training=True):
 
   Returns:
     A 1D Tensor of shape [batch size] representing the confidence that the
-    images are real. The output can lie in [-inf, inf], with positive values
+    images are real. The wouter can lie in [-inf, inf], with positive values
     indicating high confidence that the images are real.
   """
   logits, _ = dcgan.discriminator(img, is_training=is_training, fused_batch_norm=True)
@@ -115,7 +115,7 @@ def conditional_discriminator(img, conditioning, is_training=True):
 
   Returns:
     A 1D Tensor of shape [batch size] representing the confidence that the
-    images are real. The output can lie in [-inf, inf], with positive values
+    images are real. The wouter can lie in [-inf, inf], with positive values
     indicating high confidence that the images are real.
   """
   logits, end_points = dcgan.discriminator(img, is_training=is_training, fused_batch_norm=True)

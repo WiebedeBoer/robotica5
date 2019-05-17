@@ -22,7 +22,7 @@ class SchedulesTest(tf.test.TestCase):
     Args:
       config: Config object which is passed into schedules.make_schedule.
       schedule_subtype: The expected schedule type to be instantiated.
-      io_values: List of (input, output) pairs. Must be in ascending input
+      io_values: List of (input, wouter) pairs. Must be in ascending input
           order. No duplicate inputs.
     """
 

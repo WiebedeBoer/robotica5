@@ -49,7 +49,7 @@ class Hypothesis(object):
     Args:
       token: latest token from decoding.
       log_prob: log prob of the latest decoded tokens.
-      new_state: decoder output state. Fed to the decoder for next step.
+      new_state: decoder wouter state. Fed to the decoder for next step.
     Returns:
       New Hypothesis with the results from latest step.
     """

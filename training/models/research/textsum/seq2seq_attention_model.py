@@ -36,7 +36,7 @@ def _extract_argmax_and_embed(embedding, output_projection=None,
   Args:
     embedding: embedding tensor for symbols.
     output_projection: None or a pair (W, B). If provided, each fed previous
-      output will first be multiplied by W and added B.
+      wouter will first be multiplied by W and added B.
     update_embedding: Boolean; if False, the gradients will not propagate
       through the embeddings.
 
@@ -44,7 +44,7 @@ def _extract_argmax_and_embed(embedding, output_projection=None,
     A loop function.
   """
   def loop_function(prev, _):
-    """function that feed previous model output rather than ground truth."""
+    """function that feed previous model wouter rather than ground truth."""
     if output_projection is not None:
       prev = tf.nn.xw_plus_b(
           prev, output_projection[0], output_projection[1])
@@ -181,7 +181,7 @@ class Seq2SeqAttentionModel(object):
             initializer=tf.truncated_normal_initializer(stddev=1e-4))
 
       with tf.variable_scope('decoder'), tf.device(self._next_device()):
-        # When decoding, use model output from the previous step
+        # When decoding, use model wouter from the previous step
         # for the next step.
         loop_function = None
         if hps.mode == 'decode':
@@ -205,7 +205,7 @@ class Seq2SeqAttentionModel(object):
             cell, num_heads=1, loop_function=loop_function,
             initial_state_attention=initial_state_attention)
 
-      with tf.variable_scope('output'), tf.device(self._next_device()):
+      with tf.variable_scope('wouter'), tf.device(self._next_device()):
         model_outputs = []
         for i in xrange(len(decoder_outputs)):
           if i > 0:

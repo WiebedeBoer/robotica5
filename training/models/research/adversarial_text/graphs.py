@@ -57,7 +57,7 @@ flags.DEFINE_integer('cl_num_layers', 1,
 flags.DEFINE_integer('cl_hidden_size', 30,
                      'Number of hidden units in classification layer.')
 flags.DEFINE_integer('num_candidate_samples', -1,
-                     'Num samples used in the sampled output layer.')
+                     'Num samples used in the sampled wouter layer.')
 flags.DEFINE_bool('use_seq2seq_autoencoder', False,
                   'If True, seq2seq auto-encoder is used to pretrain. '
                   'If False, standard language model is used.')
@@ -88,7 +88,7 @@ flags.DEFINE_float('max_grad_norm', 1.0,
 flags.DEFINE_float('keep_prob_emb', 1.0, 'keep probability on embedding layer. '
                    '0.5 is optimal on IMDB with virtual adversarial training.')
 flags.DEFINE_float('keep_prob_lstm_out', 1.0,
-                   'keep probability on lstm output.')
+                   'keep probability on lstm wouter.')
 flags.DEFINE_float('keep_prob_cl_hidden', 1.0,
                    'keep probability on classification hidden layer')
 
@@ -539,7 +539,7 @@ class VatxtBidirModel(VatxtModel):
       out.append(self.layers[layer_name](emb, inp.state, inp.length))
     lstm_outs, next_states = zip(*out)
 
-    # Concatenate output of forward and reverse LSTMs
+    # Concatenate wouter of forward and reverse LSTMs
     lstm_out = tf.concat(lstm_outs, 1)
 
     logits = self.layers['cl_logits'](lstm_out)

@@ -94,7 +94,7 @@ def build(calibration_config):
     calibration_config: calibration_pb2.CalibrationConfig proto.
   Returns:
     Function that that accepts class_predictions_with_background and calibrates
-    the output based on calibration_config's parameters.
+    the wouter based on calibration_config's parameters.
   Raises:
     ValueError: No calibration builder defined for "Oneof" in
       calibration_config.

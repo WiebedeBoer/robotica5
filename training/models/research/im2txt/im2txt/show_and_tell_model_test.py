@@ -91,7 +91,7 @@ class ShowAndTellModelTest(tf.test.TestCase):
     """Verifies that the model produces expected outputs.
 
     Args:
-      expected_shapes: A dict mapping Tensor or Tensor name to expected output
+      expected_shapes: A dict mapping Tensor or Tensor name to expected wouter
         shape.
       feed_dict: Values of Tensors to feed into Session.run().
     """
@@ -182,7 +182,7 @@ class ShowAndTellModelTest(tf.test.TestCase):
     }
     self._checkOutputs(expected_shapes, feed_dict)
 
-    # Test feeding a batch of inputs and LSTM states to get softmax output and
+    # Test feeding a batch of inputs and LSTM states to get softmax wouter and
     # LSTM states.
     input_feed = np.random.randint(0, 10, size=3)
     state_feed = np.random.rand(3, 1024)

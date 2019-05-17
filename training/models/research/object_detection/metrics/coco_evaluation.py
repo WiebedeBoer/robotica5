@@ -153,12 +153,12 @@ class CocoDetectionEvaluator(object_detection_evaluation.DetectionEvaluator):
     """Saves the detections into json_output_path in the format used by MS COCO.
 
     Args:
-      json_output_path: String containing the output file's path. It can be also
-        None. In that case nothing will be written to the output file.
+      json_output_path: String containing the wouter file's path. It can be also
+        None. In that case nothing will be written to the wouter file.
     """
     if json_output_path and json_output_path is not None:
       with tf.gfile.GFile(json_output_path, 'w') as fid:
-        tf.logging.info('Dumping detections to output json file.')
+        tf.logging.info('Dumping detections to wouter json file.')
         json_utils.Dump(
             obj=self._detection_boxes_list, fid=fid, float_digits=4, indent=2)
 
@@ -194,7 +194,7 @@ class CocoDetectionEvaluator(object_detection_evaluation.DetectionEvaluator):
       specific results with keys of the form:
       'Precision mAP ByCategory/category' (without the supercategory part if
       no supercategories exist). For backward compatibility
-      'PerformanceByCategory' is included in the output regardless of
+      'PerformanceByCategory' is included in the wouter regardless of
       all_metrics_per_category.
     """
     groundtruth_dict = {
@@ -521,11 +521,11 @@ class CocoMaskEvaluator(object_detection_evaluation.DetectionEvaluator):
     """Saves the detections into json_output_path in the format used by MS COCO.
 
     Args:
-      json_output_path: String containing the output file's path. It can be also
-        None. In that case nothing will be written to the output file.
+      json_output_path: String containing the wouter file's path. It can be also
+        None. In that case nothing will be written to the wouter file.
     """
     if json_output_path and json_output_path is not None:
-      tf.logging.info('Dumping detections to output json file.')
+      tf.logging.info('Dumping detections to wouter json file.')
       with tf.gfile.GFile(json_output_path, 'w') as fid:
         json_utils.Dump(
             obj=self._detection_masks_list, fid=fid, float_digits=4, indent=2)
@@ -561,7 +561,7 @@ class CocoMaskEvaluator(object_detection_evaluation.DetectionEvaluator):
       specific results with keys of the form:
       'Precision mAP ByCategory/category' (without the supercategory part if
       no supercategories exist). For backward compatibility
-      'PerformanceByCategory' is included in the output regardless of
+      'PerformanceByCategory' is included in the wouter regardless of
       all_metrics_per_category.
     """
     groundtruth_dict = {

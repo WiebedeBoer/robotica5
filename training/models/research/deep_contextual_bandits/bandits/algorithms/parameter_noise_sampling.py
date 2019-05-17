@@ -139,7 +139,7 @@ class ParameterNoiseSampling(BanditAlgorithm):
     self.eps_h.append(self.eps)
 
   def compute_distance(self):
-    """Computes empirical KL for original and corrupted output distributions."""
+    """Computes empirical KL for original and corrupted wouter distributions."""
 
     random_inputs, _ = self.data_h.get_batch(self.d_samples)
     y_model = self.bnn.sess.run(

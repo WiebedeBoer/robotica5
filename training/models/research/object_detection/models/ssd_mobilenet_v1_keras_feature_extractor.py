@@ -62,7 +62,7 @@ class SSDMobileNetV1KerasFeatureExtractor(
         dependency on tf.graphkeys.UPDATE_OPS collection in order to update
         batch norm statistics.
       use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-        inputs so that the output dimensions are the same as if 'SAME' padding
+        inputs so that the wouter dimensions are the same as if 'SAME' padding
         were used.
       use_depthwise: Whether to use depthwise convolutions. Default is False.
       override_base_feature_extractor_hyperparams: Whether to override

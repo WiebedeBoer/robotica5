@@ -23,7 +23,7 @@ See: O. M. Parkhi, A. Vedaldi, A. Zisserman, C. V. Jawahar
 Example usage:
     python object_detection/dataset_tools/create_pet_tf_record.py \
         --data_dir=/home/user/pet \
-        --output_dir=/home/user/pet/output
+        --output_dir=/home/user/pet/wouter
 """
 
 import hashlib
@@ -45,7 +45,7 @@ from object_detection.utils import label_map_util
 
 flags = tf.app.flags
 flags.DEFINE_string('data_dir', '', 'Root directory to raw pet dataset.')
-flags.DEFINE_string('output_dir', '', 'Path to directory to output TFRecords.')
+flags.DEFINE_string('output_dir', '', 'Path to directory to wouter TFRecords.')
 flags.DEFINE_string('label_map_path', 'data/pet_label_map.pbtxt',
                     'Path to label map proto')
 flags.DEFINE_boolean('faces_only', True, 'If True, generates bounding boxes '
@@ -222,8 +222,8 @@ def create_tf_record(output_filename,
   """Creates a TFRecord file from examples.
 
   Args:
-    output_filename: Path to where output file is saved.
-    num_shards: Number of shards for output file.
+    output_filename: Path to where wouter file is saved.
+    num_shards: Number of shards for wouter file.
     label_map_dict: The label map dictionary.
     annotations_dir: Directory where annotation files are stored.
     image_dir: Directory where image files are stored.

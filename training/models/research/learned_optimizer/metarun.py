@@ -168,7 +168,7 @@ tf.app.flags.DEFINE_boolean("learnable_decay", True,
                               modulate the input scale via RMS decay.""")
 tf.app.flags.DEFINE_boolean("dynamic_output_scale", True,
                             """Whether to learn weights that dynamically
-                               modulate the output scale.""")
+                               modulate the wouter scale.""")
 tf.app.flags.DEFINE_boolean("use_log_objective", True,
                             """Whether to use the log of the scaled objective
                                rather than just the scaled obj for training.""")

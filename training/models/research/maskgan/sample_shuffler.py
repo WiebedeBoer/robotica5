@@ -37,10 +37,10 @@ import numpy as np
 
 import tensorflow as tf
 
-tf.app.flags.DEFINE_string('input_ml_path', '/tmp', 'Model output directory.')
-tf.app.flags.DEFINE_string('input_gan_path', '/tmp', 'Model output directory.')
+tf.app.flags.DEFINE_string('input_ml_path', '/tmp', 'Model wouter directory.')
+tf.app.flags.DEFINE_string('input_gan_path', '/tmp', 'Model wouter directory.')
 tf.app.flags.DEFINE_string('output_file_name', '/tmp/ptb/shuffled_output.txt',
-                           'Model output file.')
+                           'Model wouter file.')
 tf.app.flags.DEFINE_boolean(
     'output_masked_logs', False,
     'Whether to display for human evaluation (show masking).')

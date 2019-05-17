@@ -81,7 +81,7 @@ def build_inceptionv3_graph(images, endpoint, is_training, checkpoint,
     checkpoint: String, path to the pretrained model checkpoint.
     reuse: Boolean, whether or not we are reusing the embedder.
   Returns:
-    inception_output: `Tensor` holding the InceptionV3 output.
+    inception_output: `Tensor` holding the InceptionV3 wouter.
     inception_variables: List of inception variables.
     init_fn: Function to initialize the weights (if not reusing, then None).
   """
@@ -257,7 +257,7 @@ class ResnetEmbedder(PretrainedEmbedder):
       self._adaptation_scope = vs.name
       net = self._pretrained_output
 
-      # Define some adaptation blocks on top of the pre-trained resnet output.
+      # Define some adaptation blocks on top of the pre-trained resnet wouter.
       adaptation_blocks = []
       adaptation_block_params = [map(
           int, i.split('_')) for i in self._config.adaptation_blocks.split('-')]
@@ -267,11 +267,11 @@ class ResnetEmbedder(PretrainedEmbedder):
             stride=1)
         adaptation_blocks.append(block)
 
-      # Stack them on top of the resent output.
+      # Stack them on top of the resent wouter.
       net = resnet_utils.stack_blocks_dense(
           net, adaptation_blocks, output_stride=None)
 
-      # Average pool the output.
+      # Average pool the wouter.
       net = tf.reduce_mean(net, [1, 2], name='adaptation_pool', keep_dims=True)
 
       if self._config.emb_connection == 'fc':
@@ -375,7 +375,7 @@ class InceptionConvSSFCEmbedder(InceptionEmbedderBase):
             biases_regularizer=slim.regularizers.l2_regularizer(
                 self._l2_reg_weight)):
 
-          # Input to embedder is pre-trained inception output.
+          # Input to embedder is pre-trained inception wouter.
           net = self._pretrained_output
 
           # Optionally add more conv layers.

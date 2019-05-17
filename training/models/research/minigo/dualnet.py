@@ -82,7 +82,7 @@ class DualNetRunner(object):
     tf.train.Saver().restore(self.sess, save_file)
 
   def run(self, position, use_random_symmetry=True):
-    """Compute the policy and value output for a given position.
+    """Compute the policy and value wouter for a given position.
 
     Args:
       position: A given go board status
@@ -90,14 +90,14 @@ class DualNetRunner(object):
         the extracted feature (defined in features.py) of the given position
 
     Returns:
-      prob, value: The policy and value output (defined in dualnet_model.py)
+      prob, value: The policy and value wouter (defined in dualnet_model.py)
     """
     probs, values = self.run_many(
         [position], use_random_symmetry=use_random_symmetry)
     return probs[0], values[0]
 
   def run_many(self, positions, use_random_symmetry=True):
-    """Compute the policy and value output for given positions.
+    """Compute the policy and value wouter for given positions.
 
     Args:
       positions: A list of positions for go board status
@@ -134,8 +134,8 @@ def get_inference_input(params):
     params: An object to indicate the hyperparameters of the model.
 
   Returns:
-    The features and output tensors that get passed into model_fn. Check
-      dualnet_model.py for more details on the models input and output.
+    The features and wouter tensors that get passed into model_fn. Check
+      dualnet_model.py for more details on the models input and wouter.
   """
   input_features = tf.placeholder(
       tf.float32, [None, params.board_size, params.board_size,

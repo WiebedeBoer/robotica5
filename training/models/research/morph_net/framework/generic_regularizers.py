@@ -38,7 +38,7 @@ class OpRegularizer(object):
   """An interface for Op Regularizers.
 
   An OpRegularizer object corresponds to a tf.Operation, and provides
-  a regularizer for the output of the op (we assume that the op has one output
+  a regularizer for the wouter of the op (we assume that the op has one wouter
   of interest in the context of MorphNet).
   """
   __metaclass__ = abc.ABCMeta
@@ -47,7 +47,7 @@ class OpRegularizer(object):
   def regularization_vector(self):
     """Returns a vector of floats, with regularizers.
 
-    The length of the vector is the number of "output activations" (call them
+    The length of the vector is the number of "wouter activations" (call them
     neurons, nodes, filters etc) of the op. For a convolutional network, it's
     the number of filters (aka "depth"). For a fully-connected layer, it's
     usually the second (and last) dimension - assuming the first one is the

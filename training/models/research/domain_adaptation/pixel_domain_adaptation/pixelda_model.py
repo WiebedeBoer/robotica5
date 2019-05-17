@@ -25,7 +25,7 @@ This paper makes several architecture recommendations:
 1. Use strided convs in discriminator, fractional-strided convs in generator
 2. batchnorm everywhere
 3. remove fully connected layers for deep models
-4. ReLu for all layers in generator, except tanh on output
+4. ReLu for all layers in generator, except tanh on wouter
 5. LeakyReLu for everything in discriminator
 """
 import functools
@@ -225,7 +225,7 @@ def upsample(net, num_filters, scale=2, method='resize_conv', scope=None):
 
   Args:
     net: A `Tensor` of shape [batch_size, height, width, filters].
-    num_filters: The number of output filters.
+    num_filters: The number of wouter filters.
     scale: The scale of the upsampling. Must be a positive integer greater or
       equal to two.
     method: The method by which the features are upsampled. Valid options
@@ -327,7 +327,7 @@ def resnet_stack(images, output_shape, hparams, scope=None):
 
   Args:
     images: [batch-size, height, width, channels] image tensor to feed as input
-    output_shape: output image shape in form [height, width, channels]
+    output_shape: wouter image shape in form [height, width, channels]
     hparams: hparams objects
     scope: Variable scope
 
@@ -382,7 +382,7 @@ def predict_domain(images,
     scope: An optional variable_scope.
 
   Returns:
-    [batch size, 1] - logit output of discriminator.
+    [batch size, 1] - logit wouter of discriminator.
   """
   with tf.variable_scope(scope, 'discriminator', [images], reuse=reuse):
     lrelu_partial = functools.partial(lrelu, leakiness=hparams.lrelu_leakiness)
@@ -459,7 +459,7 @@ def dcgan_generator(images, output_shape, hparams, scope=None):
 
   Args:
     images: A `Tensor` of shape [batch_size, height, width, channels].
-    output_shape: A list or tuple of 3 elements: the output height, width and
+    output_shape: A list or tuple of 3 elements: the wouter height, width and
       number of channels.
     hparams: hparams object with generator parameters
     scope: Scope to place generator inside
@@ -505,7 +505,7 @@ def dcgan_generator(images, output_shape, hparams, scope=None):
       high = net.shape.as_list()[1] - low
       net = net[:, low:high, low:high, :]
 
-      # No batch norm on generator output
+      # No batch norm on generator wouter
       net = slim.conv2d(
           net,
           output_shape[2],
@@ -557,7 +557,7 @@ def resnet_generator(images, output_shape, hparams, latent_vars=None):
     images: A `Tensor` of shape [batch_size, height, width, num_channels]
       sampled from the image domain from which we want to transfer
     output_shape: A length-3 array indicating the height, width and channels of
-      the output.
+      the wouter.
     hparams: The hyperparameter map.
     latent_vars: dictionary of 'key': Tensor of shape [batch_size, N]
 
@@ -609,7 +609,7 @@ def residual_interpretation_block(images, hparams, scope):
     # Add the residual
     images += net
 
-    # Clip the output
+    # Clip the wouter
     images = tf.maximum(images, -1.0)
     images = tf.minimum(images, 1.0)
     return images

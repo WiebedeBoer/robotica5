@@ -94,7 +94,7 @@ def meshgrid(x, y):
 
   Keep in mind that the order of the arguments and outputs is reverse relative
   to the order of the indices they go into, done for compatibility with numpy.
-  The output tensors have the same shapes.  Specifically:
+  The wouter tensors have the same shapes.  Specifically:
 
   xgrid.get_shape() = y.get_shape().concatenate(x.get_shape())
   ygrid.get_shape() = y.get_shape().concatenate(x.get_shape())
@@ -132,7 +132,7 @@ def fixed_padding(inputs, kernel_size, rate=1):
     rate: An integer, rate for atrous convolution.
 
   Returns:
-    output: A tensor of size [batch, height_out, width_out, channels] with the
+    wouter: A tensor of size [batch, height_out, width_out, channels] with the
       input, either intact (if kernel_size == 1) or padded (if kernel_size > 1).
   """
   kernel_size_effective = kernel_size + (kernel_size - 1) * (rate - 1)
@@ -299,9 +299,9 @@ def indices_to_dense_vector(indices,
   Args:
     indices: 1d Tensor with integer indices which are to be set to
         indices_values.
-    size: scalar with size (integer) of output Tensor.
-    indices_value: values of elements specified by indices in the output vector
-    default_value: values of other elements in the output vector.
+    size: scalar with size (integer) of wouter Tensor.
+    indices_value: values of elements specified by indices in the wouter vector
+    default_value: values of other elements in the wouter vector.
     dtype: data type.
 
   Returns:
@@ -638,9 +638,9 @@ def position_sensitive_crop_regions(image,
                                     global_pool):
   """Position-sensitive crop and pool rectangular regions from a feature grid.
 
-  The output crops are split into `spatial_bins_y` vertical bins
+  The wouter crops are split into `spatial_bins_y` vertical bins
   and `spatial_bins_x` horizontal bins. For each intersection of a vertical
-  and a horizontal bin the output values are gathered by performing
+  and a horizontal bin the wouter values are gathered by performing
   `tf.image.crop_and_resize` (bilinear resampling) on a a separate subset of
   channels of the image. This reduces `depth` by a factor of
   `(spatial_bins_y * spatial_bins_x)`.
@@ -792,9 +792,9 @@ def reframe_box_masks_to_image_masks(box_masks, boxes, image_height,
            corners. Row i contains [ymin, xmin, ymax, xmax] of the box
            corresponding to mask i. Note that the box corners are in
            normalized coordinates.
-    image_height: Image height. The output mask will have the same height as
+    image_height: Image height. The wouter mask will have the same height as
                   the image height.
-    image_width: Image width. The output mask will have the same width as the
+    image_width: Image width. The wouter mask will have the same width as the
                  image width.
 
   Returns:
@@ -980,7 +980,7 @@ def matmul_crop_and_resize(image, boxes, crop_size, scope=None):
   """Matrix multiplication based implementation of the crop and resize op.
 
   Extracts crops from the input image tensor and bilinearly resizes them
-  (possibly with aspect ratio change) to a common output size specified by
+  (possibly with aspect ratio change) to a common wouter size specified by
   crop_size. This is more general than the crop_to_bounding_box op which
   extracts a fixed size slice from the input image and does not allow
   resizing or aspect ratio change.

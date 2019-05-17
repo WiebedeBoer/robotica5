@@ -158,7 +158,7 @@ def log_absolute_distance(pred, target, base):
 ### Reward Functions ###
 ########################
 
-# Reward functions assign reward based on program output.
+# Reward functions assign reward based on program wouter.
 # Warning: only use these functions as the terminal rewards in episodes, i.e.
 # for the "final" programs.
 
@@ -177,7 +177,7 @@ def absolute_distance_reward(pred, target, base, scalar_diff_fn=abs_diff):
     pred: Prediction sequence. This should be the sequence outputted by the
         generated code. List of ints n, where 0 <= n < base.
     target: Target sequence. The correct sequence that the generated code needs
-        to output. List of ints n, where 0 <= n < base.
+        to wouter. List of ints n, where 0 <= n < base.
     base: Base of the computation.
     scalar_diff_fn: Element-wise distance function.
 
@@ -198,7 +198,7 @@ def absolute_mod_distance_reward(pred, target, base):
     pred: Prediction sequence. This should be the sequence outputted by the
         generated code. List of ints n, where 0 <= n < base.
     target: Target sequence. The correct sequence that the generated code needs
-        to output. List of ints n, where 0 <= n < base.
+        to wouter. List of ints n, where 0 <= n < base.
     base: Base of the computation.
 
   Returns:
@@ -231,7 +231,7 @@ def absolute_log_distance_reward(pred, target, base):
     pred: Prediction sequence. This should be the sequence outputted by the
         generated code. List of ints n, where 0 <= n < base.
     target: Target sequence. The correct sequence that the generated code needs
-        to output. List of ints n, where 0 <= n < base.
+        to wouter. List of ints n, where 0 <= n < base.
     base: Base of the computation.
 
   Returns:
@@ -255,7 +255,7 @@ class RewardManager(object):
   many time in the same episode, so that it can make incremental improvements.
 
   Reward managers are instantiated with a target sequence, which is the known
-  correct program output. The manager is called on the output from a proposed
+  correct program wouter. The manager is called on the wouter from a proposed
   code, and returns reward. If many proposal outputs are tried, reward may be
   some stateful function that takes previous tries into account. This is done,
   in part, so that an agent cannot accumulate unbounded reward just by trying

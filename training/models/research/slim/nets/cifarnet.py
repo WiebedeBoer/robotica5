@@ -31,7 +31,7 @@ def cifarnet(images, num_classes=10, is_training=False,
              scope='CifarNet'):
   """Creates a variant of the CifarNet model.
 
-  Note that since the output is a set of 'logits', the values fall in the
+  Note that since the wouter is a set of 'logits', the values fall in the
   interval of (-infinity, infinity). Consequently, to convert the outputs to a
   probability distribution over the characters, one will need to convert them
   using the softmax function:

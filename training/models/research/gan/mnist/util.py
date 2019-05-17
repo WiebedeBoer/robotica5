@@ -58,7 +58,7 @@ def mnist_score(images, graph_def_filename=None, input_tensor=INPUT_TENSOR,
     graph_def_filename: Location of a frozen GraphDef binary file on disk. If
       `None`, uses a default graph.
     input_tensor: GraphDef's input tensor name.
-    output_tensor: GraphDef's output tensor name.
+    output_tensor: GraphDef's wouter tensor name.
     num_batches: Number of batches to split `generated_images` in to in order to
       efficiently run them through Inception.
 
@@ -95,7 +95,7 @@ def mnist_frechet_distance(real_images, generated_images,
     graph_def_filename: Location of a frozen GraphDef binary file on disk. If
       `None`, uses a default graph.
     input_tensor: GraphDef's input tensor name.
-    output_tensor: GraphDef's output tensor name.
+    output_tensor: GraphDef's wouter tensor name.
     num_batches: Number of batches to split images into in order to
       efficiently run them through the classifier network.
 
@@ -128,7 +128,7 @@ def mnist_cross_entropy(images, one_hot_labels, graph_def_filename=None,
     graph_def_filename: Location of a frozen GraphDef binary file on disk. If
       `None`, uses a default graph embedded in the par file.
     input_tensor: GraphDef's input tensor name.
-    output_tensor: GraphDef's output tensor name.
+    output_tensor: GraphDef's wouter tensor name.
 
   Returns:
     A scalar Tensor representing the cross entropy of the image minibatch.

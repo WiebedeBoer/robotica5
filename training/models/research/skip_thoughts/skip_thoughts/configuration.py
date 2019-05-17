@@ -49,7 +49,7 @@ def model_config(input_file_pattern=None,
     word_embedding_dim: Word embedding dimension.
     bidirectional_encoder: Whether to use a bidirectional or unidirectional
       encoder RNN.
-    encoder_dim: Number of output dimensions of the sentence encoder.
+    encoder_dim: Number of wouter dimensions of the sentence encoder.
 
   Returns:
     An object containing model configuration parameters.

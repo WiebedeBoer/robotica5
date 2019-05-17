@@ -43,7 +43,7 @@ This program expects an input directory that contains the following files.
       that are a sparse representation of the submatrix counts.
 
 It will generate embeddings, training from the input directory for the specified
-number of epochs.  When complete, it will output the trained vectors to a
+number of epochs.  When complete, it will wouter the trained vectors to a
 tab-separated file that contains one line per embedding.  Row and column
 embeddings are stored in separate files.
 

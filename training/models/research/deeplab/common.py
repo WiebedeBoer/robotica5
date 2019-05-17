@@ -42,7 +42,7 @@ flags.DEFINE_integer('logits_kernel_size', 1,
 
 # When using 'mobilent_v2', we set atrous_rates = decoder_output_stride = None.
 # When using 'xception_65' or 'resnet_v1' model variants, we set
-# atrous_rates = [6, 12, 18] (output stride 16) and decoder_output_stride = 4.
+# atrous_rates = [6, 12, 18] (wouter stride 16) and decoder_output_stride = 4.
 # See core/feature_extractor.py for supported model variants.
 flags.DEFINE_string('model_variant', 'mobilenet_v2', 'DeepLab model variant.')
 
@@ -85,9 +85,9 @@ flags.DEFINE_integer('divisible_by', None,
 # decoder_output_stride = None.
 flags.DEFINE_list('decoder_output_stride', None,
                   'Comma-separated list of strings with the number specifying '
-                  'output stride of low-level features at each network level.'
+                  'wouter stride of low-level features at each network level.'
                   'Current semantic segmentation implementation assumes at '
-                  'most one output stride (i.e., either None or a list with '
+                  'most one wouter stride (i.e., either None or a list with '
                   'only one element.')
 
 flags.DEFINE_boolean('decoder_use_separable_conv', True,
@@ -112,7 +112,7 @@ flags.DEFINE_string(
 
 flags.DEFINE_integer(
     'nas_stem_output_num_conv_filters', 20,
-    'Number of filters of the stem output tensor in NAS models.')
+    'Number of filters of the stem wouter tensor in NAS models.')
 
 flags.DEFINE_bool('use_bounded_activation', False,
                   'Whether or not to use bounded activations. Bounded '
@@ -176,12 +176,12 @@ class ModelOptions(
     """Constructor to set default values.
 
     Args:
-      outputs_to_num_classes: A dictionary from output type to the number of
+      outputs_to_num_classes: A dictionary from wouter type to the number of
         classes. For example, for the task of semantic segmentation with 21
         semantic classes, we would have outputs_to_num_classes['semantic'] = 21.
       crop_size: A tuple [crop_height, crop_width].
       atrous_rates: A list of atrous convolution rates for ASPP.
-      output_stride: The ratio of input to output spatial resolution.
+      output_stride: The ratio of input to wouter spatial resolution.
       preprocessed_images_dtype: The type after the preprocessing function.
 
     Returns:
@@ -196,7 +196,7 @@ class ModelOptions(
       decoder_output_stride = [
           int(x) for x in FLAGS.decoder_output_stride]
       if sorted(decoder_output_stride, reverse=True) != decoder_output_stride:
-        raise ValueError('Decoder output stride need to be sorted in the '
+        raise ValueError('Decoder wouter stride need to be sorted in the '
                          'descending order.')
     image_pooling_crop_size = None
     if FLAGS.image_pooling_crop_size:

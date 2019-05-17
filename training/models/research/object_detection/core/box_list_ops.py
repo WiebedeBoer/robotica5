@@ -20,7 +20,7 @@ Example box operations that are supported:
   * iou: pairwise intersection-over-union scores
   * sq_dist: pairwise distances between bounding boxes
 
-Whenever box_list_ops functions output a BoxList, the fields of the incoming
+Whenever box_list_ops functions wouter a BoxList, the fields of the incoming
 BoxList are retained unless documented otherwise.
 """
 import tensorflow as tf
@@ -857,7 +857,7 @@ def refine_boxes_multi_class(pool_boxes,
       have a rank 1 'scores' field and a rank 1 'classes' field.
     num_classes: (int scalar) Number of classes.
     nms_iou_thresh: (float scalar) iou threshold for non max suppression (NMS).
-    nms_max_detections: (int scalar) maximum output size for NMS.
+    nms_max_detections: (int scalar) maximum wouter size for NMS.
     voting_iou_thresh: (float scalar) iou threshold for box voting.
 
   Returns:
@@ -899,7 +899,7 @@ def refine_boxes(pool_boxes,
     pool_boxes: (BoxList) A collection of boxes to be refined. pool_boxes must
       have a rank 1 'scores' field.
     nms_iou_thresh: (float scalar) iou threshold for non max suppression (NMS).
-    nms_max_detections: (int scalar) maximum output size for NMS.
+    nms_max_detections: (int scalar) maximum wouter size for NMS.
     voting_iou_thresh: (float scalar) iou threshold for box voting.
 
   Returns:

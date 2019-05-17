@@ -129,7 +129,7 @@ class ConvolutionalClassHead(head.Head):
         spatial resolution of the feature map is smaller than the kernel size,
         then the kernel size is automatically set to be
         min(feature_width, feature_height).
-      apply_sigmoid_to_scores: if True, apply the sigmoid on the output
+      apply_sigmoid_to_scores: if True, apply the sigmoid on the wouter
         class_predictions.
       class_prediction_bias_init: constant value to initialize bias of the last
         conv2d layer before class prediction.

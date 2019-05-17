@@ -131,14 +131,14 @@ def default_train_step_kwargs(m, obj, logdir, rng_seed, is_chief, num_steps,
   train_step_kwargs['dagger_sample_bn_false'] = dagger_sample_bn_false 
   return train_step_kwargs
 
-# Utilities for visualizing and analysing validation output.
+# Utilities for visualizing and analysing validation wouter.
 def save_d_at_t(outputs, global_step, output_dir, metric_summary, N):
   """Save distance to goal at all time steps.
   
   Args:
     outputs        : [gt_dist_to_goal].
     global_step : number of iterations.
-    output_dir     : output directory.
+    output_dir     : wouter directory.
     metric_summary : to append scalars to summary.
     N              : number of outputs to process.
 
@@ -163,7 +163,7 @@ def save_all(outputs, global_step, output_dir, metric_summary, N):
   Args:
     outputs        : [locs, goal_loc, gt_dist_to_goal, node_ids, perturbs]
     global_step    : number of iterations.
-    output_dir     : output directory.
+    output_dir     : wouter directory.
     metric_summary : to append scalars to summary.
     N              : number of outputs to process.
   """

@@ -69,7 +69,7 @@ def main(argv):
   if len(argv) > 1:
     raise RuntimeError('Too many command-line arguments.')
 
-  # Process output directory.
+  # Process wouter directory.
   if os.path.exists(cmd_args.output_cluster_dir):
     raise RuntimeError(
         'output_cluster_dir = %s already exists. This may indicate that a '

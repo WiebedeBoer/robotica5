@@ -73,7 +73,7 @@ def batch_norm(inputs,
       able to reuse the layer scope must be given.
 
   Returns:
-    a tensor representing the output of the operation.
+    a tensor representing the wouter of the operation.
 
   """
   inputs_shape = inputs.get_shape()
@@ -188,7 +188,7 @@ def conv2d(inputs,
 
   Args:
     inputs: a tensor of size [batch_size, height, width, channels].
-    num_filters_out: the number of output filters.
+    num_filters_out: the number of wouter filters.
     kernel_size: a list of length 2: [kernel_height, kernel_width] of
       of the filters. Can be an int if both values are the same.
     stride: a list of length 2: [stride_height, stride_width].
@@ -207,7 +207,7 @@ def conv2d(inputs,
     reuse: whether or not the layer and its variables should be reused. To be
       able to reuse the layer scope must be given.
   Returns:
-    a tensor representing the output of the operation.
+    a tensor representing the wouter of the operation.
 
   """
   with tf.variable_scope(scope, 'Conv', [inputs], reuse=reuse):
@@ -269,7 +269,7 @@ def fc(inputs,
   Args:
     inputs: a [B x N] tensor where B is the batch size and N is the number of
             input units in the layer.
-    num_units_out: the number of output units in the layer.
+    num_units_out: the number of wouter units in the layer.
     activation: activation function.
     stddev: the standard deviation for the weights.
     bias: the initial value of the biases.
@@ -412,7 +412,7 @@ def dropout(inputs, keep_prob=0.5, is_training=True, scope=None):
     scope: Optional scope for name_scope.
 
   Returns:
-    a tensor representing the output of the operation.
+    a tensor representing the wouter of the operation.
   """
   if is_training and keep_prob > 0:
     with tf.name_scope(scope, 'Dropout', [inputs]):

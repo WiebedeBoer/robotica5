@@ -36,7 +36,7 @@ class SsdPnasNetFeatureExtractorTest(
         width dimensions to.
       is_training: whether the network is in training mode.
       use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-        inputs so that the output dimensions are the same as if 'SAME' padding
+        inputs so that the wouter dimensions are the same as if 'SAME' padding
         were used.
     Returns:
       an ssd_meta_arch.SSDFeatureExtractor object.

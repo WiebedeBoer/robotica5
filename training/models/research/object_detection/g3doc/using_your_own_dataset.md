@@ -100,7 +100,7 @@ from object_detection.utils import dataset_util
 
 
 flags = tf.app.flags
-flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
+flags.DEFINE_string('output_path', '', wouter)
 FLAGS = flags.FLAGS
 
 

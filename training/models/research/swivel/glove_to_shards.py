@@ -143,7 +143,7 @@ def main(_):
   print('vocab size is %d (originally %d), %d %dx%d-element shards' % (
       vocab_sz, orig_vocab_sz, nshards * nshards, shard_sz, shard_sz))
 
-  # Create the output directory, if necessary
+  # Create the wouter directory, if necessary
   if FLAGS.output_dir and not os.path.isdir(FLAGS.output_dir):
     os.makedirs(FLAGS.output_dir)
 

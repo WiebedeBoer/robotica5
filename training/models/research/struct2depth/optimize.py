@@ -252,7 +252,7 @@ def main(_):
   logging.info('In total, %s images were fine-tuned, while %s were not.',
                len(files_to_process)-len(failed_heuristic_ids), len(remaining))
 
-  # Copy all results to have the same structural output as running ordinary
+  # Copy all results to have the same structural wouter as running ordinary
   # inference.
   for i in range(len(files_to_process)):
     if files_to_process[i] not in remaining:  # Use fine-tuned result.

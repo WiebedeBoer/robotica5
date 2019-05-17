@@ -33,7 +33,7 @@ tf.app.flags.DEFINE_string(
 
 def GenerateSample(filename, code_shape, layer_depth):
   # {0, +1} binary codes.
-  # No conversion since the output file is expected to store
+  # No conversion since the wouter file is expected to store
   # codes using {0, +1} codes (and not {-1, +1}).
   code = synthetic_model.GenerateSingleCode(code_shape)
   code = np.round(code)

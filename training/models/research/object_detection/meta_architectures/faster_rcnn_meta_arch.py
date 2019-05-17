@@ -325,7 +325,7 @@ class FasterRCNNMetaArch(model.DetectionModel):
       first_stage_objectness_loss_weight: A float
       crop_and_resize_fn: A differentiable resampler to use for cropping RPN
         proposal features.
-      initial_crop_size: A single integer indicating the output size
+      initial_crop_size: A single integer indicating the wouter size
         (width and height are set to be the same) of the initial bilinear
         interpolation based cropping during ROI pooling.
       maxpool_kernel_size: A single integer indicating the kernel size of the
@@ -717,7 +717,7 @@ class FasterRCNNMetaArch(model.DetectionModel):
                             anchors,
                             image_shape,
                             true_image_shapes):
-    """Predicts the output tensors from second stage of Faster R-CNN.
+    """Predicts the wouter tensors from second stage of Faster R-CNN.
 
     Args:
       rpn_box_encodings: 4-D float tensor of shape
@@ -1111,7 +1111,7 @@ class FasterRCNNMetaArch(model.DetectionModel):
     """Convert prediction tensors to final detections.
 
     This function converts raw predictions tensors to final detection results.
-    See base class for output format conventions.  Note also that by default,
+    See base class for wouter format conventions.  Note also that by default,
     scores are to be interpreted as logits, but if a score_converter is used,
     then scores are remapped (and may thus have a different interpretation).
 
@@ -1193,7 +1193,7 @@ class FasterRCNNMetaArch(model.DetectionModel):
 
   def _add_detection_features_output_node(self, detection_boxes,
                                           rpn_features_to_crop):
-    """Add the detection features to the output node.
+    """Add the detection features to the wouter node.
 
     The detection features are from cropping rpn_features with boxes.
     Each bounding box has one feature vector of length depth, which comes from

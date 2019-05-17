@@ -27,7 +27,7 @@ class EntropyCoderModel(object):
     self.train_op = None
 
     # Tensor corresponding to the average code length of the input bit field
-    # tensor. The average code length is a number of output bits per input bit.
+    # tensor. The average code length is a number of wouter bits per input bit.
     # To get an effective compression, this number should be between 0.0
     # and 1.0 (1.0 corresponds to no compression).
     self.average_code_length = None

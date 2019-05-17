@@ -26,7 +26,7 @@ We have to take the following steps to add a new prediction head to an
 existing meta arch:
 (a) Add a class for predicting the head. This class should inherit from the
 `Head` class below and have a `predict` function that receives the features
-and predicts the output. The output is always a tf.float32 tensor.
+and predicts the wouter. The wouter is always a tf.float32 tensor.
 (b) Add the head to the meta architecture. For example in case of Mask RCNN,
 go to box_predictor_builder and put in the logic for adding the new head to the
 Mask RCNN box predictor.

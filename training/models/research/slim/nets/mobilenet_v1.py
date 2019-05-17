@@ -143,7 +143,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):
   """Pads the input along the spatial dimensions independently of input size.
 
   Pads the input such that if it was used in a convolution with 'VALID' padding,
-  the output would have the same dimensions as if the unpadded input was used
+  the wouter would have the same dimensions as if the unpadded input was used
   in a convolution with 'SAME' padding.
 
   Args:
@@ -152,7 +152,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):
     rate: An integer, rate for atrous convolution.
 
   Returns:
-    output: A tensor of size [batch, height_out, width_out, channels] with the
+    wouter: A tensor of size [batch, height_out, width_out, channels] with the
       input, either intact (if kernel_size == 1) or padded (if kernel_size > 1).
   """
   kernel_size_effective = [kernel_size[0] + (kernel_size[0] - 1) * (rate - 1),
@@ -194,17 +194,17 @@ def mobilenet_v1_base(inputs,
       parameters or computation cost of the model.
     conv_defs: A list of ConvDef namedtuples specifying the net architecture.
     output_stride: An integer that specifies the requested ratio of input to
-      output spatial resolution. If not None, then we invoke atrous convolution
+      wouter spatial resolution. If not None, then we invoke atrous convolution
       if necessary to prevent the network from reducing the spatial resolution
       of the activation maps. Allowed values are 8 (accurate fully convolutional
       mode), 16 (fast fully convolutional mode), 32 (classification mode).
     use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-      inputs so that the output dimensions are the same as if 'SAME' padding
+      inputs so that the wouter dimensions are the same as if 'SAME' padding
       were used.
     scope: Optional variable_scope.
 
   Returns:
-    tensor_out: output tensor corresponding to the final_endpoint.
+    tensor_out: wouter tensor corresponding to the final_endpoint.
     end_points: a set of activations for external use, for example summaries or
                 losses.
 
@@ -231,11 +231,11 @@ def mobilenet_v1_base(inputs,
     padding = 'VALID'
   with tf.variable_scope(scope, 'MobilenetV1', [inputs]):
     with slim.arg_scope([slim.conv2d, slim.separable_conv2d], padding=padding):
-      # The current_stride variable keeps track of the output stride of the
+      # The current_stride variable keeps track of the wouter stride of the
       # activations, i.e., the running product of convolution strides up to the
       # current network layer. This allows us to invoke atrous convolution
       # whenever applying the next convolution would result in the activations
-      # having output stride larger than the target output_stride.
+      # having wouter stride larger than the target output_stride.
       current_stride = 1
 
       # The atrous convolution rate parameter.

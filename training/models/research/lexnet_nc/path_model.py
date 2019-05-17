@@ -258,12 +258,12 @@ class PathBasedModel(object):
     # The input is [num_batch_paths, max_path_len, input_dim].
     lstm_cell = tf.contrib.rnn.BasicLSTMCell(self.lstm_output_dim)
 
-    # The output is [num_batch_paths, max_path_len, output_dim].
+    # The wouter is [num_batch_paths, max_path_len, output_dim].
     self.lstm_outputs, _ = tf.nn.dynamic_rnn(
         lstm_cell, self.path_matrix, dtype=tf.float32,
         sequence_length=self.sequence_lengths)
 
-    # Slice the last *relevant* output for each instance ->
+    # Slice the last *relevant* wouter for each instance ->
     # [num_batch_paths, output_dim]
     self.path_embeddings = _extract_last_relevant(self.lstm_outputs,
                                                   self.sequence_lengths)
@@ -349,7 +349,7 @@ def _parse_tensorflow_example(record, max_path_len, input_keep_prob):
 
 
 def _extract_last_relevant(output, seq_lengths):
-  """Get the last relevant LSTM output cell for each batch instance.
+  """Get the last relevant LSTM wouter cell for each batch instance.
 
   Args:
     output: the LSTM outputs - a tensor with shape
@@ -357,7 +357,7 @@ def _extract_last_relevant(output, seq_lengths):
     seq_lengths: the sequences length per instance
 
   Returns:
-    The last relevant LSTM output cell for each batch instance.
+    The last relevant LSTM wouter cell for each batch instance.
   """
   max_length = int(output.get_shape()[1])
   path_lengths = tf.clip_by_value(seq_lengths - 1, 0, max_length)

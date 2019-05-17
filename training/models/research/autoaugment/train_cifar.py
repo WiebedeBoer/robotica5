@@ -81,7 +81,7 @@ def build_model(inputs, num_classes, is_training, hparams):
 
   Args:
     inputs: input features/images being fed to the image model build built.
-    num_classes: number of output classes being predicted.
+    num_classes: number of wouter classes being predicted.
     is_training: is the model training or not.
     hparams: additional hyperparameters associated with the image model.
 

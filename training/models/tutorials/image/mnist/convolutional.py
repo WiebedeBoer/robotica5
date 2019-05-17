@@ -187,7 +187,7 @@ def main(_):
   # as the evaluation subgraphs, while sharing the trainable parameters.
   def model(data, train=False):
     """The Model definition."""
-    # 2D convolution, with 'SAME' padding (i.e. the output feature map has
+    # 2D convolution, with 'SAME' padding (i.e. the wouter feature map has
     # the same size as the input). Note that {strides} is a 4D array whose
     # shape matches the data layout: [image index, y, x, depth].
     conv = tf.nn.conv2d(data,

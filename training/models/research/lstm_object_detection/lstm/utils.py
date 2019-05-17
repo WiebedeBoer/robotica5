@@ -125,13 +125,13 @@ def quantizable_separable_conv2d(inputs,
 
   Args:
     inputs: A tensor of size [batch_size, height, width, channels].
-    num_outputs: The number of pointwise convolution output filters. If is
+    num_outputs: The number of pointwise convolution wouter filters. If is
       None, then we skip the pointwise convolution stage.
     kernel_size: A list of length 2: [kernel_height, kernel_width] of the
       filters. Can be an int if both values are the same.
     is_quantized: flag to enable/disable quantization.
-    depth_multiplier: The number of depthwise convolution output channels for
-      each input channel. The total number of depthwise convolution output
+    depth_multiplier: The number of depthwise convolution wouter channels for
+      each input channel. The total number of depthwise convolution wouter
       channels will be equal to num_filters_in * depth_multiplier.
     stride: A list of length 2: [stride_height, stride_width], specifying the
       depthwise convolution stride. Can be an int if both strides are the same.

@@ -51,7 +51,7 @@ class DeepSpeechDecoder(object):
     tokenizing to words.
 
     Args:
-      decode: string of the decoded output.
+      decode: string of the decoded wouter.
       target: a string for the ground truth label.
 
     Returns:
@@ -72,7 +72,7 @@ class DeepSpeechDecoder(object):
     CER is defined as the edit distance between the two given strings.
 
     Args:
-      decode: a string of the decoded output.
+      decode: a string of the decoded wouter.
       target: a string for the ground truth label.
 
     Returns:

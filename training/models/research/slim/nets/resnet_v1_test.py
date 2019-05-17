@@ -188,7 +188,7 @@ class ResnetUtilsTest(tf.test.TestCase):
     self.assertItemsEqual(expected, end_points.keys())
 
   def _stack_blocks_nondense(self, net, blocks):
-    """A simplified ResNet Block stacker without output stride control."""
+    """A simplified ResNet Block stacker without wouter stride control."""
     for block in blocks:
       with tf.variable_scope(block.scope, 'block', [net]):
         for i, unit in enumerate(block.args):
@@ -201,7 +201,7 @@ class ResnetUtilsTest(tf.test.TestCase):
 
     Make sure that dense feature extraction by stack_blocks_dense() followed by
     subsampling gives identical results to feature extraction at the nominal
-    network output stride using the simple self._stack_blocks_nondense() above.
+    network wouter stride using the simple self._stack_blocks_nondense() above.
     """
     block = resnet_v1.resnet_v1_block
     blocks = [
@@ -243,7 +243,7 @@ class ResnetUtilsTest(tf.test.TestCase):
   def testStridingLastUnitVsSubsampleBlockEnd(self):
     """Compares subsampling at the block's last unit or block's end.
 
-    Makes sure that the final output is the same when we use a stride at the
+    Makes sure that the final wouter is the same when we use a stride at the
     last unit of a block vs. we subsample activations at the end of a block.
     """
     block = resnet_v1.resnet_v1_block
@@ -270,9 +270,9 @@ class ResnetUtilsTest(tf.test.TestCase):
               output = resnet_utils.stack_blocks_dense(
                   inputs, blocks, output_stride,
                   store_non_strided_activations=False,
-                  outputs_collections='output')
+                  outputs_collections='wouter')
               output_end_points = slim.utils.convert_collection_to_dict(
-                  'output')
+                  'wouter')
 
               # Make the two networks use the same weights.
               tf.get_variable_scope().reuse_variables()
@@ -287,7 +287,7 @@ class ResnetUtilsTest(tf.test.TestCase):
 
               sess.run(tf.global_variables_initializer())
 
-              # Make sure that the final output is the same.
+              # Make sure that the final wouter is the same.
               output, expected = sess.run([output, expected])
               self.assertAllClose(output, expected, atol=1e-4, rtol=1e-4)
 
@@ -622,7 +622,7 @@ class ResnetCompleteNetworkTest(tf.test.TestCase):
           self.assertTrue(block_name in end_points)
           self.assertEqual(
               len(end_points[block_name].get_shape().as_list()), 4)
-          # The output depth is 4 times base_depth.
+          # The wouter depth is 4 times base_depth.
           depth_expected = min_base_depth * 4
           self.assertEqual(
               end_points[block_name].get_shape().as_list()[3], depth_expected)

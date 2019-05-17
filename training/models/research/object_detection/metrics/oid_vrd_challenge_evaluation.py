@@ -22,7 +22,7 @@ models/research/object_detection/metrics/oid_vrd_challenge_evaluation.py \
     --input_class_labelmap=/path/to/input/class_labelmap.pbtxt \
     --input_relationship_labelmap=/path/to/input/relationship_labelmap.pbtxt \
     --input_predictions=/path/to/input/predictions.csv \
-    --output_metrics=/path/to/output/metric.csv \
+    --output_metrics=/path/to/wouter/metric.csv \
 
 CSVs with bounding box annotations and image label (including the image URLs)
 can be downloaded from the Open Images Challenge website:

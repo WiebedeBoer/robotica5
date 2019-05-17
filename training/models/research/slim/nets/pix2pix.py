@@ -65,10 +65,10 @@ def upsample(net, num_outputs, kernel_size, method='nn_upsample_conv'):
 
   Args:
     net: A `Tensor` of size [batch_size, height, width, filters].
-    num_outputs: The number of output filters.
+    num_outputs: The number of wouter filters.
     kernel_size: A list of 2 scalars or a 1x2 `Tensor` indicating the scale,
-      relative to the inputs, of the output dimensions. For example, if kernel
-      size is [2, 3], then the output height and width will be twice and three
+      relative to the inputs, of the wouter dimensions. For example, if kernel
+      size is [2, 3], then the wouter height and width will be twice and three
       times the input size.
     method: The upsampling method.
 
@@ -143,7 +143,7 @@ def pix2pix_generator(net,
     is_training: Whether or not we're in training or testing mode.
 
   Returns:
-    A `Tensor` representing the model output and a dictionary of model end
+    A `Tensor` representing the model wouter and a dictionary of model end
       points.
 
   Raises:
@@ -209,7 +209,7 @@ def pix2pix_generator(net,
           net = layers.dropout(net, keep_prob=block.decoder_keep_prob)
         end_points['decoder%d' % block_id] = net
 
-  with tf.variable_scope('output'):
+  with tf.variable_scope('wouter'):
     # Explicitly set the normalizer_fn to None to override any default value
     # that may come from an arg_scope, such as pix2pix_arg_scope.
     logits = layers.conv2d(

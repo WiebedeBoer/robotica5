@@ -168,10 +168,10 @@ def embedding_lookup(embedding_matrix, indices, ids, weights, size):
 
   Args:
     embedding_matrix: float Tensor from which to do the lookup.
-    indices: int Tensor for the output rows of the looked up vectors.
+    indices: int Tensor for the wouter rows of the looked up vectors.
     ids: int Tensor vectors to look up in the embedding_matrix.
     weights: float Tensor weights to apply to the looked up vectors.
-    size: int number of output rows. Needed since some output rows may be
+    size: int number of wouter rows. Needed since some wouter rows may be
         empty.
 
   Returns:
@@ -574,7 +574,7 @@ def activation_lookup_recurrent(component, state, channel_id, source_array,
                                                 embedding_matrix, step_idx)
       dim = feature_spec.size * feature_spec.embedding_dim
     else:
-      # If embedding_dim is -1, just output concatenation of activations.
+      # If embedding_dim is -1, just wouter concatenation of activations.
       dim = feature_spec.size * source_layer_size
 
     return NamedTensor(
@@ -629,7 +629,7 @@ def activation_lookup_other(component, state, channel_id, source_tensor,
                                                 embedding_matrix, step_idx)
       dim = feature_spec.size * feature_spec.embedding_dim
     else:
-      # If embedding_dim is -1, just output concatenation of activations.
+      # If embedding_dim is -1, just wouter concatenation of activations.
       dim = feature_spec.size * source_layer_size
 
     return NamedTensor(
@@ -1074,7 +1074,7 @@ class NetworkUnitInterface(object):
     """Pulls out the logits from the tensors produced by this unit.
 
     Args:
-      network_tensors: list of tensors as output by create().
+      network_tensors: list of tensors as wouter by create().
 
     Raises:
       NotImplementedError: by default a 'logits' tensor need not be implemented.
@@ -1733,7 +1733,7 @@ class LSTMNetwork(NetworkUnitInterface):
     ct = tf.add(
         tf.multiply(i_it, i_wt), tf.multiply(i_ft, i_c_tm1), name='lstm_c')
 
-    # output -- o_t = sigmoid(affine(x_t, h_{t-1}, c_t))
+    # wouter -- o_t = sigmoid(affine(x_t, h_{t-1}, c_t))
     # Note peephole connection to current cell state.
     i_aot = (
         self._multiply_hidden_weights(input_tensor, 'x2o') +
@@ -1795,9 +1795,9 @@ class ConvNetwork(NetworkUnitInterface):
               convolutional kernel at every layer.
       depths: comma separated list of ints, number of channels input to the
               convolutional kernel at every layer except the first.
-      output_embedding_dim: int, number of output channels for the convolutional
+      output_embedding_dim: int, number of wouter channels for the convolutional
               kernel of the last layer, which receives no ReLU activation and
-              therefore can be used in a softmax output. If zero, this final
+              therefore can be used in a softmax wouter. If zero, this final
               layer is disabled entirely.
       nonlinearity ('relu'): Name of function from module "tf.nn" to apply to
         each hidden layer; e.g., "relu" or "elu".
@@ -1945,21 +1945,21 @@ class ConvMultiNetwork(NetworkUnitInterface):
               convolutional kernel at every layer.
       depths: comma separated list of ints, number of channels input to the
               convolutional kernel at every layer except the first.
-      output_embedding_dim: int, number of output channels for the convolutional
+      output_embedding_dim: int, number of wouter channels for the convolutional
               kernel of the last layer, which receives no ReLU activation and
-              therefore can be used in a softmax output. If zero, this final
+              therefore can be used in a softmax wouter. If zero, this final
               layer is disabled entirely.
       side_tower_index: An int representing the layer of the tower that the
               side tower will start from. 0 is the input data and 'num_layers'
-              is the output.
+              is the wouter.
       side_tower_widths: comma separated list of ints, number of steps input to
               the convolutional kernel at every layer of the side tower.
       side_tower_depths: comma separated list of ints, number of channels input
               to the convolutional kernel at every layer of the side tower save
               the first.
-      side_tower_output_embedding_dim: int, number of output channels for the
+      side_tower_output_embedding_dim: int, number of wouter channels for the
               kernel of the last layer, which receives no ReLU activation and
-              therefore can be used in a softmax output. If zero, this final
+              therefore can be used in a softmax wouter. If zero, this final
               layer is disabled entirely.
       nonlinearity ('relu'): Name of function from module "tf.nn" to apply to
         each hidden layer; e.g., "relu" or "elu".
@@ -2187,10 +2187,10 @@ class PairwiseConvNetwork(NetworkUnitInterface):
   the concatenation of the representations of the tokens at i and at j.
 
   To use this network for graph edge scoring, for instance by using the
-  "heads_labels" transition system, the output layer needs to have dimensions
+  "heads_labels" transition system, the wouter layer needs to have dimensions
   [N, N*num_labels]. The network takes care of outputting an [N, N*last_dim]
-  sized layer, but the user needs to ensure that the output depth equals the
-  desired number of output labels.
+  sized layer, but the user needs to ensure that the wouter depth equals the
+  desired number of wouter labels.
   """
 
   def __init__(self, component):
@@ -2352,7 +2352,7 @@ class PairwiseConvNetwork(NetworkUnitInterface):
 class ExportFixedFeaturesNetwork(NetworkUnitInterface):
   """A network that exports fixed features as layers.
 
-  Each fixed feature embedding is output as a layer whose name and dimension are
+  Each fixed feature embedding is wouter as a layer whose name and dimension are
   set to the name and dimension of the corresponding fixed feature.
   """
 

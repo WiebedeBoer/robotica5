@@ -91,7 +91,7 @@ def self_gating(input_tensor, scope, data_format='NDHWC'):
       height, width, channels].
     scope: scope for `variable_scope`.
     data_format: An optional string from: "NDHWC", "NCDHW". Defaults to "NDHWC".
-      The data format of the input and output data. With the default format
+      The data format of the input and wouter data. With the default format
       "NDHWC", the data is stored in the order of: [batch, in_depth, in_height,
       in_width, in_channels]. Alternatively, the format could be "NCDHW", the
       data storage order is:
@@ -179,7 +179,7 @@ def s3dg_base(inputs,
       usage will be to set this value in (0, 1) to reduce the number of
       parameters or computation cost of the model.
     data_format: An optional string from: "NDHWC", "NCDHW". Defaults to "NDHWC".
-      The data format of the input and output data. With the default format
+      The data format of the input and wouter data. With the default format
       "NDHWC", the data is stored in the order of: [batch, in_depth, in_height,
       in_width, in_channels]. Alternatively, the format could be "NCDHW", the
       data storage order is:
@@ -539,7 +539,7 @@ def s3dg(inputs,
     reuse: whether or not the network and its variables should be reused. To be
       able to reuse 'scope' must be given.
     data_format: An optional string from: "NDHWC", "NCDHW". Defaults to "NDHWC".
-      The data format of the input and output data. With the default format
+      The data format of the input and wouter data. With the default format
       "NDHWC", the data is stored in the order of: [batch, in_depth, in_height,
       in_width, in_channels]. Alternatively, the format could be "NCDHW", the
       data storage order is:

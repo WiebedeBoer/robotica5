@@ -226,7 +226,7 @@ def discriminator(hparams, sequence, is_training, reuse=None):
         if is_training:
           rnn_out = output_mask * rnn_out
 
-        # Prediction is linear output for Discriminator.
+        # Prediction is linear wouter for Discriminator.
         pred = tf.contrib.layers.linear(rnn_out, 1, scope=vs)
 
         predictions.append(pred)

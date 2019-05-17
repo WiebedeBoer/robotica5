@@ -110,7 +110,7 @@ def pad_or_clip_tensor(t, length):
 
 
 def pad_or_clip_nd(tensor, output_shape):
-  """Pad or Clip given tensor to the output shape.
+  """Pad or Clip given tensor to the wouter shape.
 
   Args:
     tensor: Input tensor to pad or clip.
@@ -118,7 +118,7 @@ def pad_or_clip_nd(tensor, output_shape):
       representing the size to pad or clip each dimension of the input tensor.
 
   Returns:
-    Input tensor padded and clipped to the output shape.
+    Input tensor padded and clipped to the wouter shape.
   """
   tensor_shape = tf.shape(tensor)
   clip_size = [
@@ -185,21 +185,21 @@ def static_or_dynamic_map_fn(fn, elems, dtype=None,
 
   Note that `static_or_dynamic_map_fn` currently is not *fully* interchangeable
   with the default tf.map_fn function as it does not accept nested inputs (only
-  Tensors or lists of Tensors).  Likewise, the output of `fn` can only be a
+  Tensors or lists of Tensors).  Likewise, the wouter of `fn` can only be a
   Tensor or list of Tensors.
 
   TODO(jonathanhuang): make this function fully interchangeable with tf.map_fn.
 
   Args:
     fn: The callable to be performed. It accepts one argument, which will have
-      the same structure as elems. Its output must have the
+      the same structure as elems. Its wouter must have the
       same structure as elems.
     elems: A tensor or list of tensors, each of which will
       be unpacked along their first dimension. The sequence of the
       resulting slices will be applied to fn.
-    dtype:  (optional) The output type(s) of fn. If fn returns a structure of
+    dtype:  (optional) The wouter type(s) of fn. If fn returns a structure of
       Tensors differing from the structure of elems, then dtype is not optional
-      and must have the same structure as the output of fn.
+      and must have the same structure as the wouter of fn.
     parallel_iterations: (optional) number of batch items to process in
       parallel.  This flag is only used if the native tf.map_fn is used
       and defaults to 32 instead of 10 (unlike the standard tf.map_fn default).

@@ -226,7 +226,7 @@ class COCOEvalWrapper(cocoeval.COCOeval):
         keys of the form: 'Precision mAP ByCategory/category'
         (without the supercategory part if no supercategories exist).
         For backward compatibility 'PerformanceByCategory' is included in the
-        output regardless of all_metrics_per_category.
+        wouter regardless of all_metrics_per_category.
         If evaluating class-agnostic mode, per_category_ap is an empty
         dictionary.
 

@@ -191,7 +191,7 @@ def bleu_score(logits, labels):
   """Approximate BLEU score computation between labels and predictions.
 
   An approximate BLEU scoring method since we do not glue word pieces or
-  decode the ids and tokenize the output. By default, we use ngram order of 4
+  decode the ids and tokenize the wouter. By default, we use ngram order of 4
   and use brevity penalty. Also, this does not have beam search.
 
   Args:
@@ -297,11 +297,11 @@ def rouge_2_fscore(logits, labels):
   """ROUGE-2 F1 score computation between labels and predictions.
 
   This is an approximate ROUGE scoring method since we do not glue word pieces
-  or decode the ids and tokenize the output.
+  or decode the ids and tokenize the wouter.
 
   Args:
     logits: tensor, model predictions
-    labels: tensor, gold output.
+    labels: tensor, gold wouter.
 
   Returns:
     rouge2_fscore: approx rouge-2 f1 score.
@@ -374,11 +374,11 @@ def rouge_l_fscore(predictions, labels):
   """ROUGE scores computation between labels and predictions.
 
   This is an approximate ROUGE scoring method since we do not glue word pieces
-  or decode the ids and tokenize the output.
+  or decode the ids and tokenize the wouter.
 
   Args:
     predictions: tensor, model predictions
-    labels: tensor, gold output.
+    labels: tensor, gold wouter.
 
   Returns:
     rouge_l_fscore: approx rouge-l f1 score.

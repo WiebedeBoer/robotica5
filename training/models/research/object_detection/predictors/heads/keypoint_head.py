@@ -48,9 +48,9 @@ class MaskRCNNKeypointHead(head.Head):
       num_keypoints: (int scalar) number of keypoints.
       conv_hyperparams_fn: A function to generate tf-slim arg_scope with
         hyperparameters for convolution ops.
-      keypoint_heatmap_height: Desired output mask height. The default value
+      keypoint_heatmap_height: Desired wouter mask height. The default value
         is 14.
-      keypoint_heatmap_width: Desired output mask width. The default value
+      keypoint_heatmap_width: Desired wouter mask width. The default value
         is 14.
       keypoint_prediction_num_conv_layers: Number of convolution layers applied
         to the image_features in mask prediction branch.

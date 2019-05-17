@@ -28,7 +28,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):  # pylint: disable=invalid-name
   """Pads the input along the spatial dimensions independently of input size.
 
   Pads the input such that if it was used in a convolution with 'VALID' padding,
-  the output would have the same dimensions as if the unpadded input was used
+  the wouter would have the same dimensions as if the unpadded input was used
   in a convolution with 'SAME' padding.
 
   Args:
@@ -37,7 +37,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):  # pylint: disable=invalid-name
     rate: An integer, rate for atrous convolution.
 
   Returns:
-    output: A tensor of size [batch, height_out, width_out, channels] with the
+    wouter: A tensor of size [batch, height_out, width_out, channels] with the
       input, either intact (if kernel_size == 1) or padded (if kernel_size > 1).
   """
   kernel_size_effective = [kernel_size[0] + (kernel_size[0] - 1) * (rate - 1),
@@ -84,7 +84,7 @@ class _LayersOverride(object):
         containing hyperparameters for convolution ops. Optionally set to `None`
         to use default mobilenet_v1 layer builders.
       use_explicit_padding: If True, use 'valid' padding for convolutions,
-        but explicitly pre-pads inputs so that the output dimensions are the
+        but explicitly pre-pads inputs so that the wouter dimensions are the
         same as if 'same' padding were used. Off by default.
       alpha: The width multiplier referenced in the MobileNetV1 paper. It
         modifies the number of filters in each convolutional layer. It's called
@@ -304,7 +304,7 @@ def mobilenet_v1(batchnorm_training,
         containing hyperparameters for convolution ops. Optionally set to `None`
         to use default mobilenet_v1 layer builders.
       use_explicit_padding: If True, use 'valid' padding for convolutions,
-        but explicitly pre-pads inputs so that the output dimensions are the
+        but explicitly pre-pads inputs so that the wouter dimensions are the
         same as if 'same' padding were used. Off by default.
       alpha: The width multiplier referenced in the MobileNetV1 paper. It
         modifies the number of filters in each convolutional layer.

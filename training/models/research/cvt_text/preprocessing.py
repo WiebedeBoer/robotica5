@@ -15,7 +15,7 @@
 
 """
 Preprocesses pretrained word embeddings, creates dev sets for tasks without a
-provided one, and figures out the set of output classes for each task.
+provided one, and figures out the set of wouter classes for each task.
 """
 
 from __future__ import absolute_import

@@ -42,12 +42,12 @@ def generate_variational_dropout_masks(hparams, keep_prob):
     emb_keep_prob = keep_prob[0]  # keep prob for embedding matrix
     h2h_keep_prob = emb_keep_prob  # keep prob for hidden to hidden connections
     h2i_keep_prob = keep_prob[1]  # keep prob for hidden to input connections
-    out_keep_prob = h2i_keep_prob  # keep probability for output state
+    out_keep_prob = h2i_keep_prob  # keep probability for wouter state
   else:
     emb_keep_prob = keep_prob[0]  # keep prob for embedding matrix
     h2h_keep_prob = keep_prob[1]  # keep prob for hidden to hidden connections
     h2i_keep_prob = keep_prob[2]  # keep prob for hidden to input connections
-    out_keep_prob = keep_prob[3]  # keep probability for output state
+    out_keep_prob = keep_prob[3]  # keep probability for wouter state
   h2i_masks = []  # Masks for input to recurrent connections
   h2h_masks = []  # Masks for recurrent to recurrent connections
 

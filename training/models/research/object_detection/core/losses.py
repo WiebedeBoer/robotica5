@@ -114,7 +114,7 @@ class Loss(object):
 
 
 class WeightedL2LocalizationLoss(Loss):
-  """L2 localization loss function with anchorwise output support.
+  """L2 localization loss function with anchorwise wouter support.
 
   Loss[b,a] = .5 * ||weights[b,a] * (prediction[b,a,:] - target[b,a,:])||^2
   """

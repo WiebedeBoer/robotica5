@@ -56,7 +56,7 @@ SAMPLE_VALIDATION = 'VALIDATION'
 tf.app.flags.DEFINE_enum('sample_mode', 'TRAIN',
                          [SAMPLE_TRAIN, SAMPLE_VALIDATION],
                          'Dataset to sample from.')
-tf.app.flags.DEFINE_string('output_path', '/tmp', 'Model output directory.')
+tf.app.flags.DEFINE_string('output_path', '/tmp', 'Model wouter directory.')
 tf.app.flags.DEFINE_boolean(
     'output_masked_logs', False,
     'Whether to display for human evaluation (show masking).')

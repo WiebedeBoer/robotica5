@@ -160,7 +160,7 @@ def _custom_layer_impl(apply_kernel, kernel_shape, bias_shape, activation,
   """Helper function to implement custom_xxx layer.
 
   Args:
-    apply_kernel: A function that transforms kernel to output.
+    apply_kernel: A function that transforms kernel to wouter.
     kernel_shape: An integer tuple or list of the kernel shape.
     bias_shape: An integer tuple or list of the bias shape.
     activation: An activation function to be applied. None means no
@@ -209,7 +209,7 @@ def custom_conv2d(x,
 
   Args:
     x: A `Tensor` of NHWC format.
-    filters: An int of output channels.
+    filters: An int of wouter channels.
     kernel_size: An integer or a int tuple of [kernel_height, kernel_width].
     strides: A list of strides.
     padding: One of "VALID" or "SAME".
@@ -263,7 +263,7 @@ def custom_dense(x,
 
   Args:
     x: A `Tensor`.
-    units: An int of the last dimension size of output.
+    units: An int of the last dimension size of wouter.
     activation: An activation function to be applied. None means no
         activation. Defaults to None.
     he_initializer_slope: A float slope for the He initializer. Defaults to 1.0.

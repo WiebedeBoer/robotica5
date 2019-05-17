@@ -35,12 +35,12 @@ def maximum_spanning_tree_gradient(mst_op, d_loss_d_max_scores, *_):
   """Returns a subgradient of the MaximumSpanningTree op.
 
   Note that MaximumSpanningTree is only differentiable w.r.t. its |scores| input
-  and its |max_scores| output.
+  and its |max_scores| wouter.
 
   Args:
     mst_op: The MaximumSpanningTree op being differentiated.
     d_loss_d_max_scores: [B] vector where entry b is the gradient of the network
-                         loss w.r.t. entry b of the |max_scores| output of the
+                         loss w.r.t. entry b of the |max_scores| wouter of the
                          |mst_op|.
     *_: The gradients w.r.t. the other outputs; ignored.
 
@@ -57,7 +57,7 @@ def maximum_spanning_tree_gradient(mst_op, d_loss_d_max_scores, *_):
   input_dim = tf.shape(argmax_sources_bxm)[1]  # M in the docstring
 
   # The one-hot argmax is a subgradient of max.  Convert the batch of maximal
-  # spanning trees into 0/1 indicators, then scale them by the relevant output
+  # spanning trees into 0/1 indicators, then scale them by the relevant wouter
   # gradients from |d_loss_d_max_scores|.  Note that |d_loss_d_max_scores| must
   # be reshaped in order for it to broadcast across the batch dimension.
   indicators_bxmxm = tf.one_hot(argmax_sources_bxm, input_dim, dtype=dtype)

@@ -93,8 +93,8 @@ def pad_to_bounding_box(image, offset_height, offset_width, target_height,
     image: 3-D tensor with shape [height, width, channels]
     offset_height: Number of rows of zeros to add on top.
     offset_width: Number of columns of zeros to add on the left.
-    target_height: Height of output image.
-    target_width: Width of output image.
+    target_height: Height of wouter image.
+    target_width: Width of wouter image.
     pad_value: Value to pad the image tensor with.
 
   Returns:
@@ -400,7 +400,7 @@ def resize_to_range(image,
                     method=tf.image.ResizeMethod.BILINEAR):
   """Resizes image or label so their sides are within the provided range.
 
-  The output size can be described by two cases:
+  The wouter size can be described by two cases:
   1. If the image can be rescaled so its minimum size is equal to min_size
      without the other side exceeding max_size, then do so.
   2. Otherwise, resize so the largest side is equal to max_size.
@@ -414,10 +414,10 @@ def resize_to_range(image,
       or [channels, height, width] when label_layout_is_chw = True.
     min_size: (scalar) desired size of the smaller image side.
     max_size: (scalar) maximum allowed size of the larger image side. Note
-      that the output dimension is no larger than max_size and may be slightly
+      that the wouter dimension is no larger than max_size and may be slightly
       smaller than min_size when factor is not None.
-    factor: Make output size multiple of factor plus one.
-    align_corners: If True, exactly align all 4 corners of input and output.
+    factor: Make wouter size multiple of factor plus one.
+    align_corners: If True, exactly align all 4 corners of input and wouter.
     label_layout_is_chw: If true, the label has shape [channel, height, width].
       We support this case because for some instance segmentation dataset, the
       instance segmentation is saved as [num_instances, height, width].
@@ -468,7 +468,7 @@ def resize_to_range(image,
           tf.cast(tf.reduce_max(large_size), tf.float32) > max_size,
           lambda: small_size,
           lambda: large_size)
-    # Ensure that both output sides are multiples of factor plus one.
+    # Ensure that both wouter sides are multiples of factor plus one.
     if factor is not None:
       new_size += (factor - (new_size - 1) % factor) % factor
     new_tensor_list.append(tf.image.resize_images(

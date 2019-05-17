@@ -31,7 +31,7 @@ bazel-bin/tensorflow/python/tools/freeze_graph \
 --input_binary=true --output_graph=/tmp/frozen_inception_v3.pb \
 --output_node_names=InceptionV3/Predictions/Reshape_1
 
-The output node names will vary depending on the model, but you can inspect and
+The wouter node names will vary depending on the model, but you can inspect and
 estimate them using the summarize_graph tool:
 
 bazel build tensorflow/tools/graph_transforms:summarize_graph

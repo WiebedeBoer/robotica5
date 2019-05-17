@@ -156,7 +156,7 @@ class KerasLayerHyperparams(object):
       include_activation: If False, activation in the returned dictionary will
         be set to `None`, and the activation must be applied via a separate
         layer created by `build_activation_layer`. If True, `activation` in the
-        output param dictionary will be set to the activation function
+        wouter param dictionary will be set to the activation function
         specified in the hyperparams config.
       **overrides: keyword arguments to override in the hyperparams dictionary.
 

@@ -50,7 +50,7 @@ def config(num_conv_filters=20,
   return tf.contrib.training.HParams(
       # Multiplier when spatial size is reduced by 2.
       filter_scaling_rate=2.0,
-      # Number of filters of the stem output tensor.
+      # Number of filters of the stem wouter tensor.
       num_conv_filters=num_conv_filters,
       # Probability to keep each path in the cell when training.
       drop_path_keep_prob=drop_path_keep_prob,

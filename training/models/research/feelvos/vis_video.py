@@ -48,7 +48,7 @@ flags.DEFINE_string('vis_logdir', None, 'Where to write the event logs.')
 flags.DEFINE_string('checkpoint_dir', None, 'Directory of model checkpoints.')
 
 flags.DEFINE_integer('output_stride', 8,
-                     'The ratio of input to output spatial resolution.')
+                     'The ratio of input to wouter spatial resolution.')
 
 flags.DEFINE_string('dataset', 'davis_2016',
                     'Name of the segmentation dataset.')

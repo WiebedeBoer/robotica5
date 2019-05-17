@@ -29,7 +29,7 @@ import tensorflow as tf
 
 tf.flags.DEFINE_string('input_codes', None, 'Location of binary code file.')
 tf.flags.DEFINE_integer('iteration', -1, 'The max quality level of '
-                        'the images to output. Use -1 to infer from loaded '
+                        'the images to wouter. Use -1 to infer from loaded '
                         ' codes.')
 tf.flags.DEFINE_string('output_directory', None, 'Directory to save decoded '
                        'images.')

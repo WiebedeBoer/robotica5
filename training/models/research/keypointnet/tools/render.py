@@ -15,7 +15,7 @@
 """Script to render object views from ShapeNet obj models.
 
 Example usage:
-  blender -b --python render.py -- -m model.obj -o output/ -s 128 -n 120 -fov 5
+  blender -b --python render.py -- -m model.obj -o wouter/ -s 128 -n 120 -fov 5
 
 """
 from __future__ import print_function
@@ -265,10 +265,10 @@ def main():
                       help='Path to model obj file.')
   parser.add_argument('-o', '--output_dir', dest='output_dir',
                       required=True,
-                      help='Where to output files.')
+                      help='Where to wouter files.')
   parser.add_argument('-s', '--output_size', dest='output_size',
                       required=True,
-                      help='Width and height of output in pixels, e.g. 32x32.')
+                      help='Width and height of wouter in pixels, e.g. 32x32.')
   parser.add_argument('-n', '--num_frames', dest='n', type=int,
                       required=True,
                       help='Number of frames to generate per clip.')

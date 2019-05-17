@@ -322,7 +322,7 @@ class LSTMSSDFeatureExtractor(ssd_meta_arch.SSDFeatureExtractor):
 
     Returns:
       states_and_outputs: A list of 4-D float tensors, including the lstm state
-        and output at each timestep.
+        and wouter at each timestep.
     """
     return self._states_out
 
@@ -359,7 +359,7 @@ class LSTMSSDFeatureExtractor(ssd_meta_arch.SSDFeatureExtractor):
 
     Args:
       batch_size: input batch size.
-      output_size: output size of the lstm cell, [width, height].
+      output_size: wouter size of the lstm cell, [width, height].
       state_saver: a state saver object with methods `state` and `save_state`.
       state_name: string, the name to use with the state_saver.
     Returns:

@@ -16,7 +16,7 @@
 
 Training images are sampled using the provided bounding boxes, and subsequently
 cropped to the sampled bounding box. Images are additionally flipped randomly,
-then resized to the target output size (without aspect-ratio preservation).
+then resized to the target wouter size (without aspect-ratio preservation).
 
 Images used during evaluation are resized (with aspect-ratio preservation) and
 centrally cropped.

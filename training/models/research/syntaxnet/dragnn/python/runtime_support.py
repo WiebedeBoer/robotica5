@@ -30,7 +30,7 @@ from syntaxnet.util import check
 def add_hooks(component, cell_subgraph_spec):
   """Adds "hook" nodes to the graph, for use by the runtime.
 
-  The runtime hook nodes are not on the path to any required output, and will
+  The runtime hook nodes are not on the path to any required wouter, and will
   not be called when running TF-based DRAGNN.  As long as the TF graph is not
   pruned, however, the DRAGNN runtime can call them.
 

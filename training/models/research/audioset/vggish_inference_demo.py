@@ -20,7 +20,7 @@ blocks (feature extraction, model definition and loading, postprocessing) work
 together in an inference context.
 
 A WAV file (assumed to contain signed 16-bit PCM samples) is read in, converted
-into log mel spectrogram examples, fed into VGGish, the raw embedding output is
+into log mel spectrogram examples, fed into VGGish, the raw embedding wouter is
 whitened and quantized, and the postprocessed embeddings are optionally written
 in a SequenceExample to a TFRecord file (using the same format as the embedding
 features released in AudioSet).
@@ -107,7 +107,7 @@ def main(_):
 
   with tf.Graph().as_default(), tf.Session() as sess:
     # Define the model in inference mode, load the checkpoint, and
-    # locate input and output tensors.
+    # locate input and wouter tensors.
     vggish_slim.define_vggish_slim(training=False)
     vggish_slim.load_vggish_slim_checkpoint(sess, FLAGS.checkpoint)
     features_tensor = sess.graph.get_tensor_by_name(

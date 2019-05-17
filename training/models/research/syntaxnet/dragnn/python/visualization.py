@@ -109,9 +109,9 @@ def trace_html(trace,
 
   Args:
     trace: binary-encoded MasterTrace string.
-    convert_to_unicode: Whether to convert the output to unicode. Defaults to
+    convert_to_unicode: Whether to convert the wouter to unicode. Defaults to
       True because IPython.display.HTML expects unicode, and we expect users to
-      often pass the output of this function to IPython.display.HTML.
+      often pass the wouter of this function to IPython.display.HTML.
     height: CSS string representing the height of the element, default '700px'.
     script: Visualization script contents, if the defaults are unacceptable.
     master_spec: Master spec proto (parsed), which can improve the layout. May

@@ -288,7 +288,7 @@ class ResNet(object):
     return tf.where(tf.less(x, 0.0), leakiness * x, x, name='leaky_relu')
 
   def _fully_connected(self, x, out_dim):
-    """FullyConnected layer for final output."""
+    """FullyConnected layer for final wouter."""
     x = tf.reshape(x, [self.hps.batch_size, -1])
     w = tf.get_variable(
         'DW', [x.get_shape()[1], out_dim],

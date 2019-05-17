@@ -115,7 +115,7 @@ def imagenet_parser(value, image_size, is_training):
 
   Args:
     value: encoded example.
-    image_size: size of the output image.
+    image_size: size of the wouter image.
     is_training: if True then do training preprocessing,
       otherwise do eval preprocessing.
 

@@ -77,4 +77,4 @@ log_arg.add_argument(
 io_arg = add_argument_group('IO')
 io_arg.add_argument('--model_dir', type=str, default='model')
 io_arg.add_argument('--snapshot_interval', type=int, default=1000)
-io_arg.add_argument('--output_dir', type=str, default='output')
+io_arg.add_argument('--output_dir', type=str, default='wouter')

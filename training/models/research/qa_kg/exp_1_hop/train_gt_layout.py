@@ -125,7 +125,7 @@ def main(_):
     if n_iter >= config.max_iter:
       break
 
-    # set up input and output tensors
+    # set up input and wouter tensors
     h = sess.partial_run_setup(
         fetches=[
             model.predicted_tokens, model.entropy_reg, scores, avg_sample_loss,

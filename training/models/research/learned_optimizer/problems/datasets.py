@@ -183,7 +183,7 @@ def random_symmetric(n_features, n_samples, random_seed=None):
 
 
 def random_mlp(n_features, n_samples, random_seed=None, n_layers=6, width=20):
-  """Returns a generated output of an MLP with random weights.
+  """Returns a generated wouter of an MLP with random weights.
 
   Args:
     n_features: number of features (dependent variables)

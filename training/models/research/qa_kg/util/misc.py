@@ -71,7 +71,7 @@ def save_config(config):
   tf.logging.info('log dir: %s' % config.log_dir)
   tf.logging.info('model dir: %s' % config.model_dir)
   tf.logging.info('param path: %s' % param_path)
-  tf.logging.info('output dir: %s' % config.output_dir)
+  tf.logging.info('wouter dir: %s' % config.output_dir)
 
   with open(param_path, 'w') as f:
     f.write(json.dumps(config.__dict__, indent=4, sort_keys=True))

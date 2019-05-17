@@ -62,7 +62,7 @@ class Block(collections.namedtuple('Block', ['scope', 'unit_fn', 'args'])):
   Its parts are:
     scope: The scope of the block.
     unit_fn: The Xception unit function which takes as input a tensor and
-      returns another tensor with the output of the Xception unit.
+      returns another tensor with the wouter of the Xception unit.
     args: A list of length equal to the number of units in the block. The list
       contains one dictionary for each unit in the block to serve as argument to
       unit_fn.
@@ -79,7 +79,7 @@ def fixed_padding(inputs, kernel_size, rate=1):
     rate: An integer, rate for atrous convolution.
 
   Returns:
-    output: A tensor of size [batch, height_out, width_out, channels] with the
+    wouter: A tensor of size [batch, height_out, width_out, channels] with the
       input, either intact (if kernel_size == 1) or padded (if kernel_size > 1).
   """
   kernel_size_effective = kernel_size + (kernel_size - 1) * (rate - 1)
@@ -132,12 +132,12 @@ def separable_conv2d_same(inputs,
 
   Args:
     inputs: A 4-D tensor of size [batch, height_in, width_in, channels].
-    num_outputs: An integer, the number of output filters.
+    num_outputs: An integer, the number of wouter filters.
     kernel_size: An int with the kernel_size of the filters.
-    depth_multiplier: The number of depthwise convolution output channels for
-      each input channel. The total number of depthwise convolution output
+    depth_multiplier: The number of depthwise convolution wouter channels for
+      each input channel. The total number of depthwise convolution wouter
       channels will be equal to `num_filters_in * depth_multiplier`.
-    stride: An integer, the output stride.
+    stride: An integer, the wouter stride.
     rate: An integer, rate for atrous convolution.
     use_explicit_padding: If True, use explicit padding to make the model fully
       compatible with the open source version, otherwise use the native
@@ -148,8 +148,8 @@ def separable_conv2d_same(inputs,
     **kwargs: additional keyword arguments to pass to slim.conv2d
 
   Returns:
-    output: A 4-D tensor of size [batch, height_out, width_out, channels] with
-      the convolution output.
+    wouter: A 4-D tensor of size [batch, height_out, width_out, channels] with
+      the convolution wouter.
   """
   def _separable_conv2d(padding):
     """Wrapper for separable conv2d."""
@@ -207,7 +207,7 @@ def xception_module(inputs,
                     use_explicit_padding=True):
   """An Xception module.
 
-  The output of one Xception module is equal to the sum of `residual` and
+  The wouter of one Xception module is equal to the sum of `residual` and
   `shortcut`, where `residual` is the feature computed by three separable
   convolution. The `shortcut` is the feature computed by 1x1 convolution with
   or without striding. In some cases, the `shortcut` path could be a simple
@@ -224,7 +224,7 @@ def xception_module(inputs,
     skip_connection_type: Skip connection type for the residual path. Only
       supports 'conv', 'sum', or 'none'.
     stride: The block unit's stride. Determines the amount of downsampling of
-      the units output compared to its input.
+      the units wouter compared to its input.
     unit_rate_list: A list of three integers, determining the unit rate for
       each separable convolution in the xception module.
     rate: An integer, rate for atrous convolution.
@@ -232,7 +232,7 @@ def xception_module(inputs,
       separable convolution or not.
     regularize_depthwise: Whether or not apply L2-norm regularization on the
       depthwise convolution weights.
-    outputs_collections: Collection to add the Xception unit output.
+    outputs_collections: Collection to add the Xception unit wouter.
     scope: Optional variable_scope.
     use_bounded_activation: Whether or not to use bounded activations. Bounded
       activations better lend themselves to quantized inference.
@@ -241,7 +241,7 @@ def xception_module(inputs,
       Tensorflow 'SAME' padding.
 
   Returns:
-    The Xception module's output.
+    The Xception module's wouter.
 
   Raises:
     ValueError: If depth_list and unit_rate_list do not contain three elements,
@@ -326,25 +326,25 @@ def stack_blocks_dense(net,
                        blocks,
                        output_stride=None,
                        outputs_collections=None):
-  """Stacks Xception blocks and controls output feature density.
+  """Stacks Xception blocks and controls wouter feature density.
 
   First, this function creates scopes for the Xception in the form of
   'block_name/unit_1', 'block_name/unit_2', etc.
 
-  Second, this function allows the user to explicitly control the output
-  stride, which is the ratio of the input to output spatial resolution. This
+  Second, this function allows the user to explicitly control the wouter
+  stride, which is the ratio of the input to wouter spatial resolution. This
   is useful for dense prediction tasks such as semantic segmentation or
   object detection.
 
-  Control of the output feature density is implemented by atrous convolution.
+  Control of the wouter feature density is implemented by atrous convolution.
 
   Args:
     net: A tensor of size [batch, height, width, channels].
     blocks: A list of length equal to the number of Xception blocks. Each
       element is an Xception Block object describing the units in the block.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution, which needs to be equal to
+      ratio of input to wouter spatial resolution, which needs to be equal to
       the product of unit strides from the start up to some level of Xception.
       For example, if the Xception employs units with strides 1, 2, 1, 3, 4, 1,
       then valid values for the output_stride are 1, 2, 6, 24 or None (which
@@ -419,9 +419,9 @@ def xception(inputs,
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
     keep_prob: Keep probability used in the pre-logits dropout layer.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     reuse: whether or not the network and its variables should be reused. To be
       able to reuse 'scope' must be given.
     scope: Optional variable_scope.
@@ -431,7 +431,7 @@ def xception(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is 0 or None,
-      then net is the output of the last Xception block, potentially after
+      then net is the wouter of the last Xception block, potentially after
       global average pooling. If num_classes is a non-zero integer, net contains
       the pre-softmax activations.
     end_points: A dictionary from components of the network to the corresponding

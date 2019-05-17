@@ -20,14 +20,14 @@ Example usage:
     --input_image_label_annotations_csv=/path/to/input/annotations-label.csv \
     --input_images_directory=/path/to/input/image_pixels_directory \
     --input_label_map=/path/to/input/labels_bbox_545.labelmap \
-    --output_tf_record_path_prefix=/path/to/output/prefix.tfrecord
+    --output_tf_record_path_prefix=/path/to/wouter/prefix.tfrecord
 
 CSVs with bounding box annotations and image metadata (including the image URLs)
 can be downloaded from the Open Images GitHub repository:
 https://github.com/openimages/dataset
 
 This script will include every image found in the input_images_directory in the
-output TFRecord, even if the image has no corresponding bounding box annotations
+wouter TFRecord, even if the image has no corresponding bounding box annotations
 in the input_annotations_csv. If input_image_label_annotations_csv is specified,
 it will add image-level labels as well. Note that the information of whether a
 label is positivelly or negativelly verified is NOT added to tfrecord.
@@ -56,8 +56,8 @@ tf.flags.DEFINE_string('input_image_label_annotations_csv', None,
 tf.flags.DEFINE_string('input_label_map', None, 'Path to the label map proto')
 tf.flags.DEFINE_string(
     'output_tf_record_path_prefix', None,
-    'Path to the output TFRecord. The shard index and the number of shards '
-    'will be appended for each output shard.')
+    'Path to the wouter TFRecord. The shard index and the number of shards '
+    'will be appended for each wouter shard.')
 tf.flags.DEFINE_integer('num_shards', 100, 'Number of TFRecord shards')
 
 FLAGS = tf.flags.FLAGS

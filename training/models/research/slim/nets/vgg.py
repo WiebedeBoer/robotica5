@@ -89,15 +89,15 @@ def vgg_a(inputs,
     fc_conv_padding: the type of padding to use for the fully connected layer
       that is implemented as a convolutional layer. Use 'SAME' padding if you
       are applying the network in a fully convolutional manner and want to
-      get a prediction map downsampled by a factor of 32 as an output.
-      Otherwise, the output prediction map will be (input / 32) - 6 in case of
+      get a prediction map downsampled by a factor of 32 as an wouter.
+      Otherwise, the wouter prediction map will be (input / 32) - 6 in case of
       'VALID' padding.
     global_pool: Optional boolean flag. If True, the input to the classification
       layer is avgpooled to size 1x1, for any input size. (This is not part
       of the original VGG architecture.)
 
   Returns:
-    net: the output of the logits layer (if num_classes is a non-zero integer),
+    net: the wouter of the logits layer (if num_classes is a non-zero integer),
       or the input to the logits layer (if num_classes is 0 or None).
     end_points: a dict of tensors with intermediate activations.
   """
@@ -167,15 +167,15 @@ def vgg_16(inputs,
     fc_conv_padding: the type of padding to use for the fully connected layer
       that is implemented as a convolutional layer. Use 'SAME' padding if you
       are applying the network in a fully convolutional manner and want to
-      get a prediction map downsampled by a factor of 32 as an output.
-      Otherwise, the output prediction map will be (input / 32) - 6 in case of
+      get a prediction map downsampled by a factor of 32 as an wouter.
+      Otherwise, the wouter prediction map will be (input / 32) - 6 in case of
       'VALID' padding.
     global_pool: Optional boolean flag. If True, the input to the classification
       layer is avgpooled to size 1x1, for any input size. (This is not part
       of the original VGG architecture.)
 
   Returns:
-    net: the output of the logits layer (if num_classes is a non-zero integer),
+    net: the wouter of the logits layer (if num_classes is a non-zero integer),
       or the input to the logits layer (if num_classes is 0 or None).
     end_points: a dict of tensors with intermediate activations.
   """
@@ -245,15 +245,15 @@ def vgg_19(inputs,
     fc_conv_padding: the type of padding to use for the fully connected layer
       that is implemented as a convolutional layer. Use 'SAME' padding if you
       are applying the network in a fully convolutional manner and want to
-      get a prediction map downsampled by a factor of 32 as an output.
-      Otherwise, the output prediction map will be (input / 32) - 6 in case of
+      get a prediction map downsampled by a factor of 32 as an wouter.
+      Otherwise, the wouter prediction map will be (input / 32) - 6 in case of
       'VALID' padding.
     global_pool: Optional boolean flag. If True, the input to the classification
       layer is avgpooled to size 1x1, for any input size. (This is not part
       of the original VGG architecture.)
 
   Returns:
-    net: the output of the logits layer (if num_classes is a non-zero integer),
+    net: the wouter of the logits layer (if num_classes is a non-zero integer),
       or the non-dropped-out input to the logits layer (if num_classes is 0 or
       None).
     end_points: a dict of tensors with intermediate activations.

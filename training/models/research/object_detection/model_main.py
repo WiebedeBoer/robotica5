@@ -26,7 +26,7 @@ from object_detection import model_hparams
 from object_detection import model_lib
 
 flags.DEFINE_string(
-    'model_dir', None, 'Path to output model directory '
+    'model_dir', None, 'Path to wouter model directory '
     'where event and checkpoint files will be written.')
 flags.DEFINE_string('pipeline_config_path', None, 'Path to pipeline config '
                     'file.')

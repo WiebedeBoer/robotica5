@@ -46,7 +46,7 @@ def _pad_or_clip_array(np_arr, arr_len, is_front_clip=True, output_mask=False):
     is_front_clip: a boolean. If true then clipping is done in the front,
       otherwise in the back.
     output_mask: If True, outputs a numpy array of rank 1 which represents
-      a mask of which values have been added (0 - added, 1 - actual output).
+      a mask of which values have been added (0 - added, 1 - actual wouter).
 
   Returns:
     A numpy array and the size of padding (as a python int32). This size is
@@ -116,22 +116,22 @@ class UnrolledTaskIOConfig(object):
 
   A task can have multiple inputs, which define the context, and a task query
   which defines what is to be executed in this context. The desired execution
-  is encoded in an output. The config defines the shapes of the inputs, the
+  is encoded in an wouter. The config defines the shapes of the inputs, the
   query and the outputs.
   """
 
   def __init__(self, inputs, output, query=None):
-    """Constructs a Task input/output config.
+    """Constructs a Task input/wouter config.
 
     Args:
       inputs: a list of tuples. Each tuple represents the configuration of an
         input, with first element being the type (a string value) and the second
         element the shape.
-      output: a tuple representing the configuration of the output.
+      output: a tuple representing the configuration of the wouter.
       query: a tuple representing the configuration of the query. If no query,
         then None.
     """
-    # A configuration of a single input, output or query. Consists of the type,
+    # A configuration of a single input, wouter or query. Consists of the type,
     # which can be one of the three specified above, and a shape. The shape must
     # be consistent with the type, e.g. if type == 'image', then shape is a 3
     # valued list.
@@ -179,8 +179,8 @@ class UnrolledTaskIOConfig(object):
 class UnrolledTask(object):
   """An interface for a Task which can be unrolled during training.
 
-  Each example is called episode and consists of inputs and target output, where
-  the output can be considered as desired unrolled sequence of actions for the
+  Each example is called episode and consists of inputs and target wouter, where
+  the wouter can be considered as desired unrolled sequence of actions for the
   inputs. For the specified tasks, these action sequences are to be
   unambiguously definable.
   """
@@ -205,13 +205,13 @@ class UnrolledTask(object):
     """Returns data needed to train and test a single episode.
 
     Each episode consists of inputs, which define the context of the task, a
-    query which defines the task, and a target output, which defines a
+    query which defines the task, and a target wouter, which defines a
     sequence of actions to be executed for this query. This sequence should not
     require feedback, i.e. can be predicted purely from input and query.]
 
     Returns:
-      inputs, query, output, where inputs is a list of numpy arrays and query
-      and output are numpy arrays. These arrays must be of shape and type as
+      inputs, query, wouter, where inputs is a list of numpy arrays and query
+      and wouter are numpy arrays. These arrays must be of shape and type as
       specified in the task configuration.
     """
     pass
@@ -227,8 +227,8 @@ class UnrolledTask(object):
       batch_size: size of batch.
 
     Returns:
-      (inputs, query, output, masks) where inputs is list of numpy arrays and
-      query, output, and mask are numpy arrays. These arrays must be of shape
+      (inputs, query, wouter, masks) where inputs is list of numpy arrays and
+      query, wouter, and mask are numpy arrays. These arrays must be of shape
       and type as specified in the task configuration with one additional
       preceding dimension corresponding to the batch.
 
@@ -286,12 +286,12 @@ class UnrolledTask(object):
       batch_size: a python float for the batch size.
 
     Returns:
-      inputs, query, output, mask where inputs is a dictionary of tf.Tensor
+      inputs, query, wouter, mask where inputs is a dictionary of tf.Tensor
       where the keys are the modality types specified in the config.inputs.
-      query, output, and mask are TF Tensors. These tensors must
+      query, wouter, and mask are TF Tensors. These tensors must
       be of shape and type as specified in the task configuration with one
       additional preceding  dimension corresponding to the batch. Both mask and
-      output have the same shape as output.
+      wouter have the same shape as wouter.
     """
 
     # Define TF outputs.
@@ -932,7 +932,7 @@ class GotoStaticXTask(RandomExplorationBasedTask):
 class RelativeLocationTask(RandomExplorationBasedTask):
   """A task of estimating the relative location of a query w.r.t current.
 
-  It is to be used for debugging. It is designed such that the output is a
+  It is to be used for debugging. It is designed such that the wouter is a
   single value, out of a discrete set of values, so that it can be phrased as
   a classification problem.
   """
@@ -996,9 +996,9 @@ class RelativeLocationTask(RandomExplorationBasedTask):
 class LocationClassificationTask(UnrolledTask):
   """A task of classifying a location as one of several classes.
 
-  The task does not have an input, but just a query and an output. The query
+  The task does not have an input, but just a query and an wouter. The query
   is an observation of the current location, e.g. an image taken from the
-  current state. The output is a label classifying this location in one of
+  current state. The wouter is a label classifying this location in one of
   predefined set of locations (or landmarks).
 
   The current implementation classifies locations as intersections based on the
@@ -1102,13 +1102,13 @@ class GotoStaticXNoExplorationTask(UnrolledTask):
   generates episode for such task. Each generates a sequence of observations x
   and target outputs y. x is the observations and is an OrderedDict with keys
   provided from config.inputs.keys() and the shapes provided in the
-  config.inputs. The output is a numpy arrays with the shape specified in the
-  config.output. The shape of the array is (sequence_length x action_size) where
+  config.inputs. The wouter is a numpy arrays with the shape specified in the
+  config.wouter. The shape of the array is (sequence_length x action_size) where
   action is the number of actions that can be done in the environment. Note that
-  config.output.shape should be set according to the number of actions that can
+  config.wouter.shape should be set according to the number of actions that can
   be done in the env.
   target outputs y are the groundtruth value of each action that is computed
-  from the environment graph. The target output for each action is proportional
+  from the environment graph. The target wouter for each action is proportional
   to the progress that each action makes. Target value of 1 means that the
   action takes the agent one step closer, -1 means the action takes the agent
   one step farther. Value of -2 means that action should not take place at all.
@@ -1122,14 +1122,14 @@ class GotoStaticXNoExplorationTask(UnrolledTask):
     if self._config.query is not None:
       raise ValueError('query should be None.')
     if len(self._config.output.shape) != 2:
-      raise ValueError('output should only have two dimensions:'
+      raise ValueError('wouter should only have two dimensions:'
                        '(sequence_length x number_of_actions)')
     for input_config in self._config.inputs.values():
       if input_config.shape[0] != self._config.output.shape[0]:
-        raise ValueError('the first dimension of the input and output should'
+        raise ValueError('the first dimension of the input and wouter should'
                          'be the same.')
     if len(self._config.output.shape) != 2:
-      raise ValueError('output shape should be '
+      raise ValueError('wouter shape should be '
                        '(sequence_length x number_of_actions)')
 
     self._env = env
@@ -1200,17 +1200,17 @@ class GotoStaticXNoExplorationTask(UnrolledTask):
     """Returns data needed to train and test a single episode.
 
     Returns:
-      (inputs, None, output) where inputs is a dictionary of modality types to
+      (inputs, None, wouter) where inputs is a dictionary of modality types to
         numpy arrays. The second element is query but we assume that the goal
         is also given as part of observation so it should be None for this task,
         and the outputs is the tuple of ground truth action values with the
         shape of (sequence_length x action_size) that is coming from
-        config.output.shape and a numpy array with the shape of
+        config.wouter.shape and a numpy array with the shape of
         (sequence_length,) that is 1 if the corresponding element of the
-        input and output should be used in the training optimization.
+        input and wouter should be used in the training optimization.
 
     Raises:
-      ValueError: If the output values for env.random_step_sequence is not
+      ValueError: If the wouter values for env.random_step_sequence is not
         valid.
       ValueError: If the shape of observations coming from the env is not
         consistent with the config.
@@ -1390,17 +1390,17 @@ class NewTask(UnrolledTask):
     """Returns data needed to train and test a single episode.
 
     Returns:
-      (inputs, None, output) where inputs is a dictionary of modality types to
+      (inputs, None, wouter) where inputs is a dictionary of modality types to
         numpy arrays. The second element is query but we assume that the goal
         is also given as part of observation so it should be None for this task,
         and the outputs is the tuple of ground truth action values with the
         shape of (sequence_length x action_size) that is coming from
-        config.output.shape and a numpy array with the shape of
+        config.wouter.shape and a numpy array with the shape of
         (sequence_length,) that is 1 if the corresponding element of the
-        input and output should be used in the training optimization.
+        input and wouter should be used in the training optimization.
 
     Raises:
-      ValueError: If the output values for env.random_step_sequence is not
+      ValueError: If the wouter values for env.random_step_sequence is not
         valid.
       ValueError: If the shape of observations coming from the env is not
         consistent with the config.

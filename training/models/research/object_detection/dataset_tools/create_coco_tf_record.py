@@ -15,7 +15,7 @@
 
 r"""Convert raw COCO dataset to TFRecord for object_detection.
 
-Please note that this tool creates sharded output files.
+Please note that this tool creates sharded wouter files.
 
 Example usage:
     python create_coco_tf_record.py --logtostderr \
@@ -198,10 +198,10 @@ def _create_tf_record_from_coco_annotations(
   Args:
     annotations_file: JSON file containing bounding box annotations.
     image_dir: Directory containing the image files.
-    output_path: Path to output tf.Record file.
+    output_path: Path to wouter tf.Record file.
     include_masks: Whether to include instance segmentations masks
       (PNG encoded) in the result. default: False.
-    num_shards: number of output file shards.
+    num_shards: number of wouter file shards.
   """
   with contextlib2.ExitStack() as tf_record_close_stack, \
       tf.gfile.GFile(annotations_file, 'r') as fid:

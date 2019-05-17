@@ -205,8 +205,8 @@ def pairwise_distances(feature, squared=True):
 
   Args:
     feature: 2-D numpy array of size [number of data, feature dimension]
-    squared: Boolean. If true, output is the pairwise squared euclidean
-      distance matrix; else, output is the pairwise euclidean distance matrix.
+    squared: Boolean. If true, wouter is the pairwise squared euclidean
+      distance matrix; else, wouter is the pairwise euclidean distance matrix.
 
   Returns:
     pdists: 2-D numpy array of size

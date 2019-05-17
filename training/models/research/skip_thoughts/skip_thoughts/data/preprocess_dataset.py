@@ -14,7 +14,7 @@
 # ==============================================================================
 """Converts a set of text files to TFRecord format with Example protos.
 
-Each Example proto in the output contains the following fields:
+Each Example proto in the wouter contains the following fields:
 
   decode_pre: list of int64 ids corresponding to the "previous" sentence.
   encode: list of int64 ids corresponding to the "current" sentence.
@@ -54,7 +54,7 @@ tf.flags.DEFINE_string("input_files", None,
 
 tf.flags.DEFINE_string("vocab_file", "",
                        "(Optional) existing vocab file. Otherwise, a new vocab "
-                       "file is created and written to the output directory. "
+                       "file is created and written to the wouter directory. "
                        "The file format is a list of newline-separated words, "
                        "where the word id is the corresponding 0-based index "
                        "in the file.")
@@ -62,26 +62,26 @@ tf.flags.DEFINE_string("vocab_file", "",
 tf.flags.DEFINE_string("output_dir", None, "Output directory.")
 
 tf.flags.DEFINE_integer("train_output_shards", 100,
-                        "Number of output shards for the training set.")
+                        "Number of wouter shards for the training set.")
 
 tf.flags.DEFINE_integer("validation_output_shards", 1,
-                        "Number of output shards for the validation set.")
+                        "Number of wouter shards for the validation set.")
 
 tf.flags.DEFINE_integer("num_validation_sentences", 50000,
-                        "Number of output shards for the validation set.")
+                        "Number of wouter shards for the validation set.")
 
 tf.flags.DEFINE_integer("num_words", 20000,
-                        "Number of words to include in the output.")
+                        "Number of words to include in the wouter.")
 
 tf.flags.DEFINE_integer("max_sentences", 0,
-                        "If > 0, the maximum number of sentences to output.")
+                        "If > 0, the maximum number of sentences to wouter.")
 
 tf.flags.DEFINE_integer("max_sentence_length", 30,
                         "If > 0, exclude sentences whose encode, decode_pre OR"
                         "decode_post sentence exceeds this length.")
 
 tf.flags.DEFINE_boolean("add_eos", True,
-                        "Whether to add end-of-sentence ids to the output.")
+                        "Whether to add end-of-sentence ids to the wouter.")
 
 tf.logging.set_verbosity(tf.logging.INFO)
 
@@ -217,7 +217,7 @@ def _process_input_file(filename, vocab, stats):
     sentences_seen = stats["sentences_seen"]
     sentences_output = stats["sentences_output"]
     if sentences_seen and sentences_seen % 100000 == 0:
-      tf.logging.info("Processed %d sentences (%d output)", sentences_seen,
+      tf.logging.info("Processed %d sentences (%d wouter)", sentences_seen,
                       sentences_output)
     if FLAGS.max_sentences and sentences_output >= FLAGS.max_sentences:
       break
@@ -240,7 +240,7 @@ def _write_dataset(name, dataset, indices, num_shards):
     name: Name of the dataset (e.g. "train").
     dataset: List of serialized Example protos.
     indices: List of indices of 'dataset' to be written.
-    num_shards: The number of output shards.
+    num_shards: The number of wouter shards.
   """
   tf.logging.info("Writing dataset %s", name)
   borders = np.int32(np.linspace(0, len(indices), num_shards + 1))
@@ -249,7 +249,7 @@ def _write_dataset(name, dataset, indices, num_shards):
                                                                    num_shards))
     shard_indices = indices[borders[i]:borders[i + 1]]
     _write_shard(filename, dataset, shard_indices)
-    tf.logging.info("Wrote dataset indices [%d, %d) to output shard %s",
+    tf.logging.info("Wrote dataset indices [%d, %d) to wouter shard %s",
                     borders[i], borders[i + 1], filename)
   tf.logging.info("Finished writing %d sentences in dataset %s.",
                   len(indices), name)

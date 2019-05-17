@@ -1150,7 +1150,7 @@ class CreateTargetAssignerTest(tf.test.TestCase):
     multibox_ta = (targetassigner
                    .create_target_assigner('Multibox', stage='proposal'))
     multibox_ta.assign(priors, groundtruth)
-    # No tests on output, as that may vary arbitrarily as new target assigners
+    # No tests on wouter, as that may vary arbitrarily as new target assigners
     # are added. As long as it is constructed correctly and runs without errors,
     # tests on the individual assigners cover correctness of the assignments.
 

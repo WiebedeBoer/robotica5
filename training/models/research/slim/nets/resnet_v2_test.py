@@ -188,7 +188,7 @@ class ResnetUtilsTest(tf.test.TestCase):
     self.assertItemsEqual(expected, end_points.keys())
 
   def _stack_blocks_nondense(self, net, blocks):
-    """A simplified ResNet Block stacker without output stride control."""
+    """A simplified ResNet Block stacker without wouter stride control."""
     for block in blocks:
       with tf.variable_scope(block.scope, 'block', [net]):
         for i, unit in enumerate(block.args):
@@ -201,7 +201,7 @@ class ResnetUtilsTest(tf.test.TestCase):
 
     Make sure that dense feature extraction by stack_blocks_dense() followed by
     subsampling gives identical results to feature extraction at the nominal
-    network output stride using the simple self._stack_blocks_nondense() above.
+    network wouter stride using the simple self._stack_blocks_nondense() above.
     """
     block = resnet_v2.resnet_v2_block
     blocks = [

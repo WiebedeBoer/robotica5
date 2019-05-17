@@ -34,7 +34,7 @@ class BottleneckConvLSTMCell(tf.contrib.rnn.RNNCell):
   We add forget_bias (default: 1) to the biases of the forget gate in order to
   reduce the scale of forgetting in the beginning of the training.
 
-  This LSTM first projects inputs to the size of the output before doing gate
+  This LSTM first projects inputs to the size of the wouter before doing gate
   computations. This saves params unless the input is less than a third of the
   state size channel-wise.
   """
@@ -54,7 +54,7 @@ class BottleneckConvLSTMCell(tf.contrib.rnn.RNNCell):
 
     Args:
       filter_size: collection, conv filter size.
-      output_size: collection, the width/height dimensions of the cell/output.
+      output_size: collection, the width/height dimensions of the cell/wouter.
       num_units: int, The number of channels in the LSTM cell.
       forget_bias: float, The bias added to forget gates (see above).
       activation: Activation function of the inner states.
@@ -62,7 +62,7 @@ class BottleneckConvLSTMCell(tf.contrib.rnn.RNNCell):
         a 2-d tensor. Use for exporting the model to tfmini.
       clip_state: if True, clip state between [-6, 6].
       output_bottleneck: if True, the cell bottleneck will be concatenated
-        to the cell output.
+        to the cell wouter.
       pre_bottleneck: if True, cell assumes that bottlenecking was performing
         before the function was called.
       visualize_gates: if True, add histogram summaries of all gates
@@ -101,10 +101,10 @@ class BottleneckConvLSTMCell(tf.contrib.rnn.RNNCell):
 
     Args:
       inputs: Input tensor at the current timestep.
-      state: Tuple of tensors, the state and output at the previous timestep.
+      state: Tuple of tensors, the state and wouter at the previous timestep.
       scope: Optional scope.
     Returns:
-      A tuple where the first element is the LSTM output and the second is
+      A tuple where the first element is the LSTM wouter and the second is
       a LSTMStateTuple of the state at the current timestep.
     """
     scope = scope or 'conv_lstm_cell'
@@ -151,7 +151,7 @@ class BottleneckConvLSTMCell(tf.contrib.rnn.RNNCell):
       if self._clip_state:
         new_c = tf.clip_by_value(new_c, -6, 6)
       new_h = self._activation(new_c) * tf.sigmoid(o)
-      # summary of cell output and new state
+      # summary of cell wouter and new state
       if self._viz_gates:
         slim.summaries.add_histogram_summary(new_h, 'cell_output')
         slim.summaries.add_histogram_summary(new_c, 'cell_state')
@@ -265,7 +265,7 @@ class GroupedConvLSTMCell(tf.contrib.rnn.RNNCell):
   We add forget_bias (default: 1) to the biases of the forget gate in order to
   reduce the scale of forgetting in the beginning of the training.
 
-  This LSTM first projects inputs to the size of the output before doing gate
+  This LSTM first projects inputs to the size of the wouter before doing gate
   computations. This saves params unless the input is less than a third of the
   state size channel-wise. Computation of bottlenecks and gates is divided
   into independent groups for further savings.
@@ -291,7 +291,7 @@ class GroupedConvLSTMCell(tf.contrib.rnn.RNNCell):
 
     Args:
       filter_size: collection, conv filter size
-      output_size: collection, the width/height dimensions of the cell/output
+      output_size: collection, the width/height dimensions of the cell/wouter
       num_units: int, The number of channels in the LSTM cell.
       is_training: Whether the LSTM is in training mode.
       forget_bias: float, The bias added to forget gates (see above).
@@ -305,7 +305,7 @@ class GroupedConvLSTMCell(tf.contrib.rnn.RNNCell):
       scale_state: if True, scales state so that all values are under 6 at all
         times.
       output_bottleneck: if True, the cell bottleneck will be concatenated
-        to the cell output.
+        to the cell wouter.
       pre_bottleneck: if True, cell assumes that bottlenecking was performing
         before the function was called.
       is_quantized: if True, the model is in quantize mode, which requires
@@ -371,7 +371,7 @@ class GroupedConvLSTMCell(tf.contrib.rnn.RNNCell):
       state: Tuple of tensors, the state at the previous timestep.
       scope: Optional scope.
     Returns:
-      A tuple where the first element is the LSTM output and the second is
+      A tuple where the first element is the LSTM wouter and the second is
       a LSTMStateTuple of the state at the current timestep.
     """
     scope = scope or 'conv_lstm_cell'
@@ -540,7 +540,7 @@ class GroupedConvLSTMCell(tf.contrib.rnn.RNNCell):
         # The fakequant ranges to the concat must be fixed to ensure all inputs
         # to the concat have the same range, removing the need for rescaling.
         # The quantization ranges input to the relu6 are propagated to its
-        # output. Any mismatch between these two ranges will cause an error.
+        # wouter. Any mismatch between these two ranges will cause an error.
         new_c = lstm_utils.quantize_op(
             new_c,
             is_training=False,
@@ -609,7 +609,7 @@ class GroupedConvLSTMCell(tf.contrib.rnn.RNNCell):
           is_quantized=self._is_quantized,
           scope='out_bottleneck/quantized_concat')
 
-      # summary of cell output and new state
+      # summary of cell wouter and new state
       if self._viz_gates:
         slim.summaries.add_histogram_summary(new_h, 'cell_output')
         slim.summaries.add_histogram_summary(new_c, 'cell_state')

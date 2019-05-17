@@ -24,7 +24,7 @@ def _GradientReversalGrad(_, grad):
   Args:
     _: The `gradient_reversal` `Operation` that we are differentiating,
       which we can use to find the inputs and outputs of the original op.
-    grad: Gradient with respect to the output of the `gradient_reversal` op.
+    grad: Gradient with respect to the wouter of the `gradient_reversal` op.
 
   Returns:
     Gradient with respect to the input of `gradient_reversal`, which is simply

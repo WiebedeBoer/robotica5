@@ -29,8 +29,8 @@ def _icp_grad(op, grad_transform, grad_residual):
   Args:
     op: The `icp` `Operation` that we are differentiating, which we can use
       to find the inputs and outputs of the original op.
-    grad_transform: Gradient with respect to `transform` output of the `icp` op.
-    grad_residual: Gradient with respect to `residual` output of the
+    grad_transform: Gradient with respect to `transform` wouter of the `icp` op.
+    grad_residual: Gradient with respect to `residual` wouter of the
       `icp` op.
 
   Returns:

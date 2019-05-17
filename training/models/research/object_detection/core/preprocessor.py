@@ -211,7 +211,7 @@ def _rgb_to_grayscale(images, name=None):
   """Converts one or more images from RGB to Grayscale.
 
   Outputs a tensor of the same `DType` and rank as `images`.  The size of the
-  last dimension of the output is 1, containing the Grayscale value of the
+  last dimension of the wouter is 1, containing the Grayscale value of the
   pixels.
 
   Args:
@@ -649,7 +649,7 @@ def random_rotation90(image,
   """Randomly rotates the image and detections 90 degrees counter-clockwise.
 
   The probability of rotating the image is 50%. This can be combined with
-  random_horizontal_flip and random_vertical_flip to produce an output with a
+  random_horizontal_flip and random_vertical_flip to produce an wouter with a
   uniform distribution of the eight possible 90 degree rotation / reflection
   combinations.
 
@@ -879,7 +879,7 @@ def random_adjust_brightness(image,
                              preprocess_vars_cache=None):
   """Randomly adjusts brightness.
 
-  Makes sure the output image is still between 0 and 255.
+  Makes sure the wouter image is still between 0 and 255.
 
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
@@ -919,7 +919,7 @@ def random_adjust_contrast(image,
                            preprocess_vars_cache=None):
   """Randomly adjusts contrast.
 
-  Makes sure the output image is still between 0 and 255.
+  Makes sure the wouter image is still between 0 and 255.
 
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
@@ -959,7 +959,7 @@ def random_adjust_hue(image,
                       preprocess_vars_cache=None):
   """Randomly adjusts hue.
 
-  Makes sure the output image is still between 0 and 255.
+  Makes sure the wouter image is still between 0 and 255.
 
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
@@ -995,7 +995,7 @@ def random_adjust_saturation(image,
                              preprocess_vars_cache=None):
   """Randomly adjusts saturation.
 
-  Makes sure the output image is still between 0 and 255.
+  Makes sure the wouter image is still between 0 and 255.
 
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
@@ -1032,7 +1032,7 @@ def random_distort_color(image, color_ordering=0, preprocess_vars_cache=None):
   """Randomly distorts color.
 
   Randomly distorts color using a combination of brightness, hue, contrast and
-  saturation changes. Makes sure the output image is still between 0 and 255.
+  saturation changes. Makes sure the wouter image is still between 0 and 255.
 
   Args:
     image: rank 3 float32 tensor contains 1 image -> [height, width, channels]
@@ -1646,7 +1646,7 @@ def random_crop_pad_image(image,
   Given an input image and its bounding boxes, this op first randomly crops
   the image and then randomly pads the image with background values. Parameters
   min_padded_size_ratio and max_padded_size_ratio, determine the range of the
-  final output image size.  Specifically, the final image size will have a size
+  final wouter image size.  Specifically, the final image size will have a size
   in the range of min_padded_size_ratio * tf.shape(image) and
   max_padded_size_ratio * tf.shape(image). Note that these ratios are with
   respect to the size of the original image, so we can't capture the same
@@ -2195,7 +2195,7 @@ def resize_to_range(image,
                     per_channel_pad_value=(0, 0, 0)):
   """Resizes an image so its dimensions are within the provided value.
 
-  The output size can be described by two cases:
+  The wouter size can be described by two cases:
   1. If the image can be rescaled so its minimum dimension is equal to the
      provided value without the other dimension exceeding max_dimension,
      then do so.
@@ -2212,7 +2212,7 @@ def resize_to_range(image,
     method: (optional) interpolation method used in resizing. Defaults to
             BILINEAR.
     align_corners: bool. If true, exactly align all 4 corners of the input
-                   and output. Defaults to False.
+                   and wouter. Defaults to False.
     pad_to_max_dimension: Whether to resize the image and pad it with zeros
       so the resulting image is of the spatial size
       [max_dimension, max_dimension]. If masks are included they are padded
@@ -2404,7 +2404,7 @@ def resize_image(image,
     method: (optional) interpolation method used in resizing. Defaults to
             BILINEAR.
     align_corners: bool. If true, exactly align all 4 corners of the input
-                   and output. Defaults to False.
+                   and wouter. Defaults to False.
 
   Returns:
     Note that the position of the resized_image_shape changes based on whether

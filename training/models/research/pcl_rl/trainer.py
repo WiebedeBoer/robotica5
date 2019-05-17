@@ -57,7 +57,7 @@ flags.DEFINE_integer('cutoff_agent', 0,
                      'Defaults to always cutoff')
 flags.DEFINE_integer('num_steps', 100000, 'number of training steps')
 flags.DEFINE_integer('validation_frequency', 100,
-                     'every so many steps, output some stats')
+                     'every so many steps, wouter some stats')
 
 flags.DEFINE_float('target_network_lag', 0.95,
                    'This exponential decay on online network yields target '

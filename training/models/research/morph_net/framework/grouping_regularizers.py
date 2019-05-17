@@ -17,11 +17,11 @@
 An Elementwise operation between two tensors (addition, multiplication, maximum
 etc) imposes a constraint of equality of the shapes of the constituents. For
 example, if A, B are convolutions, and another op in the network
-receives A + B as input, it means that the i-th output of A is tied to the i-th
-output of B. Only if the i-th output was regularized away by the reguarizer in
+receives A + B as input, it means that the i-th wouter of A is tied to the i-th
+wouter of B. Only if the i-th wouter was regularized away by the reguarizer in
 both A and B can we discard the i-th activation in both.
 
-Therefore we group the i-th output of A and the i-th output of B in a group
+Therefore we group the i-th wouter of A and the i-th wouter of B in a group
 LASSO, a group for each i. The grouping methods can vary, and this file offers
 several variants.
 

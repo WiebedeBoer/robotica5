@@ -40,7 +40,7 @@ The nested dictionary is the DATA DICTIONARY, which has the following keys:
    'alignment_matrix_cxf' - If you are using multiple days data, it's possible
      that one can align the channels (see manuscript).  If so each dataset will
      contain this matrix, which will be used for both the input adapter and the
-     output adapter for each dataset. These matrices, if provided, must be of
+     wouter adapter for each dataset. These matrices, if provided, must be of
      size [data_dim x factors] where data_dim is the number of neurons recorded
      on that day, and factors is chosen and set through the '--factors' flag.
    'alignment_bias_c' - See alignment_matrix_cxf.  This bias will used to
@@ -113,7 +113,7 @@ class GRU(object):
     return 1
 
   def output_from_state(self, state):
-    """Return the output portion of the state."""
+    """Return the wouter portion of the state."""
     return state
 
   def __call__(self, inputs, state, scope=None):
@@ -205,7 +205,7 @@ class GenGRU(object):
     return 1
 
   def output_from_state(self, state):
-    """Return the output portion of the state."""
+    """Return the wouter portion of the state."""
     return state
 
   def __call__(self, inputs, state, scope=None):
@@ -321,12 +321,12 @@ class LFADS(object):
       # Enforce correct dtype
       assert np.issubdtype(
           datasets[hps.dataset_names[0]]['train_data'].dtype, int), \
-          "Data dtype must be int for poisson output distribution"
+          "Data dtype must be int for poisson wouter distribution"
       data_dtype = tf.int32
     elif hps.output_dist == 'gaussian':
       assert np.issubdtype(
           datasets[hps.dataset_names[0]]['train_data'].dtype, float), \
-          "Data dtype must be float for gaussian output dsitribution"
+          "Data dtype must be float for gaussian wouter dsitribution"
       data_dtype = tf.float32
     else:
       assert False, "NIY"
@@ -628,7 +628,7 @@ class LFADS(object):
         else:
           self.g0s_val = zs_g0.mean
 
-      # Priors for controller, 'co' for controller output
+      # Priors for controller, 'co' for controller wouter
       self.prior_zs_co = prior_zs_co = [None] * num_steps
       self.posterior_zs_co = posterior_zs_co = [None] * num_steps
       self.zs_co = zs_co = [None] * num_steps
@@ -708,7 +708,7 @@ class LFADS(object):
       else:
         assert False, "NIY"
 
-    # We support multiple output distributions, for example Poisson, and also
+    # We support multiple wouter distributions, for example Poisson, and also
     # Gaussian. In these two cases respectively, there are one and two
     # parameters (rates vs. mean and variance).  So the output_dist_params
     # tensor will variable sizes via tf.concat and tf.split, along the 1st
@@ -770,7 +770,7 @@ class LFADS(object):
         else:
           u_t[t] = prior_zs_ar_con.samples_t[t]
 
-      # Inputs to the generator (controller output + external input)
+      # Inputs to the generator (controller wouter + external input)
       if ext_input_dim > 0 and hps.inject_ext_input_to_gen:
         ext_input_t_bxi = ext_input_do_bxtxi[:,t,:]
         if co_dim > 0:
@@ -1285,7 +1285,7 @@ class LFADS(object):
         the tf.session.run() call.
       batch_size (optional):  The batch_size to use
       do_collect (optional): Should the routine collect all session.run
-        output as a list, and return it?
+        wouter as a list, and return it?
       keep_prob (optional): The dropout keep probability.
 
     Returns:
@@ -1752,7 +1752,7 @@ class LFADS(object):
       A dictionary with the averaged outputs of the model decoder, namely:
         prior g0 mean, prior g0 variance, approx. posterior mean, approx
         posterior mean, the generator initial conditions, the control inputs (if
-        enabled), the state of the generator, the factors, and the output
+        enabled), the state of the generator, the factors, and the wouter
         distribution parameters, e.g. (rates or mean and variances).
     """
     hps = self.hps
@@ -1860,7 +1860,7 @@ class LFADS(object):
       A dictionary with the estimated outputs of the model decoder, namely:
         prior g0 mean, prior g0 variance, approx. posterior mean, approx
         posterior mean, the generator initial conditions, the control inputs (if
-        enabled), the state of the generator, the factors, and the output
+        enabled), the state of the generator, the factors, and the wouter
         distribution parameters, e.g. (rates or mean and variances).
     """
     hps = self.hps
@@ -1970,11 +1970,11 @@ class LFADS(object):
       The initial conditions, g0, for all examples.
       The generator states for all time.
       The factors for all time.
-      The output distribution parameters (e.g. rates) for all time.
+      The wouter distribution parameters (e.g. rates) for all time.
 
     Args:
       datasets: a dictionary of named data_dictionaries, see top of lfads.py
-      output_fname: a file name stem for the output files.
+      output_fname: a file name stem for the wouter files.
       push_mean: if False (default), generates batch_size samples for each trial
         and averages the results. if True, runs each trial once without noise,
         pushing the posterior mean initial conditions and control inputs through
@@ -2017,7 +2017,7 @@ class LFADS(object):
       The initial conditions, g0, for all examples.
       The generator states for all time.
       The factors for all time.
-      The output distribution parameters (e.g. rates) for all time.
+      The wouter distribution parameters (e.g. rates) for all time.
 
     Args:
       dataset_name: The name of the dataset to grab the factors -> rates

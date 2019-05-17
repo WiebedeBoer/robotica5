@@ -48,7 +48,7 @@ def dense_prediction_cell_hparams():
 
   Returns:
     A dictionary of hyper-parameters used for dense prediction cell with keys:
-      - reduction_size: Integer, the number of output filters for each operation
+      - reduction_size: Integer, the number of wouter filters for each operation
           inside the cell.
       - dropout_on_concat_features: Boolean, apply dropout on the concatenated
           features or not.
@@ -104,7 +104,7 @@ class DensePredictionCell(object):
     Args:
       crop_size: A list of two integers, [crop_height, crop_width] specifying
         whole patch crop size.
-      output_stride: Integer, output stride value for extracted features.
+      output_stride: Integer, wouter stride value for extracted features.
       image_grid: A list of two integers, [image_grid_height, image_grid_width],
         specifying the grid size of how the pyramid pooling will be performed.
       image_pooling_crop_size: A list of two integers, [crop_height, crop_width]
@@ -138,7 +138,7 @@ class DensePredictionCell(object):
         operation.
       crop_size: A list of two integers, [crop_height, crop_width] specifying
         whole patch crop size.
-      output_stride: Integer, output stride value for extracted features.
+      output_stride: Integer, wouter stride value for extracted features.
       image_pooling_crop_size: A list of two integers, [crop_height, crop_width]
         specifying the crop size for image pooling operations. Note that we
         decouple whole patch crop_size and image_pooling_crop_size as one could
@@ -171,7 +171,7 @@ class DensePredictionCell(object):
 
     Args:
       features: Input feature map of size [batch, height, width, channels].
-      output_stride: Int, output stride at which the features were extracted.
+      output_stride: Int, wouter stride at which the features were extracted.
       crop_size: A list [crop_height, crop_width], determining the input
         features resolution.
       image_pooling_crop_size: A list of two integers, [crop_height, crop_width]

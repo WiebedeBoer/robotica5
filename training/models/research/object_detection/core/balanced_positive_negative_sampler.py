@@ -26,7 +26,7 @@ one can also call SubsampleWeights(self, weights, labels) which is defined in
 the minibatch_sampler base class.
 
 When is_static is True, it implements a method that guarantees static shapes.
-It also ensures the length of output of the subsample is always batch_size, even
+It also ensures the length of wouter of the subsample is always batch_size, even
 when number of examples set to True in indicator is less than batch_size.
 """
 
@@ -127,7 +127,7 @@ class BalancedPositiveNegativeSampler(minibatch_sampler.MinibatchSampler):
 
     Returns:
       sampled_idx_indicator: boolean tensor of shape [N], True for entries which
-        are sampled. It ensures the length of output of the subsample is always
+        are sampled. It ensures the length of wouter of the subsample is always
         batch_size, even when number of examples set to True in indicator is
         less than batch_size.
 

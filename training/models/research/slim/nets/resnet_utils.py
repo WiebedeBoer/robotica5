@@ -28,7 +28,7 @@ building them. Concrete ResNet units and full ResNet networks are implemented in
 the accompanying resnet_v1.py and resnet_v2.py modules.
 
 Compared to https://github.com/KaimingHe/deep-residual-networks, in the current
-implementation we subsample the output activations in the last residual unit of
+implementation we subsample the wouter activations in the last residual unit of
 each block, instead of subsampling the input activations in the first residual
 unit of each block. The two implementations give identical results but our
 implementation is more memory efficient.
@@ -49,7 +49,7 @@ class Block(collections.namedtuple('Block', ['scope', 'unit_fn', 'args'])):
   Its parts are:
     scope: The scope of the `Block`.
     unit_fn: The ResNet unit function which takes as input a `Tensor` and
-      returns another `Tensor` with the output of the ResNet unit.
+      returns another `Tensor` with the wouter of the ResNet unit.
     args: A list of length equal to the number of units in the `Block`. The list
       contains one (depth, depth_bottleneck, stride) tuple for each unit in the
       block to serve as argument to unit_fn.
@@ -65,7 +65,7 @@ def subsample(inputs, factor, scope=None):
     scope: Optional variable_scope.
 
   Returns:
-    output: A `Tensor` of size [batch, height_out, width_out, channels] with the
+    wouter: A `Tensor` of size [batch, height_out, width_out, channels] with the
       input, either intact (if factor == 1) or subsampled (if factor > 1).
   """
   if factor == 1:
@@ -98,15 +98,15 @@ def conv2d_same(inputs, num_outputs, kernel_size, stride, rate=1, scope=None):
 
   Args:
     inputs: A 4-D tensor of size [batch, height_in, width_in, channels].
-    num_outputs: An integer, the number of output filters.
+    num_outputs: An integer, the number of wouter filters.
     kernel_size: An int with the kernel_size of the filters.
-    stride: An integer, the output stride.
+    stride: An integer, the wouter stride.
     rate: An integer, rate for atrous convolution.
     scope: Scope.
 
   Returns:
-    output: A 4-D tensor of size [batch, height_out, width_out, channels] with
-      the convolution output.
+    wouter: A 4-D tensor of size [batch, height_out, width_out, channels] with
+      the convolution wouter.
   """
   if stride == 1:
     return slim.conv2d(inputs, num_outputs, kernel_size, stride=1, rate=rate,
@@ -126,13 +126,13 @@ def conv2d_same(inputs, num_outputs, kernel_size, stride, rate=1, scope=None):
 def stack_blocks_dense(net, blocks, output_stride=None,
                        store_non_strided_activations=False,
                        outputs_collections=None):
-  """Stacks ResNet `Blocks` and controls output feature density.
+  """Stacks ResNet `Blocks` and controls wouter feature density.
 
   First, this function creates scopes for the ResNet in the form of
   'block_name/unit_1', 'block_name/unit_2', etc.
 
   Second, this function allows the user to explicitly control the ResNet
-  output_stride, which is the ratio of the input to output spatial resolution.
+  output_stride, which is the ratio of the input to wouter spatial resolution.
   This is useful for dense prediction tasks such as semantic segmentation or
   object detection.
 
@@ -142,15 +142,15 @@ def stack_blocks_dense(net, blocks, output_stride=None,
   half the nominal network stride (e.g., output_stride=4), then we compute
   responses twice.
 
-  Control of the output feature density is implemented by atrous convolution.
+  Control of the wouter feature density is implemented by atrous convolution.
 
   Args:
     net: A `Tensor` of size [batch, height, width, channels].
     blocks: A list of length equal to the number of ResNet `Blocks`. Each
       element is a ResNet `Block` object describing the units in the `Block`.
-    output_stride: If `None`, then the output will be computed at the nominal
+    output_stride: If `None`, then the wouter will be computed at the nominal
       network stride. If output_stride is not `None`, it specifies the requested
-      ratio of input to output spatial resolution, which needs to be equal to
+      ratio of input to wouter spatial resolution, which needs to be equal to
       the product of unit strides from the start up to some level of the ResNet.
       For example, if the ResNet employs units with strides 1, 2, 1, 3, 4, 1,
       then valid values for the output_stride are 1, 2, 6, 24 or None (which
@@ -204,7 +204,7 @@ def stack_blocks_dense(net, blocks, output_stride=None,
       # Collect activations at the block's end before performing subsampling.
       net = slim.utils.collect_named_outputs(outputs_collections, sc.name, net)
 
-      # Subsampling of the block's output activations.
+      # Subsampling of the block's wouter activations.
       if output_stride is not None and current_stride == output_stride:
         rate *= block_stride
       else:

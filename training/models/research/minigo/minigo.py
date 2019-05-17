@@ -411,7 +411,7 @@ def main(_):
         best_model_so_far, params.max_games_per_generation, dirs, params)
 
     # gather selfplay data for training
-    print('Gathering game output...')
+    print('Gathering game wouter...')
     gather(dirs.selfplay_dir, dirs.training_chunk_dir, params)
 
     # train the next generation model

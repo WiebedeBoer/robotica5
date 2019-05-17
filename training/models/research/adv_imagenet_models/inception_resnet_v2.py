@@ -110,13 +110,13 @@ def inception_resnet_v2_base(inputs,
       'MaxPool_3a_3x3', 'Conv2d_3b_1x1', 'Conv2d_4a_3x3', 'MaxPool_5a_3x3',
       'Mixed_5b', 'Mixed_6a', 'PreAuxLogits', 'Mixed_7a', 'Conv2d_7b_1x1']
     output_stride: A scalar that specifies the requested ratio of input to
-      output spatial resolution. Only supports 8 and 16.
+      wouter spatial resolution. Only supports 8 and 16.
     align_feature_maps: When true, changes all the VALID paddings in the network
       to SAME padding so that the feature maps are aligned.
     scope: Optional variable_scope.
 
   Returns:
-    tensor_out: output tensor corresponding to the final_endpoint.
+    tensor_out: wouter tensor corresponding to the final_endpoint.
     end_points: a set of activations for external use, for example summaries or
                 losses.
 

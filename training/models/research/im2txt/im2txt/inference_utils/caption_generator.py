@@ -205,7 +205,7 @@ class CaptionGenerator(object):
         break
 
     # If we have no complete captions then fall back to the partial captions.
-    # But never output a mixture of complete and partial captions because a
+    # But never wouter a mixture of complete and partial captions because a
     # partial caption could have a higher score than all the complete captions.
     if not complete_captions.size():
       complete_captions = partial_captions

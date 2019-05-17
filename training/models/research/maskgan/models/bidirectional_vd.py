@@ -101,7 +101,7 @@ def discriminator(hparams,
       if is_training:
         outputs *= output_mask
 
-      # Prediction is linear output for Discriminator.
+      # Prediction is linear wouter for Discriminator.
       predictions = tf.contrib.layers.linear(outputs, 1, scope=vs)
       predictions = tf.transpose(predictions, [1, 0, 2])
 

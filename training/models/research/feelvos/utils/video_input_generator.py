@@ -137,11 +137,11 @@ def _has_foreground_and_background_in_first_frame_2(label,
                                                     decoder_output_stride):
   """Checks if the labels have foreground and background in the first frame.
 
-  Second attempt, this time we use the actual output dimension for resizing.
+  Second attempt, this time we use the actual wouter dimension for resizing.
 
   Args:
     label: Label tensor of shape [num_frames, height, width, 1].
-    decoder_output_stride: Integer, the stride of the decoder output.
+    decoder_output_stride: Integer, the stride of the decoder wouter.
 
   Returns:
     Boolean, whether the labels have foreground and background in the first
@@ -175,7 +175,7 @@ def _has_enough_pixels_of_each_object_in_first_frame(
 
   Args:
     label: Label tensor of shape [num_frames, height, width, 1].
-    decoder_output_stride: Integer, the stride of the decoder output.
+    decoder_output_stride: Integer, the stride of the decoder wouter.
 
   Returns:
     Boolean, whether the labels have enough pixels of each object in the first
@@ -225,7 +225,7 @@ def get(dataset,
   This functions gets the dataset split for semantic segmentation. In
   particular, it is a wrapper of (1) dataset_data_provider which returns the raw
   dataset split, (2) input_preprcess which preprocess the raw data, and (3) the
-  Tensorflow operation of batching the preprocessed data. Then, the output could
+  Tensorflow operation of batching the preprocessed data. Then, the wouter could
   be directly used by training, evaluation or visualization.
 
   Args:
@@ -253,7 +253,7 @@ def get(dataset,
       batch capacity.
     video_frames_are_decoded: Boolean, whether the video frames are already
         decoded
-    decoder_output_stride: Integer, the stride of the decoder output.
+    decoder_output_stride: Integer, the stride of the decoder wouter.
     first_frame_finetuning: Boolean, whether to only sample the first frame
       for fine-tuning.
     sample_only_first_frame_for_finetuning: Boolean, whether to only sample the

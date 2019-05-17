@@ -178,7 +178,7 @@ class SBN(object):  # REINFORCE
           # Set up the input to the layer
           input = 2.0*samples[i-1]['activation'] - 1.0
 
-          # Create the conditional distribution (output is the logits)
+          # Create the conditional distribution (wouter is the logits)
           h = self._create_transformation(input,
                                           n_output=self.hparams.n_hidden,
                                           reuse=reuse,
@@ -205,7 +205,7 @@ class SBN(object):  # REINFORCE
           # Set up the input to the layer
           input = 2.0*samples[i-1]['activation'] - 1.0
 
-          # Create the conditional distribution (output is the logits)
+          # Create the conditional distribution (wouter is the logits)
           h = self._create_transformation(input,
                                           n_output=self.hparams.n_hidden,
                                           reuse=reuse,
@@ -261,7 +261,7 @@ class SBN(object):  # REINFORCE
                                           scope_prefix='p_%d' % i)
 
           if i == 0:
-            # Assume output is binary
+            # Assume wouter is binary
             logP = U.binary_log_likelihood(self._x, h + self.train_bias)
           else:
             logPPrior += log_likelihood_func(samples[i-1], h)

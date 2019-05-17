@@ -42,7 +42,7 @@ import tensorflow as tf
 
 
 tf.flags.DEFINE_string("file_out", "",
-                       "Filename of the output .tfrecords file.")
+                       "Filename of the wouter .tfrecords file.")
 tf.flags.DEFINE_string("fn_root", "", "Name of root file path.")
 tf.flags.DEFINE_string("partition_fn", "", "Partition file path.")
 tf.flags.DEFINE_string("set", "", "Name of subset.")

@@ -93,7 +93,7 @@ class InputDataFields(object):
 
 
 class DetectionResultFields(object):
-  """Naming conventions for storing the output of the detector.
+  """Naming conventions for storing the wouter of the detector.
 
   Attributes:
     source_id: source of the original image.

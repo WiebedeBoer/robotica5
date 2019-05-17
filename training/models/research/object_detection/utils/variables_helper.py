@@ -106,7 +106,7 @@ def get_variables_available_in_checkpoint(variables,
   Inspects given checkpoint and returns the subset of variables that are
   available in it.
 
-  TODO(rathodv): force input and output to be a dictionary.
+  TODO(rathodv): force input and wouter to be a dictionary.
 
   Args:
     variables: a list or dictionary of variables to find in checkpoint.

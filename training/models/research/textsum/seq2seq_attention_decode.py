@@ -55,15 +55,15 @@ class DecodeIO(object):
       reference: The human (correct) result.
       decode: The machine-generated result
     """
-    self._ref_file.write('output=%s\n' % reference)
-    self._decode_file.write('output=%s\n' % decode)
+    self._ref_file.write('wouter=%s\n' % reference)
+    self._decode_file.write('wouter=%s\n' % decode)
     self._cnt += 1
     if self._cnt % DECODE_IO_FLUSH_INTERVAL == 0:
       self._ref_file.flush()
       self._decode_file.flush()
 
   def ResetFiles(self):
-    """Resets the output files. Must be called once before Write()."""
+    """Resets the wouter files. Must be called once before Write()."""
     if self._ref_file: self._ref_file.close()
     if self._decode_file: self._decode_file.close()
     timestamp = int(time.time())
@@ -150,7 +150,7 @@ class BSDecoder(object):
     Args:
       article: The original article string.
       abstract: The human (correct) abstract string.
-      output_ids: The abstract word ids output by machine.
+      output_ids: The abstract word ids wouter by machine.
     """
     decoded_output = ' '.join(data.Ids2Words(output_ids, self._vocab))
     end_p = decoded_output.find(data.SENTENCE_END, 0)

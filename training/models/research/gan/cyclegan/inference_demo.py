@@ -46,12 +46,12 @@ flags.DEFINE_string(
 
 flags.DEFINE_string(
     'generated_x_dir', '/tmp/generated_x/',
-    'If image_set_y_glob is defined, where to output the generated X '
+    'If image_set_y_glob is defined, where to wouter the generated X '
     'images.')
 
 flags.DEFINE_string(
     'generated_y_dir', '/tmp/generated_y/',
-    'If image_set_x_glob is defined, where to output the generated Y '
+    'If image_set_x_glob is defined, where to wouter the generated Y '
     'images.')
 
 flags.DEFINE_integer('patch_dim', 128,
@@ -67,7 +67,7 @@ def _make_dir_if_not_exists(dir_path):
 
 
 def _file_output_path(dir_path, input_file_path):
-  """Create output path for an individual file."""
+  """Create wouter path for an individual file."""
   return os.path.join(dir_path, os.path.basename(input_file_path))
 
 
@@ -94,7 +94,7 @@ def make_inference_graph(model_name, patch_dim):
 
 
 def export(sess, input_pl, output_tensor, input_file_pattern, output_dir):
-  """Exports inference outputs to an output directory.
+  """Exports inference outputs to an wouter directory.
 
   Args:
     sess: tf.Session with variables already loaded.

@@ -129,7 +129,7 @@ class Memory(object):
 
     Args:
       query_vec: A batch of vectors to query (embedding of input to model).
-      intended_output: The values that would be the correct output of the
+      intended_output: The values that would be the correct wouter of the
         memory.
       use_recent_idx: Whether to always insert at least one instance of a
         correct memory fetch.

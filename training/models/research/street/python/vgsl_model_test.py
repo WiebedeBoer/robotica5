@@ -170,7 +170,7 @@ class VgslModelTest(tf.test.TestCase):
                           [[0, 1, 2, 3], [5, 6, 7, 8], [10, 11, 12, 13]])
 
   def testEndToEndSizes0d(self):
-    """Tests that the output sizes match when training/running real 0d data.
+    """Tests that the wouter sizes match when training/running real 0d data.
 
     Uses mnist with dual summarizing LSTMs to reduce to a single value.
     """
@@ -194,7 +194,7 @@ class VgslModelTest(tf.test.TestCase):
   # TODO(rays) Support logistic and test with Imagenet (as 0d, multi-object.)
 
   def testEndToEndSizes1dCTC(self):
-    """Tests that the output sizes match when training with CTC.
+    """Tests that the wouter sizes match when training with CTC.
 
     Basic bidi LSTM on top of convolution and summarizing LSTM with CTC.
     """
@@ -213,12 +213,12 @@ class VgslModelTest(tf.test.TestCase):
       self.assertEqual(len(output.shape), 3)
       self.assertEqual(len(labels.shape), 2)
       self.assertEqual(output.shape[0], labels.shape[0])
-      # This is ctc - the only cast-iron guarantee is labels <= output.
+      # This is ctc - the only cast-iron guarantee is labels <= wouter.
       self.assertLessEqual(labels.shape[1], output.shape[1])
       self.assertEqual(output.shape[2], 105)
 
   def testEndToEndSizes1dFixed(self):
-    """Tests that the output sizes match when training/running 1 data.
+    """Tests that the wouter sizes match when training/running 1 data.
 
     Convolution, summarizing LSTM with fwd rev fwd to allow no CTC.
     """
@@ -237,7 +237,7 @@ class VgslModelTest(tf.test.TestCase):
       self.assertEqual(len(output.shape), 3)
       self.assertEqual(len(labels.shape), 2)
       self.assertEqual(output.shape[0], labels.shape[0])
-      # Not CTC, output lengths match.
+      # Not CTC, wouter lengths match.
       self.assertEqual(output.shape[1], labels.shape[1])
       self.assertEqual(output.shape[2], 12)
 

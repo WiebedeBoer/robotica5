@@ -63,7 +63,7 @@ class BoxPredictor(object):
     """Computes encoded object locations and corresponding confidences.
 
     Takes a list of high level image feature maps as input and produces a list
-    of box encodings and a list of class scores where each element in the output
+    of box encodings and a list of class scores where each element in the wouter
     lists correspond to the feature maps in the input list.
 
     Args:
@@ -177,7 +177,7 @@ class KerasBoxPredictor(tf.keras.Model):
     """Computes encoded object locations and corresponding confidences.
 
     Takes a list of high level image feature maps as input and produces a list
-    of box encodings and a list of class scores where each element in the output
+    of box encodings and a list of class scores where each element in the wouter
     lists correspond to the feature maps in the input list.
 
     Args:

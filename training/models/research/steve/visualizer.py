@@ -26,8 +26,8 @@ import valuerl, worldmodel
 from config import config
 
 MODEL_NAME = config["name"]
-LOG_PATH = util.create_directory("output/" + config["env"] + "/" + MODEL_NAME + "/" + config["log_path"]) + "/" + MODEL_NAME
-LOAD_PATH =    util.create_directory("output/" + config["env"] + "/" + MODEL_NAME + "/" + config["save_model_path"])
+LOG_PATH = util.create_directory("wouter/" + config["env"] + "/" + MODEL_NAME + "/" + config["log_path"]) + "/" + MODEL_NAME
+LOAD_PATH =    util.create_directory("wouter/" + config["env"] + "/" + MODEL_NAME + "/" + config["save_model_path"])
 OBS_DIM =   np.prod(config["obs_dims"])
 HIDDEN_DIM = config["hidden_dim"]
 ACTION_DIM = config["action_dim"]

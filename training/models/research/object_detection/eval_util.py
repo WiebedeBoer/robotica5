@@ -123,8 +123,8 @@ def visualize_detection_results(result_dict,
             e.g., 'cat', 'dog', 'pizza'
           'supercategory': (optional) string representing the supercategory
             e.g., 'animal', 'vehicle', 'food', etc
-    summary_dir: the output directory to which the image summaries are written.
-    export_dir: the output directory to which images are written.  If this is
+    summary_dir: the wouter directory to which the image summaries are written.
+    export_dir: the wouter directory to which images are written.  If this is
       empty (default), then images are not exported.
     agnostic_mode: boolean (default: False) controlling whether to evaluate in
       class-agnostic mode or not.
@@ -563,7 +563,7 @@ def result_dict_for_single_example(image,
   """Merges all detection and groundtruth information for a single example.
 
   Note that evaluation tools require classes that are 1-indexed, and so this
-  function performs the offset. If `class_agnostic` is True, all output classes
+  function performs the offset. If `class_agnostic` is True, all wouter classes
   have label 1.
 
   Args:
@@ -663,7 +663,7 @@ def result_dict_for_batched_example(images,
   """Merges all detection and groundtruth information for a single example.
 
   Note that evaluation tools require classes that are 1-indexed, and so this
-  function performs the offset. If `class_agnostic` is True, all output classes
+  function performs the offset. If `class_agnostic` is True, all wouter classes
   have label 1.
 
   Args:

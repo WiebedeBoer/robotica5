@@ -138,7 +138,7 @@ def _residual_block(input_net,
 
   Args:
     input_net: Tensor as input.
-    num_outputs: (int) number of output channels for Convolution.
+    num_outputs: (int) number of wouter channels for Convolution.
     kernel_size: (int) size of the square kernel for Convolution.
     stride: (int) stride for Convolution. Default to 1.
     padding_size: (int) padding size for Convolution. Default to 0.
@@ -241,7 +241,7 @@ def generator_up_sample(input_net, num_outputs):
 
   Args:
     input_net: Tensor of shape (batch_size, h / 4, w / 4, 256).
-    num_outputs: (int) Number of channel for the output tensor.
+    num_outputs: (int) Number of channel for the wouter tensor.
 
   Returns:
     Tensor of shape (batch_size, h, w, num_outputs).
@@ -329,7 +329,7 @@ def discriminator_output_source(input_net):
   """Output Layer for Source in the Discriminator.
 
   Determine if the image is real/fake based on the feature extracted. We follow
-  the original paper design where the output is not a simple (batch_size) shape
+  the original paper design where the wouter is not a simple (batch_size) shape
   Tensor but rather a (batch_size, 2, 2, 2048) shape Tensor. We will get the
   correct shape later when we piece things together.
 
@@ -372,7 +372,7 @@ def discriminator_output_class(input_net, class_num):
 
   Args:
     input_net: Tensor of shape (batch_size, h / 64, w / 64, 2028).
-    class_num: Number of output classes to be predicted.
+    class_num: Number of wouter classes to be predicted.
 
   Returns:
     Tensor of shape (batch_size, class_num).

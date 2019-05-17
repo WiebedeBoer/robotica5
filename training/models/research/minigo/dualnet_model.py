@@ -38,7 +38,7 @@ Each residual block applies the following modules sequentially to its input:
   7. A rectifier non-linearity
 Note: num_filter is 128 for 19 x 19 board size, and 32 for 9 x 9 board size.
 
-The output of the residual tower is passed into two separate "heads" for
+The wouter of the residual tower is passed into two separate "heads" for
 computing the policy and value respectively. The policy head applies the
 following modules:
   1. A convolution of 2 filters of kernel size 1 x 1 with stride 1
@@ -97,7 +97,7 @@ def _conv_block(inputs, filters, kernel_size, training):
       model. Needed for batch norm.
 
   Returns:
-    The output tensor of the convolutional block layer.
+    The wouter tensor of the convolutional block layer.
   """
   conv = _conv2d(inputs, filters, kernel_size)
   batchn = _batch_norm(conv, training)
@@ -119,7 +119,7 @@ def _res_block(inputs, filters, kernel_size, training):
       model. Needed for batch norm.
 
   Returns:
-    The output tensor of the residual block layer.
+    The wouter tensor of the residual block layer.
   """
 
   initial_output = _conv_block(inputs, filters, kernel_size, training)
@@ -166,7 +166,7 @@ class Model(object):
       policy_logits: A vector of size self.board_size * self.board_size + 1
         corresponding to the policy logit probabilities for all intersections
         and the pass move.
-      value_logits: A scalar for the value logits output
+      value_logits: A scalar for the value logits wouter
     """
     initial_output = _conv_block(
         inputs=inputs, filters=self.num_filters,

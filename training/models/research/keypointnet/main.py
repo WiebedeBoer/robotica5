@@ -570,7 +570,7 @@ def model_fn(features, labels, mode, hparams):
   def touint8(img):
     return tf.cast(img * 255.0, tf.uint8)
 
-  with tf.variable_scope("output"):
+  with tf.variable_scope("wouter"):
     tf.summary.image("0_img0", touint8(features["img0"][:, :, :, :3]))
     tf.summary.image("1_combined", viz[0])
     for i in range(hparams.num_kp):
@@ -628,7 +628,7 @@ def predict(input_folder, hparams):
   files = [x for x in os.listdir(input_folder)
            if x[-3:] in ["jpg", "png"]]
 
-  output_folder = os.path.join(input_folder, "output")
+  output_folder = os.path.join(input_folder, "wouter")
   if not os.path.exists(output_folder):
     os.mkdir(output_folder)
 

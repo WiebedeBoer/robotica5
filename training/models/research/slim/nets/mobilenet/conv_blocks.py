@@ -25,7 +25,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):
   """Pads the input along the spatial dimensions independently of input size.
 
   Pads the input such that if it was used in a convolution with 'VALID' padding,
-  the output would have the same dimensions as if the unpadded input was used
+  the wouter would have the same dimensions as if the unpadded input was used
   in a convolution with 'SAME' padding.
 
   Args:
@@ -34,7 +34,7 @@ def _fixed_padding(inputs, kernel_size, rate=1):
     rate: An integer, rate for atrous convolution.
 
   Returns:
-    output: A tensor of size [batch, height_out, width_out, channels] with the
+    wouter: A tensor of size [batch, height_out, width_out, channels] with the
       input, either intact (if kernel_size == 1) or padded (if kernel_size > 1).
   """
   kernel_size_effective = [kernel_size[0] + (kernel_size[0] - 1) * (rate - 1),
@@ -113,14 +113,14 @@ def split_separable_conv2d(input_tensor,
     scope_depthwise for deptwhise, and scope_pointwise for pointwise.
     normalizer_fn: which normalizer function to use for depthwise/pointwise
     stride: stride
-    rate: output rate (also known as dilation rate)
+    rate: wouter rate (also known as dilation rate)
     endpoints: optional, if provided, will export additional tensors to it.
     use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-      inputs so that the output dimensions are the same as if 'SAME' padding
+      inputs so that the wouter dimensions are the same as if 'SAME' padding
       were used.
 
   Returns:
-    output tesnor
+    wouter tesnor
   """
 
   with _v1_compatible_scope_naming(scope) as scope:
@@ -195,7 +195,7 @@ def expanded_conv(input_tensor,
     rate: depthwise rate
     kernel_size: depthwise kernel
     residual: whether to include residual connection between input
-      and output.
+      and wouter.
     normalizer_fn: batchnorm or otherwise
     project_activation_fn: activation function for the project layer
     split_projection: how many ways to split projection operator
@@ -205,19 +205,19 @@ def expanded_conv(input_tensor,
       by this value.
     split_divisible_by: make sure every split group is divisible by this number.
     expansion_transform: Optional function that takes expansion
-      as a single input and returns output.
+      as a single input and returns wouter.
     depthwise_location: where to put depthwise covnvolutions supported
-      values None, 'input', 'output', 'expansion'
+      values None, 'input', 'wouter', 'expansion'
     depthwise_channel_multiplier: depthwise channel multiplier:
     each input will replicated (with different filters)
     that many times. So if input had c channels,
-    output will have c x depthwise_channel_multpilier.
+    wouter will have c x depthwise_channel_multpilier.
     endpoints: An optional dictionary into which intermediate endpoints are
       placed. The keys "expansion_output", "depthwise_output",
       "projection_output" and "expansion_transform" are always populated, even
       if the corresponding functions are not invoked.
     use_explicit_padding: Use 'VALID' padding for convolutions, but prepad
-      inputs so that the output dimensions are the same as if 'SAME' padding
+      inputs so that the wouter dimensions are the same as if 'SAME' padding
       were used.
     padding: Padding type to use if `use_explicit_padding` is not set.
     scope: optional scope.
@@ -231,7 +231,7 @@ def expanded_conv(input_tensor,
   with tf.variable_scope(scope, default_name='expanded_conv') as s, \
        tf.name_scope(s.original_name_scope):
     prev_depth = input_tensor.get_shape().as_list()[3]
-    if  depthwise_location not in [None, 'input', 'output', 'expansion']:
+    if  depthwise_location not in [None, 'input', 'wouter', 'expansion']:
       raise TypeError('%r is unknown value for depthwise_location' %
                       depthwise_location)
     if use_explicit_padding:
@@ -288,7 +288,7 @@ def expanded_conv(input_tensor,
     if expansion_transform:
       net = expansion_transform(expansion_tensor=net, input_tensor=input_tensor)
     # Note in contrast with expansion, we always have
-    # projection to produce the desired output size.
+    # projection to produce the desired wouter size.
     net = split_conv(
         net,
         num_outputs,
@@ -300,7 +300,7 @@ def expanded_conv(input_tensor,
         activation_fn=project_activation_fn)
     if endpoints is not None:
       endpoints['projection_output'] = net
-    if depthwise_location == 'output':
+    if depthwise_location == 'wouter':
       if use_explicit_padding:
         net = _fixed_padding(net, kernel_size, rate)
       net = depthwise_func(net, activation_fn=None)
@@ -315,7 +315,7 @@ def expanded_conv(input_tensor,
           net.get_shape().as_list()[3] ==
           input_tensor.get_shape().as_list()[3]):
       net += input_tensor
-    return tf.identity(net, name='output')
+    return tf.identity(net, name='wouter')
 
 
 def split_conv(input_tensor,
@@ -326,13 +326,13 @@ def split_conv(input_tensor,
                **kwargs):
   """Creates a split convolution.
 
-  Split convolution splits the input and output into
+  Split convolution splits the input and wouter into
   'num_blocks' blocks of approximately the same size each,
-  and only connects $i$-th input to $i$ output.
+  and only connects $i$-th input to $i$ wouter.
 
   Args:
     input_tensor: input tensor
-    num_outputs: number of output filters
+    num_outputs: number of wouter filters
     num_ways: num blocks to split by.
     scope: scope for all the operators.
     divisible_by: make sure that every part is divisiable by this.

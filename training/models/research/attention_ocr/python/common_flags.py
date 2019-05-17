@@ -99,7 +99,7 @@ def define():
 
   flags.DEFINE_float('lstm_state_clip_value', 10.0,
                      'cell state is clipped by this value prior to the cell'
-                     ' output activation')
+                     ' wouter activation')
 
   # 'sequence_loss_fn'
   flags.DEFINE_float('label_smoothing', 0.1,

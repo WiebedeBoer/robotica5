@@ -188,7 +188,7 @@ def discriminator(hparams, sequence, is_training, reuse=None):
         rnn_in = rnn_inputs[:, t]
         rnn_out, state_dis = cell_dis(rnn_in, state_dis)
 
-        # Prediction is linear output for Discriminator.
+        # Prediction is linear wouter for Discriminator.
         pred = tf.contrib.layers.linear(rnn_out, 1, scope=vs)
 
         predictions.append(pred)

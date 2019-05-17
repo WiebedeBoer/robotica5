@@ -71,12 +71,12 @@ def model_fn(features, labels, mode, params):
   with tf.variable_scope("model"):
     inputs, targets = features, labels
 
-    # Create model and get output logits.
+    # Create model and get wouter logits.
     model = transformer.Transformer(params, mode == tf.estimator.ModeKeys.TRAIN)
 
     logits = model(inputs, targets)
 
-    # When in prediction mode, the labels/targets is None. The model output
+    # When in prediction mode, the labels/targets is None. The model wouter
     # is the prediction
     if mode == tf.estimator.ModeKeys.PREDICT:
       if params["use_tpu"]:
@@ -641,7 +641,7 @@ def run_transformer(flags_obj):
     serving_input_fn = export.build_tensor_serving_input_receiver_fn(
         shape=[None], dtype=tf.int64, batch_size=None)
     # Export saved model, and save the vocab file as an extra asset. The vocab
-    # file is saved to allow consistent input encoding and output decoding.
+    # file is saved to allow consistent input encoding and wouter decoding.
     # (See the "Export trained model" section in the README for an example of
     # how to use the vocab file.)
     # Since the model itself does not use the vocab file, this file is saved as

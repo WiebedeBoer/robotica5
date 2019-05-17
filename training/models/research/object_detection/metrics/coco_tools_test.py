@@ -96,7 +96,7 @@ class CocoToolsTest(tf.test.TestCase):
     self.assertDictEqual(result, self._groundtruth_dict)
     with tf.gfile.GFile(output_path, 'r') as f:
       written_result = f.read()
-      # The json output should have floats written to 4 digits of precision.
+      # The json wouter should have floats written to 4 digits of precision.
       matcher = re.compile(r'"bbox":\s+\[\n\s+\d+.\d\d\d\d,', re.MULTILINE)
       self.assertTrue(matcher.findall(written_result))
       written_result = json.loads(written_result)
@@ -122,7 +122,7 @@ class CocoToolsTest(tf.test.TestCase):
     self.assertListEqual(result, self._detections_list)
     with tf.gfile.GFile(output_path, 'r') as f:
       written_result = f.read()
-      # The json output should have floats written to 4 digits of precision.
+      # The json wouter should have floats written to 4 digits of precision.
       matcher = re.compile(r'"bbox":\s+\[\n\s+\d+.\d\d\d\d,', re.MULTILINE)
       self.assertTrue(matcher.findall(written_result))
       written_result = json.loads(written_result)

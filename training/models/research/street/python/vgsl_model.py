@@ -195,8 +195,8 @@ def InitNetwork(input_pattern,
 
   Args:
     input_pattern: File pattern of the data in tfrecords of Example.
-    model_spec: Concatenation of input spec, model spec and output spec.
-      See Build below for input/output spec. For model spec, see vgslspecs.py
+    model_spec: Concatenation of input spec, model spec and wouter spec.
+      See Build below for input/wouter spec. For model spec, see vgslspecs.py
     mode: One of 'train', 'eval'
     initial_learning_rate: Initial learning rate for the network.
     final_learning_rate: Final learning rate for the network.
@@ -246,7 +246,7 @@ class VGSLImageModel(object):
     """
     # The string that was used to build this model.
     self.model_spec = model_spec
-    # The layers between input and output.
+    # The layers between input and wouter.
     self.layers = None
     # The train/eval mode.
     self.mode = mode
@@ -266,7 +266,7 @@ class VGSLImageModel(object):
     self.train_op = None
     # Tensor for the global step counter
     self.global_step = None
-    # Tensor for the output predictions (usually softmax)
+    # Tensor for the wouter predictions (usually softmax)
     self.output = None
     # True if we are using CTC training mode.
     self.using_ctc = False
@@ -275,7 +275,7 @@ class VGSLImageModel(object):
 
   def Build(self, input_pattern, input_spec, model_spec, output_spec,
             optimizer_type, num_preprocess_threads, reader):
-    """Builds the model from the separate input/layers/output spec strings.
+    """Builds the model from the separate input/layers/wouter spec strings.
 
     Args:
       input_pattern: File pattern of the data in tfrecords of TF Example format.
@@ -291,14 +291,14 @@ class VGSLImageModel(object):
           the y-size of the input must then be fixed.
       model_spec: Model definition. See vgslspecs.py
       output_spec: Output layer definition:
-        O(2|1|0)(l|s|c)n output layer with n classes.
+        O(2|1|0)(l|s|c)n wouter layer with n classes.
           2 (heatmap) Output is a 2-d vector map of the input (possibly at
             different scale).
           1 (sequence) Output is a 1-d sequence of vector values.
           0 (value) Output is a 0-d single vector value.
-          l uses a logistic non-linearity on the output, allowing multiple
-            hot elements in any output vector value.
-          s uses a softmax non-linearity, with one-hot output in each value.
+          l uses a logistic non-linearity on the wouter, allowing multiple
+            hot elements in any wouter vector value.
+          s uses a softmax non-linearity, with one-hot wouter in each value.
           c uses a softmax with CTC. Can only be used with s (sequence).
           NOTE Only O1s and O1c are currently supported.
       optimizer_type: One of 'GradientDescent', 'AdaGrad', 'Momentum', 'Adam'.
@@ -352,18 +352,18 @@ class VGSLImageModel(object):
     Args:
       sess:            Session in which to run the model.
     Returns:
-      output tensor result, labels tensor result.
+      wouter tensor result, labels tensor result.
     """
     return sess.run([self.output, self.labels])
 
   def _AddOutputs(self, prev_layer, out_dims, out_func, num_classes):
-    """Adds the output layer and loss function.
+    """Adds the wouter layer and loss function.
 
     Args:
       prev_layer:  Output of last layer of main network.
-      out_dims:    Number of output dimensions, 0, 1 or 2.
+      out_dims:    Number of wouter dimensions, 0, 1 or 2.
       out_func:    Output non-linearity. 's' or 'c'=softmax, 'l'=logistic.
-      num_classes: Number of outputs/size of last output dimension.
+      num_classes: Number of outputs/size of last wouter dimension.
     """
     height_in = shapes.tensor_dim(prev_layer, dim=1)
     logits, outputs = self._AddOutputLayer(prev_layer, out_dims, out_func,
@@ -373,31 +373,31 @@ class VGSLImageModel(object):
       self.loss = self._AddLossFunction(logits, height_in, out_dims, out_func)
       tf.summary.scalar('loss', self.loss)
     elif out_dims == 0:
-      # Be sure the labels match the output, even in eval mode.
+      # Be sure the labels match the wouter, even in eval mode.
       self.labels = tf.slice(self.labels, [0, 0], [-1, 1])
       self.labels = tf.reshape(self.labels, [-1])
 
-    logging.info('Final output=%s', outputs)
+    logging.info('Final wouter=%s', outputs)
     logging.info('Labels tensor=%s', self.labels)
     self.output = outputs
 
   def _AddOutputLayer(self, prev_layer, out_dims, out_func, num_classes):
-    """Add the fully-connected logits and SoftMax/Logistic output Layer.
+    """Add the fully-connected logits and SoftMax/Logistic wouter Layer.
 
     Args:
       prev_layer:  Output of last layer of main network.
-      out_dims:    Number of output dimensions, 0, 1 or 2.
+      out_dims:    Number of wouter dimensions, 0, 1 or 2.
       out_func:    Output non-linearity. 's' or 'c'=softmax, 'l'=logistic.
-      num_classes: Number of outputs/size of last output dimension.
+      num_classes: Number of outputs/size of last wouter dimension.
 
     Returns:
-      logits:  Pre-softmax/logistic fully-connected output shaped to out_dims.
+      logits:  Pre-softmax/logistic fully-connected wouter shaped to out_dims.
       outputs: Post-softmax/logistic shaped to out_dims.
 
     Raises:
       ValueError: if syntax is incorrect.
     """
-    # Reduce dimensionality appropriate to the output dimensions.
+    # Reduce dimensionality appropriate to the wouter dimensions.
     batch_in = shapes.tensor_dim(prev_layer, dim=0)
     height_in = shapes.tensor_dim(prev_layer, dim=1)
     width_in = shapes.tensor_dim(prev_layer, dim=2)
@@ -413,7 +413,7 @@ class VGSLImageModel(object):
       raise ValueError('Logistic not yet supported!')
     else:
       output = tf.nn.softmax(logits)
-    # Reshape to the dessired output.
+    # Reshape to the dessired wouter.
     if out_dims == 2:
       output_shape = [batch_in, height_in, width_in, num_classes]
     elif out_dims == 1:
@@ -428,9 +428,9 @@ class VGSLImageModel(object):
     """Add the appropriate loss function.
 
     Args:
-      logits:  Pre-softmax/logistic fully-connected output shaped to out_dims.
+      logits:  Pre-softmax/logistic fully-connected wouter shaped to out_dims.
       height_in:  Height of logits before going into the softmax layer.
-      out_dims:   Number of output dimensions, 0, 1 or 2.
+      out_dims:   Number of wouter dimensions, 0, 1 or 2.
       out_func:   Output non-linearity. 's' or 'c'=softmax, 'l'=logistic.
 
     Returns:
@@ -495,10 +495,10 @@ class VGSLImageModel(object):
 def _PadLabels3d(logits, labels):
   """Pads or slices 3-d labels to match logits.
 
-  Covers the case of 2-d softmax output, when labels is [batch, height, width]
+  Covers the case of 2-d softmax wouter, when labels is [batch, height, width]
   and logits is [batch, height, width, onehot]
   Args:
-    logits: 4-d Pre-softmax fully-connected output.
+    logits: 4-d Pre-softmax fully-connected wouter.
     labels: 3-d, but not necessarily matching in size.
 
   Returns:
@@ -516,7 +516,7 @@ def _PadLabels3d(logits, labels):
 def _PadLabels2d(logits_size, labels):
   """Pads or slices the 2nd dimension of 2-d labels to match logits_size.
 
-  Covers the case of 1-d softmax output, when labels is [batch, seq] and
+  Covers the case of 1-d softmax wouter, when labels is [batch, seq] and
   logits is [batch, seq, onehot]
   Args:
     logits_size: Tensor returned from tf.shape giving the target size.
@@ -562,7 +562,7 @@ def _ParseInputSpec(input_spec):
 
 
 def _ParseOutputSpec(output_spec):
-  """Parses the output spec.
+  """Parses the wouter spec.
 
   Args:
     output_spec: Output layer definition. See Build.
@@ -570,7 +570,7 @@ def _ParseOutputSpec(output_spec):
   Returns:
     out_dims:     2|1|0 for 2-d, 1-d, 0-d.
     out_func:     l|s|c for logistic, softmax, softmax+CTC
-    num_classes:  Number of classes in output.
+    num_classes:  Number of classes in wouter.
 
   Raises:
     ValueError: if syntax is incorrect.
@@ -578,7 +578,7 @@ def _ParseOutputSpec(output_spec):
   pattern = re.compile(R'(O)(0|1|2)(l|s|c)(\d+)')
   m = pattern.match(output_spec)
   if m is None:
-    raise ValueError('Failed to parse output spec:' + output_spec)
+    raise ValueError('Failed to parse wouter spec:' + output_spec)
   out_dims = int(m.group(2))
   out_func = m.group(3)
   if out_func == 'c' and out_dims != 1:

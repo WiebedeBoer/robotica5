@@ -216,7 +216,7 @@ def build_lm_sequence(seq):
     seq: SequenceWrapper.
 
   Returns:
-    SequenceWrapper with `seq` tokens copied over to output sequence tokens and
+    SequenceWrapper with `seq` tokens copied over to wouter sequence tokens and
     labels (offset by 1, i.e. predict next token) with weights set to 1.0,
     except for <eos> token.
   """

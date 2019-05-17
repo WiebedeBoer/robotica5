@@ -78,11 +78,11 @@ def attention_decoder_fn_train(encoder_state,
       time: positive integer constant reflecting the current timestep.
       cell_state: state of RNNCell.
       cell_input: input provided by `dynamic_rnn_decoder`.
-      cell_output: output of RNNCell.
+      cell_output: wouter of RNNCell.
       context_state: context state provided by `dynamic_rnn_decoder`.
 
     Returns:
-      A tuple (done, next state, next input, emit output, next context state)
+      A tuple (done, next state, next input, emit wouter, next context state)
       where:
 
       done: `None`, which is used by the `dynamic_rnn_decoder` to indicate
@@ -94,8 +94,8 @@ def attention_decoder_fn_train(encoder_state,
       next input: `cell_input`, this decoder function does not modify the
       given input. The input could be modified when applying e.g. attention.
 
-      emit output: `cell_output`, this decoder function does not modify the
-      given output.
+      emit wouter: `cell_output`, this decoder function does not modify the
+      given wouter.
 
       next context state: `context_state`, this decoder function does not
       modify the given context state. The context state could be modified when
@@ -155,10 +155,10 @@ def attention_decoder_fn_inference(output_fn,
   Further usage can be found in the `kernel_tests/seq2seq_test.py`.
 
   Args:
-    output_fn: An output function to project your `cell_output` onto class
+    output_fn: An wouter function to project your `cell_output` onto class
     logits.
 
-    An example of an output function;
+    An example of an wouter function;
 
     ```
       tf.variable_scope("decoder") as varscope
@@ -219,7 +219,7 @@ def attention_decoder_fn_inference(output_fn,
     The main difference between this decoder function and the `decoder_fn` in
     `attention_decoder_fn_train` is how `next_cell_input` is calculated. In
     decoder function we calculate the next input by applying an argmax across
-    the feature dimension of the output from the decoder. This is a
+    the feature dimension of the wouter from the decoder. This is a
     greedy-search approach. (Bahdanau et al., 2014) & (Sutskever et al., 2014)
     use beam-search instead.
 
@@ -227,11 +227,11 @@ def attention_decoder_fn_inference(output_fn,
       time: positive integer constant reflecting the current timestep.
       cell_state: state of RNNCell.
       cell_input: input provided by `dynamic_rnn_decoder`.
-      cell_output: output of RNNCell.
+      cell_output: wouter of RNNCell.
       context_state: context state provided by `dynamic_rnn_decoder`.
 
     Returns:
-      A tuple (done, next state, next input, emit output, next context state)
+      A tuple (done, next state, next input, emit wouter, next context state)
       where:
 
       done: A boolean vector to indicate which sentences has reached a
@@ -245,7 +245,7 @@ def attention_decoder_fn_inference(output_fn,
       next input: The embedding from argmax of the `cell_output` is used as
       `next_input`.
 
-      emit output: If `output_fn is None` the supplied `cell_output` is
+      emit wouter: If `output_fn is None` the supplied `cell_output` is
       returned, else the `output_fn` is used to update the `cell_output`
       before calculating `next_input` and returning `cell_output`.
 

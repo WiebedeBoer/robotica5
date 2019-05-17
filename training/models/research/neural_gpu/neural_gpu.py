@@ -211,7 +211,7 @@ def reorder_beam(beam_size, batch_size, beam_val, output, is_first,
   """Reorder to minimize beam costs."""
   # beam_val is [batch_size x beam_size]; let b = batch_size * beam_size
   # decided is len x b x a x b
-  # output is b x out_size; step is b x len x a x b;
+  # wouter is b x out_size; step is b x len x a x b;
   outputs = tf.split(axis=0, num_or_size_splits=beam_size, value=tf.nn.log_softmax(output))
   all_beam_vals, all_beam_idx = [], []
   beam_range = 1 if is_first else beam_size
@@ -395,7 +395,7 @@ class NeuralGPU(object):
             target_emb_weights, output_w, gpu_targets_tn, it_incr)
       step = dec_substep(step, decided)
       output_l = tf.expand_dims(tf.expand_dims(step[:, it, 0, :], 1), 1)
-      # Calculate argmax output.
+      # Calculate argmax wouter.
       output = tf.reshape(output_l, [-1, nmaps])
       # pylint: disable=cell-var-from-loop
       output = tf.matmul(output, output_w)
@@ -735,7 +735,7 @@ class NeuralGPU(object):
           if best[b] in [eos_id]:
             seen_eos[b] += 1
       res = [[-c for c in cost]] + outputs
-    # Collect and output results.
+    # Collect and wouter results.
     offset = 0
     norm = None
     if do_backward:

@@ -145,7 +145,7 @@ def ExtractKeypointDescriptor(image, layer_name, image_scales, iou,
        image_scales[scale_index], and run image resizing, feature extraction and
        keypoint selection. Then we will get a new set of selected_boxes for
        current scale. In the end, we concat the previous boxes with current
-       selected_boxes as the output.
+       selected_boxes as the wouter.
 
     Args:
       scale_index: A valid index in the image_scales.
@@ -304,13 +304,13 @@ def ApplyPcaAndWhitening(data,
     data: [N, dim] float tensor containing data which undergoes PCA/whitening.
     pca_matrix: [dim, dim] float tensor PCA matrix, row-major.
     pca_mean: [dim] float tensor, mean to subtract before projection.
-    output_dim: Number of dimensions to use in output data, of type int.
+    output_dim: Number of dimensions to use in wouter data, of type int.
     use_whitening: Whether whitening is to be used.
     pca_variances: [dim] float tensor containing PCA variances. Only used if
       use_whitening is True.
 
   Returns:
-    output: [N, output_dim] float tensor with output of PCA/whitening operation.
+    wouter: [N, output_dim] float tensor with wouter of PCA/whitening operation.
   """
   output = tf.matmul(
       tf.subtract(data, pca_mean),

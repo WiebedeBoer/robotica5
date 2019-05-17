@@ -38,7 +38,7 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_string('tf_master', '',
                     'TensorFlow execution engine to connect to.')
-flags.DEFINE_string('output_path', '', 'Top level for output.')
+flags.DEFINE_string('output_path', '', 'Top level for wouter.')
 flags.DEFINE_string('task_context', '',
                     'Path to a task context with resource locations and '
                     'parameters.')

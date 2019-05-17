@@ -44,7 +44,7 @@ def center_initializer():
   Raises:
     ValueError: Input tensor data type has to be tf.float32.
     ValueError: If input tensor is not a 5-D tensor.
-    ValueError: If input and output channel dimensions are different.
+    ValueError: If input and wouter channel dimensions are different.
     ValueError: If spatial kernel sizes are not 1.
     ValueError: If temporal kernel size is even.
   """
@@ -58,7 +58,7 @@ def center_initializer():
     if len(shape) != 5:
       raise ValueError('Input tensor has to be 5-D.')
     if shape[3] != shape[4]:
-      raise ValueError('Input and output channel dimensions must be the same.')
+      raise ValueError('Input and wouter channel dimensions must be the same.')
     if shape[1] != 1 or shape[2] != 1:
       raise ValueError('Spatial kernel sizes must be 1 (pointwise conv).')
     if shape[0] % 2 == 0:
@@ -97,7 +97,7 @@ def conv3d_spatiotemporal(inputs,
 
   Args:
     inputs: a 5-D tensor  `[batch_size, depth, height, width, channels]`.
-    num_outputs: integer, the number of output filters.
+    num_outputs: integer, the number of wouter filters.
     kernel_size: a list of length 3
       `[kernel_depth, kernel_height, kernel_width]` of the filters. Can be an
       int if all values are the same.
@@ -110,7 +110,7 @@ def conv3d_spatiotemporal(inputs,
     weights_regularizer: Optional regularizer for the weights.
     separable: If `True`, use separable spatiotemporal convolutions.
     data_format: An optional string from: "NDHWC", "NCDHW". Defaults to "NDHWC".
-      The data format of the input and output data. With the default format
+      The data format of the input and wouter data. With the default format
       "NDHWC", the data is stored in the order of: [batch, in_depth, in_height,
       in_width, in_channels]. Alternatively, the format could be "NCDHW", the
       data storage order is:
@@ -118,7 +118,7 @@ def conv3d_spatiotemporal(inputs,
     scope: scope for `variable_scope`.
 
   Returns:
-    A tensor representing the output of the (separable) conv3d operation.
+    A tensor representing the wouter of the (separable) conv3d operation.
 
   """
   assert len(kernel_size) == 3
@@ -192,26 +192,26 @@ def inception_block_v1_3d(inputs,
 
   Args:
     inputs: a 5-D tensor  `[batch_size, depth, height, width, channels]`.
-    num_outputs_0_0a: integer, the number of output filters for Branch 0,
+    num_outputs_0_0a: integer, the number of wouter filters for Branch 0,
       operation Conv2d_0a_1x1.
-    num_outputs_1_0a: integer, the number of output filters for Branch 1,
+    num_outputs_1_0a: integer, the number of wouter filters for Branch 1,
       operation Conv2d_0a_1x1.
-    num_outputs_1_0b: integer, the number of output filters for Branch 1,
+    num_outputs_1_0b: integer, the number of wouter filters for Branch 1,
       operation Conv2d_0b_3x3.
-    num_outputs_2_0a: integer, the number of output filters for Branch 2,
+    num_outputs_2_0a: integer, the number of wouter filters for Branch 2,
       operation Conv2d_0a_1x1.
-    num_outputs_2_0b: integer, the number of output filters for Branch 2,
+    num_outputs_2_0b: integer, the number of wouter filters for Branch 2,
       operation Conv2d_0b_3x3.
-    num_outputs_3_0b: integer, the number of output filters for Branch 3,
+    num_outputs_3_0b: integer, the number of wouter filters for Branch 3,
       operation Conv2d_0b_1x1.
     temporal_kernel_size: integer, the size of the temporal convolutional
       filters in the conv3d_spatiotemporal blocks.
     self_gating_fn: function which optionally performs self-gating.
-      Must have two arguments, `inputs` and `scope`, and return one output
+      Must have two arguments, `inputs` and `scope`, and return one wouter
       tensor the same size as `inputs`. If `None`, no self-gating is
       applied.
     data_format: An optional string from: "NDHWC", "NCDHW". Defaults to "NDHWC".
-      The data format of the input and output data. With the default format
+      The data format of the input and wouter data. With the default format
       "NDHWC", the data is stored in the order of: [batch, in_depth, in_height,
       in_width, in_channels]. Alternatively, the format could be "NCDHW", the
       data storage order is:

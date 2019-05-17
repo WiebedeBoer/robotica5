@@ -185,7 +185,7 @@ def process_arch_learned_map(args, arch_vars):
 
     elif arch_vars.var2 == 'MscROMms' or arch_vars.var2 == 'MscROMss':
       # Code with read outs, MscROMms flattens and reads out,
-      # MscROMss does not flatten and produces output at multiple scales.
+      # MscROMss does not flatten and produces wouter at multiple scales.
       args.navtask.task_params.outputs.readout_maps = True
       args.navtask.task_params.map_resize_method = 'antialiasing'
       args.arch.readout_maps = True

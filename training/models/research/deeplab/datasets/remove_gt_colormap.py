@@ -64,7 +64,7 @@ def _save_annotation(annotation, filename):
 
 
 def main(unused_argv):
-  # Create the output directory if not exists.
+  # Create the wouter directory if not exists.
   if not tf.gfile.IsDirectory(FLAGS.output_dir):
     tf.gfile.MakeDirs(FLAGS.output_dir)
 

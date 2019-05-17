@@ -134,9 +134,9 @@ class SequenceLayerBase(object):
     This function is used as a loop_function for an RNN decoder.
 
     Args:
-      prev: output tensor from previous step of the RNN. A tensor with shape:
+      prev: wouter tensor from previous step of the RNN. A tensor with shape:
         [batch_size, num_char_classes].
-      i: index of a character in the output sequence.
+      i: index of a character in the wouter sequence.
 
     Returns:
       A tensor with shape [batch_size, ?] - depth depends on implementation
@@ -151,9 +151,9 @@ class SequenceLayerBase(object):
     This function is used as a loop_function for an RNN decoder.
 
     Args:
-      prev: output tensor from previous step of the RNN. A tensor with shape:
+      prev: wouter tensor from previous step of the RNN. A tensor with shape:
         [batch_size, num_char_classes].
-      i: index of a character in the output sequence.
+      i: index of a character in the wouter sequence.
 
     Returns:
       A tensor with shape [batch_size, ?] - depth depends on implementation
@@ -174,7 +174,7 @@ class SequenceLayerBase(object):
         first element to determine batch_size and length of the list to
         determine number of steps.
       initial_state: 2D Tensor with shape [batch_size x cell.state_size].
-      loop_function: function will be applied to the i-th output in order to
+      loop_function: function will be applied to the i-th wouter in order to
         generate the i+1-st input (see self.get_input).
       cell: rnn_cell.RNNCell defining the cell function and size.
 
@@ -197,7 +197,7 @@ class SequenceLayerBase(object):
     Args:
       inputs: A tensor with shape [batch_size, ?] (depth is implementation
         dependent).
-      char_index: A integer index of a character in the output sequence.
+      char_index: A integer index of a character in the wouter sequence.
 
     Returns:
       A tensor with shape [batch_size, num_char_classes]
@@ -223,9 +223,9 @@ class SequenceLayerBase(object):
     """A wrapper for get_train_input and get_eval_input.
 
     Args:
-      prev: output tensor from previous step of the RNN. A tensor with shape:
+      prev: wouter tensor from previous step of the RNN. A tensor with shape:
         [batch_size, num_char_classes].
-      i: index of a character in the output sequence.
+      i: index of a character in the wouter sequence.
 
     Returns:
       A tensor with shape [batch_size, ?] - depth depends on implementation
@@ -284,7 +284,7 @@ class NetSlice(SequenceLayerBase):
       char_index: an index of a character.
 
     Returns:
-      A tensor with shape [batch_size, ?]. The output depth depends on the
+      A tensor with shape [batch_size, ?]. The wouter depth depends on the
       depth of input net.
     """
     batch_size, features_num, _ = [d.value for d in self._net.get_shape()]
@@ -319,7 +319,7 @@ class NetSlice(SequenceLayerBase):
 class NetSliceWithAutoregression(NetSlice):
   """A layer similar to NetSlice, but it also uses auto regression.
 
-  The "auto regression" means that we use network output for previous character
+  The "auto regression" means that we use network wouter for previous character
   as a part of input for the current character.
   """
 

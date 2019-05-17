@@ -56,17 +56,17 @@ def bottleneck(inputs,
 
   Args:
     inputs: A tensor of size [batch, height, width, channels].
-    depth: The depth of the ResNet unit output.
+    depth: The depth of the ResNet unit wouter.
     depth_bottleneck: The depth of the bottleneck layers.
     stride: The ResNet unit's stride. Determines the amount of downsampling of
-      the units output compared to its input.
+      the units wouter compared to its input.
     unit_rate: An integer, unit rate for atrous convolution.
     rate: An integer, rate for atrous convolution.
-    outputs_collections: Collection to add the ResNet unit output.
+    outputs_collections: Collection to add the ResNet unit wouter.
     scope: Optional variable_scope.
 
   Returns:
-    The ResNet unit's output.
+    The ResNet unit's wouter.
   """
   with tf.variable_scope(scope, 'bottleneck_v1', [inputs]) as sc:
     depth_in = slim.utils.last_dimension(inputs.get_shape(), min_rank=4)
@@ -142,9 +142,9 @@ def resnet_v1_beta(inputs,
     is_training: Enable/disable is_training for batch normalization.
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     root_block_fn: The function consisting of convolution operations applied to
       the root input. If root_block_fn is None, use the original setting of
       RseNet-v1, which is simply one convolution with 7x7 kernel and stride=2.
@@ -157,7 +157,7 @@ def resnet_v1_beta(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is None, then
-      net is the output of the last ResNet block, potentially after global
+      net is the wouter of the last ResNet block, potentially after global
       average pooling. If num_classes is not None, net contains the pre-softmax
       activations.
     end_points: A dictionary from components of the network to the corresponding
@@ -248,9 +248,9 @@ def resnet_v1_50(inputs,
     is_training: Enable/disable is_training for batch normalization.
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     multi_grid: Employ a hierarchy of different atrous rates within network.
     reuse: whether or not the network and its variables should be reused. To be
       able to reuse 'scope' must be given.
@@ -261,7 +261,7 @@ def resnet_v1_50(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is None, then
-      net is the output of the last ResNet block, potentially after global
+      net is the wouter of the last ResNet block, potentially after global
       average pooling. If num_classes is not None, net contains the pre-softmax
       activations.
     end_points: A dictionary from components of the network to the corresponding
@@ -321,9 +321,9 @@ def resnet_v1_50_beta(inputs,
     is_training: Enable/disable is_training for batch normalization.
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     multi_grid: Employ a hierarchy of different atrous rates within network.
     reuse: whether or not the network and its variables should be reused. To be
       able to reuse 'scope' must be given.
@@ -334,7 +334,7 @@ def resnet_v1_50_beta(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is None, then
-      net is the output of the last ResNet block, potentially after global
+      net is the wouter of the last ResNet block, potentially after global
       average pooling. If num_classes is not None, net contains the pre-softmax
       activations.
     end_points: A dictionary from components of the network to the corresponding
@@ -391,9 +391,9 @@ def resnet_v1_101(inputs,
     is_training: Enable/disable is_training for batch normalization.
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     multi_grid: Employ a hierarchy of different atrous rates within network.
     reuse: whether or not the network and its variables should be reused. To be
       able to reuse 'scope' must be given.
@@ -404,7 +404,7 @@ def resnet_v1_101(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is None, then
-      net is the output of the last ResNet block, potentially after global
+      net is the wouter of the last ResNet block, potentially after global
       average pooling. If num_classes is not None, net contains the pre-softmax
       activations.
     end_points: A dictionary from components of the network to the corresponding
@@ -464,9 +464,9 @@ def resnet_v1_101_beta(inputs,
     is_training: Enable/disable is_training for batch normalization.
     global_pool: If True, we perform global average pooling before computing the
       logits. Set to True for image classification, False for dense prediction.
-    output_stride: If None, then the output will be computed at the nominal
+    output_stride: If None, then the wouter will be computed at the nominal
       network stride. If output_stride is not None, it specifies the requested
-      ratio of input to output spatial resolution.
+      ratio of input to wouter spatial resolution.
     multi_grid: Employ a hierarchy of different atrous rates within network.
     reuse: whether or not the network and its variables should be reused. To be
       able to reuse 'scope' must be given.
@@ -477,7 +477,7 @@ def resnet_v1_101_beta(inputs,
       If global_pool is False, then height_out and width_out are reduced by a
       factor of output_stride compared to the respective height_in and width_in,
       else both height_out and width_out equal one. If num_classes is None, then
-      net is the output of the last ResNet block, potentially after global
+      net is the wouter of the last ResNet block, potentially after global
       average pooling. If num_classes is not None, net contains the pre-softmax
       activations.
     end_points: A dictionary from components of the network to the corresponding

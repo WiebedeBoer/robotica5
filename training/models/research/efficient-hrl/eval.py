@@ -54,7 +54,7 @@ def get_evaluate_checkpoint_fn(master, output_dir, eval_step_fns,
 
   Args:
     master: BNS name of the TensorFlow master
-    output_dir: The output directory to which the metric summaries are written.
+    output_dir: The wouter directory to which the metric summaries are written.
     eval_step_fns: A dictionary of a functions that return a list of
       [state, action, reward, discount, transition_type] tensors,
       indexed by summary tag name.

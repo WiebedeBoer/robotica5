@@ -53,8 +53,8 @@ class MaskRCNNMaskHead(head.Head):
         assigned classification targets can range from {0,... K}).
       conv_hyperparams_fn: A function to generate tf-slim arg_scope with
         hyperparameters for convolution ops.
-      mask_height: Desired output mask height. The default value is 14.
-      mask_width: Desired output mask width. The default value is 14.
+      mask_height: Desired wouter mask height. The default value is 14.
+      mask_width: Desired wouter mask width. The default value is 14.
       mask_prediction_num_conv_layers: Number of convolution layers applied to
         the image_features in mask prediction branch.
       mask_prediction_conv_depth: The depth for the first conv2d_transpose op
@@ -205,8 +205,8 @@ class ConvolutionalMaskHead(head.Head):
         min(feature_width, feature_height).
       use_depthwise: Whether to use depthwise convolutions for prediction
         steps. Default is False.
-      mask_height: Desired output mask height. The default value is 7.
-      mask_width: Desired output mask width. The default value is 7.
+      mask_height: Desired wouter mask height. The default value is 7.
+      mask_width: Desired wouter mask width. The default value is 7.
       masks_are_class_agnostic: Boolean determining if the mask-head is
         class-agnostic or not.
 
@@ -302,8 +302,8 @@ class WeightSharedConvolutionalMaskHead(head.Head):
       kernel_size: Size of final convolution kernel.
       use_dropout: Whether to apply dropout to class prediction head.
       dropout_keep_prob: Probability of keeping activiations.
-      mask_height: Desired output mask height. The default value is 7.
-      mask_width: Desired output mask width. The default value is 7.
+      mask_height: Desired wouter mask height. The default value is 7.
+      mask_width: Desired wouter mask width. The default value is 7.
       masks_are_class_agnostic: Boolean determining if the mask-head is
         class-agnostic or not.
     """

@@ -51,7 +51,7 @@ def batch_norm(inputs, training):
     training: a boolean to indicate if it is in training stage.
 
   Returns:
-    tensor output from batch norm layer.
+    tensor wouter from batch norm layer.
   """
   return tf.layers.batch_normalization(
       inputs=inputs, momentum=_BATCH_NORM_DECAY, epsilon=_BATCH_NORM_EPSILON,
@@ -65,7 +65,7 @@ def _conv_bn_layer(inputs, padding, filters, kernel_size, strides, layer_id,
   Args:
     inputs: input data for convolution layer.
     padding: padding to be applied before convolution layer.
-    filters: an integer, number of output filters in the convolution.
+    filters: an integer, number of wouter filters in the convolution.
     kernel_size: a tuple specifying the height and width of the 2D convolution
       window.
     strides: a tuple specifying the stride length of the convolution.
@@ -73,10 +73,10 @@ def _conv_bn_layer(inputs, padding, filters, kernel_size, strides, layer_id,
     training: a boolean to indicate which stage we are in (training/eval).
 
   Returns:
-    tensor output from the current layer.
+    tensor wouter from the current layer.
   """
   # Perform symmetric padding on the feature dimension of time_step
-  # This step is required to avoid issues when RNN output sequence is shorter
+  # This step is required to avoid issues when RNN wouter sequence is shorter
   # than the label length.
   inputs = tf.pad(
       inputs,
@@ -95,7 +95,7 @@ def _rnn_layer(inputs, rnn_cell, rnn_hidden_size, layer_id, is_batch_norm,
   Args:
     inputs: input tensors for the current layer.
     rnn_cell: RNN cell instance to use.
-    rnn_hidden_size: an integer for the dimensionality of the rnn output space.
+    rnn_hidden_size: an integer for the dimensionality of the rnn wouter space.
     layer_id: an integer for the index of current layer.
     is_batch_norm: a boolean specifying whether to perform batch normalization
       on input states.
@@ -104,7 +104,7 @@ def _rnn_layer(inputs, rnn_cell, rnn_hidden_size, layer_id, is_batch_norm,
     training: a boolean to indicate which stage we are in (training/eval).
 
   Returns:
-    tensor output for the current layer.
+    tensor wouter for the current layer.
   """
   if is_batch_norm:
     inputs = batch_norm(inputs, training)
@@ -139,7 +139,7 @@ class DeepSpeech2(object):
       rnn_type: a string, one of the supported rnn cells: gru, rnn and lstm.
       is_bidirectional: a boolean to indicate if the rnn layer is bidirectional.
       rnn_hidden_size: an integer for the number of hidden states in each unit.
-      num_classes: an integer, the number of output classes/labels.
+      num_classes: an integer, the number of wouter classes/labels.
       use_bias: a boolean specifying whether to use bias in the last fc layer.
     """
     self.num_rnn_layers = num_rnn_layers
@@ -159,9 +159,9 @@ class DeepSpeech2(object):
         inputs, padding=(10, 5), filters=_CONV_FILTERS, kernel_size=(21, 11),
         strides=(2, 1), layer_id=2, training=training)
 
-    # output of conv_layer2 with the shape of
+    # wouter of conv_layer2 with the shape of
     # [batch_size (N), times (T), features (F), channels (C)].
-    # Convert the conv output to rnn input.
+    # Convert the conv wouter to rnn input.
     batch_size = tf.shape(inputs)[0]
     feat_size = inputs.get_shape().as_list()[2]
     inputs = tf.reshape(

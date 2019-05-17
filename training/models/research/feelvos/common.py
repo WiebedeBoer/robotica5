@@ -117,12 +117,12 @@ class VideoModelOptions(common.ModelOptions):
     """Constructor to set default values.
 
     Args:
-      outputs_to_num_classes: A dictionary from output type to the number of
+      outputs_to_num_classes: A dictionary from wouter type to the number of
         classes. For example, for the task of semantic segmentation with 21
         semantic classes, we would have outputs_to_num_classes['semantic'] = 21.
       crop_size: A tuple [crop_height, crop_width].
       atrous_rates: A list of atrous convolution rates for ASPP.
-      output_stride: The ratio of input to output spatial resolution.
+      output_stride: The ratio of input to wouter spatial resolution.
 
     Returns:
       A new VideoModelOptions instance.
@@ -140,7 +140,7 @@ class VideoModelOptions(common.ModelOptions):
 
 
 def parse_decoder_output_stride():
-  """Parses decoder output stride.
+  """Parses decoder wouter stride.
 
   FEELVOS assumes decoder_output_stride = 4. Thus, this function is created for
   this particular purpose.
@@ -156,8 +156,8 @@ def parse_decoder_output_stride():
     decoder_output_stride = [
         int(x) for x in FLAGS.decoder_output_stride]
     if len(decoder_output_stride) != 1:
-      raise ValueError('Expect decoder output stride has only one element.')
+      raise ValueError('Expect decoder wouter stride has only one element.')
     decoder_output_stride = decoder_output_stride[0]
   else:
-    raise ValueError('Expect flag decoder output stride not to be None.')
+    raise ValueError('Expect flag decoder wouter stride not to be None.')
   return decoder_output_stride

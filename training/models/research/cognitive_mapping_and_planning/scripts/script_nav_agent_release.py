@@ -19,13 +19,13 @@ Usage:
   CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/opt/cuda-8.0/lib64:/opt/cudnnv51/lib64 \
     PYTHONPATH='.' PYOPENGL_PLATFORM=egl python scripts/script_nav_agent_release.py \
     --config_name cmp.lmap_Msc.clip5.sbpd_d_r2r+bench_test \
-    --logdir output/cmp.lmap_Msc.clip5.sbpd_d_r2r
+    --logdir wouter/cmp.lmap_Msc.clip5.sbpd_d_r2r
 
   2. Training a model (locally).
   CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/opt/cuda-8.0/lib64:/opt/cudnnv51/lib64 \
     PYTHONPATH='.' PYOPENGL_PLATFORM=egl python scripts/script_nav_agent_release.py \
     --config_name cmp.lmap_Msc.clip5.sbpd_d_r2r+train_train \
-    --logdir output/cmp.lmap_Msc.clip5.sbpd_d_r2r_
+    --logdir wouter/cmp.lmap_Msc.clip5.sbpd_d_r2r_
 
   3. Training a model (distributed).
   # See https://www.tensorflow.org/deploy/distributed on how to setup distributed
@@ -33,7 +33,7 @@ Usage:
   CUDA_VISIBLE_DEVICES=0 LD_LIBRARY_PATH=/opt/cuda-8.0/lib64:/opt/cudnnv51/lib64 \
     PYTHONPATH='.' PYOPENGL_PLATFORM=egl python scripts/script_nav_agent_release.py \
     --config_name cmp.lmap_Msc.clip5.sbpd_d_r2r+train_train \
-    --logdir output/cmp.lmap_Msc.clip5.sbpd_d_r2r_ \
+    --logdir wouter/cmp.lmap_Msc.clip5.sbpd_d_r2r_ \
     --ps_tasks $num_ps --master $master_name --task $worker_id
 """
 

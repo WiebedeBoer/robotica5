@@ -133,7 +133,7 @@ def read_data_and_evaluate(input_config, eval_config):
 
 
 def write_metrics(metrics, output_dir):
-  """Write metrics to the output directory.
+  """Write metrics to the wouter directory.
 
   Args:
     metrics: A dictionary containing metric names and values.
