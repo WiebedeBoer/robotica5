@@ -9,36 +9,33 @@
 
 unsigned long previousMillis = 0;
 
-const long interval = 2500;
+const long interval = 10000;
 
-bool initDown = true;
+char buffer[100] = {0};
+char rx_Byte = 0; //last received byte
+String rx_Msg = ""; //received message
+String SendSum; //checksum from raspberry
+bool rx_Complete = false; //is de transmission done
+bool ReadingCheckSum = false; //reading chechsum
 
 void setup()
 {
+  Serial.begin(115200);
+  
   ax12a.begin(BaudRate, DirectionPin, &Serial1);
-  ax12a.move(1, 200);
-  ax12a.move(2, 200);
+  ax12a.move(1, 0);
 }
 
 void loop()
 {
   unsigned long currentMillis = millis();
-
-  //Serial.println("Initiating downwards");
   
-  //Temp check
-  if (readTemp(1) > 70) { // Quit script, servo 1 overheated
-    
-  }
-  
-  downwards();
+  //downwards();
   
   if (currentMillis - previousMillis >= interval) {
-    // save the last time you blinked the LED
     previousMillis = currentMillis;
 
     Serial.println("-----------------------------------------");
-    // Get info servo's
     for (int i = 1; i <= 4; i++) {
       Serial.print("Servo "); Serial.println(i);
       Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
@@ -51,6 +48,102 @@ void loop()
     Serial.println("-----------------------------------------");
   }
 
+}
+
+String respondServo() {
+  return "ack:servo?<>|";
+}
+
+
+String servoA, servoB;
+void serialEvent() {
+  while(Serial.available() && rx_Complete == false){
+    rx_Byte = (char)Serial.read(); //Read next byte
+    if(ReadingCheckSum == false){ //enter byte to message
+      rx_Msg += rx_Byte;
+    } else { //enter byte to sendsum
+      SendSum += rx_Byte;
+    }
+    
+    if(rx_Byte == '|'){ //switch from to message to sendsum
+      ReadingCheckSum = true;
+    }
+    
+    if(rx_Byte == '\n'){ //endling and cleanup
+      rx_Complete = true;
+      ReadingCheckSum = false;
+    }
+  }
+  
+  //execute received msg
+  if(rx_Complete){
+    String OriginalMessage = rx_Msg;
+    int commaIndex = rx_Msg.indexOf(',');
+    String rx_Msg_Value = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
+    rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
+    
+    if(checksum(OriginalMessage) == SendSum.toInt()){ //control checksum with sendsum, for error checking. It continues when no error is found.
+      //possible commands and code here. KEEP IT SHORT the RP waits until its finished.
+      if(rx_Msg == "servo?|"){ // Seriele input examle: servo?,1;300&5;0|10
+        // Do stuff that apply to servo
+        // ax12a.move, etc
+        Serial.println(rx_Msg_Value);
+        // Split message into different peaces
+        for (int i = 0; i < rx_Msg_Value.length(); i++) {
+          if (rx_Msg_Value.substring(i, i+1) == "&") {
+            servoA = rx_Msg_Value.substring(0, i);
+            servoB = rx_Msg_Value.substring(i+1);
+            Serial.print("A: ");Serial.println(servoA);
+            Serial.print("B: ");Serial.println(servoB);
+            break;
+          }
+
+          // Split servoA to id and position from servo
+          for (int j = 0; j < servoA.length(); j++) {
+          
+            if (servoA.length() > 0) {
+              if (servoA.substring(j, j+1) == ";") {
+                int servoIdA = servoA.substring(0, j).toInt();
+                int servoPosA = servoA.substring(j+1).toInt();
+                ax12a.move(servoIdA, servoPosA);
+              }
+            } else { break; }
+          }
+
+          // Split servoB to id and position from servo
+          for (int k = 0; k < servoB.length(); k++) {
+            if (servoB.length() > 0) {
+              if (servoB.substring(k, k+1) == ";") {
+                int servoIdB = servoB.substring(0, k).toInt();
+                int servoPosB = servoB.substring(k+1).toInt();   
+              }
+            } else { break; }
+          }
+        }
+        
+        String result = respondServo() + String(checksum(respondServo())) + "\n";
+        int resultLength = result.length() +1; // convert string to char array
+        char resultarray[resultLength];
+        result.toCharArray(resultarray, resultLength);
+        Serial.write(resultarray);//send chararray to rp
+      }                
+    }
+     
+    //clean message   
+    rx_Msg = "";
+    SendSum = "";
+    rx_Complete = false;
+  }
+}
+
+//calculate checksum.
+int checksum(String Str){
+  int sum = 0;
+  for(int i = 0; i < Str.length();i++){
+    sum += (int)Str[i];
+    }
+    // return sum;
+    return 10;
 }
 
 void downwards() {
