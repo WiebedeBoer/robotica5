@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import math
 
-def Gate():
+def gate():
     cap = cv2.VideoCapture(0)
     while(1):
         _, frame = cap.read()
@@ -35,4 +35,3 @@ def Gate():
     cap.release()
     cv2.destroyAllWindows()
 
-Gate()
