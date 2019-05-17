@@ -5,6 +5,7 @@ import socket
 from starting import mainSwitcher
 
 # Here the function gets the string send by the pi
+# stopt met alles tot dat er een bericht van de server is ontvangen
 def SocketReceive():
     rec = sok.recv(1024, 0)
     return rec
