@@ -1,3 +1,6 @@
+#ifndef SOCKETCLASSLINUX_H
+#define SOCKETCLASSLINUX_H
+
 #include <iostream>
 #include <sys/types.h>
 #include <unistd.h>
@@ -20,6 +23,6 @@ public:
 	SocketServer();
 	//stuurt command naar de client en returnt het response
 	std::string executeCommand(std::string cmd);
-	void close();
 
 };
+#endif // SOCKETCLASSLINUX_H

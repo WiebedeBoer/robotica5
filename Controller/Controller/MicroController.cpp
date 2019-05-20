@@ -1,8 +1,8 @@
-#include "Arduino.h"
+#include "MicroController.h"
 
 std::string Response;
 //send string to serial interface 
-void Arduino::Send(std::string str, int fd) {
+void MicroController::Send(std::string str, int fd) {
 	str = str + '\n';
 	char* chars = &str[0];
 	//std::cout << "send: " << std::string(chars) << std::endl;
@@ -10,7 +10,7 @@ void Arduino::Send(std::string str, int fd) {
 }
 //returns the checksum from the given string
 
-int Arduino::CheckSum(std::string str) {
+int MicroController::CheckSum(std::string str) {
 	int sum = 0;
 	for (int i = 0; i < str.length(); i++) {
 		sum += (int)str[i];
@@ -19,13 +19,13 @@ int Arduino::CheckSum(std::string str) {
 	return sum;
 }
 //returns 1 when data is received
-int Arduino::WaitForData(int fd, int timeout)
+int MicroController::WaitForData(int fd, int timeout)
 {
 	struct pollfd poll_struct = { fd, POLLIN, 0 };
 	return poll(&poll_struct, 1, timeout);
 }
 //waits 1 second for a message from the serial interface
-std::string Arduino::WaitForMessage(int &fd) {
+std::string MicroController::WaitForMessage(int &fd) {
 
 	uint8_t rx_byte = '9';
 	int dataavail = 0;
@@ -58,7 +58,7 @@ std::string Arduino::WaitForMessage(int &fd) {
 	return "No message received";
 }
 //returns true when ack belongs to the send
-bool Arduino::ackresponse(std::string ack, std::string send) {
+bool MicroController::ackresponse(std::string ack, std::string send) {
 	int acksum, calcsum;
 	if (!ack.empty() && ack[ack.length() - 1] == '\n') {
 		try {
@@ -67,7 +67,13 @@ bool Arduino::ackresponse(std::string ack, std::string send) {
 			std::regex_search(ack, m, rgx);
 			std::string Sumable = std::string(m[1].str() + ":" + m[2].str() + "<" + m[3].str() + ">" + "|");
 			acksum = CheckSum(Sumable);
-			calcsum = std::stoi(m[4]);
+			try {
+				calcsum = std::stoi(m[4]);
+			}
+			catch (const std::exception &) {
+				std::cout << "calcsum error" << std::endl;
+			}
+			
 			Response = m[3].str();
 			if (acksum != calcsum) {
 
@@ -98,7 +104,7 @@ bool Arduino::ackresponse(std::string ack, std::string send) {
 
 }
 //sends string to serial interface with retries until message has been ack
-void Arduino::SerialSend(std::string input) {
+void MicroController::SerialSend(std::string input) {
 	if (fd < 3) {
 		serialClose(fd);
 		fd = serialOpen(UsbPort, 115200);
@@ -130,13 +136,13 @@ void Arduino::SerialSend(std::string input) {
 	}
 }
 
-std::string Arduino::GetLastResponce(){
+std::string MicroController::GetLastResponce(){
 
 	std::string result = Response;
 	Response = "";
 return result;
 }
-Arduino::Arduino(char* usb)
+MicroController::MicroController(char* usb)
 {
 	UsbPort = usb;
 	fd = serialOpen(UsbPort, 115200);
@@ -144,10 +150,10 @@ Arduino::Arduino(char* usb)
 }
 
 
-Arduino::Arduino()
+MicroController::MicroController()
 {
 }
-Arduino::~Arduino()
+MicroController::~MicroController()
 {
 	serialClose(fd);
 

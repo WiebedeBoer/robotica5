@@ -1,13 +1,17 @@
 import sys
 sys.path.append('Imp_Functions/')
+sys.path.append('../pi/')
 
 import cv2
 from eggDetection import DetectEgg
 from helpFunctions import *
+from camera_opencv import getCapture
 
 
 def startEggDistance():
-    cap = cv2.VideoCapture(0)
+
+    cap = getCapture()
+    print("Testing")
 
     closestDistance = None
     allDistances = []
@@ -28,6 +32,8 @@ def startEggDistance():
             closestDistance = distance
 
     if closestDistance is not None:
+        print("Closest distance found")
         return closestDistance
     else:
-        return 1
+        print("Not a distance found")
+        return 0

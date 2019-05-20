@@ -108,4 +108,13 @@ def wedstrijd(argument, argument1):
 
     return wedstrijdSwitcher(argument, argument1)
 
-print(mainSwitcher(1,1,1))
+
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sok.connect((socket.gethostname(), 1234))
+
+while True:
+    msg = SocketReceive()
+    msg = splitter(msg)
+
+    msgBack =  mainSwitcher(msg[0], msg[1], msg[2])
+    SocketSend(msgBack)
