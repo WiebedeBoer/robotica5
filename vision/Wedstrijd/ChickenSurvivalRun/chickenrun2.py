@@ -2,6 +2,9 @@ import cv2
 import numpy as numpy
 import matplotlib.pyplot as plt
 
+# Wait for socket
+#sok.recv(1024,0)
+
 img1 = cv2.imread('pictures/groenvoortwee.png',0)
 img2 = cv2.imread('pictures/groenvoor2.png',0)
 #img2 = cv2.VideoCapture('groenbakje.h264',0)
