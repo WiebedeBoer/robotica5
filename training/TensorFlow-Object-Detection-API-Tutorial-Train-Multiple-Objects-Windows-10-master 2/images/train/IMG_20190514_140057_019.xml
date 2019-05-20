@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Robin</folder>
+	<filename>IMG_20190514_140057_019.jpg</filename>
+	<path>/Users/robin/HBO-ICT 2 - Mac/Periode 4/robotica5/training/img/Robin/IMG_20190514_140057_019.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>1280</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>fakeChicken</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>39</xmin>
+			<ymin>165</ymin>
+			<xmax>455</xmax>
+			<ymax>590</ymax>
+		</bndbox>
+	</object>
+</annotation>

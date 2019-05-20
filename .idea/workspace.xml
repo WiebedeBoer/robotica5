@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/starting.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/starting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/soc/SocketClassLinux.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/soc/SocketClassLinux.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/testing.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,79 +14,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sockets/sok.py">
+        <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-            </state>
+            <state relative-caret-position="-765" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sockets/soklisten.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+            <state relative-caret-position="15">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sockets/SocketClass.h">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sockets/SocketClass.cpp">
+        <entry file="file://$PROJECT_DIR$/vision/starting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="79" column="27" selection-start-line="79" selection-end-line="80" />
+            <state relative-caret-position="383">
+              <caret line="106" column="41" selection-start-line="106" selection-start-column="41" selection-end-line="106" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/Controller.sln">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-223" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/Controller/main.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-73" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/Controller/Command.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-418" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controller/Controller/Arduino.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-888" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="77" column="52" selection-start-line="77" selection-start-column="48" selection-end-line="77" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.h">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -177,6 +133,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,6 +150,12 @@
               <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
               <item name="robotica5" type="462c0819:PsiDirectoryNode" />
               <item name="sockets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="soc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
@@ -260,7 +223,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -268,19 +230,19 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/vision/Imp_Functions" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sockets" />
+      <recent name="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun" />
+      <recent name="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence" />
+      <recent name="$PROJECT_DIR$/vision/Wedstrijd" />
+      <recent name="$PROJECT_DIR$/vision/Imp_Functions" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/vision/Imp_Functions" />
       <recent name="$PROJECT_DIR$/vision/Wedstrijd" />
       <recent name="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence" />
       <recent name="$PROJECT_DIR$/vision" />
       <recent name="$PROJECT_DIR$/vision/Distance/One_Cam" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd" />
-      <recent name="$PROJECT_DIR$/vision/Imp_Functions" />
-      <recent name="$PROJECT_DIR$/vision/Wedstrijd/Chicken_Survival_Run" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -319,6 +281,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16997617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -359,8 +322,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/distance.py" />
-    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/__init__.py" />
     <entry file="file://$PROJECT_DIR$/vision/__init__.py" />
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/__init__.py" />
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/__init__.py" />
@@ -453,13 +414,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/qrReader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="25" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/ChickenSurvivalRun/qrReader.py" />
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/qrReader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -471,9 +426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="28" selection-end-column="21" />
-          <folding>
-            <element signature="e#1#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -511,16 +463,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/starting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="111" column="22" selection-start-line="111" selection-start-column="22" selection-end-line="111" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -528,57 +470,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/Controller.sln">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-223" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/Controller/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/Controller/Command.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-418" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/Controller/Arduino.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-888" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="77" column="52" selection-start-line="77" selection-start-column="48" selection-end-line="77" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/sockets/sok.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sockets/soklisten.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sockets/SocketClass.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1125">
+          <caret line="75" column="52" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/sockets/SocketClass.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="79" column="27" selection-start-line="79" selection-end-line="80" />
+        <state relative-caret-position="1130">
+          <caret line="91" column="5" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/soc/soc.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/Controller.sln">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/Controller/main.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/Controller/Command.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/Controller/Arduino.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/SocketClassLinux.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-765" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/soklisten.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/starting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="106" column="41" selection-start-line="106" selection-start-column="41" selection-end-line="106" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

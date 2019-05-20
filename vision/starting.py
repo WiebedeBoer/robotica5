@@ -116,5 +116,5 @@ while True:
     msg = SocketReceive()
     msg = splitter(msg)
 
-    msgBack =  mainSwitcher(msg[0], msg[1], msg[2])
+    msgBack =  mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
     SocketSend(msgBack)
