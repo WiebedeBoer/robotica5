@@ -1,14 +1,3 @@
 ﻿  Validating sources
   Copying sources remotely to '141.252.29.50'
-  Validating architecture
-  Starting remote build
-  Compiling sources:
-  Vision.cpp
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\Vision.cpp(33,6): warning : unused variable ‘clientSocket’ [-Wunused-variable]
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\Vision.cpp(33,6): warning :   int clientSocket = accept(listening, (sockaddr*)&client, &clientSize);
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\Vision.cpp(33,6): warning :       ^~~~~~~~~~~~
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\Vision.cpp(67,16): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\Vision.cpp(67,16): warning :   for (i = 0; i < s.length(); i++) {
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\Vision.cpp(67,16): warning :               ~~^~~~~~~~~~~~
-  Linking objects
-  Controller.vcxproj -> C:\Users\Thom\source\repos\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Application Type\Linux\1.0\Linux.targets(162,5): error : Invalid URI: The format of the URI could not be determined.
