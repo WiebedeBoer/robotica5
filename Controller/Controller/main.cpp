@@ -2,19 +2,20 @@
 #include <string>
 #include <queue>
 #include "Command.h"
-#include "Arduino.h" 
+#include "MicroController.h" 
 #include "GuardedQueue.h"
 #include <chrono>
 #include <thread>
 #include "CommandExecutor.h"
 #include "DataCollector.h"
 #include "Intelligence.h"
+#include "Vision.h"
 bool* running = new bool(true);
 GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();
 DataCollector* Datacollector = new DataCollector();
 
-Arduino* Worker = new Arduino("/dev/ttyACM1");
-Arduino* Sensor = new Arduino("/dev/ttyACM0");
+MicroController* Worker = new MicroController("/dev/ttyACM1");
+MicroController* Sensor = new MicroController("/dev/ttyACM0");
 
 int main()
 {	
@@ -23,6 +24,12 @@ int main()
 	std::thread ExecutorThread = std::thread(&CommandExecutor::Execute, CExe);
 	Intelligence* AI = new Intelligence(Datacollector, Commandqueue, running, Worker, Sensor);
 	std::thread AIThread = std::thread(&Intelligence::Think, AI);
+
+	Vision* VisionApi = new Vision();
+	while (true)
+	{
+		VisionApi->executeCommand("1:1:0");
+	}
 
 	ExecutorThread.join();
 	AIThread.join();

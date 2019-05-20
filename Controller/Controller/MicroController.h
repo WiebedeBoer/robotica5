@@ -5,12 +5,12 @@
 #include <string>
 #include <poll.h>
 #include <regex>
-class Arduino
+class MicroController
 {
 public:
-	Arduino();
-	Arduino(char* usb);
-	~Arduino();
+	MicroController();
+	MicroController(char* usb);
+	~MicroController();
 	void SerialSend(std::string input);
 	std::string GetLastResponce();
 	char* UsbPort;

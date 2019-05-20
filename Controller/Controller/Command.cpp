@@ -2,20 +2,24 @@
 
 
 
-Command::Command(Arduino * a, std::string t)
+Command::Command(Vision * v, std::string t)
+{
+}
+
+Command::Command(MicroController * a, std::string t)
 {
 	Command::slave = a;
 	Command::type = t;
 }
 
-Command::Command(Arduino* a , std::string t, DataCollector* DC)
+Command::Command(MicroController* a , std::string t, DataCollector* DC)
 {
 	Command::slave = a;
 	Command::type = t;
 	Command::Datacollector = DC;
 }
 
-Command::Command(Arduino* a, std::string t,DataCollector* DC, std::vector<std::string> ar)
+Command::Command(MicroController* a, std::string t,DataCollector* DC, std::vector<std::string> ar)
 {
 	Command::slave = a;
 	Command::type = t;
@@ -29,17 +33,7 @@ Command::~Command()
 }
 
 void Command::Execute() {
-	//std::cout << Command::slave.UsbPort << std::endl;
 
-	if (Command::type == "LedOn") {
-		Command::slave->SerialSend("LedOn");
-	}
-	if (Command::type == "LedOff") {
-		Command::slave->SerialSend("LedOff");
-	}
-	if (Command::type == "Led?") {
-		Command::slave->SerialSend("Led?");
-	}
 	if (Command::type == "refresh?") {
 		Command::slave->SerialSend("refresh?," + args[0]);
 		Command::Datacollector->SetAfstandBedieningData(Command::slave->GetLastResponce());
@@ -53,5 +47,8 @@ void Command::Execute() {
 	}
 	if (Command::type == "MoveArm") {
 		std::cout << "The Arm is moving!!!:" <<args[0] <<"," <<  args[1] << ":" << args[2] << "," << args[3] << std::endl;
+	}
+	if (Command::type == "Vision") {
+		Command::VisionSlave->executeCommand("HalloWorld");
 	}
 }
