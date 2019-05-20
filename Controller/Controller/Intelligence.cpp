@@ -22,9 +22,11 @@ void Intelligence::Think()
 	int RefreshInterfal = 50;
 	int PrintInterfal = 100000;
 	int ArmInterfal = 100;
+	int AfstandInterval = 100;
 	std::chrono::system_clock::time_point RefreshController = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 	std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 	std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+	std::chrono::system_clock::time_point AfstandSensor = std::chrono::system_clock::now() + std::chrono::milliseconds(AfstandInterval);
 
 	while (*running == true) {
 		if (std::chrono::system_clock::now() > RefreshController) {
@@ -56,6 +58,11 @@ void Intelligence::Think()
 				//std::cout << "arm not moving" << std::endl;
 			}
 			MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+		}
+
+		if (std::chrono::system_clock::now() > AfstandSensor) {
+			std::vector<std::string> args;
+			CommandQueue->push(Command(Worker, "Motor", Database, args));
 		}
 
 	}
