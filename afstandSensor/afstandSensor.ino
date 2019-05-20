@@ -11,6 +11,14 @@ bool ReadingCheckSum = false;//reading chechsum
 //led
 bool LedOnOff;
 
+#define analogPin 0 // sensor value
+#define echoPin 9 // sensor value
+
+
+
+//sensor
+int sensorValue = 0; // Variable to store actual sensor value
+
 //motor
 #include <SPI.h>
 #include "mcp4xxx.h"
@@ -31,6 +39,7 @@ void setup() {
   // put your setup code here, to run once:
     //ini serial interface
   Serial.begin(115200);
+  pinMode(echoPin, INPUT);
 }
 
 //test led
@@ -75,13 +84,28 @@ void loop() {
 
 }
 
+// read value from pin pn, return value is mapped between 0 and mx-1
+int readSensor(int pn, int mx)
+{
+  return map(analogRead(pn), 0, 1023, 0, mx-1);    
+}
+
 //sensor function
 String readSensors(int Distance){ 
-
+sensorValue = readSensor(0, 100); // update sensor value
     //afstandsensor lezen
   AfstandsSensor = analogRead(A0);
   Serial.println(AfstandsSensor);
       //delay(150);
+
+      sensorValue = analogRead(analogPin); // read the value from the sensor
+
+
+      long duration;
+      int distance;
+
+      duration = pulseIn(echoPin, HIGH);
+      distance = (duration * 0.0334) / 2;
 
 //drempel waardes
 if(AfstandsSensor <300){
@@ -92,7 +116,8 @@ else{
 }
 
   pot->set(Distance);
-  return "ack:Sensor?<Distance>|";
+  return "ack:Sensor?<"+ String(distance) + ">|";
+  
 
 }
 
