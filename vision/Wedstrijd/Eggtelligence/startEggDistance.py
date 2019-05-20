@@ -11,7 +11,6 @@ from camera_opencv import getCapture
 def startEggDistance():
 
     cap = getCapture()
-    print("Testing")
 
     closestDistance = None
     allDistances = []

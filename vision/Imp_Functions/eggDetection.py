@@ -161,8 +161,8 @@ class DetectEgg:
 		return allWidths
 
 	def DetectEgg(self):
-		w = self.cap.get(3)
-		h = self.cap.get(4)
+		w = 640
+		h = 480
 
 		x, y = 0, 0
 
@@ -177,7 +177,7 @@ class DetectEgg:
 				count += 1
 
 			# Read the frame from the camera
-			_, frame = self.cap.read()
+			frame = self.cap.array
 
 			#improve contrast
 			clahe_b = self.CLAHE(frame[:,:,0])
