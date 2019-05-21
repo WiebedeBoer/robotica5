@@ -31,10 +31,9 @@ def splitter(msg):
 
 def viewBeam():
     # video capture
-    cap = getPiCamera()
+    frame = getPiCamera()
     xc, yc = 0, 0
 
-    _, frame = cap.read()
     blur = cv2.bilateralFilter(frame, 17, 75, 75)
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
