@@ -2,7 +2,7 @@
 #include <functional>
 #include <queue>
 #include <mutex>
-#include "Arduino.h"
+#include "MicroController.h"
 #include "Command.h"
 template<typename T>
 class GuardedQueue
@@ -23,7 +23,7 @@ public:
 	{
 		std::lock_guard<std::mutex> lock(m_mutex);
 		if (m_queque.size() == 0) {
-			Arduino* a = new Arduino("/dev/ttyACM0");
+			MicroController* a = new MicroController("/dev/ttyACM0");
 			return Command(a, "Wait");
 		}
 		T result = m_queque.front();

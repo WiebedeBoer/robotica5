@@ -1,6 +1,6 @@
 #include "Intelligence.h"
 
-Intelligence::Intelligence(DataCollector * DC, GuardedQueue<Command>* GQ, bool* RN, Arduino* WKR, Arduino*SNR)
+Intelligence::Intelligence(DataCollector * DC, GuardedQueue<Command>* GQ, bool* RN, MicroController* WKR, MicroController*SNR)
 {
 	Database = DC;
 	CommandQueue = GQ;
@@ -55,16 +55,13 @@ void Intelligence::Think()
 				CommandQueue->push(Command(Worker, "MoveArm", Database, args));
 			}
 			else {
-				//std::cout << "arm not moving" << std::endl;
 			}
 			MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
 		}
-
 		if (std::chrono::system_clock::now() > AfstandSensor) {
 			std::vector<std::string> args;
 			CommandQueue->push(Command(Worker, "Motor", Database, args));
 		}
-
 	}
 }
 

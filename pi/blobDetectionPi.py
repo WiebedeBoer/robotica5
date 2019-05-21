@@ -96,13 +96,12 @@ class DetectEgg:
 
 			if not self.debug:
                                 #cv2.imshow("res",res)
-				if eggDetectCount > 3:
+				if eggDetectCount >= 3:
 					print  str(turn_x) + " " + str(height_y) + " " + str(distance)
 					self.rawCapture.truncate(0)
 					return True
 					break
 				elif count >= 10:
-					print "no egg was found."
 					self.rawCapture.truncate(0)
 					return False
 					break
@@ -264,6 +263,3 @@ debug = False
 if len(sys.argv) > 1:
 	if sys.argv[1] == '-d':
 		debug = True
-
-detected = DetectEgg(debug).DetectEgg()
-print(detected)

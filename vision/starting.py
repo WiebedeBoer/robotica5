@@ -10,7 +10,7 @@ def SocketReceive():
 
 # Here the function sends a string back to the pi
 def SocketSend(msg):
-    utf8_msg = unicode(msg, "utf-8")
+    utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
 
 
@@ -108,4 +108,13 @@ def wedstrijd(argument, argument1):
 
     return wedstrijdSwitcher(argument, argument1)
 
-print(mainSwitcher(1,1,1))
+
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sok.connect((socket.gethostname(), 1234))
+
+while True:
+    msg = SocketReceive()
+    msg = splitter(msg)
+
+    msgBack =  mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
+    SocketSend(msgBack)

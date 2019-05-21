@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Rob</folder>
+	<filename>IMG_20190514_135435_001.jpg</filename>
+	<path>C:\Projects\robotica5\training\img\Rob\IMG_20190514_135435_001.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>1280</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>fakeChicken</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>162</xmin>
+			<ymin>246</ymin>
+			<xmax>405</xmax>
+			<ymax>618</ymax>
+		</bndbox>
+	</object>
+</annotation>
