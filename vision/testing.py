@@ -1,19 +1,37 @@
 import sys
 
 sys.path.append('Imp_Functions/')
-sys.path.append('../pi/')
 
 import cv2
 import numpy as np
 import math
 from helpFunctions import *
-from camera_opencv import getCapture
+from camera_opencv import getPiCamera
 from decimal import *
+import socket
+
+
+# Here the function gets the string send by the pi
+def SocketReceive():
+    rec = sok.recv(1024, 0)
+    return rec
+
+
+# Here the function sends a string back to the pi
+def SocketSend(msg):
+    utf8_msg = unicode(str(msg), "utf-8")
+    sok.send(bytes(utf8_msg))
+
+
+def splitter(msg):
+    return msg.split(':')
+
+
 
 
 def viewBeam():
     # video capture
-    cap = getCapture()
+    cap = getPiCamera()
     xc, yc = 0, 0
 
     _, frame = cap.read()
@@ -56,3 +74,14 @@ def viewBeam():
 
         else:
             return "Nothing"
+
+
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sok.connect((socket.gethostname(), 1234))
+
+while True:
+    msg = SocketReceive()
+    msg = splitter(msg)
+
+    msgBack = viewBeam()
+    SocketSend(msgBack)
