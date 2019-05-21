@@ -1,20 +1,20 @@
 #include "Vision.h"
 
 
-
 Vision::Vision()
 {
-	while (!MakeConnection()) {
-		MakeConnection();
-	}
+	makeConnection();
 }
-bool Vision::MakeConnection() {
+
+bool Vision::makeConnection() {
 	// Create a socket
 	int listening = socket(AF_INET, SOCK_STREAM, 0);
 	if (listening == -1)
 	{
-		return false;
+		//cerr << "Can't create a socket! Quitting" << endl;
+		return -1;
 	}
+
 	// Bind the ip address and port to a socket
 	sockaddr_in hint;
 	hint.sin_family = AF_INET;
@@ -25,12 +25,12 @@ bool Vision::MakeConnection() {
 
 	// Tell Winsock the socket is for listening
 	listen(listening, SOMAXCONN);
-	// Wait for a connection
+
 	// Wait for a connection
 	sockaddr_in client;
 	socklen_t clientSize = sizeof(client);
 
-	int clientSocket = accept(listening, (sockaddr*)&client, &clientSize);
+	clientSocket = accept(listening, (sockaddr*)&client, &clientSize);
 
 	char host[NI_MAXHOST];      // Client's remote name
 	char service[NI_MAXSERV];   // Service (i.e. port) the client is connect on
@@ -40,16 +40,19 @@ bool Vision::MakeConnection() {
 
 	if (getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
 	{
+		//cout << host << " connected on port " << service << endl;
 	}
 	else
 	{
 		inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
+		//cout << host << " connected on port " << ntohs(client.sin_port) << endl;
 	}
+
 	// Close listening socket
 	close(listening);
-	// While loop: accept and echo message back to client
 	return true;
 }
+
 std::string Vision::executeCommand(std::string cmd) {
 	char* confcmd = convertstrtochar(cmd);
 	send(clientSocket, confcmd, cmd.length(), 0);
@@ -57,7 +60,7 @@ std::string Vision::executeCommand(std::string cmd) {
 	char buf[4096];
 	//does it work?????????????
 	waitMsg(buf);
-	std::cout << "final awnser = " << buf << '\n';
+	//cout << "final awnser = " << buf << '\n';
 	return buf;
 }
 char* Vision::convertstrtochar(std::string s) {
@@ -70,11 +73,14 @@ char* Vision::convertstrtochar(std::string s) {
 	return p;
 }
 void Vision::waitMsg(char buf[]) {
-	memset(buf, 0,4096);
+	memset(buf, 0, 4096);
 
 	int bytesReceived = recv(clientSocket, buf, 1024, 0);
 	std::string msg2 = std::string(buf, 0, bytesReceived);
-	
+	if (bytesReceived == -1)
+	{
+
+	}
 	if (msg2 == "Ask") {
 		//send stuff from controler
 		send(clientSocket, "kip", 3, 0);
@@ -85,7 +91,4 @@ void Vision::waitMsg(char buf[]) {
 	else {
 	}
 	//cout << string(buf, 0, bytesReceived) << endl;
-}
-Vision::~Vision()
-{
 }

@@ -1,7 +1,5 @@
 #include "Command.h"
 
-
-
 Command::Command(Vision * v, std::string t)
 {
 }
