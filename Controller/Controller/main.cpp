@@ -26,10 +26,10 @@ int main()
 	std::thread AIThread = std::thread(&Intelligence::Think, AI);
 
 	Vision* VisionApi = new Vision();
-	while (true)
+	/*while (true)
 	{
 		VisionApi->executeCommand("1:1:0");
-	}
+	}*/
 
 	ExecutorThread.join();
 	AIThread.join();
