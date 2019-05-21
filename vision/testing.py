@@ -69,8 +69,7 @@ def viewBeam():
             # apply text
             return str(w) + " " + str(h) + " " + str(round(distance, 2))
 
-        else:
-            return "Nothing"
+    return "Nothing"
 
 
 sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
