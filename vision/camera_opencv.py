@@ -4,8 +4,6 @@ from picamera import PiCamera
 import time
 
 
-
-
 def getPiCamera():
     # initialize the camera and grab a reference to the raw camera capture
     camera = PiCamera()
