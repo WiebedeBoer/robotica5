@@ -8,4 +8,5 @@ def getPiCamera():
         for frame in camera.capture_continuous(stream, format="bgr",  use_video_port=True):
             stream.truncate()
             stream.seek(0)
+            frame = frame.array
             return frame
