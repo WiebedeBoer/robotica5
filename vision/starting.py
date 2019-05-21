@@ -10,7 +10,7 @@ def SocketReceive():
 
 # Here the function sends a string back to the pi
 def SocketSend(msg):
-    utf8_msg = unicode(msg, "utf-8")
+    utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
 
 
@@ -116,5 +116,5 @@ while True:
     msg = SocketReceive()
     msg = splitter(msg)
 
-    msgBack =  mainSwitcher(msg[0], msg[1], msg[2])
+    msgBack =  mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
     SocketSend(msgBack)

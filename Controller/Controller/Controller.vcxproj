@@ -74,21 +74,26 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <IncludePath>$(includePath);$(ISenseIncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="Arduino.cpp" />
+    <ClCompile Include="MicroController.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandExecutor.cpp" />
     <ClCompile Include="DataCollector.cpp" />
     <ClCompile Include="Intelligence.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Vision.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arduino.h" />
+    <ClInclude Include="MicroController.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandExecutor.h" />
     <ClInclude Include="DataCollector.h" />
     <ClInclude Include="GuardedQueue.h" />
     <ClInclude Include="Intelligence.h" />
+    <ClInclude Include="Vision.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile />

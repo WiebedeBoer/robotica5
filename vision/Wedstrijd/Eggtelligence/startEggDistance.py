@@ -1,21 +1,19 @@
 import sys
 sys.path.append('Imp_Functions/')
-sys.path.append('../pi/')
 
 import cv2
 from eggDetection import DetectEgg
 from helpFunctions import *
-from camera_opencv import getCapture
+from camera_opencv import getPiCamera
 
 
 def startEggDistance():
 
-    cap = getCapture()
-    print("Testing")
+    frame = getPiCamera()
 
     closestDistance = None
     allDistances = []
-    detectEgg = DetectEgg(False, cap)
+    detectEgg = DetectEgg(False, frame)
     eggDetected = detectEgg.DetectEgg()
 
     if eggDetected is not False:
