@@ -11,16 +11,9 @@ from camera_opencv import getCapture
 from decimal import *
 
 def viewBeam():
-
-	#video capture
 	cap = getCapture()
-	xc, yc = 0, 0
-
-	#wait for socket
-	#sok.recv(1024,0)
 
 	_, frame = cap.read()
-	blur = cv2.bilateralFilter(frame,17,75,75)
 
 	hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -53,6 +46,6 @@ def viewBeam():
 			#set contour around object
 			frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 			#calculate distance
-			distance = calculateDistance(w)
+			distance = calculateDistance(w, 476, Decimal(7.4))
 			#apply text
-			return str(w)+ " " + str(h) + " " + str(round( distance, 2 ))
+			return str(w)+ " " + str(h) + " " + str(round(distance, 2))

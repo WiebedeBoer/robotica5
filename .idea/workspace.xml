@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/vision/camera_opencv.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/camera_opencv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vision/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/testing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,11 +61,29 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/helpFunctions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vision/testing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="70" selection-start-line="70" selection-end-line="70" />
+            <state relative-caret-position="500">
+              <caret line="74" column="55" lean-forward="true" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -109,6 +127,7 @@
       <find>params</find>
       <find>SimpleBlobDetector_Params</find>
       <find>print</find>
+      <find>blur</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,7 +159,6 @@
         <option value="$PROJECT_DIR$/vision/Imp_Functions/findDirection.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/distance.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/helpFunctions.py" />
-        <option value="$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py" />
         <option value="$PROJECT_DIR$/vision/Kwalificatie/Poortje/gateRun.py" />
         <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/findQRReader.py" />
         <option value="$PROJECT_DIR$/sockets/soklisten.py" />
@@ -152,6 +170,7 @@
         <option value="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" />
         <option value="$PROJECT_DIR$/vision/starting.py" />
         <option value="$PROJECT_DIR$/vision/camera_opencv.py" />
+        <option value="$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py" />
         <option value="$PROJECT_DIR$/vision/testing.py" />
       </list>
     </option>
@@ -454,13 +473,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/helpFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -479,13 +491,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" selection-end-line="58" />
         </state>
       </provider>
     </entry>
@@ -536,10 +541,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/helpFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vision/testing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="500">
+          <caret line="74" column="55" lean-forward="true" selection-start-line="74" selection-start-column="55" selection-end-line="74" selection-end-column="55" />
         </state>
       </provider>
     </entry>

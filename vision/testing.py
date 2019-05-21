@@ -65,7 +65,7 @@ def viewBeam():
             # set contour around object
             frame = cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             # calculate distance
-            distance = calculateDistance(w)
+            distance = calculateDistance(w, 476, Decimal(7.4))
             # apply text
             return str(w) + " " + str(h) + " " + str(round(distance, 2))
 
