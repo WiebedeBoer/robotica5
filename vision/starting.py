@@ -19,94 +19,69 @@ def splitter(msg):
 
 
 # Main switcher
-def mainSwitcher(argument, argument1, argument2):
+def mainSwitcher(argument, argument1, argument2, argument3):
     switcher = {
         0: kwalificatie,
         1: wedstrijd,
     }
 
     func = switcher.get(argument, "Nothing")
-    if(func is kwalificatie):
-        return func(argument1)
-    else:
-        return func(argument1, argument2)
+    return func(argument1, argument2, argument3)
 
 
 # Kwalificatie switcher
-def kwalificatie(argument):
+def kwalificatie(argument, argument1 = False, argument2 = False):
     def kwalificatieSwitcher(argument):
         switcher = {
-            0: pitch,
-            1: poortje,
-            2: grindpad,
-            3: eiGripper,
-            4: vision
+            0: vision
         }
         func = switcher.get(argument, "Nothing")
         return func()
 
-    def pitch():
-        sys.path.append('Kwalificatie/Pitch/')
-
-    def poortje():
-        sys.path.append('Kwalificatie/Poortje/')
-        #from gateRun import gate
-        #return gate()
-
-    def grindpad():
-        sys.path.append('Kwalificatie/Grindpad/')
-
-    def eiGripper():
-        sys.path.append('Kwalificatie/EiGripper/')
-
     def vision():
         sys.path.append('Kwalificatie/Vision/')
-        #from blueBeam import viewBeam
-        #return viewBeam()
+        from blueBeam import viewBeam
+        return viewBeam()
 
     return kwalificatieSwitcher(argument)
 
 
-def wedstrijd(argument, argument1):
+def wedstrijd(argument, argument1, argument2):
     # Wedstrijd switcher
-    def wedstrijdSwitcher(argument, argument1):
+    def wedstrijdSwitcher(argument, argument1, argument2):
         switcher = {
             0: chickenSurvivalRun,
             1: eggtelligence
         }
-        func = switcher.get(argument, "Nothing")
-        if (func is chickenSurvivalRun):
-            return func()
-        else:
-            return func(argument1)
+        func = switcher.get(argument, "Something went wrong")
+        return func(argument1, argument2)
 
-
-    def chickenSurvivalRun():
+    def chickenSurvivalRun(argument = False):
         sys.path.append('Wedstrijd/ChickenSurvivalRun/')
         test = False
 
-    def eggtelligence(argument):
-        def eggtelligenceSwitcher(argument):
+    def eggtelligence(argument, argument1):
+        def eggtelligenceSwitcher(argument, argument1):
             switcher = {
                 0: eggDistance,
                 1: qrDistance
             }
-            func = switcher.get(argument, "Nothing")
-            return func()
+            func = switcher.get(argument, "Something went wrong")
+            return func(argument1)
 
-        def eggDistance():
+        def eggDistance(argument = False):
             sys.path.append('Wedstrijd/Eggtelligence/')
             from startEggDistance import startEggDistance
             return startEggDistance()
 
-        def qrDistance():
+        def qrDistance(argument):
             sys.path.append('Wedstrijd/Eggtelligence/')
             from startQRDistance import startQRDistance
-            return startQRDistance("http://'s-Hertogenbosch")
+            return startQRDistance(argument)
 
-        return eggtelligenceSwitcher(argument)
+        return eggtelligenceSwitcher(argument, argument1)
 
-    return wedstrijdSwitcher(argument, argument1)
+    return wedstrijdSwitcher(argument, argument1, argument2)
 
 
 sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
