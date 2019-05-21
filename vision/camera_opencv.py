@@ -9,5 +9,6 @@ rawCapture = PiRGBArray(camera, size=(1280, 720))
 
 def getPiCamera():
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=1):
+        frame.truncate()
         frame = frame.array
         return frame
