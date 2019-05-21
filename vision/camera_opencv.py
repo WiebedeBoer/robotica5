@@ -1,14 +1,11 @@
-from picamera.array import PiRGBArray
-from picamera import PiCamera
-
-# Camera init
-camera = PiCamera()
-camera.resolution = (1280, 720)
-camera.framerate = 30
-rawCapture = PiRGBArray(camera, size=(1280, 720))
+import io
+import time
+import picamera
 
 def getPiCamera():
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=1):
-        frame.truncate()
-        frame = frame.array
-        return frame
+    with picamera.PiCamera() as camera:
+        stream = io.BytesIO()
+        for frame in camera.capture_continuous(stream, format="bgr",  use_video_port=True):
+            stream.truncate()
+            stream.seek(0)
+            return frame
