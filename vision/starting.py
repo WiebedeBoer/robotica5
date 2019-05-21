@@ -10,7 +10,7 @@ def SocketReceive():
 
 # Here the function sends a string back to the pi
 def SocketSend(msg):
-    utf8_msg = unicode(msg, "utf-8")
+    utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
 
 
