@@ -27,8 +27,6 @@ def splitter(msg):
     return msg.split(':')
 
 
-
-
 def viewBeam():
     # video capture
     frame = getPiCamera()
