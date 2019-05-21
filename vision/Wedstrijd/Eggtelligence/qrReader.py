@@ -4,12 +4,11 @@ import pyzbar.pyzbar as pyzbar
 class QRReader:
     qrObject = None
 
-    def __init__(self, cap):
-        self.cap = cap
+    def __init__(self, frame):
+        self.frame = frame
 
     def getFrame(self):
-        _, frame = self.cap.read()
-        decodedObjects = pyzbar.decode(frame)
+        decodedObjects = pyzbar.decode(self.frame)
         return decodedObjects
 
     def findQR(self, searchQR):

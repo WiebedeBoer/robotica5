@@ -3,7 +3,6 @@
   Validating architecture
   Starting remote build
   Compiling sources:
-  Command.cpp
   main.cpp
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(17,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(17,61): warning :  MicroController* Worker = new MicroController("/dev/ttyACM1");

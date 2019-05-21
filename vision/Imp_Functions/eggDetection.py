@@ -13,9 +13,9 @@ class DetectEgg:
 	fontColor              = (255,255,255)
 	lineType               = 2
 
-	def __init__(self, debug, cap):
+	def __init__(self, debug, frame):
 		self.debug = debug
-		self.cap = cap
+		self.frame = frame
 		self.setDefaultValues()
 
 		if debug:
@@ -176,11 +176,8 @@ class DetectEgg:
 			else:
 				count += 1
 
-			# Read the frame from the camera
-			frame = self.cap.array
-
 			#improve contrast
-			clahe_b = self.CLAHE(frame[:,:,0])
+			clahe_b = self.CLAHE(self.frame[:,:,0])
 
 			denoise = cv2.medianBlur(clahe_b, 1)
 			denoise = cv2.bilateralFilter(denoise,9,75,75)
@@ -204,8 +201,8 @@ class DetectEgg:
 						y = int(kp.pt[1])
 
 						width = (x + kp.size / 2) - (x - kp.size / 2)
-						cv2.line(frame,(int(x-kp.size/2), y),(int(x+kp.size/2), y),(255,0,0),1)
-						cv2.putText(frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),
+						cv2.line(self.frame,(int(x-kp.size/2), y),(int(x+kp.size/2), y),(255,0,0),1)
+						cv2.putText(self.frame,str(self.calculateDistance(width)), (int(x + (width / 2)), int(y)),
 							self.font,self.fontScale,self.fontColor,self.lineType)
 
 						turn_x = x - (w / 2)
@@ -221,7 +218,7 @@ class DetectEgg:
 					break
 
 			else:
-				keypoints_im = cv2.drawKeypoints(frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+				keypoints_im = cv2.drawKeypoints(self.frame, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 				cv2.imshow("output", keypoints_im)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
