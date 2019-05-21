@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/vision/camera_opencv.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/camera_opencv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/testing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/camera_opencv.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -60,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vision/testing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="21" column="30" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="30" />
+            <state relative-caret-position="212">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -150,8 +151,8 @@
         <option value="$PROJECT_DIR$/pi/eggDetection.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" />
         <option value="$PROJECT_DIR$/vision/starting.py" />
-        <option value="$PROJECT_DIR$/vision/testing.py" />
         <option value="$PROJECT_DIR$/vision/camera_opencv.py" />
+        <option value="$PROJECT_DIR$/vision/testing.py" />
       </list>
     </option>
   </component>
@@ -525,13 +526,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/testing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/camera_opencv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -539,6 +533,13 @@
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/testing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
