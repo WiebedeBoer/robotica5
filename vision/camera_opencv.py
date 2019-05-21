@@ -16,4 +16,5 @@ time.sleep(0.1)
 
 def getPiCamera():
     # capture frames from the camera
-    return camera.capture_continuous(rawCapture, format="bgr", use_video_port=True).array
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        return frame.array
