@@ -187,7 +187,7 @@ class DetectEgg:
 			res = cv2.bitwise_and(denoise,denoise, mask=th)
 
 			# Set up the detector with default parameters.
-			detector = cv2.SimpleBlobDetector_create(self.params)
+			detector = cv2.SimpleBlobDetector(self.params)
 			 
 			# Detect blobs.
 			keypoints = detector.detect(res)
