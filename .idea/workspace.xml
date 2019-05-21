@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/starting.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/starting.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +33,18 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vision/starting.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" lean-forward="true" selection-start-line="14" selection-end-line="15" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/camera_opencv.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -42,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
+            <state relative-caret-position="2940">
               <caret line="196" column="39" lean-forward="true" selection-start-line="196" selection-start-column="39" selection-end-line="196" selection-end-column="39" />
             </state>
           </provider>
@@ -125,7 +137,6 @@
         <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/findQRReader.py" />
         <option value="$PROJECT_DIR$/vision/testing.py" />
         <option value="$PROJECT_DIR$/sockets/soklisten.py" />
-        <option value="$PROJECT_DIR$/vision/starting.py" />
         <option value="$PROJECT_DIR$/pi/camera_opencv.py" />
         <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" />
         <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/qrReader.py" />
@@ -133,6 +144,7 @@
         <option value="$PROJECT_DIR$/pi/eggDetection.py" />
         <option value="$PROJECT_DIR$/vision/camera_opencv.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" />
+        <option value="$PROJECT_DIR$/vision/starting.py" />
       </list>
     </option>
   </component>
@@ -442,16 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/starting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="106" column="41" selection-start-line="106" selection-start-column="41" selection-end-line="106" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-153">
@@ -506,8 +508,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
+        <state relative-caret-position="2940">
           <caret line="196" column="39" lean-forward="true" selection-start-line="196" selection-start-column="39" selection-end-line="196" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/starting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="14" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
