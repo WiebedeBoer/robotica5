@@ -18,7 +18,7 @@ private:
 	std::pair<int, int> joy2;
 	/* main modus for qualification or match, 
 	0 kwalificatie, 1 wedstrijd*/
-	enum mainModus {kwalificatie = 0, wedstrijd = 1}; 
+	enum mainModus {kwalificatie, wedstrijd}; 
 	mainModus mm;
 	/*sub modus for qualification,
 	0 pitch, 1 poortje, 2 grindpad, 3 eiGripper, 4 vision 	*/
@@ -30,7 +30,7 @@ private:
 	subMatchModus smm;
 	/*modus phase for eggtelligence match, 
 	0 eggDistance, 1 qrDistance*/
-	enum eggModus {eggDistance = 0, qrDistance = 1};
+	enum eggModus {eggDistance, qrDistance};
 	eggModus em;
 	/*city name
 	0 Hertogenbosch, 1 Eindhoven, 2 Eibergen, 3 Barneveld, 4 Duckstad
