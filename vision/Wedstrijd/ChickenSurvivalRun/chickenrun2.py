@@ -5,9 +5,11 @@ import matplotlib.pyplot as plt
 # Wait for socket
 #sok.recv(1024,0)
 
-img1 = cv2.imread('pictures/groenvoortwee.png',0)
-img2 = cv2.imread('pictures/groenvoor2.png',0)
+img1 = cv2.imread('kip.png',0) #Training
+img2 = cv2.imread('kiporg2.jpg',0) #Identify
 #img2 = cv2.VideoCapture('groenbakje.h264',0)
+video = cv2.VideoCapture('kip_afstand.h264')
+
 
 orb = cv2.ORB_create()
 
