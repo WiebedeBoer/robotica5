@@ -29,40 +29,37 @@ void setup()
 void loop()
 {
   //Serial.println(checksum("servoDS?,1;2;200&5;0|"));
-  unsigned long currentMillis = millis();
+//  unsigned long currentMillis = millis();
   
   //downwards();
   
-  if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;
-
-    Serial.println("-----------------------------------------");
-    for (int i = 1; i <= 4; i++) {
-      Serial.print("Servo "); Serial.println(i);
-      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
-      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
-      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
-      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
-      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
-      Serial.println("");
-    }
-    Serial.println("-----------------------------------------");
-  }
-
+//  if (currentMillis - previousMillis >= interval) {
+//    previousMillis = currentMillis;
+//
+//    Serial.println("-----------------------------------------");
+//    for (int i = 1; i <= 4; i++) {
+//      Serial.print("Servo "); Serial.println(i);
+//      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
+//      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
+//      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
+//      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
+//      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
+//      Serial.println("");
+//    }
+//    Serial.println("-----------------------------------------");
+//  }
 }
 
 String servoA = "", servoB = ""; int ser, di, pos, sp;
 void serialEvent() {
   while(Serial.available() && rx_Complete == false){
     rx_Byte = (char)Serial.read(); //Read next byte
-    //enter byte to message
-    if(!ReadingCheckSum){ rx_Msg += rx_Byte; }
-    //enter byte to sendsum
-    else { SendSum += rx_Byte; }
     
-    if(rx_Byte == '|'){ //switch from to message to sendsum
-      ReadingCheckSum = true;
-    }
+    if(!ReadingCheckSum){ rx_Msg += rx_Byte; } // Enter byte to message
+    else { SendSum += rx_Byte; } // Enter byte to sendsum
+
+    //switch from to message to sendsum
+    if(rx_Byte == '|'){ ReadingCheckSum = true; }
     
     if(rx_Byte == '\n'){ //endling and cleanup
       rx_Complete = true;
@@ -78,7 +75,7 @@ void serialEvent() {
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
 
     // checksum(OriginalMessage) == SendSum.toInt()
-    if(true) { //control checksum with sendsum, for error checking. It continues when no error is found.
+    if(checksum(OriginalMessage) == SendSum.toInt()) { //control checksum with sendsum, for error checking. It continues when no error is found.
       //possible commands and code here. KEEP IT SHORT the RP waits until its finished.
       String result = "";
       if(rx_Msg == "servo?|"){ // Seriele input example: servo?,1;300&5;0|10
