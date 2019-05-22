@@ -6,6 +6,9 @@ void tts(std::string text, std::string lang, int pitch, int speed);
 void speak_normal(std::string text);
 void speak_happy(std::string text);
 void speak_angry(std::string text);
+void give_pitch();
+void hello();
+void good_bye();
 
 
 int main(int argc, char **argv)
@@ -17,6 +20,20 @@ int main(int argc, char **argv)
 	speak_happy(str);
 	speak_angry("I am wall-e and i am your father");
 
+}
+void give_pitch(){
+	std::text = "this is a dummy string for the pitch";
+	speak_normal(text);
+}
+
+void hello(){
+	std::text = "Hello I'm wall-A nice to meet you";
+	speak_normal(text);
+}
+
+void good_by(){
+	std::text = "goodby";
+	speak_normal(text);
 }
 
 void tts(std::string text, std::string lang, int pitch, int speed){
