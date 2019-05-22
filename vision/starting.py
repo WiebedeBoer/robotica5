@@ -40,7 +40,7 @@ def kwalificatie(argument, argument1 = False, argument2 = False):
         return func()
 
     def pitch():
-        return 0
+        return "Hello"
 
     def vision():
         sys.path.append('Kwalificatie/Vision/')
@@ -100,14 +100,14 @@ def wedstrijd(argument, argument1, argument2):
     return wedstrijdSwitcher(argument, argument1, argument2)
 
 
-print(mainSwitcher(1,1,0,0))
-# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# sok.connect((socket.gethostname(), 1234))
-#
-# while True:
-#     msg = SocketReceive()
-#     msg = splitter(msg)
-#
-#     msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), int(msg[3]))
-#     SocketSend(msgBack)
+# print(mainSwitcher(1,1,0,0))
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sok.connect((socket.gethostname(), 1234))
+
+while True:
+    msg = SocketReceive()
+    msg = splitter(msg)
+
+    msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), int(msg[3]))
+    SocketSend(msgBack)
 
