@@ -20,8 +20,8 @@ MicroController* Sensor = new MicroController("/dev/ttyACM0");
 int main()
 {	
 	std::cout << "Controller Online!" << std::endl;
-	CommandExecutor* CExe = new CommandExecutor(running, Commandqueue);
-	std::thread ExecutorThread = std::thread(&CommandExecutor::Execute, CExe);
+	//CommandExecutor* CExe = new CommandExecutor(running, Commandqueue);
+	//std::thread ExecutorThread = std::thread(&CommandExecutor::Execute, CExe);
 	Intelligence* AI = new Intelligence(Datacollector, Commandqueue, running, Worker, Sensor);
 	std::thread AIThread = std::thread(&Intelligence::Think, AI);
 
@@ -31,7 +31,7 @@ int main()
 		VisionApi->executeCommand("1:1:0");
 	}
 
-	ExecutorThread.join();
+	//ExecutorThread.join();
 	AIThread.join();
 
 
