@@ -28,7 +28,7 @@ int main()
 	Vision* VisionApi = new Vision();
 	while (true)
 	{
-		VisionApi->executeCommand("1:1:0");
+		std::cout << VisionApi->executeCommand("1:1:0:0") << std::endl; 
 	}
 
 	//ExecutorThread.join();

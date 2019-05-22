@@ -3,20 +3,6 @@
   Validating architecture
   Starting remote build
   Compiling sources:
-  MicroController.cpp
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\MicroController.cpp(15,20): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\MicroController.cpp(15,20): warning :   for (int i = 0; i < str.length(); i++) {
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\MicroController.cpp(15,20): warning :                   ~~^~~~~~~~~~~~~~
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\MicroController.cpp(40,28): warning : conversion to ‘uint8_t {aka unsigned char}’ from ‘int’ may alter its value [-Wconversion]
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\MicroController.cpp(40,28): warning :      rx_byte = serialGetchar(fd);
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\MicroController.cpp(40,28): warning :                ~~~~~~~~~~~~~^~~~
-  Command.cpp
-  CommandExecutor.cpp
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\GuardedQueue.h(26,25): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\GuardedQueue.h(26,25): warning :     MicroController* a = new MicroController("/dev/ttyACM0");
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\GuardedQueue.h(26,25): warning :                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  DataCollector.cpp
-  Intelligence.cpp
   main.cpp
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(17,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(17,61): warning :  MicroController* Worker = new MicroController("/dev/ttyACM1");
@@ -24,9 +10,5 @@ Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(17,61): warni
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(18,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(18,61): warning :  MicroController* Sensor = new MicroController("/dev/ttyACM0");
 Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(18,61): warning :                                                              ^
-  Vision.cpp
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\Vision.cpp(70,16): warning : comparison between signed and unsigned integer expressions [-Wsign-compare]
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\Vision.cpp(70,16): warning :   for (i = 0; i < s.length(); i++) {
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\Vision.cpp(70,16): warning :               ~~^~~~~~~~~~~~
   Linking objects
   Controller.vcxproj -> Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out
