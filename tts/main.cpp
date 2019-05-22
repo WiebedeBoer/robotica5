@@ -42,7 +42,7 @@ void wall_a() {
 
 void self_destruct() {
 	std::string text = "10 seconds to self destruct";
-	speak_normal(text);
+	speak_happy(text);
 	speak_normal("10");
 	speak_normal("9");
 	speak_normal("8");
