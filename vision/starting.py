@@ -34,14 +34,13 @@ def kwalificatie(argument, argument1 = False, argument2 = False):
     def kwalificatieSwitcher(argument):
         switcher = {
             0: pitch,
-            1: poortje,
-            2: grindpad,
-            3: eiGripper,
-            4: vision
-            #0: vision
+            1: vision
         }
         func = switcher.get(argument, "Nothing")
         return func()
+
+    def pitch():
+        return 0
 
     def vision():
         sys.path.append('Kwalificatie/Vision/')
@@ -101,15 +100,14 @@ def wedstrijd(argument, argument1, argument2):
     return wedstrijdSwitcher(argument, argument1, argument2)
 
 
-sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sok.connect((socket.gethostname(), 1234))
-
-while True:
-    msg = SocketReceive()
-    msg = splitter(msg)
-
-    msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
-#msgBack =  mainSwitcher(1, 1, 1, 4) # 1 = wedstrijd, 1 = eggtelligence, 1 = qrdistane, 4 = Duckstad
-#print(msgback)
-SocketSend(msgBack)
+print(mainSwitcher(1,1,0,0))
+# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# sok.connect((socket.gethostname(), 1234))
+#
+# while True:
+#     msg = SocketReceive()
+#     msg = splitter(msg)
+#
+#     msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), int(msg[3]))
+#     SocketSend(msgBack)
 
