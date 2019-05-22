@@ -33,7 +33,12 @@ def mainSwitcher(argument, argument1, argument2, argument3):
 def kwalificatie(argument, argument1 = False, argument2 = False):
     def kwalificatieSwitcher(argument):
         switcher = {
-            0: vision
+            0: pitch,
+            1: poortje,
+            2: grindpad,
+            3: eiGripper,
+            4: vision
+            #0: vision
         }
         func = switcher.get(argument, "Nothing")
         return func()
@@ -56,7 +61,7 @@ def wedstrijd(argument, argument1, argument2):
         func = switcher.get(argument, "Something went wrong")
         return func(argument1, argument2)
 
-    def chickenSurvivalRun(argument = False):
+    def chickenSurvivalRun(argument = False, argument1 = False):
         sys.path.append('Wedstrijd/ChickenSurvivalRun/')
         test = False
 
@@ -77,7 +82,19 @@ def wedstrijd(argument, argument1, argument2):
         def qrDistance(argument):
             sys.path.append('Wedstrijd/Eggtelligence/')
             from startQRDistance import startQRDistance
-            return startQRDistance(argument)
+            return startQRDistance(townSwitcher(argument))
+
+            def townSwitcher(argument):
+                switcher = {
+                    0: "'s-Hertogenbosch",
+                    1: "Eindhoven",
+                    2: "Eibergen",
+                    3: "Barneveld",
+                    4: "Duckstad"
+                }
+                func = switcher.get(argument, "Something went wrong")
+                return func()
+                
 
         return eggtelligenceSwitcher(argument, argument1)
 
@@ -91,5 +108,8 @@ while True:
     msg = SocketReceive()
     msg = splitter(msg)
 
-    msgBack =  mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
-    SocketSend(msgBack)
+    msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
+#msgBack =  mainSwitcher(1, 1, 1, 4) # 1 = wedstrijd, 1 = eggtelligence, 1 = qrdistane, 4 = Duckstad
+#print(msgback)
+SocketSend(msgBack)
+
