@@ -3,7 +3,22 @@
 #include<string>
 #include<regex>
 #include<iostream>
+struct Wedstrijd
+{
+	std::string eggDistance;
+	std::string chickenSurvivalRun;
+	std::string qrDistance;
+	std::string qrDestination;
 
+};
+struct Kwalificatie
+{
+	std::string pitch;
+	std::string poort;
+	std::string grindpad;
+	std::string eiGripper;
+	std::string vision;
+};
 class DataCollector
 {
 public:
@@ -13,14 +28,15 @@ public:
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
 	int speed;
-	std::string eggDistance;
+	Wedstrijd wedstrijd;
+	Kwalificatie kwalificatie;
 
 private:
 	std::pair<int, int> joy1;
 	std::pair<int, int> joy2;
 	/* main modus for qualification or match, 
 	0 kwalificatie, 1 wedstrijd*/
-	enum mainModus {kwalificatie, wedstrijd}; 
+	enum mainModus {_Mkwalificatie, _Mwedstrijd}; 
 	mainModus mm;
 	/*sub modus for qualification,
 	0 pitch, 1 poortje, 2 grindpad, 3 eiGripper, 4 vision 	*/
@@ -40,7 +56,6 @@ private:
 	enum townModus {Hertogenbosch, Eindhoven, Eibergen, Barneveld, Duckstad};
 	townModus tm;
 
-	int speed;
 	int gyroscoop;
 };
 
