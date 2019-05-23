@@ -23,6 +23,6 @@ public:
 	Vision();
 	//stuurt command naar de client en returnt het response
 	std::string executeCommand(std::string cmd);
-
+	~Vision();
 };
 #endif // SOCKETCLASSLINUX_H
