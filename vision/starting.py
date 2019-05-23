@@ -38,10 +38,12 @@ def kwalificatie(argument, argument1 = False, argument2 = False):
             2: grindpad,
             3: eiGripper,
             4: vision
-            #0: vision
         }
         func = switcher.get(argument, "Nothing")
         return func()
+
+    def pitch():
+        return "Hello"
 
     def vision():
         sys.path.append('Kwalificatie/Vision/')
@@ -84,17 +86,16 @@ def wedstrijd(argument, argument1, argument2):
             from startQRDistance import startQRDistance
             return startQRDistance(townSwitcher(argument))
 
-            def townSwitcher(argument):
-                switcher = {
-                    0: "'s-Hertogenbosch",
-                    1: "Eindhoven",
-                    2: "Eibergen",
-                    3: "Barneveld",
-                    4: "Duckstad"
-                }
-                func = switcher.get(argument, "Something went wrong")
-                return func()
-                
+        def townSwitcher(argument):
+            switcher = {
+                0: "'s-Hertogenbosch",
+                1: "Eindhoven",
+                2: "Eibergen",
+                3: "Barneveld",
+                4: "Duckstad"
+            }
+            func = switcher.get(argument, "Something went wrong")
+            return func
 
         return eggtelligenceSwitcher(argument, argument1)
 
@@ -110,6 +111,7 @@ try:
         msg = splitter(msg)
 
         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
+
 except Exception, e:
     sok.close()
     print e

@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('Imp_Functions/')
 
 import cv2
@@ -8,8 +9,9 @@ from camera_opencv import getPiCamera
 
 
 def startEggDistance():
-
     frame = getPiCamera()
+    # cap = cv2.VideoCapture(0)
+    # _, frame = cap.read()
 
     closestDistance = None
     allDistances = []
@@ -30,8 +32,6 @@ def startEggDistance():
             closestDistance = distance
 
     if closestDistance is not None:
-        print("Closest distance found")
         return closestDistance
     else:
-        print("Not a distance found")
-        return 0
+        return False

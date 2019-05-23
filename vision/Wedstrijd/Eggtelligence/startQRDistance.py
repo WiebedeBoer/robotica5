@@ -9,6 +9,8 @@ from camera_opencv import getPiCamera
 
 def startQRDistance(findQRCode):
     frame = getPiCamera()
+    # cap = cv2.VideoCapture(0)
+    # _, frame = cap.read()
     qrReader = QRReader(frame)
 
     qr = qrReader.findQR(findQRCode)
