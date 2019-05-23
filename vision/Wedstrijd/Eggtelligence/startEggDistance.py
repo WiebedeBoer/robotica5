@@ -10,6 +10,8 @@ from camera_opencv import getPiCamera
 
 def startEggDistance():
     frame = getPiCamera()
+    # cap = cv2.VideoCapture(0)
+    # _, frame = cap.read()
 
     closestDistance = None
     allDistances = []

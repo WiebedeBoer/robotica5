@@ -83,24 +83,23 @@ def wedstrijd(argument, argument1, argument2):
             from startQRDistance import startQRDistance
             return startQRDistance(townSwitcher(argument))
 
-            def townSwitcher(argument):
-                switcher = {
-                    0: "'s-Hertogenbosch",
-                    1: "Eindhoven",
-                    2: "Eibergen",
-                    3: "Barneveld",
-                    4: "Duckstad"
-                }
-                func = switcher.get(argument, "Something went wrong")
-                return func()
-                
+        def townSwitcher(argument):
+            switcher = {
+                0: "'s-Hertogenbosch",
+                1: "Eindhoven",
+                2: "Eibergen",
+                3: "Barneveld",
+                4: "Duckstad"
+            }
+            func = switcher.get(argument, "Something went wrong")
+            return func
 
         return eggtelligenceSwitcher(argument, argument1)
 
     return wedstrijdSwitcher(argument, argument1, argument2)
 
 
-# print(mainSwitcher(1,1,0,0))
+# print(mainSwitcher(1,1,1,4))
 sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sok.connect((socket.gethostname(), 1234))
 
