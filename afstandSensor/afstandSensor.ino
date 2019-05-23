@@ -9,18 +9,20 @@ bool rx_Complete = false;//is de transmission done
 bool ReadingCheckSum = false;//reading chechsum
 
 //pins
-#define analogPin 20 // sensor value afstand
-#define echoPin 9 // sensor value afstand input
+#define analogPin 20 // sensor value distance analog
+#define echoPin 9 // sensor value distance input
 
-#define snelheidLinksPin 12 //sensor value snelheid links
+#define speedLeftPin 12 //sensor value speed left digital
+#define speedRightPin 13 //sensor value speed right digital
 
-#define microfoonPin 14 //microfoon
-#define geluidLaagPin 15 //geluid tonen laag
-#define geluidMiddenPin 16 //geluid tonen midden
-#define geluidHoogPin 17 //geluid tonen hoog
+#define microphonePin 14 //microphone
+#define soundLowPin 15 //geluid tonen laag
+#define soundMediumPin 16 //geluid tonen midden
+#define soundHighPin 17 //geluid tonen hoog
 
 #define gyrosclPin 18 //gyroscoop scl
 #define gyrosdaPin 19 //gyroscoop sda
+#define gyrointPin 11 //gyroscoop int digital
 
 //motor
 #include <SPI.h>
