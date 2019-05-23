@@ -102,14 +102,13 @@ def wedstrijd(argument, argument1, argument2):
 
 
 sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sok.connect((socket.gethostname(), 1234))
+try:
+    sok.connect((socket.gethostname(), 1234))
 
-while True:
-    msg = SocketReceive()
-    msg = splitter(msg)
+    while True:
+        msg = SocketReceive()
+        msg = splitter(msg)
 
-    msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
-#msgBack =  mainSwitcher(1, 1, 1, 4) # 1 = wedstrijd, 1 = eggtelligence, 1 = qrdistane, 4 = Duckstad
-#print(msgback)
-SocketSend(msgBack)
-
+        msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
+except:
+    sok.close()
