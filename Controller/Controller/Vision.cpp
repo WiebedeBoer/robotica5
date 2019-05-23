@@ -6,6 +6,11 @@ Vision::Vision()
 	makeConnection();
 }
 
+Vision::~Vision()
+{
+	close(clientSocket);
+}
+
 bool Vision::makeConnection() {
 	// Create a socket
 	int listening = socket(AF_INET, SOCK_STREAM, 0);
@@ -77,16 +82,10 @@ void Vision::waitMsg(char buf[]) {
 
 	int bytesReceived = recv(clientSocket, buf, 1024, 0);
 	std::string msg2 = std::string(buf, 0, bytesReceived);
-	if (bytesReceived == -1)
+	if (bytesReceived == -1 || bytesReceived == 0)
 	{
-
-	}
-	if (msg2 == "Ask") {
-		//send stuff from controler
-		send(clientSocket, "kip", 3, 0);
-		//cout << string(buf, 0, bytesReceived) << endl;
-		waitMsg(buf);
-
+		close(clientSocket);
+		while(!makeConnection());
 	}
 	else {
 	}
