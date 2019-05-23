@@ -110,5 +110,6 @@ try:
         msg = splitter(msg)
 
         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
-except:
+except Exception, e:
     sok.close()
+    print e
