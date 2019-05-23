@@ -6,17 +6,64 @@ void tts(std::string text, std::string lang, int pitch, int speed);
 void speak_normal(std::string text);
 void speak_happy(std::string text);
 void speak_angry(std::string text);
-
+void give_pitch();
+void hello();
+void good_bye();
+void angry_father();
+void wall_a();
+void self_destruct();
 
 int main(int argc, char **argv)
 {
 	//system("espeak \"test espeak in c++\"");
 	//tts("something witty", "en-us", 99, 60);
-	std::string str= "I am wall-e and i live on a planet with eve";
-	speak_normal(str);	
-	speak_happy(str);
-	speak_angry("I am wall-e and i am your father");
+	//std::string str= "I am wall-e and i live on a planet with eve";
+	//speak_normal(str);	
+	//speak_happy(str);
+	//speak_angry("I am wall-e and i am your father");
+	self_destruct();
 
+}
+
+void give_pitch(){
+	std::string text = "this is a dummy string for the pitch";
+	speak_normal(text);
+}
+
+void hello(){
+	std::string text = "Hello I'm wall-A nice to meet you";
+	speak_normal(text);
+}
+
+void wall_a() {
+	std::string text = "Waaallll-A";
+	speak_normal(text);
+}
+
+void self_destruct() {
+	std::string text = "10 seconds to self destruct";
+	speak_happy(text);
+	speak_normal("10");
+	speak_normal("9");
+	speak_normal("8");
+	speak_normal("7");
+	speak_normal("6");
+	speak_normal("5");
+	speak_normal("4");
+	speak_normal("3");
+	speak_normal("2");
+	speak_normal("1");
+	speak_angry("boom");
+
+}
+
+void good_bye(){
+	std::string text = "good bye ";
+	speak_normal(text);
+}
+
+void angry_father() {
+	speak_angry("I'm your father");
 }
 
 void tts(std::string text, std::string lang, int pitch, int speed){
