@@ -18,7 +18,7 @@ MCP4XXX* potR;
 
 unsigned long previousMillis = 0;
 
-const long interval = 2500;
+const long interval = 500;
 
 char buffer[100] = {0};
 char rx_Byte = 0; //last received byte
@@ -64,7 +64,6 @@ void loop()
       potR->set(0);
       drivingL = false;
       drivingR = false;
-      Serial.println("reset");
     }
     //    Serial.println("-----------------------------------------");
 //    for (int i = 1; i <= 4; i++) {
@@ -104,7 +103,7 @@ void serialEvent() {
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
 
     // checksum(OriginalMessage) == SendSum.toInt()
-    if(true) { //control checksum with sendsum, for error checking. It continues when no error is found.
+    if(checksum(OriginalMessage) == SendSum.toInt()) { //control checksum with sendsum, for error checking. It continues when no error is found.
       //possible commands and code here. KEEP IT SHORT the RP waits until its finished.
       String result = "";
       if(rx_Msg == "servo?|"){ // Seriele input example: servo?,1;300&5;0|10
@@ -125,8 +124,7 @@ void serialEvent() {
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
       Serial.write(resultarray);//send chararray to rp
-    
-     
+
       //clean message
       rx_Msg = ""; SendSum = ""; servoA = ""; servoB = "";
       rx_Complete = false;
