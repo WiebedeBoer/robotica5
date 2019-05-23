@@ -28,34 +28,34 @@ void setup()
 
 void loop()
 {
-  unsigned long currentMillis = millis();
+  //Serial.println(checksum("servoDS?,1;2;200&5;0|"));
+  //unsigned long currentMillis = millis();
   
   //downwards();
   
-  if (currentMillis - previousMillis >= interval) {
-    previousMillis = currentMillis;
-
-    Serial.println("-----------------------------------------");
-    for (int i = 1; i <= 4; i++) {
-      Serial.print("Servo "); Serial.println(i);
-      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
-      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
-      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
-      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
-      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
-      Serial.println("");
-    }
-    Serial.println("-----------------------------------------");
-  }
+//  if (currentMillis - previousMillis >= interval) {
+//    previousMillis = currentMillis;
+//
+//    Serial.println("-----------------------------------------");
+//    for (int i = 1; i <= 4; i++) {
+//      Serial.print("Servo "); Serial.println(i);
+//      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
+//      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
+//      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
+//      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
+//      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
+//      Serial.println("");
+//    }
+//    Serial.println("-----------------------------------------");
+//  }
 
 }
 
-String respondServo() {
-  return "ack:servo?<>|";
-}
+String respondServo() { return "ack:servo?<>|"; }
 
+String respondServoDS() { return "ack:servoDS?<>|"; }
 
-String servoA, servoB;
+String servoA = "", servoB = ""; int ser, di, pos, sp;
 void serialEvent() {
   while(Serial.available() && rx_Complete == false){
     rx_Byte = (char)Serial.read(); //Read next byte
@@ -82,58 +82,120 @@ void serialEvent() {
     String rx_Msg_Value = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
     
-    if(checksum(OriginalMessage) == SendSum.toInt()){ //control checksum with sendsum, for error checking. It continues when no error is found.
+    if(checksum(OriginalMessage) == SendSum.toInt()) { //control checksum with sendsum, for error checking. It continues when no error is found.
       //possible commands and code here. KEEP IT SHORT the RP waits until its finished.
-      if(rx_Msg == "servo?|"){ // Seriele input examle: servo?,1;300&5;0|10
-        // Do stuff that apply to servo
-        // ax12a.move, etc
-        Serial.println(rx_Msg_Value);
-        // Split message into different peaces
+      String result = "";
+      if(rx_Msg == "servo?|"){ // Seriele input example: servo?,1;300&5;0|10
+//        Serial.println(rx_Msg_Value);
+        
+        // Split rx_Msg_Value to servoA and servoB
         for (int i = 0; i < rx_Msg_Value.length(); i++) {
           if (rx_Msg_Value.substring(i, i+1) == "&") {
             servoA = rx_Msg_Value.substring(0, i);
             servoB = rx_Msg_Value.substring(i+1);
-            Serial.print("A: ");Serial.println(servoA);
-            Serial.print("B: ");Serial.println(servoB);
             break;
           }
+        }
 
-          // Split servoA to id and position from servo
+        if (servoB == "") { servoA = rx_Msg_Value; } //Serial.println(servoA); }
+        
+        // Search seperator and move servo
+        if (servoA.length() > 0) {
           for (int j = 0; j < servoA.length(); j++) {
-          
-            if (servoA.length() > 0) {
-              if (servoA.substring(j, j+1) == ";") {
-                int servoIdA = servoA.substring(0, j).toInt();
-                int servoPosA = servoA.substring(j+1).toInt();
-                ax12a.move(servoIdA, servoPosA);
-              }
-            } else { break; }
-          }
-
-          // Split servoB to id and position from servo
-          for (int k = 0; k < servoB.length(); k++) {
-            if (servoB.length() > 0) {
-              if (servoB.substring(k, k+1) == ";") {
-                int servoIdB = servoB.substring(0, k).toInt();
-                int servoPosB = servoB.substring(k+1).toInt();   
-              }
-            } else { break; }
+            if (servoA.substring(j, j+1) == ";") {
+              ax12a.move(servoA.substring(0,j).toInt(), servoA.substring(j+1).toInt());
+              break;
+            }
           }
         }
         
-        String result = respondServo() + String(checksum(respondServo())) + "\n";
-        int resultLength = result.length() +1; // convert string to char array
-        char resultarray[resultLength];
-        result.toCharArray(resultarray, resultLength);
-        Serial.write(resultarray);//send chararray to rp
-      }                
-    }
+        // Search seperator and move servo
+        if (servoB.length() > 0) {
+          for (int k = 0; k < servoB.length(); k++) {
+            if (servoB.substring(k, k+1) == ";") {
+              ax12a.move(servoB.substring(0,k).toInt(), servoB.substring(k+1).toInt());
+              break;
+            }
+          }
+        }
+
+        result = respondServo() + String(checksum(respondServo())) + "\n";
+      }
+      else if(rx_Msg == "servoDS?|"){ // Seriele input examle: servoDS?,1;2;200&5;0|10
+        // Seriele input examle: servoDS?,1;2;200&5;0|10
+        // Seriele input examle: servoDS?,1;2;200&5;0|10
+        // Seriele input examle: servoDS?,1;2;200&5;0|10
+//        Serial.println(rx_Msg_Value);
+
+        // Split rx_Msg_Value to servoA and servoB
+        for (int i = 0; i < rx_Msg_Value.length(); i++) {
+          if (rx_Msg_Value.substring(i, i+1) == "&") {
+            servoA = rx_Msg_Value.substring(0, i);
+            servoB = rx_Msg_Value.substring(i+1);
+            break;
+          }
+        }
+
+        if (servoB == "") { servoA = rx_Msg_Value; } //Serial.println(servoA); }
+        
+        // Search seperator and move servo
+        if (servoA.length() > 0) {
+          for (int j = 0; j < servoA.length(); j++) {
+            if (servoA.substring(j, j+1) == ";") { // Search first seperator
+              int ser = servoA.substring(0,j).toInt();
+              for (int m = j; m < servoA.substring(j+1).length(); m++) {
+                if(servoA.substring(m,m+1) == ";") {
+                  di = servoA.substring(j+1, m).toInt();
+                  sp = servoA.substring(m+1).toInt();
+                  if (di==0){pos = readPos(ser);}
+                  else if (di==1){pos=readPos(ser)+25;}
+                  else if (di==2){pos=readPos(ser)-25; if (pos < 0){pos = 0;}}
+//                  Serial.print("Pog, Moving: Servo/direction/position/speed - ");
+//                  Serial.print(ser);Serial.print("/");Serial.print(di);Serial.print("/");Serial.print(pos);Serial.print("/");Serial.println(sp);
+                  ax12a.moveSpeed(ser, pos, sp);
+                }
+              }
+              break;
+            }
+          }
+        }
+        
+        // Search seperator and move servo
+        if (servoB.length() > 0) {
+          for (int j = 0; j < servoB.length(); j++) {
+            if (servoB.substring(j, j+1) == ";") { // Search first seperator
+              int ser = servoB.substring(0,j).toInt();
+              for (int m = j; m < servoB.substring(j+1).length(); m++) {
+                if(servoB.substring(m,m+1) == ";") {
+                  di = servoB.substring(j+1, m).toInt();
+                  sp = servoB.substring(m+1).toInt();
+                  if (di==0){pos = readPos(ser);}
+                  else if (di==1){pos=readPos(ser)+25;}
+                  else if (di==2){pos=readPos(ser)-25; if (pos < 0){pos = 0;}}
+//                  Serial.print("Pog, Moving: Servo/direction/position/speed - ");
+//                  Serial.print(ser);Serial.print("/");Serial.print(di);Serial.print("/");Serial.print(pos);Serial.print("/");Serial.println(sp);
+                  ax12a.moveSpeed(ser, pos, sp);
+                }
+              }
+              break;
+            }
+          }
+        }
+
+        result = respondServoDS() + String(checksum(respondServoDS())) + "\n";
+      }
+      
+      int resultLength = result.length() +1; // convert string to char array
+      char resultarray[resultLength];
+      result.toCharArray(resultarray, resultLength);
+      Serial.write(resultarray);//send chararray to rp
+    
      
-    //clean message   
-    rx_Msg = "";
-    SendSum = "";
+    //clean message
+    rx_Msg = ""; SendSum = ""; servoA = ""; servoB = "";
     rx_Complete = false;
   }
+}
 }
 
 //calculate checksum.
@@ -141,9 +203,8 @@ int checksum(String Str){
   int sum = 0;
   for(int i = 0; i < Str.length();i++){
     sum += (int)Str[i];
-    }
-    // return sum;
-    return 10;
+  }
+  return sum;
 }
 
 void downwards() {
@@ -157,10 +218,6 @@ void downwards() {
   //Start arm movement
   ax12a.action();
 
-  Serial.println("Starting while");
-  Serial.println("Starting while");
-  Serial.println("Starting while");
-  Serial.println("Starting while");
   Serial.println("Starting while");
   while (true) {
     Serial.println(readPos(aServo));
