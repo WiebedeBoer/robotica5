@@ -99,14 +99,14 @@ void loop() {
 
 }
 
-//AFSTAND
+//DISTANCE
 // read value from pin pn, return value is mapped between 0 and mx-1
 int readSensor(int pn, int mx)
 {
   return map(analogRead(pn), 0, 1023, 0, mx-1);    
 }
 
-//sensor function
+//distance sensor function
 String readSensors(int Distance){ 
 sensorValue = readSensor(0, 100); // update sensor value
     //afstandsensor lezen
@@ -132,6 +132,24 @@ else{
   pot->set(Distance);
   return "ack:Sensor?<"+ String(distance) + ">|";
 
+}
+
+//SPEED
+String speedSensors(){
+  int leftSpeed;
+  //return "ack:Sensor?<"+ String(leftSpeed) + ">|";
+}
+
+//GYROSCOPE
+String gyroscopeSensors(){
+  int gyro;
+  //return "ack:Sensor?<"+ String(gyro) + ">|";
+}
+
+//SOUND
+String soundSensors(){
+  int sound;
+  //return "ack:Sensor?<"+ String(sound) + ">|";
 }
 
 //SOCKET
