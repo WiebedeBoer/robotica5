@@ -1,4 +1,4 @@
-//Author Thom Smit en Wiebe de Boer en Rob Alma
+//Author Thom Smit en Wiebe de Boer en Rob Alma en Kris
 //WIP template for communication between arduino and raspberrypi
 
 //usb
@@ -8,9 +8,7 @@ String SendSum;//checksum from raspberry
 bool rx_Complete = false;//is de transmission done
 bool ReadingCheckSum = false;//reading chechsum
 
-//led
-bool LedOnOff;
-
+//pins
 #define analogPin 20 // sensor value afstand
 #define echoPin 9 // sensor value afstand input
 
@@ -21,9 +19,8 @@ bool LedOnOff;
 #define geluidMiddenPin 16 //geluid tonen midden
 #define geluidHoogPin 17 //geluid tonen hoog
 
-
-//sensor
-int sensorValue = 0; // Variable to store actual sensor value
+#define gyrosclPin 18 //gyroscoop scl
+#define gyrosdaPin 19 //gyroscoop sda
 
 //motor
 #include <SPI.h>
@@ -35,12 +32,22 @@ MCP4XXX* pot;
 
 int i = 0;// waarde naar potmeter voor snelheid motor van 0-128
 
-bool drivingL, drivingR;
-
+//distance variables
+int sensorValue = 0; // Variable to store actual sensor value
 bool NearTray;
 int AfstandsSensor = 0;
 int Distance = 0;
 
+//speed variables
+
+//gyro variables
+
+//sound variables
+int soundLow = 0;
+int soundMedium = 0;
+int soundHigh = 0;
+
+//setup
 void setup() {
   // put your setup code here, to run once:
     //ini serial interface
@@ -49,6 +56,7 @@ void setup() {
 }
 
 //test led
+bool LedOnOff;
 String Led(){
   if(LedOnOff == true){
     LedOnOff = false;
@@ -60,6 +68,7 @@ String Led(){
   }
 }
 
+//loop
 void loop() {
   // put your main code here, to run repeatedly:
 
@@ -86,10 +95,9 @@ void loop() {
   rx_Complete = false;
 }
 
-
-
 }
 
+//AFSTAND
 // read value from pin pn, return value is mapped between 0 and mx-1
 int readSensor(int pn, int mx)
 {
@@ -103,10 +111,8 @@ sensorValue = readSensor(0, 100); // update sensor value
   AfstandsSensor = analogRead(A0);
   Serial.println(AfstandsSensor);
       //delay(150);
-
       sensorValue = analogRead(analogPin); // read the value from the sensor
-
-
+      
       long duration;
       int distance;
 
@@ -123,10 +129,10 @@ else{
 
   pot->set(Distance);
   return "ack:Sensor?<"+ String(distance) + ">|";
-  
 
 }
 
+//SOCKET
 //serialEventInterupt
 void serialEvent(){
   while(Serial.available()){
