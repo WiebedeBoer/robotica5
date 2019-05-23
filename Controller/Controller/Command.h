@@ -10,9 +10,9 @@ class Command
 private:
 std::string type;
 std::vector<std::string> args;
-DataCollector* Datacollector;
+DataCollector* Database;
 public:
-	Command(Vision* v, std::string t);
+	Command(Vision* v, std::string t, DataCollector* DC);
 	Command(MicroController* a, std::string t);
 	Command(MicroController* a, std::string t,DataCollector* DC);
 	Command(MicroController* a, std::string t,DataCollector* DC, std::vector<std::string> args);
@@ -20,7 +20,5 @@ public:
 	Vision* VisionSlave;
 	~Command();
 	virtual void Execute();
-	
-
 };
 

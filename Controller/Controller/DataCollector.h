@@ -10,13 +10,12 @@ public:
 	void SetAfstandBedieningData(std::string input);
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
-	int getspeed();
+	int speed;
+	std::string eggDistance;
+
 private:
 	std::pair<int, int> joy1;
 	std::pair<int, int> joy2;
-	int speed;
 	int gyroscoop;
-
-
 };
 

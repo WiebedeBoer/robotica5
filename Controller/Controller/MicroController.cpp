@@ -31,7 +31,7 @@ std::string MicroController::WaitForMessage(int &fd) {
 	int dataavail = 0;
 	bool MessageCompleted = false;
 	std::string message;
-	int Datareceived = WaitForData(fd, 200);
+	int Datareceived = WaitForData(fd, 1000);
 	if (Datareceived == 1) {
 		while (MessageCompleted == false) {
 			dataavail = serialDataAvail(fd);
@@ -71,7 +71,7 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 				calcsum = std::stoi(m[4]);
 			}
 			catch (const std::exception &) {
-				std::cout << "calcsum error" << std::endl;
+				std::cout << "fatel ack error" << std::endl;
 			}
 			
 			Response = m[3].str();

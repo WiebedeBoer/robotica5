@@ -25,6 +25,7 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 
 	DataCollector::speed = joy1.first;
 }
+
 std::pair<int, int> DataCollector::GetJoy1()
 {
 	return DataCollector::joy1;
@@ -35,7 +36,3 @@ std::pair<int, int> DataCollector::GetJoy2()
 	return DataCollector::joy2;
 }
 
-int DataCollector::getspeed()
-{
-	return speed;
-}
