@@ -34,31 +34,6 @@ void setup()
   pinMode (inputJoyButton, INPUT);
 }
 
-//sp = speed, value between 0-128
-//direction = forward, backward or stand stil
-//direction = forward: 1, backward: 2, stil: 0
-void wheelLeft(int sp, int direction) {
-  Serial.println("Wheelleft Adjustment");
-  if (direction == 0) {
-    drivingL = false;
-    digitalWrite(3, LOW);
-    digitalWrite(4, LOW);
-    return;
-  }
-
-  if (direction == 1) {
-    digitalWrite(3, LOW);
-    digitalWrite(4, HIGH);
-    Serial.println("Directiona");
-  } else if (direction == 2) {
-    digitalWrite(3, HIGH);
-    digitalWrite(4, LOW);
-    Serial.println("Picobello");
-  }
-
-  pot->set(sp);
-}
-
 int lastJoyX = 550;
 int lastJoyY = 550;
 int joyX, joyY, joyButton;
@@ -98,6 +73,33 @@ void loop()
   Serial.print("Joy Button: "); Serial.println(joyButton);
   Serial.println("");
   delay(500);
+}
+
+//sp = speed, value between 0-128
+//direction = forward, backward or stand stil
+//direction = forward: 1, backward: 2, stil: 0
+void wheelLeft(int sp, int direction) {
+  Serial.println("Wheelleft Adjustment");
+  if (direction == 0) {
+    drivingL = false;
+    digitalWrite(3, LOW);
+    digitalWrite(4, LOW);
+    return;
+  }
+
+  if (direction == 1) {
+    digitalWrite(3, LOW);
+    digitalWrite(4, HIGH);
+    Serial.println("Directiona");
+  } else if (direction == 2) {
+    digitalWrite(3, HIGH);
+    digitalWrite(4, LOW);
+    Serial.println("Picobello");
+  }
+
+  pot->set(sp);
+}
+
 //  if (
 //  wheelLeft(1, 10);
 //  delay(2500);
@@ -127,4 +129,3 @@ void loop()
 //
 //  Serial.println("Hello world");
 //  delay(300);
-}

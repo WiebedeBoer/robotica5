@@ -48,10 +48,7 @@ void setup()
 
 void loop()
 {
-  //Serial.println(checksum("servoDS?,1;2;200&5;0|"));
   unsigned long currentMillis = millis();
-  
-  //downwards();
   
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
@@ -64,18 +61,7 @@ void loop()
       potR->set(0);
       drivingL = false;
       drivingR = false;
-    }
-    //    Serial.println("-----------------------------------------");
-//    for (int i = 1; i <= 4; i++) {
-//      Serial.print("Servo "); Serial.println(i);
-//      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
-//      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
-//      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
-//      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
-//      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
-//      Serial.println("");
-//    }
-//    Serial.println("-----------------------------------------");
+    }   
   }
 }
 
@@ -340,3 +326,15 @@ String respondServo() { return "ack:servo?<"+ getAllPositions() +">|"; }
 String respondServoDS() { return "ack:servoDS?<"+ getAllPositions() +">|"; }
 
 String respondMotor() { return "ack:motor?<>|"; }
+
+//    Serial.println("-----------------------------------------");
+//    for (int i = 1; i <= 4; i++) {
+//      Serial.print("Servo "); Serial.println(i);
+//      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
+//      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
+//      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
+//      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
+//      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
+//      Serial.println("");
+//    }
+//    Serial.println("-----------------------------------------");
