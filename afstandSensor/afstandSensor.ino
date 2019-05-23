@@ -11,9 +11,15 @@ bool ReadingCheckSum = false;//reading chechsum
 //led
 bool LedOnOff;
 
-#define analogPin 0 // sensor value
-#define echoPin 9 // sensor value
+#define analogPin 20 // sensor value afstand
+#define echoPin 9 // sensor value afstand input
 
+#define snelheidLinksPin 12 //sensor value snelheid links
+
+#define microfoonPin 14 //microfoon
+#define geluidLaagPin 15 //geluid tonen laag
+#define geluidMiddenPin 16 //geluid tonen midden
+#define geluidHoogPin 17 //geluid tonen hoog
 
 
 //sensor
