@@ -115,3 +115,6 @@ try:
 except Exception, e:
     sok.close()
     print e
+
+finally:
+    sok.close()
