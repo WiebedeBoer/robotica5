@@ -63,6 +63,12 @@ int soundLow = 0;
 int soundMedium = 0;
 int soundHigh = 0;
 
+//function strings
+String ret_string;
+//ret_string = readSensors();
+
+//ret_string = String(readSensors(int Distance));
+
 //setup
 void setup() {
   // put your setup code here, to run once:
@@ -91,18 +97,6 @@ void setup() {
   
 }
 
-//test led
-bool LedOnOff;
-String Led(){
-  if(LedOnOff == true){
-    LedOnOff = false;
-    return "ack:Led?<On>|";
-    }
-  if(LedOnOff == false){
-    LedOnOff = true;
-    return "ack:Led?<Off>|";
-  }
-}
 
 //loop
 void loop() {
@@ -113,13 +107,9 @@ void loop() {
     //Serial.println("Command:"+rx_Msg+"Sum:" +SendSum + "CalculatedSum:" + String(checksum(rx_Msg))); //print contains all useful debug information
   if(checksum(rx_Msg) == SendSum.toInt()){ //control checksum with sendsum, for error checking
     //possible commands and code here   
-      if(rx_Msg == "Led?|"){
-        String result = Led();
-        String Checksum = String(checksum(result));
-        Serial.println(result + Checksum );  
-        }
-      else if (rx_Msg == "Sensor?|"){
-        String result = readSensors(Distance);
+       if (rx_Msg == "Sensor?|"){
+        //String result = readSensors(Distance);
+        String result = sendSensorsValues();
         String Checksum = String(checksum(result));
         Serial.println(result + Checksum );  
        }     
@@ -142,39 +132,45 @@ int readSensor(int pn, int mx)
 
 //distance sensor function
 String sendSensorsValues(){ 
+  ret_string = readSensors();
   //return alle waarden
-  //return "ack:Sensor?<dist"+ String(distance) + "soundL" + String(SoundLow) + "soundM" + String(SoundMedium) + "soundH" + String(SoundHigh) + "speedL"+ String(SpeedL)+ "speedR"+ String(SpeedR)+">|";
-
+  //return "ack:Sensor?<dist"+ String(distance) + ";soundL" + String(SoundLow) + ";soundM" + String(SoundMedium) + ";soundH" + String(SoundHigh) + ";speedL"+ String(SpeedL)+ ";speedR"+ String(SpeedR)+">|";
+  //return "ack:Sensor?<dist"+ readstring + ";soundL" + String(SoundLow) + ";soundM" + String(SoundMedium) + ";soundH" + String(SoundHigh) + ";speedL"+ String(SpeedL)+ ";speedR"+ String(SpeedR)+">|";
+  return "ack:Sensor?<dist"+ ret_string + ">|";
+  //return "ack:Sensor?<dist"+ String(readSensors(int Distance)) + ">|";
 }
 
 //DISTANCE
 //distance sensor function
-String readSensors(int Distance){ 
-sensorValue = readSensor(0, 100); // update sensor value
-    //afstandsensor lezen
+
+
+String readSensors(){ 
+  sensorValue = readSensor(0, 100); // update sensor value
+  //afstandsensor lezen
   AfstandsSensor = analogRead(A0);
   Serial.println(AfstandsSensor);
-      //delay(150);
-      sensorValue = analogRead(analogPin); // read the value from the sensor
+  //delay(150);
+  sensorValue = analogRead(analogPin); // read the value from the sensor
       
-      long duration;
-      int distance;
+  long duration;
+  int distance;
 
-      duration = pulseIn(echoPin, HIGH);
-      distance = (duration * 0.0334) / 2;
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration * 0.0334) / 2;
 
-//drempel waardes
-if(AfstandsSensor <300){
+  //drempel waardes
+  if(AfstandsSensor <300){
     NearTray = true;
-}
-else{
+  }
+  else{
     NearTray = false;
-}
+  }
 
   //return de waarden
   //pot->set(Distance);
   //return "ack:Sensor?<dis"+ String(distance) +">|";
-  return Distance;
+  String str_distance = String(distance);
+  return str_distance;
 
 }
 
