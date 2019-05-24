@@ -24,9 +24,11 @@ bool ReadingCheckSum = false;//reading chechsum
 #define gyrosdaPin 19 //gyroscoop sda
 #define gyrointPin 11 //gyroscoop int digital
 
-//motor
+//includes
 #include <SPI.h>
 #include "mcp4xxx.h"
+//#include <Wire.h>
+//#include <MPU6050.h>
 
 using namespace icecave::arduino;
 
@@ -43,6 +45,16 @@ int Distance = 0;
 //speed variables
 
 //gyro variables
+//MPU6050 accelgyro;
+
+int16_t ax, ay, az;
+int16_t gx, gy, gz;
+unsigned long timer = 0;
+float timestep = 0.01;
+
+float pitch = 0;
+float roll = 0;
+float yaw = 0;
 
 //sound variables
 int soundLow = 0;
@@ -55,6 +67,26 @@ void setup() {
     //ini serial interface
   Serial.begin(115200);
   pinMode(echoPin, INPUT);
+  //Serial1.begin(115200);
+  //  pinMode(LED_BUILTIN, OUTPUT);
+  //pinMode(SpeedIn,INPUT);
+
+  //INI accelgyro
+  //   while(!accelgyro.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G))
+  //{
+  //  Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
+  //  delay(500);
+  //}
+  
+  // Calibrate gyroscope. The calibration must be at rest.
+  // If you don't want calibrate, comment this line.
+  //accelgyro.calibrateGyro();
+
+  // Set threshold sensivty. Default 3.
+  // If you don't want use threshold, comment this line or set 0.
+//accelgyro.setThreshold(3);
+
+  
 }
 
 //test led
@@ -144,6 +176,23 @@ String speedSensors(){
 String gyroscopeSensors(){
   int gyro;
   //return "ack:Sensor?<"+ String(gyro) + ">|";
+}
+
+void Refresh(){
+//  Speed = digitalRead(SpeedIn);
+//  Serial.print(Speed);  
+//      Vector norm = accelgyro.readNormalizeGyro();
+
+//      pitch = pitch + norm.YAxis
+}
+void serialEvent1(){
+//  while(Serial1.available()&& rx_Complete2 == false){
+//    rx_Byte2 = (char)Serial1.read();//Read next byte
+//    rx_Msg2 += rx_Byte2;   
+//    if(rx_Byte2 == '\n'){//endling and cleanup
+//      rx_Complete2 = true;
+//      }
+//  }
 }
 
 //SOUND
