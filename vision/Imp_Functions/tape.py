@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import clahe as cl
 
-def callback():
+def callback(x):
 	pass
 
 def removeBlackBars(img):
@@ -17,40 +17,43 @@ def removeBlackBars(img):
 	crop = img[y:y+h,x:x+w]
 	return crop
 
-def removeGlare(hsv, iterations, th):
+def removeGlare(lab, iterations, th):
 
 	# glare
 	lower = th
 	upper = np.array([255,255,255])
 
 	# Threshhold on the lightness
-	glare_th = cv2.inRange(hsv, lower, upper)
+	glare_th = cv2.inRange(lab, lower, upper)
 
 	# Dilate glare
-	kernel = np.ones((10,10),np.uint8)
-	glare_th = cv2.morphologyEx(glare_th, cv2.MORPH_CLOSE, kernel)
+	kernel = np.ones((5,5),np.uint8)
+	glare_th = cv2.dilate(glare_th,kernel,iterations = 1)
 
 	# Cut out glare
-	glare = cv2.bitwise_and(hsv, hsv, mask=glare_th)
-	no_glare = cv2.bitwise_xor(hsv, glare)
+	glare = cv2.bitwise_and(lab, lab, mask=glare_th)
+	no_glare = cv2.bitwise_xor(lab, glare)
 
 	# Correct glare and paste it back
-	glare[:,:,2] = glare[:,:,2] *0.8
-	hsv = no_glare + glare
+	glare[:,:,0] = glare[:,:,0] *0.4
+	lab = no_glare + glare
 
+	# lower[0] = lower[0] *0.999
 
-	lower[2] = lower[2] *0.9
+	cv2.imshow("glare_", glare)
+	cv2.imshow("no_glare", no_glare)
+	cv2.imshow("hsv_input", lab)
+
 	if iterations > 0:
 		iterations -= 1
-		return removeGlare(hsv, iterations, lower)
+		return removeGlare(lab, iterations, lower)
 	else:
-		return hsv
+		return cv2.cvtColor( lab, cv2.COLOR_Lab2BGR )
 
-def removeGlareHSV(hsv, th_min, th_max):
+def removeGlareHSV(lab, th_min, th_max):
 
-	hsv = cv2.bitwise_not(hsv)
+	lab = cv2.bitwise_not(lab)
 	ret,th = cv2.threshold(hsv[:,:,1],th_min,th_max,cv2.THRESH_BINARY)
-	cv2.imshow("th", th)
 
 	# Dilate glare
 	kernel = np.ones((10,10),np.uint8)
@@ -61,14 +64,9 @@ def removeGlareHSV(hsv, th_min, th_max):
 	no_glare = cv2.bitwise_xor(hsv, glare)
 
 	# Correct glare and paste it back
-	glare[:,:,2] = glare[:,:,2] * 0.6
+	glare[:,:,2] = glare[:,:,2] * 0.9
 	res = no_glare + glare
-	res = cv2.cvtColor(res, cv2.COLOR_HSV2BGR)
-
-	cv2.imshow("glare", glare)
-	cv2.imshow("no_glare", no_glare)
-	cv2.imshow("hsv_input", hsv)
-	cv2.imshow("res", res)
+	res = cv2.cvtColor(res, cv2.COLOR_Lab2BGR)
 
 	return res
 	
@@ -86,10 +84,21 @@ def BlackTape():
 	cv2.createTrackbar('S_MAX','settings',0,255,callback)
 	cv2.createTrackbar('V_MAX','settings',0,255,callback)
 
-	cv2.createTrackbar('TH_MIN','settings',0,255,callback)
-	cv2.createTrackbar('TH_MAX','settings',0,255,callback)
+	cv2.createTrackbar('TH_MIN','settings',0,500,callback)
+	cv2.createTrackbar('TH_MAX','settings',0,500,callback)
+
+	cv2.createTrackbar('RHO','settings',1,20,callback)
+	cv2.createTrackbar('THETA','settings',0,200,callback)
 
 	cv2.createTrackbar('iterations','settings',0,100,callback)
+
+
+	cv2.setTrackbarPos('H_MAX','settings',255)
+	cv2.setTrackbarPos('S_MAX','settings',255)
+	cv2.setTrackbarPos('V_MAX','settings',255)
+
+	cv2.setTrackbarPos('TH_MIN','settings',255)
+	cv2.setTrackbarPos('TH_MAX','settings',411)
 
 	while(cam.isOpened()):
 
@@ -110,21 +119,29 @@ def BlackTape():
 
 			iterations = cv2.getTrackbarPos('iterations','settings')
 
+			rho = cv2.getTrackbarPos('RHO','settings')
+			theta = cv2.getTrackbarPos('THETA','settings')
+
 			lower_tape = np.array([h_min,s_min,v_min])
 			upper_tape = np.array([h_max,s_max,v_max])
 
 			_, img = cam.read()
+
+			# THIS LINE CAN BE REMOVED FOR THE PI
 			img = removeBlackBars(img)
+			# THIS LINE CAN BE REMOVED FOR THE PI
+
 			img = cv2.GaussianBlur(img, (5, 5), 0)
+			#img = removeGlare( cv2.cvtColor(img, cv2.COLOR_BGR2Lab), iterations, np.array([th_min,0,0]) )
+			
 			gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-			_,th = cv2.threshold(gray,70,255,cv2.THRESH_BINARY)
+			th = cv2.inRange(img, lower_tape, upper_tape)
 
-			cut = cv2.bitwise_and(img, img, mask=th)
-			tape = cv2.bitwise_xor(img, cut)		
-			edges = cv2.Canny(tape,50,150,apertureSize = 3)
+			tape = cv2.bitwise_and(img, img, mask=th)
+			edges = cv2.Canny(tape,th_min,th_max,apertureSize = 3)
 
-			lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=250)
+			lines = cv2.HoughLinesP(edges, rho, np.pi/180, 100, maxLineGap=30)
 			if lines is not None:
 				for line in lines:
 					x1, y1, x2, y2 = line[0]
@@ -146,7 +163,7 @@ def BlackTape():
 			cv2.imshow("tape", tape)
 			cv2.imshow("th", th)
 			cv2.imshow("edges", edges)
-			cv2.imshow("single_channel", img)
+			cv2.imshow("default", img)
 
 
 			if cv2.waitKey(1) & 0xFF == ord('q'):
