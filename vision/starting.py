@@ -1,6 +1,7 @@
 import sys
 import socket
-
+import cv2
+#from camera_opencv import getPiCamera
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -19,99 +20,90 @@ def splitter(msg):
 
 
 # Main switcher
-def mainSwitcher(argument, argument1, argument2, argument3):
+def mainSwitcher(argument, argument1, argument2, frame):
     switcher = {
-        0: kwalificatie,
-        1: wedstrijd,
+        0: pitch,
+        1: vision,
+        2: chickenSurvivalRun,
+        3: eggtelligence
     }
 
     func = switcher.get(argument, "Nothing")
-    return func(argument1, argument2, argument3)
+    return func(argument1, argument2, frame)
 
 
-# Kwalificatie switcher
-def kwalificatie(argument, argument1 = False, argument2 = False):
-    def kwalificatieSwitcher(argument):
+def pitch(argument, argument1, frame):
+    return "Hello"
+
+
+def vision(argument, argument1, frame):
+    sys.path.append('Kwalificatie/Vision/')
+    from blueBeam import viewBeam
+    return viewBeam(frame)
+
+
+def chickenSurvivalRun(argument, argument1, frame):
+    sys.path.append('Wedstrijd/ChickenSurvivalRun/')
+    test = False
+
+
+def eggtelligence(argument, argument1, frame):
+    def eggtelligenceSwitcher(argument, argument1, frame):
         switcher = {
-            0: pitch,
-            1: poortje,
-            2: grindpad,
-            3: eiGripper,
-            4: vision
-        }
-        func = switcher.get(argument, "Nothing")
-        return func()
-
-    def pitch():
-        return "Hello"
-
-    def vision():
-        sys.path.append('Kwalificatie/Vision/')
-        from blueBeam import viewBeam
-        return viewBeam()
-
-    return kwalificatieSwitcher(argument)
-
-
-def wedstrijd(argument, argument1, argument2):
-    # Wedstrijd switcher
-    def wedstrijdSwitcher(argument, argument1, argument2):
-        switcher = {
-            0: chickenSurvivalRun,
-            1: eggtelligence
+            0: eggDistance,
+            1: qrDistance
         }
         func = switcher.get(argument, "Something went wrong")
-        return func(argument1, argument2)
+        return func(argument1, frame)
 
-    def chickenSurvivalRun(argument = False, argument1 = False):
-        sys.path.append('Wedstrijd/ChickenSurvivalRun/')
-        test = False
+    def eggDistance(argument, frame):
+        sys.path.append('Wedstrijd/Eggtelligence/')
+        from startEggDistance import startEggDistance
+        return startEggDistance(frame)
 
-    def eggtelligence(argument, argument1):
-        def eggtelligenceSwitcher(argument, argument1):
-            switcher = {
-                0: eggDistance,
-                1: qrDistance
-            }
-            func = switcher.get(argument, "Something went wrong")
-            return func(argument1)
+    def qrDistance(argument, frame):
+        sys.path.append('Wedstrijd/Eggtelligence/')
+        from startQRDistance import startQRDistance
+        return startQRDistance(townSwitcher(argument), frame)
 
-        def eggDistance(argument = False):
-            sys.path.append('Wedstrijd/Eggtelligence/')
-            from startEggDistance import startEggDistance
-            return startEggDistance()
+    def townSwitcher(argument):
+        switcher = {
+            0: "'s-Hertogenbosch",
+            1: "Eindhoven",
+            2: "Eibergen",
+            3: "Barneveld",
+            4: "Duckstad"
+        }
+        func = switcher.get(argument, "Something went wrong")
+        return func
 
-        def qrDistance(argument):
-            sys.path.append('Wedstrijd/Eggtelligence/')
-            from startQRDistance import startQRDistance
-            return startQRDistance(townSwitcher(argument))
-
-        def townSwitcher(argument):
-            switcher = {
-                0: "'s-Hertogenbosch",
-                1: "Eindhoven",
-                2: "Eibergen",
-                3: "Barneveld",
-                4: "Duckstad"
-            }
-            func = switcher.get(argument, "Something went wrong")
-            return func
-
-        return eggtelligenceSwitcher(argument, argument1)
-
-    return wedstrijdSwitcher(argument, argument1, argument2)
+    eggtelligenceSwitcher(argument, argument1, frame)
 
 
-sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+cap = cv2.VideoCapture(0)
 try:
-    sok.connect((socket.gethostname(), 1234))
-
     while True:
-        msg = SocketReceive()
-        msg = splitter(msg)
+        # frame = getCapture()
+        _, frame = cap.read()
+        print(mainSwitcher(1, 0, 0, frame))
+        cv2.imshow("frame", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+except KeyboardInterrupt:
+    cap.release()
+    cv2.destroyAllWindows()
 
-        msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
-
-except Exception, e:
-    sok.close()
-    print e
+# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# try:
+#     sok.connect((socket.gethostname(), 1234))
+#
+#     while True:
+#         msg = SocketReceive()
+#         msg = splitter(msg)
+#
+#         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
+#
+# except Exception, e:
+#     sok.close()
+#     print e
