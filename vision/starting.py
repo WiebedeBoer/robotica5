@@ -65,7 +65,7 @@ def eggtelligence(argument, argument1, frame):
         sys.path.append('Wedstrijd/Eggtelligence/')
         from startQRDistance import startQRDistance
         return startQRDistance(townSwitcher(argument), frame)
-
+        
     def townSwitcher(argument):
         switcher = {
             0: "'s-Hertogenbosch",
@@ -81,29 +81,33 @@ def eggtelligence(argument, argument1, frame):
 
 
 
-cap = cv2.VideoCapture(0)
-try:
-    while True:
-        # frame = getCapture()
-        _, frame = cap.read()
-        print(mainSwitcher(1, 0, 0, frame))
-        cv2.imshow("frame", frame)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-except KeyboardInterrupt:
-    cap.release()
-    cv2.destroyAllWindows()
-
-# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# cap = cv2.VideoCapture(0)
 # try:
-#     sok.connect((socket.gethostname(), 1234))
-#
 #     while True:
-#         msg = SocketReceive()
-#         msg = splitter(msg)
-#
-#         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]))
-#
-# except Exception, e:
-#     sok.close()
-#     print e
+#         # frame = getCapture()
+#         _, frame = cap.read()
+#         print(mainSwitcher(1, 0, 0, frame))
+#         cv2.imshow("frame", frame)
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
+# except KeyboardInterrupt:
+#     cap.release()
+#     cv2.destroyAllWindows()
+
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    sok.connect((socket.gethostname(), 1234))
+
+    while True:
+    	frame = getPiCamera()
+        msg = SocketReceive()
+        msg = splitter(msg)
+
+        msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2], frame))
+
+except Exception, e:
+    sok.close()
+    print e
+
+finally:
+    sok.close()
