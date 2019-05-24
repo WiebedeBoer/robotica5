@@ -43,6 +43,8 @@ int AfstandsSensor = 0;
 int Distance = 0;
 
 //speed variables
+int SpeedL = 0;
+int SpeedR = 0;
 
 //gyro variables
 //MPU6050 accelgyro;
@@ -131,13 +133,21 @@ void loop() {
 
 }
 
-//DISTANCE
+//SENSOR READING
 // read value from pin pn, return value is mapped between 0 and mx-1
 int readSensor(int pn, int mx)
 {
   return map(analogRead(pn), 0, 1023, 0, mx-1);    
 }
 
+//distance sensor function
+String sendSensorsValues(){ 
+  //return alle waarden
+  //return "ack:Sensor?<dist"+ String(distance) + "soundL" + String(SoundLow) + "soundM" + String(SoundMedium) + "soundH" + String(SoundHigh) + "speedL"+ String(SpeedL)+ "speedR"+ String(SpeedR)+">|";
+
+}
+
+//DISTANCE
 //distance sensor function
 String readSensors(int Distance){ 
 sensorValue = readSensor(0, 100); // update sensor value
@@ -161,8 +171,10 @@ else{
     NearTray = false;
 }
 
-  pot->set(Distance);
-  return "ack:Sensor?<"+ String(distance) + ">|";
+  //return de waarden
+  //pot->set(Distance);
+  //return "ack:Sensor?<dis"+ String(distance) +">|";
+  return Distance;
 
 }
 
