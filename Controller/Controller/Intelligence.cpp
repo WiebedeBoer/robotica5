@@ -23,11 +23,13 @@ void Intelligence::Think()
 	int RefreshInterfal = 50;
 	int PrintInterfal = 100000;
 	int ArmInterfal = 100;
-	int VisionInterfall = 10000;
+	int AfstandInterval = 100;
+	
 	std::chrono::system_clock::time_point RefreshController = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 	std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 	std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
-	std::chrono::system_clock::time_point RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
+	std::chrono::system_clock::time_point AfstandSensor = std::chrono::system_clock::now() + std::chrono::milliseconds(AfstandInterval);
+
 
 	while (*running == true) {
 		if (std::chrono::system_clock::now() > RefreshController) {
@@ -71,6 +73,10 @@ void Intelligence::Think()
 	
 			//CommandQueue->push(Command(Worker, "MoveArm", Database, args));
 			MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+		}
+		if (std::chrono::system_clock::now() > AfstandSensor) {
+			std::vector<std::string> args;
+			CommandQueue->push(Command(Worker, "Motor", Database, args));
 		}
 	}
 }
