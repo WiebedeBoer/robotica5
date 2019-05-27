@@ -20,5 +20,6 @@ public:
 	Vision* VisionSlave;
 	~Command();
 	virtual void Execute();
+
 };
 

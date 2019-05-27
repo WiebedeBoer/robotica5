@@ -29,6 +29,8 @@ int main()
 	std::thread AIThread = std::thread(&Intelligence::Think, AI);
 
 	CommandExecutor* VisionExecutor = new CommandExecutor(running, VisionQueue);
+	VisionExecutor->Execute();
+
 
 	ExecutorThread.join();
 	AIThread.join();
