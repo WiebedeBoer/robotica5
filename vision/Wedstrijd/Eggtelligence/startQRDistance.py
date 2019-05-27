@@ -5,10 +5,8 @@ sys.path.append('Wedstrijd/Eggtelligence/')
 import cv2
 from helpFunctions import *
 from qrReader import QRReader
-from camera_opencv import getPiCamera
 
-def startQRDistance(findQRCode):
-    frame = getPiCamera()
+def startQRDistance(findQRCode, frame):
     qrReader = QRReader(frame)
 
     qr = qrReader.findQR(findQRCode)
