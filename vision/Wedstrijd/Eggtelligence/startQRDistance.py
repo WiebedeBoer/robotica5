@@ -6,7 +6,7 @@ import cv2
 from helpFunctions import *
 from qrReader import QRReader
 
-def startQRDistance(findQRCode, frame):
+def qrDistance(findQRCode, frame):
     qrReader = QRReader(frame)
 
     qr = qrReader.findQR(findQRCode)
