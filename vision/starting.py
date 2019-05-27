@@ -2,6 +2,7 @@ import sys
 import socket
 import cv2
 from camera_opencv import getPiCamera
+import numpy
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -104,7 +105,7 @@ try:
         msg = SocketReceive()
         msg = splitter(msg)
 
-        msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2], frame))
+        msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), frame)
         SocketSend(msgBack)
 
 except Exception, e:
