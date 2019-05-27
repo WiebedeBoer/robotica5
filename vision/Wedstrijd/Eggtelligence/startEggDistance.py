@@ -7,7 +7,7 @@ from eggDetection import DetectEgg
 from helpFunctions import *
 
 
-def startEggDistance(frame):
+def eggDistance(frame):
 
     closestDistance = None
     allDistances = []

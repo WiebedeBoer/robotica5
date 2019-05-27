@@ -46,6 +46,7 @@ def vision(argument, argument1, frame):
 def chickenSurvivalRun(argument, argument1, frame):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
+    return test
 
 
 def eggtelligence(argument, argument1, frame):
@@ -59,13 +60,14 @@ def eggtelligence(argument, argument1, frame):
 
     def eggDistance(argument, frame):
         sys.path.append('Wedstrijd/Eggtelligence/')
-        from startEggDistance import startEggDistance
-        return startEggDistance(frame)
+        from startEggDistance import eggDistance
+        return eggDistance(frame)
 
     def qrDistance(argument, frame):
         sys.path.append('Wedstrijd/Eggtelligence/')
-        from startQRDistance import startQRDistance
-        return startQRDistance(townSwitcher(argument), frame)
+        from startQRDistance import qrDistance
+        return qrDistance(townSwitcher(argument), frame)
+
         
     def townSwitcher(argument):
         switcher = {
@@ -78,7 +80,7 @@ def eggtelligence(argument, argument1, frame):
         func = switcher.get(argument, "Something went wrong")
         return func
 
-    eggtelligenceSwitcher(argument, argument1, frame)
+    return eggtelligenceSwitcher(argument, argument1, frame)
 
 
 
