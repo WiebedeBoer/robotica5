@@ -43,6 +43,7 @@ void Intelligence::Think()
 			PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 		}
 		if (std::chrono::system_clock::now() > RefreshVision) {
+
 			VisionQueue->push(Command(VisionApi, "chickenSurvivalRun", Database));
 			VisionQueue->push(Command(VisionApi, "eggDistance", Database));
 			VisionQueue->push(Command(VisionApi, "qrDistance", Database));

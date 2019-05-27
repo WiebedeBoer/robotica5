@@ -10,6 +10,7 @@
 #include "DataCollector.h"
 #include "Intelligence.h"
 #include "Vision.h"
+
 bool* running = new bool(true);
 GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();
 GuardedQueue<Command>* VisionQueue = new GuardedQueue<Command>();
