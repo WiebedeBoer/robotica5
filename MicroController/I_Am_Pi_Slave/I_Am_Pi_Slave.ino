@@ -97,8 +97,7 @@ int readSensor(int pn, int mx)
 //distance sensor function
 String sendSensorsValues(){ 
   //return alle waarden
-  //return "ack:Sensor?<dist"+ String(distance) + "soundL" + String(SoundLow) + "soundM" + String(SoundMedium) + "soundH" + String(SoundHigh) + "speedL"+ String(SpeedL)+ "speedR"+ String(SpeedR)+">|";
-
+  //return "ack:Sensor?<"+ readstring + ";" + String(SoundLow) + ";" + String(SoundMedium) + ";" + String(SoundHigh) + ";"+ String(SpeedL)+ ";"+ String(SpeedR)+";"+ String(pitch)+";"+ String(roll)+";"+ String(yaw)+">|";
 }
 
 //SPEED
