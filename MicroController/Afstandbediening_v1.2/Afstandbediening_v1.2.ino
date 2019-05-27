@@ -5,9 +5,15 @@
 #define joy2x A3
 #define joy2y A4
 
-NexText JoyL = NexText(0, 2, "JoyL");
-NexText JoyR = NexText(0, 3, "JoyR");
-NexProgressBar j2  = NexProgressBar(0, 5, "j2");
+NexText JoyL = NexText(0, 2, "JoyL"); //Joystick Left
+NexText JoyR = NexText(0, 3, "JoyR"); //Joystick Right
+NexNumber TCSpeed = NexNumber(1, 7, "TCSpeed"); //Numberbox for speed -- Next to slider
+NexNumber NAngle = NexNumber(3, 3, "NAngle"); //Number of Angle 
+NexNumber NYaw = NexNumber(3, 3, "NYaw"); //Number of Yaw 
+NexNumber NPitch = NexNumber(3, 3, "NPitch"); //Number of Pitch 
+NexSlider SSpeed = NexSlider(1, 4, "SSPeed"); //Speedbar Slider
+NexNumber TDistance = NexNumber(2, 3, "TDistance"); //Distance
+NexProgressBar CSpeed  = NexProgressBar(1, 5, "CSpeed"); //Speedbar Current Speed
 
 char buffer[100] = {0};
 char rx_Byte = 0;//last received byte
@@ -16,6 +22,10 @@ String SendSum;//checksum from raspberry
 bool rx_Complete = false;//is de transmission done
 bool ReadingCheckSum = false;//reading chechsum
 uint32_t robotspeed = 90;
+uint32_t IAngle = 0;
+uint32_t IPitch = 0;
+uint32_t IYaw = 0;
+uint32_t IDistance = 0;
 
 String JoyLtext;
 String JoyRtext;
@@ -24,6 +34,8 @@ NexTouch *nex_listen_list[] =
 {
   &JoyL,  
   &JoyR,
+  &SSpeed,
+  &TCSpeed,
   NULL  // String terminated
 };
 
@@ -57,7 +69,12 @@ void Execute_AfstandBediening(){
     JoyRtext = String(analogRead(joy2x)/16) + "," + String(analogRead(joy2y)/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
     JoyR.setText(buffer);
-    j2.setValue(robotspeed);    
+    TCSpeed.setValue(robotspeed); //Set TCSpeed number part to the same as CSpeed value. 
+    NAngle.setValue(IAngle);
+    NYaw.setValue(IYaw);
+    NPitch.setValue(IPitch);
+    TDistance.setValue(IDistance);
+       
 }
 
 //serialEventInterupt
@@ -89,6 +106,7 @@ void serialEvent2(){
         if(rx_Msg == "refresh?|"){
           String result = Respond_AfstandBediening(); // returns ack:refresh?<var1:var2>|
           String Checksum = String(checksum(result));
+          
           robotspeed =  rx_Msg_Speed.toInt(); // 
           result = result + Checksum + "\n";
           int resultLength = result.length() +1; // convert string to char array
