@@ -77,17 +77,17 @@ void Command::Execute() {
 		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 	}
 	if (Command::type == "chickenSurvivalRun") {
-		Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("1:0:0:0");
+		Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
 		std::cout <<"chickenSurvivalRun: " <<Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
 		return;
 	}
 	if (Command::type == "eggDistance") {
-		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("1:1:0:0");
+		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
 		std::cout << "EggDistance: " << Command::Database->wedstrijd.eggDistance << std::endl;
 		return;
 	}
 	if (Command::type == "qrDistance") {
-		Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("1:1:1:0");
+		Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
 		std::cout << "qrDistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
 		return;
 	}

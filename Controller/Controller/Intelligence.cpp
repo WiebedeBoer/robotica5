@@ -20,11 +20,11 @@ void Intelligence::Think()
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
 	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
 
-	int RefreshInterfal = 50;
-	int PrintInterfal = 1000;
-	int ArmInterfal = 100;
-	int DriveInterfal = 200;
-	int VisionInterfall = 100000000;
+	int RefreshInterfal = 50000000;
+	int PrintInterfal = 100000000;
+	int ArmInterfal = 10000000;
+	int DriveInterfal = 2000000;
+	int VisionInterfall = 10000;
 	std::chrono::system_clock::time_point RefreshController = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 	std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 	std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
@@ -44,8 +44,8 @@ void Intelligence::Think()
 		}
 		if (std::chrono::system_clock::now() > RefreshVision) {
 
-			VisionQueue->push(Command(VisionApi, "chickenSurvivalRun", Database));
-			VisionQueue->push(Command(VisionApi, "eggDistance", Database));
+			//VisionQueue->push(Command(VisionApi, "chickenSurvivalRun", Database));
+			//VisionQueue->push(Command(VisionApi, "eggDistance", Database));
 			VisionQueue->push(Command(VisionApi, "qrDistance", Database));
 			RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
 		}
