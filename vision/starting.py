@@ -105,7 +105,7 @@ try:
         msg = splitter(msg)
 
         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2], frame))
-        SocketSend(msgBack)
+        SocketSend("False")
 
 except Exception, e:
     sok.close()
