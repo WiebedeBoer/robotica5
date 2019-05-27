@@ -46,6 +46,7 @@ def vision(argument, argument1, frame):
 def chickenSurvivalRun(argument, argument1, frame):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
+    return test
 
 
 def eggtelligence(argument, argument1, frame):
@@ -106,6 +107,7 @@ try:
         msg = splitter(msg)
 
         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), frame)
+        print(msgBack)
         SocketSend(msgBack)
 
 except Exception, e:
