@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Controller/Controller/obj/ARM/Debug/Controller.log" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/Controller/obj/ARM/Debug/Controller.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vision/starting.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/starting.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vision/starting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="312">
+              <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -27,50 +30,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="185" column="47" selection-start-line="185" selection-start-column="47" selection-end-line="185" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/object_recognition1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/object_recognition2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-247">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="52" />
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -158,13 +128,13 @@
         <option value="$PROJECT_DIR$/vision/camera_opencv.py" />
         <option value="$PROJECT_DIR$/vision/testing.py" />
         <option value="$PROJECT_DIR$/vision/Kwalificatie/Poortje/gateRun.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py" />
         <option value="$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/object_recognition.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" />
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/Extra_Functions/Obj_detection/object_recognition2.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/object_recognition2.py" />
+        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py" />
+        <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py" />
         <option value="$PROJECT_DIR$/vision/starting.py" />
       </list>
     </option>
@@ -472,13 +442,6 @@
     <entry file="file://$PROJECT_DIR$/Controller/Controller/main.cpp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/camera_opencv.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -528,7 +491,7 @@
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/object_recognition1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="34" column="17" lean-forward="true" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
+          <caret line="34" column="17" selection-start-line="34" selection-start-column="17" selection-end-line="34" selection-end-column="17" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -537,15 +500,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startEggDistance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+        <state relative-caret-position="51">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/startQRDistance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/starting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="312">
+          <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
