@@ -2,6 +2,7 @@ import sys
 import socket
 import cv2
 from camera_opencv import getPiCamera
+import numpy
 
 # Here the function gets the string send by the pi
 def SocketReceive():
