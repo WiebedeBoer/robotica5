@@ -12,7 +12,6 @@ def qrDistance(findQRCode, frame):
     qr = qrReader.findQR(findQRCode)
 
     if qr is not None:
-        distance = calculateDistance(qrReader.getWidthQR(), 15, 1000)
-        return distance
+        return calculateDistance(qrReader.getWidthQR(), 15, 1000)
     else:
         return False
