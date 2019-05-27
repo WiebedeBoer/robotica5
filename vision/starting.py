@@ -1,7 +1,7 @@
 import sys
 import socket
 import cv2
-#from camera_opencv import getPiCamera
+from camera_opencv import getPiCamera
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -86,10 +86,11 @@ def eggtelligence(argument, argument1, frame):
 #     while True:
 #         # frame = getCapture()
 #         _, frame = cap.read()
-#         print(mainSwitcher(1, 0, 0, frame))
-#         cv2.imshow("frame", frame)
+#         print(mainSwitcher(3, 1, 0, frame))
+#         # cv2.imshow("frame", frame)
 #         if cv2.waitKey(1) & 0xFF == ord('q'):
 #             break
+#
 # except KeyboardInterrupt:
 #     cap.release()
 #     cv2.destroyAllWindows()
@@ -104,6 +105,7 @@ try:
         msg = splitter(msg)
 
         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2], frame))
+        SocketSend(msgBack)
 
 except Exception, e:
     sok.close()
