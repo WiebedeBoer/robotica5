@@ -60,13 +60,13 @@ def eggtelligence(argument, argument1, frame):
 
     def eggDistance(argument, frame):
         sys.path.append('Wedstrijd/Eggtelligence/')
-        from startEggDistance import eggDistance
-        return eggDistance(frame)
+        from startEggDistance import startEggDistance
+        return startEggDistance(frame)
 
     def qrDistance(argument, frame):
         sys.path.append('Wedstrijd/Eggtelligence/')
-        from startQRDistance import qrDistance
-        return qrDistance(townSwitcher(argument), frame)
+        from startQRDistance import startQRDistance
+        return startQRDistance(townSwitcher(argument), frame)
 
         
     def townSwitcher(argument):
