@@ -8,7 +8,15 @@ def callback(x):
 	pass
 
 def slope(var):
-	return (var[2] - var[0]) / (var[3] - var[1])
+	x1 = float( var[0] )
+	y1 = float( var[1] )
+	x2 = float( var[2] )
+	y2 = float( var[3] )
+
+	if( (x2 - x1) > 0 ):
+		return ( (y2 - y1) / (x2 - x1) ) * 180.0 / np.pi
+	else:
+		return "NAN"
 
 def isParallel(var1, var2, threshold):
 
@@ -17,6 +25,10 @@ def isParallel(var1, var2, threshold):
 
 	print "slope1 = " + str(slope1)
 	print "slope2 = " + str(slope2)
+
+	if slope1 == "NAN" or slope2 == "NAN":
+		return False
+
 
 	if slope1 == slope2:
 		return True
@@ -100,7 +112,7 @@ def BlackTape():
 	w = 640
 	h = 480
 
-	cam = cv2.VideoCapture(0) 
+	cam = cv2.VideoCapture(0)
 	cam.set(w,h)
 
 	x, y = 0, 0
@@ -139,98 +151,99 @@ def BlackTape():
 
 	while(cam.isOpened()):
 
+
 		#[30,227,18],[105,94,84]
 
-		while (True):
+		h_min = cv2.getTrackbarPos('H_MIN','settings')
+		s_min = cv2.getTrackbarPos('S_MIN','settings')
+		v_min = cv2.getTrackbarPos('V_MIN','settings')
 
-			h_min = cv2.getTrackbarPos('H_MIN','settings')
-			s_min = cv2.getTrackbarPos('S_MIN','settings')
-			v_min = cv2.getTrackbarPos('V_MIN','settings')
+		h_max = cv2.getTrackbarPos('H_MAX','settings')
+		s_max = cv2.getTrackbarPos('S_MAX','settings')
+		v_max = cv2.getTrackbarPos('V_MAX','settings')
 
-			h_max = cv2.getTrackbarPos('H_MAX','settings')
-			s_max = cv2.getTrackbarPos('S_MAX','settings')
-			v_max = cv2.getTrackbarPos('V_MAX','settings')
+		th_min = cv2.getTrackbarPos('TH_MIN','settings')
+		th_max = cv2.getTrackbarPos('TH_MAX','settings')
 
-			th_min = cv2.getTrackbarPos('TH_MIN','settings')
-			th_max = cv2.getTrackbarPos('TH_MAX','settings')
+		min_length = cv2.getTrackbarPos('MIN_LENGTH','settings')
+		max_gap = cv2.getTrackbarPos('MAX_GAP','settings')
 
-			min_length = cv2.getTrackbarPos('MIN_LENGTH','settings')
-			max_gap = cv2.getTrackbarPos('MAX_GAP','settings')
+		iterations = cv2.getTrackbarPos('iterations','settings')
 
-			iterations = cv2.getTrackbarPos('iterations','settings')
+		rho = cv2.getTrackbarPos('RHO','settings')
+		th_slope = cv2.getTrackbarPos('TH','settings')
 
-			rho = cv2.getTrackbarPos('RHO','settings')
-			th_slope = cv2.getTrackbarPos('TH','settings')
+		lower_tape = np.array([h_min,s_min,v_min])
+		upper_tape = np.array([h_max,s_max,v_max])
 
-			lower_tape = np.array([h_min,s_min,v_min])
-			upper_tape = np.array([h_max,s_max,v_max])
+		_, img = cam.read()
+		#cv2.imshow("frame", img)
 
-			_, img = cam.read()
+		# THIS LINE CAN BE REMOVED FOR THE PI #
+		#img = removeBlackBars(img)
+		# THIS LINE CAN BE REMOVED FOR THE PI #
 
-			# THIS LINE CAN BE REMOVED FOR THE PI #
-			img = removeBlackBars(img)
-			# THIS LINE CAN BE REMOVED FOR THE PI #
+		img = cv2.bilateralFilter(img,9,75,75)
+		
+		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-			img = cv2.bilateralFilter(img,9,75,75)
+		th = cv2.inRange(img, lower_tape, upper_tape)
+
+		tape = cv2.bitwise_and(img, img, mask=th)
+		edges = cv2.Canny(tape,th_min,th_max,apertureSize = 3)
+
+		lines = cv2.HoughLinesP(edges, rho, np.pi/180, min_length, maxLineGap=max_gap)
+
+		font = cv2.FONT_HERSHEY_SIMPLEX
+		if lines is not None:
+			i = 0
+			j = 0
 			
-			gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-			th = cv2.inRange(img, lower_tape, upper_tape)
-
-			tape = cv2.bitwise_and(img, img, mask=th)
-			edges = cv2.Canny(tape,th_min,th_max,apertureSize = 3)
-
-			lines = cv2.HoughLinesP(edges, rho, np.pi/180, min_length, maxLineGap=max_gap)
-
-			font = cv2.FONT_HERSHEY_SIMPLEX
-			if lines is not None:
-				i = 0
-				j = 0
+			for line in lines:
+				x1,y1,x2,y2 = line[0]
+				cv2.line(img, (x1,y1), (x2,y2), (0, 0, 255), 1) # all lines
+				line[0] = map(lambda x: x - w/2, line[0])
 				
-				for line in lines:
-					x1,y1,x2,y2 = line[0]
-					cv2.line(img, (x1,y1), (x2,y2), (0, 0, 255), 1) # all lines
-					line[0] = map(lambda x: x - w/2, line[0])
-					
-					for lineCheck in lines: # check every line if parallel
+				for lineCheck in lines: # check every line if parallel
 
-						xC1,yC1,xC2,yC2 = lineCheck[0]
-						distance = math.sqrt( (x1-xC1)**2 + (y1-yC1)**2 )
-						cv2.putText(img, str( slope(line[0]) ),(x1,y1), font, 0.7,(255,255,255),2,cv2.LINE_AA)
-						cv2.putText(img, str( slope(lineCheck[0]) ),(xC1,yC1), font, 0.7,(255,255,255),2,cv2.LINE_AA)
+					xC1,yC1,xC2,yC2 = lineCheck[0]
+					distance = math.sqrt( (x1-xC1)**2 + (y1-yC1)**2 )
+					cv2.putText(img, str( slope(line[0]) ),(x2,y2), font, 0.7,(255,255,255),2,cv2.LINE_AA)
+					cv2.putText(img, str( slope(lineCheck[0]) ),(xC2, yC2), font, 0.7,(255,255,255),2,cv2.LINE_AA)
 
-						if(distance < 20):
-							#cv2.line(img, (x1,y1), (xC1,yC1), (255, 0, 0), 2) # close lines
+					if(distance < 100 and distance > 2):
+						#cv2.line(img, (x1,y1), (xC1,yC1), (255, 0, 0), 2) # close lines
 
+						
+						
+
+						#if line[0].all() != lineCheck[0].all():
+						#if x1 != xC1 and y1 != yC1 and x2 != xC2 and y2 != yC2:
+						#if True:
+						if i != j:
 							
-							
 
-							#if line[0].all() != lineCheck[0].all():
-							#if x1 != xC1 and y1 != yC1 and x2 != xC2 and y2 != yC2:
-							#if True:
-							if i != j:
-								
-
-								if isParallel( line[0], lineCheck[0], th_slope ):
-									print "gucci"
-									cv2.line(img, (x1,y1), (x2,y2), (0, 255, 0), 3) # Parallel line
-									cv2.line(img, (x1,y1), (xC1,yC1), (255, 255, 0), 1) # Parallel line connection
-								else:
-									print "not gucci"
-					j += 1
-				i += 1
+							if isParallel( line[0], lineCheck[0], th_slope ):
+								print "gucci"
+								cv2.line(img, (x1,y1), (x2,y2), (0, 255, 0), 3) # Parallel line
+								cv2.line(img, (xC1,yC1), (xC2,yC2), (0, 255, 0), 3) # Parallel line
+								cv2.line(img, (x1,y1), (xC1,yC1), (255, 0, 255), 3) # Parallel line connection
+							else:
+								print "not gucci"
+				j += 1
+			i += 1
 
 
-			cv2.imshow("tape", tape)
-			cv2.imshow("th", th)
-			cv2.imshow("edges", edges)
-			cv2.imshow("default", img)
+		cv2.imshow("tape", tape)
+		cv2.imshow("th", th)
+		cv2.imshow("edges", edges)
+		cv2.imshow("default", img)
 
 
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			break
 
-		cam.release()
-		cv2.destroyAllWindows()
+	cam.release()
+	cv2.destroyAllWindows()
 	
 BlackTape()
