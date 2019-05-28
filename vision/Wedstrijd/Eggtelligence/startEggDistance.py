@@ -11,7 +11,7 @@ def startEggDistance(frame):
 
     closestDistance = None
     allDistances = []
-    detectEgg = DetectEgg(False, frame)
+    detectEgg = DetectEgg(frame, None)
     eggDetected = detectEgg.DetectEgg()
 
     if eggDetected is not False:

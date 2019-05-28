@@ -135,7 +135,7 @@ String sendSensorsValues(){
   ret_string = readSensors();
   //return alle waarden
   //return "ack:Sensor?<dist"+ String(distance) + ";soundL" + String(SoundLow) + ";soundM" + String(SoundMedium) + ";soundH" + String(SoundHigh) + ";speedL"+ String(SpeedL)+ ";speedR"+ String(SpeedR)+">|";
-  //return "ack:Sensor?<dist"+ readstring + ";soundL" + String(SoundLow) + ";soundM" + String(SoundMedium) + ";soundH" + String(SoundHigh) + ";speedL"+ String(SpeedL)+ ";speedR"+ String(SpeedR)+">|";
+  //return "ack:Sensor?<"+ readstring + ";" + String(SoundLow) + ";" + String(SoundMedium) + ";" + String(SoundHigh) + ";"+ String(SpeedL)+ ";"+ String(SpeedR)+";"+ String(pitch)+";"+ String(roll)+";"+ String(yaw)+">|";
   return "ack:Sensor?<dist"+ ret_string + ">|";
   //return "ack:Sensor?<dist"+ String(readSensors(int Distance)) + ">|";
 }

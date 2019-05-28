@@ -10,6 +10,7 @@
 #include "DataCollector.h"
 #include "Intelligence.h"
 #include "Vision.h"
+
 bool* running = new bool(true);
 GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();
 GuardedQueue<Command>* VisionQueue = new GuardedQueue<Command>();
@@ -28,8 +29,8 @@ int main()
 	Intelligence* AI = new Intelligence(Datacollector, Commandqueue, VisionQueue, running, Worker, Sensor, VisionApi);
 	std::thread AIThread = std::thread(&Intelligence::Think, AI);
 
-
 	CommandExecutor* VisionExecutor = new CommandExecutor(running, VisionQueue);
+	VisionExecutor->Execute();
 
 	ExecutorThread.join();
 	AIThread.join();

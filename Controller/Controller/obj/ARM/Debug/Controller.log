@@ -3,6 +3,6 @@
   Validating architecture
   Starting remote build
   Compiling sources:
-  Intelligence.cpp
+  Command.cpp
   Linking objects
   Controller.vcxproj -> C:\Users\Thom\source\repos\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out
