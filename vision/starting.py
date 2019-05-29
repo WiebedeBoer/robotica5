@@ -3,14 +3,18 @@ import socket
 import cv2
 from camera_opencv import getPiCamera
 import numpy
-
+import os
+#Onwindows use:
+#os.chdir(os.path.realpath(__file__+ '\\..\\'))
+#OnLinux Use:
+#os.chdir(os.path.realpath(__file__+ '//..//'))
 # Here the function gets the string send by the pi
 def SocketReceive():
     rec = sok.recv(1024, 0)
     return rec
 
 
-# Here the function sends a string back to the pi
+# Here the function sends a string ba ck to the pi
 def SocketSend(msg):
     utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
@@ -46,6 +50,7 @@ def vision(argument, argument1, frame):
 def chickenSurvivalRun(argument, argument1, frame):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
+    return test
 
 
 def eggtelligence(argument, argument1, frame):
@@ -59,13 +64,14 @@ def eggtelligence(argument, argument1, frame):
 
     def eggDistance(argument, frame):
         sys.path.append('Wedstrijd/Eggtelligence/')
-        from startEggDistance import eggDistance
-        return eggDistance(frame)
+        from startEggDistance import startEggDistance
+        return startEggDistance(frame)
 
     def qrDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
-        from startQRDistance import qrDistance
-        return qrDistance(townSwitcher(argument), frame)
+        sys.path.append('Wedstrijd/Eggtelligence/')        
+        from startQRDistance import startQRDistance
+        return startQRDistance(townSwitcher(argument), frame)
+
         
     def townSwitcher(argument):
         switcher = {
@@ -78,10 +84,7 @@ def eggtelligence(argument, argument1, frame):
         func = switcher.get(argument, "Something went wrong")
         return func
 
-    eggtelligenceSwitcher(argument, argument1, frame)
-
-
-
+    return eggtelligenceSwitcher(argument, argument1, frame)
 # cap = cv2.VideoCapture(0)
 # try:
 #     while True:

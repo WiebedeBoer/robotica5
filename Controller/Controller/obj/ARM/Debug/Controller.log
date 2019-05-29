@@ -5,11 +5,11 @@
   Compiling sources:
   Intelligence.cpp
   main.cpp
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(19,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(19,61): warning :  MicroController* Worker = new MicroController("/dev/ttyACM1");
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(19,61): warning :                                                              ^
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(20,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(20,61): warning :  MicroController* Sensor = new MicroController("/dev/ttyACM0");
-Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\main.cpp(20,61): warning :                                                              ^
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(19,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(19,61): warning :  MicroController* Worker = new MicroController("/dev/ttyACM0");
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(19,61): warning :                                                              ^
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(20,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(20,61): warning :  MicroController* Sensor = new MicroController("/dev/ttyACM3");
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(20,61): warning :                                                              ^
   Linking objects
-  Controller.vcxproj -> Z:\HBO-ICT2_Mac\Periode_4\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out
+  Controller.vcxproj -> C:\Users\Thom\source\repos\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out

@@ -44,7 +44,9 @@ def viewBeam(frame):
 
         if shape == "rectangle":
             # calculate distance
-            distance = calculateDistance(w, 1320, 2.5)
+            distance = calculateDistance(w, 625, 2.4)
+            #distance = calculateDistance(w, 1320, 2.4) #old broad one
+            #distance = calibration(w, 50, 2.4) #7200 #for calibration
 
             return round(distance, 2)
 

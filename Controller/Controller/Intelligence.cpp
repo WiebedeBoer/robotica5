@@ -1,4 +1,7 @@
 #include "Intelligence.h"
+#include <sstream>
+#include <iostream>
+#include <string>
 
 Intelligence::Intelligence(DataCollector* DC, GuardedQueue<Command>* GQ, GuardedQueue<Command>* VQ, bool* RN, MicroController* WKR, MicroController*SNR, Vision* V)
 {
@@ -25,11 +28,13 @@ void Intelligence::Think()
 	int ArmInterfal = 10000000;
 	int DriveInterfal = 2000000;
 	int VisionInterfall = 10000;
+	int GripperInterval = 9000;
 	std::chrono::system_clock::time_point RefreshController = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 	std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 	std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
 	std::chrono::system_clock::time_point Drive = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
 	std::chrono::system_clock::time_point RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
+	std::chrono::system_clock::time_point GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
 
 	while (*running == true) {
 		if (std::chrono::system_clock::now() > RefreshController) {
@@ -48,6 +53,23 @@ void Intelligence::Think()
 			VisionQueue->push(Command(VisionApi, "eggDistance", Database));
 			VisionQueue->push(Command(VisionApi, "qrDistance", Database));
 			RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
+		}
+		if (std::chrono::system_clock::now() > GripperVision) {
+			std::vector<std::string> args;
+			//= Database->eggDistance;
+			int eggdis = 0;	
+			//std::cout << Intelligence::Database->wedstrijd.eggDistance << std::endl;
+			if (!Intelligence::Database->wedstrijd.eggDistance.empty) {
+				eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
+				if (eggdis != 0 && eggdis != NULL) {
+					if (eggdis < 30) {
+						//if (std::stoi(Intelligence::Database->wedstrijd.eggDistance) < 30) {
+							//CommandQueue->push(Command(Worker, "ArmForward", Database, args));
+						CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+					}
+				}
+			}			
+			GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
 		}
 		if (std::chrono::system_clock::now() > Drive) {
 

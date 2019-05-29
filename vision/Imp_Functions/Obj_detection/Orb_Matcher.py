@@ -2,13 +2,11 @@ import cv2
 import numpy as np
 import glob
 
-images = [cv2.imread(file) for file in glob.glob('img/*png')]
+images = [cv2.imread(file) for file in glob.glob('../img/*jpg')]
 
 print(len(images))
 
 cap = cv2.VideoCapture(0)
-
-# frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 # ORB Detection
 orb = cv2.ORB_create()
