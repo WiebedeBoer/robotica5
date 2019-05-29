@@ -40,4 +40,3 @@ std::pair<int, int> DataCollector::GetJoy2()
 {
 	return DataCollector::joy2;
 }
-

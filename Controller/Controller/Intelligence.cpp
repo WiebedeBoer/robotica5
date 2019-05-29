@@ -34,7 +34,7 @@ void Intelligence::Think()
 			//= Database->eggDistance;
 			int eggdis = 0;
 			//std::cout << Intelligence::Database->wedstrijd.eggDistance << std::endl;
-			if (!Intelligence::Database->wedstrijd.eggDistance.empty) {
+			if (!Intelligence::Database->wedstrijd.eggDistance.empty()) {
 				eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
 				if (eggdis != 0 && eggdis != NULL) {
 					if (eggdis < 30) {
@@ -79,7 +79,6 @@ void Intelligence::CheckDrive()
 		}
 		if (joy2->first > 30 && joy2->first < 34 && joy2->second > 30 && joy2->second < 34) {//StopDriving
 			CommandQueue->push(Command(Worker, "DriveStop", Database, args));
-
 		}
 		if (joy2->first > 35) {//DriveForward
 			args[0] = "16";
