@@ -239,13 +239,13 @@ String updateGyro() {
   GyroX=Wire.read()<<8|Wire.read();
   GyroY=Wire.read()<<8|Wire.read();
   GyroZ=Wire.read()<<8|Wire.read();
-  Serial.print("AccX = "); Serial.print(AccX);
-  Serial.print(" || AccY = "); Serial.print(AccY);
-  Serial.print(" || AccZ = "); Serial.print(AccZ);
-  Serial.print(" || Temp = "); Serial.print(Temp/340.00+36.53);
-  Serial.print(" || GyroX = "); Serial.print(GyroX);
-  Serial.print(" || GyroY = "); Serial.print(GyroY);
-  Serial.print(" || GyroZ = "); Serial.println(GyroZ);
+  //Serial.print("AccX = "); Serial.print(AccX);
+  //Serial.print(" || AccY = "); Serial.print(AccY);
+  //Serial.print(" || AccZ = "); Serial.print(AccZ);
+  //Serial.print(" || Temp = "); Serial.print(Temp/340.00+36.53);
+  //Serial.print(" || GyroX = "); Serial.print(GyroX);
+  //Serial.print(" || GyroY = "); Serial.print(GyroY);
+  //Serial.print(" || GyroZ = "); Serial.println(GyroZ);
   return String(GyroX)+";"+String(GyroY)+";"+String(GyroZ);
 }
 
