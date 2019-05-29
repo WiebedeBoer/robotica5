@@ -1,4 +1,7 @@
 #include "Intelligence.h"
+#include <sstream>
+#include <iostream>
+#include <string>
 
 Intelligence::Intelligence(DataCollector* DC, GuardedQueue<Command>* GQ, GuardedQueue<Command>* VQ, bool* RN, MicroController* WKR, MicroController*SNR, Vision* V)
 {
@@ -25,7 +28,24 @@ void Intelligence::Think()
 		if (std::chrono::system_clock::now() > PrintJoystick) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
-		}		
+		}
+		if (std::chrono::system_clock::now() > GripperVision) {
+			std::vector<std::string> args;
+			//= Database->eggDistance;
+			int eggdis = 0;
+			//std::cout << Intelligence::Database->wedstrijd.eggDistance << std::endl;
+			if (!Intelligence::Database->wedstrijd.eggDistance.empty) {
+				eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
+				if (eggdis != 0 && eggdis != NULL) {
+					if (eggdis < 30) {
+						//if (std::stoi(Intelligence::Database->wedstrijd.eggDistance) < 30) {
+							//CommandQueue->push(Command(Worker, "ArmForward", Database, args));
+						CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+					}
+				}
+			}
+			GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
+		}
 	}
 }
 

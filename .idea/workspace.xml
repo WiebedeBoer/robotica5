@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/FM_Homography.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/object_recognition1.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Orb_Matcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/object_recognition2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img1.png" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img2.png" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img3.png" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img4.png" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/img/kip_img4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Template_Matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Template_Matcher.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/starting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+            <state relative-caret-position="1620">
+              <caret line="108" selection-start-line="108" selection-end-line="108" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -32,8 +25,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/FM_Homography.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="725">
+              <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Template_Matcher.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -47,7 +59,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pattern_points</find>
       <find>objectPoints</find>
       <find>mask</find>
       <find>gray</find>
@@ -77,6 +88,7 @@
       <find>None</find>
       <find>kp1</find>
       <find>img</find>
+      <find>cv</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/vision/Imp_Functions</dir>
@@ -314,12 +326,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img4.png" />
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img5.png" />
-    <entry file="file://$PROJECT_DIR$/vision/Distance/One_Cam/img7.png" />
-    <entry file="file://$PROJECT_DIR$/vision/Pictures/RoodVoor2.png" />
-    <entry file="file://$PROJECT_DIR$/vision/Pictures/RoodVoor.png" />
-    <entry file="file://$PROJECT_DIR$/vision/Pictures/RoodNaast5.png" />
     <entry file="file://$PROJECT_DIR$/vision/Pictures/GroenVoor.png" />
     <entry file="file://$PROJECT_DIR$/vision/Pictures/GR1.PNG" />
     <entry file="file://$PROJECT_DIR$/vision/Pictures/BlauwAchter.png" />
@@ -443,7 +449,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img1.jpg" />
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/clahe.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -482,9 +487,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img4.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_recognize.JPEG" />
     <entry file="file://$PROJECT_DIR$/vision/Kwalificatie/Vision/blueBeam.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -510,28 +512,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/FM_Homography.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="40" column="21" lean-forward="true" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img3.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img4.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img5.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img1.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/vision/starting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+        <state relative-caret-position="1620">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/kip_recognize.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img7.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/img/kip_img6.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Template_Matcher.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/FM_Homography.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

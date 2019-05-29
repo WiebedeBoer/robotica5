@@ -1,27 +1,43 @@
-import cv2 as cv
+import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+import time
 
-img = cv.imread('messi5.jpg',0)
-img2 = img.copy()
+cap = cv2.VideoCapture(0)
 
-template = cv.imread('template.jpg',0)
-w, h = template.shape[::-1]
+template = cv2.imread('../img/kip_img7.jpg')
+w, h, _ = template.shape[::-1]
+time.sleep(1)
 
-# All the 6 methods for comparison in a list
-methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
-            'cv.TM_CCORR_NORMED', 'cv.TM_SQDIFF', 'cv.TM_SQDIFF_NORMED']
+while True:
+    print("In True")
+    _, frame = cap.read()
+    # All the 6 methods for comparison in a list
+    # methods = ['cv2.TM_CCOEFF_NORMED', 'cv2.TM_CCORR_NORMED', 'cv2.TM_SQDIFF_NORMED']
 
-for meth in methods:
-    img = img2.copy()
-    method = eval(meth)
-    # Apply template Matching
-    res = cv.matchTemplate(img,template,method)
-    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
-    # If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum
-    if method in [cv.TM_SQDIFF, cv.TM_SQDIFF_NORMED]:
-        top_left = min_loc
-    else:
-        top_left = max_loc
-    bottom_right = (top_left[0] + w, top_left[1] + h)
-    cv.rectangle(img,top_left, bottom_right, 255, 2)
+    methods = ['cv2.TM_CCOEFF_NORMED']
+
+    for meth in methods:
+        method = eval(meth)
+
+        # Apply template Matching
+        res = cv2.matchTemplate(frame, template, method)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+
+        # If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum
+        if method in [cv2.TM_SQDIFF_NORMED]:
+            top_left = min_loc
+        else:
+            top_left = max_loc
+
+        bottom_right = (top_left[0] + w, top_left[1] + h)
+        # cv2.rectangle(frame, top_left, bottom_right, 255, 2)
+        cv2.rectangle(frame, (top_left[0], top_left[1]), (top_left[0] + w, top_left[1] + h), (0, 255, 0), 2)
+
+        cv2.imshow(str(meth), frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindow()

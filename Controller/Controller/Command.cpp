@@ -97,4 +97,12 @@ void Command::Execute() {
 		std::cout << "qrDistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
 		return;
 	}
+	if (Command::type == "GripperVision") {
+		//Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("0:3:0:0");
+		//std::cout << "eiGripper: " << Command::Database->kwalificatie.eiGripper << std::endl;
+		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("0:3:0:0");
+		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
+		std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
+		return;
+	}
 }
