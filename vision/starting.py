@@ -5,6 +5,8 @@ from camera_opencv import getPiCamera
 import numpy
 import os
 
+os.chdir(os.path.realpath(__file__+ '\\..\\'))
+
 # Here the function gets the string send by the pi
 def SocketReceive():
     rec = sok.recv(1024, 0)
@@ -45,8 +47,7 @@ def vision(argument, argument1, frame):
 
 
 def chickenSurvivalRun(argument, argument1, frame):
-    sys.path.append(os.path.join(sys.path[0],'Wedstrijd','ChickenSurvivalRun'))
-    #sys.path.append('Wedstrijd/ChickenSurvivalRun/')
+    sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
     return test
 
@@ -61,12 +62,12 @@ def eggtelligence(argument, argument1, frame):
         return func(argument1, frame)
 
     def eggDistance(argument, frame):
-        sys.path.append(os.path.join(sys.path[0],'Wedstrijd','Eggtelligence'))
+        sys.path.append('Wedstrijd/Eggtelligence/')
         from startEggDistance import startEggDistance
         return startEggDistance(frame)
 
     def qrDistance(argument, frame):
-        sys.path.append(os.path.join(sys.path[0],'Wedstrijd','Eggtelligence'))
+        sys.path.append('Wedstrijd/Eggtelligence/')        
         from startQRDistance import startQRDistance
         return startQRDistance(townSwitcher(argument), frame)
 
@@ -83,22 +84,19 @@ def eggtelligence(argument, argument1, frame):
         return func
 
     return eggtelligenceSwitcher(argument, argument1, frame)
-
-
-
-#cap = cv2.VideoCapture(0)
-#try:
-#    while True:
-#        # frame = getCapture()
-#        _, frame = cap.read()
-#        print(mainSwitcher(1, 2, 0, frame))
-#        # cv2.imshow("frame", frame)
-#        if cv2.waitKey(1) & 0xFF == ord('q'):
-#            break
-
-#except KeyboardInterrupt:
-#    cap.release()
-#    cv2.destroyAllWindows()
+# cap = cv2.VideoCapture(0)
+# try:
+#     while True:
+#         # frame = getCapture()
+#         _, frame = cap.read()
+#         print(mainSwitcher(3, 1, 0, frame))
+#         # cv2.imshow("frame", frame)
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
+#
+# except KeyboardInterrupt:
+#     cap.release()
+#     cv2.destroyAllWindows()
 
 sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
@@ -117,4 +115,4 @@ except Exception, e:
     print e
 
 finally:
-sok.close()
+    sok.close()

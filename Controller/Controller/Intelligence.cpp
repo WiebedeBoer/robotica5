@@ -24,7 +24,7 @@ void Intelligence::Think()
 	int PrintInterfal = 100000000;
 	int ArmInterfal = 10000000;
 	int DriveInterfal = 2000000;
-	int VisionInterfall = 10000;
+	int VisionInterfall = 10000000;
 	std::chrono::system_clock::time_point RefreshController = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 	std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 	std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
