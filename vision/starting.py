@@ -4,9 +4,10 @@ import cv2
 from camera_opencv import getPiCamera
 import numpy
 import os
-
-os.chdir(os.path.realpath(__file__+ '\\..\\'))
-
+#Onwindows use:
+#os.chdir(os.path.realpath(__file__+ '\\..\\'))
+#OnLinux Use:
+#os.chdir(os.path.realpath(__file__+ '//..//'))
 # Here the function gets the string send by the pi
 def SocketReceive():
     rec = sok.recv(1024, 0)
