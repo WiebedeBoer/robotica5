@@ -3,6 +3,9 @@ import socket
 import cv2
 from camera_opencv import getPiCamera
 import numpy
+import os
+
+os.chdir(os.path.realpath(__file__+ '\\..\\'))
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -10,7 +13,7 @@ def SocketReceive():
     return rec
 
 
-# Here the function sends a string back to the pi
+# Here the function sends a string ba ck to the pi
 def SocketSend(msg):
     utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
@@ -64,7 +67,7 @@ def eggtelligence(argument, argument1, frame):
         return startEggDistance(frame)
 
     def qrDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
+        sys.path.append('Wedstrijd/Eggtelligence/')        
         from startQRDistance import startQRDistance
         return startQRDistance(townSwitcher(argument), frame)
 
@@ -81,9 +84,6 @@ def eggtelligence(argument, argument1, frame):
         return func
 
     return eggtelligenceSwitcher(argument, argument1, frame)
-
-
-
 # cap = cv2.VideoCapture(0)
 # try:
 #     while True:

@@ -10,12 +10,12 @@ def typesafe_perspectiveTransform(A,B):
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 240)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-MIN_MATCH_COUNT = 5
-
-# images = [cv2.imread(file) for file in glob.glob('../img/*jpg')]  # trainImage
+MIN_MATCH_COUNT = 10
+#images = [cv2.imread(file) for file in glob.glob('../img/png/*png')]  # trainImage
 
 images = []
-images.append(cv2.imread('../img/kip_img6.jpg'))
+images.append(cv2.imread('../img/png/kip_img1-min.png'))
+#
 
 # Initiate SIFT detector
 sift = cv2.xfeatures2d.SIFT_create()
@@ -32,14 +32,12 @@ while True:
 
 
         FLANN_INDEX_KDTREE = 0
-        index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=100)
-        search_params = dict(checks=1000)
+        index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
+        search_params = dict(checks=100)
 
         flann = cv2.FlannBasedMatcher(index_params, search_params)
 
         matches = flann.knnMatch(des1, des2, k=2)
-        print matches
-        break
         # store all the good matches as per Lowe's ratio test.
         good = []
         for m, n in matches:
