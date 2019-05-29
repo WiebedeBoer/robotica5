@@ -45,6 +45,12 @@ float pitch = 0;
 float roll = 0;
 float yaw = 0;
 
+//function strings
+String ret_distance;
+String ret_sound;
+String ret_speed;
+String ret_gyro;
+
 //setup
 void setup() {
   Serial.begin(115200);
@@ -94,10 +100,14 @@ int readSensor(int pn, int mx)
   return map(analogRead(pn), 0, 1023, 0, mx-1);    
 }
 
-//distance sensor function
+//send sensor values function
 String sendSensorsValues(){ 
+  ret_distance = updateDistance();
+  ret_sound = updateMicrophone();
+  ret_speed = getSpeed();
+  ret_gyro = updateGyro();
   //return alle waarden
-  //return "ack:Sensor?<"+ readstring + ";" + String(SoundLow) + ";" + String(SoundMedium) + ";" + String(SoundHigh) + ";"+ String(SpeedL)+ ";"+ String(SpeedR)+";"+ String(pitch)+";"+ String(roll)+";"+ String(yaw)+">|";
+  return "ack:Sensor?<"+ret_distance+";"+ret_sound+";"+ret_speed+";"+ret_gyro+">|";
 }
 
 //SPEED
@@ -112,29 +122,7 @@ String gyroscopeSensors(){
   //return "ack:Sensor?<"+ String(gyro) + ">|";
 }
 
-void Refresh(){
-//  Speed = digitalRead(SpeedIn);
-//  Serial.print(Speed);  
-//      Vector norm = accelgyro.readNormalizeGyro();
-
-//      pitch = pitch + norm.YAxis
-}
-void serialEvent1(){
-//  while(Serial1.available()&& rx_Complete2 == false){
-//    rx_Byte2 = (char)Serial1.read();//Read next byte
-//    rx_Msg2 += rx_Byte2;   
-//    if(rx_Byte2 == '\n'){//endling and cleanup
-//      rx_Complete2 = true;
-//      }
-//  }
-}
-
-//SOUND
-String soundSensors(){
-  int sound;
-  //return "ack:Sensor?<"+ String(sound) + ">|";
-}
-
+//SOCKET
 //serialEventInterupt
 void serialEvent(){
   while(Serial.available()){
@@ -168,12 +156,13 @@ void serialEvent(){
       String result = "ack:";
       
       if (rx_Msg == "allSensors?|"){
-        result += "allSensors?|" + String(distance) + ";" + String(speedL) + ";" + String(speedR);
+        //result += "allSensors?|" + String(distance) + ";" + String(speedL) + ";" + String(speedR);
+        result += sendSensorsValues();
 //        String result = readSensors(distance);
 //        String Checksum = String(checksum(result));
 //        Serial.println(result + Checksum );  
       } else if (rx_Msg == "speed?|") { // speed?,1;300&5;0|10
-        Serial.println("Getting them speed");
+//        Serial.println("Getting them speed");
         result += "speed?<" + String(speedL) + ";" + speedR + ">|";
       }
     }
@@ -185,29 +174,37 @@ void serialEvent(){
   }
 }
 
-void updateDistance() { distance = (6787.0 / (analogRead(IRPin) - 3.0)) - 4.0; }
+//DISTANCE
+String updateDistance() { 
+  distance = (6787.0 / (analogRead(IRPin) - 3.0)) - 4.0; 
+  return String(distance);
+ }
 
-void updateMicrophone() {
+//SOUND
+String updateMicrophone() {
   mic = analogRead(micPin);
   soundL = analogRead(soundLPin);
   soundM = analogRead(soundMPin);
   soundH = analogRead(soundHPin);
+  String str_sound = String(mic)+";"+String(soundL)+";"+String(soundM)+";"+String(soundH);
+  return str_sound;
 }
 
+//SPEED
 int maxMillis = 500;
 unsigned long startMillis = millis();
 int left = 0, right = 0, count = 0;
 
-String measureSpeed() {
+void measureSpeed() {
   unsigned long currentMillis = millis();
   if (currentMillis - startMillis > maxMillis) {
     speedL = left * 3;
     speedR = right * 3;
     left = 0, right = 0;
     startMillis = currentMillis;
-    Serial.println(speedL);
-    Serial.println(speedR);
-    Serial.print("Total counts: ");Serial.println(count);
+    //Serial.println(speedL);
+    //Serial.println(speedR);
+    //Serial.print("Total counts: ");Serial.println(count);
     count = 0;
   } else {
     if (digitalRead(speedRPin) == 0) {
@@ -219,15 +216,18 @@ String measureSpeed() {
 
     count++;
   }
-  
-  return "ay";
 }
 
+String getSpeed() {
+  return String(speedL+";"+speedR);
+}
+
+//GYROSCOPE
 // Pins
 //#define gyrosclPin 18         // Gyroscoop scl
 //#define gyrosdaPin 19         // Gyroscoop sda
 //#define gyrointPin 11         // Gyroscoop int digital
-void updateGyro() {
+String updateGyro() {
   Wire.beginTransmission(MPU6050_addr);
   Wire.write(0x3B);
   Wire.endTransmission(false);
@@ -246,6 +246,7 @@ void updateGyro() {
   Serial.print(" || GyroX = "); Serial.print(GyroX);
   Serial.print(" || GyroY = "); Serial.print(GyroY);
   Serial.print(" || GyroZ = "); Serial.println(GyroZ);
+  return String(GyroX)+";"+String(GyroY)+";"+String(GyroZ);
 }
 
 // Calculate checksum.
