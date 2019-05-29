@@ -3,6 +3,7 @@ import socket
 import cv2
 from camera_opencv import getPiCamera
 import numpy
+import os
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -10,7 +11,7 @@ def SocketReceive():
     return rec
 
 
-# Here the function sends a string back to the pi
+# Here the function sends a string ba ck to the pi
 def SocketSend(msg):
     utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
@@ -44,7 +45,8 @@ def vision(argument, argument1, frame):
 
 
 def chickenSurvivalRun(argument, argument1, frame):
-    sys.path.append('Wedstrijd/ChickenSurvivalRun/')
+    sys.path.append(os.path.join(sys.path[0],'Wedstrijd','ChickenSurvivalRun'))
+    #sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
     return test
 
@@ -59,12 +61,12 @@ def eggtelligence(argument, argument1, frame):
         return func(argument1, frame)
 
     def eggDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
+        sys.path.append(os.path.join(sys.path[0],'Wedstrijd','Eggtelligence'))
         from startEggDistance import startEggDistance
         return startEggDistance(frame)
 
     def qrDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
+        sys.path.append(os.path.join(sys.path[0],'Wedstrijd','Eggtelligence'))
         from startQRDistance import startQRDistance
         return startQRDistance(townSwitcher(argument), frame)
 
@@ -84,19 +86,19 @@ def eggtelligence(argument, argument1, frame):
 
 
 
-# cap = cv2.VideoCapture(0)
-# try:
-#     while True:
-#         # frame = getCapture()
-#         _, frame = cap.read()
-#         print(mainSwitcher(3, 1, 0, frame))
-#         # cv2.imshow("frame", frame)
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#
-# except KeyboardInterrupt:
-#     cap.release()
-#     cv2.destroyAllWindows()
+#cap = cv2.VideoCapture(0)
+#try:
+#    while True:
+#        # frame = getCapture()
+#        _, frame = cap.read()
+#        print(mainSwitcher(1, 2, 0, frame))
+#        # cv2.imshow("frame", frame)
+#        if cv2.waitKey(1) & 0xFF == ord('q'):
+#            break
+
+#except KeyboardInterrupt:
+#    cap.release()
+#    cv2.destroyAllWindows()
 
 sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
@@ -115,4 +117,4 @@ except Exception, e:
     print e
 
 finally:
-    sok.close()
+sok.close()
