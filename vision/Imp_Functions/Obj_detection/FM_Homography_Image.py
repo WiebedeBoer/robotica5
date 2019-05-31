@@ -13,6 +13,9 @@ trainImg = cv2.imread("../img/png/kip_img1-min.png", 0)
 trainKP, trainDesc = detector.detectAndCompute(trainImg, None)
 
 cam = cv2.VideoCapture(0)
+cam.set(cv2.CAP_PROP_FRAME_WIDTH, 240)
+cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+
 while True:
     ret, QueryImgBGR = cam.read()
     QueryImg = cv2.cvtColor(QueryImgBGR, cv2.COLOR_BGR2GRAY)
@@ -23,22 +26,37 @@ while True:
     for m, n in matches:
         if (m.distance < 0.75 * n.distance):
             goodMatch.append(m)
+
     if (len(goodMatch) > MIN_MATCH_COUNT):
         tp = []
         qp = []
+
         for m in goodMatch:
             tp.append(trainKP[m.trainIdx].pt)
             qp.append(queryKP[m.queryIdx].pt)
+
         tp, qp = np.float32((tp, qp))
         H, status = cv2.findHomography(tp, qp, cv2.RANSAC, 3.0)
+        matchesMask = status.ravel().tolist()
+
         h, w = trainImg.shape
         trainBorder = np.float32([[[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]])
         queryBorder = cv2.perspectiveTransform(trainBorder, H)
         cv2.polylines(QueryImgBGR, [np.int32(queryBorder)], True, (0, 255, 0), 5)
+
     else:
-        print "Not Enough match found- %d/%d" % (len(goodMatch), MIN_MATCH_COUNT)
-    cv2.imshow('result', QueryImgBGR)
+        print("Not Enough match found- %d/%d" % (len(goodMatch), MIN_MATCH_COUNT))
+        matchesMask = None
+
+    draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
+                       singlePointColor=None,
+                       matchesMask=matchesMask,  # draw only inliers
+                       flags=2)
+
+    matching_result = cv2.drawMatches(QueryImgBGR, queryKP, trainImg, trainKP, goodMatch, None, **draw_params)
+    cv2.imshow('Matching_result', matching_result)
     if cv2.waitKey(10) == ord('q'):
         break
+
 cam.release()
 cv2.destroyAllWindows()
