@@ -5,7 +5,7 @@ import time
 
 cap = cv2.VideoCapture(0)
 
-template = cv2.imread('../img/png/kip_img1-min.png')
+template = cv2.imread('../img/png/kip_head.png')
 w, h, _ = template.shape[::-1]
 time.sleep(1)
 

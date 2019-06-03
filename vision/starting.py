@@ -1,8 +1,6 @@
 import sys
 import socket
-import cv2
 from camera_opencv import getPiCamera
-import numpy
 import os
 
 os.chdir(os.path.realpath(__file__+ '\\..\\'))

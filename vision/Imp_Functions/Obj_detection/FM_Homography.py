@@ -15,7 +15,7 @@ MIN_MATCH_COUNT = 10
 # images = [cv2.imread(file) for file in glob.glob('../img/png/*png')]  # trainImage
 
 bigImages = []
-bigImages.append(cv2.imread('../img/png/kip_img1-min.png'))
+bigImages.append(cv2.imread('../img/png/kip_head.png'))
 
 images = []
 for img in bigImages:
