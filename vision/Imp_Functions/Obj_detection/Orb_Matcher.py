@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import glob
 
-images = [cv2.imread(file) for file in glob.glob('../img/png/kip_head.png')]
+images = [cv2.imread(file) for file in glob.glob('../img/png/kip_img1-min.png')]
 
 print(len(images))
 

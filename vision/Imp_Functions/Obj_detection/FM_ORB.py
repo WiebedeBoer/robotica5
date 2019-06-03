@@ -23,10 +23,6 @@ kpTrain, desTrain = orb.compute(imgTrainGray, kpTrain)
 firsttime = True
 MIN_MATCH_COUNT = 40
 
-hsv = cv2.cvtColor(imgTrainColor, cv2.COLOR_BGR2HSV)
-lower_blue = np.array([100, 120, 50])
-upper_blue = np.array([107, 255, 255])
-
 while True:
     ret, imgCamColor = cap.read()
     imgCamGray = cv2.cvtColor(imgCamColor, cv2.COLOR_BGR2GRAY)
@@ -45,7 +41,7 @@ while True:
         firsttime = False
 
     for m in matches:
-        if (m.distance / 100) < 0.5:
+        if (m.distance / 100) < 0.4:
             good.append(m)
 
     if len(good) > MIN_MATCH_COUNT:
