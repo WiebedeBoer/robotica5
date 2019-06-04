@@ -26,7 +26,8 @@ private:
 	int ArmInterfal = 1000;
 	int DriveInterfal = 2000000;
 	int VisionInterfall = 10000;
-	int GripperInterval = 100000000;
+	//int GripperInterval = 100000000;
+	int GripperInterval = 4000;
 
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
 	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
