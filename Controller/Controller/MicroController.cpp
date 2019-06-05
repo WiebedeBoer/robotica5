@@ -49,6 +49,14 @@ std::string MicroController::WaitForMessage(int &fd) {
 					return message;
 				}
 			}
+			if (dataavail == 4095)
+			{
+				if (message[0] == 0) {
+
+					std::cout << "to much DataAvailable" << std::endl;
+					return "to much DataAvailable";
+				}
+			}
 			if (dataavail < 0) {
 				std::cout << "DataAvailableError" << std::endl;
 				return "No DataAvailable";
@@ -71,9 +79,10 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 				calcsum = std::stoi(m[4]);
 			}
 			catch (const std::exception &) {
+
 				std::cout << "fatel ack error" << std::endl;
 			}
-			
+
 			Response = m[3].str();
 			if (acksum != calcsum) {
 
@@ -86,7 +95,7 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 			send.erase(send.find(","), (send.find("|") - send.find(",")));
 		}
 		catch (const std::exception &) {
-			std::cout << "fatel error in ackresponce" << std::endl;
+			std::cout << "fatel error in ackresponce{" << send << "}" << std::endl;
 		}
 	}
 	if (ack == send) {
@@ -120,7 +129,7 @@ void MicroController::SerialSend(std::string input) {
 		try
 		{
 			NackCount++;
-			Send(sendstring, fd	);
+			Send(sendstring, fd);
 		}
 		catch (const std::exception &) {
 
@@ -129,18 +138,21 @@ void MicroController::SerialSend(std::string input) {
 
 	} while (!ackresponse(WaitForMessage(fd), sendstring) && NackCount != 5);
 	if (NackCount == 5) {
-		std::cout << "CommandDropped After 5 tries" << std::endl;
+		std::cout << "CommandDropped After 5 tries{" << input << "}" << std::endl;
+		Response = "";
+		serialClose(fd);
+
 	}
 	else {
 		//std::cout << "MessageSend" << std::endl;
 	}
 }
 
-std::string MicroController::GetLastResponce(){
+std::string MicroController::GetLastResponce() {
 
 	std::string result = Response;
 	Response = "";
-return result;
+	return result;
 }
 MicroController::MicroController(char* usb)
 {

@@ -97,7 +97,7 @@ void serialEvent2(){
   }
   //execute received msg
       if(rx_Complete){
-      String OriginalMessage = rx_Msg;
+        String OriginalMessage = rx_Msg;
       int commaIndex = rx_Msg.indexOf(',');
       String rx_Msg_Speed = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
       rx_Msg = rx_Msg.substring(0, commaIndex) + "|";      
@@ -106,7 +106,6 @@ void serialEvent2(){
         if(rx_Msg == "refresh?|"){
           String result = Respond_AfstandBediening(); // returns ack:refresh?<var1:var2>|
           String Checksum = String(checksum(result));
-          
           robotspeed =  rx_Msg_Speed.toInt(); // 
           result = result + Checksum + "\n";
           int resultLength = result.length() +1; // convert string to char array

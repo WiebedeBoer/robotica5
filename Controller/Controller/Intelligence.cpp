@@ -18,8 +18,23 @@ Intelligence::~Intelligence()
 {
 }
 
+int RefreshInterfal = 200;
+int PrintInterfal = 1000;
+int ArmInterfal = 500;
+int DriveInterfal = 200;
+int VisionInterfall = 100000000;
+int GripperInterval = 100000000;
+
+std::chrono::system_clock::time_point refreshAfstandBediening = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
+std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
+std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+std::chrono::system_clock::time_point Drive = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
+std::chrono::system_clock::time_point RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
+std::chrono::system_clock::time_point GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
+
 void Intelligence::Think()
 {
+
 	while (*running == true) {
 		Intelligence::CheckAfstandbediening();
 		Intelligence::CheckVision();
@@ -138,12 +153,18 @@ void Intelligence::CheckArm()
 		args.push_back(std::to_string(joy1->second));
 
 
-		if (joy1->first > 40)
+		if (joy1->first > 40) {
+			CommandQueue->push(Command(Worker, "ArmLeft", Database, args));
+		}
+		else if (joy1->first < 20) {
+			CommandQueue->push(Command(Worker, "ArmRight", Database, args));
+		}
+		else if (joy1->second > 40) {
 			CommandQueue->push(Command(Worker, "ArmForward", Database, args));
-
-		if (joy1->first < 20)
+		}
+		else if (joy1->second < 20) {
 			CommandQueue->push(Command(Worker, "ArmBackward", Database, args));
-
+		}
 		joy1 = Tempjoy1;
 
 		MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
