@@ -50,31 +50,44 @@ void Command::Execute() {
 		std::cout << Command::slave->GetLastResponce() << std::endl;
 		return;
 	}
+	if (Command::type == "ArmLeft") {
+		Command::slave->SerialSend("servoDS?,1;1;100&5;0");
+		std::cout << "The Arm is moving Left!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "ArmRight") {
+		Command::slave->SerialSend("servoDS?,1;2;100&5;0");
+		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
 	if (Command::type == "ArmForward") {
-		Command::slave->SerialSend("servoDS?,1;1;200&5;0");
+		Command::slave->SerialSend("servoDS?,2;1;100&5;0");
 		std::cout << "The Arm is moving forward!!!:" <<args[0] <<"," <<  args[1] << std::endl;
 		return;
-
 	}
 	if (Command::type == "ArmBackward") {
-		Command::slave->SerialSend("servoDS?,1;2;200&5;0");
+		Command::slave->SerialSend("servoDS?,2;2;100&5;0");
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
-
 	}
 	if (Command::type == "DriveStop") {
 		Command::slave->SerialSend("motor?,0;0&0;0");
+		return;
 	}
 	if (Command::type == "DriveForward") {
 		Command::slave->SerialSend("motor?,1;"+args[0]+"&2;" + args[0] + "");
+		return;
 	}
 	if (Command::type == "DriveBackward") {
 		Command::slave->SerialSend("motor?,2;" + args[0] + "&2;" + args[0] + "");
+		return;
 	}
 	if (Command::type == "DriveLeft") {
 		Command::slave->SerialSend("motor?,2;" + args[0] + "&1;" + args[0] + "");
+		return;
 	}if (Command::type == "DriveRight") {
 		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
+		return;
 	}
 	if (Command::type == "chickenSurvivalRun") {
 		std::string temp = Command::VisionSlave->executeCommand("2:0:0");
@@ -95,6 +108,14 @@ void Command::Execute() {
 		
 		Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
 		std::cout << "qrDistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
+		return;
+	}
+	if (Command::type == "GripperVision") {
+		//Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("0:3:0:0");
+		//std::cout << "eiGripper: " << Command::Database->kwalificatie.eiGripper << std::endl;
+		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("0:3:0:0");
+		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
+		std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
 		return;
 	}
 }

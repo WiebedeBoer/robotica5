@@ -17,11 +17,16 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 	std::regex rgx("(.*?),(.*?):(.*?),(.*)");
 	std::smatch m;
 	std::regex_search(input, m, rgx);
-
-	joy1.first = std::stoi(m[1]);
-	joy1.second = std::stoi(m[2]);
-	joy2.first = std::stoi(m[3]);
-	joy2.second =  std::stoi(m[4]);
+	try {
+		joy1.first = std::stoi(m[1]);
+		joy1.second = std::stoi(m[2]);
+		joy2.first = std::stoi(m[3]);
+		joy2.second = std::stoi(m[4]);
+	}
+	catch (const std::exception &) {
+		std::cout << "joy stoi error" << std::endl;
+	}
+	
 
 	DataCollector::speed = joy1.first;
 }
@@ -35,4 +40,3 @@ std::pair<int, int> DataCollector::GetJoy2()
 {
 	return DataCollector::joy2;
 }
-
