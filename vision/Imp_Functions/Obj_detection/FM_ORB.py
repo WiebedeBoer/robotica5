@@ -10,16 +10,16 @@ from helpFunctions import CLAHE
 def calculateCenter(pts):
     allXPoints = []
     allYPoints = []
-    sumX = 0
-    sumY = 0
 
     for p in pts:
         allXPoints.append(p[0][0])
         allYPoints.append(p[0][1])
 
+    sumX = 0
     for x in allXPoints:
         sumX += x
 
+    sumY = 0
     for y in allYPoints:
         sumY += y
     return [sumX / len(pts), sumY / len(pts)]
@@ -29,16 +29,16 @@ def calculateCenter(pts):
 def calculateDistance(pts, center):
     allXDistances = []
     allYDistances = []
-    sumX = 0
-    sumY = 0
 
     for p in pts:
         allXDistances.append((abs(p[0][0]) - center[0]))
         allYDistances.append((abs(p[0][1]) - center[0]))
 
+    sumX = 0
     for x in allXDistances:
         sumX += x
 
+    sumY = 0
     for y in allYDistances:
         sumY += y
     return [sumX / len(pts), sumY / len(pts)]
@@ -80,7 +80,7 @@ def FM_ORB():
     kpTrain = orb.detect(imgTrainGray, None)   # Detect orbs in imgTrainGray
     kpTrain, desTrain = orb.compute(imgTrainGray, kpTrain)    # Detect descriptors in imgTrainGray
 
-    firsttime = True    # If firsttime is True then set width and heights of frame and images as variables
+    firstTime = True    # If firstTime is True then set width and heights of frame and images as variables
     MIN_MATCH_COUNT = 20    # There need to be at least 20 matches before drawing a rectangle
 
     while True:
@@ -96,13 +96,13 @@ def FM_ORB():
         best_matches = []   # Only an amount of the best good matches are appended in this list
 
         # Get shape and dimensions of the image and frame
-        if firsttime is True:
+        if firstTime is True:
             h1, w1 = imgCamColor.shape[:2]
             h2, w2 = imgTrainColor.shape[:2]
             nWidth = w1 + w2
             nHeight = max(h1, h2)
             hdif = (h1 - h2) / 2
-            firsttime = False
+            firstTime = False
 
         # For every match check if the match is good enough
         for m in matches:
