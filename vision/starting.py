@@ -5,7 +5,7 @@ import os
 import cv2
 
 #os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
-#os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
+os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -24,7 +24,7 @@ def splitter(msg):
 
 
 # Main switcher
-def mainSwitcher(argument, argument1, argument2, frame):
+def mainSwitcher(frame, argument, argument1, argument2):
     switcher = {
         0: pitch,
         1: vision,
@@ -33,57 +33,29 @@ def mainSwitcher(argument, argument1, argument2, frame):
     }
 
     func = switcher.get(argument, "Nothing")
-    return func(argument1, argument2, frame)
+    return func(frame, argument1, argument2)
 
 
-def pitch(argument, argument1, frame):
+def pitch(frame, argument, argument1):
     return "Hello"
 
 
-def vision(argument, argument1, frame):
+def vision(frame, argument, argument1):
     sys.path.append('Kwalificatie/Vision/')
     from blueBeam import viewBeam
     return viewBeam(frame)
 
 
-def chickenSurvivalRun(argument, argument1, frame):
+def chickenSurvivalRun(frame, argument, argument1):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
     return test
 
 
-def eggtelligence(argument, argument1, frame):
-    def eggtelligenceSwitcher(argument, argument1, frame):
-        switcher = {
-            0: eggDistance,
-            1: qrDistance
-        }
-        func = switcher.get(argument, "Something went wrong")
-        return func(argument1, frame)
-
-    def eggDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
-        from startEggDistance import startEggDistance
-        return startEggDistance(frame)
-
-    def qrDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')        
-        from startQRDistance import startQRDistance
-        return startQRDistance(townSwitcher(argument), frame)
-
-        
-    def townSwitcher(argument):
-        switcher = {
-            0: "'s-Hertogenbosch",
-            1: "Eindhoven",
-            2: "Eibergen",
-            3: "Barneveld",
-            4: "Duckstad"
-        }
-        func = switcher.get(argument, "Something went wrong")
-        return func
-
-    return eggtelligenceSwitcher(argument, argument1, frame)
+def eggtelligence(frame, argument, argument1):
+    sys.path.append('Wedstrijd/Eggtelligence/')
+    from eggtelligence import eggtelligence
+    return eggtelligence(frame, argument, argument1)
 
 
 cap = cv2.VideoCapture(0)
@@ -91,7 +63,7 @@ try:
     while True:
         # frame = getCapture()
         _, frame = cap.read()
-        print(mainSwitcher(3, 1, 0, frame))
+        print(mainSwitcher(frame, 3, 1, 0))
         # cv2.imshow("frame", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -109,7 +81,7 @@ except KeyboardInterrupt:
 #         msg = SocketReceive()
 #         msg = splitter(msg)
 #
-#         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), frame)
+#         msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
 #         SocketSend(msgBack)
 #
 # except Exception, e:

@@ -150,14 +150,14 @@ def start(imgTrainColor, images):
 
 
 def chickenRecognition():
-    images = [cv2.imread(file) for file in glob.glob('../../img/testImg/Kip/*jpg')]  # trainImage
-    imgTrainColor = cv2.imread('../img/png/Kip/original_kip.jpeg')
+    images = [cv2.imread(file) for file in glob.glob('../../Images/TestImg/Kip/*jpg')]  # trainImage
+    imgTrainColor = cv2.imread('../../Images/TrainImg/Kip/kip1.jpg')
     start(imgTrainColor, images)
 
 
 def cupRecognition():
-    images = [cv2.imread(file) for file in glob.glob('../img/testImg/Beker/*jpg')]  # trainImage
-    imgTrainColor = cv2.imread('../img/png/Beker/beker1.jpg')
+    images = [cv2.imread(file) for file in glob.glob('../../Images/TestImg/Beker/*jpg')]  # trainImage
+    imgTrainColor = cv2.imread('../../Images/TrainImg/Beker/beker1.jpg')
     start(imgTrainColor, images)
 
 cupRecognition()
