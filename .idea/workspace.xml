@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_IMAGE.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_ORIGINAL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/BRIEF.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/BRIEF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/FM_Homography.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/FM_Homography.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/Orb_Matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Orb_Matcher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/Template_Matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Template_Matcher.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/img/png/Kip/original_kip.jpeg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,26 +19,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="111" column="42" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB_IMAGE.py">
+        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+            <state relative-caret-position="839">
+              <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/BRIEF.py">
+        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_IMAGE.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="154" column="32" lean-forward="true" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/BRIEF.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
               <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
@@ -43,7 +50,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/FM_Homography.py">
+        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/FM_Homography.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
               <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="84" />
@@ -159,8 +166,8 @@
         <option value="$PROJECT_DIR$/vision/Imp_Functions/eggDetection.py" />
         <option value="$PROJECT_DIR$/vision/starting.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/FM_ORB.py" />
-        <option value="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB.py" />
         <option value="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB_IMAGE.py" />
+        <option value="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB.py" />
       </list>
     </option>
   </component>
@@ -193,30 +200,6 @@
               <item name="robotica5" type="462c0819:PsiDirectoryNode" />
               <item name="Vision" type="462c0819:PsiDirectoryNode" />
               <item name="Imp_Functions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="Vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Imp_Functions" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="Vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Imp_Functions" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="png" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
-              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
-              <item name="Vision" type="462c0819:PsiDirectoryNode" />
-              <item name="Imp_Functions" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="png" type="462c0819:PsiDirectoryNode" />
-              <item name="Kip" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -281,9 +264,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16997617" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16997617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -294,7 +276,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32876712" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4980143" visible="true" weight="0.19863014" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4980143" visible="true" weight="0.19863014" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5019857" side_tool="true" weight="0.22876713" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -322,25 +304,7 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vision/Imp_Functions/Extra_Functions/Obj_tracking.py" />
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/cv2/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="61" lean-forward="true" selection-start-line="7" selection-start-column="61" selection-end-line="7" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_tracking/tracking_apis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="25" column="49" lean-forward="true" selection-start-line="25" selection-start-column="49" selection-end-line="25" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/kip_recognize.jpg">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/kip_recognize.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Pitch/pitch.cpp">
@@ -355,7 +319,7 @@
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/png/original_kip.jpeg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/Template_Matcher.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Template_Matcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
@@ -418,7 +382,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/Orb_Matcher.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Orb_Matcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
@@ -428,7 +392,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB_ORIGINAL.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_ORIGINAL.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
@@ -584,7 +548,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/FM_Homography.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/FM_Homography.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="84" />
@@ -594,7 +558,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/BRIEF.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/BRIEF.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
@@ -604,17 +568,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/testImg/Egg/egg1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/testImg/Egg/egg2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/png/Beker/beker1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_IMAGE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="111" column="42" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
+        <state relative-caret-position="528">
+          <caret line="154" column="32" lean-forward="true" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB_IMAGE.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+        <state relative-caret-position="839">
+          <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
         </state>
       </provider>
     </entry>
