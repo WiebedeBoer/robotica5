@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 
 
+# Calculates the center of points
 def calculateCenter(pts):
     allXPoints = []
     allYPoints = []
@@ -21,6 +22,7 @@ def calculateCenter(pts):
     return [sumX / len(pts), sumY / len(pts)]
 
 
+# Calculates the distance between points and the center
 def calculateDistance(pts, center):
     allXDistances = []
     allYDistances = []
@@ -40,6 +42,7 @@ def calculateDistance(pts, center):
     return [sumX / len(pts), sumY / len(pts)]
 
 
+# Go through all the points and seek the points to put the rectangle around
 def findRectanglePoints(pts):
     minXmaxY = None
     maxXminY = None
@@ -57,9 +60,6 @@ def findRectanglePoints(pts):
 
     return [minXmaxY, maxXminY]
 
-
-def sortSecond(val):
-    return val[1]
 
 def FM_ORB():
     ESC = 27
