@@ -1,5 +1,9 @@
+import sys
+sys.path.append('../')
+
 import numpy as np
 import cv2
+from helpFunctions import CLAHE
 
 
 # Calculates the center of points
@@ -18,7 +22,6 @@ def calculateCenter(pts):
 
     for y in allYPoints:
         sumY += y
-
     return [sumX / len(pts), sumY / len(pts)]
 
 
@@ -38,7 +41,6 @@ def calculateDistance(pts, center):
 
     for y in allYDistances:
         sumY += y
-
     return [sumX / len(pts), sumY / len(pts)]
 
 
@@ -57,7 +59,6 @@ def findRectanglePoints(pts):
 
         if p[0][1] < maxXminY[1]: maxXminY[1] = p[0][1]
         if p[0][1] > minXmaxY[1]: minXmaxY[1] = p[0][1]
-
     return [minXmaxY, maxXminY]
 
 
@@ -79,11 +80,12 @@ def FM_ORB():
     kpTrain = orb.detect(imgTrainGray, None)   # Detect orbs in imgTrainGray
     kpTrain, desTrain = orb.compute(imgTrainGray, kpTrain)    # Detect descriptors in imgTrainGray
 
-    firsttime = True
-    MIN_MATCH_COUNT = 20
+    firsttime = True    # If firsttime is True then set width and heights of frame and images as variables
+    MIN_MATCH_COUNT = 20    # There need to be at least 20 matches before drawing a rectangle
 
     while True:
         ret, imgCamColor = cap.read()
+        imgCamColor = CLAHE(imgCamColor)    # Sets the contrast of the frame
         imgCamGray = cv2.cvtColor(imgCamColor, cv2.COLOR_BGR2GRAY)
 
         kpCam = orb.detect(imgCamGray, None)    # Detect orbs in imgTrainGray
@@ -115,7 +117,6 @@ def FM_ORB():
             src_pts = np.float32([kpCam[m.queryIdx].pt for m in best_matches]).reshape(-1, 1, 2)  # Get the points of the best_matches
             center = calculateCenter(src_pts)   # Calculate the center of these points
             avgDistance = calculateDistance(src_pts, center)    # Calculate the average distance between the points and the center
-
             drawPoints = []
 
             # If the distance to the center is greater than the average distance then don't use it
@@ -141,7 +142,6 @@ def FM_ORB():
             cv2.line(result, pt_a, pt_b, (255, 0, 0))
 
         cv2.imshow('Camera', result)
-
         key = cv2.waitKey(20)
         if key == ESC:
             break
