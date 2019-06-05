@@ -16,8 +16,8 @@ GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();
 GuardedQueue<Command>* VisionQueue = new GuardedQueue<Command>();
 DataCollector* Datacollector = new DataCollector();
 
-MicroController* Worker = new MicroController("/dev/ttyACM0");
-MicroController* Sensor = new MicroController("/dev/ttyACM1");
+MicroController* Worker = new MicroController("/dev/ttyACM1");
+MicroController* Sensor = new MicroController("/dev/ttyACM0");
 
 Vision* VisionApi = new Vision();
 

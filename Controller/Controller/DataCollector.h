@@ -53,7 +53,6 @@ public:
 private:
 	std::pair<int, int> joy1 = std::make_pair(0, 0);
 	std::pair<int, int> joy2 = std::make_pair(0, 0);
-	
+
 	int gyroscoop;
 };
-
