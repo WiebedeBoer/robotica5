@@ -80,10 +80,10 @@ void loop()
   }
 //  Serial.println("");
 
-  int xValr, yValr, buttonValr, xVall, yVall, buttonVall;
-
-  xVall = analogRead (Xinleft);
-  yVall = analogRead (Yinleft);
+//  int xValr, yValr, buttonValr, xVall, yVall, buttonVall;
+//
+//  xVall = analogRead (Xinleft);
+//  yVall = analogRead (Yinleft);
 
 //  Serial.println(yVall);
   
@@ -110,21 +110,20 @@ void loop()
       drivingL = false;
       drivingR = false;
     }
-  }
 
-  if (debug) {
-    Serial.println("-----------------------------------------");
-    for (int i = 1; i <= 5; i++) {
-      Serial.print("Servo "); Serial.println(i);
-      Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
-      Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
-      Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
-      Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
-      Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
-      Serial.println("");
+    if (debug) {
+      Serial.println("-----------------------------------------");
+      for (int i = 1; i <= 5; i++) {
+        Serial.print("Servo "); Serial.println(i);
+        Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
+        Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
+        Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
+        Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
+        Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
+        Serial.println("");
+      }
+      Serial.println("-----------------------------------------");
     }
-    Serial.println("-----------------------------------------");
-    delay(1000);
   }
 }
 
@@ -167,9 +166,9 @@ void serialEvent() {
       else if(rx_Msg == "motor?|") {
         result = respondMotor() + String(checksum(respondMotor())) + "\n";
       }
-//      else {
-//        result = "/n";
-//      }
+      else {
+        result = "ack:noAction?<>|\n";
+      }
       
       int resultLength = result.length() +1;          // Convert string to char array
       char resultarray[resultLength];
@@ -207,10 +206,10 @@ int checksum(String Str){
 }
 
 // Serial response functions
-String respondServo() { return "ack:servo?<"+ getAllPositions() +">|"; }
+String respondServo() { return "ack:servo?<>|"; }
 
-String respondServoS() { return "ack:servoS?<"+ getAllPositions() +">|"; }
+String respondServoS() { return "ack:servoS?<>|"; }
 
-String respondServoDS() { return "ack:servoDS?<"+ getAllPositions() +">|"; }
+String respondServoDS() { return "ack:servoDS?<>|"; }
 
 String respondMotor() { return "ack:motor?<>|"; }

@@ -76,7 +76,7 @@ void moveServoS(String input) {
   ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
 
   if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
-  valuesSplit(servoA, ";", id, pos);
+  valuesSplit(servoB, ";", id, pos);
   valuesSplit(pos, ";", pos, sp);
   if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
   ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
