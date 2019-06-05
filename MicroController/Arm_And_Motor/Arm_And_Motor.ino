@@ -53,6 +53,12 @@ void setup()
   pinMode(potLpin2, OUTPUT);
   pinMode(potRpin1, OUTPUT);
   pinMode(potRpin2, OUTPUT);
+  digitalWrite(potLpin1, LOW);
+  digitalWrite(potLpin2, LOW);
+  digitalWrite(potRpin1, LOW);
+  digitalWrite(potRpin2, LOW);
+  potL->set(0);
+  potR->set(0);
 
   pinMode (KEYinleft, INPUT);
   pinMode (KEYinright, INPUT);
