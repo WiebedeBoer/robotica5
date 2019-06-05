@@ -1,94 +1,87 @@
 /* Contains all functions and variables used regarding the robot arm */
 
 String servoA = "", servoB = "";
-int di, sp, pos;
+String id, di, pos, sp;
 
-void moveServo(String input) {
-  // Split input to servoA and servoB
+/* Split input to servoA and servoB */
+void valuesSplit(String input, String splitter, String &output1, String &output2) {
+  output1 = "", output2 = "";
+  
   for (int i = 0; i < input.length(); i++) {
-    if (input.substring(i, i+1) == "&") {
-      servoA = input.substring(0, i);
-      servoB = input.substring(i+1);
+    if (input.substring(i, i+1) == splitter) {  // Found splitter
+      output1 = input.substring(0, i);
+      output2 = input.substring(i+1);
       break;
     }
   }
+  
+  if (output1 == "") { output1 = input; } // Splitter not found
+}
 
-  if (servoB == "") { servoA = input; } //Serial.println(servoA); }
+void moveServo(String input) {
+  valuesSplit(input, "&", servoA, servoB);
+
+  if (debug) { Serial.print("servoA: "); Serial.println(servoA); }
+  valuesSplit(servoA, ";", id, pos);
+
+  if (debug) { Serial.print("Id / Pos: ");Serial.print(id);Serial.print(" / ");Serial.println(pos); }
+  ax12a.moveRW(id.toInt(), pos.toInt());
+
+  if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
+  valuesSplit(servoB, ";", id, pos);
+
+  if (debug) { Serial.print("Id / Pos: ");Serial.print(id);Serial.print(" / ");Serial.println(pos); }
+  ax12a.moveRW(id.toInt(), pos.toInt());
   
-  // Search seperator and move servo
-  if (servoA.length() > 0) {
-    for (int j = 0; j < servoA.length(); j++) {
-      if (servoA.substring(j, j+1) == ";") {
-        ax12a.move(servoA.substring(0,j).toInt(), servoA.substring(j+1).toInt());
-        break;
-      }
-    }
-  }
+  ax12a.action();
+
+  id = ""; pos = "";
+}
+
+void moveServoDS(String input) {
+  valuesSplit(input, "&", servoA, servoB);
   
-  // Search seperator and move servo
-  if (servoB.length() > 0) {
-    for (int k = 0; k < servoB.length(); k++) {
-      if (servoB.substring(k, k+1) == ";") {
-        ax12a.move(servoB.substring(0,k).toInt(), servoB.substring(k+1).toInt());
-        break;
-      }
-    }
-  }
+  if (debug) { Serial.print("servoA: "); Serial.println(servoA); }
+  valuesSplit(servoA, ";", id, pos);
+  valuesSplit(pos, ";", pos, sp);
+
+  if (pos.toInt() == 0) { pos = String(ax12aPos[id.toInt()-1]); }
+  else if (pos.toInt() == 1) { pos = String(ax12aPos[id.toInt()-1]+25); }
+  else if (pos.toInt() == 2) { pos = String(ax12aPos[id.toInt()-1]-25); }
+  if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
+
+  if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
+  valuesSplit(servoB, ";", id, pos);
+  valuesSplit(pos, ";", pos, sp);
+
+  if (pos.toInt() == 0) { pos = String(ax12aPos[id.toInt()-1]); }
+  else if (pos.toInt() == 1) { pos = String(ax12aPos[id.toInt()-1]+25); }
+  else if (pos.toInt() == 2) { pos = String(ax12aPos[id.toInt()-1]-25); }
+  if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
+
+  ax12a.action();
 
   servoA = ""; servoB = "";
 }
 
-void moveServoDS(String input) {
-  // Split rx_Msg_Value to servoA and servoB
-  for (int i = 0; i < input.length(); i++) {
-    if (input.substring(i, i+1) == "&") {
-      servoA = input.substring(0, i);
-      servoB = input.substring(i+1);
-      break;
-    }
-  }
+void moveServoS(String input) {
+  valuesSplit(input, "&", servoA, servoB);
+  
+  if (debug) { Serial.print("servoA: "); Serial.println(servoA); }
+  valuesSplit(servoA, ";", id, pos);
+  valuesSplit(pos, ";", pos, sp);
+  if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
 
-  if (servoB == "") { servoA = input; } //Serial.println(servoA); }
+  if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
+  valuesSplit(servoA, ";", id, pos);
+  valuesSplit(pos, ";", pos, sp);
+  if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
   
-  // Search seperator and move servo
-  if (servoA.length() > 0) {
-    for (int j = 0; j < servoA.length(); j++) {
-      if (servoA.substring(j, j+1) == ";") { // Search first seperator
-        int ser = servoA.substring(0,j).toInt();
-        for (int m = j; m < servoA.substring(j+1).length(); m++) {
-          if(servoA.substring(m,m+1) == ";") { // Search second seperator
-            di = servoA.substring(j+1, m).toInt();
-            sp = servoA.substring(m+1).toInt();
-            if (di==0){pos = readPos(ser);}
-            else if (di==1){pos=readPos(ser)+25; if (pos > 1023){pos = 1023;}}
-            else if (di==2){pos=readPos(ser)-25; if (pos < 0){pos = 0;}}
-            ax12a.moveSpeed(ser, pos, sp);
-          }
-        }
-        break;
-      }
-    }
-  }
-  
-  // Search seperator and move servo
-  if (servoB.length() > 0) {
-    for (int j = 0; j < servoB.length(); j++) {
-      if (servoB.substring(j, j+1) == ";") { // Search first seperator
-        int ser = servoB.substring(0,j).toInt();
-        for (int m = j; m < servoB.substring(j+1).length(); m++) {
-          if(servoB.substring(m,m+1) == ";") {
-            di = servoB.substring(j+1, m).toInt();
-            sp = servoB.substring(m+1).toInt();
-            if (di==0){pos = readPos(ser);}
-            else if (di==1){pos=readPos(ser)+25;}
-            else if (di==2){pos=readPos(ser)-25; if (pos < 0){pos = 0;}}
-            ax12a.moveSpeed(ser, pos, sp);
-          }
-        }
-        break;
-      }
-    }
-  }
+  ax12a.action();
 
   servoA = ""; servoB = "";
 }
@@ -99,6 +92,7 @@ String getAllPositions() {
     response += i + ";" + ax12aPos[i-1];
     if (i < 5) { response += "&"; }
   }
+  return response;
 }
 
 int readTemp(int i) { return ax12a.readTemperature(i); }
