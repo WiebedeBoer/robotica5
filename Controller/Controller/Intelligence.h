@@ -20,5 +20,17 @@ private:
 	MicroController* Worker;
 	MicroController* Sensor;
 	Vision* VisionApi;
+
+	
+
+	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
+	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
+
+	
+	
+	void CheckDrive();
+	void CheckVision();
+	void CheckAfstandbediening();
+	void CheckArm();
 };
 

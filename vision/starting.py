@@ -4,9 +4,8 @@ import socket
 import os
 import cv2
 
-
-# os.chdir(os.path.realpath(__file__ + '\\..\\')) # For Windows
-os.chdir(os.path.realpath(__file__ + '//..//'))  # For Linux
+#os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
+#os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
 
 # Here the function gets the string send by the pi
 def SocketReceive():

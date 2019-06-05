@@ -4,12 +4,8 @@
   Starting remote build
   Compiling sources:
   Intelligence.cpp
-  main.cpp
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(19,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(19,61): warning :  MicroController* Worker = new MicroController("/dev/ttyACM0");
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(19,61): warning :                                                              ^
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(20,61): warning : ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(20,61): warning :  MicroController* Sensor = new MicroController("/dev/ttyACM3");
-C:\Users\Thom\source\repos\robotica5\Controller\Controller\main.cpp(20,61): warning :                                                              ^
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Intelligence.cpp(54,34): warning : NULL used in arithmetic [-Wpointer-arith]
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Intelligence.cpp(54,34): warning :      if (eggdis != 0 && eggdis != NULL) {
+C:\Users\Thom\source\repos\robotica5\Controller\Controller\Intelligence.cpp(54,34): warning :                                   ^~~~
   Linking objects
   Controller.vcxproj -> C:\Users\Thom\source\repos\robotica5\Controller\Controller\bin\ARM\Debug\Controller.out
