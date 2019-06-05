@@ -13,12 +13,8 @@ MCP4XXX* pot;
 // Serial event
 char rx_Byte = 0;             // Last received byte
 String rx_Msg = "";           // Received message
-char rx_Byte2 = 0;             // Last received byte for serial 1
-String rx_Msg2 = "";           // Received message for serial 1
 String SendSum;               // Checksum from raspberry
 bool rx_Complete = false;     // Transmission
-bool rx_Complete2 = false;     // Transmission for serial 1
-
 bool ReadingCheckSum = false; // Reading chechsum
 
 // Initializing all variables
@@ -58,7 +54,7 @@ String ret_gyro;
 //setup
 void setup() {
   Serial.begin(115200);
-  Serial1.begin(115200);
+
   pinMode(speedRPin, INPUT);
   pinMode(speedLPin, INPUT);
   digitalWrite(speedRPin, LOW);
@@ -126,15 +122,6 @@ String gyroscopeSensors(){
   //return "ack:Sensor?<"+ String(gyro) + ">|";
 }
 
-  void serialEvent1(){
-  while(Serial1.available()&& rx_Complete2 == false){
-    rx_Byte2 = (char)Serial1.read();//Read next byte
-    rx_Msg2 += rx_Byte2;   
-    if(rx_Byte2 == '\n'){//endling and cleanup
-      rx_Complete2 = true;
-      }
-  }
-}
 //SOCKET
 //serialEventInterupt
 void serialEvent(){
@@ -157,7 +144,6 @@ void serialEvent(){
     }
   }
 
-
   //Message received do command
   if(rx_Complete){
     String OriginalMessage = rx_Msg;
@@ -178,16 +164,9 @@ void serialEvent(){
       } else if (rx_Msg == "speed?|") { // speed?,1;300&5;0|10
 //        Serial.println("Getting them speed");
         result += "speed?<" + String(speedL) + ";" + speedR + ">|";
-      } else if(rx_Msg == "refresh?|"){
-        Serial.print("RefreshMessageSend");
-        Serial1.print(rx_Msg + '\n');        
       }
     }
-    if(rx_Complete2){
-      Serial.print(rx_Msg2 + '\n');
-      rx_Complete2 = false;
-      rx_Msg2 = "";
-    }
+    
     // Clean message   
     rx_Msg = "";
     SendSum = "";
