@@ -64,6 +64,7 @@ def findRectanglePoints(pts):
 
 
 def start():
+    ESC = 27
     images = [cv2.imread(file) for file in glob.glob('../img/testImg/newimgtrain/*jpg')]  # trainImage
     imgTrainColor = cv2.imread('../img/png/kip/original_kip.jpeg')
     imgTrainGray = cv2.cvtColor(imgTrainColor, cv2.COLOR_BGR2GRAY)
@@ -109,11 +110,6 @@ def start():
         allGood_matches = sorted(allGood_matches, key=lambda x: x.distance)  # Sort them in the order of their distance
         best_matches = allGood_matches[:10]  # Append the 10 best matches from allGood_matches in best_matches
 
-        under40 = []
-        [ if m.distance < 40 for m in allGood_matches]:
-            under40.append(m)
-
-        print(len(allGood_matches), len(under40))
         #  If allGood_matches has enough good matches then proceed
         if len(allGood_matches) > MIN_MATCH_COUNT:
             src_pts = np.float32([kpCam[m.queryIdx].pt for m in best_matches]).reshape(-1, 1, 2)  # Get the points of the best_matches
@@ -147,6 +143,11 @@ def start():
         cv2.setWindowProperty('Camera', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
         cv2.imshow('Camera', result)
         cv2.waitKey(0)
+
+        key = cv2.waitKey(20)
+        if key == ESC:
+            break
+
         cv2.destroyAllWindows()
 
 

@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/BRIEF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/FM_Homography.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/Orb_Matcher.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/Old_Detectors/Template_Matcher.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/robotica5/v15/Browse.VC.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/First try Project/Ableton Project Info/Project8_1.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/Song/First Project/Ableton Project Info/Project8_1.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/First try Project/First try.als" beforeDir="false" afterPath="$PROJECT_DIR$/Song/First Project/First try.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/First try Project/LVER+GMYS.aif" beforeDir="false" afterPath="$PROJECT_DIR$/Song/First Project/LVER+GMYS.aif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/Second try Project/Ableton Project Info/Project8_1.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/Song/Second Project/Ableton Project Info/Project8_1.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/Second try Project/Samples/Processed/Consolidate/biem-soundeffect [2019-05-24 105437].aif" beforeDir="false" afterPath="$PROJECT_DIR$/Song/Second Project/Samples/Processed/Consolidate/biem-soundeffect [2019-05-24 105437].aif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/Second try Project/Samples/Processed/Consolidate/biem-soundeffect [2019-05-24 105437].aif.asd" beforeDir="false" afterPath="$PROJECT_DIR$/Song/Second Project/Samples/Processed/Consolidate/biem-soundeffect [2019-05-24 105437].aif.asd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/Second try Project/Second try.aif" beforeDir="false" afterPath="$PROJECT_DIR$/Song/Second Project/Second try.aif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/Second try Project/Second try.aif.asd" beforeDir="false" afterPath="$PROJECT_DIR$/Song/Second Project/Second try.aif.asd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Song/Second try Project/Second try.als" beforeDir="false" afterPath="$PROJECT_DIR$/Song/Second Project/Second try.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/BRIEF.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/FM_Homography.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Orb_Matcher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/Template_Matcher.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vision/Imp_Functions/Obj_detection/kip_recognize.jpg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="121" column="7" selection-start-line="121" selection-start-column="7" selection-end-line="124" selection-end-column="40" />
+            <state relative-caret-position="388">
+              <caret line="111" column="42" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -43,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB_IMAGE.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="112" column="9" lean-forward="true" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="9" />
+            <state relative-caret-position="448">
+              <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
             </state>
           </provider>
         </entry>
@@ -625,15 +606,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="121" column="7" selection-start-line="121" selection-start-column="7" selection-end-line="124" selection-end-column="40" />
+        <state relative-caret-position="388">
+          <caret line="111" column="42" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Obj_detection/FM_ORB_IMAGE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="112" column="9" lean-forward="true" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="9" />
+        <state relative-caret-position="448">
+          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
         </state>
       </provider>
     </entry>
