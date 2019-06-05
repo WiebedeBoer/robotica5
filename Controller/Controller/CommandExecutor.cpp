@@ -3,12 +3,16 @@
 
 
 void CommandExecutor::Execute()
-{	
+{
 	while (*running == true) {
 		if (QueueIsEmpty()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
 		}
-		CommandQueue->GetFront().Execute();
+		else {
+
+			CommandQueue->GetFront().Execute();
+
+		}
 	}
 }
 
