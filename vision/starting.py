@@ -1,8 +1,11 @@
 import sys
 import socket
+# from camera_opencv import getPiCamera
+import os
 import cv2
-from camera_opencv import getPiCamera
-import numpy
+
+#os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
+#os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -10,7 +13,7 @@ def SocketReceive():
     return rec
 
 
-# Here the function sends a string back to the pi
+# Here the function sends a string ba ck to the pi
 def SocketSend(msg):
     utf8_msg = unicode(str(msg), "utf-8")
     sok.send(bytes(utf8_msg))
@@ -64,7 +67,7 @@ def eggtelligence(argument, argument1, frame):
         return startEggDistance(frame)
 
     def qrDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
+        sys.path.append('Wedstrijd/Eggtelligence/')        
         from startQRDistance import startQRDistance
         return startQRDistance(townSwitcher(argument), frame)
 
@@ -83,36 +86,35 @@ def eggtelligence(argument, argument1, frame):
     return eggtelligenceSwitcher(argument, argument1, frame)
 
 
-
-# cap = cv2.VideoCapture(0)
-# try:
-#     while True:
-#         # frame = getCapture()
-#         _, frame = cap.read()
-#         print(mainSwitcher(3, 1, 0, frame))
-#         # cv2.imshow("frame", frame)
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#
-# except KeyboardInterrupt:
-#     cap.release()
-#     cv2.destroyAllWindows()
-
-sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+cap = cv2.VideoCapture(0)
 try:
-    sok.connect((socket.gethostname(), 1234))
-
     while True:
-    	frame = getPiCamera()
-        msg = SocketReceive()
-        msg = splitter(msg)
+        # frame = getCapture()
+        _, frame = cap.read()
+        print(mainSwitcher(3, 1, 0, frame))
+        # cv2.imshow("frame", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-        msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), frame)
-        SocketSend(msgBack)
+except KeyboardInterrupt:
+    cap.release()
+    cv2.destroyAllWindows()
 
-except Exception, e:
-    sok.close()
-    print e
-
-finally:
-    sok.close()
+# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# try:
+#     sok.connect((socket.gethostname(), 1234))
+#
+#     while True:
+#     	frame = getPiCamera()
+#         msg = SocketReceive()
+#         msg = splitter(msg)
+#
+#         msgBack = mainSwitcher(int(msg[0]), int(msg[1]), int(msg[2]), frame)
+#         SocketSend(msgBack)
+#
+# except Exception, e:
+#     sok.close()
+#     print e
+#
+# finally:
+#     sok.close()

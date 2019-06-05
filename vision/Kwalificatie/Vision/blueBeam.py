@@ -5,9 +5,7 @@ sys.path.append('../pi/')
 
 import cv2
 import numpy as np
-import math
 from helpFunctions import *
-from decimal import *
 from clahe import CLAHE as cl
 
 
@@ -44,9 +42,8 @@ def viewBeam(frame):
 
         if shape == "rectangle":
             # calculate distance
-            distance = calculateDistance(w, 1320, 2.5)
+            distance = calculateDistance(w, 625, 2.4)
 
             return round(distance, 2)
-
 
     return False

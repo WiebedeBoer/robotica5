@@ -1,3 +1,6 @@
+import cv2
+
+
 # Calculate distance and return the distance
 def calculateDistance(w, focal_length, known_width):
     return (focal_length * (known_width / 2)) / (w / 2)
@@ -19,3 +22,7 @@ def dirTopOrBottom(yMidPoint):
     turn_y = yMidPoint - (480 / 2)  # 480 is the height of the frame
     return turn_y
 
+
+def CLAHE(frame):
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    return clahe.apply(frame)
