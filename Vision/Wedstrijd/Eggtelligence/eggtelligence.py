@@ -57,7 +57,7 @@ def qrDistance(frame, argument):
     if qr is not None:
         x, y, w, h = qrReader.getRectangleQR()
         distance = calculateDistance(w, 15, 1000)
-        xyAxis = whichDirection(cv2.Point(x-w/2, y-h/2), cv2.Point(x+w/2, y+h/2))
+        xyAxis = whichDirection((x-w/2, y-h/2), (x+w/2, y+h/2))
         return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     else:
         return False
