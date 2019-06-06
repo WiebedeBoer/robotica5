@@ -20,9 +20,9 @@ Intelligence::~Intelligence()
 
 int RefreshInterfal = 200;
 int PrintInterfal = 1000;
-int ArmInterfal = 500;
-int DriveInterfal = 200;
-int VisionInterfall = 100000000;
+int ArmInterfal = 500000000;
+int DriveInterfal = 200000000;
+int VisionInterfall = 1000;
 int GripperInterval = 100000000;
 
 std::chrono::system_clock::time_point refreshAfstandBediening = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
@@ -37,8 +37,8 @@ void Intelligence::Think()
 
 	while (*running == true) {
 		Intelligence::CheckAfstandbediening();
-		Intelligence::CheckVision();
-		Intelligence::CheckDrive();
+		//Intelligence::CheckVision();
+		//Intelligence::CheckDrive();
 		Intelligence::CheckArm();
 		if (std::chrono::system_clock::now() > PrintJoystick) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
@@ -170,6 +170,4 @@ void Intelligence::CheckArm()
 		MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
 	}
 }
-
-
 

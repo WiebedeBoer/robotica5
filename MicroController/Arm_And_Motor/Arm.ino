@@ -2,6 +2,16 @@
 
 String servoA = "", servoB = "";
 String id, di, pos, sp;
+int maxPositions[5][2] = {{0,1023}, {35,680}, {65, 640}, {350, 950}, {0, 1023}};
+
+void checkPosition(int id, String &target) {
+  if (target.toInt() < maxPositions[id-1][0]) {
+    target = String(maxPositions[id-1][0]);
+  }
+  else if (target.toInt() > maxPositions[id-1][1]) {
+    target = String(maxPositions[id-1][1]);
+  }
+}
 
 /* Split input to servoA and servoB */
 void valuesSplit(String input, String splitter, String &output1, String &output2) {
@@ -25,12 +35,14 @@ void moveServo(String input) {
   valuesSplit(servoA, ";", id, pos);
 
   if (debug) { Serial.print("Id / Pos: ");Serial.print(id);Serial.print(" / ");Serial.println(pos); }
+  checkPosition(id.toInt(), pos);
   ax12a.moveRW(id.toInt(), pos.toInt());
 
   if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
   valuesSplit(servoB, ";", id, pos);
 
   if (debug) { Serial.print("Id / Pos: ");Serial.print(id);Serial.print(" / ");Serial.println(pos); }
+  checkPosition(id.toInt(), pos);
   ax12a.moveRW(id.toInt(), pos.toInt());
   
   ax12a.action();
@@ -49,6 +61,7 @@ void moveServoDS(String input) {
   else if (pos.toInt() == 1) { pos = String(ax12aPos[id.toInt()-1]+25); }
   else if (pos.toInt() == 2) { pos = String(ax12aPos[id.toInt()-1]-25); }
   if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  checkPosition(id.toInt(), pos);
   ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
 
   if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
@@ -59,6 +72,7 @@ void moveServoDS(String input) {
   else if (pos.toInt() == 1) { pos = String(ax12aPos[id.toInt()-1]+25); }
   else if (pos.toInt() == 2) { pos = String(ax12aPos[id.toInt()-1]-25); }
   if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  checkPosition(id.toInt(), pos);
   ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
 
   ax12a.action();
@@ -73,12 +87,14 @@ void moveServoS(String input) {
   valuesSplit(servoA, ";", id, pos);
   valuesSplit(pos, ";", pos, sp);
   if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  checkPosition(id.toInt(), pos);
   ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
 
   if (debug) { Serial.print("servoB: "); Serial.println(servoB); }
   valuesSplit(servoB, ";", id, pos);
   valuesSplit(pos, ";", pos, sp);
   if (debug) { Serial.print("Id / Pos / Speed: ");Serial.print(id);Serial.print(" / ");Serial.print(pos);Serial.print(" / ");Serial.println(sp); }
+  checkPosition(id.toInt(), pos);
   ax12a.moveSpeedRW(id.toInt(), pos.toInt(), sp.toInt());
   
   ax12a.action();

@@ -31,7 +31,7 @@ std::string MicroController::WaitForMessage(int &fd) {
 	int dataavail = 0;
 	bool MessageCompleted = false;
 	std::string message;
-	int Datareceived = WaitForData(fd, 1000);
+	int Datareceived = WaitForData(fd, 200);
 	if (Datareceived == 1) {
 		while (MessageCompleted == false) {
 			dataavail = serialDataAvail(fd);
@@ -107,7 +107,7 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 		return false;
 	}
 	else {
-		std::cout << "NAck!" << std::endl;
+		std::cout << "NAck!"<< ack << std::endl;
 		return false;
 	}
 
@@ -117,6 +117,7 @@ void MicroController::SerialSend(std::string input) {
 	if (fd < 3) {
 		serialClose(fd);
 		fd = serialOpen(UsbPort, 115200);
+		std::cout << "SerialConnection reset. USB:" << UsbPort << std::endl;
 	}
 	std::string inputsum;
 	//std::cout << fd << std::endl;
@@ -139,7 +140,7 @@ void MicroController::SerialSend(std::string input) {
 	} while (!ackresponse(WaitForMessage(fd), sendstring) && NackCount != 5);
 	if (NackCount == 5) {
 		std::cout << "CommandDropped After 5 tries{" << input << "}" << std::endl;
-		Response = "";
+		Response = "CommandDropped";
 		serialClose(fd);
 
 	}
@@ -158,7 +159,7 @@ MicroController::MicroController(char* usb)
 {
 	UsbPort = usb;
 	fd = serialOpen(UsbPort, 115200);
-
+	std::cout << "MicroController made on" << usb << std::endl;
 }
 
 
@@ -170,4 +171,3 @@ MicroController::~MicroController()
 	serialClose(fd);
 
 }
-
