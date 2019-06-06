@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandExecutor.cpp" />
+    <ClCompile Include="DataCollector.cpp" />
+    <ClCompile Include="Intelligence.cpp" />
+    <ClCompile Include="MicroController.cpp" />
+    <ClCompile Include="Vision.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandExecutor.h" />
+    <ClInclude Include="GuardedQueue.h" />
+    <ClInclude Include="DataCollector.h" />
+    <ClInclude Include="Intelligence.h" />
+    <ClInclude Include="MicroController.h" />
+    <ClInclude Include="Vision.h" />
+  </ItemGroup>
+</Project>
