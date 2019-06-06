@@ -48,7 +48,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/fm_ORB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
+            <state relative-caret-position="401">
               <caret line="113" column="50" lean-forward="true" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
             </state>
           </provider>
@@ -292,7 +292,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16997617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -620,7 +619,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/fm_ORB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
+        <state relative-caret-position="401">
           <caret line="113" column="50" lean-forward="true" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
         </state>
       </provider>
