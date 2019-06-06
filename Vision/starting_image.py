@@ -77,7 +77,6 @@ except KeyboardInterrupt:
     cv2.destroyAllWindows()
 
 
-#
 # sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # try:
 #     sok.connect((socket.gethostname(), 1234))
