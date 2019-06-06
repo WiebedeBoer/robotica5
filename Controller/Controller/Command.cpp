@@ -75,6 +75,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveForward") {
+		std::string cmd = "motor?,1;" + args[0] + "&2;" + args[0] + "";
 		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 		return;
 	}
@@ -113,6 +114,8 @@ void Command::Execute() {
 		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("0:3:0:0");
 		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
 		//std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
+		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("4:0:0");
+		std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
 		return;
 	}
 }
