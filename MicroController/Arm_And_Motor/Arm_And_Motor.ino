@@ -43,6 +43,8 @@ int Xinright = A3; // X Input Pin left
 int Yinright = A4; // Y Input Pin left
 int KEYinright = 19; // Push Button left
 
+String id, di, pos, sp;
+
 void setup()
 {
   Serial.begin(115200);
@@ -76,25 +78,7 @@ void loop()
   
   for (int i = 0; i <= 4; i++) {
     ax12aPos[i] = readPos(i+1);
-//    Serial.print(i+1);Serial.print(" = ");Serial.println(ax12aPos[i]);
   }
-//  Serial.println("");
-
-//  int xValr, yValr, buttonValr, xVall, yVall, buttonVall;
-//
-//  xVall = analogRead (Xinleft);
-//  yVall = analogRead (Yinleft);
-
-//  Serial.println(yVall);
-  
-//  if (yVall > 800) {
-//    moveServoS("5;" + String(readPos(5)+10) + ";50&6;0;500|10");
-//    delay(100);
-//  } else if (yVall < 300) {
-//  
-//    moveServoS("5;" + String(readPos(5)-10) + ";50&6;0;500|10");
-//    delay(100);
-//  }
 
   unsigned long currentMillis = millis();
   
@@ -205,6 +189,21 @@ int checksum(String Str){
     sum += (int)Str[i];
   }
   return sum;
+}
+
+/* Split input to output1 and output2 */
+void valuesSplit(String input, String splitter, String &output1, String &output2) {
+  output1 = "", output2 = "";
+  
+  for (int i = 0; i < input.length(); i++) {
+    if (input.substring(i, i+1) == splitter) {  // Found splitter
+      output1 = input.substring(0, i);
+      output2 = input.substring(i+1);
+      break;
+    }
+  }
+  
+  if (output1 == "") { output1 = input; } // Splitter not found
 }
 
 // Serial response functions
