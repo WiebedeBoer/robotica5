@@ -5,15 +5,46 @@
 #define joy2x A3
 #define joy2y A4
 
+//Movement Page
 NexText JoyL = NexText(0, 2, "JoyL"); //Joystick Left
 NexText JoyR = NexText(0, 3, "JoyR"); //Joystick Right
 NexNumber TCSpeed = NexNumber(1, 7, "TCSpeed"); //Numberbox for speed -- Next to slider
+NexProgressBar CSpeed  = NexProgressBar(1, 5, "CSpeed"); //Speedbar Current Speed
+NexSlider SSpeed = NexSlider(1, 4, "SSPeed"); //Speedbar Slider
+
+//Distance Page
+NexNumber TDistance = NexNumber(2, 3, "TDistance"); //Distance
+
+//Angle Page
 NexNumber NAngle = NexNumber(3, 3, "NAngle"); //Number of Angle 
 NexNumber NYaw = NexNumber(3, 3, "NYaw"); //Number of Yaw 
 NexNumber NPitch = NexNumber(3, 3, "NPitch"); //Number of Pitch 
-NexSlider SSpeed = NexSlider(1, 4, "SSPeed"); //Speedbar Slider
-NexNumber TDistance = NexNumber(2, 3, "TDistance"); //Distance
-NexProgressBar CSpeed  = NexProgressBar(1, 5, "CSpeed"); //Speedbar Current Speed
+
+//Mode Page
+NexButton BPitch = NexButton(4, 3, "BPitch"); //Pitch Button -- Same as SPitch
+NexButton BPoortje = NexButton(4, 4, "BPoortje"); // Poortje Button
+NexButton BChicken = NexButton(4, 5, "BChicken"); // Chickenrun Button
+NexButton BTrap = NexButton(4, 11, "BTrap"); // Trap Button
+NexButton BGrind = NexButton(4, 7, "BGrind"); // Grind Button
+NexButton BBlauw = NexButton(4, 8, "BBlauw"); // Balkje Button
+NexButton BRace = NexButton(4, 9, "BRace"); // Race Button
+NexButton BFlag = NexButton(4, 11, "BFlag"); //Flag Button
+NexButton BDanceSingle = NexButton(4, 9, "BDanceSingle"); // Single Dance Button
+NexButton BDanceLine = NexButton(4, 10, "BDanceLine"); // Line Dance Button
+
+//Sound Page
+NexButton SPitch = NexButton(5, 3, "SPitch"); // Pitch Button -- Same as BPitch
+
+//Head Page
+
+//Light Page
+
+//Arm Page
+
+//QR Page
+
+//Pitch Page
+
 
 char buffer[100] = {0};
 char rx_Byte = 0;//last received byte
