@@ -77,22 +77,22 @@ except KeyboardInterrupt:
     cv2.destroyAllWindows()
 
 
-
-sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-try:
-    sok.connect((socket.gethostname(), 1234))
-
-    while True:
-    	frame = Camera_pi.getInstance()
-        msg = SocketReceive()
-        msg = splitter(msg)
-
-        msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
-        SocketSend(msgBack)
-
-except Exception, e:
-    sok.close()
-    print e
-
-finally:
-    sok.close()
+#
+# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# try:
+#     sok.connect((socket.gethostname(), 1234))
+#
+#     while True:
+#     	frame = Camera_pi.getInstance()
+#         msg = SocketReceive()
+#         msg = splitter(msg)
+#
+#         msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
+#         SocketSend(msgBack)
+#
+# except Exception, e:
+#     sok.close()
+#     print e
+#
+# finally:
+#     sok.close()
