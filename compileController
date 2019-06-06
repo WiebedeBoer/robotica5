@@ -1,0 +1,5 @@
+cd ~/robotica5/Controller/Controller
+
+g++ -o ../../controller main.cpp Command.cpp CommandExecutor.cpp DataCollector.cpp Intelligence.cpp  MicroController.cpp Vision.cpp -lwiringPi -lpthread
+
+chmod +x ../../controller
