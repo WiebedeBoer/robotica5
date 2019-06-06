@@ -23,7 +23,8 @@ public:
 	{
 		std::lock_guard<std::mutex> lock(m_mutex);
 		if (m_queque.size() == 0) {
-			std::cout << "queue empty" << std::endl;
+			MicroController* a = new MicroController("/dev/ttyACM0");
+			return Command(a, "Wait");
 		}
 		T result = m_queque.front();
 		m_queque.pop();
