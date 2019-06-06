@@ -18,7 +18,7 @@ bool rx_Complete = false;     // Transmission
 bool ReadingCheckSum = false; // Reading chechsum
 
 // Initializing all variables
-#define IRPin 20              // Sensor value distance analog
+#define IRPin 20                // Sensor value distance analog
 float distance;
 
 #define micPin 14             // Microphone
@@ -30,28 +30,13 @@ int mic, soundL, soundM, soundH;
 #define speedRPin 13          // Sensor value speed right digital
 #define speedLPin 12          // Sensor value speed left digital
 int speedL, speedR;
-
-#define gyrosclPin 18         // Gyroscoop scl
-#define gyrosdaPin 19         // Gyroscoop sda
-#define gyrointPin 11         // Gyroscoop int digital
-
-const int MPU6050_addr=0x68;
-int16_t AccX,AccY,AccZ,Temp,GyroX,GyroY,GyroZ;
+int maxMillis = 500;
+unsigned long startMillis = millis();
+int left = 0, right = 0, count = 0;
 
 unsigned long timer = 0;
 float timestep = 0.01;
 
-float pitch = 0;
-float roll = 0;
-float yaw = 0;
-
-//function strings
-String ret_distance;
-String ret_sound;
-String ret_speed;
-String ret_gyro;
-
-//setup
 void setup() {
   Serial.begin(115200);
 
@@ -59,24 +44,16 @@ void setup() {
   pinMode(speedLPin, INPUT);
   digitalWrite(speedRPin, LOW);
   digitalWrite(speedLPin, LOW);
-
-  Wire.begin();
-  Wire.beginTransmission(MPU6050_addr);
-  Wire.write(0x6B);
-  Wire.write(0);
-  Wire.endTransmission(true);
 }
 
 //loop
 void loop() {
   updateDistance();
+  measureSpeed();
   updateMicrophone();
-  updateGyro();
-  //measureSpeed();
-  delay(2500);
+//  delay(2500);
 
   
-
 //  Debug distance
 //  updateDistance();
 //  Serial.print("Analog value: "); Serial.println(analogRead(IRPin));
@@ -93,58 +70,25 @@ void loop() {
 //  Serial.print("Right: ");Serial.println(digitalRead(speedRPin));
 }
 
-// SENSOR READING
-// read value from pin pn, return value is mapped between 0 and mx-1
-int readSensor(int pn, int mx)
-{
-  return map(analogRead(pn), 0, 1023, 0, mx-1);    
-}
-
-//send sensor values function
-String sendSensorsValues(){ 
-  ret_distance = updateDistance();
-  ret_sound = updateMicrophone();
-  ret_speed = getSpeed();
-  ret_gyro = updateGyro();
-  //return alle waarden
-  return "ack:Sensor?<"+ret_distance+";"+ret_sound+";"+ret_speed+";"+ret_gyro+">|";
-}
-
-//SPEED
-String speedSensors(){
-  int leftSpeed;
-  //return "ack:Sensor?<"+ String(leftSpeed) + ">|";
-}
-
-//GYROSCOPE
-String gyroscopeSensors(){
-  int gyro;
-  //return "ack:Sensor?<"+ String(gyro) + ">|";
-}
-
-//SOCKET
-//serialEventInterupt
-void serialEvent(){
-  while(Serial.available()){
-    rx_Byte = (char)Serial.read();// Read next byte
+void serialEvent() {
+  while(Serial.available() && rx_Complete == false){
+    rx_Byte = (char)Serial.read(); //Read next byte
     
-    if(ReadingCheckSum == false){ // Add byte to message
-    rx_Msg += rx_Byte;
-    } else { // Add byte to sendsum
-      SendSum += rx_Byte;
-    }
-        
-    if(rx_Byte == '|'){//switch from to message to sendsum
-      ReadingCheckSum = true;
-    } 
+    if(!ReadingCheckSum){ rx_Msg += rx_Byte; }  // Enter byte to message
+    else { SendSum += rx_Byte; }                // Enter byte to sendsum
+
+    //switch from to message to sendsum
+    if(rx_Byte == '|'){ ReadingCheckSum = true; }
     
-    if(rx_Byte == '\n'){//endling and cleanup
+    if(rx_Byte == '\n'){ // End of message, cleanup
       rx_Complete = true;
       ReadingCheckSum = false;
     }
   }
 
   //Message received do command
+  
+  //execute received msg
   if(rx_Complete){
     String OriginalMessage = rx_Msg;
     int commaIndex = rx_Msg.indexOf(',');
@@ -152,102 +96,43 @@ void serialEvent(){
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
     
     // checksum(rx_Msg) == SendSum.toInt()
-    if(true){ // Control checksum with sendsum, for error checking
-      String result = "ack:";
-      
-      if (rx_Msg == "allSensors?|"){
-        //result += "allSensors?|" + String(distance) + ";" + String(speedL) + ";" + String(speedR);
-        result += sendSensorsValues();
-//        String result = readSensors(distance);
-//        String Checksum = String(checksum(result));
-//        Serial.println(result + Checksum );  
-      } else if (rx_Msg == "speed?|") { // speed?,1;300&5;0|10
-//        Serial.println("Getting them speed");
-        result += "speed?<" + String(speedL) + ";" + speedR + ">|";
+    if(true) { //control checksum with sendsum, for error checking. It continues when no error is found.
+      String result = "";
+      if(rx_Msg == "info?|"){ // info?,|10
+        result = respondInfo() + String(checksum(respondInfo())) + "\n";
       }
+      else {
+        result = "ack:noAction?<>|\n";
+      }
+      
+      int resultLength = result.length() +1;          // Convert string to char array
+      char resultarray[resultLength];
+      result.toCharArray(resultarray, resultLength);  // Result to Array
+      Serial.write(resultarray);                      // Send chararray to rp
     }
     
-    // Clean message   
-    rx_Msg = "";
-    SendSum = "";
-    rx_Complete = false;
+    // Clean message
+    rx_Msg = ""; SendSum = "";
   }
+  
+  rx_Complete = false;
 }
 
-//DISTANCE
-String updateDistance() { 
-  distance = (6787.0 / (analogRead(IRPin) - 3.0)) - 4.0; 
+String getDistance() {
   return String(distance);
- }
-
-//SOUND
-String updateMicrophone() {
-  mic = analogRead(micPin);
-  soundL = analogRead(soundLPin);
-  soundM = analogRead(soundMPin);
-  soundH = analogRead(soundHPin);
-  String str_sound = String(mic)+";"+String(soundL)+";"+String(soundM)+";"+String(soundH);
-  return str_sound;
 }
 
-//SPEED
-int maxMillis = 500;
-unsigned long startMillis = millis();
-int left = 0, right = 0, count = 0;
-
-void measureSpeed() {
-  unsigned long currentMillis = millis();
-  if (currentMillis - startMillis > maxMillis) {
-    speedL = left * 3;
-    speedR = right * 3;
-    left = 0, right = 0;
-    startMillis = currentMillis;
-    //Serial.println(speedL);
-    //Serial.println(speedR);
-    //Serial.print("Total counts: ");Serial.println(count);
-    count = 0;
-  } else {
-    if (digitalRead(speedRPin) == 0) {
-      right++;
-    }
-    if (digitalRead(speedLPin) == 0) {
-      left++;
-    }
-
-    count++;
-  }
-}
 
 String getSpeed() {
-  return String(speedL+";"+speedR);
+  return String(speedL) + ";" + String(speedR);
 }
 
-//GYROSCOPE
-// Pins
-//#define gyrosclPin 18         // Gyroscoop scl
-//#define gyrosdaPin 19         // Gyroscoop sda
-//#define gyrointPin 11         // Gyroscoop int digital
-String updateGyro() {
-  Wire.beginTransmission(MPU6050_addr);
-  Wire.write(0x3B);
-  Wire.endTransmission(false);
-  Wire.requestFrom(MPU6050_addr,14,true);
-  AccX=Wire.read()<<8|Wire.read();
-  AccY=Wire.read()<<8|Wire.read();
-  AccZ=Wire.read()<<8|Wire.read();
-  Temp=Wire.read()<<8|Wire.read();
-  GyroX=Wire.read()<<8|Wire.read();
-  GyroY=Wire.read()<<8|Wire.read();
-  GyroZ=Wire.read()<<8|Wire.read();
-  Serial.print("AccX = "); Serial.print(AccX);
-  Serial.print(" || AccY = "); Serial.print(AccY);
-  Serial.print(" || AccZ = "); Serial.print(AccZ);
-  Serial.print(" || Temp = "); Serial.print(Temp/340.00+36.53);
-  Serial.print(" || GyroX = "); Serial.print(GyroX);
-  Serial.print(" || GyroY = "); Serial.print(GyroY);
-  Serial.print(" || GyroZ = "); Serial.println(GyroZ);
-  return String(GyroX)+";"+String(GyroY)+";"+String(GyroZ);
+String getMicrophone() {
+  return String(soundL) + ";" + String(soundM) + ";" + String(soundH);
 }
+
+// return String: distance, speed, microphone
+String respondInfo() { return "ack:info?<"+ getDistance() + ";" + getSpeed() + ";" + getMicrophone() + ">|"; }
 
 // Calculate checksum.
 int checksum(String Str){
@@ -255,6 +140,5 @@ int checksum(String Str){
   for(int i = 0; i < Str.length();i++){
     sum += (int)Str[i];
     }
-    //Serial.println(sum);
     return sum;
 }

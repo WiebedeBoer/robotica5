@@ -1,13 +1,13 @@
 import sys
 import socket
-import cv2
-from camera_opencv import getPiCamera
-import numpy
+# from camera_opencv import getPiCamera
 import os
+import cv2
 #Onwindows use:
 #os.chdir(os.path.realpath(__file__+ '\\..\\'))
 #OnLinux Use:
 os.chdir(os.path.realpath(__file__+ '//..//'))
+
 # Here the function gets the string send by the pi
 def SocketReceive():
     rec = sok.recv(1024, 0)
@@ -25,7 +25,7 @@ def splitter(msg):
 
 
 # Main switcher
-def mainSwitcher(argument, argument1, argument2, frame):
+def mainSwitcher(frame, argument, argument1, argument2):
     switcher = {
         0: pitch,
         1: vision,
@@ -35,14 +35,14 @@ def mainSwitcher(argument, argument1, argument2, frame):
     }
 
     func = switcher.get(argument, "Nothing")
-    return func(argument1, argument2, frame)
+    return func(frame, argument1, argument2)
 
 
-def pitch(argument, argument1, frame):
+def pitch(frame, argument, argument1):
     return "Hello"
 
 
-def vision(argument, argument1, frame):
+def vision(frame, argument, argument1):
     sys.path.append('Kwalificatie/Vision/')
     from blueBeam import viewBeam
     return viewBeam(frame)
@@ -52,62 +52,20 @@ def GripperVision(argument, argument1, frame):
     from startEggDistance import startEggDistance
     return startEggDistance(frame)
 
-def chickenSurvivalRun(argument, argument1, frame):
+def chickenSurvivalRun(frame, argument, argument1):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
     test = False
     return test
 
 
-def eggtelligence(argument, argument1, frame):
-    def eggtelligenceSwitcher(argument, argument1, frame):
-        switcher = {
-            0: eggDistance,
-            1: qrDistance
-        }
-        func = switcher.get(argument, "Something went wrong")
-        return func(argument1, frame)
+def eggtelligence(frame, argument, argument1):
+    sys.path.append('Wedstrijd/Eggtelligence/')
+    from eggtelligence import eggtelligence
+    return eggtelligence(frame, argument, argument1)
 
-    def eggDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')
-        from startEggDistance import startEggDistance
-        return startEggDistance(frame)
 
-    def qrDistance(argument, frame):
-        sys.path.append('Wedstrijd/Eggtelligence/')        
-        from startQRDistance import startQRDistance
-        return startQRDistance(townSwitcher(argument), frame)
-
-        
-    def townSwitcher(argument):
-        switcher = {
-            0: "'s-Hertogenbosch",
-            1: "Eindhoven",
-            2: "Eibergen",
-            3: "Barneveld",
-            4: "Duckstad"
-        }
-        func = switcher.get(argument, "Something went wrong")
-        return func
-
-    return eggtelligenceSwitcher(argument, argument1, frame)
-# cap = cv2.VideoCapture(0)
-# try:
-#     while True:
-#         # frame = getCapture()
-#         _, frame = cap.read()
-#         print(mainSwitcher(3, 1, 0, frame))
-#         # cv2.imshow("frame", frame)
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#
-# except KeyboardInterrupt:
-#     cap.release()
-#     cv2.destroyAllWindows()
-
-sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+cap = cv2.VideoCapture(0)
 try:
-    sok.connect((socket.gethostname(), 1234))
-
     while True:
     	frame = getPiCamera()
         msg = SocketReceive()
@@ -122,3 +80,32 @@ except Exception, e:
 
 finally:
     sok.close()
+        # frame = getCapture()
+        _, frame = cap.read()
+        print(mainSwitcher(frame, 3, 1, 0))
+        # cv2.imshow("frame", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+except KeyboardInterrupt:
+    cap.release()
+    cv2.destroyAllWindows()
+
+# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# try:
+#     sok.connect((socket.gethostname(), 1234))
+#
+#     while True:
+#     	frame = getPiCamera()
+#         msg = SocketReceive()
+#         msg = splitter(msg)
+#
+#         msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
+#         SocketSend(msgBack)
+#
+# except Exception, e:
+#     sok.close()
+#     print e
+#
+# finally:
+#     sok.close()

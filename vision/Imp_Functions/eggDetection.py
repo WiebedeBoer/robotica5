@@ -1,8 +1,5 @@
-import sys
-
-sys.path.append('../../Imp_Functions/')
-
 import cv2
+import sys
 import numpy as np
 from helpFunctions import *
 
@@ -24,12 +21,6 @@ class DetectEgg:
 
     def nothing(self, x):
         pass
-
-    def CLAHE(self, frame):
-        clahe = cv2.createCLAHE(2.0, (8, 8))
-        cl = clahe.apply(frame)
-
-        return cl
 
     def bluefilter(self, frame, RG):
         copy = frame.copy()
@@ -178,7 +169,7 @@ class DetectEgg:
                 count += 1
 
             # improve contrast
-            clahe_b = self.CLAHE(self.frame[:, :, 0])
+            clahe_b = CLAHE(self.frame[:, :, 0])
 
             denoise = cv2.medianBlur(clahe_b, 1)
             denoise = cv2.bilateralFilter(denoise, 9, 75, 75)
