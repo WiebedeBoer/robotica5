@@ -20,6 +20,7 @@ class QRReader:
             else:
                 return None
 
-    def getWidthQR(self):
+    def getRectangleQR(self):
         x, y, w, h = self.qrObject.rect
-        return w
+        return x, y, w, h
+

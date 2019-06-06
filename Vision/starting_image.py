@@ -1,5 +1,6 @@
 import sys
 import socket
+import glob
 import os
 import cv2
 
@@ -8,8 +9,8 @@ try:
 except:
     from camera_opencv import Camera_opencv
 
-# os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
-os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
+# os.chdir(os.path.realpath(__file__ + '\\..\\')) # If on windows use this
+os.chdir(os.path.realpath(__file__ + '//..//'))  # If on linux use this
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -62,32 +63,36 @@ def eggtelligence(frame, argument, argument1):
     return eggtelligence(frame, argument, argument1)
 
 
-cap = Camera_opencv.getInstance()
+w, h = Camera_opencv.getSettings()
+
+images = [cv2.imread(file) for file in glob.glob('Images/TestImg/Beker/*jpg')]  # trainImage
 try:
-    while True:
-        _, frame = cap.read()
-        print(mainSwitcher(frame, 2, 0, 0))
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+    for image in images:
+        image = cv2.resize(image, (w, h))
+        print(mainSwitcher(image, 2, 0, 0))
+        cv2.imshow('Frame', image)
+        cv2.waitKey(0)
 
 except KeyboardInterrupt:
-    cap.release()
     cv2.destroyAllWindows()
 
-# sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# try:
-#     sok.connect((socket.gethostname(), 1234))
-#     while True:
-#     	frame = Camera_pi.getInstance()
-#         msg = SocketReceive()
-#         msg = splitter(msg)
-#
-#         msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
-#         SocketSend(msgBack)
-#
-# except Exception, e:
-#     sok.close()
-#     print e
-#
-# finally:
-#     sok.close()
+
+
+sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    sok.connect((socket.gethostname(), 1234))
+
+    while True:
+    	frame = Camera_pi.getInstance()
+        msg = SocketReceive()
+        msg = splitter(msg)
+
+        msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
+        SocketSend(msgBack)
+
+except Exception, e:
+    sok.close()
+    print e
+
+finally:
+    sok.close()
