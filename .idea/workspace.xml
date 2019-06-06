@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vision/starting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="85" column="19" lean-forward="true" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+            <state relative-caret-position="448">
+              <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
             </state>
           </provider>
         </entry>
@@ -205,6 +205,11 @@
               <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
               <item name="robotica5" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -268,6 +273,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16997617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -488,11 +494,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/starting_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1288" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/starting_test.py" />
     <entry file="file://$PROJECT_DIR$/Vision/starting_image.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -505,8 +507,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Vision/starting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="85" column="19" lean-forward="true" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
+        <state relative-caret-position="448">
+          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
         </state>
       </provider>
     </entry>
