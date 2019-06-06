@@ -43,7 +43,6 @@ def viewBeam(frame):
         if shape == "rectangle":
             # calculate distance
             distance = calculateDistance(w, 625, 2.4)
-
-            return round(distance, 2)
-
+            xyAxis = whichDirection(cv2.Point(x - w / 2, y - h / 2), cv2.Point(x + w / 2, y + h / 2))
+            return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     return False

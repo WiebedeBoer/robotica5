@@ -1,15 +1,33 @@
-from picamera.array import PiRGBArray
-from picamera import PiCamera
+import cv2
 
-# Camera init
-camera = PiCamera()
-camera.resolution = (640, 480)
-camera.framerate = 30
 
-def getPiCamera():
-    rawCapture = PiRGBArray(camera, size=(640, 480))
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=1):
-        rawCapture.truncate()
-        rawCapture.seek(0)
-        frame = frame.array
-        return frame
+class Camera_opencv:
+    __instance = None
+    __width = 640
+    __height = 480
+
+    @staticmethod
+    def getSettings():
+        """ Static access method. """
+        if Camera_opencv.__instance == None:
+            Camera_opencv.__instance = cv2.VideoCapture(0)
+            Camera_opencv.__instance.set(3, Camera_opencv.__width)
+            Camera_opencv.__instance.set(4, Camera_opencv.__height)
+        return int(Camera_opencv.__width), int(Camera_opencv.__height)
+
+
+    @staticmethod
+    def getInstance():
+        """ Static access method. """
+        if Camera_opencv.__instance == None:
+            Camera_opencv.__instance = cv2.VideoCapture(0)
+            Camera_opencv.__instance.set(3, Camera_opencv.__width)
+            Camera_opencv.__instance.set(4, Camera_opencv.__height)
+        return Camera_opencv.__instance
+
+    def __init__(self):
+        """ Virtually private constructor. """
+        if Camera_opencv.__instance != None:
+            raise Exception("This class is a singleton!")
+        else:
+            Camera_opencv.__instance = self
