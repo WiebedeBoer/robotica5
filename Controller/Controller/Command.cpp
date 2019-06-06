@@ -114,8 +114,9 @@ void Command::Execute() {
 		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("0:3:0:0");
 		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
 		//std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
-		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("4:0:0");
-		std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
-		return;
+
+		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("4:0:0");
+		//std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
+		//return;
 	}
 }

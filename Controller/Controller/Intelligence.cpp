@@ -50,7 +50,14 @@ void Intelligence::Think()
 			int eggdis = 0;
 			//std::cout << Intelligence::Database->wedstrijd.eggDistance << std::endl;
 			if (!Intelligence::Database->wedstrijd.eggDistance.empty()) {
-				eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
+				try {
+					eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
+				}
+				catch(int e){
+					std::cout << "stoi error occurred. Exception" << e << '\n';
+					eggdis = 999;
+				}
+				
 				if (eggdis != 0 && eggdis != NULL) {
 					if (eggdis < 210) {
 						//if (std::stoi(Intelligence::Database->wedstrijd.eggDistance) < 30) {
