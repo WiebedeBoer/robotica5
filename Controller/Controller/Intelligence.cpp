@@ -23,7 +23,7 @@ int PrintInterfal = 1000;
 int ArmInterfal = 500000000;
 int DriveInterfal = 200000000;
 int VisionInterfall = 1000;
-int GripperInterval = 100000000;
+int GripperInterval = 5000;
 
 std::chrono::system_clock::time_point refreshAfstandBediening = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
@@ -36,9 +36,9 @@ void Intelligence::Think()
 {
 
 	while (*running == true) {
-		Intelligence::CheckAfstandbediening();
-		//Intelligence::CheckVision();
-		//Intelligence::CheckDrive();
+		//Intelligence::CheckAfstandbediening();
+		Intelligence::CheckVision();
+		Intelligence::CheckDrive();
 		Intelligence::CheckArm();
 		if (std::chrono::system_clock::now() > PrintJoystick) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
@@ -52,10 +52,16 @@ void Intelligence::Think()
 			if (!Intelligence::Database->wedstrijd.eggDistance.empty()) {
 				eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
 				if (eggdis != 0 && eggdis != NULL) {
-					if (eggdis < 30) {
+					if (eggdis < 210) {
 						//if (std::stoi(Intelligence::Database->wedstrijd.eggDistance) < 30) {
 							//CommandQueue->push(Command(Worker, "ArmForward", Database, args));
-						CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+						args.push_back("");
+						args[0] = "32";
+						//args.push_back("");
+						//args[1] = "36";
+						//CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+						//CommandQueue->push(Command(Worker, "ArmBackward", Database, args));
+						CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
 					}
 				}
 			}

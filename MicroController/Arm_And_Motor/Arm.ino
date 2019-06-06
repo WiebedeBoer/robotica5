@@ -1,7 +1,6 @@
 /* Contains all functions and variables used regarding the robot arm */
 
 String servoA = "", servoB = "";
-String id, di, pos, sp;
 int maxPositions[5][2] = {{0,1023}, {35,680}, {65, 640}, {350, 950}, {0, 1023}};
 
 void checkPosition(int id, String &target) {
@@ -11,21 +10,6 @@ void checkPosition(int id, String &target) {
   else if (target.toInt() > maxPositions[id-1][1]) {
     target = String(maxPositions[id-1][1]);
   }
-}
-
-/* Split input to servoA and servoB */
-void valuesSplit(String input, String splitter, String &output1, String &output2) {
-  output1 = "", output2 = "";
-  
-  for (int i = 0; i < input.length(); i++) {
-    if (input.substring(i, i+1) == splitter) {  // Found splitter
-      output1 = input.substring(0, i);
-      output2 = input.substring(i+1);
-      break;
-    }
-  }
-  
-  if (output1 == "") { output1 = input; } // Splitter not found
 }
 
 void moveServo(String input) {

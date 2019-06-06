@@ -3,32 +3,15 @@
 String wheelL = "", wheelR = "";
 
 void motor(String input) {
-  for (int i = 0; i < input.length(); i++) {
-    if (input.substring(i, i+1) == "&") {
-      wheelL = input.substring(0, i);
-      wheelR = input.substring(i+1);
-      break;
-    }
-  }
+  valuesSplit(input, "&", wheelL, wheelR);
 
-  // Search seperator and move servo
-  if (wheelL.length() > 0) {
-    for (int j = 0; j < wheelL.length(); j++) {
-      if (wheelL.substring(j, j+1) == ";") {
-        moveWheelLeft(wheelL.substring(0,j).toInt(), wheelL.substring(j+1).toInt());
-        break;
-      }
-    }
-  }
+  valuesSplit(wheelL, ";", di, sp);
 
-  if (wheelR.length() > 0) {
-    for (int k = 0; k < wheelR.length(); k++) {
-      if (wheelR.substring(k, k+1) == ";") {
-        moveWheelRight(wheelR.substring(0,k).toInt(), wheelR.substring(k+1).toInt());
-        break;
-      }
-    }
-  }
+  moveWheelLeft(di.toInt(), sp.toInt());
+
+  valuesSplit(wheelR, ";", di, sp);
+  
+  moveWheelRight(di.toInt(), sp.toInt());
 }
 
 void moveWheelLeft(int di, int speed) {
