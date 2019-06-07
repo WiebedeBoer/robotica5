@@ -46,7 +46,7 @@ def pitch(frame, argument, argument1):
 
 
 def vision(frame, argument, argument1):
-    sys.path.append('Kwalificatie/Vision/')
+    sys.path.append('Kwalificatie/MainVision/')
     from blueBeam import viewBeam
     return viewBeam(frame)
 
@@ -76,12 +76,12 @@ while True:
 
 cv2.destroyAllWindows()
 
-# cap = Camera_pi.getInstance()
+# cap = Camera_opencv.getInstance()
 # try:
 #     while True:
 #         _, frame = cap.read()
 #         print(mainSwitcher(frame, 1, 0, 0))
-#         cv2.imshow('')
+#         cv2.imshow('frame', frame)
 #         if cv2.waitKey(1) & 0xFF == ord('q'):
 #             break
 #

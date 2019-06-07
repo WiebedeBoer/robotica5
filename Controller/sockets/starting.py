@@ -60,7 +60,7 @@ def kwalificatie(argument):
         sys.path.append('Kwalificatie/EiGripper/')
 
     def vision():
-        sys.path.append('Kwalificatie/Vision/')
+        sys.path.append('Kwalificatie/MainVision/')
         #from blueBeam import viewBeam
         #return viewBeam()
 
