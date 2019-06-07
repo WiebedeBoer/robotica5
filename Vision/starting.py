@@ -70,6 +70,7 @@ def eggtelligence(frame, argument, argument1):
 while True:
     frame = Camera_pi.getInstance()
     print(mainSwitcher(frame, 2, 0, 0))
+    cv2.imshow('Camera', frame)
 
 # cap = Camera_pi.getInstance()
 # try:

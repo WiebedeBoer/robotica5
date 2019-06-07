@@ -45,5 +45,6 @@ def viewBeam(frame):
             # calculate distance
             distance = calculateDistance(w, 625, 2.4)
             xyAxis = whichDirection((x + w) / 2, (y + h) / 2)
+            cv2.imshow('Res', res)
             return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     return False
