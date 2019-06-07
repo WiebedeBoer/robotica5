@@ -9,9 +9,11 @@ from helpFunctions import *
 
 
 def viewBeam(frame):
-    frame[:, :, 0] = CLAHE(frame[:, :, 0])
-    frame[:, :, 1] = CLAHE(frame[:, :, 1])
-    frame[:, :, 2] = CLAHE(frame[:, :, 2])
+    b = CLAHE(frame[:, :, 0])
+    g = CLAHE(frame[:, :, 1])
+    r = CLAHE(frame[:, :, 2])
+
+    frame = cv2.merge((b,g,r))
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -25,7 +27,7 @@ def viewBeam(frame):
     gray_res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
     _, th = cv2.threshold(gray_res, 1, 255, cv2.THRESH_BINARY)
 
-    contours, hierarchy, _ = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for cnr in range(len(contours)):
         cnt = contours[cnr]
         area = cv2.contourArea(cnt)
@@ -42,6 +44,6 @@ def viewBeam(frame):
         if shape == "rectangle":
             # calculate distance
             distance = calculateDistance(w, 625, 2.4)
-            xyAxis = whichDirection(((x + w) / 2, (y + h) / 2))
+            xyAxis = whichDirection((x + w) / 2, (y + h) / 2)
             return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     return False
