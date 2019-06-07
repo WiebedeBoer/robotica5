@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Vision/starting.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/starting.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vision/starting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+            <state relative-caret-position="150">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
             </state>
           </provider>
         </entry>
@@ -33,10 +32,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
+            <state relative-caret-position="370">
               <caret line="48" column="50" lean-forward="true" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
             </state>
           </provider>
@@ -186,8 +185,8 @@
         <option value="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py" />
         <option value="$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py" />
         <option value="$PROJECT_DIR$/Vision/Imp_Functions/fm_ORB.py" />
-        <option value="$PROJECT_DIR$/Vision/starting.py" />
         <option value="$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py" />
+        <option value="$PROJECT_DIR$/Vision/starting.py" />
       </list>
     </option>
   </component>
@@ -470,17 +469,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/starting.py">
+    <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="72" column="31" lean-forward="true" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state relative-caret-position="370">
+          <caret line="48" column="50" lean-forward="true" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
+    <entry file="file://$PROJECT_DIR$/Vision/starting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="48" column="50" lean-forward="true" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+        <state relative-caret-position="150">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
         </state>
       </provider>
     </entry>

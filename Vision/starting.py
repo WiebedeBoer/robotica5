@@ -71,12 +71,17 @@ while True:
     frame = Camera_pi.getInstance()
     print(mainSwitcher(frame, 2, 0, 0))
     cv2.imshow('Camera', frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
 
 # cap = Camera_pi.getInstance()
 # try:
 #     while True:
 #         _, frame = cap.read()
-#         print(mainSwitcher(frame, 2, 0, 0))
+#         print(mainSwitcher(frame, 1, 0, 0))
+#         cv2.imshow('')
 #         if cv2.waitKey(1) & 0xFF == ord('q'):
 #             break
 #
