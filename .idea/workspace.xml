@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="" />
+    <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py" beforeDir="false" afterPath="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,23 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Vision/starting.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vision/starting_image.py">
+        <entry file="file://$PROJECT_DIR$/Vision/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="315">
+              <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -34,17 +24,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
+            <state relative-caret-position="358">
+              <caret line="42" column="32" lean-forward="true" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Vision/camera_opencv.py">
+        <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+            <state relative-caret-position="209">
+              <caret line="137" column="28" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -52,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+            <state relative-caret-position="405">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
             </state>
           </provider>
         </entry>
@@ -61,17 +51,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/helpFunctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+            <state relative-caret-position="209">
+              <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+            <state relative-caret-position="280">
+              <caret line="58" column="49" lean-forward="true" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -132,7 +122,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vision/Wedstrijd/__init__.py" />
         <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/__init__.py" />
         <option value="$PROJECT_DIR$/vision/Wedstrijd/Eggtelligence/start.py" />
         <option value="$PROJECT_DIR$/vision/Imp_Functions/findDirection.py" />
@@ -177,12 +166,13 @@
         <option value="$PROJECT_DIR$/Vision/camera.py" />
         <option value="$PROJECT_DIR$/Vision/camera_pi.py" />
         <option value="$PROJECT_DIR$/Vision/camera_opencv.py" />
-        <option value="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py" />
-        <option value="$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py" />
-        <option value="$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py" />
         <option value="$PROJECT_DIR$/Vision/Imp_Functions/helpFunctions.py" />
         <option value="$PROJECT_DIR$/Vision/starting_image.py" />
         <option value="$PROJECT_DIR$/Vision/starting.py" />
+        <option value="$PROJECT_DIR$/Vision/test.py" />
+        <option value="$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py" />
+        <option value="$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py" />
+        <option value="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py" />
       </list>
     </option>
   </component>
@@ -198,6 +188,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -210,11 +201,49 @@
               <item name="robotica5" type="462c0819:PsiDirectoryNode" />
               <item name="Vision" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Imp_Functions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Kwalificatie" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Kwalificatie" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Wedstrijd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Wedstrijd" type="462c0819:PsiDirectoryNode" />
+              <item name="ChickenSurvivalRun" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="robotica5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="robotica5" type="462c0819:PsiDirectoryNode" />
+              <item name="Vision" type="462c0819:PsiDirectoryNode" />
+              <item name="Wedstrijd" type="462c0819:PsiDirectoryNode" />
+              <item name="Eggtelligence" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -314,7 +343,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/png/kip_img3-min.png" />
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/png/kip_img2-min.png" />
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/png/kip_img1-min.png" />
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/img/jpg/kip_img1.jpg" />
@@ -418,13 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="76" column="62" lean-forward="true" selection-start-line="76" selection-start-column="62" selection-end-line="76" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/eggDetection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -459,42 +480,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="46" column="83" selection-start-line="46" selection-start-column="83" selection-end-line="46" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/camera_opencv.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/helpFunctions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Vision/starting_test.py" />
+    <entry file="file://$PROJECT_DIR$/Vision/starting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Vision/starting_image.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -505,10 +498,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Vision/starting.py">
+    <entry file="file://$PROJECT_DIR$/Vision/camera_opencv.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
+        <state relative-caret-position="195">
+          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="137" column="28" selection-start-line="137" selection-start-column="28" selection-end-line="137" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Imp_Functions/helpFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="42" column="32" lean-forward="true" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="58" column="49" lean-forward="true" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
         </state>
       </provider>
     </entry>
