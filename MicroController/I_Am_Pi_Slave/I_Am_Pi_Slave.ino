@@ -2,13 +2,7 @@
 // WIP template for communication between arduino and raspberrypi
 
 // Includes
-#include <SPI.h>
-#include "mcp4xxx.h"
 #include <Wire.h>
-
-using namespace icecave::arduino;
-
-MCP4XXX* pot;
 
 // Serial event
 char rx_Byte = 0;             // Last received byte
@@ -72,7 +66,7 @@ void loop() {
 
 void serialEvent() {
   while(Serial.available() && rx_Complete == false){
-    rx_Byte = (char)Serial.read(); //Read next byte
+    rx_Byte = (char)Serial.read(); // Read next byte
     
     if(!ReadingCheckSum){ rx_Msg += rx_Byte; }  // Enter byte to message
     else { SendSum += rx_Byte; }                // Enter byte to sendsum
@@ -85,8 +79,6 @@ void serialEvent() {
       ReadingCheckSum = false;
     }
   }
-
-  //Message received do command
   
   //execute received msg
   if(rx_Complete){
@@ -100,6 +92,9 @@ void serialEvent() {
       String result = "";
       if(rx_Msg == "info?|"){ // info?,|10
         result = respondInfo() + String(checksum(respondInfo())) + "\n";
+      }
+      else if(rx_Msg == "refresh?|"){
+        result = "ack:RefreshMessageSend|?<>\n";
       }
       else {
         result = "ack:noAction?<>|\n";
@@ -121,7 +116,6 @@ void serialEvent() {
 String getDistance() {
   return String(distance);
 }
-
 
 String getSpeed() {
   return String(speedL) + ";" + String(speedR);
