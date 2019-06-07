@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Controller/sockets/starting.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/sockets/starting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/FM_ORB.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_IMAGE.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/FM_ORB_IMAGE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/FM_ORB_ORIGINAL.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/FM_ORB_ORIGINAL.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/BRIEF.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/BRIEF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/FM_Homography.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/FM_Homography.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Orb_Matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Orb_Matcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Template_Matcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Back_up_Obj_detection/Old_Detectors/Template_Matcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/calibrate_focallength.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/calibrate_focallength.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/calibration_camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/calibration_camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/colorpicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/colorpicker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/contrast.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/contrast.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pictures/camera_calibration/calib.npz" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pictures/camera_calibration/calib.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/distortion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/distortion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/matrix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/matrix.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/rotation.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/rotation.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/translation.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pictures/camera_calibration/out/translation.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pictures/camera_calibration_foto.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pictures/camera_calibration_foto.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Extra_Functions/pose_estimation.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Extra_Functions/pose_estimation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/Obj_tracking/tracking_apis.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/Obj_tracking/tracking_apis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/eggDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/eggDetection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/fm_ORB.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/fm_ORB.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/helpFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/helpFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Imp_Functions/tape.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Imp_Functions/tape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Kwalificatie/Pitch/pitch.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Kwalificatie/Pitch/pitch.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Kwalificatie/Vision/blueBeam.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Kwalificatie/Vision/blueBeam.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Videos/record.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Videos/record.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Videos/record.py.save" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Videos/record.py.save" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Wedstrijd/ChickenSurvivalRun/chickenSurvivalRun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/eggtelligence.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Wedstrijd/Eggtelligence/eggtelligence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/Wedstrijd/Eggtelligence/qrReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/Wedstrijd/Eggtelligence/qrReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/camera_opencv.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/camera_opencv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/camera_pi.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/camera_pi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/starting.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/starting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vision/starting_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainVision/starting_image.py" afterDir="false" />
-    </list>
+    <list default="true" id="ad7da970-ff97-4aa0-b6ba-39800d101eb6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MainVision/starting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="69" column="11" lean-forward="true" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
+            <state relative-caret-position="331">
+              <caret line="76" column="23" lean-forward="true" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -493,8 +457,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MainVision/starting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="69" column="11" lean-forward="true" selection-start-line="69" selection-start-column="11" selection-end-line="69" selection-end-column="11" />
+        <state relative-caret-position="331">
+          <caret line="76" column="23" lean-forward="true" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
         </state>
       </provider>
     </entry>
