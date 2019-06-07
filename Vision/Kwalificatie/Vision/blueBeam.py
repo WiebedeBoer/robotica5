@@ -6,13 +6,12 @@ sys.path.append('../pi/')
 import cv2
 import numpy as np
 from helpFunctions import *
-from clahe import CLAHE as cl
 
 
 def viewBeam(frame):
-    frame[:, :, 0] = cl(frame[:, :, 0])
-    frame[:, :, 1] = cl(frame[:, :, 1])
-    frame[:, :, 2] = cl(frame[:, :, 2])
+    frame[:, :, 0] = CLAHE(frame[:, :, 0])
+    frame[:, :, 1] = CLAHE(frame[:, :, 1])
+    frame[:, :, 2] = CLAHE(frame[:, :, 2])
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
