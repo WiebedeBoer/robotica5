@@ -46,7 +46,7 @@ def pitch(frame, argument, argument1):
 
 
 def vision(frame, argument, argument1):
-    sys.path.append('Kwalificatie/Vision/')
+    sys.path.append('Kwalificatie/MainVision/')
     from blueBeam import viewBeam
     return viewBeam(frame)
 
