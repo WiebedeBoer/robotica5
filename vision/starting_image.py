@@ -1,15 +1,16 @@
 import sys
 import socket
+import glob
 import os
 import cv2
-#test
+
 try:
     from camera_pi import Camera_pi
 except:
     from camera_opencv import Camera_opencv
 
-# os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
-os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
+# os.chdir(os.path.realpath(__file__ + '\\..\\')) # If on windows use this
+os.chdir(os.path.realpath(__file__ + '//..//'))  # If on linux use this
 
 # Here the function gets the string send by the pi
 def SocketReceive():
@@ -33,8 +34,7 @@ def mainSwitcher(frame, argument, argument1, argument2):
         0: pitch,
         1: vision,
         2: chickenSurvivalRun,
-        3: eggtelligence,
-        4: GripperVision
+        3: eggtelligence
     }
 
     func = switcher.get(argument, "Nothing")
@@ -50,10 +50,6 @@ def vision(frame, argument, argument1):
     from blueBeam import viewBeam
     return viewBeam(frame)
 
-def GripperVision(argument, argument1, frame):
-    sys.path.append('Wedstrijd/Eggtelligence/')
-    from startEggDistance import startEggDistance
-    return startEggDistance(frame)
 
 def chickenSurvivalRun(frame, argument, argument1):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
@@ -67,25 +63,24 @@ def eggtelligence(frame, argument, argument1):
     return eggtelligence(frame, argument, argument1)
 
 
-while True:
-    frame = Camera_pi.getInstance()
-    print(mainSwitcher(frame, 2, 0, 0))
+w, h = Camera_opencv.getSettings()
 
-# cap = Camera_pi.getInstance()
-# try:
-#     while True:
-#         _, frame = cap.read()
-#         print(mainSwitcher(frame, 2, 0, 0))
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#
-# except KeyboardInterrupt:
-#     cap.release()
-#     cv2.destroyAllWindows()
+images = [cv2.imread(file) for file in glob.glob('Images/TestImg/Beker/*jpg')]  # trainImage
+try:
+    for image in images:
+        image = cv2.resize(image, (w, h))
+        print(mainSwitcher(image, 2, 0, 0))
+        cv2.imshow('Frame', image)
+        cv2.waitKey(0)
+
+except KeyboardInterrupt:
+    cv2.destroyAllWindows()
+
 
 # sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # try:
 #     sok.connect((socket.gethostname(), 1234))
+#
 #     while True:
 #     	frame = Camera_pi.getInstance()
 #         msg = SocketReceive()

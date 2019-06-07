@@ -24,7 +24,7 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 		joy2.second = std::stoi(m[4]);
 	}
 	catch (const std::exception &) {
-		std::cout << "joy stoi error:"  << input << std::endl;
+		std::cout << "joy stoi error" << std::endl;
 	}
 	
 

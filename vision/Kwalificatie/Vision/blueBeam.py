@@ -26,7 +26,7 @@ def viewBeam(frame):
     gray_res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
     _, th = cv2.threshold(gray_res, 1, 255, cv2.THRESH_BINARY)
 
-    contours, hierarchy = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy, _ = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     for cnr in range(len(contours)):
         cnt = contours[cnr]
         area = cv2.contourArea(cnt)
@@ -43,7 +43,6 @@ def viewBeam(frame):
         if shape == "rectangle":
             # calculate distance
             distance = calculateDistance(w, 625, 2.4)
-
-            return round(distance, 2)
-
+            xyAxis = whichDirection(((x + w) / 2, (y + h) / 2))
+            return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     return False

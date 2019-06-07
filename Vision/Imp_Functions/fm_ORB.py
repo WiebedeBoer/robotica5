@@ -3,26 +3,7 @@ sys.path.append('../')
 
 import numpy as np
 import cv2
-from helpFunctions import CLAHE
-
-
-# Calculates the center of points
-def calculateCenter(pts):
-    allXPoints = []
-    allYPoints = []
-
-    for p in pts:
-        allXPoints.append(p[0][0])
-        allYPoints.append(p[0][1])
-
-    sumX = 0
-    for x in allXPoints:
-        sumX += x
-
-    sumY = 0
-    for y in allYPoints:
-        sumY += y
-    return [sumX / len(pts), sumY / len(pts)]
+from helpFunctions import *
 
 
 # Calculates the distance between points and the center
@@ -77,8 +58,8 @@ def fm_ORB(frame, imgTrainColor):
     firstTime = True    # If firstTime is True then set width and heights of frame and images as variables
     MIN_MATCH_COUNT = 20    # There need to be at least 20 matches before drawing a rectangle
 
-    imgCamColor = CLAHE(imgCamColor)    # Sets the contrast of the frame
     imgCamGray = cv2.cvtColor(imgCamColor, cv2.COLOR_BGR2GRAY)
+    imgCamColor = CLAHE(imgCamGray)  # Sets the contrast of the frame
 
     kpCam = orb.detect(imgCamGray, None)    # Detect orbs in imgTrainGray
     kpCam, desCam = orb.compute(imgCamGray, kpCam)  # Detect descriptors in imgTrainGray
@@ -107,7 +88,8 @@ def fm_ORB(frame, imgTrainColor):
     #  If allGood_matches has enough good matches then proceed
     if len(allGood_matches) > MIN_MATCH_COUNT:
         src_pts = np.float32([kpCam[m.queryIdx].pt for m in best_matches]).reshape(-1, 1, 2)  # Get the points of the best_matches
-        center = calculateCenter(src_pts)   # Calculate the center of these points
+        points = [p[0] for p in src_pts]
+        center = calculateCenter(points)   # Calculate the center of these points
         avgDistance = calculateDistance(src_pts, center)    # Calculate the average distance between the points and the center
         drawPoints = []
 
@@ -120,7 +102,7 @@ def fm_ORB(frame, imgTrainColor):
 
         # If rectanglePts is not None then draw a rectangle on the frame
         if rectanglePts[0] is not None or rectanglePts[1] is not None:
-            return rectanglePts[0], rectanglePts[1]
+            return rectanglePts
 
     else:
         return False
