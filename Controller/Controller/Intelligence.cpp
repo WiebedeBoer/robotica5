@@ -110,6 +110,7 @@ void Intelligence::CheckEgg() {
 	}
 }
 
+/*
 //splitting distance from coordinate
 template <class OutIt>
 void explode(std::string const &input, char sep, OutIt output){
@@ -118,6 +119,7 @@ void explode(std::string const &input, char sep, OutIt output){
 	while (std::getline(buffer, temp, sep))
 		*output++ = temp;
 }
+*/
 
 //blue beam vision qualification
 void Intelligence::CheckBlueBeam() {
@@ -126,9 +128,20 @@ void Intelligence::CheckBlueBeam() {
 	int bluedistance = 0; //distance
 	int horizontal = 0; //horizontal coordinate
 	if (!Intelligence::Database->kwalificatie.vision.empty()) {
-		std::string s = Intelligence::Database->kwalificatie.vision;
-		std::vector<std::string> out;
-		explode(s, ':', out);
+		//std::string s = Intelligence::Database->kwalificatie.vision;
+		//std::vector<std::string> out;
+		//explode(s, ':', out);
+
+
+			try {
+				bluedistance = std::stoi(Intelligence::Database->kwalificatie.eiGripper);
+			}
+			catch (int e) {
+				std::cout << "stoi error occurred. Exception" << e << '\n';
+				bluedistance = 999;
+			}
+
+			/*
 		try {			
 			bluedistance = std::stoi(out[0]);			
 		}
@@ -136,7 +149,9 @@ void Intelligence::CheckBlueBeam() {
 			std::cout << "stoi distance error occurred. Exception" << e << '\n';
 			bluedistance = 999;			
 		}
+		*/
 
+		/*
 		try {
 			horizontal = std::stoi(out[1]);
 		}
@@ -144,6 +159,7 @@ void Intelligence::CheckBlueBeam() {
 			std::cout << "stoi coordinate error occurred. Exception" << e << '\n';
 			horizontal = 0;
 		}
+		*/
 
 		if (bluedistance != 0 && bluedistance != NULL) {
 			//if near and in sight, drive
