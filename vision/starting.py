@@ -2,7 +2,7 @@ import sys
 import socket
 import os
 import cv2
-
+#test
 try:
     from camera_pi import Camera_pi
 except:
@@ -33,7 +33,8 @@ def mainSwitcher(frame, argument, argument1, argument2):
         0: pitch,
         1: vision,
         2: chickenSurvivalRun,
-        3: eggtelligence
+        3: eggtelligence,
+        4: GripperVision
     }
 
     func = switcher.get(argument, "Nothing")
@@ -49,6 +50,10 @@ def vision(frame, argument, argument1):
     from blueBeam import viewBeam
     return viewBeam(frame)
 
+def GripperVision(argument, argument1, frame):
+    sys.path.append('Wedstrijd/Eggtelligence/')
+    from startEggDistance import startEggDistance
+    return startEggDistance(frame)
 
 def chickenSurvivalRun(frame, argument, argument1):
     sys.path.append('Wedstrijd/ChickenSurvivalRun/')
@@ -62,17 +67,21 @@ def eggtelligence(frame, argument, argument1):
     return eggtelligence(frame, argument, argument1)
 
 
-cap = Camera_opencv.getInstance()
-try:
-    while True:
-        _, frame = cap.read()
-        print(mainSwitcher(frame, 1, 0, 0))
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+while True:
+    frame = Camera_pi.getInstance()
+    print(mainSwitcher(frame, 2, 0, 0))
 
-except KeyboardInterrupt:
-    cap.release()
-    cv2.destroyAllWindows()
+# cap = Camera_pi.getInstance()
+# try:
+#     while True:
+#         _, frame = cap.read()
+#         print(mainSwitcher(frame, 2, 0, 0))
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
+#
+# except KeyboardInterrupt:
+#     cap.release()
+#     cv2.destroyAllWindows()
 
 # sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # try:
