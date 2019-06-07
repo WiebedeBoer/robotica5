@@ -4,6 +4,7 @@ import numpy as np
 import clahe as cl
 import math
 
+img = None
 def callback(x):
 	pass
 
@@ -13,12 +14,28 @@ def slope(var):
 	x2 = float( var[2] )
 	y2 = float( var[3] )
 
-	if (x2 - x1) > 0:
-		return ( (y2 - y1) / (x2 - x1) ) * 180.0 / np.pi
-	elif (y2 - y1) > 0:
-		return ( (x2 - x1) / (y2 - y1) ) * 180.0 / np.pi
-	else:
-		return "NAN"
+	slopeY = 0
+	slopeX = 0
+
+	try:
+		if(abs(y2 - y1) > 0):
+			slopeY = ( (x2 - x1) / (y2 - y1) ) * 180.0 / np.pi
+
+		if(abs(x2 - x1) > 0):
+			slopeX = ( (y2 - y1) / (x2 - x1) ) * 180.0 / np.pi
+
+		if(slopeX > 0 and abs(slopeX) < 100):
+			return slopeX
+		elif (slopeY > 0 and abs(slopeY) < 100):
+			return slopeY
+		else:
+			if(abs(slopeX) < abs(slopeY)):
+				return slopeX
+			else:
+				return slopeY
+
+	except ZeroDivisionError:
+		return 0
 
 def isParallel(var1, var2, threshold):
 
@@ -47,59 +64,6 @@ def removeBlackBars(img):
 	crop = img[y:y+h,x:x+w]
 	return crop
 
-def removeGlare(lab, iterations, th = 0):
-
-	# glare
-	lower = th
-	upper = np.array([255,255,255])
-
-	# Threshhold on the lightness
-	glare_th = cv2.inRange(lab, lower, upper)
-
-	# Dilate glare
-	kernel = np.ones((5,5),np.uint8)
-	glare_th = cv2.dilate(glare_th,kernel,iterations = 1)
-
-	# Cut out glare
-	glare = cv2.bitwise_and(lab, lab, mask=glare_th)
-	no_glare = cv2.bitwise_xor(lab, glare)
-
-	# Correct glare and paste it back
-	glare[:,:,0] = glare[:,:,0] *0.4
-	lab = no_glare + glare
-
-	# lower[0] = lower[0] *0.999
-
-	cv2.imshow("glare_", glare)
-	cv2.imshow("no_glare", no_glare)
-	cv2.imshow("hsv_input", lab)
-
-	if iterations > 0:
-		iterations -= 1
-		return removeGlare( lab, iterations, lower )
-	else:
-		return cv2.cvtColor( lab, cv2.COLOR_Lab2BGR )
-
-def removeGlareHSV(lab, th_min, th_max):
-
-	lab = cv2.bitwise_not(lab)
-	ret,th = cv2.threshold(hsv[:,:,1],th_min,th_max,cv2.THRESH_BINARY)
-
-	# Dilate glare
-	kernel = np.ones((10,10),np.uint8)
-	glare_th = cv2.morphologyEx(th, cv2.MORPH_CLOSE, kernel)
-
-	# Cut out glare
-	glare = cv2.bitwise_and(hsv, hsv, mask=glare_th)
-	no_glare = cv2.bitwise_xor(hsv, glare)
-
-	# Correct glare and paste it back
-	glare[:,:,2] = glare[:,:,2] * 0.9
-	res = no_glare + glare
-	res = cv2.cvtColor(res, cv2.COLOR_Lab2BGR)
-
-	return res
-
 def lineRect(x1, y1, x2, y2, rx, ry, rw, rh, img):
 
 	x1 = float(x1)
@@ -111,13 +75,12 @@ def lineRect(x1, y1, x2, y2, rx, ry, rw, rh, img):
 	rw = float(rw)
 	rh = float(rh)
 
-
 	# check if the line has hit any of the rectangle's sides
 	# uses the Line/Line function below
-	left =   lineLine(x1,y1,x2,y2, rx,ry,rx, ry+rh, img)
-	right =  lineLine(x1,y1,x2,y2, rx+rw,ry, rx+rw,ry+rh, img)
-	top =    lineLine(x1,y1,x2,y2, rx,ry, rx+rw,ry, img)
-	bottom = lineLine(x1,y1,x2,y2, rx,ry+rh, rx+rw,ry+rh, img)
+	left =   lineLine(img, x1,y1,x2,y2, rx,ry,rx, ry+rh)
+	right =  lineLine(img, x1,y1,x2,y2, rx+rw,ry, rx+rw,ry+rh)
+	top =    lineLine(img, x1,y1,x2,y2, rx,ry, rx+rw,ry)
+	bottom = lineLine(img, x1,y1,x2,y2, rx,ry+rh, rx+rw,ry+rh)
 
 	# if ANY of the above are true, the line
 	# has hit the rectangle
@@ -131,10 +94,20 @@ def lineRect(x1, y1, x2, y2, rx, ry, rw, rh, img):
 		cv2.line(img, (int( rx ), int( ry + rh )), (int( rx + rw ), int( ry + rh )), (0, 0, 255), 3)
 
 	if (left or right or top or bottom):
-		return True
+		direction = ""
+		if (left and right):
+			direction += "front "
+		elif (left):
+			direction += "left "
+		elif (right):
+			direction += "right "
+		elif (bottom):
+			direction += "HOLY FUK TURN AROUND "
+
+		return direction
 	return False
 
-def lineLine(x1, y1, x2, y2, x3, y3, x4, y4, img):
+def lineLine(img, (x1, y1, x2, y2), (x3, y3, x4, y4)):
 
 	# calculate the direction of the lines
 	uA = None
@@ -143,26 +116,103 @@ def lineLine(x1, y1, x2, y2, x3, y3, x4, y4, img):
 		uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1))
 		uB = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1))
 	except ZeroDivisionError:
-		print("division by zero")
 		return False
 
 	# if uA and uB are between 0-1, lines are colliding
 	if (uA >= 0 and uA <= 1 and uB >= 0 and uB <= 1):
 
-		print("COLLIDE")
-
 		# optionally, draw a circle where the lines meet
 		intersectionX = x1 + (uA * (x2-x1))
 		intersectionY = y1 + (uA * (y2-y1))
 
-		cv2.circle(img, (int( intersectionX ), int( intersectionY )), 3, (255, 0, 0), 2)
+		cv2.circle(img, (intersectionX, intersectionY), 4, (0, 0, 255), -1)
 
 		return True
 	return False
 
-	
+def detectCollision(line, detectionLines, img):
 
-def BlackTape():
+	left = False
+	right = False
+
+	#both[Both lines][left or right][which line][coordinate]
+	for i in range(0, len(detectionLines)):
+		for j in range(0, len(detectionLines[i])):
+			for k in range(0, len(detectionLines[i][j])):
+				if lineLine(img, line, detectionLines[i][j][k]):
+					printLine(img, detectionLines[i][j][k], (255, 255, 0), 5)
+					print(detectionLines[i][j][k])
+					if(j == 0):
+						left = True
+					elif(j == 1):
+						right = True
+					printLine(img, detectionLines[i][j][k], (255,0,0))
+
+	return [left, right]
+
+
+
+def lineDetection(lines, bothLines, img):
+
+	font = cv2.FONT_HERSHEY_SIMPLEX
+	if lines is not None:
+		i = 0
+		j = 0
+		
+		# Loop through lines
+		for line in lines:
+			(x1,y1,x2,y2) = line[0]
+
+			# Compare every line
+			for lineCheck in lines: 
+
+				xC1,yC1,xC2,yC2 = lineCheck[0]
+				distance = math.sqrt( (x1-xC1)**2 + (y1-yC1)**2 )
+
+				slopeln = round( float(slope( line[0] )), 0 )
+				slopelnC = round( float(slope( lineCheck[0] )), 0 )
+
+				cv2.putText( img, str(slopeln),(x2,y2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
+				cv2.putText( img, str(slopelnC),(xC2, yC2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
+
+				# Check that line isn't the same line
+				if i != j: 
+					
+					# Check if line is parallel
+					if isParallel( line[0], lineCheck[0], 411 ): 
+
+						# Check if line is close enough
+						if(distance > 3 and distance <= 100):
+
+							printLine(img, line[0], (0, 0, 255)) # Parallel line
+							printLine(img, lineCheck[0], (0, 0, 255)) # Parallel line
+
+							# Check if line collides with any of the detection lines
+							print(line[0])
+							print(bothLines[0][0][0][0])
+							lineDetect = lineLine(line[0], bothLines[0][0][0], img)
+							print(str(lineDetect))
+							if( lineDetect[0] and lineDetect[1] ):
+								return "front"
+							elif (lineDetect[0]):
+								printLine(img, line[0], (0, 255, 0)) # Parallel line
+								printLine(img, lineCheck[0], (0, 255, 0)) # Parallel line
+								return "left"
+							elif (lineDetect[1]):
+								printLine(img, line[0], (255, 0, 0)) # Parallel line
+								printLine(img, lineCheck[0], (255, 0, 0)) # Parallel line
+								return "right"
+							else:
+								return "No tape"
+
+				j += 1
+			i += 1
+
+def printLine(img, (x1, y1, x2, y2), (b, g, r), thickness = 3):
+	cv2.line(img, (x1,y1), (x2,y2), (b, g, r), thickness) # Parallel line
+
+
+def BlackTape(follow):
 
 	# resolution
 	w = 640
@@ -194,7 +244,7 @@ def BlackTape():
 	cv2.createTrackbar('MIN_LENGTH','settings',0,500,callback)
 	cv2.createTrackbar('MAX_GAP','settings',0,500,callback)
 
-	cv2.createTrackbar('MAX_DISTANCE','settings',15,500,callback)
+	cv2.createTrackbar('MAX_DISTANCE','settings',100,500,callback)
 	cv2.createTrackbar('MIN_DISTANCE','settings',3,500,callback)
 
 	cv2.createTrackbar('iterations','settings',0,100,callback)
@@ -251,55 +301,48 @@ def BlackTape():
 		(windowHeight, windowWidth, _) = img.shape
 
 		img = cv2.bilateralFilter(img,9,75,75)
-		
 		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 		th = cv2.inRange(img, lower_tape, upper_tape)
-
 		tape = cv2.bitwise_and(img, img, mask=th)
 		edges = cv2.Canny(tape,th_min,th_max,apertureSize = 3)
 
 		lines = cv2.HoughLinesP(edges, rho, np.pi/180, min_length, maxLineGap=max_gap)
 
-		rx, ry = windowWidth / 4, windowHeight / 2
-		rw, rh = windowWidth / 2, windowHeight / 2
+		leftLines = []
+		rightLines = []
+		bothLines = []
 
-		cv2.rectangle(img, (rx, ry), (rx + rw, ry + rh), (0, 255, 0))
+		if (follow):
+			rx, ry = windowWidth / 6, windowHeight / 2
+			rw, rh = windowWidth / 6 * 4, windowHeight / 2
 
-		font = cv2.FONT_HERSHEY_SIMPLEX
+			leftLines.append([rx, ry, rx, ry+rh])
+			rightLines.append([rx+rw, ry, rx+rw, ry+rh])
 
-		if lines is not None:
-			i = 0
-			j = 0
+			# both[All lines][left or right][which line][coordinate]
+			bothLines.append([ leftLines, rightLines ])
+
+			print( lineDetection(lines, bothLines, img) )
+
+		else:
+			x1, y1 = 0, windowHeight / 5 * 4
+			x2, y2 = windowWidth / 5 * 2, windowHeight / 5 * 4
+
+			x3, y3 = windowWidth / 5 * 3, windowHeight / 5 * 4
+			x4, y4 = windowWidth, windowHeight / 5 * 4
+
+			printLine(img, (x1, y1, x2, y2), (0, 255, 0), 1)
+			printLine(img, (x3, y3, x4, y4), (0, 255, 0), 1)
+
+			leftLines.append([x3, y3, x4, y4])
+			rightLines.append([x1, y1, x2, y2])
 			
-			for line in lines: # Loop through lines
-				x1,y1,x2,y2 = line[0]
+			# both[All lines][left or right][which line][coordinate]
+			bothLines.append([ leftLines, rightLines ])
 
-				for lineCheck in lines: # Compare every line
-
-					xC1,yC1,xC2,yC2 = lineCheck[0]
-					distance = math.sqrt( (x1-xC1)**2 + (y1-yC1)**2 )
-
-					slopeln = round( float(slope( line[0] )), 0 )
-					slopelnC = round( float(slope( lineCheck[0] )), 0 )
-
-					cv2.putText( img, str(slopeln),(x2,y2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
-					cv2.putText( img, str(slopelnC),(xC2, yC2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
-
-					if i != j: # Check that line isn't the same line
-						
-						if isParallel( line[0], lineCheck[0], th_slope ): # Check if line is parallel
-
-							if(distance > min_dist and distance <= max_dist): # Check if line is close enough
-
-								cv2.line(img, (x1,y1), (x2,y2), (0, 0, 255), 1) # Draw parallel lines
-
-								# Check if line intersects with rectangle
-								if( lineRect(x1, y1, x2, y2, rx, ry, rw, rh, img) or lineRect(xC1, yC1, xC2, yC2, rx, ry, rw, rh, img) ):
-									cv2.line(img, (x1,y1), (x2,y2), (0, 255, 0), 3) # Parallel line
-									cv2.line(img, (xC1,yC1), (xC2,yC2), (0, 255, 0), 3) # Parallel line
-					j += 1
-				i += 1
+			print( lineDetection(lines, bothLines, img) )
+		
 
 		cv2.imshow("tape", tape)
 		cv2.imshow("th", th)
@@ -313,4 +356,4 @@ def BlackTape():
 	cam.release()
 	cv2.destroyAllWindows()
 	
-BlackTape()
+BlackTape(True)
