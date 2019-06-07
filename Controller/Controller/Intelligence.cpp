@@ -44,38 +44,122 @@ void Intelligence::Think()
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 		}
+		//autonomous qualification
 		if (std::chrono::system_clock::now() > GripperVision) {
-			std::vector<std::string> args;
-			//= Database->eggDistance;
-			int eggdis = 0;
-			//std::cout << Intelligence::Database->wedstrijd.eggDistance << std::endl;
-			if (!Intelligence::Database->wedstrijd.eggDistance.empty()) {
-				try {
-					eggdis = std::stoi(Intelligence::Database->wedstrijd.eggDistance);
-				}
-				catch(int e){
-					std::cout << "stoi error occurred. Exception" << e << '\n';
-					eggdis = 999;
-				}
-				
-				if (eggdis != 0 && eggdis != NULL) {
-					if (eggdis < 210) {
-						//if (std::stoi(Intelligence::Database->wedstrijd.eggDistance) < 30) {
-							//CommandQueue->push(Command(Worker, "ArmForward", Database, args));
-						args.push_back("");
-						args[0] = "32";
-						//args.push_back("");
-						//args[1] = "36";
-						//CommandQueue->push(Command(Worker, "DriveForward", Database, args));
-						//CommandQueue->push(Command(Worker, "ArmBackward", Database, args));
-						CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
-					}
-				}
+			//check qualification modus
+			std::string QualifyModus;
+			//QualifyModus = Intelligence::Database->Modus.subQualifyModus;
+			QualifyModus = "eiGripper"; //Let op. Even voor de test.
+			//egg qualification
+			if (QualifyModus == "eiGripper") {				
+				CheckEgg();
+			}
+			//blue beam qualification
+			else if (QualifyModus == "vision") {
+				CheckBlueBeam();
+			}
+			//gripper qualification
+			else if (QualifyModus == "GripperVision") {
+				CheckGripper();
 			}
 			GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
 		}
 	}
 }
+
+//gripper qualification
+void Intelligence::CheckGripper() {
+	std::vector<std::string> args;
+	args.push_back("");
+	args[0] = "32";
+	args[1] = "36";	
+	CommandQueue->push(Command(Worker, "ArmForward", Database, args)); //move arm forward
+}
+
+//egg vision qualification
+void Intelligence::CheckEgg() {
+	std::vector<std::string> args;
+	args.push_back("");
+	int eggdistance = 0; //distance
+	//std::cout << Intelligence::Database->kwalificatie.eiGripper << std::endl;
+	if (!Intelligence::Database->kwalificatie.eiGripper.empty()) {
+		try {
+			eggdistance = std::stoi(Intelligence::Database->kwalificatie.eiGripper);
+		}
+		catch (int e) {
+			std::cout << "stoi error occurred. Exception" << e << '\n';
+			eggdistance = 999;
+		}
+		//if egg seen
+		if (eggdistance != 0 && eggdistance != NULL && eggdistance !=999) {
+			//to near for gripper, drive backward
+			if (eggdistance < 210) {
+				args[0] = "32";
+				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+			}
+			else if (eggdistance >=210) {
+				args[0] = "32";
+				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+			}
+		}
+		//else egg not seen, go seek egg
+		else {
+			args[0] = "32";
+			CommandQueue->push(Command(Worker, "DriveLeft", Database, args)); //search egg in left circle
+		}
+	}
+}
+
+//blue beam vision qualification
+void Intelligence::CheckBlueBeam() {
+	std::vector<std::string> args;
+	args.push_back("");
+	int bluedistance = 0; //distance
+	int horizontal = 320; //horizontal coordinate
+	if (!Intelligence::Database->kwalificatie.vision.empty()) {
+		try {
+			bluedistance = std::stoi(Intelligence::Database->kwalificatie.vision);
+		}
+		catch (int e) {
+			std::cout << "stoi error occurred. Exception" << e << '\n';
+			bluedistance = 999;
+		}
+
+		if (bluedistance != 0 && bluedistance != NULL) {
+			//if near and in sight, drive
+			if (bluedistance >= 5 && bluedistance < 210) {
+				//left
+				if (horizontal < -10) {
+					args[0] = "32";
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				}
+				//right
+				else if (horizontal > 10) {
+					args[0] = "32";
+					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+				}
+				//forward
+				else {
+					args[0] = "32";
+					CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+				}
+			}
+			//else if too near, full stop
+			else if (bluedistance < 5) {
+				args[0] = "0";
+				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+			}
+			/*
+			//else if not seen, seek to the left, not sure if necessary
+			else if (bluedistance == 999) {
+				args[0] = "32";
+				CommandQueue->push(Command(Worker, "DriveLeft", Database, args)); //search beam
+			}
+			*/
+		}
+	}
+}
+
 
 void Intelligence::CheckDrive()
 {
@@ -143,6 +227,7 @@ void Intelligence::CheckVision()
 		VisionQueue->push(Command(VisionApi, "chickenSurvivalRun", Database));
 		VisionQueue->push(Command(VisionApi, "eggDistance", Database));
 		VisionQueue->push(Command(VisionApi, "qrDistance", Database));
+		VisionQueue->push(Command(VisionApi, "BlueBeam", Database)); //blue beam qualification
 		RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
 	}
 }

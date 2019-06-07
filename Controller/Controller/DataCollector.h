@@ -11,14 +11,14 @@ struct Wedstrijd
 	std::string qrDistance;
 	std::string qrDestination;
 };
-//DataCollection for the Kwalification
+//DataCollection for the Qualification
 struct Kwalificatie
 {
 	std::string pitch;
 	std::string poort;
 	std::string grindpad;
 	std::string eiGripper;
-	std::string vision;
+	std::string vision; //blue beam
 	std::string GripperVision;
 };
 //DataCollection for the Arm
@@ -30,7 +30,7 @@ struct Arm
 	int servo4 = 0;
 	int servo5 = 0;
 };
-//DataCollection for the diffren modusses
+//DataCollection for the different modus
 struct Modus {
 	enum mainModus { _Mkwalificatie, _Mwedstrijd } mm;
 	enum subQualifyModus { pitch, poortje, grindpad, eiGripper, vision } sqm;
