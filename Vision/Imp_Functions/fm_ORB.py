@@ -45,8 +45,13 @@ def findRectanglePoints(pts):
 
 def fm_ORB(frame, imgTrainColor):
     imgCamColor = frame
+
     # Create the orb instance
-    orb = cv2.ORB_create()
+    try:
+        orb = cv2.ORB_create()  # is being used for local
+    except:
+        orb = cv2.ORB()  # Is being used for pi
+
     # Create a Brute Force Matcher with the algorithm NORM_HAMMING and crossCheck
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
