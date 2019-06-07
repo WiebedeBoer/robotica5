@@ -8,8 +8,6 @@ import cv2
 
 def chickenSurvivalRun(frame):
     imgTrainColor = cv2.imread('Images/TrainImg/Beker/beker1.jpg')
-    screenWidth = 0
-    screenHeight = 0
 
     try:
         from camera_pi import Camera_pi
