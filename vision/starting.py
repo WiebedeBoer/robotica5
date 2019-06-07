@@ -67,7 +67,7 @@ def eggtelligence(frame, argument, argument1):
     return eggtelligence(frame, argument, argument1)
 
 
-while True:]
+while True:
     frame = Camera_pi.getInstance()
     print(mainSwitcher(frame, 2, 0, 0))
 
