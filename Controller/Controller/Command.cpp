@@ -13,14 +13,14 @@ Command::Command(MicroController * a, std::string t)
 	Command::type = t;
 }
 
-Command::Command(MicroController* a , std::string t, DataCollector* DC)
+Command::Command(MicroController* a, std::string t, DataCollector* DC)
 {
 	Command::slave = a;
 	Command::type = t;
 	Command::Database = DC;
 }
 
-Command::Command(MicroController* a, std::string t,DataCollector* DC, std::vector<std::string> ar)
+Command::Command(MicroController* a, std::string t, DataCollector* DC, std::vector<std::string> ar)
 {
 	Command::slave = a;
 	Command::type = t;
@@ -34,7 +34,7 @@ Command::~Command()
 }
 
 void Command::Execute() {
-	
+
 
 	if (Command::type == "refresh") {
 		Command::slave->SerialSend("refresh?," + args[0]);
@@ -62,7 +62,7 @@ void Command::Execute() {
 	}
 	if (Command::type == "ArmForward") {
 		Command::slave->SerialSend("servoDS?,2;1;100&5;0");
-		std::cout << "The Arm is moving forward!!!:" <<args[0] <<"," <<  args[1] << std::endl;
+		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "ArmBackward") {
@@ -75,7 +75,8 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveForward") {
-		Command::slave->SerialSend("motor?,1;"+args[0]+"&2;" + args[0] + "");
+		std::string cmd = "motor?,1;" + args[0] + "&2;" + args[0] + "";
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 		return;
 	}
 	if (Command::type == "DriveBackward") {
@@ -90,32 +91,33 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "chickenSurvivalRun") {
-		std::string temp = Command::VisionSlave->executeCommand("2:0:0");
-		
+
 		Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
-		std::cout <<"chickenSurvivalRun: " <<Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
+		std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
 		return;
 	}
 	if (Command::type == "eggDistance") {
-		std::string temp = Command::VisionSlave->executeCommand("3:0:0");
-		
+
 		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
 		std::cout << "EggDistance: " << Command::Database->wedstrijd.eggDistance << std::endl;
 		return;
 	}
 	if (Command::type == "qrDistance") {
-		std::string temp = Command::VisionSlave->executeCommand("3:1:0");
-		
+
 		Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
-		std::cout << "qrDistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
+		std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
 		return;
 	}
+	//egg grab qualification autonomous
 	if (Command::type == "GripperVision") {
-		//Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("0:3:0:0");
-		//std::cout << "eiGripper: " << Command::Database->kwalificatie.eiGripper << std::endl;
-		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("0:3:0:0");
-		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
-		std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
+		Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("3:0:0");
+		std::cout << "GripperVision: " << Command::Database->kwalificatie.eiGripper << std::endl;
+		return;
+	}
+	//blue beam qualification autonomous
+	if (Command::type == "BlueBeam") {
+		Command::Database->kwalificatie.vision = Command::VisionSlave->executeCommand("1:0:0");
+		std::cout << "BlueBeam: " << Command::Database->kwalificatie.vision << std::endl;
 		return;
 	}
 }

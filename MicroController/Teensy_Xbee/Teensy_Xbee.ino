@@ -52,6 +52,7 @@ accelgyro.setThreshold(3);
 
 void loop() {
 
+  Refresh();
   //Message received do command
   if(rx_Complete){
     //Serial.println("Command:"+rx_Msg+"Sum:" +SendSum + "CalculatedSum:" + String(checksum(rx_Msg))); //print contains all useful debug information
@@ -77,6 +78,13 @@ void loop() {
   //clean message   
 }
 
+void Refresh(){
+  //Speed = digitalRead(SpeedIn);
+  Serial.print(Speed);  
+      Vector norm = accelgyro.readNormalizeGyro();
+
+      pitch = pitch + norm.YAxis
+}
 //serialEventInterupt
 void serialEvent(){
   while(Serial.available()){
