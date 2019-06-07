@@ -1,0 +1,4 @@
+"/Users/wouter/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/191.7141.37/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/wouter/CLionProjects/Kinematics
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/wouter/CLionProjects/Kinematics/cmake-build-debug
