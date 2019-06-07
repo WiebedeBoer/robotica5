@@ -43,5 +43,10 @@ private:
 	void CheckVision();
 	void CheckAfstandbediening();
 	void CheckArm();
+
+	//qualifiers
+	void CheckBlueBeam();
+	void CheckEgg();
+	void CheckGripper();
 };
 

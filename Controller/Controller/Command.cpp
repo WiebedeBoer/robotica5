@@ -108,15 +108,16 @@ void Command::Execute() {
 		std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
 		return;
 	}
+	//egg grab qualification autonomous
 	if (Command::type == "GripperVision") {
-		//Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("0:3:0:0");
-		//std::cout << "eiGripper: " << Command::Database->kwalificatie.eiGripper << std::endl;
-		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("0:3:0:0");
-		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
-		//std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
-
-		//Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("4:0:0");
-		//std::cout << "GripperVision: " << Command::Database->wedstrijd.eggDistance << std::endl;
-		//return;
+		Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("3:0:0");
+		std::cout << "GripperVision: " << Command::Database->kwalificatie.eiGripper << std::endl;
+		return;
+	}
+	//blue beam qualification autonomous
+	if (Command::type == "BlueBeam") {
+		Command::Database->kwalificatie.vision = Command::VisionSlave->executeCommand("1:0:0");
+		std::cout << "BlueBeam: " << Command::Database->kwalificatie.vision << std::endl;
+		return;
 	}
 }
