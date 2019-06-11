@@ -9,6 +9,7 @@
 #include <vector>
 #include "Servo.h"
 #include "Node.h"
+#include "Angles.h"
 
 class JoystickArm {
 public:
