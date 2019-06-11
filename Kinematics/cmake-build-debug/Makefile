@@ -123,6 +123,33 @@ Kinematics/fast:
 	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/build
 .PHONY : Kinematics/fast
 
+Angles.o: Angles.cpp.o
+
+.PHONY : Angles.o
+
+# target to build an object file
+Angles.cpp.o:
+	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/Angles.cpp.o
+.PHONY : Angles.cpp.o
+
+Angles.i: Angles.cpp.i
+
+.PHONY : Angles.i
+
+# target to preprocess a source file
+Angles.cpp.i:
+	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/Angles.cpp.i
+.PHONY : Angles.cpp.i
+
+Angles.s: Angles.cpp.s
+
+.PHONY : Angles.s
+
+# target to generate assembly for a file
+Angles.cpp.s:
+	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/Angles.cpp.s
+.PHONY : Angles.cpp.s
+
 JoystickArm.o: JoystickArm.cpp.o
 
 .PHONY : JoystickArm.o
@@ -240,6 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Kinematics"
+	@echo "... Angles.o"
+	@echo "... Angles.i"
+	@echo "... Angles.s"
 	@echo "... JoystickArm.o"
 	@echo "... JoystickArm.i"
 	@echo "... JoystickArm.s"

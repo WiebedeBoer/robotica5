@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Angles.cpp">
+			<Option target="Kinematics"/>
+		</Unit>
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Angles.h">
+			<Option target="Kinematics"/>
+		</Unit>
 		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp">
 			<Option target="Kinematics"/>
 		</Unit>

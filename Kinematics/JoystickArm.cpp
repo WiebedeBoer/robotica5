@@ -20,35 +20,3 @@ std::vector<std::tuple<Servo&, int>> JoystickArm::GetPaths() {
 	}
 	return possibilities;
 }
-
-class Angles {
-public:
-	void Gonio();
-private:
-	int A1; //root joint
-	int A2; //counter clockwise joint
-	int len1; //arm segment 1
-	int len2; //arm segment 2
-	int D1; //dividing angle A1 joint
-	int D2; //dividing angle A1 joint
-	int dist; //distance between tip of segment 2 and root joint
-	int tipx; //x coordinate of tip
-	int tipy; //y coordinate of tip
-};
-
-void Angles::Gonio() {
-	dist = distance(tipx, tipy);
-	D1 = tan(tipx / tipy);
-	D2 = lawOfCosines(dist, len1, len2);
-	A1 = D1 + D2;
-
-	return A1, A2;
-}
-
-void lawOfCosines(a, b, c) {
-	return cos((a*a + b * b - c * c) / (2 * a * b));
-}
-
-void distance(x, y) {
-	return sqrt(x*x + y * y);
-}
