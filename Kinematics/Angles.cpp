@@ -9,6 +9,7 @@ double Angles::Gonio() {
     D1 = tan(TipX / TipY);
     D2 = LawOfCosines(Dist, Len1, Len2);
     A1 = D1 + D2;
+	A2 = lawOfCosines(len1, len2, dist);
     return A1, A2;
 }
 
