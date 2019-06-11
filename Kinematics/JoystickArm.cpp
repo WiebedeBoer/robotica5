@@ -25,6 +25,7 @@ Node JoystickArm::GetPathsVertical(int length, int height) {
                 }
             }
         }
+		
     }
-
+	//AngleToPin(angle, servo); //angle to pin for a particular servo
 }
