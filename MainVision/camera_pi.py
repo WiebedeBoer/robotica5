@@ -4,8 +4,8 @@ from picamera import PiCamera
 
 class Camera_pi:
     __instance = None
-    __width = 640
-    __height = 480
+    __width = 640.
+    __height = 480.
 
     @staticmethod
     def getSettings():
