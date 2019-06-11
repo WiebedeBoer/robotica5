@@ -43,10 +43,10 @@ RM = "/Users/wouter/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wouter/CLionProjects/Kinematics
+CMAKE_SOURCE_DIR = /Users/wouter/Projects/robotica5/Kinematics
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wouter/CLionProjects/Kinematics/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Kinematics.dir/depend.make
@@ -59,55 +59,55 @@ include CMakeFiles/Kinematics.dir/flags.make
 
 CMakeFiles/Kinematics.dir/main.cpp.o: CMakeFiles/Kinematics.dir/flags.make
 CMakeFiles/Kinematics.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Kinematics.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/main.cpp.o -c /Users/wouter/CLionProjects/Kinematics/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Kinematics.dir/main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/main.cpp.o -c /Users/wouter/Projects/robotica5/Kinematics/main.cpp
 
 CMakeFiles/Kinematics.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Kinematics.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/CLionProjects/Kinematics/main.cpp > CMakeFiles/Kinematics.dir/main.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/Projects/robotica5/Kinematics/main.cpp > CMakeFiles/Kinematics.dir/main.cpp.i
 
 CMakeFiles/Kinematics.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Kinematics.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/CLionProjects/Kinematics/main.cpp -o CMakeFiles/Kinematics.dir/main.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/Projects/robotica5/Kinematics/main.cpp -o CMakeFiles/Kinematics.dir/main.cpp.s
 
 CMakeFiles/Kinematics.dir/JoystickArm.cpp.o: CMakeFiles/Kinematics.dir/flags.make
 CMakeFiles/Kinematics.dir/JoystickArm.cpp.o: ../JoystickArm.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Kinematics.dir/JoystickArm.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/JoystickArm.cpp.o -c /Users/wouter/CLionProjects/Kinematics/JoystickArm.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Kinematics.dir/JoystickArm.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/JoystickArm.cpp.o -c /Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp
 
 CMakeFiles/Kinematics.dir/JoystickArm.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Kinematics.dir/JoystickArm.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/CLionProjects/Kinematics/JoystickArm.cpp > CMakeFiles/Kinematics.dir/JoystickArm.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp > CMakeFiles/Kinematics.dir/JoystickArm.cpp.i
 
 CMakeFiles/Kinematics.dir/JoystickArm.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Kinematics.dir/JoystickArm.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/CLionProjects/Kinematics/JoystickArm.cpp -o CMakeFiles/Kinematics.dir/JoystickArm.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp -o CMakeFiles/Kinematics.dir/JoystickArm.cpp.s
 
 CMakeFiles/Kinematics.dir/Servo.cpp.o: CMakeFiles/Kinematics.dir/flags.make
 CMakeFiles/Kinematics.dir/Servo.cpp.o: ../Servo.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Kinematics.dir/Servo.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/Servo.cpp.o -c /Users/wouter/CLionProjects/Kinematics/Servo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Kinematics.dir/Servo.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/Servo.cpp.o -c /Users/wouter/Projects/robotica5/Kinematics/Servo.cpp
 
 CMakeFiles/Kinematics.dir/Servo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Kinematics.dir/Servo.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/CLionProjects/Kinematics/Servo.cpp > CMakeFiles/Kinematics.dir/Servo.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/Projects/robotica5/Kinematics/Servo.cpp > CMakeFiles/Kinematics.dir/Servo.cpp.i
 
 CMakeFiles/Kinematics.dir/Servo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Kinematics.dir/Servo.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/CLionProjects/Kinematics/Servo.cpp -o CMakeFiles/Kinematics.dir/Servo.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/Projects/robotica5/Kinematics/Servo.cpp -o CMakeFiles/Kinematics.dir/Servo.cpp.s
 
 CMakeFiles/Kinematics.dir/Node.cpp.o: CMakeFiles/Kinematics.dir/flags.make
 CMakeFiles/Kinematics.dir/Node.cpp.o: ../Node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Kinematics.dir/Node.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/Node.cpp.o -c /Users/wouter/CLionProjects/Kinematics/Node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Kinematics.dir/Node.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Kinematics.dir/Node.cpp.o -c /Users/wouter/Projects/robotica5/Kinematics/Node.cpp
 
 CMakeFiles/Kinematics.dir/Node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Kinematics.dir/Node.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/CLionProjects/Kinematics/Node.cpp > CMakeFiles/Kinematics.dir/Node.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wouter/Projects/robotica5/Kinematics/Node.cpp > CMakeFiles/Kinematics.dir/Node.cpp.i
 
 CMakeFiles/Kinematics.dir/Node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Kinematics.dir/Node.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/CLionProjects/Kinematics/Node.cpp -o CMakeFiles/Kinematics.dir/Node.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wouter/Projects/robotica5/Kinematics/Node.cpp -o CMakeFiles/Kinematics.dir/Node.cpp.s
 
 # Object files for target Kinematics
 Kinematics_OBJECTS = \
@@ -125,7 +125,7 @@ Kinematics: CMakeFiles/Kinematics.dir/Servo.cpp.o
 Kinematics: CMakeFiles/Kinematics.dir/Node.cpp.o
 Kinematics: CMakeFiles/Kinematics.dir/build.make
 Kinematics: CMakeFiles/Kinematics.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Kinematics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Kinematics"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Kinematics.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -138,6 +138,6 @@ CMakeFiles/Kinematics.dir/clean:
 .PHONY : CMakeFiles/Kinematics.dir/clean
 
 CMakeFiles/Kinematics.dir/depend:
-	cd /Users/wouter/CLionProjects/Kinematics/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wouter/CLionProjects/Kinematics /Users/wouter/CLionProjects/Kinematics /Users/wouter/CLionProjects/Kinematics/cmake-build-debug /Users/wouter/CLionProjects/Kinematics/cmake-build-debug /Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wouter/Projects/robotica5/Kinematics /Users/wouter/Projects/robotica5/Kinematics /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Kinematics.dir/depend
 
