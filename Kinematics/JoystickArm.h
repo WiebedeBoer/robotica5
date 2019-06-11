@@ -13,7 +13,7 @@
 
 class JoystickArm {
 public:
-    Node GetPathsVertical();
+    Node GetPathsVertical(int length, int height);
 private:
     const int MIN_HEIGHT = 10;
     const int MAX_HEIGHT = 50;
