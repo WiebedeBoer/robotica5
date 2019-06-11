@@ -3,7 +3,15 @@
 //
 
 #include "Node.h"
+#include "Angles.h"
 
-Node::Node(Node& _last) {
-    
+Node::Node(Node* _last, Servo& _servo) : Last(_last), ServoArm(_servo) {
+}
+
+double Node::GetLength() {
+    if(Last == nullptr){
+        // uses cosinus
+    }else{
+
+    }
 }
