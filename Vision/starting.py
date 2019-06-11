@@ -2,7 +2,7 @@ import sys
 import socket
 import os
 import cv2
-#test
+
 try:
 	from camera_pi import Camera_pi
 except:
@@ -46,7 +46,7 @@ def pitch(frame, argument, argument1):
 
 
 def vision(frame, argument, argument1):
-	sys.path.append('Kwalificatie/MainVision/')
+	sys.path.append('Kwalificatie/Vision/')
 	from blueBeam import viewBeam
 	return viewBeam(frame)
 
@@ -69,9 +69,9 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
-		while(True):
+		while True:
 			frame = Camera_pi.getInstance()
-			print(mainSwitcher(frame, 2, 0, 0))
+			print(mainSwitcher(frame, 1, 0, 0))
 			cv2.imshow('Camera', frame)
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
