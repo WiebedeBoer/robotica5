@@ -20,3 +20,20 @@ double Angles::LawOfCosines(double& _a, double& _b, double& _c) {
 double Angles::Distance(double& _x, double& _y) {
     return sqrt(_x * _x + _y * _y);
 }
+
+//int maxPositions[5][2] = {{0,1023}, {35,680}, {65, 640}, {350, 950}, {0, 1023}};
+int AngleToPin(double Angle, int Servo) {
+	if (Servo == 1 || Servo == 5) {
+
+	}
+	else if (Servo == 2) {
+
+	}
+	else if (Servo == 3) {
+
+	}
+	else if (Servo == 4) {
+
+	}
+
+}
