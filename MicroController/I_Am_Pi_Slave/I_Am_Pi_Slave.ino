@@ -35,7 +35,7 @@ String modus = "";
 
 void setup() {
   Serial.begin(115200);
-
+  Serial1.begin(115200);
   pinMode(speedRPin, INPUT);
   pinMode(speedLPin, INPUT);
   digitalWrite(speedRPin, LOW);
