@@ -15,6 +15,8 @@ public:
     Node(int _angle, const Servo& _servo);
     ~Node();
     double GetLength();
+    double GetHeight();
+    int AngleChanges();
     int Angle;
 private:
     Node* Last;

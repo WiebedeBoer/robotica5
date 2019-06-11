@@ -14,9 +14,30 @@ Node::~Node() {
     delete Last;
 }
 double Node::GetLength() {
+    double length = cos(Angle) * ServoArm.Length;
     if(Last == nullptr){
-        return (cos(Angle) * ServoArm.Length) + Last->GetLength();
+        return length;
     }else{
-        return (cos(Angle) * ServoArm.Length);
+        return length + Last->GetLength();
+    }
+}
+
+double Node::GetHeight() {
+    double height = sin(Angle) * ServoArm.Length;
+    if(Last == nullptr) {
+        return height;
+    }else{
+        return height + Last->GetHeight();
+    }
+}
+int Node::AngleChanges() {
+    double change = ServoArm.Angle - Angle;
+    if(change < 0){
+        change = change * -1;
+    }
+    if(Last == nullptr){
+        return change;
+    }else{
+        return change + Last->AngleChanges();
     }
 }
