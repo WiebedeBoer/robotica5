@@ -1,7 +1,5 @@
 import sys
-
 sys.path.append('Imp_Functions/')
-sys.path.append('../pi/')
 
 import cv2
 import numpy as np

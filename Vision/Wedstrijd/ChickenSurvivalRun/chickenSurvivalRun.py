@@ -1,6 +1,5 @@
 import sys
 sys.path.append('Imp_Functions/')
-sys.path.append('../MainVision/')
 
 from fm_ORB import fm_ORB
 from helpFunctions import *

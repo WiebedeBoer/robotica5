@@ -30,7 +30,7 @@ int left = 0, right = 0, count = 0;
 unsigned long timer = 0;
 float timestep = 0.01;
 
-String modus = "";
+String modus = "0";
 
 void setup() {
   Serial.begin(115200);
@@ -46,7 +46,7 @@ void loop() {
   updateDistance();
   measureSpeed();
   updateMicrophone();
-  delay(2500);
+  delay(10);
 
   
 //  Debug distance
@@ -87,17 +87,12 @@ void serialEvent() {
     int commaIndex = rx_Msg.indexOf(',');
     String rx_Msg_Value = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
-    
     // checksum(rx_Msg) == SendSum.toInt()
     if(true) { // Control checksum with sendsum, for error checking. It continues when no error is found.
       String result = "\n";
       
       if(rx_Msg == "info?|"){ // info?,|10
         result = respondInfo() + String(checksum(respondInfo())) + "\n";
-        int resultLength = result.length() +1;          // Convert string to char array
-        char resultarray[resultLength];
-        result.toCharArray(resultarray, resultLength);  // Result to Array
-        Serial.write(resultarray);                      // Send chararray to rp
       }
       else if(rx_Msg == "refresh?|"){
         result = "sendRefresh?,| \n";                   // Trigger to receive modus on Serial1
@@ -105,11 +100,14 @@ void serialEvent() {
         char resultarray[resultLength];
         result.toCharArray(resultarray, resultLength);  // Result to Array
         Serial1.write(resultarray);                     // Send chararray to rp
+
+        result = respondRefresh() + String(checksum(respondRefresh())) + "\n";
       }
-      else {
-        Serial.println("U fucked up");
-        Serial.println(rx_Msg);
-      }
+
+      int resultLength = result.length() +1;          // Convert string to char array
+      char resultarray[resultLength];
+      result.toCharArray(resultarray, resultLength);  // Result to Array
+      Serial.write(resultarray);                      // Send chararray to rp
     }
     
     // Clean message
@@ -120,13 +118,11 @@ void serialEvent() {
 
 void serialEvent1() {
   while(Serial1.available() && rx_Complete_x == false){
-    rx_Byte_x = (char)Serial1.read(); // Read next byte
-    
-    if(!ReadingCheckSum_x){ rx_Msg_x += rx_Byte_x; Serial.print("Added : ");Serial.println(rx_Byte_x);
-    Serial.print("Current message: ");Serial.println(rx_Msg_x);}  // Enter byte to message
-    else { SendSum_x += rx_Byte_x; }                              // Enter byte to sendsum
+    rx_Byte_x = (char)Serial1.read();                 // Read next byte
+    if(!ReadingCheckSum_x){ rx_Msg_x += rx_Byte_x; }  // Enter byte to message
+    else { SendSum_x += rx_Byte_x; }                  // Enter byte to sendsum
 
-    //switch from to message to sendsum
+    // Switch from to message to sendsum
     if(rx_Byte_x == '|'){ ReadingCheckSum_x = true; }
     
     if(rx_Byte_x == '\n'){ // End of message, cleanup
@@ -137,29 +133,20 @@ void serialEvent1() {
   
   //execute received msg
   if(rx_Complete_x){
-    Serial.println("Serial 1 event, complete");
     String OriginalMessage = rx_Msg_x;
-    Serial.println(OriginalMessage);
     int commaIndex = rx_Msg_x.indexOf(',');
     String rx_Msg_Value_x = rx_Msg_x.substring(commaIndex +1, rx_Msg_x.length() -1);
     rx_Msg_x = rx_Msg_x.substring(0, commaIndex) + "|";
     
     // checksum(rx_Msg) == SendSum.toInt()
     if(true) { // Control checksum with sendsum, for error checking. It continues when no error is found.
-      Serial.println(rx_Msg_x);
       if(rx_Msg_x == "modus?|"){
         modus = rx_Msg_Value_x;
-        Serial.println(modus);
-      }
-      else {
-        Serial.println(rx_Msg_x);
-        Serial.println(rx_Msg_Value_x);
       }
     }
+    rx_Msg_x = ""; SendSum_x = "";
+    rx_Complete_x = false;
   }
-
-  rx_Msg_x = ""; SendSum_x = "";
-  rx_Complete_x = false;
 }
 
 String getDistance() {
@@ -176,6 +163,8 @@ String getMicrophone() {
 
 // return String: distance, speed, microphone
 String respondInfo() { return "ack:info?<"+ getDistance() + ";" + getSpeed() + ";" + getMicrophone() + ">|"; }
+
+String respondRefresh() { return "ack:refresh?<"+ modus + ">|"; }
 
 // Calculate checksum.
 int checksum(String Str){
