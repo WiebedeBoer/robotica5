@@ -12,11 +12,12 @@
 class Node {
 public:
     Node(int _angle, Servo& _servo, Node* _last);
+    Node(int _angle, const Servo& _servo);
     double GetLength();
     int Angle;
 private:
     Node* Last;
-    Servo& ServoArm;
+    const Servo& ServoArm;
 
 };
 

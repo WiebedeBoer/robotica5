@@ -8,6 +8,7 @@
 
 #include <vector>
 #include "Servo.h"
+#include "Node.h"
 
 class JoystickArm {
 public:
