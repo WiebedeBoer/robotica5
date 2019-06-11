@@ -18,7 +18,6 @@ def chickenSurvivalRun(frame):
 
     print(imgTrainColor)
     print(screenWidth, screenHeight)
-   
 
     imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
     rectanglePts = fm_ORB(frame, imgTrainColor)
