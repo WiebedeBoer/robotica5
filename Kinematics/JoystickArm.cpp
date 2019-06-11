@@ -18,9 +18,9 @@ Node JoystickArm::GetPathsVertical(int length, int height) {
                 double node2Height = node2->GetHeight();
                 if(round(node2Length) == length and round(node2Height) == height){
                     if(node2Length == length or node2Height == height){
-                        possibilitiesExact.push_back(node2)
+                        possibilitiesExact.push_back(*node2);
                     }else{
-                        possibilitiesOther.push_back(node2);
+                        possibilitiesOther.push_back(*node2);
                     }
                 }else{
                     delete node2;
