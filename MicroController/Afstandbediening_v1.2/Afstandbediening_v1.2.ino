@@ -110,6 +110,7 @@ void Execute_AfstandBediening(){
 //    TDistance.setValue(IDistance);
        
 }
+int i = 0;
 
 //serialEventInterupt
 void serialEvent2(){
@@ -144,8 +145,12 @@ void serialEvent2(){
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "refresh?|"){
+        i = i+1;
+        result = "modus?,<" + modus[i] + "?";
+        
         //robotspeed =  rx_Msg_Speed.toInt(); // 
-        result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
+        //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
+        if (i >=4) { i = 0; }
       }
       
       int resultLength = result.length() +1; // Convert string to char array
@@ -193,14 +198,18 @@ void serialEvent(){
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "refresh?|"){
+        i++;
+        result = "modus?,<" + modus[i] + "?";
+        
         //robotspeed =  rx_Msg_Speed.toInt(); // 
-        result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
+        //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
+        if (i >= 4) { i = 0; }
       }
       
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
-      Serial2.write(resultarray);// Send chararray to rp
+      Serial.write(resultarray);// Send chararray to rp
    }
      
     // Clear message
