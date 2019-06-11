@@ -3,15 +3,15 @@
 //
 
 #include "Node.h"
-#include "Angles.h"
 
-Node::Node(Node* _last, Servo& _servo) : Last(_last), ServoArm(_servo) {
+Node::Node(int _angle, Servo& _servo, Node* _last) : ServoArm(_servo), Last(_last) {
+    Angle = _angle;
 }
 
 double Node::GetLength() {
     if(Last == nullptr){
-        // uses cosinus
+        return (cos(Angle) * ServoArm.LENGTH()) + Last->GetLength();
     }else{
-
+        return (cos(Angle) * ServoArm.LENGTH());
     }
 }

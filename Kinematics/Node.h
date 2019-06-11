@@ -6,12 +6,14 @@
 #define KINEMATICS_NODE_H
 
 #include <vector>
+#include "math.h"
 #include "Servo.h"
 
 class Node {
 public:
-    Node(Node* _last, Servo& _servo);
+    Node(int _angle, Servo& _servo, Node* _last);
     double GetLength();
+    int Angle;
 private:
     Node* Last;
     Servo& ServoArm;
