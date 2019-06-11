@@ -16,9 +16,6 @@ def chickenSurvivalRun(frame):
         from camera_opencv import Camera_opencv
         screenWidth, screenHeight = Camera_opencv.getSettings()
 
-    print(imgTrainColor)
-    print(screenWidth, screenHeight)
-
     imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
     rectanglePts = fm_ORB(frame, imgTrainColor)
 
