@@ -43,7 +43,7 @@ def viewBeam(frame):
             distance = calculateDistance(w, 625, 2.4)
             xyAxis = whichDirection(x + (w / 2), y + (h / 2))
             cv2.circle(frame, (x + (w / 2), y + (h / 2)), 5, (0, 0, 255), -1)
-            cv2.circle(frame, (xyAxis[0] + 320, xyAxis[1] + 240), 5, (0, 255, 0), -1)
+            cv2.circle(frame, (xyAxis[0] + 320, xyAxis[1] - 240), 5, (0, 255, 0), -1)
             # return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     cv2.imshow('frame', frame)
     return False
