@@ -12,10 +12,10 @@ double Angles::Gonio() {
     return A1, A2;
 }
 
-double Angles::LawOfCosines(double a, double b, double c) {
-    return cos((a * a + b * b - c * c) / (2 * a * b));
+double Angles::LawOfCosines(double _a, double _b, double _c) {
+    return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
 }
 
-double Angles::Distance(double x, double y) {
-    return sqrt(x * x + y * y);
+double Angles::Distance(double _x, double _y) {
+    return sqrt(_x * _x + _y * _y);
 }

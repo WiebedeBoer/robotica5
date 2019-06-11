@@ -8,10 +8,10 @@
 #include <vector>
 class Node {
 public:
-    std::vector<Node> prev;
-    Node(){
+    Node(Node& _last);
 
-    }
+private:
+    Node& Last;
 };
 
 

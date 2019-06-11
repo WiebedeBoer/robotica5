@@ -9,8 +9,8 @@
 class Angles {
 public:
     double Gonio();
-    double LawOfCosines(double a, double b, double c);
-    double Distance(double x, double y);
+    double LawOfCosines(double _a, double _b, double _c);
+    double Distance(double _x, double _y);
 private:
     double A1; //root joint
     double A2; //counter clockwise joint
