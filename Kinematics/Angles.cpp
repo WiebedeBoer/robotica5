@@ -26,19 +26,19 @@ int AngleToPin(double Angle, int Servo) {
 	int PinOutput;
 	if (Servo == 1 || Servo == 5) {
 		//0 - 360 degrees = 0 - 1023 pin
-		PinOutput = (Angle / 360) * 1023;
+		PinOutput = int((Angle / 360) * 1023);
 	}
 	else if (Servo == 2) {
 		//0 - 360 degrees = 35 - 680 pin
-		PinOutput = ((Angle / 360) * 645) + 35;
+		PinOutput = int(((Angle / 360) * 645) + 35);
 	}
 	else if (Servo == 3) {
 		//0 - 360 degrees = 65 - 640 pin
-		PinOutput = ((Angle / 360) * 575) + 65;
+		PinOutput = int(((Angle / 360) * 575) + 65);
 	}
 	else if (Servo == 4) {
 		//0 - 360 degrees = 350 - 950 pin
-		PinOutput = ((Angle / 360) * 600) + 350;
+		PinOutput = int(((Angle / 360) * 600) + 350);
 	}
 	return PinOutput;
 }
