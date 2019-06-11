@@ -58,12 +58,11 @@ uint32_t IPitch = 0;
 uint32_t IYaw = 0;
 uint32_t IDistance = 0;
 uint32_t IModus;
-int modus = 0;
-
-
+String modus = "0";
 
 String JoyLtext;
 String JoyRtext;
+int joyLX, joyLY, joyRX, joyRY;
 
 //NexTouch *nex_listen_list[] = 
 //{
@@ -83,8 +82,22 @@ void setup() {
 }
 
 void loop() {
+  updateJoy();
+  delay(10);
+  
 //  Execute_AfstandBediening();
 //  nexLoop(nex_listen_list);
+}
+
+void updateJoy() {
+  joyLX = analogRead(joy1x);
+  joyLY = analogRead(joy1y);
+  joyRX = analogRead(joy2x);
+  joyRY = analogRead(joy2y);
+}
+
+String getJoy() {
+  return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY);
 }
 
 String Respond_AfstandBediening(){
@@ -104,14 +117,12 @@ void Execute_AfstandBediening(){
 //    NPitch.setValue(IPitch);
 //    TDistance.setValue(IDistance);
 //    BPoortje.setValue(IModus = 1);
-       
 }
 
 void moduschoise(){
   if(IModus == 1){
     //Modustest = "Poortje";
   }
-  
 }
 
 //serialEventInterupt
@@ -135,7 +146,7 @@ void serialEvent2(){
     }
   }
   
-  //execute received msg
+  // Execute received msg
   if(rx_Complete){
     String OriginalMessage = rx_Msg;
     int commaIndex = rx_Msg.indexOf(',');
@@ -148,12 +159,11 @@ void serialEvent2(){
       
       if(rx_Msg == "sendRefresh?|"){
         //result = "modus?,<" + modus[i] + "?";
-        result = "modus?," + String(modus) + "\n";
-        modus++;
+        result = "modus?," + String(modus) + ";" + getJoy() + "\n";
+        modus = String(modus.toInt()+1);
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
       }
-      Serial.println("result");
-      Serial.println(result);
+      
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
@@ -166,6 +176,8 @@ void serialEvent2(){
     rx_Complete = false;
   }
 }
+
+
 
 // Calculate checksum.
 int checksum(String Str){
