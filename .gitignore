@@ -6,7 +6,6 @@
 *.png
 *.jpg
 *.xml
-[vV]ision/
 
 # User-specific files
 *.suo
