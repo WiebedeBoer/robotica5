@@ -35,17 +35,9 @@ def viewBeam(frame):
         # a square will have an aspect ratio that is approximately
         # equal to one, otherwise, the shape is a rectangle
         if len(approx) >= 4 and len(approx) <= 6 and area > 200:
-            # print("Draw circle")
-            # print("approx length: ", len(approx))
-            # print("area: ", area)
 
             # calculate distance
             distance = calculateDistance(w, 625, 2.4)
             xyAxis = whichDirection(x + (w / 2), y + (h / 2))
-            # cv2.circle(frame, (x + (w / 2), y + (h / 2)), 5, (0, 0, 255), -1)
-            cv2.circle(frame, (xyAxis[0] + 320, xyAxis[1] + 240), 10, (0, 255, 0), -1)
-            cv2.circle(frame, (xyAxis[0] + 320, xyAxis[1] - 240), 10, (0, 0, 255), -1)
-            cv2.circle(frame, (xyAxis[0] + 320, xyAxis[1]), 10, (255, 0, 0), -1)
-            # return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
-    cv2.imshow('frame', frame)
+            return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     return False
