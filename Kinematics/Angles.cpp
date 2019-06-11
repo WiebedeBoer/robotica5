@@ -21,19 +21,24 @@ double Angles::Distance(double& _x, double& _y) {
     return sqrt(_x * _x + _y * _y);
 }
 
-//int maxPositions[5][2] = {{0,1023}, {35,680}, {65, 640}, {350, 950}, {0, 1023}};
+//conversion from angle movement to pin output
 int AngleToPin(double Angle, int Servo) {
+	int PinOutput;
 	if (Servo == 1 || Servo == 5) {
-
+		//0 - 360 degrees = 0 - 1023 pin
+		PinOutput = (Angle / 360) * 1023;
 	}
 	else if (Servo == 2) {
-
+		//0 - 360 degrees = 35 - 680 pin
+		PinOutput = ((Angle / 360) * 645) + 35;
 	}
 	else if (Servo == 3) {
-
+		//0 - 360 degrees = 65 - 640 pin
+		PinOutput = ((Angle / 360) * 575) + 65;
 	}
 	else if (Servo == 4) {
-
+		//0 - 360 degrees = 350 - 950 pin
+		PinOutput = ((Angle / 360) * 600) + 350;
 	}
-
+	return PinOutput;
 }
