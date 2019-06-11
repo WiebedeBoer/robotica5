@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug"/>
+				<Option working_dir="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug"/>
+				<Option working_dir="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug"/>
+				<Option working_dir="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Kinematics">
-				<Option output="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Kinematics" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug"/>
+				<Option output="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Kinematics" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -52,15 +52,15 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kinematics"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kinematics"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Kinematics/fast">
-				<Option output="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Kinematics" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/wouter/CLionProjects/Kinematics/cmake-build-debug"/>
+				<Option output="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Kinematics" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -73,35 +73,41 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kinematics/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kinematics/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/JoystickArm.cpp">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Angles.cpp">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/JoystickArm.h">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Angles.h">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/Node.cpp">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/Node.h">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.h">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/Servo.cpp">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Node.cpp">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/Servo.h">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Node.h">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/main.cpp">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Servo.cpp">
 			<Option target="Kinematics"/>
 		</Unit>
-		<Unit filename="/Users/wouter/CLionProjects/Kinematics/CMakeLists.txt">
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/Servo.h">
+			<Option target="Kinematics"/>
+		</Unit>
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/main.cpp">
+			<Option target="Kinematics"/>
+		</Unit>
+		<Unit filename="/Users/wouter/Projects/robotica5/Kinematics/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

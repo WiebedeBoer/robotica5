@@ -48,10 +48,10 @@ RM = "/Users/wouter/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wouter/CLionProjects/Kinematics
+CMAKE_SOURCE_DIR = /Users/wouter/Projects/robotica5/Kinematics
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wouter/CLionProjects/Kinematics/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles /Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ Kinematics: cmake_check_build_system
 Kinematics/fast:
 	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/build
 .PHONY : Kinematics/fast
+
+Angles.o: Angles.cpp.o
+
+.PHONY : Angles.o
+
+# target to build an object file
+Angles.cpp.o:
+	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/Angles.cpp.o
+.PHONY : Angles.cpp.o
+
+Angles.i: Angles.cpp.i
+
+.PHONY : Angles.i
+
+# target to preprocess a source file
+Angles.cpp.i:
+	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/Angles.cpp.i
+.PHONY : Angles.cpp.i
+
+Angles.s: Angles.cpp.s
+
+.PHONY : Angles.s
+
+# target to generate assembly for a file
+Angles.cpp.s:
+	$(MAKE) -f CMakeFiles/Kinematics.dir/build.make CMakeFiles/Kinematics.dir/Angles.cpp.s
+.PHONY : Angles.cpp.s
 
 JoystickArm.o: JoystickArm.cpp.o
 
@@ -240,6 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Kinematics"
+	@echo "... Angles.o"
+	@echo "... Angles.i"
+	@echo "... Angles.s"
 	@echo "... JoystickArm.o"
 	@echo "... JoystickArm.i"
 	@echo "... JoystickArm.s"

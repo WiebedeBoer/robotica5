@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Kinematics.dir/JoystickArm.cpp.o"
   "CMakeFiles/Kinematics.dir/Servo.cpp.o"
   "CMakeFiles/Kinematics.dir/Node.cpp.o"
+  "CMakeFiles/Kinematics.dir/Angles.cpp.o"
   "Kinematics.pdb"
   "Kinematics"
 )

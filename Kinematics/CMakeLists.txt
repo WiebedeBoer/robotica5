@@ -3,4 +3,4 @@ project(Kinematics)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Kinematics main.cpp JoystickArm.cpp Servo.cpp Node.cpp)
+add_executable(Kinematics main.cpp JoystickArm.cpp Servo.cpp Node.cpp Angles.cpp)

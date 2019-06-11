@@ -4,10 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/wouter/CLionProjects/Kinematics/JoystickArm.cpp" "/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/JoystickArm.cpp.o"
-  "/Users/wouter/CLionProjects/Kinematics/Node.cpp" "/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/Node.cpp.o"
-  "/Users/wouter/CLionProjects/Kinematics/Servo.cpp" "/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/Servo.cpp.o"
-  "/Users/wouter/CLionProjects/Kinematics/main.cpp" "/Users/wouter/CLionProjects/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/main.cpp.o"
+  "/Users/wouter/Projects/robotica5/Kinematics/Angles.cpp" "/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/Angles.cpp.o"
+  "/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp" "/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/JoystickArm.cpp.o"
+  "/Users/wouter/Projects/robotica5/Kinematics/Node.cpp" "/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/Node.cpp.o"
+  "/Users/wouter/Projects/robotica5/Kinematics/Servo.cpp" "/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/Servo.cpp.o"
+  "/Users/wouter/Projects/robotica5/Kinematics/main.cpp" "/Users/wouter/Projects/robotica5/Kinematics/cmake-build-debug/CMakeFiles/Kinematics.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
