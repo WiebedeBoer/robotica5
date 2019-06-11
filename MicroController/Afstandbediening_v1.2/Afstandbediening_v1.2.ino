@@ -101,6 +101,7 @@ void Execute_AfstandBediening(){
 //    TDistance.setValue(IDistance);
        
 }
+
 int i = 0;
 
 //serialEventInterupt
@@ -135,67 +136,14 @@ void serialEvent2(){
     if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
       String result = "NoAction?,<>|\n";
       
-      if(rx_Msg == "refresh?|"){
+      if(rx_Msg == "sendRefresh?|"){
         i = i+1;
-        result = "modus?,<" + modus[i] + "?";
+        result = "modus?,<" + modus[i] + ">\n";
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
         if (i >=4) { i = 0; }
       }
       
-      int resultLength = result.length() +1; // Convert string to char array
-      char resultarray[resultLength];
-      result.toCharArray(resultarray, resultLength);
-      Serial2.write(resultarray);// Send chararray to rp
-   }
-     
-    // Clear message
-    rx_Msg = ""; SendSum = "";
-    rx_Complete = false;
-  }
-}
-
-//serialEventInterupt
-void serialEvent(){
-  while(Serial.available() && rx_Complete == false){
-    rx_Byte = (char)Serial.read();//Read next byte
-    if(ReadingCheckSum == false){//enter byte to message
-      rx_Msg += rx_Byte;
-    }
-    else{//enter byte to sendsum
-      SendSum += rx_Byte;
-    }
-        
-    if(rx_Byte == '|'){ // Switch from to message to sendsum
-      ReadingCheckSum = true;
-    }
-    
-    if(rx_Byte == '\n'){ // End of line, cleanup
-      rx_Complete = true;
-      ReadingCheckSum = false;
-    }
-  }
-  
-  //execute received msg
-  if(rx_Complete){
-    Serial.println("Message complete");
-    String OriginalMessage = rx_Msg;
-    int commaIndex = rx_Msg.indexOf(',');
-    String rx_Msg_Speed = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
-    rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
-
-    // checksum(OriginalMessage) == SendSum.toInt()
-    if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
-      String result = "NoAction?,<>|\n";
-      
-      if(rx_Msg == "refresh?|"){
-        i++;
-        result = "modus?,<" + modus[i] + "?";
-        
-        //robotspeed =  rx_Msg_Speed.toInt(); // 
-        //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
-        if (i >= 4) { i = 0; }
-      }
-      
+      Serial.println(result);
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
@@ -213,7 +161,6 @@ int checksum(String Str){
   int sum = 0;
   for(int i = 0; i < Str.length();i++){
     sum += (int)Str[i];
-    }
-    //Serial.println(sum);
-    return sum;
+  }
+  return sum;
 }
