@@ -17,6 +17,25 @@ std::vector<std::tuple<Servo&, int>> JoystickArm::GetPaths() {
 			}
 		}
 		index++;
+
+		auto& servo1 = VerticalServos[0];
+
+
+        for (int i = VerticalServos[0].Angle - 30; i < VerticalServos[0].Angle + 30; i++) {
+            if (i >= VerticalServos[0].MIN_ROTATION() and i <= VerticalServos[0].MAX_ROTATION()) {
+
+                for (int i = VerticalServos[1].Angle - 30; i < VerticalServos[1].Angle + 30; i++) {
+                    if (i >= VerticalServos[1].MIN_ROTATION() and i <= VerticalServos[1].MAX_ROTATION()) {
+
+                        for (int i = VerticalServos[2].Angle - 30; i < VerticalServos[2].Angle + 30; i++) {
+                            if (i >= VerticalServos[2].MIN_ROTATION() and i <= VerticalServos[2].MAX_ROTATION()) {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
 	}
 	return possibilities;
 }
