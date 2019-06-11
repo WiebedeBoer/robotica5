@@ -12,7 +12,7 @@
 
 class JoystickArm {
 public:
-    std::vector<std::tuple<Servo&, int>> GetPaths();
+    Node GetPathsVertical();
 private:
     const int MIN_HEIGHT = 10;
     const int MAX_HEIGHT = 50;
