@@ -58,7 +58,7 @@ uint32_t IPitch = 0;
 uint32_t IYaw = 0;
 uint32_t IDistance = 0;
 uint32_t IModus;
-String Modustest= 1;
+int modus = 0;
 
 
 
@@ -74,7 +74,7 @@ String JoyRtext;
 //  NULL  // String terminated
 //};
 
-String modus[5] = {"Pitch", "Poortje", "Race", "Line dance", "Flag running"};
+//String modus[5] = {"Pitch", "Poortje", "Race", "Line dance", "Flag running"};
 
 void setup() {
   pinMode(13, OUTPUT);
@@ -107,11 +107,9 @@ void Execute_AfstandBediening(){
        
 }
 
-int i = 0;
-
 void moduschoise(){
   if(IModus == 1){
-    Modustest = "Poortje";
+    //Modustest = "Poortje";
   }
   
 }
@@ -149,18 +147,18 @@ void serialEvent2(){
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
-        i = i+1;
         //result = "modus?,<" + modus[i] + "?";
-        result = "modus?,<" + Modustest + "?";
+        result = "modus?," + String(modus) + "\n";
+        modus++;
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
-        if (i >=4) { i = 0; }
       }
-      
+      Serial.println("result");
       Serial.println(result);
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
       Serial2.write(resultarray);// Send chararray to rp
+      
    }
      
     // Clear message
