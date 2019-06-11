@@ -57,6 +57,10 @@ uint32_t IAngle = 0;
 uint32_t IPitch = 0;
 uint32_t IYaw = 0;
 uint32_t IDistance = 0;
+uint32_t IModus;
+String Modustest= 1;
+
+
 
 String JoyLtext;
 String JoyRtext;
@@ -99,10 +103,18 @@ void Execute_AfstandBediening(){
 //    NYaw.setValue(IYaw);
 //    NPitch.setValue(IPitch);
 //    TDistance.setValue(IDistance);
+//    BPoortje.setValue(IModus = 1);
        
 }
 
 int i = 0;
+
+void moduschoise(){
+  if(IModus == 1){
+    Modustest = "Poortje";
+  }
+  
+}
 
 //serialEventInterupt
 void serialEvent2(){
@@ -138,7 +150,8 @@ void serialEvent2(){
       
       if(rx_Msg == "sendRefresh?|"){
         i = i+1;
-        result = "modus?,<" + modus[i] + ">\n";
+        //result = "modus?,<" + modus[i] + "?";
+        result = "modus?,<" + Modustest + "?";
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
         if (i >=4) { i = 0; }
       }
@@ -156,7 +169,7 @@ void serialEvent2(){
   }
 }
 
-//calculate checksum.
+// Calculate checksum.
 int checksum(String Str){
   int sum = 0;
   for(int i = 0; i < Str.length();i++){
