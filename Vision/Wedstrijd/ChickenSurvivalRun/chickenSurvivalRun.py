@@ -7,7 +7,7 @@ from helpFunctions import *
 import cv2
 
 def chickenSurvivalRun(frame):
-    imgTrainColor = cv2.imread('Images/TrainImg/Beker/beker1.jpg')
+    imgTrainColor = cv2.imread('Images/TrainImg/Beker/piBeker.jpg')
 
     try:
         from camera_pi import Camera_pi
