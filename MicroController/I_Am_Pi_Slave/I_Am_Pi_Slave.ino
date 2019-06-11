@@ -31,6 +31,8 @@ int left = 0, right = 0, count = 0;
 unsigned long timer = 0;
 float timestep = 0.01;
 
+String modus = "";
+
 void setup() {
   Serial.begin(115200);
 
@@ -94,7 +96,9 @@ void serialEvent() {
         result = respondInfo() + String(checksum(respondInfo())) + "\n";
       }
       else if(rx_Msg == "refresh?|"){
-        result = "ack:RefreshMessageSend|?<>\n";
+        Serial1.write("refresh?,02490;4324|");
+        Serial.println(modus);
+        result = "ack:RefreshMessageSend|?<" + modus + ">\n";
       }
       else {
         result = "ack:noAction?<>|\n";
@@ -108,6 +112,42 @@ void serialEvent() {
     
     // Clean message
     rx_Msg = ""; SendSum = "";
+  }
+  
+  rx_Complete = false;
+}
+
+void serialEvent1() {
+  Serial.print("Got something from that xbee");
+  while(Serial1.available() && rx_Complete == false){
+    rx_Byte = (char)Serial1.read(); // Read next byte
+    
+    if(!ReadingCheckSum){ rx_Msg += rx_Byte; }  // Enter byte to message
+    else { SendSum += rx_Byte; }                // Enter byte to sendsum
+
+    //switch from to message to sendsum
+    if(rx_Byte == '|'){ ReadingCheckSum = true; }
+    
+    if(rx_Byte == '\n'){ // End of message, cleanup
+      rx_Complete = true;
+      ReadingCheckSum = false;
+    }
+  }
+  
+  //execute received msg
+  if(rx_Complete){
+    Serial.print("Got something from that xbee");
+    String OriginalMessage = rx_Msg;
+    int commaIndex = rx_Msg.indexOf(',');
+    String rx_Msg_Value = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
+    rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
+    
+    // checksum(rx_Msg) == SendSum.toInt()
+    if(true) { //control checksum with sendsum, for error checking. It continues when no error is found.
+      if(rx_Msg == "refresh?|"){
+        modus = rx_Msg_Value;
+      }
+    }
   }
   
   rx_Complete = false;
