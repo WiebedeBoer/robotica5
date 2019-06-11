@@ -75,19 +75,10 @@ String modus[5] = {"Pitch", "Poortje", "Race", "Line dance", "Flag running"};
 void setup() {
   pinMode(13, OUTPUT);
   Serial2.begin(115200);
-//  Serial1.begin(9600);
   delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
-  
-//  Serial1.print("baud=115200"); 
-//  Serial1.write(0xff);  // We always have to send this three lines after each command sent to nextion.
-//  Serial1.write(0xff);
-//  Serial1.write(0xff);
-//  Serial1.end();  // End the serial comunication of baud=9600
-//  Serial1.begin(115200);  // Start serial comunication at baud=115200
-  }
+}
 
 void loop() {
-  //Message received do command  
 //  Execute_AfstandBediening();
 //  nexLoop(nex_listen_list);
 }
@@ -147,8 +138,6 @@ void serialEvent2(){
       if(rx_Msg == "refresh?|"){
         i = i+1;
         result = "modus?,<" + modus[i] + "?";
-        
-        //robotspeed =  rx_Msg_Speed.toInt(); // 
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
         if (i >=4) { i = 0; }
       }
@@ -188,6 +177,7 @@ void serialEvent(){
   
   //execute received msg
   if(rx_Complete){
+    Serial.println("Message complete");
     String OriginalMessage = rx_Msg;
     int commaIndex = rx_Msg.indexOf(',');
     String rx_Msg_Speed = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
@@ -209,7 +199,7 @@ void serialEvent(){
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
-      Serial.write(resultarray);// Send chararray to rp
+      Serial2.write(resultarray);// Send chararray to rp
    }
      
     // Clear message
