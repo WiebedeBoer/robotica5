@@ -61,13 +61,14 @@ uint32_t IPitch = 0;
 uint32_t IYaw = 0;
 uint32_t IDistance = 0;
 uint32_t IModus;
-String modusChanged = false;
-String curModus = "";
 
+bool modusChanged = false;
 
+String modus;
 
 String JoyLtext;
 String JoyRtext;
+int joyLX, joyLY, joyRX, joyRY;
 
 NexTouch *nex_listen_list[] = 
 {
@@ -89,6 +90,19 @@ void setup() {
 void loop() {
   Execute_AfstandBediening();
   nexLoop(nex_listen_list);
+  updateJoy();
+  delay(10);
+}
+
+void updateJoy() {
+  joyLX = analogRead(joy1x);
+  joyLY = analogRead(joy1y);
+  joyRX = analogRead(joy2x);
+  joyRY = analogRead(joy2y);
+}
+
+String getJoy() {
+  return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY);
 }
 
 String Respond_AfstandBediening(){
@@ -102,6 +116,7 @@ void Execute_AfstandBediening(){
     JoyRtext = String(analogRead(joy2x)/16) + "," + String(analogRead(joy2y)/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
     JoyR.setText(buffer);
+    
     TCSpeed.setValue(robotspeed); //Set TCSpeed number part to the same as CSpeed value. 
     NAngle.setValue(IAngle);
     NYaw.setValue(IYaw);
@@ -122,8 +137,6 @@ void BPoortjePressed(void *ptr){
   {
     IModus = 1;
   }
-  
-  
 }
 
 void setModus(String modus) {
@@ -134,7 +147,6 @@ void moduschoise(){
     //Modustest = "Poortje";
     Serial.println("Test123"); 
   }
-  
 }
 
 //serialEventInterupt
@@ -158,7 +170,7 @@ void serialEvent2(){
     }
   }
   
-  //execute received msg
+  // Execute received msg
   if(rx_Complete){
     String OriginalMessage = rx_Msg;
     int commaIndex = rx_Msg.indexOf(',');
@@ -171,12 +183,11 @@ void serialEvent2(){
       
       if(rx_Msg == "sendRefresh?|"){
         //result = "modus?,<" + modus[i] + "?";
-        result = "modus?," + String(modus) + "\n";
-        modus++;
+        result = "modus?," + String(modus) + ";" + getJoy() + "\n";
+        modus = String(modus.toInt()+1);
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
       }
-      Serial.println("result");
-      Serial.println(result);
+      
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
@@ -190,7 +201,6 @@ void serialEvent2(){
   }
 }
 
-// Calculate checksum
 int checksum(String Str){
   int sum = 0;
   for(int i = 0; i < Str.length();i++){

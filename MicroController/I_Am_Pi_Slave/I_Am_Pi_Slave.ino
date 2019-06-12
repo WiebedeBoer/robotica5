@@ -118,7 +118,7 @@ void serialEvent() {
 
 void serialEvent1() {
   while(Serial1.available() && rx_Complete_x == false){
-    rx_Byte_x = (char)Serial1.read(); // Read next byte
+    rx_Byte_x = (char)Serial1.read();                 // Read next byte
     if(!ReadingCheckSum_x){ rx_Msg_x += rx_Byte_x; }  // Enter byte to message
     else { SendSum_x += rx_Byte_x; }                  // Enter byte to sendsum
 
