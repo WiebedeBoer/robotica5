@@ -54,7 +54,7 @@ def qrDistance(frame, argument):
 
 
 def chicken(frame, argument):
-	imgTrainColor = cv2.imread('Images/TrainImg/Kip/kip1.jpg')
+	imgTrainColor = cv2.imread('Images/TrainImg/Kip/piKip.jpg')
 
 	try:
 		from camera_pi import Camera_pi
