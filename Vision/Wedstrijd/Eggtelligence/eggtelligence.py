@@ -54,7 +54,7 @@ def qrDistance(frame, argument):
 
 
 def chicken(frame, argument):
-	imgTrainColor = cv2.imread('Images/TrainImg/Kip/kip1.jpg')
+	imgTrainColor = cv2.imread('Images/TrainImg/Kip/piKip.jpg')
 	try:
 		from camera_pi import Camera_pi
 		screenWidth, screenHeight = Camera_pi.getSettings()
@@ -62,7 +62,7 @@ def chicken(frame, argument):
 		from camera_opencv import Camera_opencv
 		screenWidth, screenHeight = Camera_opencv.getSettings()
 
-	imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
+	#imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
 	cv2.imshow('foto', imgTrainColor)
 	rectanglePts = fm_ORB(frame, imgTrainColor, 40)
 
