@@ -181,5 +181,4 @@ class DetectEgg:
 
 		if eggDetectCount > 0:
 			return keypoints
-
 		return False

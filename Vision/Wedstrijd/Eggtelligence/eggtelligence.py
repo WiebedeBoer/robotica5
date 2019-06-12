@@ -29,7 +29,7 @@ def eggDistance(frame, argument):
 		allKeypointsWidths = detectEgg.widthKeypoints(eggDetected)
 
 		for idx, width in enumerate(allKeypointsWidths):
-			distance = calculateDistance(width, 5.4, 395.684786196)
+			distance = calculateDistance(width, 5.4, 375)
 			if distance < closestDistance:
 				closestDistance = distance 
 				xyAxis = whichDirection(eggDetected[idx].pt[0], eggDetected[idx].pt[1])
