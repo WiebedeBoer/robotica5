@@ -33,7 +33,6 @@ bool ReadingCheckSum = false; // Reading chechsum
 bool drivingL, drivingR;
 
 int ax12aPos[5] = {0,0,0,0,0};
-int ax12aBoundries[5][2] = {{0,1023},{200, 600},{100,640},{350,950},{0,1023}};
 
 int Xinleft = A0; // X Input Pin left
 int Yinleft = A1; // Y Input Pin left
