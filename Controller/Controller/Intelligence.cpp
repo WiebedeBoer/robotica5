@@ -20,8 +20,8 @@ Intelligence::~Intelligence()
 
 int RefreshInterfal = 200;
 int PrintInterfal = 1000;
-int ArmInterfal = 500000000;
-int DriveInterfal = 200000000;
+int ArmInterfal = 400;
+int DriveInterfal = 420;
 int VisionInterfall = 1000;
 int GripperInterval = 5000;
 
