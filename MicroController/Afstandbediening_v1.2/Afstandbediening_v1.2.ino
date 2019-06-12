@@ -1,39 +1,42 @@
-//#include <Nextion.h>
-//#include <NexProgressBar.h>
+#include <Nextion.h>
+#include <NexProgressBar.h>
+#include <NexButton.h>
+
 #define joy1x A0
 #define joy1y A1
 #define joy2x A3
 #define joy2y A4
 
 //Movement Page
-//NexText JoyL = NexText(0, 2, "JoyL"); //Joystick Left
-//NexText JoyR = NexText(0, 3, "JoyR"); //Joystick Right
-//NexNumber TCSpeed = NexNumber(1, 7, "TCSpeed"); //Numberbox for speed -- Next to slider
-//NexProgressBar CSpeed  = NexProgressBar(1, 5, "CSpeed"); //Speedbar Current Speed
-//NexSlider SSpeed = NexSlider(1, 4, "SSPeed"); //Speedbar Slider
+NexText JoyL = NexText(0, 2, "JoyL"); //Joystick Left
+NexText JoyR = NexText(0, 3, "JoyR"); //Joystick Right
+NexText curModus = NexText(0, 3, "modus"); //Joystick Right
+NexNumber TCSpeed = NexNumber(1, 7, "TCSpeed"); //Numberbox for speed -- Next to slider
+NexProgressBar CSpeed  = NexProgressBar(1, 5, "CSpeed"); //Speedbar Current Speed
+NexSlider SSpeed = NexSlider(1, 4, "SSPeed"); //Speedbar Slider
 
 //Distance Page
-//NexNumber TDistance = NexNumber(2, 3, "TDistance"); //Distance
+NexNumber TDistance = NexNumber(2, 3, "TDistance"); //Distance
 
 //Angle Page
-//NexNumber NAngle = NexNumber(3, 3, "NAngle"); //Number of Angle 
-//NexNumber NYaw = NexNumber(3, 3, "NYaw"); //Number of Yaw 
-//NexNumber NPitch = NexNumber(3, 3, "NPitch"); //Number of Pitch 
+NexNumber NAngle = NexNumber(3, 3, "NAngle"); //Number of Angle 
+NexNumber NYaw = NexNumber(3, 3, "NYaw"); //Number of Yaw 
+NexNumber NPitch = NexNumber(3, 3, "NPitch"); //Number of Pitch 
 
 //Mode Page
-//NexButton BPitch = NexButton(4, 3, "BPitch"); //Pitch Button -- Same as SPitch
-//NexButton BPoortje = NexButton(4, 4, "BPoortje"); // Poortje Button
-//NexButton BChicken = NexButton(4, 5, "BChicken"); // Chickenrun Button
-//NexButton BTrap = NexButton(4, 11, "BTrap"); // Trap Button
-//NexButton BGrind = NexButton(4, 7, "BGrind"); // Grind Button
-//NexButton BBlauw = NexButton(4, 8, "BBlauw"); // Balkje Button
-//NexButton BRace = NexButton(4, 9, "BRace"); // Race Button
-//NexButton BFlag = NexButton(4, 11, "BFlag"); //Flag Button
-//NexButton BDanceSingle = NexButton(4, 9, "BDanceSingle"); // Single Dance Button
-//NexButton BDanceLine = NexButton(4, 10, "BDanceLine"); // Line Dance Button
+NexButton BPitch = NexButton(4, 3, "BPitch"); //Pitch Button -- Same as SPitch
+NexButton BPoortje = NexButton(4, 4, "BPoortje"); // Poortje Button
+NexButton BChicken = NexButton(4, 5, "BChicken"); // Chickenrun Button
+NexButton BTrap = NexButton(4, 11, "BTrap"); // Trap Button
+NexButton BGrind = NexButton(4, 7, "BGrind"); // Grind Button
+NexButton BBlauw = NexButton(4, 8, "BBlauw"); // Balkje Button
+NexButton BRace = NexButton(4, 9, "BRace"); // Race Button
+NexButton BFlag = NexButton(4, 11, "BFlag"); //Flag Button
+NexButton BDanceSingle = NexButton(4, 9, "BDanceSingle"); // Single Dance Button
+NexButton BDanceLine = NexButton(4, 10, "BDanceLine"); // Line Dance Button
 
 //Sound Page
-//NexButton SPitch = NexButton(5, 3, "SPitch"); // Pitch Button -- Same as BPitch
+NexButton SPitch = NexButton(5, 3, "SPitch"); // Pitch Button -- Same as BPitch
 
 //Head Page
 
@@ -58,23 +61,24 @@ uint32_t IPitch = 0;
 uint32_t IYaw = 0;
 uint32_t IDistance = 0;
 uint32_t IModus;
-int modus = 0;
+String modusChanged = false;
+String curModus = "";
 
 
 
 String JoyLtext;
 String JoyRtext;
 
-//NexTouch *nex_listen_list[] = 
-//{
-//  &JoyL,  
-//  &JoyR,
-//  &SSpeed,
-//  &TCSpeed,
-//  NULL  // String terminated
-//};
-
-//String modus[5] = {"Pitch", "Poortje", "Race", "Line dance", "Flag running"};
+NexTouch *nex_listen_list[] = 
+{
+  &JoyL,  
+  &JoyR,
+  &SSpeed,
+  &TCSpeed,
+  &BPitch,
+  &BPoortje,
+  NULL  // String terminated
+};
 
 void setup() {
   pinMode(13, OUTPUT);
@@ -83,8 +87,8 @@ void setup() {
 }
 
 void loop() {
-//  Execute_AfstandBediening();
-//  nexLoop(nex_listen_list);
+  Execute_AfstandBediening();
+  nexLoop(nex_listen_list);
 }
 
 String Respond_AfstandBediening(){
@@ -94,22 +98,41 @@ String Respond_AfstandBediening(){
 void Execute_AfstandBediening(){
     JoyLtext = String(analogRead(joy1x)/16) + "," + String(analogRead(joy1y)/16);
     JoyLtext.toCharArray(buffer, JoyLtext.length());
-//    JoyL.setText(buffer);
+    JoyL.setText(buffer);
     JoyRtext = String(analogRead(joy2x)/16) + "," + String(analogRead(joy2y)/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
-//    JoyR.setText(buffer);
-//    TCSpeed.setValue(robotspeed); //Set TCSpeed number part to the same as CSpeed value. 
-//    NAngle.setValue(IAngle);
-//    NYaw.setValue(IYaw);
-//    NPitch.setValue(IPitch);
-//    TDistance.setValue(IDistance);
-//    BPoortje.setValue(IModus = 1);
-       
+    JoyR.setText(buffer);
+    TCSpeed.setValue(robotspeed); //Set TCSpeed number part to the same as CSpeed value. 
+    NAngle.setValue(IAngle);
+    NYaw.setValue(IYaw);
+    NPitch.setValue(IPitch);
+    TDistance.setValue(IDistance);
+    BPoortje.attachPop(BPoortjePressed, &BPoortje);
+}
+/**
+ * Button to return the response
+ * 
+ * @param ptr - the parameter was transmitted to pop event function pointer
+ */
+void BPoortjePressed(void *ptr){
+  NexButton *BPoortjes = (NexButton *)ptr;
+  memset(buffer, 0, sizeof(buffer));
+  BPoortjes -> getText(buffer, sizeof(buffer));
+  if (strcmp(buffer,"ON"))
+  {
+    IModus = 1;
+  }
+  
+  
 }
 
+void setModus(String modus) {
+  Serial.print("modus is nu: ");Serial.println(modus);
+}
 void moduschoise(){
   if(IModus == 1){
     //Modustest = "Poortje";
+    Serial.println("Test123"); 
   }
   
 }
@@ -167,7 +190,7 @@ void serialEvent2(){
   }
 }
 
-// Calculate checksum.
+// Calculate checksum
 int checksum(String Str){
   int sum = 0;
   for(int i = 0; i < Str.length();i++){
