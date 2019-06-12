@@ -204,10 +204,8 @@ class DetectEgg:
             if not self.debug:
                 if eggDetectCount > 5:
                     return keypoints
-                    break
                 elif count >= 7:
                     return False
-                    break
 
             else:
                 keypoints_im = cv2.drawKeypoints(self.frame, keypoints, np.array([]), (0, 0, 255),
