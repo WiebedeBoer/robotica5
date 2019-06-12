@@ -1,9 +1,10 @@
-#ifndef KINEMATICS_JOYSTICKARM_H
-#define KINEMATICS_JOYSTICKARM_H
-
 //
 // Created by Wouter Nauta on 2019-06-06.
 //
+
+#ifndef KINEMATICS_JOYSTICKARM_H
+#define KINEMATICS_JOYSTICKARM_H
+
 
 #include <vector>
 #include "Servo.h"
@@ -12,7 +13,7 @@
 
 class JoystickArm {
 public:
-	Node GetPathsVertical(int length, int height);
+	Node* GetPathsVertical(int length, int height);
 private:
 	const int MIN_HEIGHT = 10;
 	const int MAX_HEIGHT = 50;
