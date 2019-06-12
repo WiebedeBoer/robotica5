@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/wouter/Projects/robotica5/Kinematics/Angles.h
+math.h
+-
+
+/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp
+JoystickArm.h
+/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.h
+
+/Users/wouter/Projects/robotica5/Kinematics/JoystickArm.h
+vector
+-
+Servo.h
+/Users/wouter/Projects/robotica5/Kinematics/Servo.h
+Node.h
+/Users/wouter/Projects/robotica5/Kinematics/Node.h
+Angles.h
+/Users/wouter/Projects/robotica5/Kinematics/Angles.h
+
+/Users/wouter/Projects/robotica5/Kinematics/Node.h
+vector
+-
+math.h
+/Users/wouter/Projects/robotica5/Kinematics/math.h
+Servo.h
+/Users/wouter/Projects/robotica5/Kinematics/Servo.h
+
+/Users/wouter/Projects/robotica5/Kinematics/Servo.h
+
