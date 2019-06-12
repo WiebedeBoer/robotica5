@@ -64,7 +64,7 @@ def chicken(frame, argument):
 
 	imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
 	cv2.imshow('foto', imgTrainColor)
-	rectanglePts = fm_ORB(frame, imgTrainColor, 60)
+	rectanglePts = fm_ORB(frame, imgTrainColor, 40)
 
 	if rectanglePts != False and rectanglePts != None:
 		center = calculateCenter(rectanglePts)
