@@ -54,7 +54,7 @@ uint32_t IDistance = 0;
 uint32_t IModus;
 int currentpage = 1;
 bool changedModus = false;
-String currentModus = "";
+String currentModus = "shitty mode";
 
 String modus;
 
@@ -70,8 +70,19 @@ NexTouch *nex_listen_list[] =
   NULL
 };
 
+void BPoortjePushCallBack(void *ptr) {
+  Serial.println("kms");
+}
+
+void BPoortjePopCallBack(void *ptr) {
+  Serial.println("kms2");
+}
+
 void setup() {
   pinMode(13, OUTPUT);
+  Serial.begin(115200);
+
+  //BPoortje.attachPop(BPoortjePopCallback);
   Serial2.begin(115200);
   BPoortje.attachPush(BPoortjePopCallback, &BPoortje);
   //delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
@@ -109,8 +120,8 @@ void Execute_AfstandBediening(){
     JoyR.setText(buffer);
 }
 
-void BPoortjePopCallback() { //void *ptr
-  //curModus = "Poortje";
+void BPoortjePopCallback(void *ptr) {
+  currentModus = "Poortje";
   Serial.println("Modus changed");
   //currentpage = 2;
 }
