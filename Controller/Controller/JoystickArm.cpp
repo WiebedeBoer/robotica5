@@ -3,6 +3,7 @@
 //Altered by Wiebe 2019-11-06.
 //
 
+#include "iostream"
 #include "JoystickArm.h"
 
 Node* JoystickArm::GetPathsVertical(int length, int height) {
@@ -31,7 +32,42 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 		}
 
 	}
-	return nullptr; //exact and other, exact pakkken, vervolgens beste optie selecteren
+
+	//exact and other, exact pakkken, vervolgens beste optie selecteren
+	std::reverse(possibilitiesExact.begin(), possibilitiesExact.end());
+	std::reverse(possibilitiesOther.begin(), possibilitiesExact.end());
+	for each (Node* nExact in possibilitiesExact)
+	{		
+		for each (Node* nOther in possibilitiesOther)
+		{
+			if (nExact->GetHeight() == nOther->GetHeight()) {
+				return nExact;
+			}
+			//then length
+			else {
+				if (nExact->GetLength() == nOther->GetLength()) {
+					return nExact;
+				}
+				//else not then other
+				else {
+					return nOther;
+				}				
+			}
+		}
+	}
+
+	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
+	//hoogte prioriteit
+	//exat gelijk, dan die heeft die voorrang
+	//gewoon recursief, geen tree search
+	//wanneer node gereturned, dan angle beschikbaar .angle child . angle
+	//3 nodes, eerste last = servo 4, dan servo 3, servo 2, servo 1
+	//verticale 1 2 3	
+	//servo 2, 3, 4 correct verticaal
+
+
+	return nullptr; 
+	//exact and other, exact pakkken, vervolgens beste optie selecteren
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
 	//exat gelijk, dan die heeft die voorrang
@@ -42,4 +78,20 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	//servo 2, 3, 4 correct verticaal
 
 	//AngleToPin(angle, servo); //angle to pin for a particular servo
+}
+
+int NodeToPin() {
+	//int angle
+//Angles dlg; //instance of angles
+//int n = dlg.AngleToPin(angle, servo); //angle to pin for a particular servo
+//int n = dlg.AngleToPin(angle0, VerticalServos); //angle to pin for a particular servo
+
+//n.AngleToPin(angle, servo); //angle to pin for a particular servo
+//dlg.AngleToPin(nExact.angle0, VerticalServos); //angle to pin for a particular servo
+//nExact nod;
+
+//dlg.AngleToPin(0, 1);
+//int nodpin = dlg.AngleToPin(0, 1); //angle to pin for a particular servo
+
+//return nodpin;
 }
