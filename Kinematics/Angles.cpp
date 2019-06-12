@@ -22,7 +22,7 @@ double Angles::Distance(double& _x, double& _y) {
 }
 
 //conversion from angle movement to pin output
-int AngleToPin(double Angle, int Servo) {
+int Angles::AngleToPin(double Angle, int Servo) {
 	int PinOutput;
 	if (Servo == 1 || Servo == 5) {
 		//0 - 360 degrees = 0 - 1023 pin

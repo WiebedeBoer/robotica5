@@ -40,16 +40,22 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 		for each (Node* nOther in possibilitiesOther)
 		{
 			if (nExact->GetHeight() == nOther->GetHeight()) {
-				//return nExact;
+				return nExact;
 				//int angle
 				Angles dlg; //instance of angles
 				//int n = dlg.AngleToPin(angle, servo); //angle to pin for a particular servo
 				//int n = dlg.AngleToPin(angle0, VerticalServos); //angle to pin for a particular servo
 				
 				//n.AngleToPin(angle, servo); //angle to pin for a particular servo
+				//dlg.AngleToPin(nExact.angle0, VerticalServos); //angle to pin for a particular servo
+				//nExact nod;
 
-
-				//dlg.AngleToPin(angle0, VerticalServos); //angle to pin for a particular servo
+				//dlg.AngleToPin(0, 1);
+				int nodpin = dlg.AngleToPin(0, 1); //angle to pin for a particular servo
+				//return nodpin;
+			}
+			else {
+				return nExact;
 			}
 		}
 	}

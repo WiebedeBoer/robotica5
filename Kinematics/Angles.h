@@ -11,7 +11,7 @@ public:
     double Gonio();
     double LawOfCosines(double& _a, double& _b, double& _c);
     double Distance(double& _x, double& _y);
-	int AngleToPin();
+	int AngleToPin(double Angle, int Servo);
 private:
     double A1; //root joint
     double A2; //counter clockwise joint
