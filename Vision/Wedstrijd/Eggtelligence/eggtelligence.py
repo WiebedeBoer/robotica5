@@ -44,7 +44,7 @@ def qrDistance(frame, argument):
 	qrReader = QRReader(frame)
 	qr = qrReader.findQR(findQRCode)
 
-	if qr is not None:
+	if qr != None:
 		x, y, w, h = qrReader.getRectangleQR()
 		distance = calculateDistance(w, 15, 1000)
 		xyAxis = whichDirection(x + (w / 2), y + (h / 2))
@@ -55,7 +55,7 @@ def qrDistance(frame, argument):
 
 def chicken(frame, argument):
 	imgTrainColor = cv2.imread('Images/TrainImg/Kip/kip1.jpg')
-
+	cv2.imshow('foto', imgTrainColor)
 	try:
 		from camera_pi import Camera_pi
 		screenWidth, screenHeight = Camera_pi.getSettings()
@@ -66,9 +66,10 @@ def chicken(frame, argument):
 	imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
 	rectanglePts = fm_ORB(frame, imgTrainColor)
 
-	if rectanglePts is not False and rectanglePts is not None:
+	if rectanglePts != False and rectanglePts != None:
 		center = calculateCenter(rectanglePts)
 		xyAxis = whichDirection(center[0], center[1])
+		cv2.circle(frame, (int(center[0]), int(center[1])), 15, (0,0,255), -1)
 		return str("Unknown" + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 	else:
 		return False
