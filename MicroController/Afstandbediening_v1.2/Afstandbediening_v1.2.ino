@@ -1,16 +1,18 @@
 #include <Nextion.h>
 #include <NexProgressBar.h>
 #include <NexButton.h>
+#include <NexPage.h>
 
 #define joy1x A0
 #define joy1y A1
 #define joy2x A3
 #define joy2y A4
 
+
 //Movement Page
-NexText JoyL = NexText(0, 2, "JoyL"); //Joystick Left
-NexText JoyR = NexText(0, 3, "JoyR"); //Joystick Right
-NexText curModus = NexText(0, 3, "modus"); //Joystick Right
+NexText JoyL = NexText(1, 2, "JoyL"); //Joystick Left
+NexText JoyR = NexText(1, 3, "JoyR"); //Joystick Right
+NexText curModus = NexText(1, 3, "modus"); //Joystick Right
 NexNumber TCSpeed = NexNumber(1, 7, "TCSpeed"); //Numberbox for speed -- Next to slider
 NexProgressBar CSpeed  = NexProgressBar(1, 5, "CSpeed"); //Speedbar Current Speed
 NexSlider SSpeed = NexSlider(1, 4, "SSPeed"); //Speedbar Slider
@@ -50,7 +52,7 @@ uint32_t IPitch = 0;
 uint32_t IYaw = 0;
 uint32_t IDistance = 0;
 uint32_t IModus;
-
+int currentpage = 1;
 bool changedModus = false;
 String currentModus = "";
 
@@ -63,20 +65,24 @@ int joyLX, joyLY, joyRX, joyRY;
 NexTouch *nex_listen_list[] = 
 {
   &BPoortje,
+  &JoyL,
+  &JoyR,
+  NULL
 };
 
 void setup() {
   pinMode(13, OUTPUT);
   Serial2.begin(115200);
-  BPoortje.attachPop(BPoortjePopCallback);
-  delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
+  BPoortje.attachPush(BPoortjePopCallback, &BPoortje);
+  //delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
 
 void loop() {
 //  Execute_AfstandBediening();
   nexLoop(nex_listen_list);
-  updateJoy();
-  delay(10);
+  Serial.println("Test123");
+  //updateJoy();
+  //delay(10);
 }
 
 void updateJoy() {
@@ -95,17 +101,24 @@ String Respond_AfstandBediening(){
 }
 
 void Execute_AfstandBediening(){
-    JoyLtext = String(analogRead(joy1x)/16) + "," + String(analogRead(joy1y)/16);
+    JoyLtext = String(joyLX/16) + "," + String(joyLY/16);
     JoyLtext.toCharArray(buffer, JoyLtext.length());
     JoyL.setText(buffer);
-    JoyRtext = String(analogRead(joy2x)/16) + "," + String(analogRead(joy2y)/16);
+    JoyRtext = String(joyRX/16) + "," + String(joyRY/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
     JoyR.setText(buffer);
 }
 
-void BPoortjePopCallback(void *ptr) {
+void BPoortjePopCallback() { //void *ptr
   //curModus = "Poortje";
   Serial.println("Modus changed");
+  //currentpage = 2;
+}
+
+void Currentpage(){
+  if(currentpage == 2){
+    Serial.print("Modus changed");
+  }
 }
 
 //serialEventInterupt
@@ -162,7 +175,7 @@ void serialEvent2(){
 
 int checksum(String Str){
   int sum = 0;
-  for(int i = 0; i < Str.length();i++){
+  for(unsigned int i = 0; i < Str.length();i++){
     sum += (int)Str[i];
   }
   return sum;
