@@ -37,7 +37,8 @@ def viewBeam(frame):
         if len(approx) >= 4 and len(approx) <= 6 and area > 200:
 
             # calculate distance
-            distance = calculateDistance(w, 625, 2.4)
-            xyAxis = whichDirection(x + (w / 2), y + (h / 2))
+			print(calibration(w, 50, 2.4))
+        	distance = calculateDistance(w, 625, 2.4)
+	        xyAxis = whichDirection(x + (w / 2), y + (h / 2))
             return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
     return False
