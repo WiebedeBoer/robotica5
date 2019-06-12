@@ -154,6 +154,10 @@ void serialEvent() {
         else {
           result = "ack:noAction?<>|\n";
         }
+
+        if(result == "\n"){
+          result = "ack:noAction?<ENDLINEERROR>|\n";
+        }
         
         int resultLength = result.length() +1;          // Convert string to char array
         char resultarray[resultLength];
