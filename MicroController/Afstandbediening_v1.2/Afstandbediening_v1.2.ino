@@ -52,7 +52,7 @@ uint32_t IDistance = 0;
 uint32_t IModus;
 
 bool changedModus = false;
-String currentModus = "";
+String currentModus = "shitty mode";
 
 String modus;
 
@@ -63,12 +63,32 @@ int joyLX, joyLY, joyRX, joyRY;
 NexTouch *nex_listen_list[] = 
 {
   &BPoortje,
+  NULL
 };
+
+void BPoortjePushCallBack(void *ptr) {
+  Serial.println("kms");
+}
+
+void BPoortjePopCallBack(void *ptr) {
+  Serial.println("kms2");
+}
 
 void setup() {
   pinMode(13, OUTPUT);
-  Serial2.begin(115200);
+  Serial.begin(9600);
+  delay(500);
+  Serial.print("baud=115200");
+  Serial.write(0xff);
+  Serial.write(0xff);
+  Serial.write(0xff);
+  Serial.end();
+  Serial.begin(115200);
+
   BPoortje.attachPop(BPoortjePopCallback);
+  BPoortje.attachPush(BPoortjePopCallback);
+  
+  Serial2.begin(115200);
   delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
 
@@ -76,6 +96,10 @@ void loop() {
 //  Execute_AfstandBediening();
   nexLoop(nex_listen_list);
   updateJoy();
+  if (currentModus != "shitty mode") {
+    Serial.println(currentModus);
+  }
+  
   delay(10);
 }
 
@@ -104,7 +128,7 @@ void Execute_AfstandBediening(){
 }
 
 void BPoortjePopCallback(void *ptr) {
-  //curModus = "Poortje";
+  currentModus = "Poortje";
   Serial.println("Modus changed");
 }
 
