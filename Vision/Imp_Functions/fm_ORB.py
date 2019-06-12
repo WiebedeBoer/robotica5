@@ -43,7 +43,7 @@ def findRectanglePoints(pts):
     return [minXmaxY, maxXminY]
 
 
-def fm_ORB(frame, imgTrainColor):
+def fm_ORB(frame, imgTrainColor, MIN_MATCH):
     imgCamColor = frame
 
     # Create the orb instance
@@ -61,7 +61,7 @@ def fm_ORB(frame, imgTrainColor):
     kpTrain, desTrain = orb.compute(imgTrainGray, kpTrain)    # Detect descriptors in imgTrainGray
 
     firstTime = True    # If firstTime is True then set width and heights of frame and images as variables
-    MIN_MATCH_COUNT = 30    # There need to be at least 30 matches before drawing a rectangle
+    MIN_MATCH_COUNT = MIN_MATCH    # There need to be at least the given amound of matches before drawing a rectangle
 
     imgCamGray = cv2.cvtColor(imgCamColor, cv2.COLOR_BGR2GRAY)
     imgCamColor = CLAHE(imgCamGray)  # Sets the contrast of the frame
