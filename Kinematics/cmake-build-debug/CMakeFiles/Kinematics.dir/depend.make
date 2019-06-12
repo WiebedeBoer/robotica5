@@ -17,5 +17,9 @@ CMakeFiles/Kinematics.dir/Node.cpp.o: ../Servo.h
 CMakeFiles/Kinematics.dir/Servo.cpp.o: ../Servo.cpp
 CMakeFiles/Kinematics.dir/Servo.cpp.o: ../Servo.h
 
+CMakeFiles/Kinematics.dir/main.cpp.o: ../Angles.h
+CMakeFiles/Kinematics.dir/main.cpp.o: ../JoystickArm.h
+CMakeFiles/Kinematics.dir/main.cpp.o: ../Node.h
+CMakeFiles/Kinematics.dir/main.cpp.o: ../Servo.h
 CMakeFiles/Kinematics.dir/main.cpp.o: ../main.cpp
 

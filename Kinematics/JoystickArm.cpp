@@ -5,7 +5,7 @@
 
 #include "JoystickArm.h"
 
-Node JoystickArm::GetPathsVertical(int length, int height) {
+Node* JoystickArm::GetPathsVertical(int length, int height) {
     std::vector<Node *> possibilitiesExact;
     std::vector<Node *> possibilitiesOther;
     for (int angle0 = VerticalServos[0].MinRotation; angle0 < VerticalServos[0].MaxRotation; angle0++) {
@@ -29,5 +29,6 @@ Node JoystickArm::GetPathsVertical(int length, int height) {
         }
 		
     }
+    return nullptr;
 	//AngleToPin(angle, servo); //angle to pin for a particular servo
 }
