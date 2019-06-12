@@ -54,8 +54,17 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 				int nodpin = dlg.AngleToPin(0, 1); //angle to pin for a particular servo
 				//return nodpin;
 			}
+			//then length
 			else {
-				return nExact;
+				if (nExact->GetLength() == nOther->GetLength()) {
+					return nExact;
+				}
+				//else not then other
+				else {
+					return nOther;
+				}
+
+				
 			}
 		}
 	}
