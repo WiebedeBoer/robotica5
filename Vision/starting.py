@@ -72,7 +72,7 @@ def debug(arg):
 	if(arg == "-p"):
 		while True:
 			frame = Camera_pi.getInstance()
-			print(mainSwitcher(frame, 3, 2, 0))
+			print(mainSwitcher(frame, 1, 0, 0))
 			cv2.imshow('Camera', frame)
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
