@@ -8,6 +8,7 @@ try:
 except:
 	from camera_opencv import Camera_opencv
 
+sok = None
 # os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
 os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
 
@@ -82,7 +83,7 @@ def debug(arg):
 		try:
 			while True:
 				_, frame = cap.read()
-				print(mainSwitcher(frame, 1, 0, 0))
+				print(mainSwitcher(frame, 3, 2, 0))
 				cv2.imshow('frame', frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
@@ -91,8 +92,8 @@ def debug(arg):
 			cv2.destroyAllWindows()
 
 def release():
-	sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	try:
+		sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sok.connect((socket.gethostname(), 1234))
 		while True:
 			frame = Camera_pi.getInstance()
