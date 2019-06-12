@@ -27,7 +27,7 @@ NexNumber NPitch = NexNumber(3, 3, "NPitch"); //Number of Pitch
 NexButton BPitch = NexButton(4, 3, "BPitch"); //Pitch Button -- Same as SPitch
 NexButton BPoortje = NexButton(4, 4, "BPoortje"); // Poortje Button
 NexButton BChicken = NexButton(4, 5, "BChicken"); // Chickenrun Button
-NexButton BTrap = NexButton(4, 11, "BTrap"); // Trap Button
+NexButton BTrap = NexButton(4, 11, "BTrap"); // Trap Button 
 NexButton BGrind = NexButton(4, 7, "BGrind"); // Grind Button
 NexButton BBlauw = NexButton(4, 8, "BBlauw"); // Balkje Button
 NexButton BRace = NexButton(4, 9, "BRace"); // Race Button
@@ -37,17 +37,6 @@ NexButton BDanceLine = NexButton(4, 10, "BDanceLine"); // Line Dance Button
 
 //Sound Page
 NexButton SPitch = NexButton(5, 3, "SPitch"); // Pitch Button -- Same as BPitch
-
-//Head Page
-
-//Light Page
-
-//Arm Page
-
-//QR Page
-
-//Pitch Page
-
 
 char buffer[100] = {0};
 char rx_Byte = 0;//last received byte
@@ -62,7 +51,8 @@ uint32_t IYaw = 0;
 uint32_t IDistance = 0;
 uint32_t IModus;
 
-bool modusChanged = false;
+bool changedModus = false;
+String currentModus = "";
 
 String modus;
 
@@ -72,23 +62,18 @@ int joyLX, joyLY, joyRX, joyRY;
 
 NexTouch *nex_listen_list[] = 
 {
-  &JoyL,  
-  &JoyR,
-  &SSpeed,
-  &TCSpeed,
-  &BPitch,
   &BPoortje,
-  NULL  // String terminated
 };
 
 void setup() {
   pinMode(13, OUTPUT);
   Serial2.begin(115200);
+  BPoortje.attachPop(BPoortjePopCallback);
   delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
 
 void loop() {
-  Execute_AfstandBediening();
+//  Execute_AfstandBediening();
   nexLoop(nex_listen_list);
   updateJoy();
   delay(10);
@@ -116,37 +101,11 @@ void Execute_AfstandBediening(){
     JoyRtext = String(analogRead(joy2x)/16) + "," + String(analogRead(joy2y)/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
     JoyR.setText(buffer);
-    
-    TCSpeed.setValue(robotspeed); //Set TCSpeed number part to the same as CSpeed value. 
-    NAngle.setValue(IAngle);
-    NYaw.setValue(IYaw);
-    NPitch.setValue(IPitch);
-    TDistance.setValue(IDistance);
-    BPoortje.attachPop(BPoortjePressed, &BPoortje);
-}
-/**
- * Button to return the response
- * 
- * @param ptr - the parameter was transmitted to pop event function pointer
- */
-void BPoortjePressed(void *ptr){
-  NexButton *BPoortjes = (NexButton *)ptr;
-  memset(buffer, 0, sizeof(buffer));
-  BPoortjes -> getText(buffer, sizeof(buffer));
-  if (strcmp(buffer,"ON"))
-  {
-    IModus = 1;
-  }
 }
 
-void setModus(String modus) {
-  Serial.print("modus is nu: ");Serial.println(modus);
-}
-void moduschoise(){
-  if(IModus == 1){
-    //Modustest = "Poortje";
-    Serial.println("Test123"); 
-  }
+void BPoortjePopCallback(void *ptr) {
+  //curModus = "Poortje";
+  Serial.println("Modus changed");
 }
 
 //serialEventInterupt
