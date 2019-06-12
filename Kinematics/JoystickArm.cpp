@@ -3,6 +3,7 @@
 //Altered by Wiebe 2019-11-06.
 //
 
+#include "iostream"
 #include "JoystickArm.h"
 
 Node* JoystickArm::GetPathsVertical(int length, int height) {
@@ -41,18 +42,6 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 		{
 			if (nExact->GetHeight() == nOther->GetHeight()) {
 				return nExact;
-				//int angle
-				Angles dlg; //instance of angles
-				//int n = dlg.AngleToPin(angle, servo); //angle to pin for a particular servo
-				//int n = dlg.AngleToPin(angle0, VerticalServos); //angle to pin for a particular servo
-				
-				//n.AngleToPin(angle, servo); //angle to pin for a particular servo
-				//dlg.AngleToPin(nExact.angle0, VerticalServos); //angle to pin for a particular servo
-				//nExact nod;
-
-				//dlg.AngleToPin(0, 1);
-				int nodpin = dlg.AngleToPin(0, 1); //angle to pin for a particular servo
-				//return nodpin;
 			}
 			//then length
 			else {
@@ -62,12 +51,14 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 				//else not then other
 				else {
 					return nOther;
-				}
-
-				
+				}				
 			}
 		}
 	}
+
+
+
+
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
 	//exat gelijk, dan die heeft die voorrang
@@ -90,4 +81,20 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	//servo 2, 3, 4 correct verticaal
 
 	//AngleToPin(angle, servo); //angle to pin for a particular servo
+}
+
+int NodeToPin() {
+	//int angle
+//Angles dlg; //instance of angles
+//int n = dlg.AngleToPin(angle, servo); //angle to pin for a particular servo
+//int n = dlg.AngleToPin(angle0, VerticalServos); //angle to pin for a particular servo
+
+//n.AngleToPin(angle, servo); //angle to pin for a particular servo
+//dlg.AngleToPin(nExact.angle0, VerticalServos); //angle to pin for a particular servo
+//nExact nod;
+
+//dlg.AngleToPin(0, 1);
+//int nodpin = dlg.AngleToPin(0, 1); //angle to pin for a particular servo
+
+//return nodpin;
 }
