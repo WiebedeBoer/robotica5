@@ -172,8 +172,8 @@ def lineDetection(lines, bothLines, img):
 				slopeln = round( float(slope( line[0] )), 0 )
 				slopelnC = round( float(slope( lineCheck[0] )), 0 )
 
-				cv2.putText( img, str(slopeln),(x2,y2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
-				cv2.putText( img, str(slopelnC),(xC2, yC2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
+				cv2.putText( img, str(slopeln),(x2,y2), font, 0.6,(255,255,255),2)
+				cv2.putText( img, str(slopelnC),(xC2, yC2), font, 0.6,(255,255,255),2)
 
 				# Check that line isn't the same line
 				if i != j: 
