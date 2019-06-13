@@ -80,9 +80,8 @@ NexTouch *nex_listen_list[] =
 void setup() {
   nexInit();
   pinMode(13, OUTPUT);
-  Serial.begin(115200);
+  Serial.begin(115200); //Start Serial
   Serial1.begin(9600);
-  //BPoortje.attachPop(BPoortjePopCallback);
   Serial2.begin(115200);
 
 
@@ -162,21 +161,13 @@ void BDanceLiPopCallback(void *ptr){
 }
 
 void loop() {
-//Execute_AfstandBediening();
+  Execute_AfstandBediening();
   nexLoop(nex_listen_list); //Loop through list of Items
   updateJoy();
   //delay(10);
 }
 
-// Set Joystick Buttons
-void updateJoy() {
-  joyLX = analogRead(joy1x);
-  joyLY = analogRead(joy1y);
-  joyRX = analogRead(joy2x);
-  joyRY = analogRead(joy2y);
-}
 
-// 
 String getJoy() {
   return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY);
 }
@@ -192,8 +183,19 @@ void Execute_AfstandBediening(){
     JoyRtext = String(joyRX/16) + "," + String(joyRY/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
     JoyR.setText(buffer);
+    TCSpeed.setValue(robotspeed);
+    TDistance.setValue(IDistance);
+}
+// Set Joystick Buttons
+void updateJoy() {
+  Serial.println(joyLX);
+  joyLX = analogRead(joy1x);
+  joyLY = analogRead(joy1y);
+  joyRX = analogRead(joy2x);
+  joyRY = analogRead(joy2y);
 }
 
+// 
 
 //serialEventInterupt
 void serialEvent2(){
