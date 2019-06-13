@@ -92,7 +92,7 @@ def start(imgTrainColor, images):
         best_matches = []  # Only an amount of the best good matches are appended in this list
 
         # Get shape and dimensions of the image and frame
-        if firstTime is True:
+        if firstTime:
             h1, w1 = imgDetectColor.shape[:2]
             h2, w2 = imgTrainColor.shape[:2]
             nWidth = w1 + w2

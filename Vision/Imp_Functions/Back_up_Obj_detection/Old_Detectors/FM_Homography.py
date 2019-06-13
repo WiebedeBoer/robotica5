@@ -55,7 +55,7 @@ while True:
             M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 7.0)
             matchesMask = mask.ravel().tolist()
 
-            if M is not None:
+            if M != None:
                 h, w, _ = frame.shape
                 pts = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
                 dst = cv2.perspectiveTransform(pts, M)

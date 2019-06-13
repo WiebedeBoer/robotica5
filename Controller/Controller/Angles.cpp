@@ -5,24 +5,24 @@
 #include "Angles.h"
 
 double Angles::Gonio() {
-	Dist = Distance(TipX, TipY);
-	D1 = tan(TipX / TipY);
-	D2 = LawOfCosines(Dist, Len1, Len2);
-	A1 = D1 + D2;
+    Dist = Distance(TipX, TipY);
+    D1 = tan(TipX / TipY);
+    D2 = LawOfCosines(Dist, Len1, Len2);
+    A1 = D1 + D2;
 	A2 = LawOfCosines(Len1, Len2, Dist);
-	return A1, A2;
+    return A1, A2;
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {
-	return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
+    return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
 }
 
 double Angles::Distance(double& _x, double& _y) {
-	return sqrt(_x * _x + _y * _y);
+    return sqrt(_x * _x + _y * _y);
 }
 
 //conversion from angle movement to pin output
-int AngleToPin(double Angle, int Servo) {
+int Angles::AngleToPin(double Angle, int Servo) {
 	int PinOutput;
 	if (Servo == 1 || Servo == 5) {
 		//0 - 360 degrees = 0 - 1023 pin
