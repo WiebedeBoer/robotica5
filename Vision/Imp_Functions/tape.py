@@ -189,9 +189,10 @@ def lineDetection(lines, bothLines, img):
 							elif (lineDetect[1]):
 								return "right"
 							else:
-								return "No tape"
+								return False
 				j += 1
 			i += 1
+	return False
 
 def BlackTape(frame, follow):
 	# resolution
