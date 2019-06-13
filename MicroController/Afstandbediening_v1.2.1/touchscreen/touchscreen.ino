@@ -7,41 +7,42 @@ int count = 0;
 
 NexTouch *listen_list[] = 
 {
-  &b0
+  &b0,
+  NULL
 };
 
 void setup()
 {
+  nexInit();
   Serial1.begin(9600);
 
   b0.attachPush(b0PushCallback, &b0);
+  b0.attachPop(b0PopCallback, &b0);
 }
 
-bool bla = false;
+bool answer = false;
 
 void loop()
-{   
-  count++;
-  if (count == 201) {
-    count = 0;
+{
+
+  if(digitalRead(0) != 1) {
+    Serial.println(digitalRead(0));
+    Serial.println("Got something");
   }
 
-  Serial1.print("t0.txt=");
-  Serial1.print("\"");
-  Serial1.print(count);
-  Serial1.print("\"");
-  Serial1.write(0xff);
-  Serial1.write(0xff);
-  Serial1.write(0xff);
-
-  if (bla) { Serial.println("boeee"); }
+  if (answer) { 
+    Serial.println("boeee"); 
+  }
+    
   nexLoop(listen_list);
 }
 
 void b0PushCallback(void *ptr) {
-  bla = true;
+  Serial.println("button is called");
+  answer = true;
 }
 
 void b0PopCallback(void *ptr) {
-  bla = true;
+  Serial.println("button is popped");
+  answer = true;
 }
