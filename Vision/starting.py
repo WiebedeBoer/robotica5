@@ -67,8 +67,8 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
-		rawCapture = Camera_pi.getInstance()
-		for frame in Camera_pi.__instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
+		instance, rawCapture = Camera_pi.getInstance()
+		for frame in instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
 			oneFrame = frame.array
 			print(mainSwitcher(oneFrame, 0, 0, 0))
 			rawCapture.truncate()

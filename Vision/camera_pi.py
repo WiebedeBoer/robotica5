@@ -26,7 +26,7 @@ class Camera_pi:
             Camera_pi.__instance.framerate = 30
 
         rawCapture = PiRGBArray(Camera_pi.__instance, size=(Camera_pi.__width, Camera_pi.__height))
-        return rawCapture
+        return Camera_pi.__instance, rawCapture
 
     def __init__(self):
         """ Virtually private constructor. """
