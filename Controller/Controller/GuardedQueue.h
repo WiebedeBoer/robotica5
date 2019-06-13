@@ -5,6 +5,7 @@
 #include "MicroController.h"
 #include "Command.h"
 template<typename T>
+//special queue, works same as normal queue but thread safe
 class GuardedQueue
 {
 public:

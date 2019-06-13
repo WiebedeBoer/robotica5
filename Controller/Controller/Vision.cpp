@@ -1,16 +1,16 @@
 #include "Vision.h"
 
-
+//constructor
 Vision::Vision()
 {
 	makeConnection();
 }
-
+//deconstructor
 Vision::~Vision()
 {
 	close(clientSocket);
 }
-
+//function to make the connection
 bool Vision::makeConnection() {
 	// Create a socket
 	int listening = socket(AF_INET, SOCK_STREAM, 0);
@@ -63,11 +63,10 @@ std::string Vision::executeCommand(std::string cmd) {
 	send(clientSocket, confcmd, cmd.length(), 0);
 	delete[] confcmd;
 	char buf[4096];
-	//does it work?????????????
 	waitMsg(buf);
-	//cout << "final awnser = " << buf << '\n';
 	return buf;
 }
+//helper fucntion to convert a string to char array
 char* Vision::convertstrtochar(std::string s) {
 	int i;
 	const int x = s.length();
@@ -77,6 +76,7 @@ char* Vision::convertstrtochar(std::string s) {
 	}
 	return p;
 }
+//function to wait for a response from the client
 void Vision::waitMsg(char buf[]) {
 	memset(buf, 0, 4096);
 
@@ -87,7 +87,4 @@ void Vision::waitMsg(char buf[]) {
 		close(clientSocket);
 		while(!makeConnection());
 	}
-	else {
-	}
-	//cout << string(buf, 0, bytesReceived) << endl;
 }

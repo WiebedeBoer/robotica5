@@ -88,7 +88,20 @@ void Command::Execute() {
 	}if (Command::type == "DriveRight") {
 		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 		return;
+	}if (Command::type == "speak_normal") {
+		Command::tts.speak_normal(args[0]);
+		return;
+	}if (Command::type == "speak_happy") {
+		Command::tts.speak_happy(args[0]);
+		return;
+	}if (Command::type == "speak_angry") {
+		Command::tts.speak_angry(args[0]);
+		return;
+	}if (Command::type == "speak_pitch") {
+		Command::tts.give_pitch();
+		return;
 	}
+
 
 
 	if (Command::type == "RefreshVision") {
@@ -105,7 +118,7 @@ void Command::Execute() {
 			break;
 		case modus::Modus::eggtelligence:
 			Command::Database->kwalificatie.eggLocation = Command::VisionSlave->executeCommand("3:0:0");
-			std::cout << "EggDistance: " << Command::Database->kwalificatie.eggLocation << std::endl;	
+			std::cout << "EggDistance: " << Command::Database->kwalificatie.eggLocation << std::endl;
 			Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
 			std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
 			Command::Database->wedstrijd.findChickin = Command::VisionSlave->executeCommand("3:2:0");

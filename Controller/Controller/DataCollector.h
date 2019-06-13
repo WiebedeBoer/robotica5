@@ -3,6 +3,7 @@
 #include<string>
 #include<regex>
 #include<iostream>
+//namespace for modus enum
 namespace modus {
 	enum Modus { BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence };
 }
