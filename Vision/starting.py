@@ -5,6 +5,8 @@ import cv2
 
 try:
 	from camera_pi import Camera_pi
+	from picamera.array import PiRGBArray
+	from picamera import PiCamera
 except:
 	from camera_opencv import Camera_opencv
 
@@ -42,7 +44,7 @@ def mainSwitcher(frame, argument, argument1, argument2):
 
 def tape(frame, argument, argument1):
 	sys.path.append('Imp_Functions/')
-	from tape import BlackTape
+	from tapetest import BlackTape
 	return BlackTape(frame, False if argument == 0 else True )
 
 
@@ -65,20 +67,33 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
-		while True:
-			frame = Camera_pi.getInstance()
-			print(mainSwitcher(frame, 0, 0, 0))
-			#cv2.imshow('Camera', frame)
-			#if cv2.waitKey(1) & 0xFF == ord('q'):
-			#	break
-		#cv2.destroyAllWindows()
+		instance, rawCapture = Camera_pi.getInstance()
+		for frame in instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
+			oneFrame = frame.array
+			print(mainSwitcher(oneFrame, 0, 0, 0))
+			key = cv2.waitKey(1) & 0xFF
+			# if the `q` key was pressed, break from the loop
+			if key == ord("q"):
+				break
+
+		rawCapture.truncate()
+		rawCapture.seek(0)
+
+		#
+		# while True:
+		# 	frame = Camera_pi.getInstance()
+		# 	print(mainSwitcher(frame, 0, 0, 0))
+		# 	#cv2.imshow('Camera', frame)
+		# 	#if cv2.waitKey(1) & 0xFF == ord('q'):
+		# 	#	break
+		# #cv2.destroyAllWindows()
 
 	if(arg == "-o"):
 		cap = Camera_opencv.getInstance()
 		try:
 			while True:
 				_, frame = cap.read()
-				print(mainSwitcher(frame, 3, 2, 0))
+				print(mainSwitcher(frame, 0, 0, 0))
 				cv2.imshow('frame', frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break

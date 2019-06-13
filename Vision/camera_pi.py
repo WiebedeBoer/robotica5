@@ -26,11 +26,7 @@ class Camera_pi:
             Camera_pi.__instance.framerate = 30
 
         rawCapture = PiRGBArray(Camera_pi.__instance, size=(Camera_pi.__width, Camera_pi.__height))
-        for frame in Camera_pi.__instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
-            rawCapture.truncate()
-            rawCapture.seek(0)
-            frame = frame.array
-            return frame
+        return Camera_pi.__instance, rawCapture
 
     def __init__(self):
         """ Virtually private constructor. """
