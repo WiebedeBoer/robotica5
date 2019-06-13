@@ -2,6 +2,7 @@ import sys
 import socket
 import os
 import cv2
+import time
 
 try:
 	# from camera_pi import Camera_pi
@@ -72,8 +73,12 @@ def debug(arg):
 		camera.framerate = 32
 		rawCapture = PiRGBArray(camera, size=(640, 480))
 
+		time.sleep(0.1)
+
 		while True:
 			for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+				rawCapture.truncate()
+				rawCapture.seek(0)
 				img = frame.array
 				print(mainSwitcher(img, 0, 0, 0))
 
