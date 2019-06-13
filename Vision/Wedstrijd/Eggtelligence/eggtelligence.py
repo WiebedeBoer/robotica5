@@ -63,8 +63,7 @@ def chicken(frame, argument):
 		from camera_opencv import Camera_opencv
 		screenWidth, screenHeight = Camera_opencv.getSettings()
 
-	#imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
-	cv2.imshow('foto', imgTrainColor)
+	# imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
 	rectanglePts = fm_ORB(frame, imgTrainColor, 40)
 
 	if rectanglePts != False and rectanglePts != None:
