@@ -31,13 +31,7 @@ struct Arm
 	int servo5 = 0;
 };
 //DataCollection for the different modus
-struct Modus {
-	enum mainModus { _Mkwalificatie, _Mwedstrijd } mm;
-	enum subQualifyModus { pitch, poortje, grindpad, eiGripper, vision } sqm;
-	enum subMatchModus { chickenSurvivalRun, eggtelligence }smm;
-	enum eggModus { eggDistance, qrDistance };
-	enum townModus { Hertogenbosch, Eindhoven, Eibergen, Barneveld, Duckstad }tm;
-};
+
 class DataCollector
 {
 public:
@@ -49,6 +43,7 @@ public:
 	int speed;
 	Wedstrijd wedstrijd;
 	Kwalificatie kwalificatie;
+	enum Modus {BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence } modus;
 	Arm arm;
 private:
 	std::pair<int, int> joy1;

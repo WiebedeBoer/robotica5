@@ -214,14 +214,18 @@ def printLine(img, (x1, y1, x2, y2), (b, g, r), thickness = 3):
 	cv2.line(img, (x1,y1), (x2,y2), (b, g, r), thickness) # Parallel line
 
 
-def BlackTape(frame, follow):
+def BlackTape(follow):
+
 	# resolution
-	try:
-		from camera_pi import Camera_pi
-		w, h = Camera_pi.getSettings()
-	except:
-		from camera_opencv import Camera_opencv
-		w, h = Camera_opencv.getSettings()
+	w = 640
+	h = 480
+
+	cam = cv2.VideoCapture(0)
+	cam.set(cv2.CAP_PROP_FRAME_WIDTH, w)
+	cam.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
+	#cam.set(w, h)
+
+	x, y = 0, 0 # UNUSED
 
 	leftLines = []
 	rightLines = []
@@ -247,7 +251,36 @@ def BlackTape(frame, follow):
 
 	bothLines.append([ leftLines, rightLines ])
 
-	#img = cv2.bilateralFilter(img,9,75,75)
-	edges = cv2.Canny(frame, 255,411,apertureSize = 3)
-	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
-	return lineDetection(lines, bothLines, frame)
+
+	while(cam.isOpened()):
+
+
+		_, img = cam.read()
+
+		#cv2.imshow("frame", img)
+
+		# THIS LINE CAN BE REMOVED FOR THE PI #
+		#img = removeBlackBars(img)
+		# THIS LINE CAN BE REMOVED FOR THE PI #
+
+		#img = cv2.bilateralFilter(img,9,75,75)
+		edges = cv2.Canny(img,255,411,apertureSize = 3)
+
+		lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
+
+		printLine(img, (x1, y1, x2, y2), (0, 0, 255), 1)
+		printLine(img, (x3, y3, x4, y4), (0, 0, 255), 1)
+		print( lineDetection(lines, bothLines, img) )
+		
+
+		cv2.imshow("edges", edges)
+		cv2.imshow("default", img)
+
+
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			break
+
+	cam.release()
+	cv2.destroyAllWindows()
+	
+BlackTape(False)

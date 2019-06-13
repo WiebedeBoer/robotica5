@@ -2,6 +2,7 @@
 #include <NexProgressBar.h>
 #include <NexButton.h>
 #include <NexPage.h>
+#include <NexTouch.h>
 
 #define joy1x A0
 #define joy1y A1

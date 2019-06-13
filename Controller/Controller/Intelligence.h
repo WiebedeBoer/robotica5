@@ -31,7 +31,7 @@ private:
 	void CheckVision();
 	void CheckAfstandbediening();
 	void CheckArm();
-
+	void SplitOn(std::string const &input, char sep, std::vector<std::string>& output);
 	//qualifiers
 	void CheckBlueBeam();
 	void CheckEgg();
