@@ -10,7 +10,7 @@ TextToSpeach::TextToSpeach()
 TextToSpeach::~TextToSpeach()
 {
 }
-
+//base function to make the espeak command
 void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int speed) {
 	std::string cmd = ("espeak \"" + text + "\" -v " + lang + " -k -s" + std::to_string(speed) + " -p" + std::to_string(pitch));
 	char* ccmd = convertstrtochar(cmd);
@@ -19,6 +19,7 @@ void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int spe
 	delete(ccmd);
 }
 
+//gives the pitch
 void TextToSpeach::give_pitch() {
 	std::string text = "My name is Wall-A";
 	speak_normal(text);
@@ -86,16 +87,16 @@ void TextToSpeach::angry_father() {
 }
 
 
-
+//says something  in the happy voice
 void TextToSpeach::speak_happy(std::string text) {
 		 espeak(text, "en-german+f4", 99, 100);
 }
 
-
+//says something  in the normal voice
 void TextToSpeach::speak_normal(std::string text) {
 	espeak(text, "en-german+f4", 40, 90);
 }
-
+//says something  in the angry voice
 void TextToSpeach::speak_angry(std::string text) {
 	espeak(text, "en-german", 0, 90);
 }
