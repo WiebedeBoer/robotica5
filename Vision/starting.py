@@ -68,10 +68,10 @@ def debug(arg):
 		while True:
 			frame = Camera_pi.getInstance()
 			print(mainSwitcher(frame, 0, 0, 0))
-			cv2.imshow('Camera', frame)
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
-		cv2.destroyAllWindows()
+			#cv2.imshow('Camera', frame)
+			#if cv2.waitKey(1) & 0xFF == ord('q'):
+			#	break
+		#cv2.destroyAllWindows()
 
 	if(arg == "-o"):
 		cap = Camera_opencv.getInstance()
