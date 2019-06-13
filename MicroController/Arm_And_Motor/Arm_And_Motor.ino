@@ -95,17 +95,17 @@ void loop()
     }
 
     if (debug) {
-      Serial.println("-----------------------------------------");
-      for (int i = 1; i <= 5; i++) {
-        Serial.print("Servo "); Serial.println(i);
-        Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
-        Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
-        Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
-        Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
-        Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
-        Serial.println("");
-      }
-      Serial.println("-----------------------------------------");
+//      Serial.println("-----------------------------------------");
+//      for (int i = 1; i <= 5; i++) {
+//        Serial.print("Servo "); Serial.println(i);
+//        Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
+//        Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
+//        Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
+//        Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
+//        Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
+//        Serial.println("");
+//      }
+//      Serial.println("-----------------------------------------");
     }
   }
 }

@@ -18,150 +18,149 @@ Intelligence::~Intelligence()
 {
 }
 
-int RefreshInterfal = 200;
-int PrintInterfal = 100000;
-int ArmInterfal = 40000000;
-int DriveInterfal = 420000000;
-int VisionInterfall = 1000;
+int RefreshInterfal = 2000000;
+int PrintInterfal = 50000000;
+int ArmInterfal = 4000000;
+int DriveInterfal = 4200000;
+int CheckVisionInterfall = 1000;
+int ExecuteVisionInterfall = 50;
 int GripperInterval = 5000;
 
-std::chrono::system_clock::time_point refreshAfstandBediening = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
-std::chrono::system_clock::time_point PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
-std::chrono::system_clock::time_point MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
-std::chrono::system_clock::time_point Drive = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
-std::chrono::system_clock::time_point RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
-std::chrono::system_clock::time_point GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
+std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
+std::chrono::system_clock::time_point PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
+std::chrono::system_clock::time_point MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+std::chrono::system_clock::time_point DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
+std::chrono::system_clock::time_point RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterfall);
+std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterfall);
+int i = 0;
 
 void Intelligence::Think()
 {
-
 	while (*running == true) {
 		//Intelligence::CheckAfstandbediening();
 		Intelligence::CheckVision();
-		Intelligence::CheckDrive();
-		Intelligence::CheckArm();
-		if (std::chrono::system_clock::now() > PrintJoystick) {
+		Intelligence::ExecuteDrive();
+		Intelligence::ExecuteArm();
+		Intelligence::ExecuteVision();
+		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
-			PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
+			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 		}
-		////autonomous qualification
-		//if (std::chrono::system_clock::now() > RefreshVision) {
-		//	//check qualification modus
-		//	std::string QualifyModus;
-		//	//QualifyModus = Intelligence::Database->Modus.subQualifyModus;
-		//	QualifyModus = "blueBeam"; //Let op. Even voor de test.
-		//	//egg qualification
-		//	if (QualifyModus == "eiGripper") {				
-		//		CheckEgg();
-		//	}
-		//	//blue beam qualification
-		//	else if (QualifyModus == "blueBeam") {
-		//		CheckBlueBeam();
-		//	}
-		//	//gripper qualification
-		//	else if (QualifyModus == "GripperVision") {
-		//		CheckGripper();
-		//	}
-		//	RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
-		//}
 	}
 }
 
-//gripper qualification
-void Intelligence::CheckGripper() {
-	std::vector<std::string> args;
-	args.push_back("");
-	args[0] = "32";
-	args[1] = "36";	
-	CommandQueue->push(Command(Worker, "ArmForward", Database, args)); //move arm forward
+
+void Intelligence::ExecuteChickinSurivalRun()
+{
+
 }
 
 //egg vision qualification
-void Intelligence::CheckEgg() {
+void Intelligence::ExecuteEgg() {
 	std::vector<std::string> args;
 	args.push_back("");
-	int eggdistance = 0; //distance
-	//std::cout << Intelligence::Database->kwalificatie.eiGripper << std::endl;
-	if (!Intelligence::Database->kwalificatie.eiGripper.empty()) {
+	int distance = 999; //distance
+	int horizontal = 0; //horizontal coordinate
+	if (!Intelligence::Database->kwalificatie.eggLocation.empty()) {
+		std::string s = Intelligence::Database->kwalificatie.eggLocation;
+		std::vector<std::string> out;
+
+		SplitOn(ref(s), ':', ref(out));
+
 		try {
-			eggdistance = std::stoi(Intelligence::Database->kwalificatie.eiGripper);
+			if (out[0] != "False") {
+				distance = std::stoi(out[0]);
+				horizontal = std::stoi(out[1]);
+			}
+			else {
+				distance = 0;
+			}
 		}
 		catch (int e) {
-			std::cout << "stoi error occurred. Exception" << e << '\n';
-			eggdistance = 999;
+			std::cout << "stoi distance error occurred. Exception" << e << '\n';
 		}
-		//if egg seen
-		if (eggdistance != 0 && eggdistance != NULL && eggdistance !=999) {
-			//to near for gripper, drive backward
-			if (eggdistance < 210) {
-				args[0] = "32";
-				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+
+
+		if (distance != 0 && distance != NULL) {
+			//if near and in sight, drive
+			if (distance >= 5 && distance < 210) {
+				//left
+				if (horizontal < -150) {
+					args[0] = "256";
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				}
+				//right
+				else if (horizontal > 150) {
+					args[0] = "256";
+					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+				}
+				//forward
+				else {
+					args[0] = "256";
+					CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+				}
 			}
-			else if (eggdistance >=210) {
-				args[0] = "32";
-				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+
+			//else if too near, full stop
+			else if (distance < 5) {
+				args[0] = "0";
+				std::cout << "EggDistanceIsToSmall" << std::endl;
+				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			}
-		}
-		//else egg not seen, go seek egg
-		else {
-			args[0] = "32";
-			CommandQueue->push(Command(Worker, "DriveLeft", Database, args)); //search egg in left circle
 		}
 	}
 }
 
 //blue beam vision qualification
-void Intelligence::CheckBlueBeam() {
+void Intelligence::ExecuteBlueBeam() {
 	std::vector<std::string> args;
 	args.push_back("");
-	int bluedistance = 999; //distance
+	int distance = 999; //distance
 	int horizontal = 0; //horizontal coordinate
-	if (!Intelligence::Database->kwalificatie.vision.empty()) {
-		std::string s = Intelligence::Database->kwalificatie.vision;
+	if (!Intelligence::Database->kwalificatie.bluebeam.empty()) {
+		std::string s = Intelligence::Database->kwalificatie.bluebeam;
 		std::vector<std::string> out;
-		if (s == "False") {
-			int zzzz = 3l;
-		}
 
-		SplitOn(ref(s), ':', ref(out));			
+		SplitOn(ref(s), ':', ref(out));
 
-		try {		
+		try {
 			if (out[0] != "False") {
-				bluedistance = std::stoi(out[0]);
+				distance = std::stoi(out[0]);
 				horizontal = std::stoi(out[1]);
 			}
 			else {
-				bluedistance = 0;
-				std::cout << "Bluebeam stoi error" << std::endl;
-			} 
+				distance = 0;
+			}
 		}
 		catch (int e) {
 			std::cout << "stoi distance error occurred. Exception" << e << '\n';
 		}
-		
 
-		if (bluedistance != 0 && bluedistance != NULL) {
+
+		if (distance != 0 && distance != NULL) {
 			//if near and in sight, drive
-			if (bluedistance >= 5 && bluedistance < 210) {
+			if (distance >= 5 && distance < 210) {
 				//left
-				if (horizontal < -20) {
-					args[0] = "32";
+				if (horizontal < -150) {
+					args[0] = "256";
 					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
 				}
 				//right
-				else if (horizontal > 20) {
-					args[0] = "32";
+				else if (horizontal > 150) {
+					args[0] = "256";
 					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
 				}
 				//forward
 				else {
-					args[0] = "32";
+					args[0] = "256";
 					CommandQueue->push(Command(Worker, "DriveForward", Database, args));
 				}
 			}
+
 			//else if too near, full stop
-			else if (bluedistance < 5) {
+			else if (distance < 5) {
 				args[0] = "0";
+				std::cout << "BlueDistanceIsToSmall" << std::endl;
 				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			}
 		}
@@ -169,9 +168,9 @@ void Intelligence::CheckBlueBeam() {
 }
 
 
-void Intelligence::CheckDrive()
+void Intelligence::ExecuteDrive()
 {
-	if (std::chrono::system_clock::now() > Drive) {
+	if (std::chrono::system_clock::now() > DriveTime) {
 
 		std::vector<std::string> args;
 		args.push_back("");
@@ -224,39 +223,36 @@ void Intelligence::CheckDrive()
 		}
 		joy2 = Tempjoy2;
 
-		Drive = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
+		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
 	}
 }
 
 void Intelligence::CheckVision()
 {
-
-if (std::chrono::system_clock::now() > RefreshVision) {
-		Database->modus = ;//modus is bluebeam
+	if (std::chrono::system_clock::now() > RefreshVisionTime) {
+		Database->modus = modus::Modus::BlueBeam;//modus is bluebeam
 		VisionQueue->push(Command(VisionApi, "RefreshVision", Database));
-
-		RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
+		RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterfall);
 	}
 }
 
 void Intelligence::CheckAfstandbediening()
 {
-	if (std::chrono::system_clock::now() > refreshAfstandBediening) {
+	if (std::chrono::system_clock::now() > refreshAfstandBedieningTime) {
 		std::vector<std::string> args;
 		args.push_back(std::to_string(Database->speed));
 		CommandQueue->push(Command(Sensor, "refresh", Database, args));
-		refreshAfstandBediening = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
+		refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
 	}
 }
 
-void Intelligence::CheckArm()
+void Intelligence::ExecuteArm()
 {
-	if (std::chrono::system_clock::now() > MoveArm) {
+	if (std::chrono::system_clock::now() > MoveArmTime) {
 		std::vector<std::string> args;
 		std::pair<int, int>* Tempjoy1 = new std::pair<int, int>(Database->GetJoy1());
 		args.push_back(std::to_string(joy1->first));
 		args.push_back(std::to_string(joy1->second));
-
 
 		if (joy1->first > 40) {
 			CommandQueue->push(Command(Worker, "ArmLeft", Database, args));
@@ -272,16 +268,51 @@ void Intelligence::CheckArm()
 		}
 		joy1 = Tempjoy1;
 
-		MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
 	}
 }
-	//splitting distance from coordinate
-	void Intelligence::SplitOn(std::string const &input, char sep, std::vector<std::string>& output) {
-		std::istringstream buffer(input);
-		std::string temp;
-		while (std::getline(buffer, temp, sep))
-			output.push_back(temp);
+void Intelligence::ExecuteVision()
+{
+	if (std::chrono::system_clock::now() > ExecuteVisionTime) {
+		Intelligence::Database->modus = static_cast<modus::Modus>(i);
+
+		if (i > 6)
+		{
+			i = 0;
+		}
+		else {
+			i++;
+		}
+
+		switch (Intelligence::Database->modus)
+		{
+		case modus::Modus::BlueBeam:
+			ExecuteBlueBeam();
+			break;
+		case modus::Modus::grindpad:
+			break;
+		case modus::Modus::poortje:
+			break;
+		case modus::Modus::eggtelligence:
+			ExecuteEgg();
+			break;
+		case modus::Modus::chickenSurvivalRun:
+			//function call here for chickinsurvivalrun
+			break;
+		default:
+			break;
+		}
+		ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterfall);
+
 	}
+}
+//splitting distance from coordinate
+void Intelligence::SplitOn(std::string const &input, char sep, std::vector<std::string>& output) {
+	std::istringstream buffer(input);
+	std::string temp;
+	while (std::getline(buffer, temp, sep))
+		output.push_back(temp);
+}
 
 
 

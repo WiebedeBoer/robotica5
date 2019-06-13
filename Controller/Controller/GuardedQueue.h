@@ -26,6 +26,9 @@ public:
 			MicroController* a = new MicroController("/dev/ttyACM0");
 			return Command(a, "Wait");
 		}
+		else if(m_queque.size() > 50) {
+			std::cout << "CommanndQueueToLarge!" << std::endl;
+		}
 		T result = m_queque.front();
 		m_queque.pop();
 		return result;

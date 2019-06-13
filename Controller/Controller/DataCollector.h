@@ -3,6 +3,9 @@
 #include<string>
 #include<regex>
 #include<iostream>
+namespace modus {
+	enum Modus { BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence };
+}
 //DataCollection for the Wedstrijd
 struct Wedstrijd
 {
@@ -10,6 +13,7 @@ struct Wedstrijd
 	std::string chickenSurvivalRun;
 	std::string qrDistance;
 	std::string qrDestination;
+	std::string findChickin;
 };
 //DataCollection for the Qualification
 struct Kwalificatie
@@ -17,9 +21,8 @@ struct Kwalificatie
 	std::string pitch;
 	std::string poort;
 	std::string grindpad;
-	std::string eiGripper;
-	std::string vision; //blue beam
-	std::string GripperVision;
+	std::string eggLocation;
+	std::string bluebeam;
 };
 //DataCollection for the Arm
 struct Arm
@@ -40,10 +43,10 @@ public:
 	void SetAfstandBedieningData(std::string input);
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
+	modus::Modus modus;
 	int speed;
 	Wedstrijd wedstrijd;
 	Kwalificatie kwalificatie;
-	enum Modus {BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence } modus;
 	Arm arm;
 private:
 	std::pair<int, int> joy1;
