@@ -223,8 +223,6 @@ def BlackTape(frame, follow):
 		from camera_opencv import Camera_opencv
 		w, h = Camera_opencv.getSettings()
 
-	x, y = 0, 0 # UNUSED
-
 	leftLines = []
 	rightLines = []
 	bothLines = []
@@ -250,6 +248,6 @@ def BlackTape(frame, follow):
 	bothLines.append([ leftLines, rightLines ])
 
 	#img = cv2.bilateralFilter(img,9,75,75)
-	edges = cv2.Canny(img,255,411,apertureSize = 3)
+	edges = cv2.Canny(frame, 255,411,apertureSize = 3)
 	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
-	return lineDetection(lines, bothLines, img)
+	return lineDetection(lines, bothLines, frame)

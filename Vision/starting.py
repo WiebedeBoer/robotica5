@@ -30,14 +30,21 @@ def splitter(msg):
 # Main switcher
 def mainSwitcher(frame, argument, argument1, argument2):
 	switcher = {
-		0: vision,
-		1: chickenSurvivalRun,
-		2: eggtelligence,
-		3: tape
+		0: tape,
+		1: vision,
+		2: chickenSurvivalRun,
+		3: eggtelligence
 	}
 
 	func = switcher.get(argument, "Nothing")
 	return func(frame, argument1, argument2)
+
+
+def tape(frame, argument, argument1):
+	sys.path.append('Imp_Functions/')
+	from tape import BlackTape
+	return BlackTape(frame, False if argument == 0 else True )
+
 
 def vision(frame, argument, argument1):
 	sys.path.append('Kwalificatie/Vision/')
@@ -54,12 +61,6 @@ def eggtelligence(frame, argument, argument1):
 	sys.path.append('Wedstrijd/Eggtelligence/')
 	from eggtelligence import eggtelligence
 	return eggtelligence(frame, argument, argument1)
-
-
-def tape(frame, argument, argument1):
-	sys.path.append('Imp_Functions/')
-	from tape import BlackTape
-	return BlackTape(frame, False if argument == 0 else True )
 
 
 def debug(arg):
