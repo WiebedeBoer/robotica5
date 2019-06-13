@@ -90,34 +90,34 @@ void Command::Execute() {
 		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 		return;
 	}
-	if (Command::type == "chickenSurvivalRun") {
 
-		Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
-		std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
-		return;
-	}
-	if (Command::type == "eggDistance") {
 
-		Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
-		std::cout << "EggDistance: " << Command::Database->wedstrijd.eggDistance << std::endl;
-		return;
-	}
-	if (Command::type == "qrDistance") {
-
-		Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
-		std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
-		return;
-	}
-	//egg grab qualification autonomous
-	if (Command::type == "GripperVision") {
-		Command::Database->kwalificatie.eiGripper = Command::VisionSlave->executeCommand("3:0:0");
-		std::cout << "GripperVision: " << Command::Database->kwalificatie.eiGripper << std::endl;
-		return;
-	}
-	//blue beam qualification autonomous
-	if (Command::type == "BlueBeam") {
-		Command::Database->kwalificatie.vision = Command::VisionSlave->executeCommand("1:0:0");
-		std::cout << "BlueBeam: " << Command::Database->kwalificatie.vision << std::endl;
+	if (Command::type == "RefreshVision") {
+		switch (Command::Database->modus)
+		{
+		case 0:
+			Command::Database->kwalificatie.vision = Command::VisionSlave->executeCommand("1:0:0");
+			std::cout << "BlueBeam: " << Command::Database->kwalificatie.vision << std::endl;
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
+			std::cout << "EggDistance: " << Command::Database->wedstrijd.eggDistance << std::endl;
+			break;
+		case 4:
+			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
+			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
+			break;
+		case 5:
+			Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
+			std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
+			break;
+		default:
+			break;
+		}
 		return;
 	}
 }

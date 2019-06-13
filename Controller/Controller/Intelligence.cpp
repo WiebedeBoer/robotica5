@@ -19,9 +19,9 @@ Intelligence::~Intelligence()
 }
 
 int RefreshInterfal = 200;
-int PrintInterfal = 1000;
-int ArmInterfal = 400;
-int DriveInterfal = 420;
+int PrintInterfal = 100000;
+int ArmInterfal = 40000000;
+int DriveInterfal = 420000000;
 int VisionInterfall = 1000;
 int GripperInterval = 5000;
 
@@ -44,26 +44,26 @@ void Intelligence::Think()
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystick = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
 		}
-		//autonomous qualification
-		if (std::chrono::system_clock::now() > GripperVision) {
-			//check qualification modus
-			std::string QualifyModus;
-			//QualifyModus = Intelligence::Database->Modus.subQualifyModus;
-			QualifyModus = "eiGripper"; //Let op. Even voor de test.
-			//egg qualification
-			if (QualifyModus == "eiGripper") {				
-				CheckEgg();
-			}
-			//blue beam qualification
-			else if (QualifyModus == "vision") {
-				CheckBlueBeam();
-			}
-			//gripper qualification
-			else if (QualifyModus == "GripperVision") {
-				CheckGripper();
-			}
-			GripperVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
-		}
+		////autonomous qualification
+		//if (std::chrono::system_clock::now() > RefreshVision) {
+		//	//check qualification modus
+		//	std::string QualifyModus;
+		//	//QualifyModus = Intelligence::Database->Modus.subQualifyModus;
+		//	QualifyModus = "blueBeam"; //Let op. Even voor de test.
+		//	//egg qualification
+		//	if (QualifyModus == "eiGripper") {				
+		//		CheckEgg();
+		//	}
+		//	//blue beam qualification
+		//	else if (QualifyModus == "blueBeam") {
+		//		CheckBlueBeam();
+		//	}
+		//	//gripper qualification
+		//	else if (QualifyModus == "GripperVision") {
+		//		CheckGripper();
+		//	}
+		//	RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(GripperInterval);
+		//}
 	}
 }
 
@@ -110,53 +110,35 @@ void Intelligence::CheckEgg() {
 	}
 }
 
-
-//splitting distance from coordinate
-
-void explode(std::string const &input, char sep, std::vector<std::string>& output) {
-	std::istringstream buffer(input);
-	std::string temp;
-	while (std::getline(buffer, temp, sep))
-		output.push_back(temp);
-}
-
-
 //blue beam vision qualification
 void Intelligence::CheckBlueBeam() {
 	std::vector<std::string> args;
 	args.push_back("");
-	int bluedistance = 0; //distance
+	int bluedistance = 999; //distance
 	int horizontal = 0; //horizontal coordinate
 	if (!Intelligence::Database->kwalificatie.vision.empty()) {
 		std::string s = Intelligence::Database->kwalificatie.vision;
 		std::vector<std::string> out;
-		explode(ref(s), ':', ref(out));
+		if (s == "False") {
+			int zzzz = 3l;
+		}
 
-		/*
-			try {
-				bluedistance = std::stoi(Intelligence::Database->kwalificatie.eiGripper);
+		SplitOn(ref(s), ':', ref(out));			
+
+		try {		
+			if (out[0] != "False") {
+				bluedistance = std::stoi(out[0]);
+				horizontal = std::stoi(out[1]);
 			}
-			catch (int e) {
-				std::cout << "stoi error occurred. Exception" << e << '\n';
-				bluedistance = 999;
-			}
-			*/
-			
-		try {			
-			bluedistance = std::stoi(out[0]);			
+			else {
+				bluedistance = 0;
+				std::cout << "Bluebeam stoi error" << std::endl;
+			} 
 		}
 		catch (int e) {
 			std::cout << "stoi distance error occurred. Exception" << e << '\n';
-			bluedistance = 999;			
-		}	
-		
-		try {
-			horizontal = std::stoi(out[1]);
 		}
-		catch (int e) {
-			std::cout << "stoi coordinate error occurred. Exception" << e << '\n';
-			horizontal = 0;
-		}		
+		
 
 		if (bluedistance != 0 && bluedistance != NULL) {
 			//if near and in sight, drive
@@ -182,13 +164,6 @@ void Intelligence::CheckBlueBeam() {
 				args[0] = "0";
 				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			}
-			/*
-			//else if not seen, seek to the left, not sure if necessary
-			else if (bluedistance == 999) {
-				args[0] = "32";
-				CommandQueue->push(Command(Worker, "DriveLeft", Database, args)); //search beam
-			}
-			*/
 		}
 	}
 }
@@ -255,12 +230,11 @@ void Intelligence::CheckDrive()
 
 void Intelligence::CheckVision()
 {
-	if (std::chrono::system_clock::now() > RefreshVision) {
 
-		VisionQueue->push(Command(VisionApi, "chickenSurvivalRun", Database));
-		VisionQueue->push(Command(VisionApi, "eggDistance", Database));
-		VisionQueue->push(Command(VisionApi, "qrDistance", Database));
-		VisionQueue->push(Command(VisionApi, "BlueBeam", Database)); //blue beam qualification
+if (std::chrono::system_clock::now() > RefreshVision) {
+		Database->modus = ;//modus is bluebeam
+		VisionQueue->push(Command(VisionApi, "RefreshVision", Database));
+
 		RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
 	}
 }
@@ -301,4 +275,13 @@ void Intelligence::CheckArm()
 		MoveArm = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
 	}
 }
+	//splitting distance from coordinate
+	void Intelligence::SplitOn(std::string const &input, char sep, std::vector<std::string>& output) {
+		std::istringstream buffer(input);
+		std::string temp;
+		while (std::getline(buffer, temp, sep))
+			output.push_back(temp);
+	}
+
+
 
