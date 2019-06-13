@@ -5,6 +5,7 @@
 
 #include "iostream"
 #include "JoystickArm.h"
+//#include "Node.h"
 
 Node* JoystickArm::GetPathsVertical(int length, int height) {
 	std::vector<Node> possibilitiesExact;
@@ -20,12 +21,12 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 				double node2Height = node2->GetHeight();
 				if (round(node2Length) == length && round(node2Height) == height) {
 					if (node2Length == length || node2Height == height) {
-					    Node n2 = *node2;
+						Node n2 = *node2;
 						possibilitiesExact.push_back(n2);
 					}
 					else {
-                        Node n2 = *node2;
-                        possibilitiesOther.push_back(n2);
+						Node n2 = *node2;
+						possibilitiesOther.push_back(n2);
 					}
 				}
 				delete node2;
@@ -38,62 +39,120 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	//exact and other, exact pakkken, vervolgens beste optie selecteren
 
 	std::vector<Node> bothVector;
-    std::vector<Node> heightVector;
-    std::vector<Node> lengthVector;
+	std::vector<Node> heightVector;
+	std::vector<Node> lengthVector;
 
-    if(!possibilitiesExact.size()) {
-        for (Node nExact : possibilitiesExact) {
+	if (!possibilitiesExact.size()) {
+		for (Node nExact : possibilitiesExact) {
 
-            if (nExact.GetHeight() == height && nExact.GetLength() == length) {
-                // beide gelijk
-                bothVector.push_back(nExact);
-            }else if(nExact.GetHeight() == height){
-                heightVector.push_back(nExact);
-            }else if(nExact.GetLength() == length){
-                lengthVector.push_back(nExact);
-            }
-        }
+			if (nExact.GetHeight() == height && nExact.GetLength() == length) {
+				// beide gelijk
+				bothVector.push_back(nExact);
+			}
+			else if (nExact.GetHeight() == height) {
+				heightVector.push_back(nExact);
+			}
+			else if (nExact.GetLength() == length) {
+				lengthVector.push_back(nExact);
+			}
+		}
 
-    }else if(!possibilitiesOther.size()){
-        for (Node nOther : possibilitiesOther)
-        {
+	}
+	else if (!possibilitiesOther.size()) {
+		for (Node nOther : possibilitiesOther)
+		{
+			if (nOther.GetHeight() == height && nOther.GetLength() == length) {
+				// beide gelijk
+				bothVector.push_back(nOther);
+			}
+			else if (nOther.GetHeight() == height) {
+				heightVector.push_back(nOther);
+			}
+			else if (nOther.GetLength() == length) {
+				lengthVector.push_back(nOther);
+			}
+		}
 
-        }
-        for (Node nOther : possibilitiesOther)
-        {
+	}
 
-        }
-        for (Node nOther : possibilitiesOther)
-        {
+	//other
+	//eerst both vector, minste angle, anders heightvector
+	//angle change, minste is
+	//hoogte hetzelfde, lengte dichtbij het zelfde
+	//en andersom. dus de lengte, dan dichtbij de hoogte
 
-        }
-    }
-/*    for (Node* nOther : possibilitiesOther)
-    {
-        if (nExact->GetHeight() == nOther->GetHeight()) {
-            return nExact;
-        }
-        else {
-            if (nExact->GetLength() == nOther->GetLength()) {
-                return nExact;
-            }
-                //else not then other
-            else {
-                return nOther;
-            }
-        }
-    }*/
+	//exact lengte exact hetzelfde anders zit het in other
+
+	//stel gevuld
+	//op basis prioriteit beste node
+	//dat return
+
+	/*
+	//exact and other, exact pakkken, vervolgens beste optie selecteren
+	//std::reverse(possibilitiesExact.begin(), possibilitiesExact.end());
+	//std::reverse(possibilitiesOther.begin(), possibilitiesExact.end());
+	for (Node* nExact : possibilitiesExact)
+	{		
+		//for (Node* nOther : possibilitiesOther)
+		//{
+			if (nExact->GetHeight() == nExact->GetHeight()) {
+				//return nExact; //beste moves //hoogte en lengte prioriteit 1
+				//hoogte gelijk 2
+				//lengte glijk 3
+			}
+			//then length
+			else {
+				if (nExact->GetLength() == nExact->GetLength()) {
+					//return nExact; //prioriteit 1
+				}
+				//else not then other
+				else {
+					//return nOther; //prioriteit 2 hoogte, lengte 3
+				}				
+			}
+		//}
+	}
+	//return nExact;
+
+	//minste angle verandering filteren
+	return possibilitiesExact;
+
+	for (Node* nOther : possibilitiesExact)
+	{
+		//for (Node* nOther : possibilitiesOther)
+		//{
+		if (nOther->GetHeight() == nOther->GetHeight()) {
+			//return nExact;
+		}
+		//then length
+		else {
+			if (nOther->GetLength() == nOther->GetLength()) {
+				//return nExact;
+			}
+			//else not then other
+			else {
+				//return nOther;
+			}
+		}
+		//}
+	}
+	return possibilitiesOther;
+	*/
+
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
-	//exat gelijk, dan die heeft die voorrang
+	//exact gelijk, dan die heeft die voorrang
 	//gewoon recursief, geen tree search
 	//wanneer node gereturned, dan angle beschikbaar .angle child . angle
 	//3 nodes, eerste last = servo 4, dan servo 3, servo 2, servo 1
 	//verticale 1 2 3	
 	//servo 2, 3, 4 correct verticaal
 
+	//verandering in angles beste move eruit
+	//possibilities niet toegevoegd, wel ergens toegevoegd
 
-	return nullptr; 
+
+	//return nullptr; 
 	//exact and other, exact pakkken, vervolgens beste optie selecteren
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
@@ -105,6 +164,7 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	//servo 2, 3, 4 correct verticaal
 
 	//AngleToPin(angle, servo); //angle to pin for a particular servo
+
 }
 
 int JoystickArm::NodeToPin(Node node) {
@@ -115,11 +175,11 @@ int JoystickArm::NodeToPin(Node node) {
 
 	//n.AngleToPin(angle, servo); //angle to pin for a particular servo
 	//dlg.AngleToPin(nExact.angle0, VerticalServos); //angle to pin for a particular servo
-	Node n = node;
+	//Node n = node;
 
 	//dlg.AngleToPin(0, 1);
 	//int nodpin = dlg.AngleToPin(n.Angle, VerticalServos); //angle to pin for a particular servo
-	int nodpin = dlg.AngleToPin(n.Angle, node.ServoArm.Id); //angle to pin for a particular servo
+	int nodpin = dlg.AngleToPin(node.Angle, node.ServoArm.Id); //angle to pin for a particular servo
 
 	return nodpin;
 }
