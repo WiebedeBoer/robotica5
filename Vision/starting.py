@@ -71,12 +71,12 @@ def debug(arg):
 		for frame in instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
 			oneFrame = frame.array
 			print(mainSwitcher(oneFrame, 0, 0, 0))
+			rawCapture.truncate()
 			key = cv2.waitKey(1) & 0xFF
 			# if the `q` key was pressed, break from the loop
 			if key == ord("q"):
 				break
 
-		rawCapture.truncate()
 		rawCapture.seek(0)
 
 		#
