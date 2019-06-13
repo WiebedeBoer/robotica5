@@ -43,7 +43,6 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 			if (nExact->GetHeight() == nOther->GetHeight()) {
 				return nExact;
 			}
-			//then length
 			else {
 				if (nExact->GetLength() == nOther->GetLength()) {
 					return nExact;
@@ -92,7 +91,7 @@ int JoystickArm::NodeToPin(Node node) {
 
 	//dlg.AngleToPin(0, 1);
 	//int nodpin = dlg.AngleToPin(n.Angle, VerticalServos); //angle to pin for a particular servo
-	int nodpin = dlg.AngleToPin(n.Angle, 1); //angle to pin for a particular servo
+	int nodpin = dlg.AngleToPin(n.Angle, node.ServoArm.Id); //angle to pin for a particular servo
 
 	return nodpin;
 }

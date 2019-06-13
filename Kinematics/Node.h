@@ -18,9 +18,10 @@ public:
     double GetHeight();
     int AngleChanges();
     int Angle;
+	const Servo& ServoArm;
 private:
     Node* Last;
-    const Servo& ServoArm;
+    
 
 };
 
