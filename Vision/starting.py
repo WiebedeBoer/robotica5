@@ -81,7 +81,11 @@ def debug(arg):
 			img = frame.array
 			print(mainSwitcher(img, 0, 0, 0))
 
+			if cv2.waitKey(1) & 0xFF == ord('q'):
+				break
 		camera.close()
+
+		
 
 	if(arg == "-o"):
 		cap = Camera_opencv.getInstance()
