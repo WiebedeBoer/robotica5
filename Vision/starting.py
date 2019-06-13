@@ -8,7 +8,6 @@ try:
 except:
 	from camera_opencv import Camera_opencv
 
-sok = None
 # os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
 os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
 
@@ -88,6 +87,7 @@ def debug(arg):
 
 def release():
 	try:
+		global sok
 		sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sok.connect((socket.gethostname(), 1234))
 		while True:
