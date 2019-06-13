@@ -2,12 +2,9 @@ import sys
 import socket
 import os
 import cv2
-import time
 
 try:
-	# from camera_pi import Camera_pi
-	from picamera.array import PiRGBArray
-	from picamera import PiCamera
+	from camera_pi import Camera_pi
 except:
 	from camera_opencv import Camera_opencv
 
@@ -68,24 +65,20 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
-		camera = PiCamera()
-		camera.resolution = (640, 480)
-		camera.framerate = 30
-		rawCapture = PiRGBArray(camera, size=(640, 480))
-
-		time.sleep(0.1)
-
-		for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+		rawCapture = Camera_pi.getInstance()
+		for frame in Camera_pi.__instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
+			oneFrame = frame.array
+			print(mainSwitcher(oneFrame, 0, 0, 0))
 			rawCapture.truncate()
 			rawCapture.seek(0)
-			img = frame.array
-			print(mainSwitcher(img, 0, 0, 0))
-
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
-		camera.close()
-
-		
+		#
+		# while True:
+		# 	frame = Camera_pi.getInstance()
+		# 	print(mainSwitcher(frame, 0, 0, 0))
+		# 	#cv2.imshow('Camera', frame)
+		# 	#if cv2.waitKey(1) & 0xFF == ord('q'):
+		# 	#	break
+		# #cv2.destroyAllWindows()
 
 	if(arg == "-o"):
 		cap = Camera_opencv.getInstance()
