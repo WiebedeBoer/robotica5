@@ -113,8 +113,6 @@ def lineLine(img, (x1, y1, x2, y2), (x3, y3, x4, y4)):
 
 
 	# calculate the direction of the lines
-	uA = None
-	uB = None
 	try:
 		uA = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1))
 		uB = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)) / ((y4-y3)*(x2-x1) - (x4-x3)*(y2-y1))
@@ -150,7 +148,6 @@ def detectCollision(line, detectionLines, img):
 					elif(direction == 1):
 						right = True
 			direction += 1
-
 	return [left, right]
 
 
@@ -175,8 +172,8 @@ def lineDetection(lines, bothLines, img):
 				slopeln = round( float(slope( line[0] )), 0 )
 				slopelnC = round( float(slope( lineCheck[0] )), 0 )
 
-				cv2.putText( img, str(slopeln),(x2,y2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
-				cv2.putText( img, str(slopelnC),(xC2, yC2), font, 0.6,(255,255,255),2,cv2.LINE_AA )
+				cv2.putText( img, str(slopeln),(x2,y2), font, 0.6,(255,255,255),2)
+				cv2.putText( img, str(slopelnC),(xC2, yC2), font, 0.6,(255,255,255),2)
 
 				# Check that line isn't the same line
 				if i != j: 
@@ -192,7 +189,6 @@ def lineDetection(lines, bothLines, img):
 
 							# Check if line collides with any of the detection lines
 							lineDetect = detectCollision(list(line[0]), bothLines, img)
-							print(str(lineDetect))
 							if( lineDetect[0] and lineDetect[1] ):
 								return "front"
 							elif (lineDetect[0]):
@@ -204,28 +200,23 @@ def lineDetection(lines, bothLines, img):
 								printLine(img, lineCheck[0], (255, 0, 0)) # Parallel line
 								return "right"
 							else:
-								return "No tape"
-
-
+								return False
 				j += 1
 			i += 1
+	return False
 
 def printLine(img, (x1, y1, x2, y2), (b, g, r), thickness = 3):
 	cv2.line(img, (x1,y1), (x2,y2), (b, g, r), thickness) # Parallel line
 
 
-def BlackTape(follow):
-
+def BlackTape(frame, follow):
 	# resolution
-	w = 640
-	h = 480
-
-	cam = cv2.VideoCapture(0)
-	cam.set(cv2.CAP_PROP_FRAME_WIDTH, w)
-	cam.set(cv2.CAP_PROP_FRAME_HEIGHT, h)
-	#cam.set(w, h)
-
-	x, y = 0, 0 # UNUSED
+	try:
+		from camera_pi import Camera_pi
+		w, h = Camera_pi.getSettings()
+	except:
+		from camera_opencv import Camera_opencv
+		w, h = Camera_opencv.getSettings()
 
 	leftLines = []
 	rightLines = []
@@ -251,36 +242,11 @@ def BlackTape(follow):
 
 	bothLines.append([ leftLines, rightLines ])
 
+	#img = cv2.bilateralFilter(img,9,75,75)
+	edges = cv2.Canny(frame, 255, 411, apertureSize = 3)
 
-	while(cam.isOpened()):
+	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
 
-
-		_, img = cam.read()
-
-		#cv2.imshow("frame", img)
-
-		# THIS LINE CAN BE REMOVED FOR THE PI #
-		#img = removeBlackBars(img)
-		# THIS LINE CAN BE REMOVED FOR THE PI #
-
-		#img = cv2.bilateralFilter(img,9,75,75)
-		edges = cv2.Canny(img,255,411,apertureSize = 3)
-
-		lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
-
-		printLine(img, (x1, y1, x2, y2), (0, 0, 255), 1)
-		printLine(img, (x3, y3, x4, y4), (0, 0, 255), 1)
-		print( lineDetection(lines, bothLines, img) )
-		
-
-		cv2.imshow("edges", edges)
-		cv2.imshow("default", img)
-
-
-		if cv2.waitKey(1) & 0xFF == ord('q'):
-			break
-
-	cam.release()
-	cv2.destroyAllWindows()
-	
-BlackTape(False)
+	printLine(frame, (x1, y1, x2, y2), (0, 0, 255), 1)
+	printLine(frame, (x3, y3, x4, y4), (0, 0, 255), 1)
+	return lineDetection(lines, bothLines, frame)

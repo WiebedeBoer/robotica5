@@ -147,8 +147,7 @@ def detectCollision(line, detectionLines, img):
 						left = True
 					elif(direction == 1):
 						right = True
-		direction += 1
-
+			direction += 1
 	return [left, right]
 
 
@@ -190,9 +189,10 @@ def lineDetection(lines, bothLines, img):
 							elif (lineDetect[1]):
 								return "right"
 							else:
-								return "No tape"
+								return False
 				j += 1
 			i += 1
+	return False
 
 def BlackTape(frame, follow):
 	# resolution
