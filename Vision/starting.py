@@ -81,6 +81,8 @@ def debug(arg):
 			img = frame.array
 			print(mainSwitcher(img, 0, 0, 0))
 
+		camera.close()
+
 	if(arg == "-o"):
 		cap = Camera_opencv.getInstance()
 		try:
