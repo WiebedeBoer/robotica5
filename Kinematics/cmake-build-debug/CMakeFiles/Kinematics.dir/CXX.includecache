@@ -11,6 +11,8 @@ math.h
 -
 
 /Users/wouter/Projects/robotica5/Kinematics/JoystickArm.cpp
+iostream
+/Users/wouter/Projects/robotica5/Kinematics/iostream
 JoystickArm.h
 /Users/wouter/Projects/robotica5/Kinematics/JoystickArm.h
 
@@ -23,6 +25,10 @@ Node.h
 /Users/wouter/Projects/robotica5/Kinematics/Node.h
 Angles.h
 /Users/wouter/Projects/robotica5/Kinematics/Angles.h
+
+/Users/wouter/Projects/robotica5/Kinematics/Node.cpp
+Node.h
+/Users/wouter/Projects/robotica5/Kinematics/Node.h
 
 /Users/wouter/Projects/robotica5/Kinematics/Node.h
 vector

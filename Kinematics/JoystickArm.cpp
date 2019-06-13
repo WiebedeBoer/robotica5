@@ -7,8 +7,9 @@
 #include "JoystickArm.h"
 
 Node* JoystickArm::GetPathsVertical(int length, int height) {
-	std::vector<Node *> possibilitiesExact;
-	std::vector<Node *> possibilitiesOther;
+	std::vector<Node> possibilitiesExact;
+	std::vector<Node> possibilitiesOther;
+
 	for (int angle0 = VerticalServos[0].MinRotation; angle0 < VerticalServos[0].MaxRotation; angle0++) {
 		Node *node0 = new Node(angle0, VerticalServos[0]);
 		for (int angle1 = VerticalServos[1].MinRotation; angle1 < VerticalServos[1].MaxRotation + 30; angle1++) {
@@ -19,42 +20,69 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 				double node2Height = node2->GetHeight();
 				if (round(node2Length) == length && round(node2Height) == height) {
 					if (node2Length == length || node2Height == height) {
-						possibilitiesExact.push_back(node2);
+					    Node n2 = *node2;
+						possibilitiesExact.push_back(n2);
 					}
 					else {
-						possibilitiesOther.push_back(node2);
+                        Node n2 = *node2;
+                        possibilitiesOther.push_back(n2);
 					}
 				}
-				else {
-					delete node2;
-				}
+				delete node2;
 			}
+			delete node1;
 		}
-
+		delete node0;
 	}
 
 	//exact and other, exact pakkken, vervolgens beste optie selecteren
-	std::reverse(possibilitiesExact.begin(), possibilitiesExact.end());
-	std::reverse(possibilitiesOther.begin(), possibilitiesExact.end());
-	for each (Node* nExact in possibilitiesExact)
-	{		
-		for each (Node* nOther in possibilitiesOther)
-		{
-			if (nExact->GetHeight() == nOther->GetHeight()) {
-				return nExact;
-			}
-			else {
-				if (nExact->GetLength() == nOther->GetLength()) {
-					return nExact;
-				}
-				//else not then other
-				else {
-					return nOther;
-				}				
-			}
-		}
-	}
 
+	std::vector<Node> bothVector;
+    std::vector<Node> heightVector;
+    std::vector<Node> lengthVector;
+
+    if(!possibilitiesExact.size()) {
+        for (Node nExact : possibilitiesExact) {
+
+            if (nExact.GetHeight() == height && nExact.GetLength() == length) {
+                // beide gelijk
+                bothVector.push_back(nExact);
+            }else if(nExact.GetHeight() == height){
+                heightVector.push_back(nExact);
+            }else if(nExact.GetLength() == length){
+                lengthVector.push_back(nExact);
+            }
+        }
+
+    }else if(!possibilitiesOther.size()){
+        for (Node nOther : possibilitiesOther)
+        {
+
+        }
+        for (Node nOther : possibilitiesOther)
+        {
+
+        }
+        for (Node nOther : possibilitiesOther)
+        {
+
+        }
+    }
+/*    for (Node* nOther : possibilitiesOther)
+    {
+        if (nExact->GetHeight() == nOther->GetHeight()) {
+            return nExact;
+        }
+        else {
+            if (nExact->GetLength() == nOther->GetLength()) {
+                return nExact;
+            }
+                //else not then other
+            else {
+                return nOther;
+            }
+        }
+    }*/
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
 	//exat gelijk, dan die heeft die voorrang

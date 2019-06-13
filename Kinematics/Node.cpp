@@ -10,9 +10,6 @@ Node::Node(int _angle, const Servo& _servo, Node* _last) : ServoArm(_servo), Las
 Node::Node(int _angle, const Servo& _servo) : ServoArm(_servo), Last(nullptr) {
     Angle = _angle;
 }
-Node::~Node() {
-    delete Last;
-}
 double Node::GetLength() {
     double length = cos(Angle) * ServoArm.Length;
     if(Last == nullptr){
