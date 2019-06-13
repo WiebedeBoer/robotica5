@@ -147,8 +147,7 @@ def detectCollision(line, detectionLines, img):
 						left = True
 					elif(direction == 1):
 						right = True
-		direction += 1
-
+			direction += 1
 	return [left, right]
 
 

@@ -78,7 +78,7 @@ def debug(arg):
 		try:
 			while True:
 				_, frame = cap.read()
-				print(mainSwitcher(frame, 3, 2, 0))
+				print(mainSwitcher(frame, 0, 0, 0))
 				cv2.imshow('frame', frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
