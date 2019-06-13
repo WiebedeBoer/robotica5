@@ -17,7 +17,7 @@ void setup()
   Serial1.begin(9600);
 
   b0.attachPush(b0PushCallback, &b0);
-  b0.attachPop(b0PopCallback, &b0);
+  //b0.attachPop(b0PopCallback, &b0);
 }
 
 bool answer = false;
@@ -25,14 +25,14 @@ bool answer = false;
 void loop()
 {
 
-  if(digitalRead(0) != 1) {
-    Serial.println(digitalRead(0));
-    Serial.println("Got something");
-  }
+//  if(digitalRead(0) != 1) {
+//    Serial.println(digitalRead(0));
+//    Serial.println("Got something");
+//  }
 
-  if (answer) { 
-    Serial.println("boeee"); 
-  }
+//  if (answer) { 
+//    Serial.println("boeee"); 
+//  }
     
   nexLoop(listen_list);
 }
