@@ -25,20 +25,15 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 						possibilitiesOther.push_back(node2);
 					}
 				}
-				else {
-					delete node2;
-				}
 			}
 		}
 
 	}
 
 	//exact and other, exact pakkken, vervolgens beste optie selecteren
-	std::reverse(possibilitiesExact.begin(), possibilitiesExact.end());
-	std::reverse(possibilitiesOther.begin(), possibilitiesExact.end());
-	for each (Node* nExact in possibilitiesExact)
+	for (Node* nExact : possibilitiesExact)
 	{		
-		for each (Node* nOther in possibilitiesOther)
+		for (Node* nOther : possibilitiesOther)
 		{
 			if (nExact->GetHeight() == nOther->GetHeight()) {
 				return nExact;
@@ -47,13 +42,14 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 				if (nExact->GetLength() == nOther->GetLength()) {
 					return nExact;
 				}
-				//else not then other
 				else {
 					return nOther;
 				}				
 			}
 		}
 	}
+
+	return nullptr;
 
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
@@ -64,8 +60,6 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	//verticale 1 2 3	
 	//servo 2, 3, 4 correct verticaal
 
-
-	return nullptr; 
 	//exact and other, exact pakkken, vervolgens beste optie selecteren
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
