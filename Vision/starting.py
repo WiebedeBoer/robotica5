@@ -5,6 +5,8 @@ import cv2
 
 try:
 	from camera_pi import Camera_pi
+	from picamera.array import PiRGBArray
+	from picamera import PiCamera
 except:
 	from camera_opencv import Camera_opencv
 
