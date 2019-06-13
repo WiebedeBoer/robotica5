@@ -9,7 +9,7 @@ class CommandExecutor
 public:
 	CommandExecutor(bool *r, GuardedQueue<Command>* gq);
 	~CommandExecutor();
-	void Execute();
+	void Execute();//executes commands in queue
 
 private:
 	bool QueueIsEmpty();

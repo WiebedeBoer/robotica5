@@ -8,6 +8,7 @@
     <ClCompile Include="Intelligence.cpp" />
     <ClCompile Include="MicroController.cpp" />
     <ClCompile Include="Vision.cpp" />
+    <ClCompile Include="TextToSpeach.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
@@ -17,5 +18,6 @@
     <ClInclude Include="Intelligence.h" />
     <ClInclude Include="MicroController.h" />
     <ClInclude Include="Vision.h" />
+    <ClInclude Include="TextToSpeach.h" />
   </ItemGroup>
 </Project>
