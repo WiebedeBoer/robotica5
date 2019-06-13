@@ -75,8 +75,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveForward") {
-		std::string cmd = "motor?,1;" + args[0] + "&2;" + args[0] + "";
-		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&1;" + args[0] + "");
 		return;
 	}
 	if (Command::type == "DriveBackward") {
@@ -93,27 +92,28 @@ void Command::Execute() {
 
 
 	if (Command::type == "RefreshVision") {
+
 		switch (Command::Database->modus)
 		{
-		case 0:
-			Command::Database->kwalificatie.vision = Command::VisionSlave->executeCommand("1:0:0");
-			std::cout << "BlueBeam: " << Command::Database->kwalificatie.vision << std::endl;
+		case modus::Modus::BlueBeam:
+			Command::Database->kwalificatie.bluebeam = Command::VisionSlave->executeCommand("1:0:0");
+			std::cout << "BlueBeam: " << Command::Database->kwalificatie.bluebeam << std::endl;
 			break;
-		case 1:
+		case modus::Modus::grindpad:
 			break;
-		case 2:
+		case modus::Modus::poortje:
 			break;
-		case 3:
-			Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
-			std::cout << "EggDistance: " << Command::Database->wedstrijd.eggDistance << std::endl;
-			break;
-		case 4:
-			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
-			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
-			break;
-		case 5:
+		case modus::Modus::eggtelligence:
+			Command::Database->kwalificatie.eggLocation = Command::VisionSlave->executeCommand("3:0:0");
+			std::cout << "EggDistance: " << Command::Database->kwalificatie.eggLocation << std::endl;	
 			Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
 			std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
+			Command::Database->wedstrijd.findChickin = Command::VisionSlave->executeCommand("3:2:0");
+			std::cout << "FindChicken: " << Command::Database->wedstrijd.findChickin << std::endl;
+			break;
+		case modus::Modus::chickenSurvivalRun:
+			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
+			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
 			break;
 		default:
 			break;
