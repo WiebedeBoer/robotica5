@@ -70,22 +70,31 @@ def debug(arg):
 	if(arg == "-p"):
 		camera = PiCamera()
 		camera.resolution = (640, 480)
-		camera.framerate = 30
+		camera.framerate = 32
 		rawCapture = PiRGBArray(camera, size=(640, 480))
 
 		time.sleep(0.1)
 
 		for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-			rawCapture.truncate()
-			rawCapture.seek(0)
-			img = frame.array
-			print(mainSwitcher(img, 0, 0, 0))
-
-			if cv2.waitKey(1) & 0xFF == ord('q'):
+			image = frame.array
+			# print(mainSwitcher(image, 0, 0, 0))
+			cv2.imshow('frame', image)
+			rawCapture.truncate(0)
+			key = cv2.waitKey(1) & 0xFF
+			# if the `q` key was pressed, break from the loop
+			if key == ord("q"):
 				break
-		camera.close()
 
-		
+
+
+		#
+		# while True:
+		# 	frame = Camera_pi.getInstance()
+		# 	print(mainSwitcher(frame, 0, 0, 0))
+		# 	#cv2.imshow('Camera', frame)
+		# 	#if cv2.waitKey(1) & 0xFF == ord('q'):
+		# 	#	break
+		# #cv2.destroyAllWindows()
 
 	if(arg == "-o"):
 		cap = Camera_opencv.getInstance()

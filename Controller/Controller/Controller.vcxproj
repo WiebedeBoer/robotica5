@@ -84,6 +84,7 @@
     <ClCompile Include="DataCollector.cpp" />
     <ClCompile Include="Intelligence.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextToSpeach.cpp" />
     <ClCompile Include="Vision.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,7 @@
     <ClInclude Include="DataCollector.h" />
     <ClInclude Include="GuardedQueue.h" />
     <ClInclude Include="Intelligence.h" />
+    <ClInclude Include="TextToSpeach.h" />
     <ClInclude Include="Vision.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

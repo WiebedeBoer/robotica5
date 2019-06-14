@@ -18,33 +18,42 @@ Intelligence::~Intelligence()
 {
 }
 
-int RefreshInterfal = 2000000;
-int PrintInterfal = 50000000;
-int ArmInterfal = 4000000;
-int DriveInterfal = 4200000;
-int CheckVisionInterfall = 1000;
-int ExecuteVisionInterfall = 50;
-int GripperInterval = 5000;
+//intervals for when some functions need to happen
 
-std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
-std::chrono::system_clock::time_point PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
-std::chrono::system_clock::time_point MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
-std::chrono::system_clock::time_point DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
-std::chrono::system_clock::time_point RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterfall);
-std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterfall);
+int RefreshInterval = 2000000;
+int PrintInterval = 50000000;
+int ArmInterval = 4000000;
+int DriveInterval = 4200000;
+int CheckVisionInterval = 1000;
+int ExecuteVisionInterval = 50;
+int GripperInterval = 5000;
+int SpeakInterval = 30000;
+
+//corrisponding timers for the intervals
+std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
+std::chrono::system_clock::time_point PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
+std::chrono::system_clock::time_point MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterval);
+std::chrono::system_clock::time_point DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
+std::chrono::system_clock::time_point RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterval);
+std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterval);
+std::chrono::system_clock::time_point SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
+
+//modus switching value
 int i = 0;
 
 void Intelligence::Think()
 {
 	while (*running == true) {
-		//Intelligence::CheckAfstandbediening();
+		Intelligence::CheckAfstandbediening();
 		Intelligence::CheckVision();
 		Intelligence::ExecuteDrive();
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
+
+		//debug print joystick values
 		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
-			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterfal);
+			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
 		}
 	}
 }
@@ -55,7 +64,14 @@ void Intelligence::ExecuteChickinSurivalRun()
 
 }
 
-//egg vision qualification
+void Intelligence::ExecuteSpeak()
+{
+	if (std::chrono::system_clock::now() > SpeakTime) {
+		CommandQueue->push(Command(Worker, "speak_pitch", Database));
+		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
+	}
+}
+
 void Intelligence::ExecuteEgg() {
 	std::vector<std::string> args;
 	args.push_back("");
@@ -223,7 +239,7 @@ void Intelligence::ExecuteDrive()
 		}
 		joy2 = Tempjoy2;
 
-		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterfal);
+		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 	}
 }
 
@@ -232,7 +248,7 @@ void Intelligence::CheckVision()
 	if (std::chrono::system_clock::now() > RefreshVisionTime) {
 		Database->modus = modus::Modus::BlueBeam;//modus is bluebeam
 		VisionQueue->push(Command(VisionApi, "RefreshVision", Database));
-		RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterfall);
+		RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterval);
 	}
 }
 
@@ -242,7 +258,7 @@ void Intelligence::CheckAfstandbediening()
 		std::vector<std::string> args;
 		args.push_back(std::to_string(Database->speed));
 		CommandQueue->push(Command(Sensor, "refresh", Database, args));
-		refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterfal);
+		refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
 	}
 }
 
@@ -268,7 +284,7 @@ void Intelligence::ExecuteArm()
 		}
 		joy1 = Tempjoy1;
 
-		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterfal);
+		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterval);
 	}
 }
 void Intelligence::ExecuteVision()
@@ -302,7 +318,7 @@ void Intelligence::ExecuteVision()
 		default:
 			break;
 		}
-		ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterfall);
+		ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterval);
 
 	}
 }
