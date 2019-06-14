@@ -38,7 +38,7 @@ while True:
     allGood_matches = []
     best_matches = []
 
-    if firsttime is True:
+    if firsttime:
         h1, w1 = imgCamColor.shape[:2]
         h2, w2 = imgTrainColor.shape[:2]
         nWidth = w1 + w2
@@ -54,7 +54,7 @@ while True:
     allGood_matches = sorted(allGood_matches, key=lambda x: x.distance)
     best_matches = allGood_matches[:10]
 
-    if len(allGood_matches) > MIN_MATCH_COUNT or len(best_matches) is 9:
+    if len(allGood_matches) > MIN_MATCH_COUNT or len(best_matches) == 9:
         print("Enough matches are found - %d/%d" % (len(allGood_matches), MIN_MATCH_COUNT))
 
         src_pts = np.float32([kpCam[m.queryIdx].pt for m in best_matches]).reshape(-1, 1, 2)
