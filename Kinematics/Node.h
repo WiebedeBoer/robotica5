@@ -9,6 +9,7 @@
 #include "math.h"
 #include "Servo.h"
 
+// Node is the same as Segment
 class Node {
 public:
     Node(int _angle, const Servo& _servo, Node* _last);
