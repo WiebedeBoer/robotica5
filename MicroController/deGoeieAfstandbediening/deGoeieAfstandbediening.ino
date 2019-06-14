@@ -45,14 +45,7 @@ bool rx_Complete = false;       // Boolean is de transmission done
 bool ReadingCheckSum = false;   // Reading chechsum
 uint32_t robotSpeed = 90;       // Standaard Speed -- 90
 
-
-uint32_t IAngle = 0;
-uint32_t IPitch = 0;
-uint32_t IYaw = 0;
 uint32_t IDistance = 0;
-uint32_t IModus;
-int currentpage = 1;
-bool changedModus = false;
 
 String curMode = "start";  // Current Mode
 
@@ -102,11 +95,10 @@ void setup() {
 }
 
 void loop() {
+//  Serial.println("Start loop");
   nexLoop(nex_listen_list);   // Loop through list of Items
-  nextionSetJoy();            // Execute_AfstandBediening functie
+//  nextionSetJoy();            // Set joy values in Nextion
   updateJoy();                // update Joysticks functie aanroepen
-  Serial.println("Loop over");
-  delay(1000);
 }
 
 String getJoy() {
@@ -160,13 +152,12 @@ void serialEvent2(){
     String rx_Msg_Speed = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
 
-    // checksum(OriginalMessage) == SendSum.toInt()
-    if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
+    if(checksum(OriginalMessage) == SendSum.toInt()){ // Control checksum with sendsum, for error checking. It continues when no error is found
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
         //result = "modus?,<" + modus[i] + "?";
-        result = "modus?," + String(curMode) + ";" + getJoy() + "\n";
+        result = "info?," + String(curMode) + ";" + getJoy() + "\n";
         modus = String(modus.toInt()+1);
         //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
       }
@@ -196,29 +187,29 @@ int checksum(String Str){
 //        SET CALLBACK FUNCTIONS FOR BUTTONS OF MODE PAGE
 // _________________________________________________________________
 // Callback function btnPoortje
-void btnPoortjePopCallback(void *ptr) { curMode = "Poortje"; }
+void btnPoortjePopCallback(void *ptr) { curMode = "Poortje";Serial.println(curMode); }
 
 // Callback funtion btnChicken
-void btnChickenPopCallback(void *ptr) { curMode = "Chicken"; }
+void btnChickenPopCallback(void *ptr) { curMode = "Chicken";Serial.println(curMode); }
 
 // Callback function btnTrap
-void btnTrapPopCallback(void *ptr){ curMode = "Trap"; }
+void btnTrapPopCallback(void *ptr){ curMode = "Trap";Serial.println(curMode); }
 
 // Callback function btnGrind
-void btnGrindPopCallback(void *ptr){ curMode = "Grind"; }
+void btnGrindPopCallback(void *ptr){ curMode = "Grind"; Serial.println(curMode);}
 
 // Callback function btnBlue
-void btnBluePopCallback(void *ptr){ curMode = "Balkje"; }
+void btnBluePopCallback(void *ptr){ curMode = "Balkje"; Serial.println(curMode);}
 
 // Callback functie knop BRace
-void btnRacePopCallback(void *ptr){ curMode = "Race"; }
+void btnRacePopCallback(void *ptr){ curMode = "Race";Serial.println(curMode); }
 
 // Callback functie knop BFlag
-void btnFlagPopCallback(void *ptr){ curMode = "Flag"; }
+void btnFlagPopCallback(void *ptr){ curMode = "Flag"; Serial.println(curMode);}
 
 // Callback functie knop BDance Single Dance
-void btnDanceSiPopCallback(void *ptr){ curMode = "DanceSi"; }
+void btnDanceSiPopCallback(void *ptr){ curMode = "DanceSi";Serial.println(curMode); }
 
 // Callback functie knop BPoortje Line Dance
-void btnDanceLiPopCallback(void *ptr){ curMode = "DanceLi"; }
+void btnDanceLiPopCallback(void *ptr){ curMode = "DanceLi"; Serial.println(curMode);}
 // _________________________________________________________________
