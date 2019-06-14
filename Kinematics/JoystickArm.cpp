@@ -5,6 +5,7 @@
 
 #include "iostream"
 #include "JoystickArm.h"
+//#include "Node.h"
 
 Node* JoystickArm::GetPathsVertical(int length, int height) {
 	std::vector<Node> possibilitiesExact;
@@ -21,12 +22,12 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 				double node2Height = node2->GetHeight();
 				if (round(node2Length) == length && round(node2Height) == height) {
 					if (node2Length == length || node2Height == height) {
-					    Node n2 = *node2;
+						Node n2 = *node2;
 						possibilitiesExact.push_back(n2);
 					}
 					else {
-                        Node n2 = *node2;
-                        possibilitiesOther.push_back(n2);
+						Node n2 = *node2;
+						possibilitiesOther.push_back(n2);
 					}
 				}
 				delete node2;
@@ -63,8 +64,8 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 		{
 			if (closestHeight != nullptr)
 			{
-				int heightDistanceOther = abs(height - nOther.GetHeight);
-				int heightDistanceClosest = abs(height - closestHeight->GetHeight);
+				int heightDistanceOther = abs(height - nOther.GetHeight());
+				int heightDistanceClosest = abs(height - closestHeight->GetHeight());
 
 				if (heightDistanceOther < heightDistanceClosest)
 				{
@@ -76,8 +77,8 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 
 			if (closestLength != nullptr)
 			{
-				int lengthDistanceOther = abs(length - nOther.GetLength);
-				int lengthDistanceClosest = abs(length - closestHeight->GetLength);
+				int lengthDistanceOther = abs(length - nOther.GetLength());
+				int lengthDistanceClosest = abs(length - closestHeight->GetLength());
 
 				if (lengthDistanceOther < lengthDistanceClosest)
 				{
@@ -108,15 +109,21 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
         }
     }*/
 
+
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
-	//exat gelijk, dan die heeft die voorrang
+	//exact gelijk, dan die heeft die voorrang
 	//gewoon recursief, geen tree search
 	//wanneer node gereturned, dan angle beschikbaar .angle child . angle
 	//3 nodes, eerste last = servo 4, dan servo 3, servo 2, servo 1
 	//verticale 1 2 3	
 	//servo 2, 3, 4 correct verticaal
 
+	//verandering in angles beste move eruit
+	//possibilities niet toegevoegd, wel ergens toegevoegd
+
+
+	//return nullptr; 
 	//exact and other, exact pakkken, vervolgens beste optie selecteren
 	//eerst kijken naar de dingen bij de hoogte exact gelijk is, die van hoogte nemen
 	//hoogte prioriteit
@@ -128,6 +135,7 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	//servo 2, 3, 4 correct verticaal
 
 	//AngleToPin(angle, servo); //angle to pin for a particular servo
+
 }
 
 int JoystickArm::NodeToPin(Node node) {
@@ -138,11 +146,11 @@ int JoystickArm::NodeToPin(Node node) {
 
 	//n.AngleToPin(angle, servo); //angle to pin for a particular servo
 	//dlg.AngleToPin(nExact.angle0, VerticalServos); //angle to pin for a particular servo
-	Node n = node;
+	//Node n = node;
 
 	//dlg.AngleToPin(0, 1);
 	//int nodpin = dlg.AngleToPin(n.Angle, VerticalServos); //angle to pin for a particular servo
-	int nodpin = dlg.AngleToPin(n.Angle, node.ServoArm.Id); //angle to pin for a particular servo
+	int nodpin = dlg.AngleToPin(node.Angle, node.ServoArm.Id); //angle to pin for a particular servo
 
 	return nodpin;
 }
