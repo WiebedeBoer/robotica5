@@ -10,7 +10,9 @@ double Angles::Gonio(double TipX, double TipY) {
     D2 = LawOfCosines(Dist, Len1, Len2);
     A1 = D1 + D2;
 	A2 = LawOfCosines(Len1, Len2, Dist);
-    return A1, A2;
+	AnglePinOutput1 = AngleToPin(A1, 2);
+	AnglePinOutput2 = AngleToPin(A2, 3);
+    return AnglePinOutput1, AnglePinOutput2;
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {
