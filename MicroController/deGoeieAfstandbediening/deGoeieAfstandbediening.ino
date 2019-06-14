@@ -95,7 +95,6 @@ void setup() {
 }
 
 void loop() {
-//  Serial.println("Start loop");
   nexLoop(nex_listen_list);   // Loop through list of Items
   nextionSetJoy();            // Set joy values in Nextion
   updateJoy();                // update Joysticks functie aanroepen

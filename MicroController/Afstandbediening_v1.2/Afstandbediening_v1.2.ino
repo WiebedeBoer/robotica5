@@ -65,7 +65,6 @@ int joyLX, joyLY, joyRX, joyRY;
 // Intialize event items for nextion
 NexTouch *nex_listen_list[] = 
 {
-
   &btnPoortje,
   &btnChicken,
   &btnTrap,
@@ -75,12 +74,10 @@ NexTouch *nex_listen_list[] =
   &btnFlag,
   &btnDanceSingle,
   &btnDanceLine,
-
   &btnDuckstad,
   &btnEibergen,
   &btnEindhoven,
   &btnBarneveld,
-  
   &JoyL,
   &JoyR,
   NULL
@@ -168,6 +165,7 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 // _________________________________________________________________
 
 void loop() {
+  Serial.println("Start loop");
   Execute_AfstandBediening(); // Execute_AfstandBediening functie
   nexLoop(nex_listen_list);   // Loop through list of Items
   updateJoy();                // update Joysticks functie aanroepen
@@ -188,12 +186,12 @@ String Respond_AfstandBediening(){
 void Execute_AfstandBediening(){
     JoyLtext = String(joyLX/16) + "," + String(joyLY/16);
     JoyLtext.toCharArray(buffer, JoyLtext.length());
-    JoyL.setText(buffer);
+//    JoyL.setText(buffer);
     JoyRtext = String(joyRX/16) + "," + String(joyRY/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
-    JoyR.setText(buffer);
-    TCSpeed.setValue(robotspeed);
-    TDistance.setValue(IDistance);
+//    JoyR.setText(buffer);
+//    TCSpeed.setValue(robotspeed);
+//    TDistance.setValue(IDistance);
 }
 
 // Update joystick values
