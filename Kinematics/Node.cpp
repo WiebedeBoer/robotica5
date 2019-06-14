@@ -33,10 +33,8 @@ double Node::GetHeight() {
 	}
 }
 int Node::AngleChanges() {
-	double change = ServoArm.Angle - Angle;
-	if (change < 0) {
-		change = change * -1;
-	}
+	double change = abs(ServoArm.Angle - Angle);
+
 	if (Last == nullptr) {
 		return change;
 	}

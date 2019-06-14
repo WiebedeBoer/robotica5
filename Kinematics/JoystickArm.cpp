@@ -10,6 +10,7 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	std::vector<Node> possibilitiesExact;
 	std::vector<Node> possibilitiesOther;
 
+	// Get all available rotations
 	for (int angle0 = VerticalServos[0].MinRotation; angle0 < VerticalServos[0].MaxRotation; angle0++) {
 		Node *node0 = new Node(angle0, VerticalServos[0]);
 		for (int angle1 = VerticalServos[1].MinRotation; angle1 < VerticalServos[1].MaxRotation + 30; angle1++) {
@@ -39,7 +40,10 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	std::vector<Node> bothVector;
     std::vector<Node> heightVector;
     std::vector<Node> lengthVector;
+	Node *closestHeight = nullptr;
+	Node *closestLength = nullptr;
 
+	// filter values
     if(!possibilitiesExact.size()) {
         for (Node nExact : possibilitiesExact) {
 
@@ -54,20 +58,41 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
         }
 
     }else if(!possibilitiesOther.size()){
-        for (Node nOther : possibilitiesOther)
-        {
 
-        }
         for (Node nOther : possibilitiesOther)
-        {
+		{
+			if (closestHeight != nullptr)
+			{
+				int heightDistanceOther = abs(height - nOther.GetHeight);
+				int heightDistanceClosest = abs(height - closestHeight->GetHeight);
 
-        }
-        for (Node nOther : possibilitiesOther)
-        {
+				if (heightDistanceOther < heightDistanceClosest)
+				{
+					closestHeight = &nOther;
+				}
+			}
+			else
+				closestHeight = &nOther;
 
+			if (closestLength != nullptr)
+			{
+				int lengthDistanceOther = abs(length - nOther.GetLength);
+				int lengthDistanceClosest = abs(length - closestHeight->GetLength);
+
+				if (lengthDistanceOther < lengthDistanceClosest)
+				{
+					closestLength = &nOther;
+				}
+			}
+			else
+				closestHeight = &nOther;
         }
     }
-/*    for (Node* nOther : possibilitiesOther)
+	else
+	{
+		std::cout << "something went wrong." << std::endl;
+	}
+	/*for (Node* nOther : possibilitiesOther)
     {
         if (nExact->GetHeight() == nOther->GetHeight()) {
             return nExact;
