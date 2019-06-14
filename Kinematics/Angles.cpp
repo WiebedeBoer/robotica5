@@ -4,7 +4,7 @@
 
 #include "Angles.h"
 
-double Angles::Gonio() {
+double Angles::Gonio(double TipX, double TipY) {
     Dist = Distance(TipX, TipY);
     D1 = tan(TipX / TipY);
     D2 = LawOfCosines(Dist, Len1, Len2);

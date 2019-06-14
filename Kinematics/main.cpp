@@ -1,13 +1,19 @@
 #include <iostream>
-#include "Node.h"
-#include "JoystickArm.h"
-
+//#include "Node.h"
+#include "Angles.h"
+//#include "JoystickArm.h"
 int main() {
-	std::cout << "Hello, World!" << std::endl;
-	JoystickArm dlg; //instance of joystickarm
-	Node *n = dlg.GetPathsVertical(1, 2);
+    std::cout << "Hello, World!" << std::endl;
+	//JoystickArm dlg; //instance of joystickarm
+	//Node *n = dlg.GetPathsVertical(1, 2);
+	//Node n = JoystickArm::GetPathsVertical(1, 2);
 	//std::cout << n->GetHeight() << std::endl;
 	//std::cout << n->GetLength() << std::endl;
-	return 0;
-
+	double x = 5.0;
+	double y = 5.0;
+	//a1, a2 = angles(x, y);
+	Angles dlg;
+	double a, double b = dlg.Gonio(x, y);
+	std::cout << a << b << std::endl;
+    return 0;
 }

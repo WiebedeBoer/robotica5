@@ -8,7 +8,7 @@
 #include <math.h>
 class Angles {
 public:
-    double Gonio();
+    double Gonio(double TipX, double TipY);
     double LawOfCosines(double& _a, double& _b, double& _c);
     double Distance(double& _x, double& _y);
 	int AngleToPin(double Angle, int Servo);
