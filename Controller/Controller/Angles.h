@@ -22,6 +22,8 @@ private:
     double Dist; //distance between tip of segment 2 and root joint
     double TipX; //x coordinate of tip
     double TipY; //y coordinate of tip
+	int AnglePinOutput1;
+	int AnglePinOutput2;
 };
 
 
