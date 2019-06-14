@@ -8,7 +8,7 @@
 #include <math.h>
 class Angles {
 public:
-    double Gonio();
+    double Gonio(double TipX, double TipY);
     double LawOfCosines(double& _a, double& _b, double& _c);
     double Distance(double& _x, double& _y);
 	int AngleToPin(double Angle, int Servo);
@@ -22,6 +22,8 @@ private:
     double Dist; //distance between tip of segment 2 and root joint
     double TipX; //x coordinate of tip
     double TipY; //y coordinate of tip
+	int AnglePinOutput1;
+	int AnglePinOutput2;
 };
 
 
