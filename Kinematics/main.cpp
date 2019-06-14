@@ -13,7 +13,7 @@ int main() {
 	double y = 5.0;
 	//a1, a2 = angles(x, y);
 	Angles dlg;
-	double a, double b = dlg.Gonio(x, y);
-	std::cout << a << b << std::endl;
+	//double a, double b = dlg.Gonio(x, y);
+	std::cout << dlg.Gonio(x, y) << std::endl;
     return 0;
 }
