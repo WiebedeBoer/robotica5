@@ -4,7 +4,7 @@
 
 #include "Angles.h"
 
-double Angles::Gonio(double TipX, double TipY) {
+std::vector<int> Angles::Gonio(double TipX, double TipY) {
     Dist = Distance(TipX, TipY);
     D1 = tan(TipX / TipY);
     D2 = LawOfCosines(Dist, Len1, Len2);
@@ -12,7 +12,13 @@ double Angles::Gonio(double TipX, double TipY) {
 	A2 = LawOfCosines(Len1, Len2, Dist);
 	AnglePinOutput1 = AngleToPin(A1, 2);
 	AnglePinOutput2 = AngleToPin(A2, 3);
-	return AnglePinOutput1, AnglePinOutput2;
+
+	std::vector<int> AnglePinOut;
+	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput1);
+	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput2);
+	//return AnglePinOutput1, AnglePinOutput2;
+	return AnglePinOut;
+
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {

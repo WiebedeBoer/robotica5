@@ -1,5 +1,7 @@
 #include "Command.h"
 #include "Angles.h"
+#include <string>
+#include <stdio.h>
 
 Command::Command(Vision * v, std::string t, DataCollector* DC)
 {
@@ -73,11 +75,13 @@ void Command::Execute() {
 	}
 
 	if (Command::type == "KineArmForward") {
-		double Targetx = 5.0;
+		double Targetx = 5.0; //hardcoded target, must be from python vision
 		double Targety = 5.0;
 		Angles dlg;
-		dlg.Gonio(Targetx, Targety);
-		Command::slave->SerialSend("servoS?,1;100;50&5;0;100");//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		char buffer[100];
+		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+		sprintf(buffer, "servoS?,1;%d;50&5;0;%d", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
