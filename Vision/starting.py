@@ -4,12 +4,6 @@ import os
 import cv2
 import time
 
-try:
-	# from camera_pi import Camera_pi
-	from picamera.array import PiRGBArray
-	from picamera import PiCamera
-except:
-	from camera_opencv import Camera_opencv
 
 # os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
 os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
@@ -68,6 +62,9 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
+		# from camera_pi import Camera_pi
+		from picamera.array import PiRGBArray
+		from picamera import PiCamera
 		camera = PiCamera()
 		camera.resolution = (640, 480)
 		camera.framerate = 32
@@ -97,6 +94,7 @@ def debug(arg):
 		# #cv2.destroyAllWindows()
 
 	if(arg == "-o"):
+		from camera_opencv import Camera_opencv
 		cap = Camera_opencv.getInstance()
 		try:
 			while True:

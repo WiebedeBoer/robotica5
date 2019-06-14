@@ -1,4 +1,5 @@
 #include "Command.h"
+#include "Angles.h"
 
 Command::Command(Vision * v, std::string t, DataCollector* DC)
 {
@@ -67,6 +68,11 @@ void Command::Execute() {
 	}
 	if (Command::type == "ArmBackward") {
 		Command::slave->SerialSend("servoDS?,2;2;100&5;0");
+		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "KineArmForward") {
+		Command::slave->SerialSend("servoS?,1;100;50&5;0;100|10");
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
