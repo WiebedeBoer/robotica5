@@ -1,6 +1,6 @@
 //
 // Created by Wouter Nauta on 2019-06-11.
-//
+// altered by Wiebe de Boer
 
 #ifndef KINEMATICS_ANGLES_H
 #define KINEMATICS_ANGLES_H

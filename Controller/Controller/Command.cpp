@@ -1,4 +1,5 @@
 #include "Command.h"
+#include "Angles.h"
 
 Command::Command(Vision * v, std::string t, DataCollector* DC)
 {
