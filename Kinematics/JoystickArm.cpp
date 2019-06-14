@@ -93,6 +93,8 @@ Node* JoystickArm::GetPathsVertical(int length, int height) {
 	{
 		std::cout << "something went wrong." << std::endl;
 	}
+
+	return nullptr;
 	/*for (Node* nOther : possibilitiesOther)
     {
         if (nExact->GetHeight() == nOther->GetHeight()) {
