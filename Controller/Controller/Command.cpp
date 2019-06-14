@@ -71,6 +71,16 @@ void Command::Execute() {
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
+
+	if (Command::type == "KineArmForward") {
+		double Targetx = 5.0;
+		double Targety = 5.0;
+		Angles dlg;
+		dlg.Gonio(Targetx, Targety);
+		Command::slave->SerialSend("servoS?,1;100;50&5;0;100");//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
 	if (Command::type == "DriveStop") {
 		Command::slave->SerialSend("motor?,0;0&0;0");
 		return;
