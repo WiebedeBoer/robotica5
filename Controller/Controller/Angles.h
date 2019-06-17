@@ -1,19 +1,23 @@
-#pragma once
 //
 // Created by Wouter Nauta on 2019-06-11.
-// altered by Wiebe de Boer 2019-06-12
+// altered by Wiebe de Boer
 
 #ifndef KINEMATICS_ANGLES_H
 #define KINEMATICS_ANGLES_H
 
 #include <math.h>
+#include <vector>
+
 class Angles {
 public:
-	double Gonio(double TipX, double TipY);
+	std::vector<int> Gonio(double TipX, double TipY);
+	double Compensator(double compensate, double TipX, double A2);
 	double LawOfCosines(double& _a, double& _b, double& _c);
 	double Distance(double& _x, double& _y);
 	int AngleToPin(double Angle, int Servo);
 private:
+	std::vector<int> args;
+	double compensate;
 	double A1; //root joint
 	double A2; //counter clockwise joint
 	double Len1 = 150.0; //arm segment 1
@@ -25,6 +29,7 @@ private:
 	double TipY; //y coordinate of tip
 	int AnglePinOutput1;
 	int AnglePinOutput2;
+	int AnglePinOutput3;
 };
 
 

@@ -78,6 +78,7 @@
     <IncludePath>$(includePath);$(ISenseIncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="Angles.cpp" />
     <ClCompile Include="MicroController.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandExecutor.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="Vision.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Angles.h" />
     <ClInclude Include="MicroController.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandExecutor.h" />

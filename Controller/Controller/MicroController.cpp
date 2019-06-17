@@ -127,9 +127,9 @@ void MicroController::SerialSend(std::string input) {
 			std::cout << "An Error occured" << std::endl;
 		}
 
-	} while (!ackresponse(WaitForMessage(fd), sendstring) && NackCount != 5);
-	if (NackCount == 5) {
-		std::cout << "CommandDropped After 5 tries" << std::endl;
+	} while (!ackresponse(WaitForMessage(fd), sendstring) && NackCount != 2);
+	if (NackCount == 2) {
+		std::cout << "CommandDropped After 2 tries" << std::endl;
 	}
 	else {
 		//std::cout << "MessageSend" << std::endl;
