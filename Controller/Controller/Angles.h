@@ -20,8 +20,8 @@ private:
 	double compensate;
 	double A1; //root joint
 	double A2; //counter clockwise joint
-	double Len1; //arm segment 1
-	double Len2; //arm segment 2
+	double Len1 = 150.0; //arm segment 1
+	double Len2 = 196.0; //arm segment 2
 	double D1; //dividing angle A1 joint
 	double D2; //dividng angle A1 joint
 	double Dist; //distance between tip of segment 2 and root joint
