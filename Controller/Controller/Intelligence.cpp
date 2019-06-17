@@ -282,22 +282,29 @@ void Intelligence::ExecuteArm()
 			CommandQueue->push(Command(Worker, "ArmBackward", Database, args));
 		}
 		joy1 = Tempjoy1;
+		if (Database->updateGrab == true) {
+			if (Database->grab == true)
+				CommandQueue->push(Command(Worker, "GrabOn", Database, args));
 
+			if (Database->grab == false)
+				CommandQueue->push(Command(Worker, "GrabOff", Database, args));
+		}
 		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterval);
 	}
 }
 void Intelligence::ExecuteVision()
 {
 	if (std::chrono::system_clock::now() > ExecuteVisionTime) {
-		Intelligence::Database->modus = static_cast<modus::Modus>(i);
 
-		if (i > 6)
-		{
-			i = 0;
-		}
-		else {
-			i++;
-		}
+		/*
+				Intelligence::Database->modus = static_cast<modus::Modus>(i);
+				if (i > 6)
+				{
+					i = 0;
+				}
+				else {
+					i++;
+				}*/
 
 		switch (Intelligence::Database->modus)
 		{
