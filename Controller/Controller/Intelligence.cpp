@@ -20,15 +20,15 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 
-int RefreshInterval = 2000000;
-int PrintInterval = 50000000;
-int ArmInterval = 4000000;
-int DriveInterval = 4200000;
+int RefreshInterval = 50000;
+int PrintInterval = 510;
+int ArmInterval = 1000;
+int DriveInterval = 1000;
 int CheckVisionInterval = 1000;
 int ExecuteVisionInterval = 50;
 int GripperInterval = 5000;
 int SpeakInterval = 30000;
-
+int RepeateInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
 std::chrono::system_clock::time_point PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -37,6 +37,8 @@ std::chrono::system_clock::time_point DriveTime = std::chrono::system_clock::now
 std::chrono::system_clock::time_point RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterval);
 std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterval);
 std::chrono::system_clock::time_point SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
+std::chrono::system_clock::time_point RepeateTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeateInterval);
+std::chrono::system_clock::time_point UntilTime;
 
 //modus switching value
 int i = 0;
@@ -50,6 +52,7 @@ void Intelligence::Think()
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
 		Intelligence::ExecuteSpeak();		//debug print joystick values
+		Intelligence::RepeateUntil();
 		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -71,6 +74,23 @@ void Intelligence::ExecuteSpeak()
 	}
 }
 
+//can only repeate one command at a time. Run this to start repeating a command
+void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
+{
+	repeatedCommand = cmd;
+	UntilTime = until;
+	RepeateInterval = interval;
+	RepeateUntil();
+}
+//this repeates the selected command
+void Intelligence::RepeateUntil() {
+	if (std::chrono::system_clock::now() > RepeateTime) {
+		if (std::chrono::system_clock::now() < UntilTime) {
+			CommandQueue->push(repeatedCommand);
+			RepeateTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeateInterval);
+		}
+	}
+}
 void Intelligence::ExecuteEgg() {
 	std::vector<std::string> args;
 	args.push_back("");
@@ -101,17 +121,17 @@ void Intelligence::ExecuteEgg() {
 			if (distance >= 5 && distance < 210) {
 				//left
 				if (horizontal < -150) {
-					args[0] = "256";
+					args[0] = "64";
 					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
 				}
 				//right
 				else if (horizontal > 150) {
-					args[0] = "256";
+					args[0] = "64";
 					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
 				}
 				//forward
 				else {
-					args[0] = "256";
+					args[0] = "64";
 					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
 				}
 			}
@@ -157,17 +177,17 @@ void Intelligence::ExecuteBlueBeam() {
 			if (distance >= 5 && distance < 210) {
 				//left
 				if (horizontal < -150) {
-					args[0] = "256";
+					args[0] = "64";
 					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
 				}
 				//right
 				else if (horizontal > 150) {
-					args[0] = "256";
+					args[0] = "64";
 					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
 				}
 				//forward
 				else {
-					args[0] = "256";
+					args[0] = "64";
 					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
 				}
 			}
@@ -245,7 +265,6 @@ void Intelligence::ExecuteDrive()
 void Intelligence::CheckVision()
 {
 	if (std::chrono::system_clock::now() > RefreshVisionTime) {
-		Database->modus = modus::Modus::BlueBeam;//modus is bluebeam
 		VisionQueue->push(Command(VisionApi, "RefreshVision", Database));
 		RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterval);
 	}

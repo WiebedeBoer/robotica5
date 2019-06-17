@@ -43,7 +43,9 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 		else if (m[1] == "Grind")
 			modus = modus::grindpad;
 		else if (m[1] == "Balkje")
-			modus = modus::BlueBeam;
+			modus = modus::BlueBeam;	
+		else if (m[1] == "Start")
+			modus = modus::Controller;
 	}
 	catch (const std::exception &) {
 		std::cout << "joy stoi error" << std::endl;
