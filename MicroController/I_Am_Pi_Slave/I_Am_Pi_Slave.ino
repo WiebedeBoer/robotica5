@@ -23,14 +23,14 @@ int mic, soundL, soundM, soundH;
 #define speedRPin 13          // Sensor value speed right digital
 #define speedLPin 12          // Sensor value speed left digital
 int speedL, speedR;
-int maxMillis = 500;
+
 unsigned long startMillis = millis();
 int left = 0, right = 0, count = 0;
 
 unsigned long timer = 0;
 float timestep = 0.01;
 
-String modus = "0";
+String controller = "start;0;0;0;0";
 
 void setup() {
   Serial.begin(115200);
@@ -88,8 +88,8 @@ void serialEvent() {
     String rx_Msg_Value = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
     // checksum(rx_Msg) == SendSum.toInt()
-    if(true) { // Control checksum with sendsum, for error checking. It continues when no error is found.
-      String result = "\n";
+    if(checksum(rx_Msg) == SendSum.toInt()) { // Control checksum with sendsum, for error checking. It continues when no error is found.
+      String result = "NoAction?,| \n";
       
       if(rx_Msg == "info?|"){ // info?,|10
         result = respondInfo() + String(checksum(respondInfo())) + "\n";
@@ -139,9 +139,9 @@ void serialEvent1() {
     rx_Msg_x = rx_Msg_x.substring(0, commaIndex) + "|";
     
     // checksum(rx_Msg) == SendSum.toInt()
-    if(true) { // Control checksum with sendsum, for error checking. It continues when no error is found.
-      if(rx_Msg_x == "modus?|"){
-        modus = rx_Msg_Value_x;
+    if(checksum(rx_Msg) == SendSum.toInt()) { // Control checksum with sendsum, for error checking. It continues when no error is found.
+      if(rx_Msg_x == "info?|"){
+        controller = rx_Msg_Value_x;
       }
     }
     rx_Msg_x = ""; SendSum_x = "";
@@ -164,7 +164,7 @@ String getMicrophone() {
 // return String: distance, speed, microphone
 String respondInfo() { return "ack:info?<"+ getDistance() + ";" + getSpeed() + ";" + getMicrophone() + ">|"; }
 
-String respondRefresh() { return "ack:refresh?<"+ modus + ">|"; }
+String respondRefresh() { return "ack:refresh?<"+ controller + ">|"; }
 
 // Calculate checksum.
 int checksum(String Str){

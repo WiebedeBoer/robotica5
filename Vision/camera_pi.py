@@ -13,7 +13,7 @@ class Camera_pi:
         if Camera_pi.__instance == None:
             Camera_pi.__instance = PiCamera()
             Camera_pi.__instance.resolution = (Camera_pi.__width, Camera_pi.__height)
-            Camera_pi.__instance.framerate = 30
+            Camera_pi.__instance.framerate = 60
         return int(Camera_pi.__width), int(Camera_pi.__height)
 
 
@@ -23,7 +23,7 @@ class Camera_pi:
         if Camera_pi.__instance == None:
             Camera_pi.__instance = PiCamera()
             Camera_pi.__instance.resolution = (Camera_pi.__width, Camera_pi.__height)
-            Camera_pi.__instance.framerate = 30
+            Camera_pi.__instance.framerate = 60
 
         rawCapture = PiRGBArray(Camera_pi.__instance, size=(Camera_pi.__width, Camera_pi.__height))
         return Camera_pi.__instance, rawCapture

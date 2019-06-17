@@ -25,15 +25,21 @@ NexNumber NPitch        = NexNumber(3, 3, "NPitch");        // Number of Pitch
 
 // Mode Page
 //NexButton BPitch      = NexButton(4, 3, "BPitch");        // Pitch Button -- Same as SPitch       // NOT USED -- Button declared in Nextion
-NexButton btnPoortje     = NexButton(4, 4, "BPoortje");      // Poortje Button
-NexButton btnChicken      = NexButton(4, 5, "BChicken");      // Chickenrun Button
-NexButton btnTrap         = NexButton(4, 11, "BTrap");        // Trap Button 
-NexButton btnGrind        = NexButton(4, 6, "BGrind");        // Grind Button
-NexButton btnBlue        = NexButton(4, 7, "BBlauw");        // Balkje Button
-NexButton btnRace         = NexButton(4, 8, "BRace");         // Race Button
-NexButton btnFlag         = NexButton(4, 12, "BFlag");        // Flag Button
-NexButton btnDanceSingle  = NexButton(4, 9, "BDanceSingle");  // Single Dance Button
-NexButton btnDanceLine    = NexButton(4, 10, "BDanceLine");   // Line Dance Button
+NexButton btnPoortje    = NexButton(4, 4, "BPoortje");      // Poortje Button
+NexButton btnChicken    = NexButton(4, 5, "BChicken");      // Chickenrun Button
+NexButton btnTrap       = NexButton(4, 11, "BTrap");        // Trap Button 
+NexButton btnGrind      = NexButton(4, 6, "BGrind");        // Grind Button
+NexButton btnBlue       = NexButton(4, 7, "BBlauw");        // Balkje Button
+NexButton btnRace       = NexButton(4, 8, "BRace");         // Race Button
+NexButton btnFlag       = NexButton(4, 12, "BFlag");        // Flag Button
+NexButton btnDanceSingle= NexButton(4, 9, "BDanceSingle");  // Single Dance Button
+NexButton btnDanceLine  = NexButton(4, 10, "BDanceLine");   // Line Dance Button
+
+// QR Page
+NexButton btnDuckstad   = NexButton(9, 3, "BDuckstad");
+NexButton btnEindhoven  = NexButton(9, 6, "BEindhoven");
+NexButton btnEibergen   = NexButton(9, 4, "BEibergen");
+NexButton btnBarneveld  = NexButton(9, 7, "BBarneveld");
 
 // Sound Page
 NexButton SPitch        = NexButton(5, 3, "SPitch");        // Pitch Button -- Same as BPitch
@@ -46,25 +52,17 @@ bool rx_Complete = false;       // Boolean is de transmission done
 bool ReadingCheckSum = false;   // Reading chechsum
 uint32_t robotspeed = 90;       // Standaard Speed -- 90
 
-
-uint32_t IAngle = 0;
-uint32_t IPitch = 0;
-uint32_t IYaw = 0;
 uint32_t IDistance = 0;
-uint32_t IModus;
-int currentpage = 1;
-bool changedModus = false;
-
-String curMode = "start";  // Current Mode -- Begin Mode is Start
-
 String modus;
 
+String curMode = "start"; // Current Mode -- Begin Mode is Start
+String curQR = "start";   // Current QR -- Begin Mode is Start
+ 
 String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
 int joyLX, joyLY, joyRX, joyRY;
 
-
-// List Items Nextion
+// Intialize event items for nextion
 NexTouch *nex_listen_list[] = 
 {
   &btnPoortje,
@@ -76,21 +74,27 @@ NexTouch *nex_listen_list[] =
   &btnFlag,
   &btnDanceSingle,
   &btnDanceLine,
+  &btnDuckstad,
+  &btnEibergen,
+  &btnEindhoven,
+  &btnBarneveld,
   &JoyL,
   &JoyR,
   NULL
 };
 
 void setup() {
-  nexInit();
-  pinMode(13, OUTPUT);
-  Serial.begin(115200); //Start Serial
-  Serial1.begin(9600);
-  Serial2.begin(115200);
+  nexInit();              // Inialize (Connection Nextion)
+  pinMode(13, OUTPUT);    // Build in LED
+  Serial.begin(115200);   // Start Serial 
+  Serial1.begin(9600);    // Nextion Serial
+  Serial2.begin(115200);  // XBEE Serial
 
 
   // Button attachPops
   // If Button is pressed go to the function assigned 
+
+  // Mode page
   btnPoortje.attachPop(btnPoortjePopCallback, &btnPoortje);
   btnChicken.attachPop(btnChickenPopCallback, &btnChicken);
   btnTrap.attachPop(btnTrapPopCallback, &btnTrap);
@@ -100,11 +104,22 @@ void setup() {
   btnFlag.attachPop(btnFlagPopCallback, &btnFlag);
   btnDanceSingle.attachPop(btnDanceSiPopCallback, &btnDanceSingle);
   btnDanceLine.attachPop(btnDanceLiPopCallback,  &btnDanceLine);
+
+
+  // QR page
+  btnDuckstad.attachPop(btnDuckstadPopCallback, &btnDuckstad);
+  btnEindhoven.attachPop(btnEindhovenPopCallback, &btnEindhoven);
+  btnEibergen.attachPop(btnEibergenPopCallback, &btnEibergen);
+  btnBarneveld.attachPop(btnBarneveldPopCallback, &btnBarneveld);
+  
   //delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
 
 //        SET CALLBACK FUNCTIONS FOR BUTTONS OF MODE PAGE
 // _________________________________________________________________
+//                         BUTTONS MODE
+// _________________________________________________________________
+
 // Callback function btnPoortje
 void btnPoortjePopCallback(void *ptr) { curMode = "Poortje"; }
 
@@ -131,38 +146,56 @@ void btnDanceSiPopCallback(void *ptr){ curMode = "DanceSi"; }
 
 // Callback functie knop BPoortje Line Dance
 void btnDanceLiPopCallback(void *ptr){ curMode = "DanceLi"; }
+
+//                         BUTTONS QR
+// _________________________________________________________________
+
+// Callback functie knop Duckstad 
+void btnDuckstadPopCallback(void *ptr){ curQR = "Duckstad"; }   
+
+// Callback functie knop Eindhoven 
+void btnEindhovenPopCallback(void *ptr){ curQR = "Eindhoven"; }
+
+// Callback functie knop Eibergen 
+void btnEibergenPopCallback(void *ptr){ curQR = "Eibergen"; }
+
+// Callback functie knop Barneveld 
+void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
+
 // _________________________________________________________________
 
 void loop() {
+  Serial.println("Start loop");
   Execute_AfstandBediening(); // Execute_AfstandBediening functie
   nexLoop(nex_listen_list);   // Loop through list of Items
   updateJoy();                // update Joysticks functie aanroepen
   //delay(10);
 }
 
-
+// Return Joystick Values
 String getJoy() {
-  return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY);
+  return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY); 
 }
 
+// Refresh function - Send to PI
 String Respond_AfstandBediening(){
-    return  "ack:refresh?<"+JoyLtext +":"+ JoyRtext+">|" ;
+    return  "ack:refresh?<"+JoyLtext +":"+ JoyRtext+":"+ curMode +">|";
 }
 
+// Execute function
 void Execute_AfstandBediening(){
     JoyLtext = String(joyLX/16) + "," + String(joyLY/16);
     JoyLtext.toCharArray(buffer, JoyLtext.length());
-    JoyL.setText(buffer);
+//    JoyL.setText(buffer);
     JoyRtext = String(joyRX/16) + "," + String(joyRY/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
-    JoyR.setText(buffer);
-    TCSpeed.setValue(robotspeed);
-    TDistance.setValue(IDistance);
+//    JoyR.setText(buffer);
+//    TCSpeed.setValue(robotspeed);
+//    TDistance.setValue(IDistance);
 }
 
-// Set Joystick Buttons
+// Update joystick values
 void updateJoy() {
-  Serial.println(joyLX);
   joyLX = analogRead(joy1x);
   joyLY = analogRead(joy1y);
   joyRX = analogRead(joy2x);
@@ -173,8 +206,9 @@ void updateJoy() {
 
 //serialEventInterupt
 void serialEvent2(){
+  // Read serial
   while(Serial2.available() && rx_Complete == false){
-    rx_Byte = (char)Serial2.read();//Read next byte
+    rx_Byte = (char)Serial2.read();   //Read next byte
     if(ReadingCheckSum == false){//enter byte to message
       rx_Msg += rx_Byte;
     }
@@ -199,8 +233,8 @@ void serialEvent2(){
     String rx_Msg_Speed = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
 
-    // checksum(OriginalMessage) == SendSum.toInt()
-    if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
+    // Checksum check
+    if(checksum(OriginalMessage) == SendSum.toInt()){ // Control checksum with sendsum, for error checking. It continues when no error is found
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
@@ -223,6 +257,7 @@ void serialEvent2(){
   }
 }
 
+// Return checksum value
 int checksum(String Str){
   int sum = 0;
   for(unsigned int i = 0; i < Str.length();i++){

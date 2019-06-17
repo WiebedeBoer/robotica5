@@ -2,6 +2,7 @@
 
 String wheelL = "", wheelR = "";
 
+// Split motor input
 void motor(String input) {
   valuesSplit(input, "&", wheelL, wheelR);
 
@@ -16,6 +17,7 @@ void motor(String input) {
   moveWheelRight(di.toInt(), sp.toInt());
 }
 
+// Move left wheel
 void moveWheelLeft(int di, int speed) {
   if (di == 0) {
     drivingL = false;
@@ -41,6 +43,7 @@ void moveWheelLeft(int di, int speed) {
   potL->set(speed);
 }
 
+// Move right wheel
 void moveWheelRight(int di, int speed) {
   if (di == 0) {
     drivingR = false;

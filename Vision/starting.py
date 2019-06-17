@@ -2,13 +2,8 @@ import sys
 import socket
 import os
 import cv2
+import time
 
-try:
-	from camera_pi import Camera_pi
-	from picamera.array import PiRGBArray
-	from picamera import PiCamera
-except:
-	from camera_opencv import Camera_opencv
 
 # os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
 os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
@@ -67,17 +62,27 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
-		instance, rawCapture = Camera_pi.getInstance()
-		for frame in instance.capture_continuous(rawCapture, format="bgr", use_video_port=1):
-			oneFrame = frame.array
-			print(mainSwitcher(oneFrame, 0, 0, 0))
+		# from camera_pi import Camera_pi
+		from picamera.array import PiRGBArray
+		from picamera import PiCamera
+		camera = PiCamera()
+		camera.resolution = (640, 480)
+		camera.framerate = 32
+		rawCapture = PiRGBArray(camera, size=(640, 480))
+
+		time.sleep(0.1)
+
+		for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+			image = frame.array
+			# print(mainSwitcher(image, 0, 0, 0))
+			cv2.imshow('frame', image)
+			rawCapture.truncate(0)
 			key = cv2.waitKey(1) & 0xFF
 			# if the `q` key was pressed, break from the loop
 			if key == ord("q"):
 				break
 
-		rawCapture.truncate()
-		rawCapture.seek(0)
+
 
 		#
 		# while True:
@@ -89,6 +94,7 @@ def debug(arg):
 		# #cv2.destroyAllWindows()
 
 	if(arg == "-o"):
+		from camera_opencv import Camera_opencv
 		cap = Camera_opencv.getInstance()
 		try:
 			while True:

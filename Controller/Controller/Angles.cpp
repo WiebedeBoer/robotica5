@@ -4,21 +4,23 @@
 
 #include "Angles.h"
 
-double Angles::Gonio() {
-    Dist = Distance(TipX, TipY);
-    D1 = tan(TipX / TipY);
-    D2 = LawOfCosines(Dist, Len1, Len2);
-    A1 = D1 + D2;
+double Angles::Gonio(double TipX, double TipY) {
+	Dist = Distance(TipX, TipY);
+	D1 = tan(TipX / TipY);
+	D2 = LawOfCosines(Dist, Len1, Len2);
+	A1 = D1 + D2;
 	A2 = LawOfCosines(Len1, Len2, Dist);
-    return A1, A2;
+	AnglePinOutput1 = AngleToPin(A1, 2);
+	AnglePinOutput2 = AngleToPin(A2, 3);
+	return AnglePinOutput1, AnglePinOutput2;
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {
-    return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
+	return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
 }
 
 double Angles::Distance(double& _x, double& _y) {
-    return sqrt(_x * _x + _y * _y);
+	return sqrt(_x * _x + _y * _y);
 }
 
 //conversion from angle movement to pin output
