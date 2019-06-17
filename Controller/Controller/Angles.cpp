@@ -17,7 +17,7 @@ std::vector<int> Angles::Gonio(double TipX, double TipY) {
 	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput1);
 	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput2);
 
-	compensate = Compensator(90 - D2);
+	compensate = Compensator(90 - D2, TipX, A2);
 	AnglePinOutput3 = AngleToPin(compensate, 4);
 	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput3);
 	return AnglePinOut;
@@ -53,8 +53,12 @@ int Angles::AngleToPin(double Angle, int Servo) {
 	return PinOutput;
 }
 
-double Angles::Compensator(double compensating) {
-	int CompensatorOutput = compensating;
-	//int CompensatorOutput = asin(compensating / langstezijde);
-		return CompensatorOutput;
+double Angles::Compensator(double compensatingAlpha, double lTotal, double A2) {
+	//int CompensatorOutput = compensating;
+	//double CompensatorOutput = asin(compensating / Len1);
+
+	double lA = sin(compensatingAlpha) * Len1;
+	double lB = lTotal - lA;
+	double CompensatorOutput = tan(A2) * lB;
+	return CompensatorOutput;
 }
