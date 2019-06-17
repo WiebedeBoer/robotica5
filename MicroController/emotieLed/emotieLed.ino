@@ -38,10 +38,14 @@ void loop() {
 //  Wit(200);
   delay(500);
 //  Cyaan(200);
-    Blauw(10000);
+    Blauw(1000);
     closeEye2(250);
     delay(200); 
-    openEye2(250, color);
+    openEye2(250);
+    delay(200); 
+    closeEye(250);
+    delay(200); 
+    openEye(250);
   if(NUM_LEDS == 28){
      delay(400);  
   }
@@ -92,65 +96,68 @@ void setDefault(){
     }
 }
 void closeEye(int sleep){
+  leds[6] = CRGB(0,0,0);
+  leds[5] = CRGB(0,0,0);
+  FastLED.show();
+  delay(sleep);
+  
+  leds[7] = CRGB(0,0,0);
+  leds[12] = CRGB(0,0,0);
+  leds[11] = CRGB(0,0,0);
+  leds[4] = CRGB(0,0,0);
+  FastLED.show();
+  delay(sleep);
+
+  leds[8] = CRGB(0,0,0);
+  leds[9] = CRGB(0,0,0);
+  leds[13] = CRGB(0,0,0);
+  leds[10] = CRGB(0,0,0);
   leds[3] = CRGB(0,0,0);
   FastLED.show();
   delay(sleep);
 
-  leds[4] = CRGB(0,0,0);
+  leds[0] = CRGB(0,0,0);
   leds[2] = CRGB(0,0,0);
   FastLED.show();
   delay(sleep);
-  
-  leds[5] = CRGB(0,0,0);
-  leds[11] = CRGB(0,0,0);
-  leds[13] = CRGB(0,0,0);
-  leds[10] = CRGB(0,0,0);
+
+
   leds[1] = CRGB(0,0,0);
-  FastLED.show();
-  delay(sleep);
-
-  leds[12] = CRGB(0,0,0);
-  leds[9] = CRGB(0,0,0);
-  leds[6] = CRGB(0,0,0);
-  leds[0] = CRGB(0,0,0);
-  FastLED.show();
-  delay(sleep);
-
-  leds[7] = CRGB(0,0,0);
-  leds[8] = CRGB(0,0,0);
   FastLED.show();
   delay(sleep);
 }
 
 void openEye(int sleep){
-  leds[7] = color;
-  leds[8] = color;
-  FastLED.show();
-  delay(sleep);
-
-  leds[12] = color;
-  leds[9] = color;
-  leds[6] = color;
-  leds[0] = color;
-  FastLED.show();
-  delay(sleep);
-
-  leds[5] = color;
-  leds[11] = color;
-  leds[13] = color;
-  leds[10] = color;
   leds[1] = color;
   FastLED.show();
   delay(sleep);
 
-  leds[4] = color;
+  leds[0] = color;
   leds[2] = color;
   FastLED.show();
   delay(sleep);
 
+  leds[8] = color;
+  leds[9] = color;
+  leds[13] = color;
+  leds[10] = color;
   leds[3] = color;
   FastLED.show();
   delay(sleep);
+
+  leds[7] = color;
+  leds[12] = color;
+  leds[11] = color;
+  leds[4] = color;
+  FastLED.show();
+  delay(sleep);
+
+  leds[6] = color;
+  leds[5] = color;
+  FastLED.show();
+  delay(sleep);
+  
+
 }
 
 void closeCircle(int sleep){
@@ -218,7 +225,7 @@ void closeEye2(int sleep){
   delay(sleep);
 }
 
-void openEye2(int sleep, CRGB color){
+void openEye2(int sleep){
   leds[19] = color;
   leds[20] = color;
   FastLED.show();
