@@ -3,6 +3,10 @@
 #include <string>
 #include <stdio.h>
 
+Command::Command()
+{
+}
+
 Command::Command(Vision * v, std::string t, DataCollector* DC)
 {
 	Command::VisionSlave = v;
@@ -82,37 +86,61 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmForward") {
-		double Targetx = 5.0; //hardcoded target, must be from python vision
-		double Targety = 5.0;
+
+		Arm arms;
 		Angles dlg;
 		char buffer[100];
+		//offsetting
+		double Targetx = arms.Xpos;
+		Targetx = arms.Xpos + arms.xoffset;
+		double Targety = arms.Ypos;
+		Targety = arms.Ypos - arms.yoffset;
+
+		//first command to move arm
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-		sprintf(buffer, "servoS?,1;%d;50&5;0;%d", noutput[0], noutput[1]);
-		Command::slave->SerialSend(buffer);//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		//second command to keep height steady
+		sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
+		Command::slave->SerialSend(buffer);
 		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
-		double Targetx = 5.0; //hardcoded target, must be from python vision
-		double Targety = 5.0;
+
+		Arm arms;
 		Angles dlg;
 		char buffer[100];
+		//offsetting
+		double Targetx = arms.Xpos;
+		Targetx = arms.Xpos - arms.xoffset;
+		double Targety = arms.Ypos;
+		Targety = arms.Ypos + arms.yoffset;
+
+		//first command to move arm
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-		sprintf(buffer, "servoS?,2;%d;100&5;0;%d", noutput[0], noutput[1]);
+		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);
+		//second command to keep height steady
+		sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
 		Command::slave->SerialSend(buffer);
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
-
-	if (Command::type == "KineArmForward") {
-		double Targetx = 5.0; //hardcoded target, must be from python vision
-		double Targety = 5.0;
-		Angles dlg;
+	if (Command::type == "KineArmLeft") {
+		int OffsetLeft = 5; //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
-		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-		sprintf(buffer, "servoS?,1;%d;50&5;0;%d", noutput[0], noutput[1]);
-		Command::slave->SerialSend(buffer);//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
-		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetLeft);
+		Command::slave->SerialSend(buffer); //ID;POS;SPEED
+		std::cout << "The Arm is moving Left!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "KineArmRight") {
+		int OffsetRight = 540;  //hardcoded target, must be from python vision for autonomous
+		char buffer[100];
+		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetRight);
+		Command::slave->SerialSend(buffer); //ID;POS;SPEED
+		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "DriveStop") {
