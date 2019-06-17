@@ -22,12 +22,12 @@ Intelligence::~Intelligence()
 
 int RefreshInterval = 50000;
 int PrintInterval = 510;
-int ArmInterval = 1000;
-int DriveInterval = 1000;
+int ArmInterval = 100000;
+int DriveInterval = 1000000;
 int CheckVisionInterval = 1000;
 int ExecuteVisionInterval = 50;
-int GripperInterval = 5000;
-int SpeakInterval = 30000;
+int GripperInterval = 500000;
+int SpeakInterval = 300000;
 int RepeatInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
@@ -52,7 +52,7 @@ void Intelligence::Think()
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
 		Intelligence::ExecuteSpeak();		//debug print joystick values
-		Intelligence::RepeatUntil();
+		/*Intelligence::RepeatUntil();*/
 		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -75,22 +75,22 @@ void Intelligence::ExecuteSpeak()
 }
 
 //can only Repeat one command at a time. Run this to start repeating a command
-void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
-{
-	RepeatedCommand = cmd;
-	UntilTime = until;
-	RepeatInterval = interval;
-	RepeatUntil();
-}
+//void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
+//{
+//	RepeatedCommand = cmd;
+//	UntilTime = until;
+//	RepeatInterval = interval;
+//	RepeatUntil();
+//}
 //this Repeats the selected command
-void Intelligence::RepeatUntil() {
-	if (std::chrono::system_clock::now() > RepeatTime) {
-		if (std::chrono::system_clock::now() < UntilTime) {
-			CommandQueue->push(RepeatedCommand);
-			RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
-		}
-	}
-}
+//void Intelligence::RepeatUntil() {
+//	if (std::chrono::system_clock::now() > RepeatTime) {
+//		if (std::chrono::system_clock::now() < UntilTime) {
+//			CommandQueue->push(RepeatedCommand);
+//			RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
+//		}
+//	}
+//}
 void Intelligence::ExecuteEgg() {
 	std::vector<std::string> args;
 	args.push_back("");
@@ -168,7 +168,7 @@ void Intelligence::ExecuteBlueBeam() {
 				
 				// Write if new value
 				if(abs(Database->horizontalBlueBeam - 10) > abs(std::stof(out[1]))
-					&& abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
+					|| abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
 					Database->horizontalBlueBeam = std::stof(out[1]);
 			}
 		}
@@ -179,22 +179,15 @@ void Intelligence::ExecuteBlueBeam() {
 		if (Database->horizontalBlueBeam != std::numeric_limits<float>::max()) {
 			//if near and in sight, drive
 			if (distance >= 5 && distance < 210) {
-				//left
-
 				auto argsChange = [](std::string speed, std::vector<std::string> args) { args[0] = speed; return args; };
-
-				if (Database->horizontalBlueBeam < -20) {
-
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args) ));
-					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args) ));
-					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args) ));
-				}
-				//right
-				else if (Database->horizontalBlueBeam > 20) {
-					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args)));
-					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args)));
+				
+				//left
+				if (Database->horizontalBlueBeam < -50) 
 					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args)));
-				}
+			
+				//right
+				else if (Database->horizontalBlueBeam > 50) 
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args)));
 			}
 
 			//else if too near, full stop
