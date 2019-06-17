@@ -32,8 +32,6 @@ float timestep = 0.01;
 
 String controller = "start;0;0;0;0";
 
-unsigned int maxMillis = 500;
-
 void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
