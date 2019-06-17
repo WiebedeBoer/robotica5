@@ -37,9 +37,6 @@ def viewBeam(frame):
 		if len(approx) >= 4 and len(approx) <= 6 and area > 200:
 
 			# calculate distance
-			focalLength = calibration(w, 50, 2.4)
-			cv2.putText(frame,str(focalLength),(x,y), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),2)
-			print(focalLength)
 			distance = calculateDistance(w, 583, 2.4)
 			xyAxis = whichDirection(x + (w / 2), y + (h / 2))
 			return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))

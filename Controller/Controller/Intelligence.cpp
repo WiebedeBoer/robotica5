@@ -151,14 +151,9 @@ void Intelligence::ExecuteBlueBeam() {
 					&& abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
 					Database->horizontalBlueBeam = std::stof(out[1]);
 			}
-			else {
-				distance = 0;
-				std::cerr << out[0] << std::endl;
-				std::cout << "Bluebeam stoi error" << std::endl;
-			} 
 		}
-		catch (int e) {
-			std::cout << "stoi distance error occurred. Exception" << e << '\n';
+		catch (float e) {
+			std::cout << "Stof error occurred. Exception" << e << '\n';
 		}
 
 		if (Database->horizontalBlueBeam != std::numeric_limits<float>::max()) {
