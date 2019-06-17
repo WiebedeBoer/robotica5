@@ -88,9 +88,7 @@ void Command::Execute() {
 		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
 		Command::slave->SerialSend(buffer);//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		double compensated = 5.0;
-		int steadier = dlg.Compensator(compensated);
-		sprintf(buffer, "servoS?,6;0;50&4;0;%d", steadier);
+		sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
 		Command::slave->SerialSend(buffer);
 		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
@@ -104,10 +102,8 @@ void Command::Execute() {
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
 		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
 		Command::slave->SerialSend(buffer);
-		double compensated = 5.0;
 		//second command to keep height steady
-		int steadier = dlg.Compensator(compensated);
-		sprintf(buffer, "servoS?,6;0;50&4;0;%d", steadier);
+		sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
 		Command::slave->SerialSend(buffer);
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;

@@ -16,9 +16,11 @@ std::vector<int> Angles::Gonio(double TipX, double TipY) {
 	std::vector<int> AnglePinOut;
 	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput1);
 	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput2);
-	//return AnglePinOutput1, AnglePinOutput2;
-	return AnglePinOut;
 
+	compensate = Compensator(90 - D2);
+	AnglePinOutput3 = AngleToPin(compensate, 4);
+	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput3);
+	return AnglePinOut;
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {
@@ -51,7 +53,8 @@ int Angles::AngleToPin(double Angle, int Servo) {
 	return PinOutput;
 }
 
-int Angles::Compensator(double compensate) {
-	int CompensatorOutput = compensate;
+double Angles::Compensator(double compensating) {
+	int CompensatorOutput = compensating;
+	//int CompensatorOutput = asin(compensating / langstezijde);
 		return CompensatorOutput;
 }

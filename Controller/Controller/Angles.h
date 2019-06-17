@@ -11,7 +11,7 @@
 class Angles {
 public:
 	std::vector<int> Gonio(double TipX, double TipY);
-	int Compensator(double compensate);
+	double Compensator(double compensate);
 	double LawOfCosines(double& _a, double& _b, double& _c);
 	double Distance(double& _x, double& _y);
 	int AngleToPin(double Angle, int Servo);
@@ -29,6 +29,7 @@ private:
 	double TipY; //y coordinate of tip
 	int AnglePinOutput1;
 	int AnglePinOutput2;
+	int AnglePinOutput3;
 };
 
 
