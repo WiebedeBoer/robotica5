@@ -84,14 +84,14 @@ void Command::Execute() {
 	}
 	if (Command::type == "KineArmForward") {
 
-		Arm arms;
+		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		double Targetx = arms.Xpos;
-		Targetx = arms.Xpos + arms.xoffset;
-		double Targety = arms.Ypos;
-		Targety = arms.Ypos - arms.yoffset;
+		double Targetx = armsmoving.Xpos;
+		Targetx = armsmoving.Xpos + armsmoving.xoffset;
+		double Targety = armsmoving.Ypos;
+		Targety = armsmoving.Ypos - armsmoving.yoffset;
 
 		//first command to move arm
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
@@ -105,14 +105,14 @@ void Command::Execute() {
 	}
 	if (Command::type == "KineArmBackward") {
 
-		Arm arms;
+		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		double Targetx = arms.Xpos;
-		Targetx = arms.Xpos - arms.xoffset;
-		double Targety = arms.Ypos;
-		Targety = arms.Ypos + arms.yoffset;
+		double Targetx = armsmoving.Xpos;
+		Targetx = armsmoving.Xpos - armsmoving.xoffset;
+		double Targety = armsmoving.Ypos;
+		Targety = armsmoving.Ypos + armsmoving.yoffset;
 
 		//first command to move arm
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
