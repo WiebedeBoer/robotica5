@@ -8,6 +8,14 @@
 #include "TextToSpeach.h"
 #include "Angles.h"
 
+//arm datacollector
+struct Arm {
+	double xoffset = 2.0; //offset x
+	double yoffset = 2.0; //offset y
+	double Xpos = 30.0; //hardcoded target, must be from python vision for autonomous
+	double Ypos = 30.0; //hardcoded target, must be from python vision for autonomous
+};
+
 class Command
 {
 private:
