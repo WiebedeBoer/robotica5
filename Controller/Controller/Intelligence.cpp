@@ -164,15 +164,15 @@ void Intelligence::ExecuteBlueBeam() {
 
 				if (Database->horizontalBlueBeam < -20) {
 
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("300", args) ));
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args) ));
 					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args) ));
-					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("300", args) ));
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args) ));
 				}
 				//right
 				else if (Database->horizontalBlueBeam > 20) {
-					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("300", args)));
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args)));
 					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args)));
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("300", args)));
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args)));
 				}
 			}
 
