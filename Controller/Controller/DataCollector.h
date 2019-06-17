@@ -41,6 +41,7 @@ public:
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
 	int speed;
+	float horizontalBlueBeam = std::numeric_limits<float>::max();
 	Wedstrijd wedstrijd;
 	Kwalificatie kwalificatie;
 	enum Modus {BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence } modus;

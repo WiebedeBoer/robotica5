@@ -114,8 +114,8 @@ void Intelligence::CheckEgg() {
 void Intelligence::CheckBlueBeam() {
 	std::vector<std::string> args;
 	args.push_back("");
-	int bluedistance = 999; //distance
-	int horizontal = 0; //horizontal coordinate
+	int distance = 999; //distance
+	//int horizontal = 0; //horizontal coordinate
 	if (!Intelligence::Database->kwalificatie.vision.empty()) {
 		std::string s = Intelligence::Database->kwalificatie.vision;
 		std::vector<std::string> out;
@@ -127,11 +127,20 @@ void Intelligence::CheckBlueBeam() {
 
 		try {		
 			if (out[0] != "False") {
-				bluedistance = std::stoi(out[0]);
-				horizontal = std::stoi(out[1]);
+				distance = std::stoi(out[0]);
+				//horizontal = std::stoi(out[1]);
+
+				// Write if not initialized
+				if (Database->horizontalBlueBeam == std::numeric_limits<float>::max())
+					Database->horizontalBlueBeam = std::stof(out[1]);
+				
+				// Write if new value
+				if(abs(Database->horizontalBlueBeam - 10) > abs(std::stof(out[1]))
+					&& abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
+					Database->horizontalBlueBeam = std::stof(out[1]);
 			}
 			else {
-				bluedistance = 0;
+				distance = 0;
 				std::cout << "Bluebeam stoi error" << std::endl;
 			} 
 		}
@@ -140,27 +149,28 @@ void Intelligence::CheckBlueBeam() {
 		}
 		
 
-		if (bluedistance != 0 && bluedistance != NULL) {
+		if (Database->horizontalBlueBeam != std::numeric_limits<float>::max()) {
 			//if near and in sight, drive
-			if (bluedistance >= 5 && bluedistance < 210) {
+			if (distance >= 5 && distance < 210) {
 				//left
-				if (horizontal < -20) {
-					args[0] = "32";
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				auto argsChange = [](std::string speed, std::vector<std::string> args) { args[0] = speed; return args; };
+
+				if (Database->horizontalBlueBeam < -20) {
+
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("300", args) ));
+					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args) ));
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("300", args) ));
 				}
 				//right
-				else if (horizontal > 20) {
-					args[0] = "32";
-					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
-				}
-				//forward
-				else {
-					args[0] = "32";
-					CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+				else if (Database->horizontalBlueBeam > 20) {
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("300", args)));
+					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args)));
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("300", args)));
+					
 				}
 			}
 			//else if too near, full stop
-			else if (bluedistance < 5) {
+			else if (distance < 5) {
 				args[0] = "0";
 				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			}
@@ -232,7 +242,7 @@ void Intelligence::CheckVision()
 {
 
 if (std::chrono::system_clock::now() > RefreshVision) {
-		Database->modus = ;//modus is bluebeam
+		Database->modus = Database->BlueBeam;//modus is bluebeam
 		VisionQueue->push(Command(VisionApi, "RefreshVision", Database));
 
 		RefreshVision = std::chrono::system_clock::now() + std::chrono::milliseconds(VisionInterfall);
