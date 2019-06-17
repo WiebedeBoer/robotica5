@@ -141,7 +141,6 @@ void Intelligence::ExecuteBlueBeam() {
 		try {
 			if (out[0] != "False") {
 				distance = std::stoi(out[0]);
-				//horizontal = std::stoi(out[1]);
 
 				// Write if not initialized
 				if (Database->horizontalBlueBeam == std::numeric_limits<float>::max())
