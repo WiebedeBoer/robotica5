@@ -9,7 +9,7 @@
 #include "Angles.h"
 
 //arm datacollector
-struct Arm {
+struct ArmMove {
 	double xoffset = 2.0; //offset x
 	double yoffset = 2.0; //offset y
 	double Xpos = 30.0; //hardcoded target, must be from python vision for autonomous

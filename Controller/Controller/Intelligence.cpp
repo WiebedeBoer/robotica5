@@ -28,7 +28,7 @@ int CheckVisionInterval = 1000;
 int ExecuteVisionInterval = 50;
 int GripperInterval = 5000;
 int SpeakInterval = 30000;
-int RepeateInterval = 500;
+int RepeatInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
 std::chrono::system_clock::time_point PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -37,7 +37,7 @@ std::chrono::system_clock::time_point DriveTime = std::chrono::system_clock::now
 std::chrono::system_clock::time_point RefreshVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(CheckVisionInterval);
 std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterval);
 std::chrono::system_clock::time_point SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
-std::chrono::system_clock::time_point RepeateTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeateInterval);
+std::chrono::system_clock::time_point RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
 std::chrono::system_clock::time_point UntilTime;
 
 //modus switching value
@@ -52,7 +52,7 @@ void Intelligence::Think()
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
 		Intelligence::ExecuteSpeak();		//debug print joystick values
-		Intelligence::RepeateUntil();
+		Intelligence::RepeatUntil();
 		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -74,20 +74,20 @@ void Intelligence::ExecuteSpeak()
 	}
 }
 
-//can only repeate one command at a time. Run this to start repeating a command
+//can only Repeat one command at a time. Run this to start repeating a command
 void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
 {
-	repeatedCommand = cmd;
+	RepeatedCommand = cmd;
 	UntilTime = until;
-	RepeateInterval = interval;
-	RepeateUntil();
+	RepeatInterval = interval;
+	RepeatUntil();
 }
-//this repeates the selected command
-void Intelligence::RepeateUntil() {
-	if (std::chrono::system_clock::now() > RepeateTime) {
+//this Repeats the selected command
+void Intelligence::RepeatUntil() {
+	if (std::chrono::system_clock::now() > RepeatTime) {
 		if (std::chrono::system_clock::now() < UntilTime) {
-			CommandQueue->push(repeatedCommand);
-			RepeateTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeateInterval);
+			CommandQueue->push(RepeatedCommand);
+			RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
 		}
 	}
 }

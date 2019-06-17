@@ -2,15 +2,15 @@
 
 // Define joysticks location on pins. 
 #define joy1x A0  // Analog 0
-#define joy1y A1  // Analog 1 
+#define joy1y A1  // Analog 1
+#define joy1Dig 16 
 #define joy2x A3  // Analog 3
 #define joy2y A4  // Analog 4
-
+#define joy2Dig 19
 
 // Movement Page
 NexText JoyL            = NexText(1, 2, "JoyL");            // Joystick Left
 NexText JoyR            = NexText(1, 3, "JoyR");            // Joystick Right
-NexText curModus        = NexText(1, 3, "modus");           // Current Modus
 NexNumber TCSpeed       = NexNumber(1, 7, "TCSpeed");       // Numberbox for speed -- Next to slider
 NexProgressBar CSpeed   = NexProgressBar(1, 5, "CSpeed");   // Speedbar Current Speed
 NexSlider SSpeed        = NexSlider(1, 4, "SSPeed");        // Speedbar Slider
@@ -35,6 +35,7 @@ NexButton btnFlag       = NexButton(4, 12, "BFlag");        // Flag Button
 NexButton btnDanceSingle= NexButton(4, 9, "BDanceSingle");  // Single Dance Button
 NexButton btnDanceLine  = NexButton(4, 10, "BDanceLine");   // Line Dance Button
 NexButton btnLeeg       = NexButton(4, 14, "BLeeg");        // Geen Mode
+NexText curModus        = NexText(4, 15, "TCModus");        // Current Modus
 
 // QR Page
 NexButton btnDuckstad   = NexButton(9, 3, "BDuckstad");
@@ -51,10 +52,10 @@ String rx_Msg = "";             // Received message
 String SendSum;                 // Checksum from raspberry
 bool rx_Complete = false;       // Boolean is de transmission done
 bool ReadingCheckSum = false;   // Reading chechsum
-uint32_t robotspeed = 90;       // Standaard Speed -- 90
 
+uint32_t robotspeed = 90;       // Standaard Speed -- 90
 uint32_t IDistance = 0;
-String modus;
+bool eggTrig = false;
 
 String curMode = "Start"; // Current Mode -- Begin Mode is Start
 String curQR = "Start";   // Current QR -- Begin Mode is Start
@@ -62,6 +63,9 @@ String curQR = "Start";   // Current QR -- Begin Mode is Start
 String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
 int joyLX, joyLY, joyRX, joyRY;
+
+unsigned int updateInterval = 1000;
+unsigned long lastUpdateInterval = 0;
 
 // Intialize event items for nextion
 NexTouch *nex_listen_list[] = 
@@ -92,9 +96,11 @@ void setup() {
   Serial1.begin(9600);    // Nextion Serial
   Serial2.begin(115200);  // XBEE Serial
 
-
-  // Button attachPops
-  // If Button is pressed go to the function assigned 
+  // Joystick input
+  pinMode(joy1Dig, INPUT);
+  pinMode(joy2Dig, INPUT);
+  digitalWrite(joy1Dig, HIGH);
+  digitalWrite(joy2Dig, HIGH);
 
   // Mode page
   btnPoortje.attachPop(btnPoortjePopCallback, &btnPoortje);
@@ -171,31 +177,48 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 
 void loop() {
   nexLoop(nex_listen_list);   // Loop through list of Items
-//  Execute_AfstandBediening(); // Execute_AfstandBediening functie
   updateJoy();                // update Joysticks functie aanroepen
-  //delay(10);
-}
 
-// Return Joystick Values
-String getJoy() {
-  return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY); 
-}
-
-// Refresh function - Send to PI
-String Respond_AfstandBediening(){
-    return  "ack:refresh?<"+JoyLtext +":"+ JoyRtext+":"+ curMode +">|";
+  unsigned long currentMillis = millis(); // Current millis
+  
+  if (currentMillis - lastUpdateInterval >= updateInterval) { // Check wether interval passed
+    if (digitalRead(joy1Dig) == 0) {
+      eggTrig = true;
+    }
+    
+    lastUpdateInterval = currentMillis; // Set last check millis
+    updateNextion();
+  }
 }
 
 // Execute function
-void Execute_AfstandBediening(){
-    JoyLtext = String(joyLX/16) + "," + String(joyLY/16);
-    JoyLtext.toCharArray(buffer, JoyLtext.length());
-    JoyL.setText(buffer);
-    JoyRtext = String(joyRX/16) + "," + String(joyRY/16);
-    JoyRtext.toCharArray(buffer, JoyRtext.length());
-    JoyR.setText(buffer);
-    TCSpeed.setValue(robotspeed);
-    TDistance.setValue(IDistance);
+void updateNextion(){
+  // Update JoyL text on Nextion
+  Serial1.print("JoyL.txt=");
+  Serial1.print("\"");
+  Serial1.print(String(joyLX/16) + "," + String(joyLY/16));
+  Serial1.print("\"");
+  Serial1.write(0xff);
+  Serial1.write(0xff);
+  Serial1.write(0xff);
+
+  // Update JoyR text on Nextion
+  Serial1.print("JoyR.txt=");
+  Serial1.print("\"");
+  Serial1.print(String(joyRX/16) + "," + String(joyRY/16));
+  Serial1.print("\"");
+  Serial1.write(0xff);
+  Serial1.write(0xff);
+  Serial1.write(0xff);
+
+  // Update current mode on Nextion
+  Serial1.print("TCModus.txt=");
+  Serial1.print("\"");
+  Serial1.print(curMode);
+  Serial1.print("\"");
+  Serial1.write(0xff);
+  Serial1.write(0xff);
+  Serial1.write(0xff);
 }
 
 // Update joystick values
@@ -204,6 +227,11 @@ void updateJoy() {
   joyLY = analogRead(joy1y);
   joyRX = analogRead(joy2x);
   joyRY = analogRead(joy2y);
+}
+
+// Return Joystick Values
+String getJoy() {
+  return String(joyLX/16) + ";" + String(joyLY/16) + ";" + String(joyRX/16) + ";" + String(joyRY/16); 
 }
 
 //serialEventInterupt
@@ -240,7 +268,9 @@ void serialEvent2(){
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
-        result = "info?," + String(curMode) + ";" + getJoy() + ";False \n";
+        result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
+
+        if (eggTrig) { eggTrig = false; }
       }
       
       int resultLength = result.length() +1; // Convert string to char array
