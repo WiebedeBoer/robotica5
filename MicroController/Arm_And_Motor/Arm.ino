@@ -1,6 +1,8 @@
 /* Contains all functions and variables used regarding the robot arm */
 
 String servoA = "", servoB = "";
+String id, di, pos, sp;
+
 int maxPositions[5][2] = {{0,1023}, {35,680}, {65, 640}, {350, 950}, {0, 1023}};
 
 void checkPosition(int id, String &target) {
@@ -12,6 +14,7 @@ void checkPosition(int id, String &target) {
   }
 }
 
+// Move servo with id and position
 void moveServo(String input) {
   valuesSplit(input, "&", servoA, servoB);
 
@@ -34,6 +37,7 @@ void moveServo(String input) {
   id = ""; pos = "";
 }
 
+// Move servo with id, direction and speed
 void moveServoDS(String input) {
   valuesSplit(input, "&", servoA, servoB);
   
@@ -64,6 +68,7 @@ void moveServoDS(String input) {
   servoA = ""; servoB = "";
 }
 
+// Move servo with id, position and speed
 void moveServoS(String input) {
   valuesSplit(input, "&", servoA, servoB);
   
@@ -86,6 +91,7 @@ void moveServoS(String input) {
   servoA = ""; servoB = "";
 }
 
+// Return string with all servo positions
 String getAllPositions() {
   String response = "";
   for (int i = 1; i <= 5; i++) {
@@ -95,6 +101,7 @@ String getAllPositions() {
   return response;
 }
 
+// Functions to read servo values 
 int readTemp(int i) { return ax12a.readTemperature(i); }
 
 int readPos(int i) { return ax12a.readPosition(i); }

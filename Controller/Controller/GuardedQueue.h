@@ -5,6 +5,7 @@
 #include "MicroController.h"
 #include "Command.h"
 template<typename T>
+//special queue, works same as normal queue but thread safe
 class GuardedQueue
 {
 public:
@@ -25,6 +26,9 @@ public:
 		if (m_queque.size() == 0) {
 			MicroController* a = new MicroController("/dev/ttyACM0");
 			return Command(a, "Wait");
+		}
+		else if(m_queque.size() > 50) {
+			std::cout << "CommanndQueueToLarge!" << std::endl;
 		}
 		T result = m_queque.front();
 		m_queque.pop();

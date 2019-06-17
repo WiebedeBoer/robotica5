@@ -72,6 +72,36 @@ void Command::Execute() {
 		Command::slave->SerialSend("servoDS?,2;2;100&5;0");
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
+	}if (Command::type == "GrabOn") {
+		Command::slave->SerialSend("servoS?,5;100;50&;60;100");
+		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}if (Command::type == "GrabOff") {
+		Command::slave->SerialSend("servoS?,5;0;50&;60;100");
+		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "KineArmForward") {
+		double Targetx = 5.0; //hardcoded target, must be from python vision
+		double Targety = 5.0;
+		Angles dlg;
+		char buffer[100];
+		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+		sprintf(buffer, "servoS?,1;%d;50&5;0;%d", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "KineArmBackward") {
+		double Targetx = 5.0; //hardcoded target, must be from python vision
+		double Targety = 5.0;
+		Angles dlg;
+		char buffer[100];
+		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+		sprintf(buffer, "servoS?,2;%d;100&5;0;%d", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);
+		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
 	}
 
 	if (Command::type == "KineArmForward") {
@@ -90,8 +120,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveForward") {
-		std::string cmd = "motor?,1;" + args[0] + "&2;" + args[0] + "";
-		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&1;" + args[0] + "");
 		return;
 	}
 	if (Command::type == "DriveBackward") {
@@ -104,31 +133,45 @@ void Command::Execute() {
 	}if (Command::type == "DriveRight") {
 		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 		return;
+	}if (Command::type == "speak_normal") {
+		Command::tts.speak_normal(args[0]);
+		return;
+	}if (Command::type == "speak_happy") {
+		Command::tts.speak_happy(args[0]);
+		return;
+	}if (Command::type == "speak_angry") {
+		Command::tts.speak_angry(args[0]);
+		return;
+	}if (Command::type == "speak_pitch") {
+		Command::tts.give_pitch();
+		return;
 	}
 
 
+
 	if (Command::type == "RefreshVision") {
+
 		switch (Command::Database->modus)
 		{
-		case 0:
-			Command::Database->kwalificatie.vision = Command::VisionSlave->executeCommand("1:0:0");
-			std::cout << "BlueBeam: " << Command::Database->kwalificatie.vision << std::endl;
+		case modus::Modus::BlueBeam:
+			Command::Database->kwalificatie.bluebeam = Command::VisionSlave->executeCommand("1:0:0");
+			std::cout << "BlueBeam: " << Command::Database->kwalificatie.bluebeam << std::endl;
 			break;
-		case 1:
+		case modus::Modus::grindpad:
 			break;
-		case 2:
+		case modus::Modus::poortje:
 			break;
-		case 3:
-			Command::Database->wedstrijd.eggDistance = Command::VisionSlave->executeCommand("3:0:0");
-			std::cout << "EggDistance: " << Command::Database->wedstrijd.eggDistance << std::endl;
-			break;
-		case 4:
-			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
-			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
-			break;
-		case 5:
+		case modus::Modus::eggtelligence:
+			Command::Database->kwalificatie.eggLocation = Command::VisionSlave->executeCommand("3:0:0");
+			std::cout << "EggDistance: " << Command::Database->kwalificatie.eggLocation << std::endl;
 			Command::Database->wedstrijd.qrDistance = Command::VisionSlave->executeCommand("3:1:0");
 			std::cout << "qrdistance: " << Command::Database->wedstrijd.qrDistance << std::endl;
+			Command::Database->wedstrijd.findChickin = Command::VisionSlave->executeCommand("3:2:0");
+			std::cout << "FindChicken: " << Command::Database->wedstrijd.findChickin << std::endl;
+			break;
+		case modus::Modus::chickenSurvivalRun:
+			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
+			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
 			break;
 		default:
 			break;

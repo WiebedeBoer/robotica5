@@ -1,10 +1,10 @@
 #include "AX12A.h"
-#include <SPI.h>
+#include "SPI.h"
 #include "mcp4xxx.h"
-//#include "mcp4xxx.h"
 
 using namespace icecave::arduino;
 
+// Init motor library
 MCP4XXX* potL;
 MCP4XXX* potR;
 
@@ -17,7 +17,7 @@ MCP4XXX* potR;
 #define potRpin1 5
 #define potRpin2 6
 
-bool debug = false;
+bool debug = false; // Debug enables a lot of Serial prints
 
 unsigned long motorPreviousMillis = 0;
 
@@ -34,22 +34,17 @@ bool drivingL, drivingR;
 
 int ax12aPos[5] = {0,0,0,0,0};
 
-int Xinleft = A0; // X Input Pin left
-int Yinleft = A1; // Y Input Pin left
-int KEYinleft = 16; // Push Button left
-
-int Xinright = A3; // X Input Pin left
-int Yinright = A4; // Y Input Pin left
-int KEYinright = 19; // Push Button left
-
-String id, di, pos, sp;
+//String id, di, pos, sp;
 
 void setup()
 {
-  Serial.begin(115200);
+  Serial.begin(115200); // Servo's Serial
+  
+  // Init motor on pins
   potL = new MCP4XXX(10);
   potR = new MCP4XXX(9);
 
+  // Motor setup
   pinMode(potLpin1, OUTPUT);
   pinMode(potLpin2, OUTPUT);
   pinMode(potRpin1, OUTPUT);
@@ -61,9 +56,7 @@ void setup()
   potL->set(0);
   potR->set(0);
 
-  pinMode (KEYinleft, INPUT);
-  pinMode (KEYinright, INPUT);
-  
+  // Servo setup and start position
   ax12a.begin(BaudRate, DirectionPin, &Serial1);
   ax12a.move(1, 550);
   ax12a.move(2, 200);
@@ -74,16 +67,18 @@ void setup()
 
 void loop()
 {
-  
+  // Update servo positions
   for (int i = 0; i <= 4; i++) {
     ax12aPos[i] = readPos(i+1);
   }
 
-  unsigned long currentMillis = millis();
+  unsigned long currentMillis = millis(); // Current millis
   
-  if (currentMillis - motorPreviousMillis >= motorInterval) {
-    motorPreviousMillis = currentMillis;
-    if (drivingL || drivingR) {
+  if (currentMillis - motorPreviousMillis >= motorInterval) { // Check wether interval passed
+    motorPreviousMillis = currentMillis; // Set last check millis
+
+    // If driving, stop motor
+    if (drivingL || drivingR) { // Check Motor.ino for more details
       digitalWrite(potLpin1, LOW);
       digitalWrite(potLpin2, LOW);
       digitalWrite(potRpin1, LOW);
@@ -94,7 +89,7 @@ void loop()
       drivingR = false;
     }
 
-    if (debug) {
+    if (debug) { // Print servo values
       Serial.println("-----------------------------------------");
       for (int i = 1; i <= 5; i++) {
         Serial.print("Servo "); Serial.println(i);
@@ -110,9 +105,11 @@ void loop()
   }
 }
 
+// Triggers on Serial event
 void serialEvent() {
   if (!rx_Complete) {
-    while(Serial.available() && rx_Complete == false){
+    // Read serial content
+    while(Serial.available() && !rx_Complete) {
       rx_Byte = (char)Serial.read(); //Read next byte
       
       if(!ReadingCheckSum){ rx_Msg += rx_Byte; }  // Enter byte to message
@@ -185,7 +182,7 @@ void serialEvent() {
   }
 }
 
-//calculate checksum.
+// Calculate checksum.
 int checksum(String Str){
   int sum = 0;
   for(int i = 0; i < Str.length();i++){
@@ -194,7 +191,7 @@ int checksum(String Str){
   return sum;
 }
 
-/* Split input to output1 and output2 */
+// Split input to output1 and output2
 void valuesSplit(String input, String splitter, String &output1, String &output2) {
   output1 = "", output2 = "";
   

@@ -5,6 +5,8 @@
 #include <thread>
 #include <chrono>
 #include <utility>
+
+//this class get data based on time,  on that data it makes new commands to execute
 class Intelligence
 {
 public:
@@ -21,20 +23,19 @@ private:
 	MicroController* Sensor;
 	Vision* VisionApi;
 
-
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
-	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
-
+	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());	
 	
-	
-	void CheckDrive();
+	void ExecuteDrive();
 	void CheckVision();
+	void ExecuteVision();
 	void CheckAfstandbediening();
-	void CheckArm();
+	void ExecuteArm();
 	void SplitOn(std::string const &input, char sep, std::vector<std::string>& output);
-	//qualifiers
-	void CheckBlueBeam();
-	void CheckEgg();
-	void CheckGripper();
+	void ExecuteBlueBeam();
+	void ExecuteEgg();
+	void ExecuteChickinSurivalRun();
+	void ExecuteSpeak();
+
 };
 

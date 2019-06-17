@@ -22,11 +22,11 @@ std::vector<int> Angles::Gonio(double TipX, double TipY) {
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {
-    return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
+	return cos((_a * _a + _b * _b - _c * _c) / (2 * _a * _b));
 }
 
 double Angles::Distance(double& _x, double& _y) {
-    return sqrt(_x * _x + _y * _y);
+	return sqrt(_x * _x + _y * _y);
 }
 
 //conversion from angle movement to pin output

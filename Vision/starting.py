@@ -2,13 +2,9 @@ import sys
 import socket
 import os
 import cv2
+import time
 
-try:
-	from camera_pi import Camera_pi
-except:
-	from camera_opencv import Camera_opencv
 
-sok = None
 # os.chdir(os.path.realpath(__file__+ '\\..\\')) # If on windows use this
 os.chdir(os.path.realpath(__file__+ '//..//'))  # If on liunx use this
 
@@ -31,30 +27,26 @@ def splitter(msg):
 # Main switcher
 def mainSwitcher(frame, argument, argument1, argument2):
 	switcher = {
-		0: pitch,
+		0: tape,
 		1: vision,
 		2: chickenSurvivalRun,
-		3: eggtelligence,
-		4: GripperVision
+		3: eggtelligence
 	}
 
 	func = switcher.get(argument, "Nothing")
 	return func(frame, argument1, argument2)
 
 
-def pitch(frame, argument, argument1):
-	return "Hello"
+def tape(frame, argument, argument1):
+	sys.path.append('Imp_Functions/')
+	from tapetest import BlackTape
+	return BlackTape(frame, False if argument == 0 else True )
 
 
 def vision(frame, argument, argument1):
 	sys.path.append('Kwalificatie/Vision/')
 	from blueBeam import viewBeam
 	return viewBeam(frame)
-
-def GripperVision(argument, argument1, frame):
-	sys.path.append('Wedstrijd/Eggtelligence/')
-	from startEggDistance import startEggDistance
-	return startEggDistance(frame)
 
 def chickenSurvivalRun(frame, argument, argument1):
 	sys.path.append('Wedstrijd/ChickenSurvivalRun/')
@@ -70,20 +62,44 @@ def eggtelligence(frame, argument, argument1):
 
 def debug(arg):
 	if(arg == "-p"):
-		while True:
-			frame = Camera_pi.getInstance()
-			print(mainSwitcher(frame, 3, 1, 0))
-			cv2.imshow('Camera', frame)
-			if cv2.waitKey(1) & 0xFF == ord('q'):
+		# from camera_pi import Camera_pi
+		from picamera.array import PiRGBArray
+		from picamera import PiCamera
+		camera = PiCamera()
+		camera.resolution = (640, 480)
+		camera.framerate = 32
+		rawCapture = PiRGBArray(camera, size=(640, 480))
+
+		time.sleep(0.1)
+
+		for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+			image = frame.array
+			# print(mainSwitcher(image, 0, 0, 0))
+			cv2.imshow('frame', image)
+			rawCapture.truncate(0)
+			key = cv2.waitKey(1) & 0xFF
+			# if the `q` key was pressed, break from the loop
+			if key == ord("q"):
 				break
-		cv2.destroyAllWindows()
+
+
+
+		#
+		# while True:
+		# 	frame = Camera_pi.getInstance()
+		# 	print(mainSwitcher(frame, 0, 0, 0))
+		# 	#cv2.imshow('Camera', frame)
+		# 	#if cv2.waitKey(1) & 0xFF == ord('q'):
+		# 	#	break
+		# #cv2.destroyAllWindows()
 
 	if(arg == "-o"):
+		from camera_opencv import Camera_opencv
 		cap = Camera_opencv.getInstance()
 		try:
 			while True:
 				_, frame = cap.read()
-				print(mainSwitcher(frame, 3, 2, 0))
+				print(mainSwitcher(frame, 0, 0, 0))
 				cv2.imshow('frame', frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
@@ -93,6 +109,7 @@ def debug(arg):
 
 def release():
 	try:
+		global sok
 		sok = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sok.connect((socket.gethostname(), 1234))
 		while True:
