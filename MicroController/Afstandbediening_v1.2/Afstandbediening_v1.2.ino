@@ -34,6 +34,7 @@ NexButton btnRace       = NexButton(4, 8, "BRace");         // Race Button
 NexButton btnFlag       = NexButton(4, 12, "BFlag");        // Flag Button
 NexButton btnDanceSingle= NexButton(4, 9, "BDanceSingle");  // Single Dance Button
 NexButton btnDanceLine  = NexButton(4, 10, "BDanceLine");   // Line Dance Button
+NexButton btnLeeg       = NexButton(4, 14, "BLeeg");        // Geen Mode
 
 // QR Page
 NexButton btnDuckstad   = NexButton(9, 3, "BDuckstad");
@@ -55,8 +56,8 @@ uint32_t robotspeed = 90;       // Standaard Speed -- 90
 uint32_t IDistance = 0;
 String modus;
 
-String curMode = "start"; // Current Mode -- Begin Mode is Start
-String curQR = "start";   // Current QR -- Begin Mode is Start
+String curMode = "Start"; // Current Mode -- Begin Mode is Start
+String curQR = "Start";   // Current QR -- Begin Mode is Start
  
 String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
@@ -72,6 +73,7 @@ NexTouch *nex_listen_list[] =
   &btnBlue,
   &btnRace,
   &btnFlag,
+  &btnLeeg,
   &btnDanceSingle,
   &btnDanceLine,
   &btnDuckstad,
@@ -104,7 +106,7 @@ void setup() {
   btnFlag.attachPop(btnFlagPopCallback, &btnFlag);
   btnDanceSingle.attachPop(btnDanceSiPopCallback, &btnDanceSingle);
   btnDanceLine.attachPop(btnDanceLiPopCallback,  &btnDanceLine);
-
+  btnLeeg.attachPop(btnLeegPopCallback, &btnLeeg);
 
   // QR page
   btnDuckstad.attachPop(btnDuckstadPopCallback, &btnDuckstad);
@@ -112,7 +114,7 @@ void setup() {
   btnEibergen.attachPop(btnEibergenPopCallback, &btnEibergen);
   btnBarneveld.attachPop(btnBarneveldPopCallback, &btnBarneveld);
   
-  //delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
+  delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
 
 //        SET CALLBACK FUNCTIONS FOR BUTTONS OF MODE PAGE
@@ -124,28 +126,31 @@ void setup() {
 void btnPoortjePopCallback(void *ptr) { curMode = "Poortje"; }
 
 // Callback funtion btnChicken
-void btnChickenPopCallback(void *ptr) { curMode = "Chicken"; }
+void btnChickenPopCallback(void *ptr) { curMode = "Chicken";}
 
 // Callback function btnTrap
-void btnTrapPopCallback(void *ptr){ curMode = "Trap"; }
+void btnTrapPopCallback(void *ptr){ curMode = "Trap";}
 
 // Callback function btnGrind
-void btnGrindPopCallback(void *ptr){ curMode = "Grind"; }
+void btnGrindPopCallback(void *ptr){ curMode = "Grind";}
 
 // Callback function btnBlue
-void btnBluePopCallback(void *ptr){ curMode = "Balkje"; }
+void btnBluePopCallback(void *ptr){ curMode = "Balkje";}
 
 // Callback functie knop btnRace
-void btnRacePopCallback(void *ptr){ curMode = "Race"; }
+void btnRacePopCallback(void *ptr){ curMode = "Race";}
 
 // Callback functie knop btnFlag
-void btnFlagPopCallback(void *ptr){ curMode = "Flag"; }
+void btnFlagPopCallback(void *ptr){ curMode = "Flag";}
 
 // Callback functie knop BDance Single Dance
-void btnDanceSiPopCallback(void *ptr){ curMode = "DanceSi"; }
+void btnDanceSiPopCallback(void *ptr){ curMode = "DanceSi";}
 
 // Callback functie knop BPoortje Line Dance
-void btnDanceLiPopCallback(void *ptr){ curMode = "DanceLi"; }
+void btnDanceLiPopCallback(void *ptr){ curMode = "DanceLi";}
+
+// Callback functie knop BPoortje Line Dance
+void btnLeegPopCallback(void *ptr){ curMode = "Start";}
 
 //                         BUTTONS QR
 // _________________________________________________________________
@@ -165,9 +170,8 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 // _________________________________________________________________
 
 void loop() {
-  Serial.println("Start loop");
-  Execute_AfstandBediening(); // Execute_AfstandBediening functie
   nexLoop(nex_listen_list);   // Loop through list of Items
+//  Execute_AfstandBediening(); // Execute_AfstandBediening functie
   updateJoy();                // update Joysticks functie aanroepen
   //delay(10);
 }
@@ -186,12 +190,12 @@ String Respond_AfstandBediening(){
 void Execute_AfstandBediening(){
     JoyLtext = String(joyLX/16) + "," + String(joyLY/16);
     JoyLtext.toCharArray(buffer, JoyLtext.length());
-//    JoyL.setText(buffer);
+    JoyL.setText(buffer);
     JoyRtext = String(joyRX/16) + "," + String(joyRY/16);
     JoyRtext.toCharArray(buffer, JoyRtext.length());
-//    JoyR.setText(buffer);
-//    TCSpeed.setValue(robotspeed);
-//    TDistance.setValue(IDistance);
+    JoyR.setText(buffer);
+    TCSpeed.setValue(robotspeed);
+    TDistance.setValue(IDistance);
 }
 
 // Update joystick values
@@ -201,8 +205,6 @@ void updateJoy() {
   joyRX = analogRead(joy2x);
   joyRY = analogRead(joy2y);
 }
-
-// 
 
 //serialEventInterupt
 void serialEvent2(){
@@ -233,15 +235,12 @@ void serialEvent2(){
     String rx_Msg_Speed = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
 
-    // Checksum check
-    if(checksum(OriginalMessage) == SendSum.toInt()){ // Control checksum with sendsum, for error checking. It continues when no error is found
+    // Checksum check;
+    if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
-        //result = "modus?,<" + modus[i] + "?";
-        result = "modus?," + String(modus) + ";" + getJoy() + "\n";
-        modus = String(modus.toInt()+1);
-        //result = Respond_AfstandBediening() + String(checksum(result)) + "\n";
+        result = "info?," + String(curMode) + ";" + getJoy() + ";False \n";
       }
       
       int resultLength = result.length() +1; // Convert string to char array

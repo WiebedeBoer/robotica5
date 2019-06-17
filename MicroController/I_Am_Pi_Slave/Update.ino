@@ -1,3 +1,5 @@
+unsigned long maxMillis = 500;
+
 // Distance
 String updateDistance() { 
   distance = (6787.0 / (analogRead(IRPin) - 3.0)) - 4.0; 
