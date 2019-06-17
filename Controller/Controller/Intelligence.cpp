@@ -49,8 +49,7 @@ void Intelligence::Think()
 		Intelligence::ExecuteDrive();
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
-
-		//debug print joystick values
+		Intelligence::ExecuteSpeak();		//debug print joystick values
 		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -113,7 +112,7 @@ void Intelligence::ExecuteEgg() {
 				//forward
 				else {
 					args[0] = "256";
-					CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
 				}
 			}
 
@@ -169,7 +168,7 @@ void Intelligence::ExecuteBlueBeam() {
 				//forward
 				else {
 					args[0] = "256";
-					CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
 				}
 			}
 
