@@ -49,10 +49,12 @@ public:
 	Wedstrijd wedstrijd;
 	Kwalificatie kwalificatie;
 	Arm arm;
+	bool updateGrab = false;
+	bool grab = false;
+
 private:
 	std::pair<int, int> joy1;
 	std::pair<int, int> joy2;
-
 	int gyroscoop;
 };
 

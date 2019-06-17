@@ -16,8 +16,8 @@ GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();//queue for sh
 GuardedQueue<Command>* VisionQueue = new GuardedQueue<Command>();//queue for vision commands, vision is slow, so is this queue
 DataCollector* Datacollector = new DataCollector();//object to store all shared data
 
-MicroController* Worker = new MicroController("/dev/ttyACM0");//worker slave
-MicroController* Sensor = new MicroController("/dev/ttyACM1");//sensor slave
+MicroController* Worker = new MicroController("/dev/ttyACM1");//worker slave
+MicroController* Sensor = new MicroController("/dev/ttyACM0");//sensor slave
 
 Vision* VisionApi = new Vision();//vision socket connection
 

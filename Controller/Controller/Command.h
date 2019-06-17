@@ -6,6 +6,8 @@
 #include"DataCollector.h"
 #include "Vision.h"
 #include "TextToSpeach.h"
+#include "Angles.h"
+
 class Command
 {
 private:
