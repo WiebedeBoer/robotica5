@@ -79,7 +79,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmForward") {
-		Command::slave->SerialSend("servoS?,1;100;50&5;0;100");
+		Command::slave->SerialSend("servoS?,1;100;50&5;0;100|10");
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
