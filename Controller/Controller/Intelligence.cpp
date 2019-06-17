@@ -153,6 +153,7 @@ void Intelligence::ExecuteBlueBeam() {
 			}
 			else {
 				distance = 0;
+				std::cerr << out[0] << std::endl;
 				std::cout << "Bluebeam stoi error" << std::endl;
 			} 
 		}
