@@ -7,11 +7,13 @@
 #include "Angles.h"
 const double pi = atan(1) * 4;
 std::vector<int> Angles::Gonio(double TipX, double TipY) {
+
 	Dist = Distance(TipX, TipY);
 	D1 = atan(TipY / TipX) * 180 / pi;
 	D2 = LawOfCosines(Dist, Len1, Len2) * 180 / pi;
 	A1 = D1 + D2;
 	A2 = LawOfCosines(Len1, Len2, Dist) * 180 / pi;
+
 	AnglePinOutput1 = AngleToPin(A1, 2);
 	AnglePinOutput2 = AngleToPin(A2, 3);
 

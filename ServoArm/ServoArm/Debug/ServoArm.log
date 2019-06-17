@@ -1,0 +1,87 @@
+﻿  JoystickArm.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(951): error C2528: 'pointer': pointer to reference is illegal
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(903): note: see reference to class template instantiation 'std::allocator<_Ty>' being compiled
+          with
+          [
+              _Ty=Node &
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(360): note: see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<Node &>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(360): note: see reference to alias template instantiation 'std::_Rebind_alloc_t<std::allocator<_Ty>,_Ty>' being compiled
+          with
+          [
+              _Ty=Node &
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(405): note: see reference to class template instantiation 'std::_Vec_base_types<_Ty,_Alloc>' being compiled
+          with
+          [
+              _Ty=Node &,
+              _Alloc=std::allocator<Node &>
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(626): note: see reference to class template instantiation 'std::_Vector_alloc<std::_Vec_base_types<_Ty,_Alloc>>' being compiled
+          with
+          [
+              _Ty=Node &,
+              _Alloc=std::allocator<Node &>
+          ]
+  c:\users\wiebe\source\repos\servoarm\servoarm\joystickarm.cpp(9): note: see reference to class template instantiation 'std::vector<Node &,std::allocator<_Ty>>' being compiled
+          with
+          [
+              _Ty=Node &
+          ]
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(952): error C2528: 'const_pointer': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(970): error C2528: 'address': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(975): error C2528: 'address': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(989): error C2528: '_Ptr': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(996): error C2528: 'allocate': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(1002): error C2528: 'allocate': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(840): error C2528: 'abstract declarator': pointer to reference is illegal
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(905): note: see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<Node &>
+          ]
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(841): error C2528: 'abstract declarator': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(860): error C2528: '<template-parameter>': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(866): error C2528: '<template-parameter>': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(923): error C2528: 'abstract declarator': pointer to reference is illegal
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(363): note: see reference to variable template 'const bool _Is_simple_alloc_v<std::allocator<Node &> >' being compiled
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(923): error C2528: '<template-parameter>': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(924): error C2528: 'abstract declarator': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(924): error C2528: '<template-parameter>': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(371): error C2528: '<template-parameter>': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(934): error C2528: 'abstract declarator': pointer to reference is illegal
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(411): note: see reference to class template instantiation 'std::_Simple_types<_Ty>' being compiled
+          with
+          [
+              _Ty=Node &
+          ]
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\xmemory0(935): error C2528: 'abstract declarator': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(936): error C2535: 'void std::vector<Node &,std::allocator<_Ty>>::push_back(_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=Node &
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(930): note: see declaration of 'std::vector<Node &,std::allocator<_Ty>>::push_back'
+          with
+          [
+              _Ty=Node &
+          ]
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1024): error C2535: 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::insert(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=Node &
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1018): note: see declaration of 'std::vector<Node &,std::allocator<_Ty>>::insert'
+          with
+          [
+              _Ty=Node &
+          ]
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1608): error C2528: 'data': pointer to reference is illegal
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\vector(1613): error C2528: 'data': pointer to reference is illegal
+  ServoArm.cpp
+c:\users\wiebe\source\repos\servoarm\servoarm\servoarm.cpp(13): error C3867: 'Node::GetHeight': non-standard syntax; use '&' to create a pointer to member
+  Generating Code...

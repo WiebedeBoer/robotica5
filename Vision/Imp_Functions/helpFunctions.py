@@ -1,5 +1,11 @@
 import cv2
 
+try:
+	from camera_pi import Camera_pi
+	screenWidth, screenHeight = Camera_pi.getSettings()
+except:
+	from camera_opencv import Camera_opencv
+	screenWidth, screenHeight = Camera_opencv.getSettings()
 
 # Calculate distance and return the distance
 def calculateDistance(w, focal_length, known_width):
@@ -13,8 +19,8 @@ def calibration(w, known_distance, known_width):
 
 # Calculate if the robot has to go left, right, top or bottom
 def whichDirection(xMidPoint, yMidPoint):
-	turn_x = xMidPoint - (640 / 2)  # 640 is the width of the frame
-	turn_y = (480 / 2) - yMidPoint  # 480 is the height of the frame
+	turn_x = xMidPoint - (screenWidth / 2)  # 640 is the width of the frame
+	turn_y = (screenHeight / 2) - yMidPoint  # 480 is the height of the frame
 	return turn_x, turn_y
 
 

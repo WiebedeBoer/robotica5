@@ -8,17 +8,12 @@
 
 class Servo {
 public:
-    Servo(int _minRotation, int _maxRotation, int _angle, int _length);
+    Servo(int _id, int _minRotation, int _maxRotation, int _angle, int _length);
 	int Angle;
-    int MIN_ROTATION() const { return MinRotation; }
-    int MAX_ROTATION() const { return MaxRotation; }
-    int LENGTH() const {return Length;}
-private:
-    int MinRotation;
-    int MaxRotation;
-    int Length;
-
-
+    const int Id;
+    const int MinRotation;
+    const int MaxRotation;
+    const int Length;
 };
 
 
