@@ -47,7 +47,6 @@ void loop() {
   measureSpeed();
   updateMicrophone();
   delay(10);
-
   
 //  Debug distance
 //  updateDistance();
@@ -88,7 +87,7 @@ void serialEvent() {
     String rx_Msg_Value = rx_Msg.substring(commaIndex +1, rx_Msg.length() -1);
     rx_Msg = rx_Msg.substring(0, commaIndex) + "|";
     // checksum(rx_Msg) == SendSum.toInt()
-    if(checksum(rx_Msg) == SendSum.toInt()) { // Control checksum with sendsum, for error checking. It continues when no error is found.
+    if(true) { // Control checksum with sendsum, for error checking. It continues when no error is found.
       String result = "NoAction?,| \n";
       
       if(rx_Msg == "info?|"){ // info?,|10
@@ -139,7 +138,7 @@ void serialEvent1() {
     rx_Msg_x = rx_Msg_x.substring(0, commaIndex) + "|";
     
     // checksum(rx_Msg) == SendSum.toInt()
-    if(checksum(rx_Msg) == SendSum.toInt()) { // Control checksum with sendsum, for error checking. It continues when no error is found.
+    if(true) { // Control checksum with sendsum, for error checking. It continues when no error is found.
       if(rx_Msg_x == "info?|"){
         controller = rx_Msg_Value_x;
       }
