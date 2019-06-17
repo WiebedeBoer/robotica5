@@ -50,3 +50,8 @@ int Angles::AngleToPin(double Angle, int Servo) {
 	}
 	return PinOutput;
 }
+
+int Angles::Compensator(double compensate) {
+	int CompensatorOutput = compensate;
+		return CompensatorOutput;
+}

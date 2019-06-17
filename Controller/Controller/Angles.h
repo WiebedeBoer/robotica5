@@ -11,11 +11,13 @@
 class Angles {
 public:
 	std::vector<int> Gonio(double TipX, double TipY);
+	int Compensator(double compensate);
 	double LawOfCosines(double& _a, double& _b, double& _c);
 	double Distance(double& _x, double& _y);
 	int AngleToPin(double Angle, int Servo);
 private:
 	std::vector<int> args;
+	double compensate;
 	double A1; //root joint
 	double A2; //counter clockwise joint
 	double Len1; //arm segment 1
