@@ -5,7 +5,7 @@
 #include<iostream>
 //namespace for modus enum
 namespace modus {
-	enum Modus { BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence };
+	enum Modus { BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence, Controller };
 }
 //DataCollection for the Wedstrijd
 struct Wedstrijd
@@ -44,7 +44,7 @@ public:
 	void SetAfstandBedieningData(std::string input);
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
-	modus::Modus modus;
+	modus::Modus modus = modus::Controller;
 	int speed;
 	float horizontalBlueBeam = std::numeric_limits<float>::max();
 	Wedstrijd wedstrijd;
