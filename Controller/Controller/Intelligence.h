@@ -22,7 +22,7 @@ private:
 	MicroController* Worker;
 	MicroController* Sensor;
 	Vision* VisionApi;
-	Command repeatedCommand;
+	Command RepeatedCommand;
 
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
 	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
@@ -38,6 +38,6 @@ private:
 	void ExecuteChickinSurivalRun();
 	void ExecuteSpeak();
 	void ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval);
-	void RepeateUntil();
+	void RepeatUntil();
 };
 
