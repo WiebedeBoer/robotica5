@@ -16,6 +16,7 @@ std::vector<std::string> args;//arguments added to this command
 DataCollector* Database;
 TextToSpeach tts;//used for texttospeach
 public:
+	Command();
 	Command(Vision* v, std::string t, DataCollector* DC);
 	Command(MicroController* a, std::string t);
 	Command(MicroController* a, std::string t,DataCollector* DC);

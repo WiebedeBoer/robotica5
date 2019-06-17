@@ -1,5 +1,9 @@
 #include "Command.h"
 
+Command::Command()
+{
+}
+
 Command::Command(Vision * v, std::string t, DataCollector* DC)
 {
 	Command::VisionSlave = v;

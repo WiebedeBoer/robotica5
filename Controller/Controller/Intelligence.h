@@ -10,7 +10,7 @@
 class Intelligence
 {
 public:
-	Intelligence(DataCollector* DC, GuardedQueue<Command>* GQ , GuardedQueue<Command>* VQ, bool* RN, MicroController* WKR, MicroController*SNR, Vision* V);
+	Intelligence(DataCollector* DC, GuardedQueue<Command>* GQ, GuardedQueue<Command>* VQ, bool* RN, MicroController* WKR, MicroController*SNR, Vision* V);
 	~Intelligence();
 	void Think();
 
@@ -22,10 +22,11 @@ private:
 	MicroController* Worker;
 	MicroController* Sensor;
 	Vision* VisionApi;
+	Command repeatedCommand;
 
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
-	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());	
-	
+	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
+
 	void ExecuteDrive();
 	void CheckVision();
 	void ExecuteVision();
@@ -36,6 +37,7 @@ private:
 	void ExecuteEgg();
 	void ExecuteChickinSurivalRun();
 	void ExecuteSpeak();
-
+	void ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval);
+	void RepeateUntil();
 };
 
