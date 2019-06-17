@@ -79,7 +79,24 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmForward") {
-		Command::slave->SerialSend("servoS?,1;100;50&5;0;100|10");
+		double Targetx = 5.0; //hardcoded target, must be from python vision
+		double Targety = 5.0;
+		Angles dlg;
+		char buffer[100];
+		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+		sprintf(buffer, "servoS?,1;%d;50&5;0;%d", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);//servocommand;ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "KineArmBackward") {
+		double Targetx = 5.0; //hardcoded target, must be from python vision
+		double Targety = 5.0;
+		Angles dlg;
+		char buffer[100];
+		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+		sprintf(buffer, "servoS?,2;%d;100&5;0;%d", noutput[0], noutput[1]);
+		Command::slave->SerialSend(buffer);
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
