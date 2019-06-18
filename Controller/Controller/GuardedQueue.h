@@ -28,6 +28,7 @@ public:
 			return Command(a, "Wait");
 		}
 		else if(m_queque.size() > 50) {
+
 			std::cout << "CommanndQueueToLarge!" << std::endl;
 		}
 		T result = m_queque.front();

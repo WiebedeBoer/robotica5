@@ -221,59 +221,61 @@ void Intelligence::ExecuteBlueBeam() {
 void Intelligence::ExecuteDrive()
 {
 	if (std::chrono::system_clock::now() > DriveTime) {
-
-		std::vector<std::string> args;
-		args.push_back("");
-		std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
-		if (joy2->second > 35) {//driveleft
-			args[0] = "32";
-			if (joy2->second > 45) {
-				args[0] = "64";
-				if (joy2->second > 55) {
-					args[0] = "128";
-				}
-			}
-			CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
-		}
-		if (joy2->second < 30) {//DriveRight
-			args[0] = "32";
-			if (joy2->second < 20) {
-				args[0] = "64";
-				if (joy2->second < 10) {
-					args[0] = "128";
-				}
-			}
-			CommandQueue->push(Command(Worker, "DriveRight", Database, args));
-
-		}
-		if (joy2->first > 30 && joy2->first < 34 && joy2->second > 30 && joy2->second < 34) {//StopDriving
-			CommandQueue->push(Command(Worker, "DriveStop", Database, args));
-		}
-		if (joy2->first > 35) {//DriveForward
-			args[0] = "16";
-			if (joy2->first > 45) {
-				args[0] = "64";
-				if (joy2->first > 55) {
-					args[0] = "128";
-				}
-			}
-			CommandQueue->push(Command(Worker, "DriveForward", Database, args));
-
-		}
-		if (joy2->first < 30) {//DriveBackward
-			args[0] = "16";
-			if (joy2->first < 20) {
-				args[0] = "64";
-				if (joy2->first < 10) {
-					args[0] = "128";
-				}
-			}
-			CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
-
-		}
-		joy2 = Tempjoy2;
-
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
+
+		if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
+			std::vector<std::string> args;
+			args.push_back("");
+			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
+			if (Database->GetJoy2().second > 35) {//driveleft
+				args[0] = "32";
+				if (Database->GetJoy2().second > 45) {
+					args[0] = "64";
+					if (Database->GetJoy2().second > 55) {
+						args[0] = "128";
+					}
+				}
+				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				
+			}
+			if (Database->GetJoy2().second < 30) {//DriveRight
+				args[0] = "32";
+				if (Database->GetJoy2().second < 20) {
+					args[0] = "64";
+					if (Database->GetJoy2().second < 10) {
+						args[0] = "128";
+					}
+				}
+				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+
+			}
+			if (Database->GetJoy2().first > 25 && Database->GetJoy2().first < 34 && Database->GetJoy2().second > 25 && Database->GetJoy2().second < 34) {//StopDriving
+				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+			}
+			if (Database->GetJoy2().first > 35) {//DriveForward
+				args[0] = "32";
+				if (Database->GetJoy2().first > 45) {
+					args[0] = "64";
+					if (Database->GetJoy2().first > 55) {
+						args[0] = "128";
+					}
+				}
+				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+
+			}
+			if (Database->GetJoy2().first < 25) {//DriveBackward
+				args[0] = "32";
+				if (Database->GetJoy2().first < 20) {
+					args[0] = "64";
+					if (Database->GetJoy2().first < 10) {
+						args[0] = "128";
+					}
+				}
+				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+
+			}
+			joy2 = Tempjoy2;
+		}
 	}
 }
 
