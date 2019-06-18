@@ -232,11 +232,20 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 wtb">
           <div class="portfolio-item">
-            <div class="hover-bg"> <a href="img/portfolio/wtb_armvisueel.jpg" title="Robotarm" data-lightbox-gallery="gallery1">
+            <div class="hover-bg"> <a href="img/portfolio/wtb_armvisueel.jpg" title="Robotarm sketch" data-lightbox-gallery="gallery1">
               <div class="hover-text">
-                <h4>Robotarm</h4>
+                <h4>Robotarm sketch</h4>
               </div>
               <img src="img/portfolio/wtb_armvisueel.jpg" class="img-responsive" alt="Robotica"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4 ict">
+          <div class="portfolio-item">
+            <div class="hover-bg"> <a href="img/portfolio/ict_priorities2.jpeg" title="To do lijst" data-lightbox-gallery="gallery1">
+              <div class="hover-text">
+                <h4>To do lijst</h4>
+              </div>
+              <img src="img/portfolio/ict_priorities2.jpeg" class="img-responsive" alt="Robotica"> </a> </div>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 col-lg-4 ict">
@@ -246,6 +255,42 @@
                 <h4>Website</h4>
               </div>
               <img src="img/portfolio/ict_websitecode.jpg" class="img-responsive" alt="Robotica"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4 wtb">
+          <div class="portfolio-item">
+            <div class="hover-bg"> <a href="img/portfolio/wtb_arm_edit.jpeg" title="Robotarm" data-lightbox-gallery="gallery1">
+              <div class="hover-text">
+                <h4>Robotarm</h4>
+              </div>
+              <img src="img/portfolio/wtb_arm_edit.jpeg" class="img-responsive" alt="Robotica"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4 ict">
+          <div class="portfolio-item">
+            <div class="hover-bg"> <a href="img/portfolio/ict_controller2.jpeg" title="Controller" data-lightbox-gallery="gallery1">
+              <div class="hover-text">
+                <h4>Controller</h4>
+              </div>
+              <img src="img/portfolio/ict_controller2.jpeg" class="img-responsive" alt="Robotica"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4 wtb">
+          <div class="portfolio-item">
+            <div class="hover-bg"> <a href="img/portfolio/wtb_controllerTekening.jpg" title="Controller" data-lightbox-gallery="gallery1">
+              <div class="hover-text">
+                <h4>Controller sketch</h4>
+              </div>
+              <img src="img/portfolio/wtb_controllerTekening.jpg" class="img-responsive" alt="Robotica"> </a> </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-4 wtb">
+          <div class="portfolio-item">
+            <div class="hover-bg"> <a href="img/portfolio/wtb_controller.jpeg" title="Controller" data-lightbox-gallery="gallery1">
+              <div class="hover-text">
+                <h4>Controller</h4>
+              </div>
+              <img src="img/portfolio/wtb_controller.jpeg" class="img-responsive" alt="Robotica"> </a> </div>
           </div>
         </div>
       </div>

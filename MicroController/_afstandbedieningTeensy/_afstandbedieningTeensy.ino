@@ -178,7 +178,7 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 void loop() {
   nexLoop(nex_listen_list);   // Loop through list of Items
   updateJoy();                // update Joysticks functie aanroepen
-
+  
   unsigned long currentMillis = millis(); // Current millis
   
   if (currentMillis - lastUpdateInterval >= updateInterval) { // Check wether interval passed

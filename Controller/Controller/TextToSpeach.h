@@ -29,6 +29,20 @@ public:
 	//says something  in the angry voice
 	void speak_angry_nl(std::string text);
 
+	void speak_normal_germ(std::string text);
+
+	void speak_normal_dan(std::string text);
+
+	void speak_normal_french(std::string text);
+
+	void speak_normal_itl(std::string text);
+
+	void speak_normal_chin(std::string text);
+
+	void speak_normal_rus(std::string text);
+
+	void speak_normal_greek(std::string text);
+
 	//gives the pitch
 	void give_pitch();
 	//says hello
