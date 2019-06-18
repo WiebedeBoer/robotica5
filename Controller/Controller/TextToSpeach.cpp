@@ -102,15 +102,15 @@ void TextToSpeach::speak_angry(std::string text) {
 
 //says something  in the normal voice
 void TextToSpeach::speak_normal_nl(std::string text) {
-	espeak(text, "en-german+f4", 40, 90);
+	espeak(text, "dutch", 40, 90);
 }
 //says something  in the happy voice
 void TextToSpeach::speak_happy_nl(std::string text) {
-	espeak(text, "en-german+f4", 99, 90);
+	espeak(text, "dutch", 99, 90);
 }
 //says something  in the angry voice
 void TextToSpeach::speak_angry_nl(std::string text) {
-	espeak(text, "en-german+f4", 0, 90);
+	espeak(text, "dutch", 0, 90);
 }
 
 void TextToSpeach::speak_quite(std::string text, int speed) {
