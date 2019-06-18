@@ -29,7 +29,7 @@ def eggDistance(frame, argument):
 		allKeypointsWidths = detectEgg.widthKeypoints(eggDetected)
 
 		for idx, width in enumerate(allKeypointsWidths):
-			distance = calculateDistance(width, 5.4, 375)
+			distance = calculateDistance(width, 420, 5.4)
 			if distance < closestDistance:
 				closestDistance = distance 
 				xyAxis = whichDirection(eggDetected[idx].pt[0], eggDetected[idx].pt[1])
@@ -46,8 +46,7 @@ def qrDistance(frame, argument):
 
 	if qr != None:
 		x, y, w, h = qrReader.getRectangleQR()
-		distance = calculateDistance(w, 51.33, 150)
-		#return str(calibration(w, 50.0, 150.0))
+		distance = calculateDistance(w, 114, 150)
 		xyAxis = whichDirection(x + (w / 2), y + (h / 2))
 		return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 	else:
@@ -56,21 +55,19 @@ def qrDistance(frame, argument):
 
 def chicken(frame, argument):
 	imgTrainColor = cv2.imread('Images/TrainImg/Kip/piKip.jpg')
-	try:
-		from camera_pi import Camera_pi
-		screenWidth, screenHeight = Camera_pi.getSettings()
-	except:
-		from camera_opencv import Camera_opencv
-		screenWidth, screenHeight = Camera_opencv.getSettings()
+	# try:
+	# 	from camera_pi import Camera_pi
+	# 	screenWidth, screenHeight = Camera_pi.getSettings()
+	# except:
+	# 	from camera_opencv import Camera_opencv
+	# 	screenWidth, screenHeight = Camera_opencv.getSettings()
 
 	# imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
-	rectanglePts = fm_ORB(frame, imgTrainColor, 40)
+	rectanglePts = fm_ORB(frame, imgTrainColor, 60)
 
 	if rectanglePts != False and rectanglePts != None:
 		center = calculateCenter(rectanglePts)
-		cv2.circle(frame, (int(center[0]), int(center[1])), 20, (0, 0, 255), -1)
 		xyAxis = whichDirection(center[0], center[1])
-		cv2.circle(frame, (int(center[0]), int(center[1])), 15, (0,0,255), -1)
 		return str("Unknown" + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 	else:
 		return False

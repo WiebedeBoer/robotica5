@@ -9,23 +9,30 @@ const double pi = atan(1) * 4;
 std::vector<int> Angles::Gonio(double TipX, double TipY) {
 
 	Dist = Distance(TipX, TipY);
-	D1 = atan(TipY / TipX) * 180 / pi;
-	D2 = LawOfCosines(Dist, Len1, Len2) * 180 / pi;
-	A1 = D1 + D2;
-	A2 = LawOfCosines(Len1, Len2, Dist) * 180 / pi;
 
-	AnglePinOutput1 = AngleToPin(A1, 2);
-	AnglePinOutput2 = AngleToPin(A2, 3);
+	if (Dist > 0 && Dist <= 346) {
+		D1 = atan(TipY / TipX) * 180 / pi;
+		D2 = LawOfCosines(Dist, Len1, Len2) * 180 / pi;
+		A1 = D1 + D2;
+		A2 = LawOfCosines(Len1, Len2, Dist) * 180 / pi;
 
-	std::vector<int> AnglePinOut;
-	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput1);
-	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput2);
+		AnglePinOutput1 = AngleToPin(A1, 2);
+		AnglePinOutput2 = AngleToPin(A2, 3);
 
-	compensate = Compensator(90 - D2, TipX, A2);
+		std::vector<int> AnglePinOut;
+		AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput1);
+		AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput2);
 
-	AnglePinOutput3 = AngleToPin(compensate, 4);
-	AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput3);
-	return AnglePinOut;
+		compensate = Compensator(90 - D2, TipX, A2);
+
+		AnglePinOutput3 = AngleToPin(compensate, 4);
+		AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput3);
+		return AnglePinOut;
+	}
+	else {
+		return std::vector<int>();
+	}
+
 }
 
 double Angles::LawOfCosines(double& _a, double& _b, double& _c) {

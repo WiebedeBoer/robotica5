@@ -91,20 +91,24 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
-		double Targetx = armsmoving.Xpos;
-		Targetx = armsmoving.Xpos + joyOffset;
-		double Targety = armsmoving.Ypos;
-		Targety = armsmoving.Ypos - joyOffset;
+		if (args.size() > 1) {
+			double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
+			double Targetx = armsmoving.Xpos;
+			Targetx = armsmoving.Xpos + joyOffset;
+			double Targety = armsmoving.Ypos;
+			Targety = armsmoving.Ypos - joyOffset;
 
-		//first command to move arm
-		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
-		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
-		//second command to keep height steady
-		sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
-		Command::slave->SerialSend(buffer);
-		std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+			//first command to move arm
+			std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+			if (noutput.size() > 2) {
+				sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
+				Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+				//second command to keep height steady
+				sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
+				Command::slave->SerialSend(buffer);
+				std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+			}
+		}
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
@@ -112,25 +116,29 @@ void Command::Execute() {
 		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
-		//offsetting
-		double joyOffset = (20 - stoi(args[1])) + armsmoving.xoffset; //offset from joystick
-		double Targetx = armsmoving.Xpos;
-		Targetx = armsmoving.Xpos - joyOffset;
-		double Targety = armsmoving.Ypos;
-		Targety = armsmoving.Ypos + joyOffset;
+		if (args.size() > 1) {
+			//offsetting
+			double joyOffset = (20 - stoi(args[1])) + armsmoving.xoffset; //offset from joystick
+			double Targetx = armsmoving.Xpos;
+			Targetx = armsmoving.Xpos - joyOffset;
+			double Targety = armsmoving.Ypos;
+			Targety = armsmoving.Ypos + joyOffset;
+			//first command to move arm
+			std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+			if (noutput.size() > 2) {
+				sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
+				Command::slave->SerialSend(buffer);
+				//second command to keep height steady
+				sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
+				Command::slave->SerialSend(buffer);
+				std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
+			}
+		}
 
-		//first command to move arm
-		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
-		Command::slave->SerialSend(buffer);
-		//second command to keep height steady
-		sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
-		Command::slave->SerialSend(buffer);
-		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmLeft") {
-		int OffsetLeft = 5; //hardcoded target, must be from python vision for autonomous
+		int OffsetLeft = 8; //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
 		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetLeft);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
@@ -138,9 +146,17 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmRight") {
-		int OffsetRight = 540;  //hardcoded target, must be from python vision for autonomous
+		int OffsetRight = 8;  //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
 		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetRight);
+		Command::slave->SerialSend(buffer); //ID;POS;SPEED
+		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "Gripper") {
+		int OffsetGrip = 8;  //hardcoded target, must be from python vision for autonomous
+		char buffer[100];
+		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
 		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
 		return;

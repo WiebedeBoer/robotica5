@@ -30,6 +30,7 @@ private:
 	int AnglePinOutput1;
 	int AnglePinOutput2;
 	int AnglePinOutput3;
+	double maxboundary = 340.0; //maximum boundary out of pythagoras
 };
 
 
