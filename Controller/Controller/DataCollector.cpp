@@ -45,7 +45,9 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 		else if (m[1] == "Balkje")
 			modus = modus::BlueBeam;	
 		else if (m[1] == "Start")
-			modus = modus::Controller;
+			modus = modus::Controller;		
+		else if (m[1] == "Pitch")
+			modus = modus::pitch;
 	}
 	catch (const std::exception &) {
 		std::cout << "joy stoi error" << std::endl;

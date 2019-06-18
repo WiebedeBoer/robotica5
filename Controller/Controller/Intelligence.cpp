@@ -20,14 +20,14 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 
-int RefreshInterval = 50000;
+int RefreshInterval = 500;
 int PrintInterval = 510;
-int ArmInterval = 1000;
-int DriveInterval = 1000;
+int ArmInterval = 800;
+int DriveInterval = 500;
 int CheckVisionInterval = 1000;
-int ExecuteVisionInterval = 50;
+int ExecuteVisionInterval = 150;
 int GripperInterval = 5000;
-int SpeakInterval = 30000;
+int SpeakInterval = 1000;
 int RepeatInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
@@ -69,7 +69,15 @@ void Intelligence::ExecuteChickinSurivalRun()
 void Intelligence::ExecuteSpeak()
 {
 	if (std::chrono::system_clock::now() > SpeakTime) {
-		CommandQueue->push(Command(Worker, "speak_pitch", Database));
+		if (Database->modus = modus::pitch) {
+			CommandQueue->push(Command(Worker, "speak_pitch", Database));
+		}
+		else
+		{
+			CommandQueue->push(Command(Worker, "speak_random", Database));
+
+		}
+		
 		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
 	}
 }

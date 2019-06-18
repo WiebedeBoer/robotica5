@@ -5,7 +5,7 @@
 #include<iostream>
 //namespace for modus enum
 namespace modus {
-	enum Modus { BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence, Controller };
+	enum Modus { BlueBeam, poortje, grindpad, eiGripper, chickenSurvivalRun, eggtelligence, Controller, pitch };
 }
 //DataCollection for the Wedstrijd
 struct Wedstrijd

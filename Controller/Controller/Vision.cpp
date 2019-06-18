@@ -85,6 +85,9 @@ void Vision::waitMsg(char buf[]) {
 	if (bytesReceived == -1 || bytesReceived == 0)
 	{
 		close(clientSocket);
+
+		std::string cmd = "python /home/rob/robotica5/Vision/starting.py -r";
+		std::future<void> s = std::async(std::launch::async, [=] {std::system(cmd.c_str()); });
 		while(!makeConnection());
 	}
 }

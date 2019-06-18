@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <bits/stdc++.h>
 #include <future>
+#include <ctime>
+#include <cstdlib>
 class TextToSpeach
 {
 
@@ -34,7 +36,7 @@ public:
 	void bugged_count();
 	//says something quite to wait a but
 	void speak_quite(std::string text, int speed);
-
+	void random_quote();
 
 };
 

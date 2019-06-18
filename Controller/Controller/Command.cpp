@@ -92,7 +92,7 @@ void Command::Execute() {
 		char buffer[100];
 		//offsetting
 		double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
-		double Targetx = armsmoving.Xpos;		
+		double Targetx = armsmoving.Xpos;
 		Targetx = armsmoving.Xpos + joyOffset;
 		double Targety = armsmoving.Ypos;
 		Targety = armsmoving.Ypos - joyOffset;
@@ -174,6 +174,9 @@ void Command::Execute() {
 		return;
 	}if (Command::type == "speak_pitch") {
 		Command::tts.give_pitch();
+		return;
+	}if (Command::type == "speak_random") {
+		Command::tts.random_quote();
 		return;
 	}
 
