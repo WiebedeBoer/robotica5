@@ -138,7 +138,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmLeft") {
-		int OffsetLeft = 5; //hardcoded target, must be from python vision for autonomous
+		int OffsetLeft = 8; //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
 		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetLeft);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
@@ -146,9 +146,17 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmRight") {
-		int OffsetRight = 540;  //hardcoded target, must be from python vision for autonomous
+		int OffsetRight = 8;  //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
 		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetRight);
+		Command::slave->SerialSend(buffer); //ID;POS;SPEED
+		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
+		return;
+	}
+	if (Command::type == "Gripper") {
+		int OffsetGrip = 8;  //hardcoded target, must be from python vision for autonomous
+		char buffer[100];
+		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
 		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
