@@ -68,7 +68,6 @@ def chicken(frame, argument):
 	if rectanglePts != False and rectanglePts != None:
 		center = calculateCenter(rectanglePts)
 		xyAxis = whichDirection(center[0], center[1])
-		cv2.circle(frame, (int(center[0]), int(center[1])), 15, (0,0,255), -1)
 		return str("Unknown" + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 	else:
 		return False
