@@ -124,7 +124,7 @@ void TextToSpeach::speak_quite(std::string text, int speed) {
 void TextToSpeach::random_quote()
 {
 	srand(time(0));
-	int r = (rand()% 10) + 1;
+	int r = (rand()% 11) + 1;
 
 	switch (r)
 	{
@@ -157,6 +157,9 @@ void TextToSpeach::random_quote()
 		break;
 	case 10:
 		speak_normal("Beep-bee-bee-boop-bee-doo-weep");
+		break;
+	case 11:
+		speak_normal("oh geez rick");
 		break;
 	default:
 		break;
