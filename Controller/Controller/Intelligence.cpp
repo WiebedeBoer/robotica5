@@ -20,14 +20,14 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 
-int RefreshInterval = 50000;
-int PrintInterval = 510;
+int RefreshInterval = 1000;
+int PrintInterval = 500;
 int ArmInterval = 1000;
 int DriveInterval = 1000;
-int CheckVisionInterval = 1000;
-int ExecuteVisionInterval = 50;
+int CheckVisionInterval = 50000;
+int ExecuteVisionInterval = 50000;
 int GripperInterval = 5000;
-int SpeakInterval = 30000;
+int SpeakInterval = 300000;
 int RepeatInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
