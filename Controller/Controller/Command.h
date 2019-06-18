@@ -12,8 +12,8 @@
 struct ArmMove {
 	double xoffset = 6.0; //offset x
 	double yoffset = 6.0; //offset y
-	double Xpos = 300.0; //hardcoded target, must be from python vision for autonomous
-	double Ypos = 300.0; //hardcoded target, must be from python vision for autonomous
+	double Xpos = 160.0; //hardcoded target, must be from python vision for autonomous
+	double Ypos = 220.0; //hardcoded target, must be from python vision for autonomous
 };
 
 class Command
