@@ -91,7 +91,7 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		if (args.size > 1) {
+		if (args.size() > 1) {
 			double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos + joyOffset;
@@ -100,7 +100,7 @@ void Command::Execute() {
 
 			//first command to move arm
 			std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-			if (noutput.size > 2) {
+			if (noutput.size() > 2) {
 				sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
 				Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 				//second command to keep height steady
@@ -116,7 +116,7 @@ void Command::Execute() {
 		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
-		if (args.size > 1) {
+		if (args.size() > 1) {
 			//offsetting
 			double joyOffset = (20 - stoi(args[1])) + armsmoving.xoffset; //offset from joystick
 			double Targetx = armsmoving.Xpos;
@@ -125,7 +125,7 @@ void Command::Execute() {
 			Targety = armsmoving.Ypos + joyOffset;
 			//first command to move arm
 			std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-			if (noutput.size > 2) {
+			if (noutput.size() > 2) {
 				sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
 				Command::slave->SerialSend(buffer);
 				//second command to keep height steady
