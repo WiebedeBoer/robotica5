@@ -19,6 +19,14 @@ public:
 	void speak_happy(std::string text);
 	//says something  in the angry voice
 	void speak_angry(std::string text);
+
+	//says something  in the normal voice
+	void speak_normal_nl(std::string text);
+	//says something  in the happy voice
+	void speak_happy_nl(std::string text);
+	//says something  in the angry voice
+	void speak_angry_nl(std::string text);
+
 	//gives the pitch
 	void give_pitch();
 	//says hello
