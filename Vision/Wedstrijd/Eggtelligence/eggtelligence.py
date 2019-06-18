@@ -47,7 +47,6 @@ def qrDistance(frame, argument):
 	if qr != None:
 		x, y, w, h = qrReader.getRectangleQR()
 		distance = calculateDistance(w, 51.33, 150)
-		#return str(calibration(w, 50.0, 150.0))
 		xyAxis = whichDirection(x + (w / 2), y + (h / 2))
 		return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 	else:
@@ -68,7 +67,6 @@ def chicken(frame, argument):
 
 	if rectanglePts != False and rectanglePts != None:
 		center = calculateCenter(rectanglePts)
-		cv2.circle(frame, (int(center[0]), int(center[1])), 20, (0, 0, 255), -1)
 		xyAxis = whichDirection(center[0], center[1])
 		cv2.circle(frame, (int(center[0]), int(center[1])), 15, (0,0,255), -1)
 		return str("Unknown" + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
