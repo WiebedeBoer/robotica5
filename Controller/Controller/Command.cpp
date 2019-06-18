@@ -202,6 +202,9 @@ void Command::Execute() {
 	}if (Command::type == "speak_pitch") {
 		Command::tts.give_pitch();
 		return;
+	}if (Command::type == "speak_random") {
+		Command::tts.random_quote();
+		return;
 	}
 
 

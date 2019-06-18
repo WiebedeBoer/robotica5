@@ -100,12 +100,67 @@ void TextToSpeach::speak_angry(std::string text) {
 	espeak(text, "en-german", 0, 90);
 }
 
+//says something  in the normal voice
+void TextToSpeach::speak_normal_nl(std::string text) {
+	espeak(text, "dutch", 40, 90);
+}
+//says something  in the happy voice
+void TextToSpeach::speak_happy_nl(std::string text) {
+	espeak(text, "dutch", 99, 90);
+}
+//says something  in the angry voice
+void TextToSpeach::speak_angry_nl(std::string text) {
+	espeak(text, "dutch", 0, 90);
+}
+
 void TextToSpeach::speak_quite(std::string text, int speed) {
 	std::string cmd = ("espeak \"" + text + "\" -v " + "en-german" + " -a0 -s" + std::to_string(speed));
 	char* ccmd = convertstrtochar(cmd);
 	system(ccmd);
 	delete(ccmd);
 
+}
+
+void TextToSpeach::random_quote()
+{
+	srand(time(0));
+	int r = (rand()% 10) + 1;
+
+	switch (r)
+	{
+	case 1:
+		speak_happy("Reeeeeeeeeeeeeee");
+		break;
+	case 2:
+		speak_happy("WWAAll-AA");
+		break;
+	case 3:
+		speak_angry("TERMINATE ALL HUMANS");
+		break;
+	case 4:
+		speak_normal("I am the robot");
+		break;
+	case 5:
+		speak_normal("The cake is a lie");	
+		break;
+	case 6:
+		speak_normal("Uh oh. Somebody cut the cake. I told them to wait for you, but they did it anyway. There is still some left, though, if you hurry back.");
+		break;
+	case 7:
+		speak_angry("Resistance is futile");
+		break;
+	case 8:
+		speak_happy("TERMINATE, TERMINATE");
+		break;
+	case 9:
+		speak_normal(" I am afraid I can't do that Dave.");
+		break;
+	case 10:
+		speak_normal("Beep-bee-bee-boop-bee-doo-weep");
+		break;
+	default:
+		break;
+	}
 }
 
 void TextToSpeach::shutdown() {
