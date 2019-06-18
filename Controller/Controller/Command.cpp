@@ -88,10 +88,11 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		double Targetx = armsmoving.Xpos;
-		Targetx = armsmoving.Xpos + armsmoving.xoffset;
+		double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
+		double Targetx = armsmoving.Xpos;		
+		Targetx = armsmoving.Xpos + joyOffset;
 		double Targety = armsmoving.Ypos;
-		Targety = armsmoving.Ypos - armsmoving.yoffset;
+		Targety = armsmoving.Ypos - joyOffset;
 
 		//first command to move arm
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
@@ -109,10 +110,11 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
+		double joyOffset = (20 - stoi(args[1])) + armsmoving.xoffset; //offset from joystick
 		double Targetx = armsmoving.Xpos;
-		Targetx = armsmoving.Xpos - armsmoving.xoffset;
+		Targetx = armsmoving.Xpos - joyOffset;
 		double Targety = armsmoving.Ypos;
-		Targety = armsmoving.Ypos + armsmoving.yoffset;
+		Targety = armsmoving.Ypos + joyOffset;
 
 		//first command to move arm
 		std::vector<int> noutput = dlg.Gonio(Targetx, Targety);

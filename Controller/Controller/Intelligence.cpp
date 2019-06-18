@@ -295,10 +295,10 @@ void Intelligence::ExecuteArm()
 			CommandQueue->push(Command(Worker, "ArmRight", Database, args));
 		}
 		else if (joy1->second > 40) {
-			CommandQueue->push(Command(Worker, "ArmForward", Database, args));
+			CommandQueue->push(Command(Worker, "KineArmForward", Database, args));
 		}
 		else if (joy1->second < 20) {
-			CommandQueue->push(Command(Worker, "ArmBackward", Database, args));
+			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));
 		}
 		joy1 = Tempjoy1;
 		if (Database->updateGrab == true) {
