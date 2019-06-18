@@ -1,6 +1,7 @@
-#ifndef SOCKETCLASSLINUX_H
-#define SOCKETCLASSLINUX_H
+#pragma once
 
+#include <future>
+#include <stdio.h>
 #include <iostream>
 #include <sys/types.h>
 #include <unistd.h>
@@ -25,4 +26,3 @@ public:
 	std::string executeCommand(std::string cmd);
 	~Vision();
 };
-#endif // SOCKETCLASSLINUX_H

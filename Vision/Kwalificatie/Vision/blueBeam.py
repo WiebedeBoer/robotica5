@@ -1,5 +1,4 @@
 import sys
-
 sys.path.append('Imp_Functions/')
 
 import cv2
@@ -35,12 +34,8 @@ def viewBeam(frame):
 		# a square will have an aspect ratio that is approximately
 		# equal to one, otherwise, the shape is a rectangle
 		if len(approx) >= 4 and len(approx) <= 6 and area > 200:
-
 			# calculate distance
-			focalLength = calibration(w, 50, 2.4)
-			cv2.putText(frame,str(focalLength),(x,y), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),2)
-			print(focalLength)
-			distance = calculateDistance(w, 583, 2.4)
+			distance = calculateDistance(w, 1000, 2.4)
 			xyAxis = whichDirection(x + (w / 2), y + (h / 2))
 			return str(str(distance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 	return False

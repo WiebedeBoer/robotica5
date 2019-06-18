@@ -43,7 +43,7 @@ def findRectanglePoints(pts):
     return [minXmaxY, maxXminY]
 
 
-def fm_ORB(frame, imgTrainColor, MIN_MATCH):
+def fm_ORB(frame, imgTrainColor, MIN_MATCH_COUNT):
     imgCamColor = frame
 
     # Create the orb instance
@@ -61,8 +61,6 @@ def fm_ORB(frame, imgTrainColor, MIN_MATCH):
     kpTrain, desTrain = orb.compute(imgTrainGray, kpTrain)    # Detect descriptors in imgTrainGray
 
     firstTime = True    # If firstTime is True then set width and heights of frame and images as variables
-    MIN_MATCH_COUNT = MIN_MATCH    # There need to be at least the given amound of matches before drawing a rectangle
-
     imgCamGray = cv2.cvtColor(imgCamColor, cv2.COLOR_BGR2GRAY)
     imgCamColor = CLAHE(imgCamGray)  # Sets the contrast of the frame
 
@@ -90,7 +88,6 @@ def fm_ORB(frame, imgTrainColor, MIN_MATCH):
     allGood_matches = sorted(allGood_matches, key=lambda x: x.distance)  # Sort them in the order of their distance
     best_matches = allGood_matches[:10]     # Append the 10 best matches from allGood_matches in best_matches
 
-    print(len(allGood_matches))
     #  If allGood_matches has enough good matches then proceed
     if len(allGood_matches) > MIN_MATCH_COUNT:
         src_pts = np.float32([kpCam[m.queryIdx].pt for m in best_matches]).reshape(-1, 1, 2)  # Get the points of the best_matches
@@ -109,6 +106,5 @@ def fm_ORB(frame, imgTrainColor, MIN_MATCH):
         # If rectanglePts is not None then draw a rectangle on the frame
         if rectanglePts[0] is not None or rectanglePts[1] is not None:
             return rectanglePts
-
     else:
         return False

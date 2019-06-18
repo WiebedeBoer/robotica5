@@ -10,6 +10,11 @@
 #include "DataCollector.h"
 #include "Intelligence.h"
 #include "Vision.h"
+#include <bits/stdc++.h>
+#include <future>
+#include <stdio.h>
+
+
 
 bool* running = new bool(true);//when set to false, program stops
 GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();//queue for short commands, moslty executed on microcontrollers
@@ -19,7 +24,11 @@ DataCollector* Datacollector = new DataCollector();//object to store all shared 
 MicroController* Worker = new MicroController("/dev/ttyACM1");//worker slave
 MicroController* Sensor = new MicroController("/dev/ttyACM0");//sensor slave
 
-Vision* VisionApi = new Vision();//vision socket connection
+std::string cmd = "python /home/rob/robotica5/Vision/starting.py -r";
+std::future<Vision*> f = std::async(std::launch::async, [] { return new Vision(); });
+std::future<void> s = std::async(std::launch::async, [=] {std::system(cmd.c_str()); });
+Vision* VisionApi = f.get();
+//Vision* VisionApi = new Vision();//vision socket connection
 
 int main()
 {	
