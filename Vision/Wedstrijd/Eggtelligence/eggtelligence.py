@@ -55,12 +55,12 @@ def qrDistance(frame, argument):
 
 def chicken(frame, argument):
 	imgTrainColor = cv2.imread('Images/TrainImg/Kip/piKip.jpg')
-	try:
-		from camera_pi import Camera_pi
-		screenWidth, screenHeight = Camera_pi.getSettings()
-	except:
-		from camera_opencv import Camera_opencv
-		screenWidth, screenHeight = Camera_opencv.getSettings()
+	# try:
+	# 	from camera_pi import Camera_pi
+	# 	screenWidth, screenHeight = Camera_pi.getSettings()
+	# except:
+	# 	from camera_opencv import Camera_opencv
+	# 	screenWidth, screenHeight = Camera_opencv.getSettings()
 
 	# imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
 	rectanglePts = fm_ORB(frame, imgTrainColor, 60)
