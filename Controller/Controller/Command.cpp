@@ -97,7 +97,7 @@ void Command::Execute() {
 			Targetx = armsmoving.Xpos + joyOffset;
 			double Targety = armsmoving.Ypos;
 			Targety = armsmoving.Ypos - joyOffset;
-			if (Targety > 40) {
+			if (Targety > 210) {
 				//first command to move arm
 				std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
 				if (noutput.size() > 2) {
@@ -126,18 +126,21 @@ void Command::Execute() {
 			Targetx = armsmoving.Xpos - joyOffset;
 			double Targety = armsmoving.Ypos;
 			Targety = armsmoving.Ypos + joyOffset;
-			//first command to move arm
-			std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
-			if (noutput.size() > 2) {
-				sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
-				Command::slave->SerialSend(buffer);
-				//second command to keep height steady
-				sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
-				Command::slave->SerialSend(buffer);
-				std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
+			if (Targety > 210) {
+				//first command to move arm
+				std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+				if (noutput.size() > 2) {
+					armsmoving.Xpos = Targetx;
+					armsmoving.Ypos = Targety;
+					sprintf(buffer, "servoS?,2;%d;32&3;%d;32", noutput[0], noutput[1]);
+					Command::slave->SerialSend(buffer);
+					//second command to keep height steady
+					sprintf(buffer, "servoS?,6;0;50&4;0;%d", noutput[2]);
+					Command::slave->SerialSend(buffer);
+					std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
+				}
 			}
 		}
-
 		return;
 	}
 	if (Command::type == "KineArmLeft") {
