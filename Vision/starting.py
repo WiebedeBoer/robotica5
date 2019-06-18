@@ -43,7 +43,7 @@ def mainSwitcher(frame, argument, argument1, argument2):
 
 def tape(frame, argument, argument1):
 	sys.path.append('Imp_Functions/')
-	from tapetest import BlackTape
+	from tape import BlackTape
 	return BlackTape(frame, False if argument == 0 else True )
 
 
