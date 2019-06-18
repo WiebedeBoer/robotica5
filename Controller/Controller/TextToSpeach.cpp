@@ -100,6 +100,19 @@ void TextToSpeach::speak_angry(std::string text) {
 	espeak(text, "en-german", 0, 90);
 }
 
+//says something  in the normal voice
+void TextToSpeach::speak_normal_nl(std::string text) {
+	espeak(text, "en-german+f4", 40, 90);
+}
+//says something  in the happy voice
+void TextToSpeach::speak_happy_nl(std::string text) {
+	espeak(text, "en-german+f4", 99, 90);
+}
+//says something  in the angry voice
+void TextToSpeach::speak_angry_nl(std::string text) {
+	espeak(text, "en-german+f4", 0, 90);
+}
+
 void TextToSpeach::speak_quite(std::string text, int speed) {
 	std::string cmd = ("espeak \"" + text + "\" -v " + "en-german" + " -a0 -s" + std::to_string(speed));
 	char* ccmd = convertstrtochar(cmd);
