@@ -1,4 +1,7 @@
 #include "Command.h"
+#include "Angles.h"
+#include <string>
+#include <stdio.h>
 
 Command::Command()
 {

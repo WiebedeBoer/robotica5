@@ -151,7 +151,7 @@ void Intelligence::ExecuteBlueBeam() {
 	std::vector<std::string> args;
 	args.push_back("");
 	int distance = 999; //distance
-	int horizontal = 0; //horizontal coordinate
+
 	if (!Intelligence::Database->kwalificatie.bluebeam.empty()) {
 		std::string s = Intelligence::Database->kwalificatie.bluebeam;
 		std::vector<std::string> out;
@@ -161,34 +161,39 @@ void Intelligence::ExecuteBlueBeam() {
 		try {
 			if (out[0] != "False") {
 				distance = std::stoi(out[0]);
-				horizontal = std::stoi(out[1]);
-			}
-			else {
-				distance = 0;
+
+				// Write if not initialized
+				if (Database->horizontalBlueBeam == std::numeric_limits<float>::max())
+					Database->horizontalBlueBeam = std::stof(out[1]);
+				
+				// Write if new value
+				if(abs(Database->horizontalBlueBeam - 10) > abs(std::stof(out[1]))
+					&& abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
+					Database->horizontalBlueBeam = std::stof(out[1]);
 			}
 		}
-		catch (int e) {
-			std::cout << "stoi distance error occurred. Exception" << e << '\n';
+		catch (float e) {
+			std::cout << "Stof error occurred. Exception" << e << '\n';
 		}
 
-
-		if (distance != 0 && distance != NULL) {
+		if (Database->horizontalBlueBeam != std::numeric_limits<float>::max()) {
 			//if near and in sight, drive
 			if (distance >= 5 && distance < 210) {
 				//left
-				if (horizontal < -150) {
-					args[0] = "64";
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+
+				auto argsChange = [](std::string speed, std::vector<std::string> args) { args[0] = speed; return args; };
+
+				if (Database->horizontalBlueBeam < -20) {
+
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args) ));
+					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args) ));
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args) ));
 				}
 				//right
-				else if (horizontal > 150) {
-					args[0] = "64";
-					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
-				}
-				//forward
-				else {
-					args[0] = "64";
-					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+				else if (Database->horizontalBlueBeam > 20) {
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args)));
+					CommandQueue->push(Command(Worker, "DriveForward", Database, argsChange(std::to_string(abs(Database->horizontalBlueBeam) * 10), args)));
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args)));
 				}
 			}
 
