@@ -121,6 +121,40 @@ void TextToSpeach::speak_quite(std::string text, int speed) {
 
 }
 
+void TextToSpeach::speak_normal_germ(std::string text) {
+	espeak(text, "german", 40, 90);
+}
+
+void TextToSpeach::speak_normal_dan(std::string text) {
+	espeak(text, "danish", 40, 90);
+
+}
+
+void TextToSpeach::speak_normal_french(std::string text) {
+	espeak(text, "french", 40, 90);
+
+}
+
+void TextToSpeach::speak_normal_itl(std::string text) {
+	espeak(text, "italian", 40, 90);
+
+}
+
+void TextToSpeach::speak_normal_chin(std::string text) {
+	espeak(text, "zh", 40, 90);
+
+}
+
+void TextToSpeach::speak_normal_rus(std::string text) {
+	espeak(text, "russian", 40, 90);
+
+}
+
+void TextToSpeach::speak_normal_greek(std::string text) {
+	espeak(text, "greek", 40, 90);
+
+}
+
 void TextToSpeach::random_quote()
 {
 	srand(time(0));
