@@ -17,7 +17,7 @@ MCP4XXX* potR;
 #define potRpin1 5
 #define potRpin2 6
 
-bool debug = true; // Debug enables a lot of Serial prints
+bool debug = false; // Debug enables a lot of Serial prints
 
 unsigned long motorPreviousMillis = 0;
 

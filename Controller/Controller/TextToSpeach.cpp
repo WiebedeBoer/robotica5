@@ -28,12 +28,12 @@ void TextToSpeach::give_pitch() {
 	speak_quite("a", 1200);
 	speak_normal("Initializing...3...2...1");
 	speak_quite("a", 1200);
-	speak_normal_nl("Welkom allemaal. Mijn naam is Wall-a. De beste robot die hier vandaag staat!");
+	speak_normal_nl("Welkom allemaal bij deze wall-I ficatie. Mijn naam is Wall-a. De beste robot die hier vandaag staat!");
 	speak_quite("a", 1200);
 	speak_normal_nl("Mijn projectgroep is groep 5. Zij hebben uit de allerdiepste lade in de werkplaats mijn blauwdruk gevonden");
 	speak_quite("a", 1200);
 	speak_normal_nl("Misschien zie ik er wel bekend uit en heb je mijn blauwdruk al gezien.");
-	speak_quite("a", 2000);
+	speak_quite("a", 1200);
 	speak_normal_nl("Ik ben de voorloper van de bekende Wall-I robot. Ik ben prototype alfa");
 	speak_quite("a", 1200);
 	speak_normal_nl("Na het zien van de blauwdruk heeft groep 5 besloten dat ik de beste robot zou zijn voor de wedstrijd.");
