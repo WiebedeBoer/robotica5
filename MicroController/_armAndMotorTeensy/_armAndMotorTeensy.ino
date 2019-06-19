@@ -17,11 +17,11 @@ MCP4XXX* potR;
 #define potRpin1 5
 #define potRpin2 6
 
-bool debug = false; // Debug enables a lot of Serial prints
+bool debug = true; // Debug enables a lot of Serial prints
 
 unsigned long motorPreviousMillis = 0;
 
-const long motorInterval = 500;
+const long motorInterval = 1000;
 
 char buffer[100] = {0};
 char rx_Byte = 0;             // Last received byte
@@ -95,8 +95,6 @@ void loop()
         Serial.print("Servo "); Serial.println(i);
         Serial.print("Temp");Serial.print(" = "); Serial.println(readTemp(i));
         Serial.print("Posi");Serial.print(" = "); Serial.println(readPos(i));
-        Serial.print("Volt");Serial.print(" = "); Serial.println(readVolt(i));
-        Serial.print("Load");Serial.print(" = "); Serial.println(readLoad(i));
         Serial.print("Spee");Serial.print(" = "); Serial.println(readSpeed(i));
         Serial.println("");
       }
