@@ -227,6 +227,7 @@ void Intelligence::ExecuteDrive()
 			std::vector<std::string> args;
 			args.push_back("");
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
+
 			if (Database->GetJoy2().second > 35) {//driveleft
 				args[0] = "32";
 				if (Database->GetJoy2().second > 45) {
