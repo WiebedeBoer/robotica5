@@ -24,7 +24,7 @@ NexNumber NYaw          = NexNumber(3, 3, "NYaw");          // Number of Yaw
 NexNumber NPitch        = NexNumber(3, 3, "NPitch");        // Number of Pitch 
 
 // Mode Page
-//NexButton BPitch      = NexButton(4, 3, "BPitch");        // Pitch Button -- Same as SPitch       // NOT USED -- Button declared in Nextion
+NexButton btnPitch      = NexButton(4, 3, "BPitch");        // Pitch Button -- Same as SPitch       // NOT USED -- Button declared in Nextion
 NexButton btnPoortje    = NexButton(4, 4, "BPoortje");      // Poortje Button
 NexButton btnChicken    = NexButton(4, 5, "BChicken");      // Chickenrun Button
 NexButton btnTrap       = NexButton(4, 11, "BTrap");        // Trap Button 
@@ -64,12 +64,13 @@ String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
 int joyLX, joyLY, joyRX, joyRY;
 
-unsigned int updateInterval = 1000;
+unsigned int updateInterval = 250;
 unsigned long lastUpdateInterval = 0;
 
 // Intialize event items for nextion
 NexTouch *nex_listen_list[] = 
 {
+  &btnPitch,
   &btnPoortje,
   &btnChicken,
   &btnTrap,
@@ -103,6 +104,7 @@ void setup() {
   digitalWrite(joy2Dig, HIGH);
 
   // Mode page
+  btnPitch.attachPop(btnPitchPopCallback, &btnPitch);
   btnPoortje.attachPop(btnPoortjePopCallback, &btnPoortje);
   btnChicken.attachPop(btnChickenPopCallback, &btnChicken);
   btnTrap.attachPop(btnTrapPopCallback, &btnTrap);
@@ -127,6 +129,9 @@ void setup() {
 // _________________________________________________________________
 //                         BUTTONS MODE
 // _________________________________________________________________
+
+// Callback function btnPoortje
+void btnPitchPopCallback(void *ptr) { curMode = "Pitch"; }
 
 // Callback function btnPoortje
 void btnPoortjePopCallback(void *ptr) { curMode = "Poortje"; }
@@ -265,11 +270,11 @@ void serialEvent2(){
 
     // Checksum check;
     if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
+    
       String result = "NoAction?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
         result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
-
         if (eggTrig) { eggTrig = false; }
       }
       
