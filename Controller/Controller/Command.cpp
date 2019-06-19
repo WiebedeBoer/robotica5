@@ -148,7 +148,7 @@ void Command::Execute() {
 		char buffer[100];
 		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetLeft);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
-		std::cout << "The Arm is moving Left!!!:" << args[0] << "," << args[1] << std::endl;
+		std::cout << "The Arm is moving kineLeft!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmRight") {
@@ -156,7 +156,7 @@ void Command::Execute() {
 		char buffer[100];
 		sprintf(buffer, "servoS?,1;%d;32&6;0;0", OffsetRight);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
-		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
+		std::cout << "The Arm is moving kineRight!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "Gripper") {
@@ -172,7 +172,6 @@ void Command::Execute() {
 		char buffer[100];
 		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
-		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "DriveStop") {
