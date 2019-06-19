@@ -20,14 +20,14 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 
-int RefreshInterval = 1000;
-int PrintInterval = 500;
-int ArmInterval = 1000;
-int DriveInterval = 1000;
-int CheckVisionInterval = 50000;
-int ExecuteVisionInterval = 50000;
-int GripperInterval = 5000;
-int SpeakInterval = 300000;
+int RefreshInterval = 100000;
+int PrintInterval = 50000;
+int ArmInterval = 100000;
+int DriveInterval = 1000000;
+int CheckVisionInterval = 50000000;
+int ExecuteVisionInterval = 50000000;
+int GripperInterval = 50000000;
+int SpeakInterval = 1200000;
 // Thom values
 //int RefreshInterval = 500;
 //int PrintInterval = 510;
