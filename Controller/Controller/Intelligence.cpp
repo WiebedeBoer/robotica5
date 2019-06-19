@@ -27,7 +27,7 @@ int DriveInterval = 1000000;
 int CheckVisionInterval = 500000;
 int ExecuteVisionInterval = 500000;
 int GripperInterval = 5000000;
-int SpeakInterval = 120000;
+int SpeakInterval = 2000;
 // Thom values
 //int RefreshInterval = 500;
 //int PrintInterval = 510;
@@ -78,16 +78,17 @@ void Intelligence::ExecuteChickinSurivalRun()
 void Intelligence::ExecuteSpeak()
 {
 	if (std::chrono::system_clock::now() > SpeakTime) {
+		CommandQueue->push(Command(Worker, "speak_pitch", Database));
+
 		if (Database->modus = modus::pitch) {
-			CommandQueue->push(Command(Worker, "speak_pitch", Database));
 		}
 		else
 		{
-			CommandQueue->push(Command(Worker, "speak_random", Database));
+			//CommandQueue->push(Command(Worker, "speak_random", Database));
 
 		}
 		
-		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
+		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval +999999);
 	}
 }
 
