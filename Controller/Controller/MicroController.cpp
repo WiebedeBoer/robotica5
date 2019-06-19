@@ -31,7 +31,7 @@ std::string MicroController::WaitForMessage(int &fd) {
 	int dataavail = 0;
 	bool MessageCompleted = false;
 	std::string message;
-	int Datareceived = WaitForData(fd, 1000);
+	int Datareceived = WaitForData(fd, 150);
 	if (Datareceived == 1) {
 		while (MessageCompleted == false) {
 			dataavail = serialDataAvail(fd);
@@ -107,7 +107,7 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 void MicroController::SerialSend(std::string input) {
 	if (fd < 3) {
 		serialClose(fd);
-		fd = serialOpen(UsbPort, 115200);
+		fd = serialOpen("/dev/ttyACM0", 115200);
 	}
 	std::string inputsum;
 	//std::cout << fd << std::endl;
