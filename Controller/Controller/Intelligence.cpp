@@ -200,11 +200,11 @@ void Intelligence::ExecuteBlueBeam() {
 				
 				//left
 				if (Database->horizontalBlueBeam < -50) 
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("32", args)));
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("128", args)));
 			
 				//right
 				else if (Database->horizontalBlueBeam > 50) 
-					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("32", args)));
+					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("128", args)));
 			}
 
 			//else if too near, full stop
@@ -229,22 +229,22 @@ void Intelligence::ExecuteDrive()
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
 
 			if (Database->GetJoy2().second > 35) {//driveleft
-				args[0] = "32";
+				args[0] = "64";
 				if (Database->GetJoy2().second > 45) {
-					args[0] = "64";
+					args[0] = "128";
 					if (Database->GetJoy2().second > 55) {
-						args[0] = "128";
+						args[0] = "150";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
 				
 			}
 			if (Database->GetJoy2().second < 30) {//DriveRight
-				args[0] = "32";
+				args[0] = "64";
 				if (Database->GetJoy2().second < 20) {
-					args[0] = "64";
+					args[0] = "128";
 					if (Database->GetJoy2().second < 10) {
-						args[0] = "128";
+						args[0] = "150";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
@@ -254,22 +254,22 @@ void Intelligence::ExecuteDrive()
 				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			}
 			if (Database->GetJoy2().first > 35) {//DriveForward
-				args[0] = "32";
+				args[0] = "64";
 				if (Database->GetJoy2().first > 45) {
-					args[0] = "64";
+					args[0] = "128";
 					if (Database->GetJoy2().first > 55) {
-						args[0] = "128";
+						args[0] = "150";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
 
 			}
 			if (Database->GetJoy2().first < 25) {//DriveBackward
-				args[0] = "32";
+				args[0] = "64";
 				if (Database->GetJoy2().first < 20) {
-					args[0] = "64";
+					args[0] = "128";
 					if (Database->GetJoy2().first < 10) {
-						args[0] = "128";
+						args[0] = "150";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
