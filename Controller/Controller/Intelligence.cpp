@@ -22,7 +22,7 @@ Intelligence::~Intelligence()
 int LedInterval = 10000;
 int RefreshInterval = 500;
 int PrintInterval = 510;
-int ArmInterval = 8000000;
+int ArmInterval = 1000;
 int DriveInterval = 200;
 int CheckVisionInterval = 1000000;
 int ExecuteVisionInterval = 1500000;
@@ -86,23 +86,6 @@ void Intelligence::ExecuteSpeak()
 	}
 }
 
-//can only Repeat one command at a time. Run this to start repeating a command
-void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
-{
-	RepeatedCommand = cmd;
-	UntilTime = until;
-	RepeatInterval = interval;
-	RepeatUntil();
-}
-//this Repeats the selected command
-void Intelligence::RepeatUntil() {
-	if (std::chrono::system_clock::now() > RepeatTime) {
-		if (std::chrono::system_clock::now() < UntilTime) {
-			CommandQueue->push(RepeatedCommand);
-			RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
-		}
-	}
-}
 void Intelligence::ExecuteEgg() {
 	std::vector<std::string> args;
 	args.push_back("");
@@ -218,7 +201,7 @@ void Intelligence::ExecuteDrive()
 	int slowSpeed = 32;
 	int midSpeed = 64;
 	int highSpeed = 128;
-	if (std::chrono::system_clock::now() > DriveTime) {
+	if (std::chrono::system_clock::now() > DriveTime && Database->modus != modus::arm) {
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
 		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
@@ -315,25 +298,32 @@ void Intelligence::ExecuteLed() {
 }
 void Intelligence::ExecuteArm()
 {
-	if (std::chrono::system_clock::now() > MoveArmTime) {
+	Database->modus = modus::arm;
+	if (std::chrono::system_clock::now() > MoveArmTime && Database->modus == modus::arm) {
 		std::vector<std::string> args;
-		std::pair<int, int>* Tempjoy1 = new std::pair<int, int>(Database->GetJoy1());
 		args.push_back(std::to_string(joy1->first));
 		args.push_back(std::to_string(joy1->second));
 
-		if (joy1->first > 40) {
+		if (Database->joy2.first > 40) {
 			CommandQueue->push(Command(Worker, "ArmLeft", Database, args));
 		}
-		else if (joy1->first < 20) {
+		else if (Database->joy2.first < 20) {
 			CommandQueue->push(Command(Worker, "ArmRight", Database, args));
 		}
-		else if (joy1->second > 40) {
+		else if (Database->joy2.second > 40) {
 			CommandQueue->push(Command(Worker, "KineArmForward", Database, args));
 		}
-		else if (joy1->second < 20) {
+		else if (Database->joy2.second < 20) {
 			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));
 		}
-		joy1 = Tempjoy1;
+		else if (Database->joy1.first > 40) {
+			std::cout << "arm should move left" << std::endl;
+		}
+		else if (Database->joy1.first < 20) {
+			std::cout << "arm should move Right" << std::endl;
+		}
+
+
 		if (Database->updateGrab == true) {
 			if (Database->grab == true)
 				CommandQueue->push(Command(Worker, "GrabOn", Database, args));

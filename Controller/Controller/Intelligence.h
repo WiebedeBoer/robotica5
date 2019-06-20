@@ -37,8 +37,7 @@ private:
 	void ExecuteEgg();
 	void ExecuteChickinSurivalRun();
 	void ExecuteSpeak();
-	void ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval);
-	void RepeatUntil();
 	void ExecuteLed();
+
 };
 
