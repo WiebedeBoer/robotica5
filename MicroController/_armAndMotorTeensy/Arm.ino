@@ -3,7 +3,7 @@
 String servoA = "", servoB = "";
 String id, di, pos, sp;
 
-int maxPositions[5][2] = {{400,800}, {200,680}, {65, 640}, {350, 950}, {0, 1023}};
+int maxPositions[5][2] = {{400,800}, {35,680}, {65, 450}, {350, 950}, {185, 251}};
 
 void checkPosition(int id, String &target) {
   if (target.toInt() < maxPositions[id-1][0]) {

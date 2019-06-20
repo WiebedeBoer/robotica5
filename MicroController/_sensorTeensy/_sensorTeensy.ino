@@ -30,7 +30,7 @@ int left = 0, right = 0, count = 0;
 unsigned long timer = 0;
 float timestep = 0.01;
 
-String controller = "start;28;28;28;28";
+String controller = "start;28;28;28;28;false";
 
 void setup() {
   Serial.begin(115200);
