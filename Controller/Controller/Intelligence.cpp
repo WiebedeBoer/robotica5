@@ -19,7 +19,7 @@ Intelligence::~Intelligence()
 }
 
 //intervals for when some functions need to happen
-
+int LedInterval = 10000;
 int RefreshInterval = 500;
 int PrintInterval = 510;
 int ArmInterval = 1000;
@@ -38,6 +38,7 @@ std::chrono::system_clock::time_point RefreshVisionTime = std::chrono::system_cl
 std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ExecuteVisionInterval);
 std::chrono::system_clock::time_point SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
 std::chrono::system_clock::time_point RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
+std::chrono::system_clock::time_point LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
 std::chrono::system_clock::time_point UntilTime;
 
 //modus switching value
@@ -49,6 +50,7 @@ void Intelligence::Think()
 		Intelligence::CheckAfstandbediening();
 		Intelligence::CheckVision();
 		Intelligence::ExecuteDrive();
+		Intelligence::ExecuteLed();
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
 		Intelligence::ExecuteSpeak();		//debug print joystick values
@@ -286,7 +288,14 @@ void Intelligence::CheckAfstandbediening()
 		refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
 	}
 }
+void Intelligence::ExecuteLed() {
+	if (std::chrono::system_clock::now() > LedTime) {
+		CommandQueue->push(Command(Sensor, "TurnEyeCyan"));
 
+
+		LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
+	}
+}
 void Intelligence::ExecuteArm()
 {
 	Database->modus = modus::arm;

@@ -37,6 +37,7 @@ private:
 	void ExecuteEgg();
 	void ExecuteChickinSurivalRun();
 	void ExecuteSpeak();
+	void ExecuteLed();
 
 };
 

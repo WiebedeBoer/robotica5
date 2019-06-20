@@ -91,8 +91,8 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		if (args.size() > 1) {
-			double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
+		if (args.size() == 1) {
+			double joyOffset = (stoi(args[0]) - 40) + armsmoving.xoffset; //offset from joystick
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos + joyOffset;
 			double Targety = armsmoving.Ypos;
@@ -115,13 +115,12 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
-
 		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
-		if (args.size() > 1) {
+		if (args.size() == 1) {
 			//offsetting
-			double joyOffset = (20 - stoi(args[1])) + armsmoving.xoffset; //offset from joystick
+			double joyOffset = (20 - stoi(args[0])) + armsmoving.xoffset; //offset from joystick
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos - joyOffset;
 			double Targety = armsmoving.Ypos;
@@ -143,6 +142,64 @@ void Command::Execute() {
 		}
 		return;
 	}
+	
+	if (Command::type == "KineArmUp") {
+		ArmMove armsmoving;
+		Angles dlg;
+		char buffer[100];
+		//offsetting
+		if (args.size() == 1) {
+			double joyOffset = (stoi(args[0]) - 40) + armsmoving.yoffset; //offset from joystick
+			//double joyOffset = armsmoving.xoffset;
+			double Targety = armsmoving.Ypos;
+			Targety = armsmoving.Ypos + joyOffset;
+			double Targetx = armsmoving.Xpos;
+			if (Targetx > 40 && Targety > 210) {
+				//first command to move arm
+				std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+				if (noutput.size() > 2) {
+					armsmoving.Xpos = Targetx;
+					armsmoving.Ypos = Targety;
+					sprintf(buffer, "servoS?,2;%d;16&3;%d;32", noutput[0], noutput[1]);
+					Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+					//second command to keep height steady
+					sprintf(buffer, "servoS?,6;0;16&4;0;%d", noutput[2]);
+					Command::slave->SerialSend(buffer);
+					std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
+				}
+			}
+		}
+		return;
+	}
+	
+	if (Command::type == "KineArmDown") {
+		ArmMove armsmoving;
+		Angles dlg;
+		char buffer[100];
+		if (args.size() == 1) {
+			//offsetting
+			double joyOffset = (20 - stoi(args[0])) + armsmoving.yoffset; //offset from joystick
+			double Targety = armsmoving.Ypos;
+			Targety = armsmoving.Ypos - joyOffset;
+			double Targetx = armsmoving.Xpos;
+			if (Targetx > 40 && Targety > 210) {
+				//first command to move arm
+				std::vector<int> noutput = dlg.Gonio(Targetx, Targety);
+				if (noutput.size() > 2) {
+					armsmoving.Xpos = Targetx;
+					armsmoving.Ypos = Targety;
+					sprintf(buffer, "servoS?,2;%d;16&3;%d;32", noutput[0], noutput[1]);
+					Command::slave->SerialSend(buffer);
+					//second command to keep height steady
+					sprintf(buffer, "servoS?,6;0;16&4;0;%d", noutput[2]);
+					Command::slave->SerialSend(buffer);
+					std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
+				}
+			}
+		}
+		return;
+	}
+	
 	if (Command::type == "KineArmLeft") {
 		int OffsetLeft = 8; //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
