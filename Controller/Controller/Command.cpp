@@ -160,9 +160,9 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "Gripper") {
-		int OffsetGrip = 200;  //hardcoded target, must be from python vision for autonomous
+		int OffsetGrip = 186;  //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
-		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
+		sprintf(buffer, "servoS?,5;%d;16&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
 		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
@@ -170,7 +170,7 @@ void Command::Execute() {
 	if (Command::type == "GripperLoose") {
 		int OffsetGrip = 250;  //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
-		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
+		sprintf(buffer, "servoS?,5;%d;16&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
 		return;
 	}
