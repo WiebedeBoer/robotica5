@@ -183,13 +183,13 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 void loop() {
   nexLoop(nex_listen_list);   // Loop through list of Items
   updateJoy();                // Update Joysticks functie aanroepen
-  updateNextion();            // Update screen values on Nextion
+              // Update screen values on Nextion
   
   unsigned long currentMillis = millis(); // Current millis
   
   if (currentMillis - lastUpdateInterval >= updateInterval) { // Check wether interval passed
     lastUpdateInterval = currentMillis; // Set last check millis
-    
+    updateNextion();
     if (digitalRead(joy1Dig) == 0) {
       eggTrig = true;
     }    
@@ -270,18 +270,19 @@ void serialEvent2(){
 
     // Checksum check;
     if(true){ // Control checksum with sendsum, for error checking. It continues when no error is found
-      String result = "NoAction?,<>|\n";
+      String result = "NoActionController?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
         result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
         if (eggTrig) { eggTrig = false; }
       }
+
+      Serial.print("Resonding: ");Serial.println(result);
       
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
       result.toCharArray(resultarray, resultLength);
       Serial2.write(resultarray);// Send chararray to rp
-      
    }
      
     // Clear message
