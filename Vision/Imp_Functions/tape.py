@@ -157,15 +157,18 @@ def lineDetection(lines, bothLines, img):
 	if lines is not None:
 		i = 0
 		j = 0
-		
+
 		# Loop through lines
 		for line in lines:
 			(x1,y1,x2,y2) = line[0]
+			cv2.line(img, (x1, y1), (x2, y2), (0, 255, 0), 1)
 
 			# Compare every line
 			for lineCheck in lines: 
 
 				xC1,yC1,xC2,yC2 = lineCheck[0]
+
+				cv2.line(img, (xC1, yC1), (xC2, yC2), (255, 0, 0), 1)
 				distance = math.sqrt( (x1-xC1)**2 + (y1-yC1)**2 )
 
 				slopeln = round( float(slope( line[0] )), 0 )
@@ -229,5 +232,5 @@ def BlackTape(frame, follow):
 
 	#img = cv2.bilateralFilter(img,9,75,75)
 	edges = cv2.Canny(frame, 255,411,apertureSize = 3)
-	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
+	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 50, maxLineGap=35)
 	return lineDetection(lines, bothLines, frame)
