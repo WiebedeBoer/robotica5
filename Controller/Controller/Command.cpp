@@ -207,8 +207,19 @@ void Command::Execute() {
 	}if (Command::type == "speak_random") {
 		Command::tts.random_quote();
 		return;
+	}if (Command::type == "TurnEyeCyan") {
+		Command::slave->SerialSend("eyeCyan?,0");
+		return;
+	}if (Command::type == "TurnEyeRed") {
+		Command::slave->SerialSend("eyeRed?,0");
+		return;
+	}if (Command::type == "TurnEyeBlue") {
+		Command::slave->SerialSend("eyeBlue?,0");
+		return;
+	}if (Command::type == "TurnEyeWhite") {
+		Command::slave->SerialSend("eyeWhite?,0");
+		return;
 	}
-
 
 
 	if (Command::type == "RefreshVision") {

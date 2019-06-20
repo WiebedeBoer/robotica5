@@ -68,8 +68,8 @@ def debug(arg):
 	if(arg == "-p"):
 		while True:
 			frame = Camera_pi.getInstance()
-			print(mainSwitcher(frame, 3, 2, 0))
-			#cv2.imshow('Camera', frame)
+			print(mainSwitcher(frame, 0, 0, 0))
+			cv2.imshow('Camera', frame)
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 		cv2.destroyAllWindows()
@@ -79,7 +79,7 @@ def debug(arg):
 		try:
 			while True:
 				_, frame = cap.read()
-				print(mainSwitcher(frame, 3, 2, 0))
+				print(mainSwitcher(frame, 0, 0, 0))
 				cv2.imshow('frame', frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
