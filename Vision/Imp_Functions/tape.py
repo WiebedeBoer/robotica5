@@ -232,5 +232,5 @@ def BlackTape(frame, follow):
 
 	#img = cv2.bilateralFilter(img,9,75,75)
 	edges = cv2.Canny(frame, 255,411,apertureSize = 3)
-	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
+	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 50, maxLineGap=35)
 	return lineDetection(lines, bothLines, frame)
