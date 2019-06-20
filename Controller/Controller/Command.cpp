@@ -85,7 +85,7 @@ void Command::Execute() {
 		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
-	if (Command::type == "KineArmForward") {
+	if (Command::type == "KineArmForw.ard") {
 
 		ArmMove armsmoving;
 		Angles dlg;
