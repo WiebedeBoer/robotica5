@@ -91,8 +91,8 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		if (args.size() > 1) {
-			double joyOffset = (stoi(args[1]) - 40) + armsmoving.xoffset; //offset from joystick
+		if (args.size() == 1) {
+			double joyOffset = (stoi(args[0]) - 40) + armsmoving.xoffset; //offset from joystick
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos + joyOffset;
 			double Targety = armsmoving.Ypos;
@@ -115,13 +115,12 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
-
 		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
-		if (args.size() > 1) {
+		if (args.size() == 1) {
 			//offsetting
-			double joyOffset = (20 - stoi(args[1])) + armsmoving.xoffset; //offset from joystick
+			double joyOffset = (20 - stoi(args[0])) + armsmoving.xoffset; //offset from joystick
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos - joyOffset;
 			double Targety = armsmoving.Ypos;
@@ -149,8 +148,8 @@ void Command::Execute() {
 		Angles dlg;
 		char buffer[100];
 		//offsetting
-		if (args.size() > 1) {
-			double joyOffset = (stoi(args[1]) - 40) + armsmoving.yoffset; //offset from joystick
+		if (args.size() == 1) {
+			double joyOffset = (stoi(args[0]) - 40) + armsmoving.yoffset; //offset from joystick
 			//double joyOffset = armsmoving.xoffset;
 			double Targety = armsmoving.Ypos;
 			Targety = armsmoving.Ypos + joyOffset;
@@ -177,9 +176,9 @@ void Command::Execute() {
 		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
-		if (args.size() > 1) {
+		if (args.size() == 1) {
 			//offsetting
-			double joyOffset = (20 - stoi(args[1])) + armsmoving.yoffset; //offset from joystick
+			double joyOffset = (20 - stoi(args[0])) + armsmoving.yoffset; //offset from joystick
 			double Targety = armsmoving.Ypos;
 			Targety = armsmoving.Ypos - joyOffset;
 			double Targetx = armsmoving.Xpos;
