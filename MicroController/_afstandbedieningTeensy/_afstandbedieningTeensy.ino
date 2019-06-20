@@ -1,11 +1,11 @@
 #include <Nextion.h>
 
 // Define joysticks location on pins. 
-#define joy1x A0  // Analog 0
-#define joy1y A1  // Analog 1
+#define joy1y A0  // Analog 0
+#define joy1x A1  // Analog 1
 #define joy1Dig 16 
-#define joy2x A3  // Analog 3
-#define joy2y A4  // Analog 4
+#define joy2y A3  // Analog 3
+#define joy2x A4  // Analog 4
 #define joy2Dig 19
 
 // Movement Page
@@ -24,7 +24,7 @@ NexNumber NYaw          = NexNumber(3, 3, "NYaw");          // Number of Yaw
 NexNumber NPitch        = NexNumber(3, 3, "NPitch");        // Number of Pitch 
 
 // Mode Page
-//NexButton BPitch      = NexButton(4, 3, "BPitch");        // Pitch Button -- Same as SPitch       // NOT USED -- Button declared in Nextion
+NexButton btnPitch      = NexButton(4, 3, "BPitch");        // Pitch Button -- Same as SPitch       // NOT USED -- Button declared in Nextion
 NexButton btnPoortje    = NexButton(4, 4, "BPoortje");      // Poortje Button
 NexButton btnChicken    = NexButton(4, 5, "BChicken");      // Chickenrun Button
 NexButton btnTrap       = NexButton(4, 11, "BTrap");        // Trap Button 
@@ -64,12 +64,13 @@ String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
 int joyLX, joyLY, joyRX, joyRY;
 
-unsigned int updateInterval = 1000;
+unsigned int updateInterval = 250;
 unsigned long lastUpdateInterval = 0;
 
 // Intialize event items for nextion
 NexTouch *nex_listen_list[] = 
 {
+  &btnPitch,
   &btnPoortje,
   &btnChicken,
   &btnTrap,
@@ -103,6 +104,7 @@ void setup() {
   digitalWrite(joy2Dig, HIGH);
 
   // Mode page
+  btnPitch.attachPop(btnPitchPopCallback, &btnPitch);
   btnPoortje.attachPop(btnPoortjePopCallback, &btnPoortje);
   btnChicken.attachPop(btnChickenPopCallback, &btnChicken);
   btnTrap.attachPop(btnTrapPopCallback, &btnTrap);
@@ -127,6 +129,9 @@ void setup() {
 // _________________________________________________________________
 //                         BUTTONS MODE
 // _________________________________________________________________
+
+// Callback function btnPoortje
+void btnPitchPopCallback(void *ptr) { curMode = "Pitch"; }
 
 // Callback function btnPoortje
 void btnPoortjePopCallback(void *ptr) { curMode = "Poortje"; }
@@ -177,17 +182,17 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 
 void loop() {
   nexLoop(nex_listen_list);   // Loop through list of Items
-  updateJoy();                // update Joysticks functie aanroepen
+  updateJoy();                // Update Joysticks functie aanroepen
+  updateNextion();            // Update screen values on Nextion
   
   unsigned long currentMillis = millis(); // Current millis
   
   if (currentMillis - lastUpdateInterval >= updateInterval) { // Check wether interval passed
+    lastUpdateInterval = currentMillis; // Set last check millis
+    
     if (digitalRead(joy1Dig) == 0) {
       eggTrig = true;
-    }
-    
-    lastUpdateInterval = currentMillis; // Set last check millis
-    updateNextion();
+    }    
   }
 }
 
@@ -196,7 +201,7 @@ void updateNextion(){
   // Update JoyL text on Nextion
   Serial1.print("JoyL.txt=");
   Serial1.print("\"");
-  Serial1.print(String(joyLX/16) + "," + String(joyLY/16));
+  Serial1.print(String(joyLX) + "," + String(joyLY));
   Serial1.print("\"");
   Serial1.write(0xff);
   Serial1.write(0xff);
@@ -205,7 +210,7 @@ void updateNextion(){
   // Update JoyR text on Nextion
   Serial1.print("JoyR.txt=");
   Serial1.print("\"");
-  Serial1.print(String(joyRX/16) + "," + String(joyRY/16));
+  Serial1.print(String(joyRX) + "," + String(joyRY));
   Serial1.print("\"");
   Serial1.write(0xff);
   Serial1.write(0xff);
@@ -223,15 +228,15 @@ void updateNextion(){
 
 // Update joystick values
 void updateJoy() {
-  joyLX = analogRead(joy1x);
-  joyLY = analogRead(joy1y);
-  joyRX = analogRead(joy2x);
-  joyRY = analogRead(joy2y);
+  joyLX = map(1023-analogRead(joy2x), 0, 940, 0, 56) - 6;
+  joyLY = map(analogRead(joy2y), 0, 900, 0, 56);
+  joyRX = map(analogRead(joy1x), 0, 900, 0, 56);
+  joyRY = map(1023-analogRead(joy1y), 0, 920, 0, 56) - 6;
 }
 
 // Return Joystick Values
 String getJoy() {
-  return String(joyLX/16) + ";" + String(joyLY/16) + ";" + String(joyRX/16) + ";" + String(joyRY/16); 
+  return String(joyLX) + ";" + String(joyLY) + ";" + String(joyRX) + ";" + String(joyRY); 
 }
 
 //serialEventInterupt
@@ -269,7 +274,6 @@ void serialEvent2(){
       
       if(rx_Msg == "sendRefresh?|"){
         result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
-
         if (eggTrig) { eggTrig = false; }
       }
       

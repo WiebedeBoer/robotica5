@@ -20,23 +20,23 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 
-int RefreshInterval = 1000000;
-int PrintInterval = 500000;
-int ArmInterval = 100000;
-int DriveInterval = 1000000;
-int CheckVisionInterval = 500000;
-int ExecuteVisionInterval = 500000;
-int GripperInterval = 5000000;
-int SpeakInterval = 120000;
+int RefreshInterval = 1000;
+int PrintInterval = 500;
+int ArmInterval = 1000;
+int DriveInterval = 1000;
+int CheckVisionInterval = 50000;
+int ExecuteVisionInterval = 50000;
+int GripperInterval = 5000;
+int SpeakInterval = 300000;
 // Thom values
-//int RefreshInterval = 500;
-//int PrintInterval = 510;
-//int ArmInterval = 800;
-//int DriveInterval = 500;
-//int CheckVisionInterval = 1000;
-//int ExecuteVisionInterval = 150;
-//int GripperInterval = 5000;
-//int SpeakInterval = 1000;
+int RefreshInterval = 500;
+int PrintInterval = 510;
+int ArmInterval = 8000000;
+int DriveInterval = 200;
+int CheckVisionInterval = 1000000;
+int ExecuteVisionInterval = 1500000;
+int GripperInterval = 500000;
+int SpeakInterval = 1000000;
 int RepeatInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
@@ -78,16 +78,18 @@ void Intelligence::ExecuteChickinSurivalRun()
 void Intelligence::ExecuteSpeak()
 {
 	if (std::chrono::system_clock::now() > SpeakTime) {
+
 		if (Database->modus = modus::pitch) {
 			CommandQueue->push(Command(Worker, "speak_pitch", Database));
+
 		}
 		else
 		{
-			CommandQueue->push(Command(Worker, "speak_random", Database));
+			//CommandQueue->push(Command(Worker, "speak_random", Database));
 
 		}
 		
-		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
+		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval +999999);
 	}
 }
 
@@ -229,50 +231,55 @@ void Intelligence::ExecuteDrive()
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
 
 			if (Database->GetJoy2().second > 35) {//driveleft
-				args[0] = "64";
+				args[0] = "32";
 				if (Database->GetJoy2().second > 45) {
 					args[0] = "128";
 					if (Database->GetJoy2().second > 55) {
-						args[0] = "150";
+						args[0] = "128";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				return;
 				
 			}
-			if (Database->GetJoy2().second < 30) {//DriveRight
-				args[0] = "64";
+			if (Database->GetJoy2().second < 25) {//DriveRight
+				args[0] = "32";
 				if (Database->GetJoy2().second < 20) {
 					args[0] = "128";
 					if (Database->GetJoy2().second < 10) {
-						args[0] = "150";
+						args[0] = "128";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+				return;
 
 			}
 			if (Database->GetJoy2().first > 25 && Database->GetJoy2().first < 34 && Database->GetJoy2().second > 25 && Database->GetJoy2().second < 34) {//StopDriving
-				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+				//CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+				return;
 			}
 			if (Database->GetJoy2().first > 35) {//DriveForward
-				args[0] = "64";
+				args[0] = "32";
 				if (Database->GetJoy2().first > 45) {
 					args[0] = "128";
 					if (Database->GetJoy2().first > 55) {
-						args[0] = "150";
+						args[0] = "128";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+				return;
 
 			}
 			if (Database->GetJoy2().first < 25) {//DriveBackward
-				args[0] = "64";
+				args[0] = "32";
 				if (Database->GetJoy2().first < 20) {
 					args[0] = "128";
 					if (Database->GetJoy2().first < 10) {
-						args[0] = "150";
+						args[0] = "128";
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+				return;
 
 			}
 			joy2 = Tempjoy2;
