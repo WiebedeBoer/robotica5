@@ -21,7 +21,7 @@ bool debug = false; // Debug enables a lot of Serial prints
 
 unsigned long motorPreviousMillis = 0;
 
-const long motorInterval = 1000;
+const long motorInterval = 250;
 
 char buffer[100] = {0};
 char rx_Byte = 0;             // Last received byte
