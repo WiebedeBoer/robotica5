@@ -12,7 +12,7 @@ TextToSpeach::~TextToSpeach()
 }
 //base function to make the espeak command
 void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int speed) {
-	std::string cmd = ("espeak \"" + text + "\" -v " + lang + " -k -s" + std::to_string(speed) + " -p" + std::to_string(pitch));
+	std::string cmd = ("espeak \"" + text + "\" -v " + lang + " -s" + std::to_string(speed) + " -p" + std::to_string(pitch));
 	char* ccmd = convertstrtochar(cmd);
 	std::future<void> r = std::async(std::launch::async, [ccmd] {system(ccmd); });
 	
@@ -21,31 +21,39 @@ void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int spe
 
 //gives the pitch
 void TextToSpeach::give_pitch() {
-	speak_normal("Hello!");
-
-	speak_normal("My name is Wall-A");
-
-	speak_normal("I am a robot created by group 5");
-
-	speak_normal("My favorite creator is sven");
-
-	speak_normal("My only purpose in this world is to defeat the other robots in a serie of challenges");
-
-	speak_angry("Ofcourse I will be victorious!");
-
-	speak_quite("a", 90);
-
-	speak_normal("I am the first creation of the wall-project, They are still working on my brother wall-e");
-
-	speak_normal("There are some differences between us");
-
-	speak_normal("for instance, I can search for eggs instead of garbage");
-
-	speak_normal("And i avoid chickins, they scare me allot!");
-
-	speak_normal("My favorite hobbys are following eggs and blue beams");
-
-
+	speak_quite("a", 1200);
+	speak_normal("Initializing. Three. Two. One.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Welkom allemaal, mijn naam is vast al bekend");
+	speak_quite("a", 1200);
+	speak_normal("Initializing...3...2...1");
+	speak_quite("a", 1200);
+	speak_normal_nl("Welkom allemaal bij deze wall-I ficatie. Mijn naam is Wall-a. De beste robot die hier vandaag staat!");
+	speak_quite("a", 1200);
+	speak_normal_nl("Mijn projectgroep is groep 5. Zij hebben uit de allerdiepste lade in de werkplaats mijn blauwdruk gevonden");
+	speak_quite("a", 1200);
+	speak_normal_nl("Misschien zie ik er wel bekend uit en heb je mijn blauwdruk al gezien.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Ik ben de voorloper van de bekende Wall-I robot. Ik ben prototype alfa");
+	speak_quite("a", 1200);
+	speak_normal_nl("Na het zien van de blauwdruk heeft groep 5 besloten dat ik de beste robot zou zijn voor de wedstrijd.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Zij hebben mij in de korte tijd proberen op te bouwen.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Eieren rapen en blauwe blokjes volgen kan ik heel erg goed. Bij kippen blijf ik liever uit de buurt want die vind ik een beetje eng");
+	speak_quite("a", 1200);
+	speak_normal_nl("Ik luister ook graag naar muziek en kan heel erg goed dansen wanneer mijn favoriete nummer wordt afgespeeld."); // veranderen mijn ogen van kleur
+	speak_quite("a", 1200);
+	speak_normal_nl("Door mijn rupsbanden kan ik heel goed over de bak met grind rijden, dit is één van mijn beste eigenschappen.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Ik ga winnen omdat ik niet geprogrammeerd ben om te valen.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Wall-a. Wil om Altijd Lekker Lui te winnen, Altijd.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Wil je nog meer van mijn goede eigenschappen zien");
+	speak_quite("a", 5000);
+	speak_normal_nl("Kom dan eens langs in lokaal F2060 dan zal groep 5 alles over mij vertellen");
+	speak_quite("a", 1200);
 }
 
 void TextToSpeach::hello() {
@@ -102,19 +110,19 @@ void TextToSpeach::speak_angry(std::string text) {
 
 //says something  in the normal voice
 void TextToSpeach::speak_normal_nl(std::string text) {
-	espeak(text, "dutch", 40, 90);
+	espeak(text, "dutch+f4", 40, 120);
 }
 //says something  in the happy voice
 void TextToSpeach::speak_happy_nl(std::string text) {
-	espeak(text, "dutch", 99, 90);
+	espeak(text, "dutch+f4", 99, 90);
 }
 //says something  in the angry voice
 void TextToSpeach::speak_angry_nl(std::string text) {
-	espeak(text, "dutch", 0, 90);
+	espeak(text, "dutch+f4", 0, 90);
 }
 
 void TextToSpeach::speak_quite(std::string text, int speed) {
-	std::string cmd = ("espeak \"" + text + "\" -v " + "en-german" + " -a0 -s" + std::to_string(speed));
+	std::string cmd = ("espeak \"" + text + "\" -v " + "dutch" + " -a0 -s" + std::to_string(speed));
 	char* ccmd = convertstrtochar(cmd);
 	system(ccmd);
 	delete(ccmd);

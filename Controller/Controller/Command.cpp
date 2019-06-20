@@ -160,7 +160,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "Gripper") {
-		int OffsetGrip = 18;  //hardcoded target, must be from python vision for autonomous
+		int OffsetGrip = 200;  //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
 		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
@@ -168,7 +168,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "GripperLoose") {
-		int OffsetGrip = 8;  //hardcoded target, must be from python vision for autonomous
+		int OffsetGrip = 250;  //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
 		sprintf(buffer, "servoS?,5;%d;32&6;0;0", OffsetGrip);
 		Command::slave->SerialSend(buffer); //ID;POS;SPEED
@@ -179,18 +179,18 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveForward") {
-		Command::slave->SerialSend("motor?,1;" + args[0] + "&1;" + args[0] + "");
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
 		return;
 	}
 	if (Command::type == "DriveBackward") {
-		Command::slave->SerialSend("motor?,2;" + args[0] + "&2;" + args[0] + "");
+		Command::slave->SerialSend("motor?,2;" + args[0] + "&1;" + args[0] + "");
 		return;
 	}
 	if (Command::type == "DriveLeft") {
-		Command::slave->SerialSend("motor?,2;" + args[0] + "&1;" + args[0] + "");
+		Command::slave->SerialSend("motor?,2;" + args[0] + "&2;" + args[0] + "");
 		return;
 	}if (Command::type == "DriveRight") {
-		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&1;" + args[0] + "");
 		return;
 	}if (Command::type == "speak_normal") {
 		Command::tts.speak_normal(args[0]);
@@ -207,8 +207,19 @@ void Command::Execute() {
 	}if (Command::type == "speak_random") {
 		Command::tts.random_quote();
 		return;
+	}if (Command::type == "TurnEyeCyan") {
+		Command::slave->SerialSend("eyeCyan?,0");
+		return;
+	}if (Command::type == "TurnEyeRed") {
+		Command::slave->SerialSend("eyeRed?,0");
+		return;
+	}if (Command::type == "TurnEyeBlue") {
+		Command::slave->SerialSend("eyeBlue?,0");
+		return;
+	}if (Command::type == "TurnEyeWhite") {
+		Command::slave->SerialSend("eyeWhite?,0");
+		return;
 	}
-
 
 
 	if (Command::type == "RefreshVision") {

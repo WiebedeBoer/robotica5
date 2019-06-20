@@ -17,11 +17,11 @@ MCP4XXX* potR;
 #define potRpin1 5
 #define potRpin2 6
 
-bool debug = true; // Debug enables a lot of Serial prints
+bool debug = false; // Debug enables a lot of Serial prints
 
 unsigned long motorPreviousMillis = 0;
 
-const long motorInterval = 1000;
+const long motorInterval = 300;
 
 char buffer[100] = {0};
 char rx_Byte = 0;             // Last received byte
@@ -132,7 +132,8 @@ void serialEvent() {
       // checksum(OriginalMessage) == SendSum.toInt()
       if(true) { //control checksum with sendsum, for error checking. It continues when no error is found.
         //possible commands and code here. Pi waits for ack.
-        String result = "";
+        String result = "ack:noActionArmAndMotor?<>|\n";
+        
         if(rx_Msg == "servo?|"){
           result = respondServo() + String(checksum(respondServo())) + "\n";
         }
@@ -144,13 +145,6 @@ void serialEvent() {
         }
         else if(rx_Msg == "motor?|") {
           result = respondMotor() + String(checksum(respondMotor())) + "\n";
-        }
-        else {
-          result = "ack:noAction?<>|\n";
-        }
-
-        if(result == "\n"){
-          result = "ack:noAction?<ENDLINEERROR>|\n";
         }
         
         int resultLength = result.length() +1;          // Convert string to char array
