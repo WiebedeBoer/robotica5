@@ -12,7 +12,7 @@ TextToSpeach::~TextToSpeach()
 }
 //base function to make the espeak command
 void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int speed) {
-	std::string cmd = ("espeak \"" + text + "\" -v " + lang + " -k -s" + std::to_string(speed) + " -p" + std::to_string(pitch));
+	std::string cmd = ("espeak \"" + text + "\" -v " + lang + " -s" + std::to_string(speed) + " -p" + std::to_string(pitch));
 	char* ccmd = convertstrtochar(cmd);
 	std::future<void> r = std::async(std::launch::async, [ccmd] {system(ccmd); });
 	
@@ -21,20 +21,39 @@ void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int spe
 
 //gives the pitch
 void TextToSpeach::give_pitch() {
-	speak_normal_nl("Hallo allemaal, mijn naam is al meerdere keren door de gangen van de school gegaan, zo populair ben ik.");
-	speak_normal_nl("Mijn naam is Wall-a. Volgens de makers de beste robot die hier vandaag staat.");
-	speak_normal_nl("Misschien zie ik er bekend uit, en dat zou kunnen kloppen.");
-    speak_normal_nl("Mijn projectgroep is groep 5, ze hebben in de WTB werkplaats uit de aller diepste lade een blauwdruk gevonden van mij.");
-    speak_normal_nl("Ik ben namelijk de voorloper van de bekende Wall-e robots. Ik ben prototype a.");
-    speak_normal_nl("Groep 5 heeft besloten dat ik de beste robot zou zijn voor de wedstrijd na het zien van de blauwdruk.");
-    speak_normal_nl("Zij hebben mij in de korte tijd proberen op te bouwen, dit met enkele tegenslagen.");
-	speak_normal_nl("Eieren rapen en blauwe blokjes volgens kan ik heel erg goed. Bij kippen blijf ik liever uit de buurt, want die vind ik een beetje eng.");
-	speak_normal_nl("Ik luister ook graag naar muziek en kan hier erg goed op dansen. Als mijn favoriete muziek afgespeeld wordt veranderen mijn ogen van kleur.");
+	speak_quite("a", 1200);
+	speak_normal("Initializing. Three. Two. One.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Welkom allemaal, mijn naam is vast al bekend");
+	speak_quite("a", 1200);
+	speak_normal("Initializing...3...2...1");
+	speak_quite("a", 1200);
+	speak_normal_nl("Welkom allemaal bij deze wall-I ficatie. Mijn naam is Wall-a. De beste robot die hier vandaag staat!");
+	speak_quite("a", 1200);
+	speak_normal_nl("Mijn projectgroep is groep 5. Zij hebben uit de allerdiepste lade in de werkplaats mijn blauwdruk gevonden");
+	speak_quite("a", 1200);
+	speak_normal_nl("Misschien zie ik er wel bekend uit en heb je mijn blauwdruk al gezien.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Ik ben de voorloper van de bekende Wall-I robot. Ik ben prototype alfa");
+	speak_quite("a", 1200);
+	speak_normal_nl("Na het zien van de blauwdruk heeft groep 5 besloten dat ik de beste robot zou zijn voor de wedstrijd.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Zij hebben mij in de korte tijd proberen op te bouwen.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Eieren rapen en blauwe blokjes volgen kan ik heel erg goed. Bij kippen blijf ik liever uit de buurt want die vind ik een beetje eng");
+	speak_quite("a", 1200);
+	speak_normal_nl("Ik luister ook graag naar muziek en kan heel erg goed dansen wanneer mijn favoriete nummer wordt afgespeeld."); // veranderen mijn ogen van kleur
+	speak_quite("a", 1200);
 	speak_normal_nl("Door mijn rupsbanden kan ik heel goed over de bak met grind rijden, dit is één van mijn beste eigenschappen.");
-	speak_normal_nl("Ik maak kans om te winnen, omdat groep 5 mijn blauwdruk heeft gezien en mij op zijn best hebben gemaakt.");
-	speak_normal_nl("Door mijn rupsbanden kan ik heel goed over de bak met grind rijden, dit is één van mijn beste eigenschappen.");
-	speak_normal_nl("Hierdoor ben ik zo goed gemaakt dat verliezen geen optie is. WALL-A: Wil om Altijd Lekker Lui te winnen, Altijd.");
-	speak_normal_nl("Wil je nog meer van mijn goede eigenschappen zien? Kom dan eens langs in lokaal F2060, dan zal groep 5 alles over mij vertellen.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Ik ga winnen omdat ik niet geprogrammeerd ben om te valen.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Wall-a. Wil om Altijd Lekker Lui te winnen, Altijd.");
+	speak_quite("a", 1200);
+	speak_normal_nl("Wil je nog meer van mijn goede eigenschappen zien");
+	speak_quite("a", 5000);
+	speak_normal_nl("Kom dan eens langs in lokaal F2060 dan zal groep 5 alles over mij vertellen");
+	speak_quite("a", 1200);
 }
 
 void TextToSpeach::hello() {
@@ -91,7 +110,7 @@ void TextToSpeach::speak_angry(std::string text) {
 
 //says something  in the normal voice
 void TextToSpeach::speak_normal_nl(std::string text) {
-	espeak(text, "dutch+f4", 40, 90);
+	espeak(text, "dutch+f4", 40, 120);
 }
 //says something  in the happy voice
 void TextToSpeach::speak_happy_nl(std::string text) {
@@ -103,7 +122,7 @@ void TextToSpeach::speak_angry_nl(std::string text) {
 }
 
 void TextToSpeach::speak_quite(std::string text, int speed) {
-	std::string cmd = ("espeak \"" + text + "\" -v " + "en-german" + " -a0 -s" + std::to_string(speed));
+	std::string cmd = ("espeak \"" + text + "\" -v " + "dutch" + " -a0 -s" + std::to_string(speed));
 	char* ccmd = convertstrtochar(cmd);
 	system(ccmd);
 	delete(ccmd);
