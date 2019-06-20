@@ -20,15 +20,6 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 
-int RefreshInterval = 1000;
-int PrintInterval = 500;
-int ArmInterval = 1000;
-int DriveInterval = 1000;
-int CheckVisionInterval = 50000;
-int ExecuteVisionInterval = 50000;
-int GripperInterval = 5000;
-int SpeakInterval = 300000;
-// Thom values
 int RefreshInterval = 500;
 int PrintInterval = 510;
 int ArmInterval = 8000000;
@@ -85,31 +76,31 @@ void Intelligence::ExecuteSpeak()
 		}
 		else
 		{
-			//CommandQueue->push(Command(Worker, "speak_random", Database));
+			CommandQueue->push(Command(Worker, "speak_random", Database));
 
 		}
-		
-		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval +999999);
+
+		SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval + 999999);
 	}
 }
 
 //can only Repeat one command at a time. Run this to start repeating a command
-//void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
-//{
-//	RepeatedCommand = cmd;
-//	UntilTime = until;
-//	RepeatInterval = interval;
-//	RepeatUntil();
-//}
+void Intelligence::ExecuteUntil(Command cmd, std::chrono::system_clock::time_point until, int interval)
+{
+	RepeatedCommand = cmd;
+	UntilTime = until;
+	RepeatInterval = interval;
+	RepeatUntil();
+}
 //this Repeats the selected command
-//void Intelligence::RepeatUntil() {
-//	if (std::chrono::system_clock::now() > RepeatTime) {
-//		if (std::chrono::system_clock::now() < UntilTime) {
-//			CommandQueue->push(RepeatedCommand);
-//			RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
-//		}
-//	}
-//}
+void Intelligence::RepeatUntil() {
+	if (std::chrono::system_clock::now() > RepeatTime) {
+		if (std::chrono::system_clock::now() < UntilTime) {
+			CommandQueue->push(RepeatedCommand);
+			RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
+		}
+	}
+}
 void Intelligence::ExecuteEgg() {
 	std::vector<std::string> args;
 	args.push_back("");
@@ -184,10 +175,9 @@ void Intelligence::ExecuteBlueBeam() {
 				// Write if not initialized
 				if (Database->horizontalBlueBeam == std::numeric_limits<float>::max())
 					Database->horizontalBlueBeam = std::stof(out[1]);
-				
+
 				// Write if new value
-				if(abs(Database->horizontalBlueBeam - 10) > abs(std::stof(out[1]))
-					|| abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
+				if (abs(Database->horizontalBlueBeam - 10) > abs(std::stof(out[1])) || abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
 					Database->horizontalBlueBeam = std::stof(out[1]);
 			}
 		}
@@ -199,13 +189,13 @@ void Intelligence::ExecuteBlueBeam() {
 			//if near and in sight, drive
 			if (distance >= 5 && distance < 210) {
 				auto argsChange = [](std::string speed, std::vector<std::string> args) { args[0] = speed; return args; };
-				
+
 				//left
-				if (Database->horizontalBlueBeam < -50) 
+				if (Database->horizontalBlueBeam < -50)
 					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("128", args)));
-			
+
 				//right
-				else if (Database->horizontalBlueBeam > 50) 
+				else if (Database->horizontalBlueBeam > 50)
 					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("128", args)));
 			}
 
@@ -222,68 +212,77 @@ void Intelligence::ExecuteBlueBeam() {
 
 void Intelligence::ExecuteDrive()
 {
+
+	int slowSpeed = 32;
+	int midSpeed = 64;
+	int highSpeed = 128;
 	if (std::chrono::system_clock::now() > DriveTime) {
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
-		if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
+		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
 			std::vector<std::string> args;
 			args.push_back("");
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
 
 			if (Database->GetJoy2().second > 35) {//driveleft
-				args[0] = "32";
+				args[0] = slowSpeed;
 				if (Database->GetJoy2().second > 45) {
-					args[0] = "128";
+					args[0] = midSpeed;
 					if (Database->GetJoy2().second > 55) {
-						args[0] = "128";
-					}
-				}
-				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
-				return;
-				
-			}
-			if (Database->GetJoy2().second < 25) {//DriveRight
-				args[0] = "32";
-				if (Database->GetJoy2().second < 20) {
-					args[0] = "128";
-					if (Database->GetJoy2().second < 10) {
-						args[0] = "128";
-					}
-				}
-				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
-				return;
-
-			}
-			if (Database->GetJoy2().first > 25 && Database->GetJoy2().first < 34 && Database->GetJoy2().second > 25 && Database->GetJoy2().second < 34) {//StopDriving
-				//CommandQueue->push(Command(Worker, "DriveStop", Database, args));
-				return;
-			}
-			if (Database->GetJoy2().first > 35) {//DriveForward
-				args[0] = "32";
-				if (Database->GetJoy2().first > 45) {
-					args[0] = "128";
-					if (Database->GetJoy2().first > 55) {
-						args[0] = "128";
+						args[0] = highSpeed;
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+
+				return;
+
+			}
+			if (Database->GetJoy2().second < 25) {//DriveRight
+				args[0] = slowSpeed;
+				if (Database->GetJoy2().second < 20) {
+					args[0] = midSpeed;
+					if (Database->GetJoy2().second < 10) {
+						args[0] = highSpeed;
+					}
+				}
+				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+
+				return;
+
+			}
+
+			if (Database->GetJoy2().first > 35) {//DriveForward
+				args[0] = slowSpeed;
+				if (Database->GetJoy2().first > 45) {
+					args[0] = midSpeed;
+					if (Database->GetJoy2().first > 55) {
+						args[0] = highSpeed;
+					}
+				}
+				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+
 				return;
 
 			}
 			if (Database->GetJoy2().first < 25) {//DriveBackward
-				args[0] = "32";
+				args[0] = slowSpeed;
 				if (Database->GetJoy2().first < 20) {
-					args[0] = "128";
+					args[0] = midSpeed;
 					if (Database->GetJoy2().first < 10) {
-						args[0] = "128";
+						args[0] = highSpeed;
 					}
 				}
-				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+
 				return;
 
 			}
+			if (Database->GetJoy2().first > 28 && Database->GetJoy2().first < 32 && Database->GetJoy2().second > 28 && Database->GetJoy2().second < 32) {//StopDriving
+				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+				return;
+			}
 			joy2 = Tempjoy2;
-		}
+		//}
 	}
 }
 
@@ -340,15 +339,6 @@ void Intelligence::ExecuteVision()
 {
 	if (std::chrono::system_clock::now() > ExecuteVisionTime) {
 
-		/*
-				Intelligence::Database->modus = static_cast<modus::Modus>(i);
-				if (i > 6)
-				{
-					i = 0;
-				}
-				else {
-					i++;
-				}*/
 
 		switch (Intelligence::Database->modus)
 		{

@@ -73,7 +73,7 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 			catch (const std::exception &) {
 				std::cout << "fatel ack error" << std::endl;
 			}
-			
+
 			Response = m[3].str();
 			if (acksum != calcsum) {
 
@@ -107,7 +107,12 @@ bool MicroController::ackresponse(std::string ack, std::string send) {
 void MicroController::SerialSend(std::string input) {
 	if (fd < 3) {
 		serialClose(fd);
-		fd = serialOpen("/dev/ttyACM0", 115200);
+		std::cout << "ReconnectUsbSerial" << std::endl;
+		if (UsbPort == "/dev/ttyACM01")
+			fd = serialOpen("/dev/ttyACM0", 115200);
+		else
+			fd = serialOpen(UsbPort, 115200);
+
 	}
 	std::string inputsum;
 	//std::cout << fd << std::endl;
@@ -120,7 +125,7 @@ void MicroController::SerialSend(std::string input) {
 		try
 		{
 			NackCount++;
-			Send(sendstring, fd	);
+			Send(sendstring, fd);
 		}
 		catch (const std::exception &) {
 
@@ -136,11 +141,11 @@ void MicroController::SerialSend(std::string input) {
 	}
 }
 
-std::string MicroController::GetLastResponce(){
+std::string MicroController::GetLastResponce() {
 
 	std::string result = Response;
 	Response = "";
-return result;
+	return result;
 }
 MicroController::MicroController(char* usb)
 {

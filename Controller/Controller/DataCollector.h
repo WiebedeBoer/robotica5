@@ -44,6 +44,9 @@ public:
 	void SetAfstandBedieningData(std::string input);
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
+	
+	std::pair<int, int> joy1;
+	std::pair<int, int> joy2;
 	modus::Modus modus = modus::Controller;
 	int speed;
 	float horizontalBlueBeam = std::numeric_limits<float>::max();
@@ -54,8 +57,6 @@ public:
 	bool grab = false;
 
 private:
-	std::pair<int, int> joy1;
-	std::pair<int, int> joy2;
 	int gyroscoop;
 };
 
