@@ -20,7 +20,7 @@ def eggtelligence(frame, argument, argument1):
 
 
 def eggDistance(frame, argument):
-	closestDistance = []
+	closestDistance = sys.float_info.max
 	detectEgg = DetectEgg(frame, None)
 	eggDetected = detectEgg.DetectEgg()
 	xyAxis = []
