@@ -31,7 +31,7 @@ def eggDistance(frame, argument):
 		for idx, width in enumerate(allKeypointsWidths):
 			distance = calculateDistance(width, 420, 5.4)
 			if distance < closestDistance:
-				closestDistance = distance 
+				closestDistance = distance
 				xyAxis = whichDirection(eggDetected[idx].pt[0], eggDetected[idx].pt[1])
 		return str(str(closestDistance) + ':' + str(xyAxis[0]) + ':' + str(xyAxis[1]))
 
@@ -64,7 +64,6 @@ def chicken(frame, argument):
 
 	# imgTrainColor = cv2.resize(imgTrainColor, (screenWidth, screenHeight))
 	rectanglePts = fm_ORB(frame, imgTrainColor, 60)
-
 	if rectanglePts != False and rectanglePts != None:
 		center = calculateCenter(rectanglePts)
 		xyAxis = whichDirection(center[0], center[1])
