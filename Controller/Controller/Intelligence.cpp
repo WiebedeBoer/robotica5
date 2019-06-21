@@ -22,12 +22,12 @@ Intelligence::~Intelligence()
 int LedInterval = 10000;
 int RefreshInterval = 500;
 int PrintInterval = 510;
-int ArmInterval = 1000;
+int ArmInterval = 500;
 int DriveInterval = 200;
 int CheckVisionInterval = 1000000;
 int ExecuteVisionInterval = 1500000;
-int GripperInterval = 500000;
-int SpeakInterval = 1000000;
+int GripperInterval = 500;
+int SpeakInterval = 30000;
 int RepeatInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
@@ -39,10 +39,7 @@ std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_cl
 std::chrono::system_clock::time_point SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
 std::chrono::system_clock::time_point RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
 std::chrono::system_clock::time_point LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
-std::chrono::system_clock::time_point UntilTime;
 
-//modus switching value
-int i = 0;
 
 void Intelligence::Think()
 {
@@ -54,7 +51,6 @@ void Intelligence::Think()
 		Intelligence::ExecuteArm();
 		Intelligence::ExecuteVision();
 		Intelligence::ExecuteSpeak();		//debug print joystick values
-		/*Intelligence::RepeatUntil();*/
 		if (std::chrono::system_clock::now() > PrintJoystickTime) {
 			CommandQueue->push(Command(Sensor, "GetJoystick", Database));
 			PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);

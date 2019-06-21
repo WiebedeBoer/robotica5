@@ -144,10 +144,11 @@ void Command::Execute() {
 		}
 		return;
 	}
-	
+
 	if (Command::type == "KineArmUp") {
 		ArmMove armsmoving;
 		Angles dlg;
+
 		char buffer[100];
 		//offsetting
 		if (args.size() == 1) {
@@ -173,7 +174,7 @@ void Command::Execute() {
 		}
 		return;
 	}
-	
+
 	if (Command::type == "KineArmDown") {
 		ArmMove armsmoving;
 		Angles dlg;
@@ -202,7 +203,7 @@ void Command::Execute() {
 		}
 		return;
 	}
-	
+
 	if (Command::type == "KineArmLeft") {
 		int OffsetLeft = 8; //hardcoded target, must be from python vision for autonomous
 		char buffer[100];
