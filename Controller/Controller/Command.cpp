@@ -85,14 +85,15 @@ void Command::Execute() {
 		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
-	if (Command::type == "KineArmForw.ard") {
+	if (Command::type == "KineArmForward") {
 
 		ArmMove armsmoving;
 		Angles dlg;
 		char buffer[100];
 		//offsetting
 		if (args.size() == 1) {
-			double joyOffset = (stoi(args[0]) - 40) + armsmoving.xoffset; //offset from joystick
+			//double joyOffset = (stoi(args[0]) - 40) + armsmoving.xoffset; //offset from joystick
+			double joyOffset = armsmoving.xoffset;
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos + joyOffset;
 			double Targety = armsmoving.Ypos;
@@ -120,7 +121,8 @@ void Command::Execute() {
 		char buffer[100];
 		if (args.size() == 1) {
 			//offsetting
-			double joyOffset = (20 - stoi(args[0])) + armsmoving.xoffset; //offset from joystick
+			//double joyOffset = (20 - stoi(args[0])) + armsmoving.xoffset; //offset from joystick
+			double joyOffset = armsmoving.xoffset;
 			double Targetx = armsmoving.Xpos;
 			Targetx = armsmoving.Xpos - joyOffset;
 			double Targety = armsmoving.Ypos;
@@ -149,8 +151,8 @@ void Command::Execute() {
 		char buffer[100];
 		//offsetting
 		if (args.size() == 1) {
-			double joyOffset = (stoi(args[0]) - 40) + armsmoving.yoffset; //offset from joystick
-			//double joyOffset = armsmoving.xoffset;
+			//double joyOffset = (stoi(args[0]) - 40) + armsmoving.yoffset; //offset from joystick
+			double joyOffset = armsmoving.yoffset;
 			double Targety = armsmoving.Ypos;
 			Targety = armsmoving.Ypos + joyOffset;
 			double Targetx = armsmoving.Xpos;
@@ -178,7 +180,8 @@ void Command::Execute() {
 		char buffer[100];
 		if (args.size() == 1) {
 			//offsetting
-			double joyOffset = (20 - stoi(args[0])) + armsmoving.yoffset; //offset from joystick
+			//double joyOffset = (20 - stoi(args[0])) + armsmoving.yoffset; //offset from joystick
+			double joyOffset = armsmoving.yoffset;
 			double Targety = armsmoving.Ypos;
 			Targety = armsmoving.Ypos - joyOffset;
 			double Targetx = armsmoving.Xpos;
