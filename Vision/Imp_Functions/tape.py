@@ -98,7 +98,9 @@ def lineRect(x1, y1, x2, y2, rx, ry, rw, rh, img):
 		return direction
 	return False
 
-def lineLine(img, (x1, y1, x2, y2), (x3, y3, x4, y4)):
+def lineLine(img, x1_y1_x2_y2, x3_y3_x4_y4):
+	x1, y1, x2, y2 = x1_y1_x2_y2
+	x3, y3, x4, y4 = x3_y3_x4_y4
 
 	x1 = float(x1)
 	y1 = float(y1)
@@ -229,6 +231,6 @@ def BlackTape(frame, follow):
 	bothLines.append([ leftLines, rightLines ])
 
 	# 255, 411
-	edges = cv2.Canny(frame, 255,411,apertureSize = 3)
-	lines = cv2.HoughLinesP(edges, 2, np.pi/180, 50, maxLineGap=35)
+	edges = cv2.Canny(frame, 295,411,apertureSize = 3)
+	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 70, maxLineGap=35)
 	return lineDetection(lines, bothLines, frame)
