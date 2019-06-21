@@ -2,7 +2,7 @@
 
 // Includes
 #include <Wire.h>
-
+#include <FastLED.h>
 // Serial event
 char rx_Byte = 0, rx_Byte_x;             // Last received byte
 String rx_Msg = "", rx_Msg_x = "";           // Received message
@@ -30,8 +30,22 @@ int left = 0, right = 0, count = 0;
 unsigned long timer = 0;
 float timestep = 0.01;
 
-String controller = "start;28;28;28;28;false";
+String controller = "start;28;28;28;28;0";
+#define LED_PIN     2
+#define NUM_LEDS    28
+#define BRIGHTNESS  64 //128
+#define LED_TYPE    WS2811
+#define COLOR_ORDER RGB
+#define UPDATES_PER_SECOND 100
 
+CRGB leds[NUM_LEDS];
+CRGB color = CRGB(0,0,255);
+CRGBPalette16 currentPalette;
+TBlendType    currentBlending;
+int sleep = 200;
+
+extern CRGBPalette16 myRedWhiteBluePalette;
+extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
 void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
@@ -39,6 +53,12 @@ void setup() {
   pinMode(speedLPin, INPUT);
   digitalWrite(speedRPin, LOW);
   digitalWrite(speedLPin, LOW);
+  delay( 1000 ); // power-up safety delay
+  FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
+  FastLED.setBrightness(  BRIGHTNESS );
+  currentPalette = RainbowColors_p;
+  currentBlending = LINEARBLEND;
+  Groen();
 }
 
 //loop
@@ -101,6 +121,21 @@ void serialEvent() {
         Serial1.write(resultarray);                     // Send chararray to rp
 
         result = respondRefresh() + String(checksum(respondRefresh())) + "\n";
+      }else if(rx_Msg == "eyeCyan?|"){
+        Cyaan();
+        result = respondEye() + String(checksum(respondEye())) + "\n";
+      }
+      else if(rx_Msg == "eyeRed?|"){
+        Rood();
+        result = respondEye() + String(checksum(respondEye())) + "\n";
+      }
+      else if(rx_Msg == "eyeBlue?|"){
+        Blauw();
+        result = respondEye() + String(checksum(respondEye())) + "\n";
+      }
+      else if(rx_Msg == "eyeWhite?|"){
+        Wit();
+        result = respondEye() + String(checksum(respondEye())) + "\n";
       }
 
       int resultLength = result.length() +1;          // Convert string to char array
@@ -159,7 +194,79 @@ String getSpeed() {
 String getMicrophone() {
   return String(soundL) + ";" + String(soundM) + ";" + String(soundH);
 }
+//fucntions
+void Rood(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(0,255,0);
+  }
+  
+  FastLED.show();
+  color = CRGB(0,255,0);
+}
 
+void Groen(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(255,0,0);
+  }
+  
+  FastLED.show();
+  color = CRGB(255,0,0);
+}
+
+void Blauw(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(0,0,255);
+  }
+  
+  FastLED.show();
+  color = CRGB(0,0,255);
+}
+
+void Geel(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(255,255,0);
+  }
+  
+  FastLED.show();
+  color = CRGB(255,255,0);
+}
+
+void Roze(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(0,255,255);
+  }
+  
+  FastLED.show();
+  color = CRGB(0,255,255);
+}
+
+void Cyaan(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(255,0,255);
+  }
+  
+  FastLED.show();
+  color = CRGB(255,0,255);
+}
+
+void Wit(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(255,255,255);
+  }  
+  FastLED.show();
+  color = CRGB(255,255,255);
+}
+
+void Grijs(){
+  for(int i = 0; i < NUM_LEDS; i++){
+    leds[i] = CRGB(200,200,200);
+  }
+  
+  FastLED.show();
+  color = CRGB(200,200,200);
+}
+
+String respondEye() { return "ack:eye?<eye>|"; }
 // return String: distance, speed, microphone
 String respondInfo() { return "ack:info?<"+ getDistance() + ";" + getSpeed() + ";" + getMicrophone() + ">|"; }
 

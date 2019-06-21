@@ -8,6 +8,12 @@
 #define joy2x A4  // Analog 4
 #define joy2Dig 19
 
+// Home Page
+NexButton btnArm        = NexButton(0, 10, "BArm");        // Arm Button
+
+// Arm Page
+NexButton btnHome    = NexButton(1, 4, "Home");        // Home Button
+
 // Movement Page
 NexText JoyL            = NexText(1, 2, "JoyL");            // Joystick Left
 NexText JoyR            = NexText(1, 3, "JoyR");            // Joystick Right
@@ -64,12 +70,15 @@ String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
 int joyLX, joyLY, joyRX, joyRY;
 
-unsigned int updateInterval = 250;
+unsigned int updateIntervalStart = 100;
+unsigned int updateInterval = updateIntervalStart;
 unsigned long lastUpdateInterval = 0;
 
 // Intialize event items for nextion
 NexTouch *nex_listen_list[] = 
 {
+  &btnArm,
+  &btnHome,
   &btnPitch,
   &btnPoortje,
   &btnChicken,
@@ -103,6 +112,10 @@ void setup() {
   digitalWrite(joy1Dig, HIGH);
   digitalWrite(joy2Dig, HIGH);
 
+  // Home page
+  btnArm.attachPush(btnArmPushCallback, &btnArm);
+  // Arm Page
+  btnHome.attachPush(btnHomePushCallback, &btnHome);
   // Mode page
   btnPitch.attachPop(btnPitchPopCallback, &btnPitch);
   btnPoortje.attachPop(btnPoortjePopCallback, &btnPoortje);
@@ -130,7 +143,13 @@ void setup() {
 //                         BUTTONS MODE
 // _________________________________________________________________
 
-// Callback function btnPoortje
+// Callback function btnArm
+void btnArmPushCallback(void *ptr) { curMode = "Arm"; }
+
+// Callback function btnHome
+void btnHomePushCallback(void *ptr) { curMode = "Start"; }
+
+// Callback function btnPitch
 void btnPitchPopCallback(void *ptr) { curMode = "Pitch"; }
 
 // Callback function btnPoortje
@@ -183,16 +202,20 @@ void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
 void loop() {
   nexLoop(nex_listen_list);   // Loop through list of Items
   updateJoy();                // Update Joysticks functie aanroepen
-              // Update screen values on Nextion
+  updateNextion();            // Update screen values on Nextion
   
   unsigned long currentMillis = millis(); // Current millis
   
   if (currentMillis - lastUpdateInterval >= updateInterval) { // Check wether interval passed
     lastUpdateInterval = currentMillis; // Set last check millis
-    updateNextion();
+    
     if (digitalRead(joy1Dig) == 0) {
-      eggTrig = true;
-    }    
+      eggTrig = !eggTrig;
+      Serial.println(String(eggTrig));
+      updateInterval = updateInterval + 3000;
+    } else {
+      updateInterval = updateIntervalStart;
+    }
   }
 }
 
@@ -274,10 +297,9 @@ void serialEvent2(){
       
       if(rx_Msg == "sendRefresh?|"){
         result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
-        if (eggTrig) { eggTrig = false; }
       }
 
-      Serial.print("Resonding: ");Serial.println(result);
+      Serial.print("Responding: ");Serial.println(result);
       
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];
