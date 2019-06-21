@@ -3,7 +3,6 @@ import cv2
 import numpy as np
 import math
 
-
 def slope(var):
 	x1 = float( var[0] )
 	y1 = float( var[1] )
@@ -230,6 +229,6 @@ def BlackTape(frame, follow):
 	bothLines.append([ leftLines, rightLines ])
 
 	# 255, 411
-	edges = cv2.Canny(frame, 275,411,apertureSize = 3)
-	lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, maxLineGap=35)
+	edges = cv2.Canny(frame, 255,411,apertureSize = 3)
+	lines = cv2.HoughLinesP(edges, 2, np.pi/180, 50, maxLineGap=35)
 	return lineDetection(lines, bothLines, frame)

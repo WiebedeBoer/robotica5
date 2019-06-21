@@ -98,9 +98,9 @@ def release():
 			msg = splitter(msg)
 			msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
 			SocketSend(msgBack)
-	except Exception, e:
+	except Exception as e:
 		sok.close()
-		print e
+		print(e)
 	finally:
 		 sok.close()
 
