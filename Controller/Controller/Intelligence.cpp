@@ -298,16 +298,15 @@ void Intelligence::ExecuteLed() {
 }
 void Intelligence::ExecuteArm()
 {
-	Database->modus = modus::arm;
 	if (std::chrono::system_clock::now() > MoveArmTime && Database->modus == modus::arm) {
 		std::vector<std::string> args;
 		args.push_back(std::to_string(joy1->first));
 		args.push_back(std::to_string(joy1->second));
 
-		if (Database->joy2.first > 40) {
+		if (Database->joy2.first < 20) {
 			CommandQueue->push(Command(Worker, "ArmLeft", Database, args));
 		}
-		else if (Database->joy2.first < 20) {
+		else if (Database->joy2.first > 40) {
 			CommandQueue->push(Command(Worker, "ArmRight", Database, args));
 		}
 		else if (Database->joy2.second > 40) {
@@ -316,11 +315,11 @@ void Intelligence::ExecuteArm()
 		else if (Database->joy2.second < 20) {
 			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));
 		}
-		else if (Database->joy1.first > 40) {
-			std::cout << "arm should move left" << std::endl;
+		else if (Database->joy1.second > 40) {
+			CommandQueue->push(Command(Worker, "KineArmUp", Database, args));
 		}
-		else if (Database->joy1.first < 20) {
-			std::cout << "arm should move Right" << std::endl;
+		else if (Database->joy1.second < 20) {
+			CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
 		}
 
 
@@ -330,6 +329,9 @@ void Intelligence::ExecuteArm()
 
 			if (Database->grab == false)
 				CommandQueue->push(Command(Worker, "GrabOff", Database, args));
+
+			Database->updateGrab = false;
+
 		}
 		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterval);
 	}
