@@ -70,7 +70,7 @@ String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
 int joyLX, joyLY, joyRX, joyRY;
 
-unsigned int updateIntervalStart = 250;
+unsigned int updateIntervalStart = 100;
 unsigned int updateInterval = updateIntervalStart;
 unsigned long lastUpdateInterval = 0;
 
@@ -212,7 +212,7 @@ void loop() {
     if (digitalRead(joy1Dig) == 0) {
       eggTrig = !eggTrig;
       Serial.println(String(eggTrig));
-      updateInterval = updateInterval + 2000;
+      updateInterval = updateInterval + 3000;
     } else {
       updateInterval = updateIntervalStart;
     }
@@ -299,7 +299,7 @@ void serialEvent2(){
         result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
       }
 
-      Serial.print("Resonding: ");Serial.println(result);
+      Serial.print("Responding: ");Serial.println(result);
       
       int resultLength = result.length() +1; // Convert string to char array
       char resultarray[resultLength];

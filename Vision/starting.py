@@ -79,7 +79,7 @@ def debug(arg):
 		try:
 			while True:
 				_, frame = cap.read()
-				print(mainSwitcher(frame, 0, 0, 0))
+				print(mainSwitcher(frame, 3, 1, 0))
 				cv2.imshow('frame', frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
@@ -98,9 +98,9 @@ def release():
 			msg = splitter(msg)
 			msgBack = mainSwitcher(frame, int(msg[0]), int(msg[1]), int(msg[2]))
 			SocketSend(msgBack)
-	except Exception, e:
+	except Exception as e:
 		sok.close()
-		print e
+		print(e)
 	finally:
 		 sok.close()
 

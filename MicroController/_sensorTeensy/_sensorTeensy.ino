@@ -30,7 +30,7 @@ int left = 0, right = 0, count = 0;
 unsigned long timer = 0;
 float timestep = 0.01;
 
-String controller = "start;28;28;28;28;false";
+String controller = "start;28;28;28;28;0";
 #define LED_PIN     2
 #define NUM_LEDS    28
 #define BRIGHTNESS  64 //128
