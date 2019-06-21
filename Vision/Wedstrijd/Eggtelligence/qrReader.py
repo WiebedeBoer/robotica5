@@ -13,7 +13,7 @@ class QRReader:
 
     def findQR(self, searchQR):
         for obj in self.getFrame():
-            qrdata = obj.data
+            qrdata = obj.data.decode("utf-8")
             if qrdata == searchQR:
                 self.qrObject = obj
                 return obj
