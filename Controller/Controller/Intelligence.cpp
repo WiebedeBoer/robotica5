@@ -98,19 +98,22 @@ void Intelligence::ExecuteEgg() {
 		driverEgg = DriveEggtelligence();
 		//stop at tape (mode tape: false, both, left, right), Jesse
 		//go around at chicken, Robin
-		if (driverEgg == true)
+		if (driverEgg == true) {
 			armEgg = ArmEggtelligence();
+		}			
 		//step 2.1, arm forward
 		//step 2.2, lower arm
 		//step 2.3, close gripper and pick up egg
 		//step 2.4, raise arm
 		//stop at tape (mode tape: false, both, left, right), Jesse
 		//go around at chicken, Robin
-		if (armEgg == true)
+		if (armEgg == true) {
 			trayEgg = TrayEggtelligence();
+		}			
 		//step 3, drive towards tray
-		if (trayEgg == true)
+		if (trayEgg == true) {
 			dropEgg = DropEggtelligence();
+		}			
 		//step 4.1, see qr is near tray, lower arm
 		//step 4.2 open gripper, drop egg in tray
 		if (dropEgg == true) {
@@ -184,16 +187,85 @@ bool Intelligence::DriveEggtelligence() {
 
 //eggtelligence match step 2, move arm to pick up egg
 bool Intelligence::ArmEggtelligence() {
+	std::vector<std::string> args;
+	args.push_back("");
+	//step 2.1, arm forward
+	CommandQueue->push(Command(Worker, "KineArmForward", Database, args));
+	//step 2.2, lower arm
+	CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
+	//step 2.3, close gripper and pick up egg
+	CommandQueue->push(Command(Worker, "Gripper", Database, args));
+	//step 2.4, raise arm
+	CommandQueue->push(Command(Worker, "KineArmUp", Database, args));
 	return true;
 }
 
 //eggtelligence match step 3, find tray
 bool Intelligence::TrayEggtelligence() {
+	//step 3, drive towards tray
+	std::vector<std::string> args;
+	args.push_back("");
+	int distance = 999; //distance
+	int horizontal = 0; //horizontal coordinate of tray
+	if (!Intelligence::Database->wedstrijd.qrDistance.empty()) {
+		std::string s = Intelligence::Database->wedstrijd.qrDistance; //qr distance
+		std::vector<std::string> out;
+
+		SplitOn(ref(s), ':', ref(out));
+
+		try {
+			if (out[0] != "False") {
+				distance = std::stoi(out[0]);
+				horizontal = std::stoi(out[1]);
+			}
+			else {
+				distance = 0;
+			}
+		}
+		catch (int e) {
+			std::cout << "stoi distance error occurred. Exception" << e << '\n';
+		}
+
+
+		if (distance != 0 && distance != NULL) {
+			//if near and in sight, drive
+			if (distance >= 5 && distance < 210) {
+				//left
+				if (horizontal < -150) {
+					args[0] = "64";
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				}
+				//right
+				else if (horizontal > 150) {
+					args[0] = "64";
+					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+				}
+				//forward
+				else {
+					args[0] = "64";
+					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+				}
+			}
+
+			//else if too near, full stop
+			else if (distance < 5) {
+				args[0] = "0";
+				std::cout << "QRDistanceIsToSmall" << std::endl;
+				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+			}
+		}
+	}
 	return true;
 }
 
 //eggtelligence match step 4, drop off egg
 bool Intelligence::DropEggtelligence() {
+	std::vector<std::string> args;
+	args.push_back("");
+	//step 4.1, see qr is near tray, lower arm	
+	CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
+	//step 4.2 open gripper, drop egg in tray
+	CommandQueue->push(Command(Worker, "GripperLoose", Database, args));
 	return true;
 }
 
