@@ -84,7 +84,49 @@ void Intelligence::ExecuteSpeak()
 	}
 }
 
+//eggtelligence match
 void Intelligence::ExecuteEgg() {
+	bool driverEgg = false;
+	bool armEgg = false;
+	bool trayEgg = false;
+	bool dropEgg = false;
+	//step 0, set qr for tray, do this once
+
+	//repeat steps max 3 times
+	for (int inc = 0; inc < 3; inc++) {
+		//step 1, find egg
+		driverEgg = DriveEggtelligence();
+		//stop at tape (mode tape: false, both, left, right), Jesse
+		//go around at chicken, Robin
+		if (driverEgg == true)
+			armEgg = ArmEggtelligence();
+		//step 2.1, arm forward
+		//step 2.2, lower arm
+		//step 2.3, close gripper and pick up egg
+		//step 2.4, raise arm
+		//stop at tape (mode tape: false, both, left, right), Jesse
+		//go around at chicken, Robin
+		if (armEgg == true)
+			trayEgg = TrayEggtelligence();
+		//step 3, drive towards tray
+		if (trayEgg == true)
+			dropEgg = DropEggtelligence();
+		//step 4.1, see qr is near tray, lower arm
+		//step 4.2 open gripper, drop egg in tray
+		if (dropEgg == true) {
+			driverEgg = false;
+			armEgg = false;
+			trayEgg = false;
+			dropEgg = false;
+		}
+	}
+
+}
+
+//eggtelligence match step 0, fill in qr for city name tray, to begin eggtelligence
+
+//eggtelligence match step 1, find egg
+bool Intelligence::DriveEggtelligence() {
 	std::vector<std::string> args;
 	args.push_back("");
 	int distance = 999; //distance
@@ -137,6 +179,22 @@ void Intelligence::ExecuteEgg() {
 			}
 		}
 	}
+	return true;
+}
+
+//eggtelligence match step 2, move arm to pick up egg
+bool Intelligence::ArmEggtelligence() {
+	return true;
+}
+
+//eggtelligence match step 3, find tray
+bool Intelligence::TrayEggtelligence() {
+	return true;
+}
+
+//eggtelligence match step 4, drop off egg
+bool Intelligence::DropEggtelligence() {
+	return true;
 }
 
 //blue beam vision qualification
@@ -203,68 +261,68 @@ void Intelligence::ExecuteDrive()
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
 		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
-			std::vector<std::string> args;
-			args.push_back("");
-			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
+		std::vector<std::string> args;
+		args.push_back("");
+		std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
 
-			if (Database->GetJoy2().second > 35) {//driveleft
-				args[0] = slowSpeed;
-				if (Database->GetJoy2().second > 45) {
-					args[0] = midSpeed;
-					if (Database->GetJoy2().second > 55) {
-						args[0] = highSpeed;
-					}
+		if (Database->GetJoy2().second > 35) {//driveleft
+			args[0] = slowSpeed;
+			if (Database->GetJoy2().second > 45) {
+				args[0] = midSpeed;
+				if (Database->GetJoy2().second > 55) {
+					args[0] = highSpeed;
 				}
-				CommandQueue->push(Command(Worker, "DriveForward", Database, args));
-
-				return;
-
 			}
-			if (Database->GetJoy2().second < 25) {//DriveRight
-				args[0] = slowSpeed;
-				if (Database->GetJoy2().second < 20) {
-					args[0] = midSpeed;
-					if (Database->GetJoy2().second < 10) {
-						args[0] = highSpeed;
-					}
+			CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+
+			return;
+
+		}
+		if (Database->GetJoy2().second < 25) {//DriveRight
+			args[0] = slowSpeed;
+			if (Database->GetJoy2().second < 20) {
+				args[0] = midSpeed;
+				if (Database->GetJoy2().second < 10) {
+					args[0] = highSpeed;
 				}
-				CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
-
-				return;
-
 			}
+			CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
 
-			if (Database->GetJoy2().first > 35) {//DriveForward
-				args[0] = slowSpeed;
-				if (Database->GetJoy2().first > 45) {
-					args[0] = midSpeed;
-					if (Database->GetJoy2().first > 55) {
-						args[0] = highSpeed;
-					}
+			return;
+
+		}
+
+		if (Database->GetJoy2().first > 35) {//DriveForward
+			args[0] = slowSpeed;
+			if (Database->GetJoy2().first > 45) {
+				args[0] = midSpeed;
+				if (Database->GetJoy2().first > 55) {
+					args[0] = highSpeed;
 				}
-				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
-
-				return;
-
 			}
-			if (Database->GetJoy2().first < 25) {//DriveBackward
-				args[0] = slowSpeed;
-				if (Database->GetJoy2().first < 20) {
-					args[0] = midSpeed;
-					if (Database->GetJoy2().first < 10) {
-						args[0] = highSpeed;
-					}
+			CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+
+			return;
+
+		}
+		if (Database->GetJoy2().first < 25) {//DriveBackward
+			args[0] = slowSpeed;
+			if (Database->GetJoy2().first < 20) {
+				args[0] = midSpeed;
+				if (Database->GetJoy2().first < 10) {
+					args[0] = highSpeed;
 				}
-				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
-
-				return;
-
 			}
-			if (Database->GetJoy2().first > 28 && Database->GetJoy2().first < 32 && Database->GetJoy2().second > 28 && Database->GetJoy2().second < 32) {//StopDriving
-				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
-				return;
-			}
-			joy2 = Tempjoy2;
+			CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+
+			return;
+
+		}
+		if (Database->GetJoy2().first > 28 && Database->GetJoy2().first < 32 && Database->GetJoy2().second > 28 && Database->GetJoy2().second < 32) {//StopDriving
+			CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+			return;
+		}
+		joy2 = Tempjoy2;
 		//}
 	}
 }

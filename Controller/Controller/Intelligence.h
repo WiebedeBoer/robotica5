@@ -39,5 +39,10 @@ private:
 	void ExecuteSpeak();
 	void ExecuteLed();
 	void CheckInfo();
+	//eggtellignce sub steps
+	bool DriveEggtelligence();
+	bool ArmEggtelligence();
+	bool TrayEggtelligence();
+	bool DropEggtelligence();
 };
 
