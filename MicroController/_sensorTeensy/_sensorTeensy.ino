@@ -66,9 +66,6 @@ void loop() {
   updateDistance();
   measureSpeed();
   updateMicrophone();
-  if (!Serial1) {
-    Serial1.begin(115200);
-  }
   delay(10);
   
 //  Debug distance
