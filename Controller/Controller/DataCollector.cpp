@@ -11,6 +11,10 @@ DataCollector::~DataCollector()
 {
 }
 
+void DataCollector::SetSensorInfo(std::string input) {
+	sensorInfo = input;
+}
+
 void DataCollector::SetAfstandBedieningData(std::string input)
 {
 
