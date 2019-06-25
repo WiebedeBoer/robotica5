@@ -11,6 +11,30 @@ DataCollector::~DataCollector()
 {
 }
 
+void DataCollector::SetSensorInfo(std::string input) 
+{
+	sensorInfo = input;
+	/*std::regex rgx("(\d+)");
+	std::smatch matches;
+
+	if (std::regex_search(input, matches, rgx)) 
+	{
+		try
+		{
+			microphone[0] = std::stoi(matches[4]);
+			microphone[1] = std::stoi(matches[5]);
+			microphone[2] = std::stoi(matches[6]);
+		}
+		catch (const std::exception &) {
+			std::cout << "sensor stoi error" << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "No Sensor values" << std::endl;
+	}*/
+}
+
 void DataCollector::SetAfstandBedieningData(std::string input)
 {
 
@@ -37,7 +61,7 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 			}
 		}
 		// alleen kwalificatie modus zijn toegevoegd
-		std::cout << m[1] << std::endl;
+		//std::cout << m[1] << std::endl;
 		if (m[1] == "Poortje")
 			modus = modus::poortje;
 		else if (m[1] == "Chicken")
@@ -52,7 +76,9 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 			modus = modus::pitch;
 		else if (m[1] == "Arm")
 			modus = modus::arm;
-		std::cout << modus << std::endl;
+		else if (m[1] == "DanceSi")
+			modus = modus::DanceSi;
+		//std::cout << modus << std::endl;
 	}
 	catch (const std::exception &) {
 		std::cout << "joy stoi error" << std::endl;

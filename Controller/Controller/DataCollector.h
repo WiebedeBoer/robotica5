@@ -3,9 +3,11 @@
 #include<string>
 #include<regex>
 #include<iostream>
+#include <chrono>
 //namespace for modus enum
 namespace modus {
-	enum Modus { BlueBeam, poortje, grindpad, chickenSurvivalRun, eggtelligence, Controller, pitch, arm };
+
+	enum Modus { BlueBeam, poortje, grindpad, chickenSurvivalRun, eggtelligence, Controller, pitch, arm, DanceLi, DanceSi };
 }
 //DataCollection for the Wedstrijd
 struct Wedstrijd
@@ -15,6 +17,9 @@ struct Wedstrijd
 	std::string qrDistance;
 	std::string qrDestination;
 	std::string findChickin;
+	std::string tape;
+	bool setTime = false;
+	std::chrono::system_clock::time_point stopDance;
 };
 //DataCollection for the Qualification
 struct Kwalificatie
@@ -42,11 +47,13 @@ public:
 	DataCollector();
 	~DataCollector();
 	void SetAfstandBedieningData(std::string input);
+	void SetSensorInfo(std::string input);
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
 	
-	std::pair<int, int> joy1;
-	std::pair<int, int> joy2;
+	std::pair<int, int> joy1 = std::pair<int, int>(28,28);
+	std::pair<int, int> joy2 = std::pair<int, int>(28,28);
+	std::string sensorInfo;
 	modus::Modus modus = modus::Controller;
 	int speed;
 	float horizontalBlueBeam = std::numeric_limits<float>::max();
@@ -55,6 +62,7 @@ public:
 	Arm arm;
 	bool updateGrab = false;
 	bool grab = false;
+	int microphone[3];//0=low 1=mid 2=high
 
 private:
 	int gyroscoop;

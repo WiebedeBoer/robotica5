@@ -1,4 +1,4 @@
-// Author Thom Smit, Wiebe de Boer, Rob Alma, Kris van den Berg en Stan van der Ploeg
+// Author Thom Smit, Wiebe de Boer, Rob Alma, Kris van den Berg, Stan van der Ploeg en je moeder
 
 // Includes
 #include <Wire.h>
@@ -135,6 +135,10 @@ void serialEvent() {
       }
       else if(rx_Msg == "eyeWhite?|"){
         Wit();
+        result = respondEye() + String(checksum(respondEye())) + "\n";
+      }
+      else if(rx_Msg == "eyePink?|"){
+        Roze();
         result = respondEye() + String(checksum(respondEye())) + "\n";
       }
 
