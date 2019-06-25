@@ -15,12 +15,13 @@ os.chdir(os.path.realpath(__file__+ '//..//'))  # If on linux use this
 # Here the function gets the string send by the pi
 def SocketReceive():
 	rec = sok.recv(1024, 0)
+	rec = rec.decode("utf-8")
 	return rec
 
 
 # Here the function sends a string ba ck to the pi
 def SocketSend(msg):
-	utf8_msg = unicode(str(msg), "utf-8")
+	utf8_msg = str(msg).encode('utf-8')
 	sok.send(bytes(utf8_msg))
 
 
@@ -68,8 +69,7 @@ def debug(arg):
 	if(arg == "-p"):
 		while True:
 			frame = Camera_pi.getInstance()
-			print(mainSwitcher(frame, 2, 0, 0))
-			cv2.imshow('Camera', frame)
+			print(mainSwitcher(frame, 1, 0, 0))
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 		cv2.destroyAllWindows()

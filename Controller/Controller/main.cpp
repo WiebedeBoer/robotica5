@@ -21,8 +21,8 @@ GuardedQueue<Command>* Commandqueue = new GuardedQueue<Command>();//queue for sh
 GuardedQueue<Command>* VisionQueue = new GuardedQueue<Command>();//queue for vision commands, vision is slow, so is this queue
 DataCollector* Datacollector = new DataCollector();//object to store all shared data
 
-MicroController* Worker = new MicroController("/dev/ttyACM0");//worker slave
-MicroController* Sensor = new MicroController("/dev/ttyACM1");//sensor slave
+MicroController* Worker = new MicroController("/dev/ttyACM1");//worker slave
+MicroController* Sensor = new MicroController("/dev/ttyACM0");//sensor slave
 
 std::string cmd = "sudo python3 /home/jesse/robotica5/Vision/starting.py -r";
 std::future<Vision*> f = std::async(std::launch::async, [] { return new Vision(); });
