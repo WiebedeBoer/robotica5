@@ -1,4 +1,4 @@
-// Author Thom Smit, Wiebe de Boer, Rob Alma, Kris van den Berg en Stan van der Ploeg
+// Author Thom Smit, Wiebe de Boer, Rob Alma, Kris van den Berg, Stan van der Ploeg en je moeder
 
 // Includes
 #include <Wire.h>

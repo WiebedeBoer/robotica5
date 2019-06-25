@@ -38,6 +38,6 @@ private:
 	void ExecuteChickinSurivalRun();
 	void ExecuteSpeak();
 	void ExecuteLed();
-
+	void CheckInfo();
 };
 

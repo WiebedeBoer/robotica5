@@ -29,6 +29,7 @@ int ExecuteVisionInterval = 1500000;
 int GripperInterval = 500;
 int SpeakInterval = 3000000;
 int RepeatInterval = 500;
+int infoInterval = 500;
 //corrisponding timers for the intervals
 std::chrono::system_clock::time_point refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
 std::chrono::system_clock::time_point PrintJoystickTime = std::chrono::system_clock::now() + std::chrono::milliseconds(PrintInterval);
@@ -39,6 +40,7 @@ std::chrono::system_clock::time_point ExecuteVisionTime = std::chrono::system_cl
 std::chrono::system_clock::time_point SpeakTime = std::chrono::system_clock::now() + std::chrono::milliseconds(SpeakInterval);
 std::chrono::system_clock::time_point RepeatTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RepeatInterval);
 std::chrono::system_clock::time_point LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
+std::chrono::system_clock::time_point infoTime = std::chrono::system_clock::now() + std::chrono::milliseconds(infoInterval);
 
 
 void Intelligence::Think()
@@ -299,6 +301,14 @@ void Intelligence::CheckAfstandbediening()
 		args.push_back(std::to_string(Database->speed));
 		CommandQueue->push(Command(Sensor, "refresh", Database, args));
 		refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
+	}
+}
+void Intelligence::CheckInfo()
+{
+	if (std::chrono::system_clock::now() > infoTime) {
+		std::vector<std::string> args;
+		CommandQueue->push(Command(Sensor, "info", Database, args));
+		infoTime = std::chrono::system_clock::now() + std::chrono::milliseconds(infoInterval);
 	}
 }
 void Intelligence::ExecuteLed() {
