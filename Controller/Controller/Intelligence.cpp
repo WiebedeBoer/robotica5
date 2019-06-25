@@ -90,6 +90,7 @@ void Intelligence::ExecuteEgg() {
 	bool armEgg = false;
 	bool trayEgg = false;
 	bool dropEgg = false;
+
 	//step 0, set qr for tray, do this once
 
 	//repeat steps max 3 times
@@ -99,7 +100,8 @@ void Intelligence::ExecuteEgg() {
 		//stop at tape (mode tape: false, both, left, right), Jesse
 		//go around at chicken, Robin
 		if (driverEgg == true) {
-			armEgg = ArmEggtelligence();
+			armGrip = "fasten";
+			armEgg = ArmEggtelligence(armGrip);
 		}			
 		//step 2.1, arm forward
 		//step 2.2, lower arm
@@ -112,7 +114,8 @@ void Intelligence::ExecuteEgg() {
 		}			
 		//step 3, drive towards tray
 		if (trayEgg == true) {
-			dropEgg = DropEggtelligence();
+			armGrip = "loose";
+			dropEgg = ArmEggtelligence(armGrip);
 		}			
 		//step 4.1, see qr is near tray, lower arm
 		//step 4.2 open gripper, drop egg in tray
@@ -185,18 +188,29 @@ bool Intelligence::DriveEggtelligence() {
 	return true;
 }
 
-//eggtelligence match step 2, move arm to pick up egg
-bool Intelligence::ArmEggtelligence() {
+//eggtelligence match, move arm to, step 2 pick up egg, step 4 drop off egg
+bool Intelligence::ArmEggtelligence(std::string armGrip) {
 	std::vector<std::string> args;
 	args.push_back("");
 	//step 2.1, arm forward
 	CommandQueue->push(Command(Worker, "KineArmForward", Database, args));
+	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
 	//step 2.2, lower arm
 	CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
-	//step 2.3, close gripper and pick up egg
-	CommandQueue->push(Command(Worker, "Gripper", Database, args));
+	if (armGrip =="loose") {
+		//step 2.3, close gripper and pick up egg
+		CommandQueue->push(Command(Worker, "Gripper", Database, args));
+	}
+	else {
+		//step 4.3 open gripper, drop egg in tray
+		CommandQueue->push(Command(Worker, "GripperLoose", Database, args));
+	}
+	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
 	//step 2.4, raise arm
 	CommandQueue->push(Command(Worker, "KineArmUp", Database, args));
+	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
+	//step 2.4, arm backward
+	CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));
 	return true;
 }
 
@@ -258,16 +272,47 @@ bool Intelligence::TrayEggtelligence() {
 	return true;
 }
 
-//eggtelligence match step 4, drop off egg
-bool Intelligence::DropEggtelligence() {
-	std::vector<std::string> args;
-	args.push_back("");
-	//step 4.1, see qr is near tray, lower arm	
-	CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
-	//step 4.2 open gripper, drop egg in tray
-	CommandQueue->push(Command(Worker, "GripperLoose", Database, args));
-	return true;
+//eggtelligence tape helper
+std::string Intelligence::TapeHelper() {
+	std::vector<std::string> out;
+	//std::string s = Intelligence::Database->kwalificatie.bluebeam;
+	std::string s;
+
+	SplitOn(ref(s), ':', ref(out));
+
+	try {
+		if (out[0] != "False") {
+			std::cout << "tape found" << '\n';
+			return "tape";
+		}
+	}
+	catch (float e) {
+		std::cout << "Stof error occurred. Exception" << e << '\n';
+	}
 }
+
+//eggtelligence chicken helper
+std::string Intelligence::ChickenHelper() {
+	std::vector<std::string> out;
+	//std::string s = Intelligence::Database->kwalificatie.bluebeam;
+	std::string s;
+
+	SplitOn(ref(s), ':', ref(out));
+
+	try {
+		if (out[0] != "False") {
+			std::cout << "chicken found" << '\n';
+			return "chicken";
+		}
+	}
+	catch (float e) {
+		std::cout << "Stof error occurred. Exception" << e << '\n';
+	}
+}
+
+
+
+
 
 //blue beam vision qualification
 void Intelligence::ExecuteBlueBeam() {

@@ -48,6 +48,17 @@ void Command::Execute() {
 		Command::Database->SetAfstandBedieningData(Command::slave->GetLastResponce());
 		return;
 	}
+	if (Command::type == "sleep") {
+		if (args.size == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(args[0])));
+		}
+		else
+		{
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+		}
+		return;
+	}
 	if (Command::type == "GetJoystick") {
 		std::cout << "1:" << std::to_string(Command::Database->GetJoy1().first) << "," << std::to_string(Command::Database->GetJoy1().second) << std::endl;
 		std::cout << "2:" << std::to_string(Command::Database->GetJoy2().first) << "," << std::to_string(Command::Database->GetJoy2().second) << std::endl;
@@ -306,12 +317,6 @@ void Command::Execute() {
 		default:
 			break;
 		}
-		return;
-	}
-
-	if (Command::type == "info") {
-		Command::slave->SerialSend("info?," + args[0]);
-		Command::Database->SetSensorInfo(Command::slave->GetLastResponce());
 		return;
 	}
 }

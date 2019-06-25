@@ -5,6 +5,7 @@
 #include <thread>
 #include <chrono>
 #include <utility>
+#include <string>
 
 //this class get data based on time,  on that data it makes new commands to execute
 class Intelligence
@@ -23,6 +24,7 @@ private:
 	MicroController* Sensor;
 	Vision* VisionApi;
 	Command RepeatedCommand;
+	std::string armGrip;
 
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
 	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
@@ -39,10 +41,11 @@ private:
 	void ExecuteSpeak();
 	void ExecuteLed();
 	void CheckInfo();
-	//eggtellignce sub steps
-	bool DriveEggtelligence();
-	bool ArmEggtelligence();
-	bool TrayEggtelligence();
-	bool DropEggtelligence();
+	//eggtelligence sub steps
+	bool DriveEggtelligence(); //finding egg
+	bool ArmEggtelligence(std::string armGrip); //pick up and drop off
+	bool TrayEggtelligence(); //finding tray
+	std::string Intelligence::TapeHelper(); //for the tape
+	std::string Intelligence::ChickenHelper(); //for the chicken
 };
 
