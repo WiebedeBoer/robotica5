@@ -56,6 +56,8 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 			modus = modus::pitch;
 		else if (m[1] == "Arm")
 			modus = modus::arm;
+		else if (m[1] == "DanceSi")
+			modus = modus::DanceSi;
 		//std::cout << modus << std::endl;
 	}
 	catch (const std::exception &) {

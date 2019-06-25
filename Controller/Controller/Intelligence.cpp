@@ -319,6 +319,11 @@ void Intelligence::ExecuteLed() {
 		LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
 	}
 }
+void Intelligence::ExecuteDanceSi()
+{
+
+
+}
 bool onoff = false;
 void Intelligence::ExecuteArm()
 {
@@ -400,6 +405,9 @@ void Intelligence::ExecuteVision()
 			break;
 		case modus::Modus::chickenSurvivalRun:
 			//function call here for chickinsurvivalrun
+			break;
+		case modus::Modus::DanceSi: // not really a vision function, but is the easiest way to add it
+			ExecuteDanceSi();
 			break;
 		default:
 			break;
