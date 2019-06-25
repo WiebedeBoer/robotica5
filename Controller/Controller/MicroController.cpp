@@ -134,6 +134,7 @@ void MicroController::SerialSend(std::string input) {
 
 	} while (!ackresponse(WaitForMessage(fd), sendstring) && NackCount != 2);
 	if (NackCount == 2) {
+
 		std::cout << "CommandDropped After 2 tries" << std::endl;
 	}
 	else {

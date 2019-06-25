@@ -20,13 +20,13 @@ std::vector<int> Angles::Gonio(double TipX, double TipY) {
 		AnglePinOutput2 = AngleToPin(A2, 3);
 
 		std::vector<int> AnglePinOut;
-		AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput1);
-		AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput2);
+		AnglePinOut.push_back(AnglePinOutput1);
+		AnglePinOut.push_back(AnglePinOutput2);
 
 		compensate = Compensator(90 - D2, TipX, A2);
-
+		compensate = 0;
 		AnglePinOutput3 = AngleToPin(compensate, 4);
-		AnglePinOut.insert(AnglePinOut.begin(), AnglePinOutput3);
+		AnglePinOut.push_back(AnglePinOutput3);
 		return AnglePinOut;
 	}
 	else {
@@ -50,20 +50,24 @@ int Angles::AngleToPin(double Angle, int Servo) {
 	int PinOutput;
 	if (Servo == 1 || Servo == 5) {
 		//0 - 360 degrees = 0 - 1023 pin
-		PinOutput = int((Angle / 360) * 1023);
+		PinOutput = int((Angle / 300) * 1023);
 	}
 	else if (Servo == 2) {
 		//0 - 360 degrees = 35 - 680 pin
-		PinOutput = int(((Angle / 360) * 645) + 35);
+		Angle = 360 - Angle;
+		PinOutput = int((Angle / 300) * 1023);
 	}
 	else if (Servo == 3) {
 		//0 - 360 degrees = 65 - 640 pin
-		PinOutput = int(((Angle / 360) * 575) + 65);
+		Angle = 360 - Angle;
+		PinOutput = int((Angle / 300) * 1023);
 	}
 	else if (Servo == 4) {
 		//0 - 360 degrees = 350 - 950 pin
-		PinOutput = int(((Angle / 360) * 600) + 350);
+		Angle = 360 - Angle;
+		PinOutput = int((Angle / 300) * 1023);
 	}
+
 	return PinOutput;
 }
 

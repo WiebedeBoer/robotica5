@@ -20,14 +20,14 @@ Intelligence::~Intelligence()
 
 //intervals for when some functions need to happen
 int LedInterval = 10000;
-int RefreshInterval = 500;
-int PrintInterval = 510;
-int ArmInterval = 500;
+int RefreshInterval = 5000000;
+int PrintInterval = 5000;
+int ArmInterval = 10000;
 int DriveInterval = 200;
 int CheckVisionInterval = 1000000;
 int ExecuteVisionInterval = 1500000;
 int GripperInterval = 500;
-int SpeakInterval = 30000;
+int SpeakInterval = 3000000;
 int RepeatInterval = 500;
 int infoInterval = 500;
 //corrisponding timers for the intervals
@@ -196,9 +196,27 @@ void Intelligence::ExecuteBlueBeam() {
 void Intelligence::ExecuteDrive()
 {
 
-	int slowSpeed = 32;
-	int midSpeed = 64;
-	int highSpeed = 128;
+	std::string slowSpeed = "175";
+	std::string midSpeed = "175";
+	std::string highSpeed = "175";
+
+
+	std::string HslowSpeed = "36";
+	std::string HmidSpeed = "64";
+	std::string HhighSpeed = "64";
+
+
+	int Pjoylow = 30;
+	int Pjoymid = 35;
+	int Pjoyhigh = 40;
+
+
+	int Njoylow = 26;
+	int Njoymid = 22;
+	int Njoyhigh = 20;
+
+	
+
 	if (std::chrono::system_clock::now() > DriveTime && Database->modus != modus::arm) {
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
@@ -207,11 +225,11 @@ void Intelligence::ExecuteDrive()
 			args.push_back("");
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
 
-			if (Database->GetJoy2().second > 35) {//driveleft
+			if (Database->joy2.second > Pjoylow) {//DriveForward
 				args[0] = slowSpeed;
-				if (Database->GetJoy2().second > 45) {
+				if (Database->joy2.second > Pjoymid) {
 					args[0] = midSpeed;
-					if (Database->GetJoy2().second > 55) {
+					if (Database->joy2.second > Pjoyhigh) {
 						args[0] = highSpeed;
 					}
 				}
@@ -220,11 +238,11 @@ void Intelligence::ExecuteDrive()
 				return;
 
 			}
-			if (Database->GetJoy2().second < 25) {//DriveRight
+			if (Database->joy2.second < Njoylow) {//DriveBackward
 				args[0] = slowSpeed;
-				if (Database->GetJoy2().second < 20) {
+				if (Database->joy2.second < Njoymid) {
 					args[0] = midSpeed;
-					if (Database->GetJoy2().second < 10) {
+					if (Database->joy2.second < Njoyhigh) {
 						args[0] = highSpeed;
 					}
 				}
@@ -234,25 +252,24 @@ void Intelligence::ExecuteDrive()
 
 			}
 
-			if (Database->GetJoy2().first > 35) {//DriveForward
-				args[0] = slowSpeed;
-				if (Database->GetJoy2().first > 45) {
-					args[0] = midSpeed;
-					if (Database->GetJoy2().first > 55) {
-						args[0] = highSpeed;
+			if (Database->joy2.first > Pjoylow) {//DriveRight
+				args[0] = HslowSpeed;
+				if (Database->joy2.first > Pjoymid) {
+					args[0] = HmidSpeed;
+					if (Database->joy2.first > Pjoyhigh) {
+						args[0] = HhighSpeed;
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveRight", Database, args));
 
 				return;
-
 			}
-			if (Database->GetJoy2().first < 25) {//DriveBackward
-				args[0] = slowSpeed;
-				if (Database->GetJoy2().first < 20) {
-					args[0] = midSpeed;
-					if (Database->GetJoy2().first < 10) {
-						args[0] = highSpeed;
+			if (Database->joy2.first < Njoylow) {//DriveLeft
+				args[0] = HslowSpeed;
+				if (Database->joy2.first < Njoymid) {
+					args[0] = HmidSpeed;
+					if (Database->joy2.first < Njoyhigh) {
+						args[0] = HhighSpeed;
 					}
 				}
 				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
@@ -302,8 +319,35 @@ void Intelligence::ExecuteLed() {
 		LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
 	}
 }
+void Intelligence::ExecuteDanceSi()
+{
+
+
+}
+bool onoff = false;
 void Intelligence::ExecuteArm()
 {
+
+	std::vector<std::string> args;
+	if (std::chrono::system_clock::now() > MoveArmTime) {
+
+		if (onoff == false) {
+			CommandQueue->push(Command(Worker, "KineArmForward", Database, args));//forward is hardcoded
+
+			onoff = true;
+		}
+		else {
+			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));//forward is hardcoded
+
+			onoff = false;
+		}
+		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterval);
+
+	}
+	//debug
+	
+
+
 	if (std::chrono::system_clock::now() > MoveArmTime && Database->modus == modus::arm) {
 		std::vector<std::string> args;
 		args.push_back(std::to_string(joy1->first));
@@ -316,16 +360,16 @@ void Intelligence::ExecuteArm()
 			CommandQueue->push(Command(Worker, "ArmRight", Database, args));
 		}
 		else if (Database->joy2.second > 40) {
-			CommandQueue->push(Command(Worker, "KineArmForward", Database, args));
+			CommandQueue->push(Command(Worker, "KineArmForward", Database, args));//forward is hardcoded
 		}
 		else if (Database->joy2.second < 20) {
-			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));
+			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));//backward is hardcoded
 		}
 		else if (Database->joy1.second > 40) {
-			CommandQueue->push(Command(Worker, "KineArmUp", Database, args));
+			//CommandQueue->push(Command(Worker, "KineArmUp", Database, args));
 		}
 		else if (Database->joy1.second < 20) {
-			CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
+			//CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
 		}
 
 
@@ -361,6 +405,9 @@ void Intelligence::ExecuteVision()
 			break;
 		case modus::Modus::chickenSurvivalRun:
 			//function call here for chickinsurvivalrun
+			break;
+		case modus::Modus::DanceSi: // not really a vision function, but is the easiest way to add it
+			ExecuteDanceSi();
 			break;
 		default:
 			break;
