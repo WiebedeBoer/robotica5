@@ -220,7 +220,6 @@ void Intelligence::ExecuteDrive()
 	if (std::chrono::system_clock::now() > DriveTime && Database->modus != modus::arm) {
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
-		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
 			std::vector<std::string> args;
 			args.push_back("");
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
@@ -282,7 +281,7 @@ void Intelligence::ExecuteDrive()
 				return;
 			}
 			joy2 = Tempjoy2;
-		//}
+		
 	}
 }
 
@@ -321,8 +320,7 @@ void Intelligence::ExecuteLed() {
 }
 void Intelligence::ExecuteDanceSi()
 {
-
-
+	
 }
 bool onoff = false;
 void Intelligence::ExecuteArm()

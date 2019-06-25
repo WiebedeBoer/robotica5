@@ -46,8 +46,8 @@ public:
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
 	
-	std::pair<int, int> joy1;
-	std::pair<int, int> joy2;
+	std::pair<int, int> joy1 = std::pair<int, int>(28,28);
+	std::pair<int, int> joy2 = std::pair<int, int>(28,28);
 	std::string sensorInfo;
 	modus::Modus modus = modus::Controller;
 	int speed;
