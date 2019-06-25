@@ -34,6 +34,8 @@ bool drivingL, drivingR;
 
 int ax12aPos[5] = {0,0,0,0,0};
 
+int ax12aHeadPos[4][3] = {{210, 512, 820},{820, 820, 510},{330, 580, 890}, {240, 200, 500}};
+
 //String id, di, pos, sp;
 
 void setup()
@@ -58,11 +60,22 @@ void setup()
 
   // Servo setup and start position
   ax12a.begin(BaudRate, DirectionPin, &Serial1);
+
+  // Egg Arm
   ax12a.move(1, 530); //0 - 1023 //0 - 1000 //68mm vanaf onderkant //85mm vanaf onder tot join //nieuwe begin 512 //max 800 //min 400
   ax12a.move(2, 170); //200 min // 200 begin //max 550
   ax12a.move(3, 250); //250 begin //50 min //max 500
   ax12a.move(4, 530); //min 350 //begin 530 // max 700 
   ax12a.move(5, 100); //min 100 //max 190 //begin 190
+
+  // Head Arm
+  ax12a.move(6, 210);
+  ax12a.move(7, 820);
+  ax12a.move(8, 330);
+  ax12a.move(9, 240);
+  ax12a.move(10, 100);
+  ax12a.move(11, 100);
+
   if (debug) { motorInterval = 2500; }
 }
 
@@ -147,6 +160,23 @@ void serialEvent() {
         else if(rx_Msg == "motor?|") {
           result = respondMotor() + String(checksum(respondMotor())) + "\n";
         }
+        else if(rx_Msg == "headPos1?|"){
+          for (int i = 6; i <= 11; i++){
+            axa12.move(i, ax12aHeadPos[i-6][1]);
+          }
+        }
+        else if(rx_Msg == "headPos2?|") {
+          for (int i = 6; i <= 8; i++) {
+            axa12.move(i, ax12aHeadPos[i-6][2]);
+          }
+        }
+        else if(rx_Msg == "headPos3?|") {
+          for (int i = 6; i <= 8; i++) {
+            axa12.move(i, ax12aHeadPos[i-6][3]);
+          }
+        }
+
+        
         
         int resultLength = result.length() +1;          // Convert string to char array
         char resultarray[resultLength];

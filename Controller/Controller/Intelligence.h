@@ -38,6 +38,8 @@ private:
 	void ExecuteChickinSurivalRun();
 	void ExecuteSpeak();
 	void ExecuteLed();
+	void ExecuteDanceSi();
+
 	void CheckInfo();
 	void ExecuteDanceLi();
 };
