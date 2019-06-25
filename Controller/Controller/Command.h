@@ -23,6 +23,7 @@ std::string type; //defines this command
 std::vector<std::string> args;//arguments added to this command
 DataCollector* Database;
 TextToSpeach tts;//used for texttospeach
+char* convertstrtochar(std::string s);
 public:
 	Command();
 	Command(Vision* v, std::string t, DataCollector* DC);
