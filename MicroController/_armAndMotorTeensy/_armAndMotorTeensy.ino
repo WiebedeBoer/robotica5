@@ -59,7 +59,7 @@ void setup()
   potR->set(0);
 
   // Servo setup and start position
-  ax12a.begin(BaudRate, DirectionPin, &Serial1);
+  ax12a.begin(BaudRate, DirectionPin, &Serial);
 
   // Egg Arm
   ax12a.move(1, 530); //0 - 1023 //0 - 1000 //68mm vanaf onderkant //85mm vanaf onder tot join //nieuwe begin 512 //max 800 //min 400
@@ -84,6 +84,9 @@ void loop()
   // Update servo positions
   for (int i = 0; i <= 4; i++) {
     ax12aPos[i] = readPos(i+1);
+  delay(5000);
+  Serial.println("Head move");
+  headMedium();
   }
 
   unsigned long currentMillis = millis(); // Current millis
@@ -115,6 +118,13 @@ void loop()
       Serial.println("-----------------------------------------");
     }
   }
+}
+
+
+void headMedium() {
+          for (int i = 6; i <= 8; i++) {
+            ax12a.moveSpeed(i, ax12aHeadPos[i-6][1], 50);
+          }
 }
 
 // Triggers on Serial event
@@ -162,17 +172,17 @@ void serialEvent() {
         }
         else if(rx_Msg == "headPos1?|"){
           for (int i = 6; i <= 11; i++){
-            axa12.move(i, ax12aHeadPos[i-6][1]);
+            ax12a.moveSpeed(i, ax12aHeadPos[i-6][0], 50);
           }
         }
         else if(rx_Msg == "headPos2?|") {
           for (int i = 6; i <= 8; i++) {
-            axa12.move(i, ax12aHeadPos[i-6][2]);
+            ax12a.moveSpeed(i, ax12aHeadPos[i-6][1], 50);
           }
         }
         else if(rx_Msg == "headPos3?|") {
           for (int i = 6; i <= 8; i++) {
-            axa12.move(i, ax12aHeadPos[i-6][3]);
+            ax12a.moveSpeed(i, ax12aHeadPos[i-6][2], 50);
           }
         }
 
