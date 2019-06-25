@@ -5,7 +5,8 @@
 #include<iostream>
 //namespace for modus enum
 namespace modus {
-	enum Modus { BlueBeam, poortje, grindpad, chickenSurvivalRun, eggtelligence, Controller, pitch, arm };
+
+	enum Modus { BlueBeam, poortje, grindpad, chickenSurvivalRun, eggtelligence, Controller, pitch, arm, DanceLi, DanceSi };
 }
 //DataCollection for the Wedstrijd
 struct Wedstrijd
@@ -46,8 +47,8 @@ public:
 	std::pair<int, int> GetJoy1();
 	std::pair<int, int> GetJoy2();
 	
-	std::pair<int, int> joy1;
-	std::pair<int, int> joy2;
+	std::pair<int, int> joy1 = std::pair<int, int>(28,28);
+	std::pair<int, int> joy2 = std::pair<int, int>(28,28);
 	std::string sensorInfo;
 	modus::Modus modus = modus::Controller;
 	int speed;
@@ -57,6 +58,7 @@ public:
 	Arm arm;
 	bool updateGrab = false;
 	bool grab = false;
+	int microphone[3];//0=low 1=mid 2=high
 
 private:
 	int gyroscoop;

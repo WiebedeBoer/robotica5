@@ -9,10 +9,11 @@
 #define joy2Dig 19
 
 // Home Page
-NexButton btnArm        = NexButton(0, 10, "BArm");        // Arm Button
+NexButton btnArm        = NexButton(0, 10, "BArm");         // Arm Button
+NexButton btnShutdown   = NexButton(0, 11, "btnShutdown");  // Shutdown Button
 
 // Arm Page
-NexButton btnHome    = NexButton(1, 4, "Home");        // Home Button
+NexButton btnHome       = NexButton(1, 4, "Home");          // Home Button
 
 // Movement Page
 NexText JoyL            = NexText(1, 2, "JoyL");            // Joystick Left
@@ -52,6 +53,18 @@ NexButton btnBarneveld  = NexButton(9, 7, "BBarneveld");
 // Sound Page
 NexButton SPitch        = NexButton(5, 3, "SPitch");        // Pitch Button -- Same as BPitch
 
+// Head Page
+NexButton btnHeadPos1   = NexButton(6, 3, "headPos1");      // Button Head Loc 1
+NexButton btnHeadPos2   = NexButton(6, 4, "headPos2");      // Button Head Loc 2
+NexButton btnHeadPos3   = NexButton(6, 5, "headPos3");      // Button Head Loc 3
+NexButton btnHeadPos4   = NexButton(6, 6, "headPos4");      // Button Head Loc 4
+
+NexButton btnEyesPos1   = NexButton(6, 9, "eyesPos1");      // Button Eyes Loc 1
+NexButton btnEyesPos2   = NexButton(6, 8, "eyesPos2");      // Button Eyes Loc 2
+NexButton btnEyesPos3   = NexButton(6, 7, "eyesPos3");      // Button Eyes Loc 3
+
+
+
 char buffer[100] = {0};         // Buffer voor data van joystick
 char rx_Byte = 0;               // Last received byte
 String rx_Msg = "";             // Received message
@@ -65,6 +78,9 @@ bool eggTrig = false;
 
 String curMode = "Start"; // Current Mode -- Begin Mode is Start
 String curQR = "Start";   // Current QR -- Begin Mode is Start
+String curHead = "Start"; // Current Head -- Begin Mode is Start
+String curEyes = "Start"; // Current Eyes -- Begin Mode is Start
+bool boolshutdown = false; // Shutdown Modus -- False
  
 String JoyLtext;  // Set JoyLtext -- Used for joysticks location
 String JoyRtext;  // Set JoyRtext -- Used for joysticks location
@@ -78,6 +94,7 @@ unsigned long lastUpdateInterval = 0;
 NexTouch *nex_listen_list[] = 
 {
   &btnArm,
+  &btnShutdown,
   &btnHome,
   &btnPitch,
   &btnPoortje,
@@ -94,6 +111,13 @@ NexTouch *nex_listen_list[] =
   &btnEibergen,
   &btnEindhoven,
   &btnBarneveld,
+  &btnHeadPos1,
+  &btnHeadPos2,
+  &btnHeadPos3,
+  &btnHeadPos4,
+  &btnEyesPos1,
+  &btnEyesPos2,
+  &btnEyesPos3,
   &JoyL,
   &JoyR,
   NULL
@@ -114,6 +138,8 @@ void setup() {
 
   // Home page
   btnArm.attachPush(btnArmPushCallback, &btnArm);
+  btnShutdown.attachPush(btnShutdownPushCallback, &btnShutdown);
+  
   // Arm Page
   btnHome.attachPush(btnHomePushCallback, &btnHome);
   // Mode page
@@ -134,6 +160,15 @@ void setup() {
   btnEindhoven.attachPop(btnEindhovenPopCallback, &btnEindhoven);
   btnEibergen.attachPop(btnEibergenPopCallback, &btnEibergen);
   btnBarneveld.attachPop(btnBarneveldPopCallback, &btnBarneveld);
+
+  // Head Page
+  btnHeadPos1.attachPop(btnHeadPos1PopCallback, &btnHeadPos1);
+  btnHeadPos2.attachPop(btnHeadPos2PopCallback, &btnHeadPos2);
+  btnHeadPos3.attachPop(btnHeadPos3PopCallback, &btnHeadPos3);
+  btnHeadPos4.attachPop(btnHeadPos4PopCallback, &btnHeadPos4);
+  btnEyesPos1.attachPop(btnEyesPos1PopCallback, &btnEyesPos1);
+  btnEyesPos2.attachPop(btnEyesPos2PopCallback, &btnEyesPos2);
+  btnEyesPos3.attachPop(btnEyesPos3PopCallback, &btnEyesPos3);
   
   delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
@@ -145,6 +180,9 @@ void setup() {
 
 // Callback function btnArm
 void btnArmPushCallback(void *ptr) { curMode = "Arm"; }
+
+// Callback function btnShutdown
+void btnShutdownPushCallback(void *ptr) { boolshutdown = true; }
 
 // Callback function btnHome
 void btnHomePushCallback(void *ptr) { curMode = "Start"; }
@@ -196,6 +234,30 @@ void btnEibergenPopCallback(void *ptr){ curQR = "Eibergen"; }
 
 // Callback functie knop Barneveld 
 void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
+
+//                         BUTTONS HEAD/EYE
+// _________________________________________________________________
+
+// Callback function Head
+void btnHeadPos1PopCallback(void *ptr) { curHead = "Head1"; }
+
+// Callback function Head
+void btnHeadPos2PopCallback(void *ptr) { curHead = "Head2"; }
+
+// Callback function Head
+void btnHeadPos3PopCallback(void *ptr) { curHead = "Head3"; }
+
+// Callback function Head
+void btnHeadPos4PopCallback(void *ptr) { curHead = "Head4"; }
+
+// Callback function Head
+void btnEyesPos1PopCallback(void *ptr) { curEyes = "Eyes1"; }
+
+// Callback function Head
+void btnEyesPos2PopCallback(void *ptr) { curEyes = "Eyes2"; }
+
+// Callback function Head
+void btnEyesPos3PopCallback(void *ptr) { curEyes = "Eyes3"; }
 
 // _________________________________________________________________
 
@@ -296,7 +358,7 @@ void serialEvent2(){
       String result = "NoActionController?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
-        result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + " \n";
+        result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + ";" + boolshutdown + "\n";
       }
 
       Serial.print("Responding: ");Serial.println(result);

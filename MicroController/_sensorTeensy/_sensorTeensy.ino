@@ -1,4 +1,4 @@
-// Author Thom Smit, Wiebe de Boer, Rob Alma, Kris van den Berg en Stan van der Ploeg
+// Author Thom Smit, Wiebe de Boer, Rob Alma, Kris van den Berg, Stan van der Ploeg en je moeder
 
 // Includes
 #include <Wire.h>
@@ -30,7 +30,7 @@ int left = 0, right = 0, count = 0;
 unsigned long timer = 0;
 float timestep = 0.01;
 
-String controller = "start;28;28;28;28;0";
+String controller = "start;28;28;28;28;0;0";
 #define LED_PIN     2
 #define NUM_LEDS    28
 #define BRIGHTNESS  64 //128
@@ -121,29 +121,20 @@ void serialEvent() {
         Serial1.write(resultarray);                     // Send chararray to rp
 
         result = respondRefresh() + String(checksum(respondRefresh())) + "\n";
-      }
-      else if(rx_Msg == "eyeCyan?|"){
-        Cyan();
+      }else if(rx_Msg == "eyeCyan?|"){
+        Cyaan();
         result = respondEye() + String(checksum(respondEye())) + "\n";
       }
       else if(rx_Msg == "eyeRed?|"){
-        Red();
+        Rood();
         result = respondEye() + String(checksum(respondEye())) + "\n";
       }
       else if(rx_Msg == "eyeBlue?|"){
-        Blue();
+        Blauw();
         result = respondEye() + String(checksum(respondEye())) + "\n";
       }
       else if(rx_Msg == "eyeWhite?|"){
-        White();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
-      }
-      else if(rx_Msg == "eyeGreen?|"){
-        Green();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
-      }
-      else if(rx_Msg == "eyePink?|"){
-        Pink();
+        Wit();
         result = respondEye() + String(checksum(respondEye())) + "\n";
       }
 
@@ -203,9 +194,8 @@ String getSpeed() {
 String getMicrophone() {
   return String(soundL) + ";" + String(soundM) + ";" + String(soundH);
 }
-
-// Eye functions
-void Red(){
+//fucntions
+void Rood(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(0,255,0);
   }
@@ -214,7 +204,7 @@ void Red(){
   color = CRGB(0,255,0);
 }
 
-void Green(){
+void Groen(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(255,0,0);
   }
@@ -223,7 +213,7 @@ void Green(){
   color = CRGB(255,0,0);
 }
 
-void Blue(){
+void Blauw(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(0,0,255);
   }
@@ -232,7 +222,7 @@ void Blue(){
   color = CRGB(0,0,255);
 }
 
-void Yellow(){
+void Geel(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(255,255,0);
   }
@@ -241,7 +231,7 @@ void Yellow(){
   color = CRGB(255,255,0);
 }
 
-void Pink(){
+void Roze(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(0,255,255);
   }
@@ -250,7 +240,7 @@ void Pink(){
   color = CRGB(0,255,255);
 }
 
-void Cyan(){
+void Cyaan(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(255,0,255);
   }
@@ -259,7 +249,7 @@ void Cyan(){
   color = CRGB(255,0,255);
 }
 
-void White(){
+void Wit(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(255,255,255);
   }  
@@ -267,7 +257,7 @@ void White(){
   color = CRGB(255,255,255);
 }
 
-void Gray(){
+void Grijs(){
   for(int i = 0; i < NUM_LEDS; i++){
     leds[i] = CRGB(200,200,200);
   }
@@ -276,7 +266,7 @@ void Gray(){
   color = CRGB(200,200,200);
 }
 
-String respondEye() { return "ack:eye?<>|"; }
+String respondEye() { return "ack:eye?<eye>|"; }
 
 // return String: distance, speed, microphone
 String respondInfo() { return "ack:info?<"+ getDistance() + ";" + getSpeed() + ";" + getMicrophone() + ">|"; }
