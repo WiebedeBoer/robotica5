@@ -162,13 +162,13 @@ void setup() {
   btnBarneveld.attachPop(btnBarneveldPopCallback, &btnBarneveld);
 
   // Head Page
-  btnHeadPos.attachPop(btnHeadPos1PopCallback, &btnHeadPos1);
-  btnHeadPos.attachPop(btnHeadPos2PopCallback, &btnHeadPos2);
-  btnHeadPos.attachPop(btnHeadPos3PopCallback, &btnHeadPos3);
-  btnHeadPos.attachPop(btnHeadPos4PopCallback, &btnHeadPos4);
-  btnEyesPos.attachPop(btnEyesPos1PopCallback, &btnEyesPos1);
-  btnEyesPos.attachPop(btnEyesPos2PopCallback, &btnEyesPos2);
-  btnEyesPos.attachPop(btnEyesPos3PopCallback, &btnEyesPos3);
+  btnHeadPos1.attachPop(btnHeadPos1PopCallback, &btnHeadPos1);
+  btnHeadPos2.attachPop(btnHeadPos2PopCallback, &btnHeadPos2);
+  btnHeadPos3.attachPop(btnHeadPos3PopCallback, &btnHeadPos3);
+  btnHeadPos4.attachPop(btnHeadPos4PopCallback, &btnHeadPos4);
+  btnEyesPos1.attachPop(btnEyesPos1PopCallback, &btnEyesPos1);
+  btnEyesPos2.attachPop(btnEyesPos2PopCallback, &btnEyesPos2);
+  btnEyesPos3.attachPop(btnEyesPos3PopCallback, &btnEyesPos3);
   
   delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
@@ -358,7 +358,7 @@ void serialEvent2(){
       String result = "NoActionController?,<>|\n";
       
       if(rx_Msg == "sendRefresh?|"){
-        result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + ";" + boolshutdown \n";
+        result = "info?," + String(curMode) + ";" + getJoy() + ";" + String(eggTrig) + ";" + boolshutdown + "\n";
       }
 
       Serial.print("Responding: ");Serial.println(result);
