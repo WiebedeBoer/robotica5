@@ -220,6 +220,7 @@ void Intelligence::ExecuteDrive()
 	if (std::chrono::system_clock::now() > DriveTime && Database->modus != modus::arm) {
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
+
 		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
 		std::vector<std::string> args;
 		args.push_back("");
@@ -231,6 +232,7 @@ void Intelligence::ExecuteDrive()
 				args[0] = midSpeed;
 				if (Database->joy2.second > Pjoyhigh) {
 					args[0] = highSpeed;
+
 				}
 			}
 			CommandQueue->push(Command(Worker, "DriveForward", Database, args));
@@ -276,13 +278,14 @@ void Intelligence::ExecuteDrive()
 
 			return;
 
+
 		}
 		if (Database->GetJoy2().first > 28 && Database->GetJoy2().first < 32 && Database->GetJoy2().second > 28 && Database->GetJoy2().second < 32) {//StopDriving
 			CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			return;
 		}
 		joy2 = Tempjoy2;
-		//}
+		
 	}
 }
 void Intelligence::ExecuteDanceLi()
@@ -498,6 +501,7 @@ void Intelligence::ExecuteLed() {
 		LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);
 	}
 }
+
 bool onoff = false;
 void Intelligence::ExecuteArm()
 {
