@@ -66,7 +66,7 @@ void setup()
   ax12a.move(2, 170); //200 min // 200 begin //max 550
   ax12a.move(3, 250); //250 begin //50 min //max 500
   ax12a.move(4, 530); //min 350 //begin 530 // max 700 
-  ax12a.move(5, 500); //min 100 //max 190 //begin 190
+  ax12a.move(5, 100); //min 100 //max 190 //begin 190
 
   // Head Arm
   ax12a.move(6, 210);
@@ -75,7 +75,7 @@ void setup()
   ax12a.move(9, 240);
   ax12a.move(10, 100);
   ax12a.move(11, 100);
-  
+
   if (debug) { motorInterval = 2500; }
 }
 
@@ -162,17 +162,17 @@ void serialEvent() {
         }
         else if(rx_Msg == "headPos1?|"){
           for (int i = 6; i <= 11; i++){
-            ax12a.moveSpeed(i, ax12aHeadPos[i-6][0], 50);
+            axa12.move(i, ax12aHeadPos[i-6][1]);
           }
         }
         else if(rx_Msg == "headPos2?|") {
           for (int i = 6; i <= 8; i++) {
-            ax12a.moveSpeed(i, ax12aHeadPos[i-6][1], 50);
+            axa12.move(i, ax12aHeadPos[i-6][2]);
           }
         }
         else if(rx_Msg == "headPos3?|") {
           for (int i = 6; i <= 8; i++) {
-            ax12a.moveSpeed(i, ax12aHeadPos[i-6][2], 50);
+            axa12.move(i, ax12aHeadPos[i-6][3]);
           }
         }
 

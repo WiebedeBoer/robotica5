@@ -95,9 +95,11 @@ void Command::Execute() {
 		return;
 	}if (Command::type == "GrabOn") {
 		Command::slave->SerialSend("servoS?,5;100;50&;60;100");
+		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}if (Command::type == "GrabOff") {
 		Command::slave->SerialSend("servoS?,5;0;50&;60;100");
+		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmForward") {
@@ -258,9 +260,6 @@ void Command::Execute() {
 	}if (Command::type == "TurnEyeWhite") {
 		Command::slave->SerialSend("eyeWhite?,0");
 		return;
-	}if (Command::type == "TurnEyePink") {
-		Command::slave->SerialSend("eyePink?,0");
-		return;
 	}
 
 
@@ -287,11 +286,6 @@ void Command::Execute() {
 		case modus::Modus::chickenSurvivalRun:
 			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
 			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
-			break;
-		case modus::Modus::DanceSi:
-			Command::Database->wedstrijd.tape = Command::VisionSlave->executeCommand("0:0:0");
-			std::cout << "Tape: " << Command::Database->wedstrijd.tape << std::endl;
-
 			break;
 		default:
 			break;
