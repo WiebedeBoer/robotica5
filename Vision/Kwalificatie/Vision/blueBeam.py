@@ -24,7 +24,7 @@ def viewBeam(frame):
 
 	gray_res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
 	_, th = cv2.threshold(gray_res, 1, 255, cv2.THRESH_BINARY)
-	contours, hierarchy = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+	_, contours, hierarchy = cv2.findContours(th, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 	for cnt in contours:
 		area = cv2.contourArea(cnt)
 		perimeter = cv2.arcLength(cnt, True)
