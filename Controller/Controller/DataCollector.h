@@ -5,7 +5,7 @@
 #include<iostream>
 //namespace for modus enum
 namespace modus {
-	enum Modus { BlueBeam, poortje, grindpad, chickenSurvivalRun, eggtelligence, Controller, pitch, arm };
+	enum Modus { BlueBeam, poortje, grindpad, chickenSurvivalRun, eggtelligence, Controller, pitch, arm, DanceLi };
 }
 //DataCollection for the Wedstrijd
 struct Wedstrijd
@@ -57,6 +57,7 @@ public:
 	Arm arm;
 	bool updateGrab = false;
 	bool grab = false;
+	int microphone[3];//0=low 1=mid 2=high
 
 private:
 	int gyroscoop;

@@ -39,5 +39,6 @@ private:
 	void ExecuteSpeak();
 	void ExecuteLed();
 	void CheckInfo();
+	void ExecuteDanceLi();
 };
 
