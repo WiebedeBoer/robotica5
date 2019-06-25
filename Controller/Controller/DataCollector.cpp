@@ -14,7 +14,7 @@ DataCollector::~DataCollector()
 void DataCollector::SetSensorInfo(std::string input) 
 {
 	sensorInfo = input;
-	std::regex rgx("(\d+)");
+	/*std::regex rgx("(\d+)");
 	std::smatch matches;
 
 	if (std::regex_search(input, matches, rgx)) 
@@ -32,7 +32,7 @@ void DataCollector::SetSensorInfo(std::string input)
 	else
 	{
 		std::cout << "No Sensor values" << std::endl;
-	}
+	}*/
 }
 
 void DataCollector::SetAfstandBedieningData(std::string input)

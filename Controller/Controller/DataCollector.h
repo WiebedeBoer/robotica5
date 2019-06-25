@@ -3,6 +3,7 @@
 #include<string>
 #include<regex>
 #include<iostream>
+#include <chrono>
 //namespace for modus enum
 namespace modus {
 
@@ -16,6 +17,9 @@ struct Wedstrijd
 	std::string qrDistance;
 	std::string qrDestination;
 	std::string findChickin;
+	std::string tape;
+	bool setTime = false;
+	std::chrono::system_clock::time_point stopDance;
 };
 //DataCollection for the Qualification
 struct Kwalificatie

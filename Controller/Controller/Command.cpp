@@ -49,7 +49,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "sleep") {
-		if (args.size == 1) {
+		if (args.size() == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(args[0])));
 		}
 		else
@@ -89,11 +89,9 @@ void Command::Execute() {
 		return;
 	}if (Command::type == "GrabOn") {
 		Command::slave->SerialSend("servoS?,5;100;50&;60;100");
-		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}if (Command::type == "GrabOff") {
 		Command::slave->SerialSend("servoS?,5;0;50&;60;100");
-		std::cout << "The Arm is grabbing!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmForward") {
@@ -101,8 +99,8 @@ void Command::Execute() {
 		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", "300", "100");
 		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "300");
-		//Command::slave->SerialSend(buffer);
+		sprintf(buffer, "servoS?,6;0;50&4;0;%d", "300");
+		Command::slave->SerialSend(buffer);
 		//std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
@@ -111,8 +109,8 @@ void Command::Execute() {
 		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", "170", "250");
 		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "530");
-		//Command::slave->SerialSend(buffer);
+		sprintf(buffer, "servoS?,6;0;50&4;0;%d", "530");
+		Command::slave->SerialSend(buffer);
 		//std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
@@ -258,6 +256,9 @@ void Command::Execute() {
 	}if (Command::type == "TurnEyeWhite") {
 		Command::slave->SerialSend("eyeWhite?,0");
 		return;
+	}if (Command::type == "TurnEyePink") {
+		Command::slave->SerialSend("eyePink?,0");
+		return;
 	}
 
 
@@ -285,6 +286,11 @@ void Command::Execute() {
 			Command::Database->wedstrijd.chickenSurvivalRun = Command::VisionSlave->executeCommand("2:0:0");
 			std::cout << "chickenSurvivalRun: " << Command::Database->wedstrijd.chickenSurvivalRun << std::endl;
 			break;
+		case modus::Modus::DanceSi:
+			Command::Database->wedstrijd.tape = Command::VisionSlave->executeCommand("0:0:0");
+			std::cout << "Tape: " << Command::Database->wedstrijd.tape << std::endl;
+
+			break;
 		default:
 			break;
 		}
@@ -292,7 +298,7 @@ void Command::Execute() {
 	}
 
 	if (Command::type == "info") {
-		Command::slave->SerialSend("info?," + args[0]);
+		Command::slave->SerialSend("info?,");
 		Command::Database->SetSensorInfo(Command::slave->GetLastResponce());
 		return;
 	}

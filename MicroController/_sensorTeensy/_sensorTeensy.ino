@@ -137,6 +137,10 @@ void serialEvent() {
         Wit();
         result = respondEye() + String(checksum(respondEye())) + "\n";
       }
+      else if(rx_Msg == "eyePink?|"){
+        Roze();
+        result = respondEye() + String(checksum(respondEye())) + "\n";
+      }
 
       int resultLength = result.length() +1;          // Convert string to char array
       char resultarray[resultLength];
