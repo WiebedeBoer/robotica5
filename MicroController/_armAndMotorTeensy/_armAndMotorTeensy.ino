@@ -62,7 +62,7 @@ void setup()
   ax12a.move(2, 170); //200 min // 200 begin //max 550
   ax12a.move(3, 250); //250 begin //50 min //max 500
   ax12a.move(4, 530); //min 350 //begin 530 // max 700 
-  ax12a.move(5, 100); //min 100 //max 190 //begin 190
+  ax12a.move(5, 500); //min 100 //max 190 //begin 190
   if (debug) { motorInterval = 2500; }
 }
 
