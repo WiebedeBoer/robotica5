@@ -41,7 +41,7 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 			}
 		}
 		// alleen kwalificatie modus zijn toegevoegd
-		std::cout << m[1] << std::endl;
+		//std::cout << m[1] << std::endl;
 		if (m[1] == "Poortje")
 			modus = modus::poortje;
 		else if (m[1] == "Chicken")
@@ -56,7 +56,9 @@ void DataCollector::SetAfstandBedieningData(std::string input)
 			modus = modus::pitch;
 		else if (m[1] == "Arm")
 			modus = modus::arm;
-		std::cout << modus << std::endl;
+		else if (m[1] == "DanceSi")
+			modus = modus::DanceSi;
+		//std::cout << modus << std::endl;
 	}
 	catch (const std::exception &) {
 		std::cout << "joy stoi error" << std::endl;
