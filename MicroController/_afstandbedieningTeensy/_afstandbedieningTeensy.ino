@@ -78,6 +78,8 @@ bool eggTrig = false;
 
 String curMode = "Start"; // Current Mode -- Begin Mode is Start
 String curQR = "Start";   // Current QR -- Begin Mode is Start
+String curHead = "Start"; // Current Head -- Begin Mode is Start
+String curEyes = "Start"; // Current Eyes -- Begin Mode is Start
 bool boolshutdown = false; // Shutdown Modus -- False
  
 String JoyLtext;  // Set JoyLtext -- Used for joysticks location
@@ -160,6 +162,13 @@ void setup() {
   btnBarneveld.attachPop(btnBarneveldPopCallback, &btnBarneveld);
 
   // Head Page
+  btnHeadPos.attachPop(btnHeadPos1PopCallback, &btnHeadPos1);
+  btnHeadPos.attachPop(btnHeadPos2PopCallback, &btnHeadPos2);
+  btnHeadPos.attachPop(btnHeadPos3PopCallback, &btnHeadPos3);
+  btnHeadPos.attachPop(btnHeadPos4PopCallback, &btnHeadPos4);
+  btnEyesPos.attachPop(btnEyesPos1PopCallback, &btnEyesPos1);
+  btnEyesPos.attachPop(btnEyesPos2PopCallback, &btnEyesPos2);
+  btnEyesPos.attachPop(btnEyesPos3PopCallback, &btnEyesPos3);
   
   delay(2000);  // This delay is just in case the nextion display didn't start yet, to be sure it will receive the following command.
 }
@@ -225,6 +234,30 @@ void btnEibergenPopCallback(void *ptr){ curQR = "Eibergen"; }
 
 // Callback functie knop Barneveld 
 void btnBarneveldPopCallback(void *ptr){ curQR = "Barneveld"; }
+
+//                         BUTTONS HEAD/EYE
+// _________________________________________________________________
+
+// Callback function Head
+void btnHeadPos1PopCallback(void *ptr) { curHead = "Head1"; }
+
+// Callback function Head
+void btnHeadPos2PopCallback(void *ptr) { curHead = "Head2"; }
+
+// Callback function Head
+void btnHeadPos3PopCallback(void *ptr) { curHead = "Head3"; }
+
+// Callback function Head
+void btnHeadPos4PopCallback(void *ptr) { curHead = "Head4"; }
+
+// Callback function Head
+void btnEyesPos1PopCallback(void *ptr) { curEyes = "Eyes1"; }
+
+// Callback function Head
+void btnEyesPos2PopCallback(void *ptr) { curEyes = "Eyes2"; }
+
+// Callback function Head
+void btnEyesPos3PopCallback(void *ptr) { curEyes = "Eyes3"; }
 
 // _________________________________________________________________
 
