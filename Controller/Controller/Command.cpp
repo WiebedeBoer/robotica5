@@ -46,16 +46,10 @@ void Command::Execute() {
 	if (Command::type == "refresh") {
 		Command::slave->SerialSend("refresh?," + args[0]);
 		Command::Database->SetAfstandBedieningData(Command::slave->GetLastResponce());
-		if (Database->shutdown == "true") {
-			std::string cmd = "sudo shutdown now";
-			char* ccmd = convertstrtochar(cmd);
-			system(ccmd);
-			delete(ccmd);
-		}
 		return;
 	}
 	if (Command::type == "sleep") {
-		if (args.size() == 1) {
+		if (args.size == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(args[0])));
 		}
 		else
@@ -101,19 +95,23 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmForward") {
-		Command::slave->SerialSend("servoS?,2;300;32&3;100;32");//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		char buffer[100];
+		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", "300", "100");
+		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
-
-		Command::slave->SerialSend("servoS?,6;0;50&4;0;300");
+		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "300");
+		//Command::slave->SerialSend(buffer);
+		//std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
-		Command::slave->SerialSend("servoS?,2;170;32&3;250;32");//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
-		std::this_thread::sleep_for(std::chrono::milliseconds(300));
-
+		char buffer[100];
+		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", "170", "250");
+		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		Command::slave->SerialSend("servoS?,6;0;50&4;0;530");
+		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "530");
+		//Command::slave->SerialSend(buffer);
+		//std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 
@@ -300,18 +298,8 @@ void Command::Execute() {
 	}
 
 	if (Command::type == "info") {
-		Command::slave->SerialSend("info?,");
+		Command::slave->SerialSend("info?," + args[0]);
 		Command::Database->SetSensorInfo(Command::slave->GetLastResponce());
 		return;
 	}
-}
-
-char* Command::convertstrtochar(std::string s) {
-	int i;
-	const int x = s.length();
-	char* p = new char[x];
-	for (i = 0; i < s.length(); i++) {
-		p[i] = s[i];
-	}
-	return p;
 }
