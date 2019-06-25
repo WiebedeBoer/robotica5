@@ -60,10 +60,15 @@ void Intelligence::Think()
 	}
 }
 
-
+//chicken trap?
 void Intelligence::ExecuteChickinSurivalRun()
 {
-
+	//autonomous stairs up
+	std::vector<std::string> args;
+	args.push_back("");
+	args[0] = "64";
+	CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+	//else on joystick
 }
 
 void Intelligence::ExecuteSpeak()
