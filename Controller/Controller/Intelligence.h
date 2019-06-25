@@ -41,5 +41,6 @@ private:
 	void ExecuteDanceSi();
 
 	void CheckInfo();
+	void ExecuteDanceLi();
 };
 

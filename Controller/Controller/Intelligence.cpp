@@ -220,7 +220,6 @@ void Intelligence::ExecuteDrive()
 	if (std::chrono::system_clock::now() > DriveTime && Database->modus != modus::arm) {
 		DriveTime = std::chrono::system_clock::now() + std::chrono::milliseconds(DriveInterval);
 
-		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
 			std::vector<std::string> args;
 			args.push_back("");
 			std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
@@ -282,7 +281,44 @@ void Intelligence::ExecuteDrive()
 				return;
 			}
 			joy2 = Tempjoy2;
-		//}
+		
+	}
+}
+int dancemove = 0;
+void Intelligence::ExecuteDanceLi()
+{
+	std::vector<std::string> args;
+	args.push_back("");
+	int activationThreshold = 512;
+	if (Database->microphone[0] > activationThreshold)
+	{
+		switch (dancemove)
+		{
+		case 1:
+			args[0] = "100";
+			CommandQueue->push(Command(Worker, "DriveForward", Database, args));
+			CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+			CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+
+			break;
+		case 2:
+			args[0] = "100";
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+			break;
+		}
+	}
+	if (Database->microphone[1] > activationThreshold)
+	{
+
+	}
+	if (Database->microphone[2] > activationThreshold)
+	{
+
 	}
 }
 
@@ -300,6 +336,7 @@ void Intelligence::CheckAfstandbediening()
 		std::vector<std::string> args;
 		args.push_back(std::to_string(Database->speed));
 		CommandQueue->push(Command(Sensor, "refresh", Database, args));
+		CheckInfo();
 		refreshAfstandBedieningTime = std::chrono::system_clock::now() + std::chrono::milliseconds(RefreshInterval);
 	}
 }
@@ -321,8 +358,7 @@ void Intelligence::ExecuteLed() {
 }
 void Intelligence::ExecuteDanceSi()
 {
-
-
+	
 }
 bool onoff = false;
 void Intelligence::ExecuteArm()
@@ -406,6 +442,10 @@ void Intelligence::ExecuteVision()
 		case modus::Modus::chickenSurvivalRun:
 			//function call here for chickinsurvivalrun
 			break;
+
+		case modus::Modus::DanceLi:
+			break;
+
 		case modus::Modus::DanceSi: // not really a vision function, but is the easiest way to add it
 			ExecuteDanceSi();
 			break;
