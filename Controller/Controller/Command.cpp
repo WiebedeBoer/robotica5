@@ -308,4 +308,10 @@ void Command::Execute() {
 		}
 		return;
 	}
+
+	if (Command::type == "info") {
+		Command::slave->SerialSend("info?," + args[0]);
+		Command::Database->SetSensorInfo(Command::slave->GetLastResponce());
+		return;
+	}
 }
