@@ -45,7 +45,7 @@ private:
 	bool DriveEggtelligence(); //finding egg
 	bool ArmEggtelligence(std::string armGrip); //pick up and drop off
 	bool TrayEggtelligence(); //finding tray
-	std::string Intelligence::TapeHelper(); //for the tape
-	std::string Intelligence::ChickenHelper(); //for the chicken
+	void Intelligence::TapeHelper(); //for the tape
+	void Intelligence::ChickenHelper(); //for the chicken
 };
 

@@ -113,7 +113,11 @@ void Intelligence::ExecuteEgg() {
 		//step 2.3, close gripper and pick up egg
 		//step 2.4, raise arm
 		//stop at tape (mode tape: false, both, left, right), Jesse
+		TapeHelper();
 		//go around at chicken, Robin
+		ChickenHelper();
+
+
 		if (armEgg == true) {
 			trayEgg = TrayEggtelligence();
 		}			
@@ -278,7 +282,7 @@ bool Intelligence::TrayEggtelligence() {
 }
 
 //eggtelligence tape helper
-std::string Intelligence::TapeHelper() {
+void Intelligence::TapeHelper() {
 	std::vector<std::string> out;
 	//std::string s = Intelligence::Database->kwalificatie.bluebeam;
 	std::string s;
@@ -288,7 +292,11 @@ std::string Intelligence::TapeHelper() {
 	try {
 		if (out[0] != "False") {
 			std::cout << "tape found" << '\n';
-			return "tape";
+
+				std::vector<std::string> args;
+				args.push_back("");
+				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+			
 		}
 	}
 	catch (float e) {
@@ -297,7 +305,7 @@ std::string Intelligence::TapeHelper() {
 }
 
 //eggtelligence chicken helper
-std::string Intelligence::ChickenHelper() {
+void Intelligence::ChickenHelper() {
 	std::vector<std::string> out;
 	//std::string s = Intelligence::Database->kwalificatie.bluebeam;
 	std::string s;
@@ -307,7 +315,9 @@ std::string Intelligence::ChickenHelper() {
 	try {
 		if (out[0] != "False") {
 			std::cout << "chicken found" << '\n';
-			return "chicken";
+			std::vector<std::string> args;
+			args.push_back("");
+			CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
 		}
 	}
 	catch (float e) {
