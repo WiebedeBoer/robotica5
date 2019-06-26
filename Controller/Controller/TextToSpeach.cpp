@@ -166,7 +166,7 @@ void TextToSpeach::speak_normal_greek(std::string text) {
 void TextToSpeach::random_quote()
 {
 	srand(time(0));
-	int r = (rand() % 14) + 1;
+	int r = (rand() % 15) + 1;
 
 	switch (r)
 	{
@@ -212,6 +212,9 @@ void TextToSpeach::random_quote()
 		break;
 	case 14:
 		speak_normal("Kiss my metal shiny ass!");
+		break;
+	case 15:
+		speak_normal("Paniek?! Paniek?! Paniek?!");
 		break;
 	default:
 		break;
