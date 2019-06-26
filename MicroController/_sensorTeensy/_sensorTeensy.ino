@@ -123,23 +123,23 @@ void serialEvent() {
         result = respondRefresh() + String(checksum(respondRefresh())) + "\n";
       }else if(rx_Msg == "eyeCyan?|"){
         Cyaan();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
+        result = respondEyeCyan() + String(checksum(respondEyeCyan())) + "\n";
       }
       else if(rx_Msg == "eyeRed?|"){
         Rood();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
+        result = respondEyeRed() + String(checksum(respondEyeRed())) + "\n";
       }
       else if(rx_Msg == "eyeBlue?|"){
         Blauw();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
+        result = respondEyeBlue() + String(checksum(respondEyeBlue())) + "\n";
       }
       else if(rx_Msg == "eyeWhite?|"){
         Wit();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
+        result = respondEyeWhite() + String(checksum(respondEyeWhite())) + "\n";
       }
       else if(rx_Msg == "eyePink?|"){
         Roze();
-        result = respondEye() + String(checksum(respondEye())) + "\n";
+        result = respondEyePink() + String(checksum(respondEyePink())) + "\n";
       }
 
       int resultLength = result.length() +1;          // Convert string to char array
@@ -270,7 +270,12 @@ void Grijs(){
   color = CRGB(200,200,200);
 }
 
-String respondEye() { return "ack:eye?<eye>|"; }
+String respondEyeCyan() { return "ack:eyeCyan?<>|"; }
+String respondEyeRed() { return "ack:eyeRed?<>|"; }
+String respondEyeBlue() { return "ack:eyeBlue?<>|"; }
+String respondEyeWhite() { return "ack:eyeWhite?<>|"; }
+String respondEyePink() { return "ack:eyePink?<>|"; }
+
 // return String: distance, speed, microphone
 String respondInfo() { return "ack:info?<"+ getDistance() + ";" + getSpeed() + ";" + getMicrophone() + ">|"; }
 
