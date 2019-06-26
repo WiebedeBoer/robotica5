@@ -49,7 +49,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "sleep") {
-		if (args.size == 1) {
+		if (args.size() == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(args[0])));
 		}
 		else
@@ -95,9 +95,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmForward") {
-		char buffer[100];
-		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", "300", "100");
-		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		Command::slave->SerialSend("servoS?,2;300;32&3;100;32");//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
 		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "300");
 		//Command::slave->SerialSend(buffer);
@@ -105,9 +103,7 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
-		char buffer[100];
-		sprintf(buffer, "servoS?,2;%d;32&3;%d;32", "170", "250");
-		Command::slave->SerialSend(buffer);//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
+		Command::slave->SerialSend("servoS?,2;170;32&3;250;32");//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
 		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "530");
 		//Command::slave->SerialSend(buffer);
@@ -298,7 +294,7 @@ void Command::Execute() {
 	}
 
 	if (Command::type == "info") {
-		Command::slave->SerialSend("info?," + args[0]);
+		Command::slave->SerialSend("info?,");
 		Command::Database->SetSensorInfo(Command::slave->GetLastResponce());
 		return;
 	}
