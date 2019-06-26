@@ -52,7 +52,6 @@ public:
 	std::string sensorInfo;
 	modus::Modus modus = modus::Controller;
 	int speed;
-	float horizontalBlueBeam = std::numeric_limits<float>::max();
 	Wedstrijd wedstrijd;
 	Kwalificatie kwalificatie;
 	Arm arm;

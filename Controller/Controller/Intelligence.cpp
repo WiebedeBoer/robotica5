@@ -150,35 +150,36 @@ void Intelligence::ExecuteBlueBeam() {
 		std::vector<std::string> out;
 
 		SplitOn(ref(s), ':', ref(out));
+		float horizontalBlueBeam = std::numeric_limits<float>::max();
 
 		try {
 			if (out[0] != "False") {
 				distance = std::stoi(out[0]);
 
 				// Write if not initialized
-				if (Database->horizontalBlueBeam == std::numeric_limits<float>::max())
-					Database->horizontalBlueBeam = std::stof(out[1]);
+				if (horizontalBlueBeam == std::numeric_limits<float>::max())
+					horizontalBlueBeam = std::stof(out[1]);
 
 				// Write if new value
-				if (abs(Database->horizontalBlueBeam - 10) > abs(std::stof(out[1])) || abs(Database->horizontalBlueBeam + 10) < abs(std::stof(out[1])))
-					Database->horizontalBlueBeam = std::stof(out[1]);
+				if (abs(horizontalBlueBeam - 10) > abs(std::stof(out[1])) || abs(horizontalBlueBeam + 10) < abs(std::stof(out[1])))
+					horizontalBlueBeam = std::stof(out[1]);
 			}
 		}
 		catch (float e) {
 			std::cout << "Stof error occurred. Exception" << e << '\n';
 		}
 
-		if (Database->horizontalBlueBeam != std::numeric_limits<float>::max()) {
+		if (horizontalBlueBeam != std::numeric_limits<float>::max()) {
 			//if near and in sight, drive
 			if (distance >= 5 && distance < 210) {
 				auto argsChange = [](std::string speed, std::vector<std::string> args) { args[0] = speed; return args; };
 
 				//left
-				if (Database->horizontalBlueBeam < -50)
+				if (horizontalBlueBeam < -50)
 					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("128", args)));
 
 				//right
-				else if (Database->horizontalBlueBeam > 50)
+				else if (horizontalBlueBeam > 50)
 					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("128", args)));
 			}
 

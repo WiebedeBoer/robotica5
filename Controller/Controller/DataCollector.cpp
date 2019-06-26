@@ -14,25 +14,25 @@ DataCollector::~DataCollector()
 void DataCollector::SetSensorInfo(std::string input) 
 {
 	sensorInfo = input;
-	std::regex rgx("(\d+)");
-	std::smatch matches;
+	//std::regex rgx("(\d+)");
+	//std::smatch matches;
 
-	if (std::regex_search(input, matches, rgx)) 
-	{
-		try
-		{
-			microphone[0] = std::stoi(matches[4]);
-			microphone[1] = std::stoi(matches[5]);
-			microphone[2] = std::stoi(matches[6]);
-		}
-		catch (const std::exception &) {
-			std::cout << "sensor stoi error" << std::endl;
-		}
-	}
-	else
-	{
-		//std::cout << "No Sensor values" << std::endl;
-	}
+	//if (std::regex_search(input, matches, rgx)) 
+	//{
+	//	try
+	//	{
+	//		microphone[0] = std::stoi(matches[4]);
+	//		microphone[1] = std::stoi(matches[5]);
+	//		microphone[2] = std::stoi(matches[6]);
+	//	}
+	//	catch (const std::exception &) {
+	//		std::cout << "sensor stoi error" << std::endl;
+	//	}
+	//}
+	//else
+	//{
+	//	//std::cout << "No Sensor values" << std::endl;
+	//}
 }
 
 void DataCollector::SetAfstandBedieningData(std::string input)
