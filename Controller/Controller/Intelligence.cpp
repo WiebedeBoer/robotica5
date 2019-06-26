@@ -22,9 +22,9 @@ Intelligence::~Intelligence()
 int LedInterval = 10000;
 int RefreshInterval = 150;
 int PrintInterval = 5000;
-int ArmInterval = 200;
+int ArmInterval = 10000;
 int DriveInterval = 200;
-int CheckVisionInterval = 1000;
+int CheckVisionInterval = 500;
 int ExecuteVisionInterval = 200;
 int GripperInterval = 500;
 int SpeakInterval = 3000000;
@@ -495,7 +495,7 @@ void Intelligence::CheckInfo()
 }
 void Intelligence::ExecuteLed() {
 	if (std::chrono::system_clock::now() > LedTime) {
-		CommandQueue->push(Command(Sensor, "TurnEyeCyan"));
+		//CommandQueue->push(Command(Sensor, "TurnEyeCyan"));
 
 
 		LedTime = std::chrono::system_clock::now() + std::chrono::milliseconds(LedInterval);

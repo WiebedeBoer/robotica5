@@ -14,8 +14,7 @@ DataCollector::~DataCollector()
 void DataCollector::SetSensorInfo(std::string input) 
 {
 	sensorInfo = input;
-	//std::regex rgx("(\d+)");
-	std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*)");
+	std::regex rgx("(\d+)");
 	std::smatch matches;
 
 	if (std::regex_search(input, matches, rgx)) 
@@ -39,14 +38,11 @@ void DataCollector::SetSensorInfo(std::string input)
 void DataCollector::SetAfstandBedieningData(std::string input)
 {
 
-	std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*);(.*)");
+	std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*)");
 	std::smatch m;
 	std::regex_search(input, m, rgx);
 
 	try {
-
-		
-		//shutdown = m[6];//shutdown check
 		joy1.first = std::stoi(m[2]);
 		joy1.second = std::stoi(m[3]);
 		joy2.first = std::stoi(m[4]);
