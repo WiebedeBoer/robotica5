@@ -1,5 +1,13 @@
 cd ~/robotica5/Controller/Controller
 
-g++ -o ../../controller main.cpp Command.cpp CommandExecutor.cpp DataCollector.cpp Intelligence.cpp  MicroController.cpp Vision.cpp -lwiringPi -lpthread
+echo "Start compiling"
 
-chmod +x ../../controller
+g++ -o ../../../controller main.cpp Command.cpp CommandExecutor.cpp DataCollector.cpp Intelligence.cpp  MicroController.cpp Vision.cpp -lwiringPi -lpthread
+
+echo "Done compiling"
+
+sudo chmod +x ../../../controller
+
+echo "Start controller"
+
+../../../controller
