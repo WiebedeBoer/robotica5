@@ -15,7 +15,7 @@ void TextToSpeach::espeak(std::string text, std::string lang, int pitch, int spe
 	std::string cmd = ("espeak \"" + text + "\" -v " + lang + " -s" + std::to_string(speed) + " -p" + std::to_string(pitch));
 	char* ccmd = convertstrtochar(cmd);
 	std::future<void> r = std::async(std::launch::async, [ccmd] {system(ccmd); });
-	
+
 	delete(ccmd);
 }
 
@@ -96,7 +96,7 @@ void TextToSpeach::angry_father() {
 
 //says something  in the happy voice
 void TextToSpeach::speak_happy(std::string text) {
-		 espeak(text, "en-german+f4", 99, 100);
+	espeak(text, "en-german+f4", 99, 100);
 }
 
 //says something  in the normal voice
@@ -166,7 +166,7 @@ void TextToSpeach::speak_normal_greek(std::string text) {
 void TextToSpeach::random_quote()
 {
 	srand(time(0));
-	int r = (rand()% 11) + 1;
+	int r = (rand() % 14) + 1;
 
 	switch (r)
 	{
@@ -183,7 +183,7 @@ void TextToSpeach::random_quote()
 		speak_normal("I am the robot");
 		break;
 	case 5:
-		speak_normal("The cake is a lie");	
+		speak_normal("The cake is a lie");
 		break;
 	case 6:
 		speak_normal("Uh oh. Somebody cut the cake. I told them to wait for you, but they did it anyway. There is still some left, though, if you hurry back.");
@@ -202,6 +202,16 @@ void TextToSpeach::random_quote()
 		break;
 	case 11:
 		speak_normal("oh geez rick");
+		break;
+	case 12:
+		speak_normal("I'll be back!");
+		break;
+
+	case 13:
+		speak_normal("ROGER ROGER");
+		break;
+	case 14:
+		speak_normal("Kiss my metal shiny ass!");
 		break;
 	default:
 		break;

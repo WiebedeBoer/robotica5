@@ -46,6 +46,12 @@ void Command::Execute() {
 	if (Command::type == "refresh") {
 		Command::slave->SerialSend("refresh?," + args[0]);
 		Command::Database->SetAfstandBedieningData(Command::slave->GetLastResponce());
+		if (Database->shutdown == "1") {
+			std::string cmd = "sudo shutdown now";
+			char* ccmd = convertstrtochar(cmd);
+			system(ccmd);
+			delete(ccmd);
+		}
 		return;
 	}
 	if (Command::type == "sleep") {
@@ -70,12 +76,10 @@ void Command::Execute() {
 	}
 	if (Command::type == "ArmLeft") {
 		Command::slave->SerialSend("servoDS?,1;1;100&5;0");
-		std::cout << "The Arm is moving Left!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "ArmRight") {
 		Command::slave->SerialSend("servoDS?,1;2;100&5;0");
-		std::cout << "The Arm is moving Right!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "ArmForward") {
@@ -88,26 +92,24 @@ void Command::Execute() {
 		std::cout << "The Arm is moving Backward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}if (Command::type == "GrabOn") {
-		Command::slave->SerialSend("servoS?,5;100;50&;60;100");
+		Command::slave->SerialSend("servoS?,5;250;50&;60;100");
 		return;
 	}if (Command::type == "GrabOff") {
 		Command::slave->SerialSend("servoS?,5;0;50&;60;100");
 		return;
 	}
 	if (Command::type == "KineArmForward") {
+		Command::slave->SerialSend("servoS?,4;300;32&6;0;30");
+
 		Command::slave->SerialSend("servoS?,2;300;32&3;100;32");//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "300");
-		//Command::slave->SerialSend(buffer);
-		//std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 	if (Command::type == "KineArmBackward") {
+		Command::slave->SerialSend("servoS?,4;530;42&6;0;50");
+
 		Command::slave->SerialSend("servoS?,2;170;32&3;250;32");//servocommand,ID;POS;SPEED; //servoS?,1;100;50&5;0;100|10 //ID;POS;SPEED
 		//second command to keep height steady
-		//sprintf(buffer, "servoS?,6;0;50&4;0;%d", "530");
-		//Command::slave->SerialSend(buffer);
-		//std::cout << "The Arm is moving forward!!!:" << args[0] << "," << args[1] << std::endl;
 		return;
 	}
 
@@ -220,10 +222,10 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveLeft") {
-		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;" + args[0] + "");
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;0");
 		return;
 	}if (Command::type == "DriveRight") {
-		Command::slave->SerialSend("motor?,2;" + args[0] + "&1;" + args[0] + "");
+		Command::slave->SerialSend("motor?,2;0&1;" + args[0] + "");
 		return;
 	}if (Command::type == "speak_normal") {
 		Command::tts.speak_normal(args[0]);
@@ -298,4 +300,14 @@ void Command::Execute() {
 		Command::Database->SetSensorInfo(Command::slave->GetLastResponce());
 		return;
 	}
+}
+
+char* Command::convertstrtochar(std::string s) {
+	int i;
+	const int x = s.length();
+	char* p = new char[x];
+	for (i = 0; i < s.length(); i++) {
+		p[i] = s[i];
+	}
+	return p;
 }

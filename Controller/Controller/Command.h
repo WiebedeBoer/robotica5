@@ -33,6 +33,6 @@ public:
 	Vision* VisionSlave;
 	~Command();
 	virtual void Execute();
-
+	char* convertstrtochar(std::string s);
 };
 

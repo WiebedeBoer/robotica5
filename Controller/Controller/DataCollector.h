@@ -56,11 +56,12 @@ public:
 	std::string sensorInfo;
 	modus::Modus modus = modus::Controller;
 	int speed;
+	std::string shutdown = "0";
 	float horizontalBlueBeam = std::numeric_limits<float>::max();
 	Wedstrijd wedstrijd;
 	Kwalificatie kwalificatie;
 	Arm arm;
-	bool updateGrab = false;
+	bool updateGrab = true;
 	bool grab = false;
 	int microphone[3];//0=low 1=mid 2=high
 

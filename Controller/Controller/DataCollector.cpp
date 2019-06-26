@@ -11,13 +11,14 @@ DataCollector::~DataCollector()
 {
 }
 
-void DataCollector::SetSensorInfo(std::string input) 
+void DataCollector::SetSensorInfo(std::string input)
 {
 	sensorInfo = input;
-	std::regex rgx("(\d+)");
+	std::regex rgx("([0-9.]+)");
 	std::smatch matches;
+	//std::cout << "input regex gino we all gucci yay: " << input << std::endl;
 
-	if (std::regex_search(input, matches, rgx)) 
+	if (std::regex_search(input, matches, rgx))
 	{
 		try
 		{
@@ -26,23 +27,29 @@ void DataCollector::SetSensorInfo(std::string input)
 			microphone[2] = std::stoi(matches[6]);
 		}
 		catch (const std::exception &) {
-			std::cout << "sensor stoi error" << std::endl;
+			//std::cout << "sensor stoi error" << std::endl;
 		}
 	}
 	else
 	{
-		//std::cout << "No Sensor values" << std::endl;
+		std::cout << "No Sensor values" << std::endl;
 	}
 }
 
 void DataCollector::SetAfstandBedieningData(std::string input)
 {
 
-	std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*)");
+	//std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*)");
+	std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*);(.*)");
 	std::smatch m;
 	std::regex_search(input, m, rgx);
 
 	try {
+		if (m[7] == "1") {
+			shutdown = m[7];//shutdown check
+			std::cout << "shutdown immiment" << std::endl;
+		}
+
 		joy1.first = std::stoi(m[2]);
 		joy1.second = std::stoi(m[3]);
 		joy2.first = std::stoi(m[4]);

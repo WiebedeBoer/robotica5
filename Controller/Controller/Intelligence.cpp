@@ -22,10 +22,10 @@ Intelligence::~Intelligence()
 int LedInterval = 10000;
 int RefreshInterval = 150;
 int PrintInterval = 5000;
-int ArmInterval = 10000;
+int ArmInterval = 500;
 int DriveInterval = 200;
-int CheckVisionInterval = 500;
-int ExecuteVisionInterval = 200;
+int CheckVisionInterval = 400;
+int ExecuteVisionInterval = 150;
 int GripperInterval = 500;
 int SpeakInterval = 3000000;
 int RepeatInterval = 500;
@@ -148,6 +148,7 @@ void Intelligence::ExecuteBlueBeam() {
 	if (!Intelligence::Database->kwalificatie.bluebeam.empty()) {
 		std::string s = Intelligence::Database->kwalificatie.bluebeam;
 		std::vector<std::string> out;
+		CommandQueue->push(Command(Worker, "KineArmBackward", Database));
 
 		SplitOn(ref(s), ':', ref(out));
 
@@ -174,12 +175,12 @@ void Intelligence::ExecuteBlueBeam() {
 				auto argsChange = [](std::string speed, std::vector<std::string> args) { args[0] = speed; return args; };
 
 				//left
-				if (Database->horizontalBlueBeam < -50)
-					CommandQueue->push(Command(Worker, "DriveLeft", Database, argsChange("128", args)));
+				if (Database->horizontalBlueBeam < -75)
+					CommandQueue->push(Command(Worker, "ArmLeft", Database));
 
 				//right
-				else if (Database->horizontalBlueBeam > 50)
-					CommandQueue->push(Command(Worker, "DriveRight", Database, argsChange("128", args)));
+				else if (Database->horizontalBlueBeam > 75)
+					CommandQueue->push(Command(Worker, "ArmRight", Database));
 			}
 
 			//else if too near, full stop
@@ -187,6 +188,7 @@ void Intelligence::ExecuteBlueBeam() {
 				args[0] = "0";
 				std::cout << "BlueDistanceIsToSmall" << std::endl;
 				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+
 			}
 		}
 	}
@@ -507,22 +509,6 @@ void Intelligence::ExecuteArm()
 {
 
 	std::vector<std::string> args;
-	if (std::chrono::system_clock::now() > MoveArmTime) {
-
-		if (onoff == false) {
-			CommandQueue->push(Command(Worker, "KineArmForward", Database, args));//forward is hardcoded
-
-			onoff = true;
-		}
-		else {
-			CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));//forward is hardcoded
-
-			onoff = false;
-		}
-		MoveArmTime = std::chrono::system_clock::now() + std::chrono::milliseconds(ArmInterval);
-
-	}
-	//debug
 	
 
 
@@ -575,22 +561,34 @@ void Intelligence::ExecuteVision()
 			ExecuteBlueBeam();
 			break;
 		case modus::Modus::grindpad:
+			CommandQueue->push(Command(Worker, "KineArmForward", Database));
+
 			break;
 		case modus::Modus::poortje:
+			CommandQueue->push(Command(Worker, "KineArmForward", Database));
+
 			break;
 		case modus::Modus::eggtelligence:
+			CommandQueue->push(Command(Worker, "KineArmForward", Database));
+
 			ExecuteEgg();
 			break;
 		case modus::Modus::chickenSurvivalRun:
+			CommandQueue->push(Command(Worker, "KineArmForward", Database));
+
 			//function call here for chickinsurvivalrun
 			break;
 
 		case modus::Modus::DanceLi:
+			CommandQueue->push(Command(Worker, "KineArmBackward", Database));
+
 			ExecuteDanceLi();
 			break;
 
 		case modus::Modus::DanceSi: // not really a vision function, but is the easiest way to add it
 			ExecuteDanceSi();
+			CommandQueue->push(Command(Worker, "KineArmBackward", Database));
+
 			break;
 		default:
 			break;
