@@ -15,6 +15,7 @@ void DataCollector::SetSensorInfo(std::string input)
 {
 	sensorInfo = input;
 	//std::regex rgx("(\d+)");
+	std::regex rgx("(.*?);(.*?);(.*?);(.*?);(.*?);(.*)");
 	std::smatch matches;
 
 	if (std::regex_search(input, matches, rgx)) 
