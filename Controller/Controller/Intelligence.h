@@ -23,6 +23,7 @@ private:
 	MicroController* Sensor;
 	Vision* VisionApi;
 	Command RepeatedCommand;
+	std::string armGrip;
 
 	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
 	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
