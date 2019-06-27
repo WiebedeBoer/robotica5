@@ -71,12 +71,12 @@ void setup()
 
 
   // Head Arm
-  ax12a.moveSpeed(6, 210, 50);
-  ax12a.moveSpeed(7, 820, 50);
-  ax12a.moveSpeed(8, 330, 50);
-  ax12a.moveSpeed(9, 240, 50);
-  ax12a.moveSpeed(10, 100, 50);
-  ax12a.moveSpeed(11, 100, 50);
+  ax12a.moveSpeed(6, 346, 50);
+  ax12a.moveSpeed(7, 850, 50);
+  ax12a.moveSpeed(8, 932, 50);
+  ax12a.moveSpeed(9, 370, 50);
+  ax12a.moveSpeed(10, 400, 50);
+  ax12a.moveSpeed(11, 600, 50);
   
   if (debug) { motorInterval = 2500; }
 }
