@@ -42,5 +42,12 @@ private:
 
 	void CheckInfo();
 	void ExecuteDanceLi();
+	//eggtelligence sub steps
+	std::string CityEggtelligence();
+	bool DriveEggtelligence(); //finding egg
+	bool ArmEggtelligence(std::string armGrip); //pick up and drop off
+	bool TrayEggtelligence(); //finding tray
+	void Intelligence::TapeHelper(); //for the tape
+	void Intelligence::ChickenHelper(); //for the chicken
 };
 

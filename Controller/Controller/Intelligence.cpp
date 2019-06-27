@@ -84,7 +84,63 @@ void Intelligence::ExecuteSpeak()
 	}
 }
 
+//eggtelligence match
 void Intelligence::ExecuteEgg() {
+	bool driverEgg = false;
+	bool armEgg = false;
+	bool trayEgg = false;
+	bool dropEgg = false;
+
+	//step 0, set qr for tray, do this once
+	CityEggtelligence();
+
+	//repeat steps max 3 times
+	for (int inc = 0; inc < 3; inc++) {
+		//step 1, find egg
+		driverEgg = DriveEggtelligence();
+		//stop at tape (mode tape: false, both, left, right), Jesse
+		//go around at chicken, Robin
+		if (driverEgg == true) {
+			armGrip = "fasten";
+			armEgg = ArmEggtelligence(armGrip);
+		}			
+		//step 2.1, arm forward
+		//step 2.2, lower arm
+		//step 2.3, close gripper and pick up egg
+		//step 2.4, raise arm
+		//stop at tape (mode tape: false, both, left, right), Jesse
+		TapeHelper();
+		//go around at chicken, Robin
+		ChickenHelper();
+
+
+		if (armEgg == true) {
+			trayEgg = TrayEggtelligence();
+		}			
+		//step 3, drive towards tray
+		if (trayEgg == true) {
+			armGrip = "loose";
+			dropEgg = ArmEggtelligence(armGrip);
+		}			
+		//step 4.1, see qr is near tray, lower arm
+		//step 4.2 open gripper, drop egg in tray
+		if (dropEgg == true) {
+			driverEgg = false;
+			armEgg = false;
+			trayEgg = false;
+			dropEgg = false;
+		}
+	}
+
+}
+
+//eggtelligence match step 0, fill in qr for city name tray, to begin eggtelligence
+std::string CityEggtelligence() {
+	return "";
+}
+
+//eggtelligence match step 1, find egg
+bool Intelligence::DriveEggtelligence() {
 	std::vector<std::string> args;
 	args.push_back("");
 	int distance = 999; //distance
@@ -136,6 +192,135 @@ void Intelligence::ExecuteEgg() {
 				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			}
 		}
+	}
+	return true;
+}
+
+//eggtelligence match, move arm to, step 2 pick up egg, step 4 drop off egg
+bool Intelligence::ArmEggtelligence(std::string armGrip) {
+	std::vector<std::string> args;
+	args.push_back("");
+	//step 2.1, arm forward
+	CommandQueue->push(Command(Worker, "KineArmForward", Database, args));
+	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
+	//step 2.2, lower arm
+	CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
+	if (armGrip =="loose") {
+		//step 2.3, close gripper and pick up egg
+		CommandQueue->push(Command(Worker, "Gripper", Database, args));
+	}
+	else {
+		//step 4.3 open gripper, drop egg in tray
+		CommandQueue->push(Command(Worker, "GripperLoose", Database, args));
+	}
+	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
+	//step 2.4, raise arm
+	CommandQueue->push(Command(Worker, "KineArmUp", Database, args));
+	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
+	//step 2.4, arm backward
+	CommandQueue->push(Command(Worker, "KineArmBackward", Database, args));
+	return true;
+}
+
+//eggtelligence match step 3, find tray
+bool Intelligence::TrayEggtelligence() {
+	//step 3, drive towards tray
+	std::vector<std::string> args;
+	args.push_back("");
+	int distance = 999; //distance
+	int horizontal = 0; //horizontal coordinate of tray
+	if (!Intelligence::Database->wedstrijd.qrDistance.empty()) {
+		std::string s = Intelligence::Database->wedstrijd.qrDistance; //qr distance
+		std::vector<std::string> out;
+
+		SplitOn(ref(s), ':', ref(out));
+
+		try {
+			if (out[0] != "False") {
+				distance = std::stoi(out[0]);
+				horizontal = std::stoi(out[1]);
+			}
+			else {
+				distance = 0;
+			}
+		}
+		catch (int e) {
+			std::cout << "stoi distance error occurred. Exception" << e << '\n';
+		}
+
+
+		if (distance != 0 && distance != NULL) {
+			//if near and in sight, drive
+			if (distance >= 5 && distance < 210) {
+				//left
+				if (horizontal < -150) {
+					args[0] = "64";
+					CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+				}
+				//right
+				else if (horizontal > 150) {
+					args[0] = "64";
+					CommandQueue->push(Command(Worker, "DriveRight", Database, args));
+				}
+				//forward
+				else {
+					args[0] = "64";
+					CommandQueue->push(Command(Worker, "DriveBackward", Database, args));
+				}
+			}
+
+			//else if too near, full stop
+			else if (distance < 5) {
+				args[0] = "0";
+				std::cout << "QRDistanceIsToSmall" << std::endl;
+				CommandQueue->push(Command(Worker, "DriveStop", Database, args));
+			}
+		}
+	}
+	return true;
+}
+
+//eggtelligence tape helper
+void Intelligence::TapeHelper() {
+	std::vector<std::string> out;
+	//std::string s = Intelligence::Database->kwalificatie.bluebeam;
+	std::string s;
+
+	SplitOn(ref(s), ':', ref(out));
+
+	try {
+		if (out[0] != "False") {
+			std::cout << "tape found" << '\n';
+
+				std::vector<std::string> args;
+				args.push_back("");
+				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+			
+		}
+	}
+	catch (float e) {
+		std::cout << "Stof error occurred. Exception" << e << '\n';
+	}
+}
+
+//eggtelligence chicken helper
+void Intelligence::ChickenHelper() {
+	std::vector<std::string> out;
+	//std::string s = Intelligence::Database->kwalificatie.bluebeam;
+	std::string s;
+
+	SplitOn(ref(s), ':', ref(out));
+
+	try {
+		if (out[0] != "False") {
+			std::cout << "chicken found" << '\n';
+			std::vector<std::string> args;
+			args.push_back("");
+			CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+		}
+	}
+	catch (float e) {
+		std::cout << "Stof error occurred. Exception" << e << '\n';
 	}
 }
 

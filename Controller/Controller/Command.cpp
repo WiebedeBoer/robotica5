@@ -259,6 +259,19 @@ void Command::Execute() {
 		return;
 	}
 
+	if (Command::type == "headPos1") {
+		Command::slave->SerialSend("headPos1?,0");
+		return;
+	}
+	if (Command::type == "headPos2") {
+		Command::slave->SerialSend("headPos2?,0");
+		return;
+	}
+	if (Command::type == "headPos3") {
+		Command::slave->SerialSend("headPos3?,0");
+		return;
+	}
+
 
 	if (Command::type == "RefreshVision") {
 
