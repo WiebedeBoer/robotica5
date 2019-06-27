@@ -170,11 +170,13 @@ void serialEvent() {
           for (int i = 6; i <= 8; i++) {
             ax12a.moveSpeed(i, ax12aHeadPos[i-6][1], 50);
           }
+          result = respondHeadPos2() + String(checksum(respondHeadPos2())) + "\n";
         }
         else if(rx_Msg == "headPos3?|") {
           for (int i = 6; i <= 8; i++) {
             ax12a.moveSpeed(i, ax12aHeadPos[i-6][2], 50);
           }
+          result = respondHeadPos3() + String(checksum(respondHeadPos3())) + "\n";
         }
 
         
