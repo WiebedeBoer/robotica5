@@ -25,8 +25,6 @@ private:
 	Command RepeatedCommand;
 	std::string armGrip;
 
-	std::pair<int, int>* joy1 = new std::pair<int, int>(Database->GetJoy1());
-	std::pair<int, int>* joy2 = new std::pair<int, int>(Database->GetJoy2());
 
 	void ExecuteDrive();
 	void CheckVision();
@@ -48,7 +46,7 @@ private:
 	bool DriveEggtelligence(); //finding egg
 	bool ArmEggtelligence(std::string armGrip); //pick up and drop off
 	bool TrayEggtelligence(); //finding tray
-	void Intelligence::TapeHelper(); //for the tape
-	void Intelligence::ChickenHelper(); //for the chicken
+	void TapeHelper(); //for the tape
+	void ChickenHelper(); //for the chicken
 };
 

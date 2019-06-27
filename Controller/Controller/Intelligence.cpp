@@ -103,7 +103,7 @@ void Intelligence::ExecuteEgg() {
 		if (driverEgg == true) {
 			armGrip = "fasten";
 			armEgg = ArmEggtelligence(armGrip);
-		}			
+		}
 		//step 2.1, arm forward
 		//step 2.2, lower arm
 		//step 2.3, close gripper and pick up egg
@@ -116,12 +116,12 @@ void Intelligence::ExecuteEgg() {
 
 		if (armEgg == true) {
 			trayEgg = TrayEggtelligence();
-		}			
+		}
 		//step 3, drive towards tray
 		if (trayEgg == true) {
 			armGrip = "loose";
 			dropEgg = ArmEggtelligence(armGrip);
-		}			
+		}
 		//step 4.1, see qr is near tray, lower arm
 		//step 4.2 open gripper, drop egg in tray
 		if (dropEgg == true) {
@@ -135,7 +135,7 @@ void Intelligence::ExecuteEgg() {
 }
 
 //eggtelligence match step 0, fill in qr for city name tray, to begin eggtelligence
-std::string CityEggtelligence() {
+std::string Intelligence::CityEggtelligence() {
 	return "";
 }
 
@@ -205,7 +205,7 @@ bool Intelligence::ArmEggtelligence(std::string armGrip) {
 	CommandQueue->push(Command(Worker, "Sleep", Database, args)); //pause 1 sec
 	//step 2.2, lower arm
 	CommandQueue->push(Command(Worker, "KineArmDown", Database, args));
-	if (armGrip =="loose") {
+	if (armGrip == "loose") {
 		//step 2.3, close gripper and pick up egg
 		CommandQueue->push(Command(Worker, "Gripper", Database, args));
 	}
@@ -292,10 +292,10 @@ void Intelligence::TapeHelper() {
 		if (out[0] != "False") {
 			std::cout << "tape found" << '\n';
 
-				std::vector<std::string> args;
-				args.push_back("");
-				CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
-			
+			std::vector<std::string> args;
+			args.push_back("");
+			CommandQueue->push(Command(Worker, "DriveLeft", Database, args));
+
 		}
 	}
 	catch (float e) {
@@ -411,7 +411,6 @@ void Intelligence::ExecuteDrive()
 		//if (Database->GetJoy2().first != 0 && Database->GetJoy2().second != 0) {
 		std::vector<std::string> args;
 		args.push_back("");
-		std::pair<int, int>* Tempjoy2 = new std::pair<int, int>(Database->GetJoy2());
 
 		if (Database->joy2.second > Pjoylow) {//DriveForward
 			args[0] = slowSpeed;
@@ -471,8 +470,7 @@ void Intelligence::ExecuteDrive()
 			CommandQueue->push(Command(Worker, "DriveStop", Database, args));
 			return;
 		}
-		joy2 = Tempjoy2;
-		
+
 	}
 }
 void Intelligence::ExecuteDanceLi()
@@ -596,7 +594,7 @@ void Intelligence::ExecuteDanceLi()
 			CommandQueue->push(Command(Worker, "sleep", Database, sleepArgs));
 			CommandQueue->push(Command(Worker, "TurnEyeWhite", Database));
 			CommandQueue->push(Command(Worker, "sleep", Database, sleepArgs));
-		
+
 		}
 	}
 }
@@ -610,7 +608,7 @@ void Intelligence::ExecuteDanceSi()
 
 	args.push_back("");
 	sleepArgs.push_back("");
-	
+
 	args[0] = 500;
 	sleepArgs[0] = 100;
 	if (!foundTape)
@@ -694,13 +692,13 @@ void Intelligence::ExecuteArm()
 {
 
 	std::vector<std::string> args;
-	
+
 
 
 	if (std::chrono::system_clock::now() > MoveArmTime && Database->modus == modus::arm) {
 		std::vector<std::string> args;
-		args.push_back(std::to_string(joy1->first));
-		args.push_back(std::to_string(joy1->second));
+		args.push_back(std::to_string(Database->joy1.first));
+		args.push_back(std::to_string(Database->joy1.second));
 
 		if (Database->joy2.first < 20) {
 			CommandQueue->push(Command(Worker, "ArmLeft", Database, args));
@@ -766,13 +764,12 @@ void Intelligence::ExecuteVision()
 
 		case modus::Modus::DanceLi:
 			CommandQueue->push(Command(Worker, "KineArmBackward", Database));
-
 			ExecuteDanceLi();
 			break;
 
 		case modus::Modus::DanceSi: // not really a vision function, but is the easiest way to add it
-			ExecuteDanceSi();
 			CommandQueue->push(Command(Worker, "KineArmBackward", Database));
+			ExecuteDanceSi();
 
 			break;
 		default:
@@ -789,6 +786,3 @@ void Intelligence::SplitOn(std::string const &input, char sep, std::vector<std::
 	while (std::getline(buffer, temp, sep))
 		output.push_back(temp);
 }
-
-
-
