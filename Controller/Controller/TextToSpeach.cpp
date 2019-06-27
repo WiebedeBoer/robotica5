@@ -216,6 +216,9 @@ void TextToSpeach::random_quote()
 	case 15:
 		speak_normal("Paniek?! Paniek?! Paniek?!");
 		break;
+	case 16:
+		speak_normal("80085");
+		break;
 	default:
 		break;
 	}

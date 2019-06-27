@@ -27,7 +27,7 @@ int DriveInterval = 200;
 int CheckVisionInterval = 400;
 int ExecuteVisionInterval = 150;
 int GripperInterval = 500;
-int SpeakInterval = 3000000;
+int SpeakInterval = 30000;
 int RepeatInterval = 500;
 int infoInterval = 500;
 //corrisponding timers for the intervals
