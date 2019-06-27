@@ -35,6 +35,7 @@ bool drivingL, drivingR;
 int ax12aPos[5] = {0,0,0,0,0};
 
 int ax12aHeadPos[4][3] = {{210, 512, 820},{820, 820, 510},{330, 580, 890}, {240, 200, 500}};
+int ax12aEyesPos[2][3] = {{943, 200, 500},{80, 270, 420}};
 
 //String id, di, pos, sp;
 
@@ -62,19 +63,19 @@ void setup()
   ax12a.begin(BaudRate, DirectionPin, &Serial1);
 
   // Egg Arm
-  ax12a.moveSpeed(1, 530, 50); //0 - 1023 //0 - 1000 //68mm vanaf onderkant //85mm vanaf onder tot join //nieuwe begin 512 //max 800 //min 400
-  ax12a.moveSpeed(2, 170, 50); //200 min // 200 begin //max 550
-  ax12a.moveSpeed(3, 250, 50); //250 begin //50 min //max 500
-  ax12a.moveSpeed(4, 530, 50); //min 350 //begin 530 // max 700 
-  ax12a.moveSpeed(5, 500, 50); //min 100 //max 190 //begin 190
+  ax12a.move(1, 530); //0 - 1023 //0 - 1000 //68mm vanaf onderkant //85mm vanaf onder tot join //nieuwe begin 512 //max 800 //min 400
+  ax12a.move(2, 170); //200 min // 200 begin //max 550
+  ax12a.move(3, 250); //250 begin //50 min //max 500
+  ax12a.move(4, 530); //min 350 //begin 530 // max 700 
+  ax12a.move(5, 500); //min 100 //max 190 //begin 190
 
   // Head Arm
-  ax12a.moveSpeed(6, 210, 50);
-  ax12a.moveSpeed(7, 820, 50);
-  ax12a.moveSpeed(8, 330, 50);
-  ax12a.moveSpeed(9, 240, 50);
-  ax12a.moveSpeed(10, 100, 50);
-  ax12a.moveSpeed(11, 100, 50);
+  ax12a.move(6, 210);
+  ax12a.move(7, 820);
+  ax12a.move(8, 330);
+  ax12a.move(9, 240);
+  ax12a.move(10, 100);
+  ax12a.move(11, 100);
   
   if (debug) { motorInterval = 2500; }
 }
@@ -163,23 +164,34 @@ void serialEvent() {
         else if(rx_Msg == "headPos1?|"){
           for (int i = 6; i <= 11; i++){
             ax12a.moveSpeed(i, ax12aHeadPos[i-6][0], 50);
+            delay(200);
           }
-          result = respondHeadPos1() + String(checksum(respondHeadPos1())) + "\n";
         }
         else if(rx_Msg == "headPos2?|") {
           for (int i = 6; i <= 8; i++) {
             ax12a.moveSpeed(i, ax12aHeadPos[i-6][1], 50);
           }
-          result = respondHeadPos2() + String(checksum(respondHeadPos2())) + "\n";
         }
         else if(rx_Msg == "headPos3?|") {
           for (int i = 6; i <= 8; i++) {
             ax12a.moveSpeed(i, ax12aHeadPos[i-6][2], 50);
           }
-          result = respondHeadPos3() + String(checksum(respondHeadPos3())) + "\n";
         }
-
-        
+        else if(rx_Msg == "eyesPos1?|") {
+          for (int i = 10; i <= 11; i++){
+            ax12a.moveSpeed(i, ax12aEyesPos[i-10][0], 50);
+          }
+        }
+        else if(rx_Msg == "eyesPos2?|") {
+          for (int i = 6; i <= 8; i++){
+            ax12a.moveSpeed(i, ax12aEyesPos[i-10][1], 50);
+          }
+        }
+        else if(rx_Msg == "eyesPos3?|") {
+          for (int i = 6; i <= 8; i++){
+            ax12a.moveSpeed(i, ax12aEyesPos[i-10][2], 50);
+          }
+        }        
         
         int resultLength = result.length() +1;          // Convert string to char array
         char resultarray[resultLength];
@@ -234,12 +246,6 @@ void valuesSplit(String input, String splitter, String &output1, String &output2
 
 // Serial response functions
 String respondServo() { return "ack:servo?<>|"; }
-
-String respondHeadPos1(){return "ack:headPos1?<>";}
-
-String respondHeadPos2(){return "ack:headPos2?<>";}
-
-String respondHeadPos3(){return "ack:headPos3?<>";}
 
 String respondServoS() { return "ack:servoS?<>|"; }
 
