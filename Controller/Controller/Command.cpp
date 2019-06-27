@@ -259,19 +259,34 @@ void Command::Execute() {
 		return;
 	}
 
-	if (Command::type == "headPos1") {
+	if (Command::type == "Head1") {
 		Command::slave->SerialSend("headPos1?,0");
 		return;
 	}
-	if (Command::type == "headPos2") {
+	if (Command::type == "Head2") {
 		Command::slave->SerialSend("headPos2?,0");
 		return;
 	}
-	if (Command::type == "headPos3") {
+	if (Command::type == "Head3") {
 		Command::slave->SerialSend("headPos3?,0");
 		return;
 	}
-
+	//if (Command::type == "Head4") {
+	//	Command::slave->SerialSend("headPos3?,0");
+	//	return;
+	//}
+	if (Command::type == "Eyes1") {
+		Command::slave->SerialSend("headPos4?,0");
+		return;
+	}
+	if (Command::type == "Eyes2") {
+		Command::slave->SerialSend("headPos3?,0");
+		return;
+	}
+	if (Command::type == "Eyes3") {
+		Command::slave->SerialSend("headPos3?,0");
+		return;
+	}
 
 	if (Command::type == "RefreshVision") {
 
