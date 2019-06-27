@@ -164,6 +164,7 @@ void serialEvent() {
           for (int i = 6; i <= 11; i++){
             ax12a.moveSpeed(i, ax12aHeadPos[i-6][0], 50);
           }
+          result = respondHeadPos1() + String(checksum(respondHeadPos1())) + "\n";
         }
         else if(rx_Msg == "headPos2?|") {
           for (int i = 6; i <= 8; i++) {
@@ -231,6 +232,12 @@ void valuesSplit(String input, String splitter, String &output1, String &output2
 
 // Serial response functions
 String respondServo() { return "ack:servo?<>|"; }
+
+String respondHeadPos1(){return "ack:headPos1?<>";}
+
+String respondHeadPos2(){return "ack:headPos2?<>";}
+
+String respondHeadPos3(){return "ack:headPos3?<>";}
 
 String respondServoS() { return "ack:servoS?<>|"; }
 
