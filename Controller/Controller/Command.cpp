@@ -55,14 +55,9 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "sleep") {
-		if (args.size() == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(std::stoi(args[0])));
-		}
-		else
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+			std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
-		}
+		
 		return;
 	}
 	if (Command::type == "GetJoystick") {
@@ -222,10 +217,10 @@ void Command::Execute() {
 		return;
 	}
 	if (Command::type == "DriveLeft") {
-		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;0");
+		Command::slave->SerialSend("motor?,1;" + args[0] + "&2;"+args[0]+"");
 		return;
 	}if (Command::type == "DriveRight") {
-		Command::slave->SerialSend("motor?,2;0&1;" + args[0] + "");
+		Command::slave->SerialSend("motor?,2;" + args[0] + "&1;" + args[0] + "");
 		return;
 	}if (Command::type == "speak_normal") {
 		Command::tts.speak_normal(args[0]);

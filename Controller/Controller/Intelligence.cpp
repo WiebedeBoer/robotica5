@@ -475,18 +475,22 @@ void Intelligence::ExecuteDrive()
 }
 void Intelligence::ExecuteDanceLi()
 {
-	if (CommandQueue->GetSize() < 20) {
+	try
+	{
 
-		srand(time(0));
-		int dancemove = (rand() % 3);
-		std::vector<std::string> sleepArgs;
-		std::vector<std::string> danceArgs;
-		int sleeptime = 1023 - Database->microphone[0];
-		sleepArgs.push_back(std::to_string(sleeptime));
-		danceArgs.push_back("100");
-		int activationThreshold = 256;
-		if (Database->microphone[0] > activationThreshold)
-		{
+
+		if (CommandQueue->GetSize() < 20) {
+
+			srand(time(0));
+			int dancemove = (rand() % 3);
+			std::vector<std::string> sleepArgs;
+			std::vector<std::string> danceArgs;
+			int sleeptime = 1023 - Database->microphone[0];
+			sleepArgs.push_back(std::to_string(sleeptime));
+			danceArgs.push_back("100");
+			int activationThreshold = 256;
+			/*	if (Database->microphone[0] > activationThreshold)
+				{*/
 			switch (dancemove)
 			{
 			case 0:
@@ -523,9 +527,9 @@ void Intelligence::ExecuteDanceLi()
 			}
 			CommandQueue->push(Command(Worker, "sleep", Database, danceArgs));
 			CommandQueue->push(Command(Worker, "DriveStop", Database, danceArgs));
-		}
-		if (Database->microphone[1] > activationThreshold)
-		{
+			/*	}
+				if (Database->microphone[1] > activationThreshold)
+				{*/
 			switch (dancemove)
 			{
 			case 0:
@@ -583,10 +587,10 @@ void Intelligence::ExecuteDanceLi()
 			default:
 				break;
 			}
-		}
-		if (Database->microphone[2] > activationThreshold)
-		{
-			int eyeDelay = 1123 - Database->microphone[2];//change this when eyes burn
+
+			/*if (Database->microphone[2] > activationThreshold)
+			{*/
+			int eyeDelay = 512;//change this when eyes burn
 			sleepArgs[0] = eyeDelay;
 			CommandQueue->push(Command(Worker, "TurnEyeRed", Database));
 			CommandQueue->push(Command(Worker, "sleep", Database, sleepArgs));
@@ -595,13 +599,20 @@ void Intelligence::ExecuteDanceLi()
 			CommandQueue->push(Command(Worker, "TurnEyeWhite", Database));
 			CommandQueue->push(Command(Worker, "sleep", Database, sleepArgs));
 
+			//}
 		}
+	}
+	catch (const std::exception&)
+	{
+		std::cout << "it wanted to crash" << std::endl;
 	}
 }
 
 bool foundTape = false;
 void Intelligence::ExecuteDanceSi()
 {
+	try
+	{
 	std::string *tape = &Database->wedstrijd.tape;
 	std::vector<std::string> args;
 	std::vector<std::string> sleepArgs;
@@ -650,6 +661,11 @@ void Intelligence::ExecuteDanceSi()
 		CommandQueue->push(Command(Sensor, "TurnEyePink"));
 
 
+	}
+	}
+	catch (const std::exception&)
+	{
+		std::cout << "It wanted to crash" << std::endl;
 	}
 }
 void Intelligence::CheckVision()
